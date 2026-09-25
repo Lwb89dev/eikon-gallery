@@ -1,5 +1,6 @@
 package app.eikon.gallery
 
+import android.net.Uri
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.Box
@@ -44,6 +45,7 @@ import app.eikon.gallery.feature.security.LockGate
 import app.eikon.gallery.feature.security.UnprotectedNotice
 import app.eikon.gallery.feature.settings.SettingsScreen
 import app.eikon.gallery.feature.trash.TrashScreen
+import app.eikon.gallery.feature.viewer.ExternalImageViewer
 
 private object Routes {
     const val LIBRARY = "library"
@@ -62,8 +64,12 @@ private object Routes {
 }
 
 @Composable
-fun EikonApp(settings: AppSettings) {
+fun EikonApp(settings: AppSettings, externalImage: Uri? = null, onCloseExternal: () -> Unit = {}) {
     EikonTheme(settings.themeMode) {
+        if (externalImage != null) {
+            ExternalImageViewer(externalImage, onClose = onCloseExternal)
+            return@EikonTheme
+        }
         val navController = rememberNavController()
         // A Surface (not just a background) so text without an explicit colour is legible in dark mode.
         Surface(

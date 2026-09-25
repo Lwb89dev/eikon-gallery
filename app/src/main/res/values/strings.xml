@@ -477,4 +477,18 @@
         <item quantity="one">Edit removed from %d photo; the original is as it always was</item>
         <item quantity="other">Edits removed from %d photos; the originals are as they always were</item>
     </plurals>
+
+    <!-- Accessibility -->
+    <string name="slider_reset">Reset to neutral</string>
+    <string name="crop_area">Crop area, from %1$d%% to %2$d%% across and from %3$d%% to %4$d%% down</string>
+    <string name="crop_action_smaller">Make the crop smaller</string>
+    <string name="crop_action_larger">Make the crop larger</string>
+    <string name="crop_action_left">Move the crop left</string>
+    <string name="crop_action_right">Move the crop right</string>
+    <string name="crop_action_up">Move the crop up</string>
+    <string name="crop_action_down">Move the crop down</string>
+    <string name="viewer_zoom_in">Zoom in</string>
+    <string name="viewer_zoom_out">Zoom out</string>
+    <string name="external_photo">Photo</string>
+    <string name="viewer_cannot_display">This photo can\'t be displayed.</string>
 </resources>

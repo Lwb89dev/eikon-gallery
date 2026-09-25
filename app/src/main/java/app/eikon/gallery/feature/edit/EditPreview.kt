@@ -7,7 +7,7 @@ import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.FilterChip
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -27,12 +27,17 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.CustomAccessibilityAction
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.customActions
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import app.eikon.gallery.R
 import app.eikon.gallery.domain.edit.Crop
 import app.eikon.gallery.domain.edit.CropHandle
 import app.eikon.gallery.domain.edit.CropTool
+import kotlin.math.roundToInt
 
 /** The photo as edited. Hold it (outside the crop tool) to see the original; in the crop tool the crop rectangle is drawn over it. */
 @Composable
@@ -52,12 +57,13 @@ fun EditPreview(state: EditUiState, viewModel: EditViewModel, modifier: Modifier
                 CropOverlay(aspect, state.recipe.geometry.crop, CropTool.ratioOf(state.cropShape, aspect)) { viewModel.geometry { g -> g.copy(crop = it) } }
             }
         }
-        if (comparing && !cropping) {
-            Text(
-                stringResource(R.string.edit_original),
-                color = Color.White,
-                style = MaterialTheme.typography.labelLarge,
-                modifier = Modifier.align(Alignment.TopCenter).padding(8.dp),
+        if (!cropping && !state.recipe.isIdentity) {
+            // Holding the picture does the same; this is for whoever cannot hold (a screen reader, a shaky hand) or has not found that yet.
+            FilterChip(
+                selected = comparing,
+                onClick = { comparing = !comparing },
+                label = { Text(stringResource(R.string.edit_original)) },
+                modifier = Modifier.align(Alignment.TopEnd).padding(8.dp),
             )
         }
     }
@@ -74,8 +80,13 @@ private fun CropOverlay(imageAspect: Float, crop: Crop, ratio: Float?, onChange:
     val currentRatio by rememberUpdatedState(ratio)
     val shown = imageRect(size, imageAspect)
     var handle by remember { mutableStateOf<CropHandle?>(null) }
+    val description = stringResource(R.string.crop_area, percent(crop.left), percent(crop.right), percent(crop.top), percent(crop.bottom))
+    val actions = cropActions(crop, ratio, imageAspect, onChange)
     Canvas(
-        Modifier.fillMaxSize().onSizeChanged { size = it }.pointerInput(size, imageAspect) {
+        Modifier.fillMaxSize().onSizeChanged { size = it }.semantics {
+            contentDescription = description
+            customActions = actions
+        }.pointerInput(size, imageAspect) {
             detectDragGestures(
                 onDragStart = { at ->
                     val rect = imageRect(size, imageAspect)
@@ -95,6 +106,39 @@ private fun CropOverlay(imageAspect: Float, crop: Crop, ratio: Float?, onChange:
 }
 
 private const val TOUCH_SLOP = 28f
+
+/** How far one accessibility action moves or resizes the crop, as a fraction of the picture. */
+private const val ACCESSIBILITY_STEP = 0.05f
+
+private fun percent(fraction: Float) = (fraction * 100).roundToInt()
+
+/**
+ * What a finger does by dragging, as actions a screen reader can offer, since dragging is not possible with one: make the crop smaller or larger
+ * (all four sides at once) and move it. Every action goes through the same [CropTool] rules as a drag.
+ */
+@Composable
+private fun cropActions(crop: Crop, ratio: Float?, aspect: Float, onChange: (Crop) -> Unit): List<CustomAccessibilityAction> {
+    val smaller = stringResource(R.string.crop_action_smaller)
+    val larger = stringResource(R.string.crop_action_larger)
+    val left = stringResource(R.string.crop_action_left)
+    val right = stringResource(R.string.crop_action_right)
+    val up = stringResource(R.string.crop_action_up)
+    val down = stringResource(R.string.crop_action_down)
+    fun act(label: String, change: (Crop) -> Crop) = CustomAccessibilityAction(label) {
+        onChange(change(crop))
+        true
+    }
+    fun drag(from: Crop, handle: CropHandle, dx: Float, dy: Float) = CropTool.drag(from, handle, dx, dy, ratio, aspect)
+    val step = ACCESSIBILITY_STEP
+    return listOf(
+        act(smaller) { drag(drag(it, CropHandle.TOP_LEFT, step, step), CropHandle.BOTTOM_RIGHT, -step, -step) },
+        act(larger) { drag(drag(it, CropHandle.TOP_LEFT, -step, -step), CropHandle.BOTTOM_RIGHT, step, step) },
+        act(left) { drag(it, CropHandle.MOVE, -step, 0f) },
+        act(right) { drag(it, CropHandle.MOVE, step, 0f) },
+        act(up) { drag(it, CropHandle.MOVE, 0f, -step) },
+        act(down) { drag(it, CropHandle.MOVE, 0f, step) },
+    )
+}
 
 /** Where the picture is drawn inside a container of [size] (fitted and centred), in pixels. */
 private fun imageRect(size: IntSize, aspect: Float): Rect {

@@ -18,9 +18,8 @@ Legend: [x] done and covered by build/tests, [~] done but only checkable on a de
 Known gaps inside Phase 1, in priority order:
 
 1. Run on a device and fix what it reveals.
-2. Grid to viewer transition is a fade/scale, not a shared-element transition (Phase 7).
-3. "Selfies" and "edited" filters: no reliable signal in MediaStore. Selfies would need eikon to know who the
-   phone's owner is (it never asks). Edits made in eikon are known to eikon (Phase 6) but the filter is not built yet.
+2. Grid to viewer transition: a flight of the thumbnail since Phase 7 (not seen on a device yet).
+3. "Selfies" filter: no reliable signal in MediaStore. It would need eikon to know who the phone's owner is (it never asks). The "Edited" filter exists since Phase 7.
 4. No thumbnail scrubber for video; no editing of date/location/caption; "add to album" and "hide"
    in multi-select arrive with Phase 2.
 5. Media3 adds `ACCESS_NETWORK_STATE` to the manifest; remove it after checking playback on a device.
@@ -28,7 +27,7 @@ Known gaps inside Phase 1, in priority order:
 7. Performance on a fresh install: ART compiles a sideloaded app lazily, so the first sessions run
    partly interpreted (release scroll: p90 14-19 ms) until background compilation finishes (p90 9 ms
    after full AOT). A Baseline Profile would give the fast state from the first launch (Phase 7).
-8. Opening an image from another app (`ACTION_VIEW`) is not supported yet.
+8. Opening an image from another app (`ACTION_VIEW`): supported for pictures since Phase 7 (not videos); not run on a device yet.
 
 ## Phase 2 — Albums and utilities
 
@@ -112,13 +111,22 @@ larger cities only (no roads, no imagery); trips need Places analysis and its pe
 - [~] **Not run on a device yet**: every screen, the crop overlay's gestures, how each tool looks on real photos, the renderer's speed and memory on a phone, and the saved copy's metadata. The renderer, recipe
       format, copy/paste rules and database are covered by JVM tests on synthetic pictures; `EditOnDeviceTest` is written but not run.
 
-Known gaps: **Share sends the original file**, not the edit (save a copy to share it); videos cannot be edited; no undo stack inside a session; no local adjustments, curves, per-colour tools, noise
+Known gaps: videos cannot be edited; no undo stack inside a session; no local adjustments, curves, per-colour tools, noise
 reduction or retouching; perspective is two sliders, not four corners; no Ultra HDR or wide-gamut output (copies are sRGB JPEG); if another app changes the file afterwards, eikon still draws its recipe over it;
-the "selfies" filter still has no signal. The library's "Edited" filter is not added yet.
+the "selfies" filter still has no signal. (Sharing an edited photo shares the edit, and the "Edited" filter exists: both added in Phase 7.)
 
 ## Phase 7 — Polish
-Shared-element transitions, baseline profiles and large-library tuning, accessibility audit, battery
-and thermal behaviour, edge cases.
+
+- [x] Grid to viewer transition: the thumbnail flies from its cell to the viewer and back (`HeroFlight`), with tested geometry; falls back to a fade when it cannot be made ([PERFORMANCE.md](PERFORMANCE.md))
+- [x] Baseline profile for eikon's own code (hand-written, all of `app.eikon.gallery`), checked to be in the release APK
+- [x] Large-library tuning found by looking at the query plans: a device folder had no index; database version 7 adds two, with a tested migration and a test that fails if a main query starts to sort or scan a whole table
+- [x] Battery: a background analysis run waits in Battery Saver ("Analyze now" does not); thermal handling reviewed
+- [x] Accessibility review with fixes: labelled sliders with reset, actions for zoom and for moving or resizing the crop, a tap alternative to press-and-hold, roles and selected state, a scrollable tool row ([ACCESSIBILITY.md](ACCESSIBILITY.md))
+- [x] Edge cases: "Open with" for pictures from other apps; a photo that cannot be decoded says so; sharing an edited photo shares the edit (no metadata); an "Edited only" filter
+- [~] **Not run on a device**: the flight's alignment on real screens, whether the baseline profile speeds up the first launch, TalkBack, the FileProvider share and "Open with" from a real app. The battery policy, the migration, the query plans and the geometry are covered by JVM tests.
+
+Not done: a *measured* baseline profile (needs a Macrobenchmark module and a device); animated GIF and WebP still show their first frame; the Media3 `ACCESS_NETWORK_STATE` permission is still merged in (removing it needs playback checked on a
+device); on-screen photos are not analysed first; no thumbnail scrubber for video; very large albums sort their members for each page (see [PERFORMANCE.md](PERFORMANCE.md)).
 
 ## Later — Home-server backup
 Opt-in automatic backup to a self-hosted server. Constraints are in [PRIVACY.md](PRIVACY.md).

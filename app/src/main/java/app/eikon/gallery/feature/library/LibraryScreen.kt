@@ -13,8 +13,6 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
-import androidx.compose.animation.scaleIn
-import androidx.compose.animation.scaleOut
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -51,6 +49,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.layout.positionInRoot
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalResources
@@ -64,6 +64,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import app.eikon.gallery.R
+import app.eikon.gallery.core.ui.peekOrNull
 import app.eikon.gallery.core.image.LocalEditRecipeTexts
 import app.eikon.gallery.data.db.PersonEntity
 import app.eikon.gallery.feature.people.MergePicker
@@ -159,7 +160,31 @@ private fun LibraryContent(
     BackHandler(enabled = selection.isNotEmpty() && !viewerOpen, onBack = viewModel::clearSelection)
     if (albumState == AlbumState.Gone || personState == PersonState.Gone) LaunchedEffect(Unit) { screen.onBack?.invoke() }
 
-    Box(modifier.fillMaxSize()) {
+    val flights = remember(scope) { ViewerFlights(scope) }
+    val openViewer = { index: Int ->
+        viewerIndex = index
+        viewerOpen = true
+        flights.open(items.peekOrNull(index), flights.cellFrame(gridState, layout, index))
+    }
+    val closeViewer = { animated: Boolean ->
+        val index = viewerIndex
+        scope.launch {
+            revealInGrid(gridState, layout, index)
+            if (animated) {
+                flights.close(items.peekOrNull(index), flights.cellFrame(gridState, layout, index)) { viewerOpen = false }
+            } else {
+                viewerOpen = false
+            }
+        }
+        Unit
+    }
+
+    Box(
+        modifier.fillMaxSize().onGloballyPositioned {
+            flights.screenOrigin = it.positionInRoot()
+            flights.screenSize = it.size
+        },
+    ) {
         Scaffold(
             modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
             containerColor = MaterialTheme.colorScheme.background,
@@ -178,10 +203,8 @@ private fun LibraryContent(
                 }
                 SyncStatusLine(syncStatus, onRetry = viewModel::retrySync)
                 val bottomPadding = if (screen.bottomBar == null) navigationInset else 0.dp
-                LibraryBody(settings, layout, items, selection, syncStatus, gridState, bottomPadding, viewModel) { index ->
-                    viewerIndex = index
-                    viewerOpen = true
-                }
+                val gridModifier = Modifier.onGloballyPositioned { flights.gridOrigin = it.positionInRoot() }
+                LibraryBody(settings, layout, items, selection, syncStatus, gridState, bottomPadding, viewModel, gridModifier, openViewer)
             }
         }
         LibraryViewer(
@@ -191,11 +214,10 @@ private fun LibraryContent(
             viewModel = viewModel,
             onEdit = screen.onEdit,
             onPageChanged = { viewerIndex = it },
-            onClose = {
-                viewerOpen = false
-                scope.launch { revealInGrid(gridState, layout, viewerIndex) }
-            },
+            onClose = closeViewer,
+            hero = flights.hero,
         )
+        HeroLayer(flights.hero)
         val preparingShare by viewModel.isPreparingShare.collectAsStateWithLifecycle()
         if (preparingShare) PreparingShare(Modifier.align(Alignment.TopCenter))
     }
@@ -384,6 +406,7 @@ private fun LibraryBody(
     gridState: LazyGridState,
     bottomPadding: Dp,
     viewModel: LibraryViewModel,
+    modifier: Modifier,
     onOpen: (mediaIndex: Int) -> Unit,
 ) {
     if (layout.mediaCount == 0) {
@@ -392,7 +415,7 @@ private fun LibraryBody(
     }
     val grouping = TimelineGrouping.forColumns(settings.gridColumns)
     val labels = rememberTimelineLabels()
-    Box(Modifier.fillMaxSize()) {
+    Box(modifier.fillMaxSize()) {
         LibraryGrid(
             layout = layout,
             items = items,
@@ -456,7 +479,8 @@ private fun LibraryViewer(
     viewModel: LibraryViewModel,
     onEdit: (mediaId: Long) -> Unit,
     onPageChanged: (Int) -> Unit,
-    onClose: () -> Unit,
+    onClose: (animated: Boolean) -> Unit,
+    hero: HeroController,
 ) {
     val viewerItems = remember(items) { PagingViewerItems(items) }
     val currentEdit by rememberUpdatedState(onEdit)
@@ -475,14 +499,16 @@ private fun LibraryViewer(
     }
     AnimatedVisibility(
         visible = open,
-        enter = fadeIn(tween(VIEWER_IN_MS)) + scaleIn(tween(VIEWER_IN_MS), initialScale = 0.94f),
-        exit = fadeOut(tween(VIEWER_OUT_MS)) + scaleOut(tween(VIEWER_OUT_MS), targetScale = 0.97f),
+        enter = fadeIn(tween(VIEWER_IN_MS)),
+        exit = fadeOut(tween(VIEWER_OUT_MS)),
     ) {
         MediaViewer(
             items = viewerItems,
             initialPage = index,
             onPageChanged = onPageChanged,
             onClose = onClose,
+            shown = hero.viewerShown,
+            backdrop = hero::backdrop,
             leadingActions = leading,
             trailingActions = trailing,
             infoSheet = { item, dismiss -> InfoSheet(item, dismiss) },

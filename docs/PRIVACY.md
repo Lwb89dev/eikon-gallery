@@ -13,6 +13,7 @@ This document says what eikon does with your data today, and where its guarantee
 | Settings | app-private DataStore | theme, grid density, filter, sort, and the look last copied with "Copy edits" (a few lines of text) |
 | Sync bookkeeping | app-private DataStore | last MediaStore generation and version, access level |
 | Memory cache | RAM only | decoded thumbnails; nothing is written to a disk cache |
+| Shared edits | app-private cache folder | only while sharing an edited photo: the drawn picture without metadata, removed after a day |
 
 All of it lives in the app's private storage: other apps cannot read it, and it disappears when eikon is
 uninstalled. Revoking photo access makes eikon delete the index at the next launch.
@@ -85,6 +86,11 @@ photos. Like everything else, none of this is encrypted (see the limits below).
   the picture; similar shots reuse the description stored for search. The fingerprints are private, excluded from backups and deleted when you revoke photo access. eikon
   never removes anything by itself: a photo leaves only when you confirm in Android's own dialog, and goes to Recently deleted.
 
+## Opening a picture from another app
+
+Any app can ask eikon to show one picture ("Open with"). eikon accepts only pictures handed over as a `content://` address, reads that one picture to show it, and does not add it to the library, analyze it or remember it. Videos and
+files are not offered. That window does not run the library sync.
+
 ## Editing and saved copies
 
 An edit changes nothing in the photo's file: it is a recipe in eikon's private database, drawn over the original (see [EDITING.md](EDITING.md)). It holds no picture and no personal
@@ -94,7 +100,8 @@ data beyond the fact that you edited that photo. Like the rest of the database i
 locations" permission, its location**, so that it sits at the right place in the timeline; sharing the copy shares that metadata like any other photo. eikon never deletes or
 replaces the original.
 
-**Sharing an edited photo from eikon shares the original file**, not the edited picture, because the edit only exists inside eikon. To share the edit, save a copy first.
+**Sharing an edited photo shares the edit**, drawn into a temporary picture in eikon's private cache folder and handed to the app you choose through a `FileProvider` (not exported, one file granted per share). That picture carries no metadata: no location and no camera
+details. Temporary pictures older than a day are removed the next time an edited photo is shared. Photos without an edit are shared as the files they are.
 
 ## Deleting and sharing
 

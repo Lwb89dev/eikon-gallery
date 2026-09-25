@@ -221,7 +221,7 @@ private fun TrashViewer(
             items = viewerItems,
             initialPage = index,
             onPageChanged = onPageChanged,
-            onClose = onClose,
+            onClose = { onClose() },
             leadingActions = leading,
             trailingActions = trailing,
             infoSheet = { item: MediaItem, dismiss -> InfoSheet(item, dismiss) },

@@ -496,4 +496,18 @@
         <item quantity="many">Modifiche rimosse da %d foto; gli originali sono come sono sempre stati</item>
         <item quantity="other">Modifiche rimosse da %d foto; gli originali sono come sono sempre stati</item>
     </plurals>
+
+    <!-- Accessibility -->
+    <string name="slider_reset">Riporta al valore neutro</string>
+    <string name="crop_area">Area di ritaglio, dal %1$d%% al %2$d%% in larghezza e dal %3$d%% al %4$d%% in altezza</string>
+    <string name="crop_action_smaller">Riduci il ritaglio</string>
+    <string name="crop_action_larger">Ingrandisci il ritaglio</string>
+    <string name="crop_action_left">Sposta il ritaglio a sinistra</string>
+    <string name="crop_action_right">Sposta il ritaglio a destra</string>
+    <string name="crop_action_up">Sposta il ritaglio in alto</string>
+    <string name="crop_action_down">Sposta il ritaglio in basso</string>
+    <string name="viewer_zoom_in">Ingrandisci</string>
+    <string name="viewer_zoom_out">Riduci</string>
+    <string name="external_photo">Foto</string>
+    <string name="viewer_cannot_display">Questa foto non può essere mostrata.</string>
 </resources>

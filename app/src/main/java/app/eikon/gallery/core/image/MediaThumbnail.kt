@@ -1,6 +1,7 @@
 package app.eikon.gallery.core.image
 
 import android.content.ContentResolver
+import android.content.ContentUris
 import android.graphics.Bitmap
 import android.net.Uri
 import android.os.CancellationSignal
@@ -12,6 +13,7 @@ import app.eikon.gallery.domain.edit.EditRecipeCodec
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.unit.IntSize
 import app.eikon.gallery.domain.MediaItem
 import app.eikon.gallery.domain.mediaContentUri
 import coil3.ImageLoader
@@ -55,8 +57,9 @@ class MediaThumbnailFetcher(
     override suspend fun fetch(): FetchResult {
         val width = options.size.width.pxOrElse { DEFAULT_EDGE_PX }
         val height = options.size.height.pxOrElse { DEFAULT_EDGE_PX }
-        val bitmap = load(AndroidSize(width, height))
-        return ImageFetchResult(image = edited(bitmap).asImage(), isSampled = true, dataSource = DataSource.DISK)
+        val shown = edited(load(AndroidSize(width, height)))
+        ThumbnailAspects.Shared.remember(ContentUris.parseId(data.uri), shown.width, shown.height)
+        return ImageFetchResult(image = shown.asImage(), isSampled = true, dataSource = DataSource.DISK)
     }
 
     /** The thumbnail with the photo's edit drawn on it, so an edited photo looks edited everywhere it is listed. The file is never touched. */
@@ -101,7 +104,8 @@ fun MediaThumbnail(
     modifier: Modifier = Modifier,
     contentScale: ContentScale = ContentScale.Crop,
     applyEdit: Boolean = true,
-) = MediaThumbnail(item.id, item.isVideo, item.modifiedAt, modifier, contentScale, applyEdit)
+    requestSize: IntSize? = null,
+) = MediaThumbnail(item.id, item.isVideo, item.modifiedAt, modifier, contentScale, applyEdit, requestSize)
 
 /** Same, from the few fields a collection cover carries. */
 @Composable
@@ -112,13 +116,15 @@ fun MediaThumbnail(
     modifier: Modifier = Modifier,
     contentScale: ContentScale = ContentScale.Crop,
     applyEdit: Boolean = true,
+    requestSize: IntSize? = null,
 ) {
     val context = LocalPlatformContext.current
     val recipe = if (isVideo || !applyEdit) null else LocalEditRecipeTexts.current[id]
-    val request = remember(id, modifiedAt, recipe) {
-        ImageRequest.Builder(context)
-            .data(MediaThumbnailData(mediaContentUri(id, isVideo), modifiedAt, recipe))
-            .build()
+    val request = remember(id, modifiedAt, recipe, requestSize) {
+        val builder = ImageRequest.Builder(context).data(MediaThumbnailData(mediaContentUri(id, isVideo), modifiedAt, recipe))
+        // A size given by the caller wins over the size of the layout, so a picture that is drawn large but was already loaded small is not loaded again.
+        requestSize?.let { builder.size(it.width, it.height) }
+        builder.build()
     }
     AsyncImage(
         model = request,

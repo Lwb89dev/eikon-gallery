@@ -40,12 +40,14 @@ import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.Dp
@@ -78,14 +80,19 @@ fun MediaViewer(
     items: ViewerItems,
     initialPage: Int,
     onPageChanged: (Int) -> Unit,
-    onClose: () -> Unit,
+    /** Asked to close; [animated] is true when the photo is at rest (not zoomed, not pulled), so it may fly back to where it came from. */
+    onClose: (animated: Boolean) -> Unit,
     leadingActions: List<ViewerAction>,
     trailingActions: List<ViewerAction>,
     infoSheet: @Composable (item: MediaItem, onDismiss: () -> Unit) -> Unit,
     modifier: Modifier = Modifier,
+    /** False while a photo is flying in from or out to the grid: the viewer keeps its backdrop but hides its picture and buttons. */
+    shown: Boolean = true,
+    /** How much of the black backdrop to draw, 0..1, read while drawing. */
+    backdrop: () -> Float = { 1f },
 ) {
     val count = items.count
-    LaunchedEffect(count == 0) { if (count == 0) onClose() }
+    LaunchedEffect(count == 0) { if (count == 0) onClose(false) }
 
     val pagerState = rememberPagerState(initialPage = initialPage.coerceIn(0, (count - 1).coerceAtLeast(0))) { items.count }
     var chromeVisible by rememberSaveable { mutableStateOf(true) }
@@ -103,38 +110,40 @@ fun MediaViewer(
         zoomed = false
         originalShownFor = null
     }
-    BackHandler(onBack = onClose)
+    BackHandler(onBack = { onClose(!zoomed) })
     ImmersiveMode(hidden = !chromeVisible)
     SystemBarIcons(lightIcons = true)
 
     Box(
         modifier = modifier
             .fillMaxSize()
-            .background(Color.Black.copy(alpha = 1f - MAX_PULL_BACKDROP_FADE * pull.progress))
-            .pullGestures(pull, enabled = !zoomed, onDismiss = onClose, onPullUp = { infoOpen = true }),
+            .drawBehind { drawRect(Color.Black, alpha = (1f - MAX_PULL_BACKDROP_FADE * pull.progress) * backdrop().coerceIn(0f, 1f)) }
+            .pullGestures(pull, enabled = !zoomed && shown, onDismiss = { onClose(false) }, onPullUp = { infoOpen = true }),
     ) {
-        ViewerPager(
-            pagerState = pagerState,
-            items = items,
-            pull = pull,
-            chromeVisible = chromeVisible,
-            editOf = editOf,
-            onToggleChrome = { chromeVisible = !chromeVisible },
-            onZoomedChange = { zoomed = it },
-        )
-        ViewerChrome(
-            visible = chromeVisible && pull.offset == 0f,
-            position = pagerState.currentPage + 1,
-            count = count,
-            item = currentItem,
-            onClose = onClose,
-            leadingActions = leadingActions,
-            trailingActions = trailingActions,
-            onInfo = { infoOpen = true },
-            editedChip = currentItem?.takeIf { !it.isVideo && it.id in edits }?.let { item ->
-                { EditedChip(showingOriginal = item.id == originalShownFor) { originalShownFor = if (item.id == originalShownFor) null else item.id } }
-            },
-        )
+        Box(Modifier.fillMaxSize().graphicsLayer { alpha = if (shown) 1f else 0f }) {
+            ViewerPager(
+                pagerState = pagerState,
+                items = items,
+                pull = pull,
+                chromeVisible = chromeVisible,
+                editOf = editOf,
+                onToggleChrome = { chromeVisible = !chromeVisible },
+                onZoomedChange = { zoomed = it },
+            )
+            ViewerChrome(
+                visible = chromeVisible && pull.offset == 0f,
+                position = pagerState.currentPage + 1,
+                count = count,
+                item = currentItem,
+                onClose = { onClose(!zoomed) },
+                leadingActions = leadingActions,
+                trailingActions = trailingActions,
+                onInfo = { infoOpen = true },
+                editedChip = currentItem?.takeIf { !it.isVideo && it.id in edits }?.let { item ->
+                    { EditedChip(showingOriginal = item.id == originalShownFor) { originalShownFor = if (item.id == originalShownFor) null else item.id } }
+                },
+            )
+        }
     }
     if (infoOpen && currentItem != null) infoSheet(currentItem) { infoOpen = false }
 }
@@ -263,7 +272,7 @@ private fun EditedChip(showingOriginal: Boolean, onToggle: () -> Unit) {
             .padding(end = 12.dp)
             .clip(RoundedCornerShape(50))
             .background(Color.White.copy(alpha = 0.18f))
-            .clickable(onClickLabel = action, onClick = onToggle)
+            .clickable(onClickLabel = action, role = Role.Button, onClick = onToggle)
             .padding(horizontal = 12.dp, vertical = 6.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {

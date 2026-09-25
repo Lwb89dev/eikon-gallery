@@ -98,6 +98,13 @@ original with `_edit` added. It is created as *pending* and only becomes visible
 The copy keeps the original's date, camera, lens and exposure details so it sits at the right place in the timeline. **Location is copied only if eikon holds the "read photo
 locations" permission**, because otherwise Android hides it; the confirmation says if the details could not be copied. Orientation is reset (the pixels are already upright).
 
+## Sharing an edited photo
+
+**Share** hands over what you see. For a photo with an edit, eikon draws the edit at full size into a temporary JPEG in its own cache folder (`cache/shared/`, one folder per share) and shares that through a `FileProvider`
+that is not exported and grants only that file to the app you choose. The picture carries **no metadata** (no location, no camera details). Photos without an edit, and videos, are shared as the files they are. Temporary
+pictures older than a day are removed the next time something edited is shared. A thin bar moves across the top of the screen while the pictures are being drawn; if that fails the share does not happen and says so, and
+it never falls back to sending the unedited file.
+
 ## Copy edits, Paste edits
 
 - **Copy edits** (editor menu) puts the photo's *look* (adjustments and filter) on eikon's clipboard: a few lines of text kept across restarts.
@@ -112,7 +119,6 @@ locations" permission**, because otherwise Android hides it; the confirmation sa
 - **Photos only**; videos cannot be edited. RAW files, animated images and photos with Ultra HDR gain maps are not specially handled (they are decoded as ordinary pictures; the exported
   copy is an ordinary sRGB JPEG, so HDR information is dropped). Not tried on any.
 - **sRGB only**: wide-gamut photos are converted on decoding, so an edit means the same thing everywhere.
-- **Sharing sends the original.** The Share action hands over the photo's file, which the edit never changed; to share an edit, save a copy first. (Sharing the edited picture directly is not implemented.)
 - **No history**: one recipe per photo. Revert and "discard changes" are all there is; there is no undo stack inside a session.
 - **Perspective** is two sliders (vertical and horizontal), not four draggable corners.
 - **Not offered**: local adjustments and masks, curves, per-colour adjustments, noise reduction, red-eye or retouching, text and drawing.

@@ -10,6 +10,7 @@ import androidx.compose.foundation.gestures.calculateZoom
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.Stable
@@ -20,6 +21,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshotFlow
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.geometry.Offset
@@ -32,8 +34,14 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.input.pointer.positionChanged
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.onSizeChanged
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.CustomAccessibilityAction
+import androidx.compose.ui.semantics.customActions
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.IntSize
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.lerp
+import app.eikon.gallery.R
 import app.eikon.gallery.core.image.EditTransformation
 import app.eikon.gallery.core.image.MediaThumbnail
 import app.eikon.gallery.domain.edit.EditRecipe
@@ -56,7 +64,7 @@ private const val ZOOMED_THRESHOLD = 1.02f
 private const val ZOOM_ANIMATION_MS = 260
 
 /** Longest edge requested once the user zooms in; bounds memory to about 64 MB for one bitmap. */
-private const val HIGH_RES_EDGE_PX = 4096
+internal const val HIGH_RES_EDGE_PX = 4096
 
 /**
  * Pan/zoom state of one photo. The image is drawn fitted into the container at scale 1; zooming
@@ -143,10 +151,15 @@ fun ZoomableBox(
     content: @Composable () -> Unit,
 ) {
     val scope = rememberCoroutineScope()
+    // Pinching and double-tapping cannot be done with a screen reader, so zooming is offered as an action too.
+    val zoomLabel = stringResource(if (state.isZoomed) R.string.viewer_zoom_out else R.string.viewer_zoom_in)
     Box(
         modifier = modifier
             .fillMaxSize()
             .clipToBounds()
+            .semantics {
+                customActions = listOf(CustomAccessibilityAction(zoomLabel) { scope.launch { state.toggleZoom(Offset.Zero) }; true })
+            }
             .onSizeChanged { state.containerSize = it }
             .pointerInput(state) {
                 detectTapGestures(
@@ -220,6 +233,7 @@ fun ImagePage(
 private fun LayeredImage(item: MediaItem, state: ZoomState, recipe: EditRecipe?) {
     val context = LocalPlatformContext.current
     var previewLoaded by remember(item.id, recipe) { mutableStateOf(false) }
+    var failed by remember(item.id, recipe) { mutableStateOf(false) }
     if (!previewLoaded) MediaThumbnail(item, Modifier.fillMaxSize(), ContentScale.Fit, applyEdit = recipe != null)
 
     val container = state.containerSize
@@ -234,8 +248,10 @@ private fun LayeredImage(item: MediaItem, state: ZoomState, recipe: EditRecipe?)
                 state.imageAspect = it.result.image.width.toFloat() / it.result.image.height
                 previewLoaded = true
             },
+            onError = { failed = true },
         )
     }
+    if (failed) Box(Modifier.fillMaxSize(), contentAlignment = Alignment.BottomCenter) { CannotDisplay(Modifier.padding(bottom = 96.dp)) }
     if (state.isZoomed) HighResLayer(item, recipe)
 }
 

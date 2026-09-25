@@ -28,7 +28,7 @@ Location clustering (the map's markers) is not a stage: it is computed when the 
 ### How it runs
 
 - **WorkManager**, periodic (every 15 minutes at most) and unique, with these constraints: battery not low,
-  and by default charging. "Analyze now" runs one slice immediately, still not on a low battery.
+  and by default charging. "Analyze now" runs one slice immediately, still not on a low battery (but even in Battery Saver).
 - One run is a **time slice of 8 minutes** (WorkManager allows about 10). Whatever is left is picked up by
   the next run; nothing needs to finish in one go.
 - **State is per photo and per stage** in `index_state` (done, skipped because there was nothing to
@@ -37,6 +37,7 @@ Location clustering (the map's markers) is not a stage: it is computed when the 
   3 times is left alone.
 - **Order**: places first (fast), then the fingerprints for duplicates (fast), then what photos show, then faces, then text (slowest); within a stage, newest photos first, because those are the ones
   most likely to be searched for. (Prioritizing what is currently on screen is not implemented.)
+- **Battery Saver**: a scheduled run does not start on a photo while Battery Saver is on (nothing is marked failed; the next run tries again). "Analyze now" is the user's own request and goes ahead.
 - **Battery and heat**: the runner reads the platform thermal status between photos. Moderate heat adds a
   pause after each photo; severe heat stops the run. The user can pause everything, turn each step off, and
   choose whether to require charging.

@@ -34,7 +34,7 @@ Writes to media (trash, favorite) never go through the index first: they go thro
 | Package | Contents |
 | --- | --- |
 | `core.di` | Hilt modules and qualifiers |
-| `core.image` | Coil thumbnail fetcher backed by `ContentResolver.loadThumbnail` (draws a photo's edit on it), and the transformation that draws an edit in the viewer |
+| `core.image` | Coil thumbnail fetcher backed by `ContentResolver.loadThumbnail` (draws a photo's edit on it), the transformation that draws an edit in the viewer, and the memory of thumbnail shapes |
 | `core.permissions` | `MediaAccessChecker` (full / limited / none) |
 | `core.ui` | theme, system-bar helpers, paging helpers |
 | `data.db` | Room entity, DAO, database, `LibraryQueryBuilder` (SQL from a query object) |
@@ -60,7 +60,7 @@ Writes to media (trash, favorite) never go through the index first: they go thro
 - Capture time is `datetaken`, falling back to `date_modified`, then `date_added`, because many files
   (downloads, screenshots) have no capture date.
 
-## Room schema (version 6)
+## Room schema (version 7)
 
 Schemas are exported to `app/schemas`. Two kinds of tables live in the database:
 
@@ -76,7 +76,7 @@ Schemas are exported to `app/schemas`. Two kinds of tables live in the database:
 | `isFavorite` | MediaStore `is_favorite` |
 | `isScreenshot`, `isScreenRecording`, `isPanorama`, `isRaw` | heuristic categories, see below |
 
-Indexes on `takenAt` and `addedAt`. Because `id` is the rowid, `ORDER BY takenAt DESC, id DESC` is
+Indexes on `takenAt`, `addedAt`, and (`relativePath`, `takenAt`) and (`relativePath`, `addedAt`), the last two so that a device folder is read straight from the index in date order (see [PERFORMANCE.md](PERFORMANCE.md)). Because `id` is the rowid, `ORDER BY takenAt DESC, id DESC` is
 served straight from the index.
 
 **User data**, never derived from MediaStore and never touched when the cache is cleared or re-synced:
@@ -108,7 +108,7 @@ not copies) and `memory_preference` (`key`, `value`, `createdAt`: memories hidde
 
 Rows whose media is currently not visible (deleted, or outside a "selected photos" grant) are simply
 not shown and reappear if the media does. A destructive migration is never configured; version 1 to 2
-is an automatic migration, and versions 2 to 3, 3 to 4, 4 to 5 and 5 to 6 are explicit ones whose SQL is checked against the schema export
+is an automatic migration, and versions 2 to 3, 3 to 4, 4 to 5, 5 to 6 and 6 to 7 are explicit ones whose SQL is checked against the schema export
 and run on a real SQLite in a JVM test (and, separately, by an instrumented test).
 
 Category heuristics (`MediaClassifier`) rely on folder names, file names and image shape, because
@@ -198,6 +198,7 @@ with a `ContentObserver` only while the UI is visible: nothing runs in the backg
 - The viewer is an overlay on the library, sharing the grid's paged list. A photo is shown as
   thumbnail, then a screen-sized decode, then (only while zoomed) a decode up to 4096 px, dropped again
   when zoom returns to 1. A photo with an edit is drawn edited at each of those steps (see [EDITING.md](EDITING.md)). Only the visible video page owns an ExoPlayer.
+- Opening and closing a photo flies its thumbnail between the cell and the viewer (`feature/library/HeroFlight.kt`; see [PERFORMANCE.md](PERFORMANCE.md)); the cell's place comes from the grid's layout only when a photo is tapped.
 - Grid gestures: pinch (Initial pass, consumed only for two fingers), long-press-drag range selection
   (scrolling is disabled while dragging, with edge auto-scroll).
 

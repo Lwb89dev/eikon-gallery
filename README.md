@@ -14,7 +14,7 @@ Repository: <https://github.com/Lwb89dev/eikon-gallery>
 
 Early development. Phases 1 (gallery foundation), 2 (albums and utilities), 3 (search foundation), 4
 (intelligent indexing: search by what photos show, people, pets), 5 (smart collections: places, trips,
-memories, duplicates) and 6 (non-destructive editing) are implemented. Phases 1 and 2 were checked on a real phone; **Phases 3, 4, 5 and 6 are covered
+memories, duplicates), 6 (non-destructive editing) and 7 (polish: transitions, baseline profile, query tuning, battery, accessibility) are implemented. Phases 1 and 2 were checked on a real phone; **Phases 3 to 7 are covered
 by unit tests, including tests that run the real models, but have not been run on a device yet**, so how fast and how
 battery-hungry the analysis is on a phone, how fast editing is, and how the new screens behave, is unchecked. The full plan, with what is done and what is not, is in [docs/ROADMAP.md](docs/ROADMAP.md).
 Features that are not built yet are not shown in the app.
@@ -26,9 +26,10 @@ Features that are not built yet are not shown in the app.
   a local index in pages, never loaded into memory as a whole.
 - Date headers per day or month, a fast scroller with a month/year bubble, pinch to change grid
   density (2 to 7 columns), sorting by date taken or date added.
-- Combinable filters: photos or videos, favorites only, and one kind (screenshots, screen recordings,
+- Combinable filters: photos or videos, favorites only, edited only, and one kind (screenshots, screen recordings,
   panoramas, RAW).
 - Multi-select by tap or long-press-and-drag, then share, favorite, add to album, hide or delete.
+- Opening a photo grows it from its thumbnail, and closing it shrinks it back to its place in the grid. "Open with" from other apps shows a picture without adding it to the library.
 
 **Viewer and details**
 - Full-screen viewer: swipe between items, pinch and double-tap zoom, immersive mode, drag down to
@@ -72,7 +73,7 @@ Features that are not built yet are not shown in the app.
 - Auto enhance, exposure, brightness, contrast, highlights, shadows, black point, saturation, vibrance, temperature, tint, sharpness, vignette, crop (free, 1:1, 4:3, 3:2, 16:9), rotate, flip,
   straighten, perspective, and eight filters with a strength. Edited photos look edited in the grid and the viewer, where a chip shows the original.
 - **Save a copy** writes a new JPEG next to the original, keeping its date and camera details. **Copy edits** and **Paste edits** apply one photo's look to many at once; each keeps its own crop.
-- Limits, stated up front: photos only; other apps and Share see the original until you save a copy; recipes are lost if the app's data is cleared. See [docs/EDITING.md](docs/EDITING.md).
+- Limits, stated up front: photos only; other apps see the original until you save a copy (Share sends the edit, without metadata); recipes are lost if the app's data is cleared. See [docs/EDITING.md](docs/EDITING.md).
 
 **People and pets**
 - **People**: eikon finds faces on the phone and *groups* the ones that look alike. It does not identify anyone and
@@ -135,7 +136,7 @@ them.
 
 ### Tests
 
-- **JVM unit tests** (`./gradlew :app:testDebugUnitTest`, 490 tests): the sync engine, every library and
+- **JVM unit tests** (`./gradlew :app:testDebugUnitTest`, 527 tests): the sync engine, every library and
   search query run against a real SQLite including full-text search (checking, for instance, that each
   item lands in the right date section), the database migrations, the search query parser, the offline
   place lookup, the analysis runner (retries, resuming, pausing, heat, a model that cannot load), the edit renderer and recipe format, timeline
@@ -165,13 +166,13 @@ app/src/main/java/app/eikon/gallery/
 tools/         scripts that build bundled assets (the world map)
 app/src/main/assets/   place data (GeoNames) and OCR language data; see NOTICE.md
 app/model-manifest.tsv the machine-learning models fetched at build time (URL and SHA-256 of each)
-docs/          architecture, indexing, editing, privacy, ML notes, roadmap
+docs/          architecture, indexing, editing, performance, accessibility, privacy, ML notes, roadmap
 ```
 
 ## Documentation
 
 [Architecture](docs/ARCHITECTURE.md) · [Privacy](docs/PRIVACY.md) · [Indexing](docs/INDEXING.md) ·
-[Machine learning](docs/ML.md) · [Editing](docs/EDITING.md) · [Roadmap](docs/ROADMAP.md)
+[Machine learning](docs/ML.md) · [Editing](docs/EDITING.md) · [Performance](docs/PERFORMANCE.md) · [Accessibility](docs/ACCESSIBILITY.md) · [Roadmap](docs/ROADMAP.md)
 
 ## License
 

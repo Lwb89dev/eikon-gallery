@@ -6,13 +6,17 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
@@ -32,6 +36,14 @@ import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.CustomAccessibilityAction
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.clearAndSetSemantics
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.customActions
+import androidx.compose.ui.semantics.selected
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import app.eikon.gallery.R
@@ -62,24 +74,37 @@ private val PANEL_MAX_HEIGHT = 230.dp
 
 // --- The row of tools -----------------------------------------------------------------------------
 
+/** The six tools. They spread over the width when they fit, and scroll sideways when they do not (a narrow phone, or large text). */
 @Composable
 private fun ToolRow(state: EditUiState, viewModel: EditViewModel) {
-    Row(Modifier.fillMaxWidth().padding(vertical = 4.dp), horizontalArrangement = Arrangement.SpaceEvenly) {
-        ToolButton(R.drawable.ic_auto_fix, R.string.tool_auto, selected = false, onClick = viewModel::autoEnhance)
-        ToolButton(R.drawable.ic_tune, R.string.tool_light, state.tool == EditTool.LIGHT) { viewModel.selectTool(EditTool.LIGHT) }
-        ToolButton(R.drawable.ic_palette, R.string.tool_color, state.tool == EditTool.COLOR) { viewModel.selectTool(EditTool.COLOR) }
-        ToolButton(R.drawable.ic_detail, R.string.tool_detail, state.tool == EditTool.DETAIL) { viewModel.selectTool(EditTool.DETAIL) }
-        ToolButton(R.drawable.ic_photo_filter, R.string.tool_filters, state.tool == EditTool.FILTERS) { viewModel.selectTool(EditTool.FILTERS) }
-        ToolButton(R.drawable.ic_crop, R.string.tool_crop, state.tool == EditTool.CROP) { viewModel.selectTool(EditTool.CROP) }
+    BoxWithConstraints(Modifier.fillMaxWidth()) {
+        Row(
+            Modifier.horizontalScroll(rememberScrollState()).widthIn(min = maxWidth).padding(vertical = 4.dp),
+            horizontalArrangement = Arrangement.SpaceEvenly,
+        ) {
+            ToolButton(R.drawable.ic_auto_fix, R.string.tool_auto, selected = false, role = Role.Button, onClick = viewModel::autoEnhance)
+            ToolButton(R.drawable.ic_tune, R.string.tool_light, state.tool == EditTool.LIGHT) { viewModel.selectTool(EditTool.LIGHT) }
+            ToolButton(R.drawable.ic_palette, R.string.tool_color, state.tool == EditTool.COLOR) { viewModel.selectTool(EditTool.COLOR) }
+            ToolButton(R.drawable.ic_detail, R.string.tool_detail, state.tool == EditTool.DETAIL) { viewModel.selectTool(EditTool.DETAIL) }
+            ToolButton(R.drawable.ic_photo_filter, R.string.tool_filters, state.tool == EditTool.FILTERS) { viewModel.selectTool(EditTool.FILTERS) }
+            ToolButton(R.drawable.ic_crop, R.string.tool_crop, state.tool == EditTool.CROP) { viewModel.selectTool(EditTool.CROP) }
+        }
     }
 }
 
 @Composable
-private fun ToolButton(@DrawableRes icon: Int, @StringRes label: Int, selected: Boolean, onClick: () -> Unit) {
+private fun ToolButton(@DrawableRes icon: Int, @StringRes label: Int, selected: Boolean, role: Role = Role.Tab, onClick: () -> Unit) {
     val tint = if (selected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant
-    Column(Modifier.clip(RoundedCornerShape(12.dp)).clickable(onClick = onClick).padding(horizontal = 8.dp, vertical = 4.dp), horizontalAlignment = Alignment.CenterHorizontally) {
+    Column(
+        Modifier
+            .clip(RoundedCornerShape(12.dp))
+            .semantics { if (role == Role.Tab) this.selected = selected }
+            .clickable(role = role, onClick = onClick)
+            .padding(horizontal = 10.dp, vertical = 4.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
         Icon(painterResource(icon), contentDescription = null, tint = tint)
-        Text(stringResource(label), style = MaterialTheme.typography.labelSmall, color = tint)
+        Text(stringResource(label), style = MaterialTheme.typography.labelSmall, color = tint, maxLines = 1)
     }
 }
 
@@ -88,12 +113,25 @@ private fun ToolButton(@DrawableRes icon: Int, @StringRes label: Int, selected: 
 /** A labelled slider that shows its value and returns to [neutral] when the label is tapped. */
 @Composable
 private fun AdjustSlider(@StringRes label: Int, value: Float, range: ClosedFloatingPointRange<Float>, neutral: Float = 0f, onChange: (Float) -> Unit) {
+    val name = stringResource(label)
+    val valueText = String.format(Locale.US, "%+.2f", value)
+    val resetLabel = stringResource(R.string.slider_reset)
     Column(Modifier.fillMaxWidth()) {
-        Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
-            Text(stringResource(label), style = MaterialTheme.typography.bodyMedium, modifier = Modifier.weight(1f).clickable { onChange(neutral) })
-            Text(String.format(Locale.US, "%+.2f", value), style = MaterialTheme.typography.labelMedium, color = if (value == neutral) MaterialTheme.colorScheme.onSurfaceVariant else MaterialTheme.colorScheme.primary)
+        // Sighted users tap the name to reset; for a screen reader the slider itself carries the name, the value and the reset, so this row is hidden from it.
+        Row(Modifier.fillMaxWidth().clearAndSetSemantics {}, verticalAlignment = Alignment.CenterVertically) {
+            Text(name, style = MaterialTheme.typography.bodyMedium, modifier = Modifier.weight(1f).clickable { onChange(neutral) })
+            Text(valueText, style = MaterialTheme.typography.labelMedium, color = if (value == neutral) MaterialTheme.colorScheme.onSurfaceVariant else MaterialTheme.colorScheme.primary)
         }
-        Slider(value = value, onValueChange = onChange, valueRange = range)
+        Slider(
+            value = value,
+            onValueChange = onChange,
+            valueRange = range,
+            modifier = Modifier.semantics {
+                contentDescription = name
+                stateDescription = valueText
+                customActions = listOf(CustomAccessibilityAction(resetLabel) { onChange(neutral); true })
+            },
+        )
     }
 }
 
@@ -147,7 +185,7 @@ private fun FilterPanel(state: EditUiState, viewModel: EditViewModel) {
 private fun FilterItem(filter: EditFilter, state: EditUiState, viewModel: EditViewModel) {
     val selected = state.recipe.filter == filter
     val outline = if (selected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.surfaceContainerHighest
-    Column(Modifier.clickable { viewModel.setFilter(filter) }, horizontalAlignment = Alignment.CenterHorizontally) {
+    Column(Modifier.selectable(selected = selected, role = Role.RadioButton) { viewModel.setFilter(filter) }, horizontalAlignment = Alignment.CenterHorizontally) {
         val thumbnail = state.filterThumbnails[filter]
         Box(Modifier.size(72.dp).clip(RoundedCornerShape(8.dp)).border(2.dp, outline, RoundedCornerShape(8.dp))) {
             if (thumbnail != null) Image(thumbnail.asImageBitmap(), contentDescription = null, contentScale = ContentScale.Crop, modifier = Modifier.size(72.dp))

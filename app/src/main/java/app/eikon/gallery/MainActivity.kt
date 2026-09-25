@@ -1,5 +1,7 @@
 package app.eikon.gallery
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -16,6 +18,7 @@ import app.eikon.gallery.core.security.AreaLocks
 import app.eikon.gallery.data.settings.AppSettings
 import app.eikon.gallery.data.settings.SettingsRepository
 import app.eikon.gallery.data.sync.LibrarySyncCoordinator
+import app.eikon.gallery.feature.viewer.ExternalView
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -37,21 +40,32 @@ class MainActivity : FragmentActivity() {
 
     private val appViewModel: AppViewModel by viewModels()
 
+    /** A picture another app asked eikon to show ("Open with"); when set, that is all this window shows. */
+    private var externalImage: Uri? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         val splash = installSplashScreen()
         super.onCreate(savedInstanceState)
         // Hold the splash until the persisted theme/grid settings are read, so the first frame is final.
         splash.setKeepOnScreenCondition { appViewModel.settings.value == null }
         enableEdgeToEdge()
+        externalImage = imageToView(intent)
 
-        // Keep the index fresh only while the app is visible; nothing runs in the background.
-        lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) { syncCoordinator.keepFresh() }
+        // Keep the index fresh only while the app is visible; nothing runs in the background. Showing one picture for another app needs none of it.
+        if (externalImage == null) {
+            lifecycleScope.launch {
+                repeatOnLifecycle(Lifecycle.State.STARTED) { syncCoordinator.keepFresh() }
+            }
         }
         setContent {
             val settings by appViewModel.settings.collectAsState()
-            settings?.let { EikonApp(it) }
+            settings?.let { EikonApp(it, externalImage, onCloseExternal = ::finish) }
         }
+    }
+
+    private fun imageToView(intent: Intent?): Uri? {
+        val data = intent?.data ?: return null
+        return data.takeIf { ExternalView.isImage(intent.action, it.scheme, intent.type) }
     }
 
     /** Protected areas (Hidden, Recently deleted) lock again as soon as the app leaves the screen. */
