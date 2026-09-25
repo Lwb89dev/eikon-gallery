@@ -39,16 +39,20 @@ class MigrationTest {
     }
 
     @Test
-    fun migrating1To2KeepsMediaAndMakesAlbumTablesUsable() = runTest {
+    fun migratingFromVersion1KeepsMediaAndMakesTheNewTablesUsable() = runTest {
         createVersion1Database()
 
-        val db = Room.databaseBuilder(context, EikonDatabase::class.java, NAME).build()
+        val db = Room.databaseBuilder(context, EikonDatabase::class.java, NAME)
+            .addMigrations(*app.eikon.gallery.data.db.DatabaseMigrations.ALL)
+            .build()
         try {
             assertEquals(listOf(7L), db.mediaDao().allIds())
             val albumId = db.albumDao().create("Trip", 0)
             db.albumDao().addItems(listOf(app.eikon.gallery.data.db.AlbumItemEntity(albumId, 7, 0)))
             db.hiddenDao().hide(listOf(app.eikon.gallery.data.db.HiddenMediaEntity(7, 0)))
             assertEquals(1, db.albumDao().observeAlbums().first().size)
+            db.indexDao().insertSearch(listOf(app.eikon.gallery.data.db.MediaSearchEntity(7, "a jpg", "")))
+            assertEquals(listOf(7L), db.indexDao().existingSearchRows(listOf(7L)))
         } finally {
             db.close()
         }

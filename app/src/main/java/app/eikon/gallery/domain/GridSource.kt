@@ -1,5 +1,7 @@
 package app.eikon.gallery.domain
 
+import app.eikon.gallery.domain.search.SearchSpec
+
 /** The ready-made collections shown in the Collections screen. */
 enum class PresetKind { FAVORITES, RECENT, VIDEOS, SCREENSHOTS, SCREEN_RECORDINGS, PANORAMAS, RAW }
 
@@ -15,6 +17,9 @@ sealed interface GridSource {
     data class Folder(val relativePath: String) : GridSource
     data object Hidden : GridSource
 
+    /** The Search tab. The query text is not part of the source: it changes as the user types. */
+    data object Search : GridSource
+
     /** Round-trips through [parse]. */
     fun toArg(): String = when (this) {
         Library -> "library"
@@ -22,6 +27,7 @@ sealed interface GridSource {
         is Album -> "album:$id"
         is Folder -> "folder:$relativePath"
         Hidden -> "hidden"
+        Search -> "search"
     }
 
     /**
@@ -33,6 +39,8 @@ sealed interface GridSource {
         is Album -> LibraryQuery(LibraryScope.Album(id), LibraryFilters.NONE, sortField, direction)
         is Folder -> LibraryQuery(LibraryScope.Folder(relativePath), LibraryFilters.NONE, sortField, direction)
         Hidden -> LibraryQuery(LibraryScope.Hidden, LibraryFilters.NONE, sortField, direction)
+        // Search results are built from the typed text (see SearchViewModel); this is the empty state.
+        Search -> LibraryQuery(LibraryScope.Search(SearchSpec()), LibraryFilters.NONE, sortField, direction)
         is Preset -> presetQuery(kind, sortField, direction)
     }
 
@@ -42,6 +50,7 @@ sealed interface GridSource {
             val text = arg ?: return Library
             return when {
                 text == "hidden" -> Hidden
+                text == "search" -> Search
                 text.startsWith("preset:") -> PresetKind.entries.firstOrNull { it.name == text.removePrefix("preset:") }
                     ?.let(::Preset) ?: Library
                 text.startsWith("album:") -> text.removePrefix("album:").toLongOrNull()?.let(::Album) ?: Library

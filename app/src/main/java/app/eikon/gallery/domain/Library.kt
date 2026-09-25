@@ -4,6 +4,7 @@ import android.content.ContentUris
 import android.net.Uri
 import android.provider.MediaStore
 import androidx.compose.runtime.Immutable
+import app.eikon.gallery.domain.search.SearchSpec
 
 enum class SortField { DATE_TAKEN, DATE_ADDED }
 
@@ -45,6 +46,9 @@ sealed interface LibraryScope {
     data class RecentlyAdded(val days: Int = RECENT_DAYS) : LibraryScope
 
     data object Hidden : LibraryScope
+
+    /** Photos matching what the user typed in Search (text, place and date; hidden ones never appear). */
+    data class Search(val spec: SearchSpec) : LibraryScope
 
     companion object {
         const val RECENT_DAYS = 30

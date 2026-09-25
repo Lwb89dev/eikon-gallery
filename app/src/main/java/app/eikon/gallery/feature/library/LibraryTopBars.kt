@@ -119,6 +119,7 @@ private fun gridTitle(source: GridSource, albumName: String?, filters: LibraryFi
     is GridSource.Album -> albumName.orEmpty()
     is GridSource.Folder -> source.relativePath.trimEnd('/').substringAfterLast('/')
     GridSource.Hidden -> stringResource(R.string.collection_hidden)
+    GridSource.Search -> stringResource(R.string.nav_search)
 }
 
 @Composable

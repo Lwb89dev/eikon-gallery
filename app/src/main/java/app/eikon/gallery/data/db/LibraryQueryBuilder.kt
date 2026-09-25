@@ -9,6 +9,11 @@ import app.eikon.gallery.domain.SortDirection
 import app.eikon.gallery.domain.SortField
 import app.eikon.gallery.domain.TimelineGrouping
 import app.eikon.gallery.domain.TypeFilter
+import app.eikon.gallery.domain.search.DateSpec
+import app.eikon.gallery.domain.search.PlaceMatch
+import app.eikon.gallery.domain.search.SearchSpec
+import app.eikon.gallery.domain.search.SearchTerm
+import app.eikon.gallery.domain.search.TextNormalizer
 
 /** Plain SQL plus bind arguments, kept free of Room types so it can be unit tested on the JVM. */
 data class SqlQuery(val sql: String, val args: List<Any> = emptyList()) {
@@ -26,6 +31,9 @@ data class SqlQuery(val sql: String, val args: List<Any> = emptyList()) {
  */
 object LibraryQueryBuilder {
     private const val MILLIS_PER_DAY = 86_400_000L
+
+    /** Keeps a very common place name from producing hundreds of bound values. */
+    private const val MAX_PLACE_IDS = 200
 
     fun media(query: LibraryQuery, nowMillis: Long = System.currentTimeMillis()): SqlQuery {
         val parts = Parts(query, nowMillis)
@@ -77,22 +85,82 @@ object LibraryQueryBuilder {
                 }
                 else -> "FROM media m"
             }
-            conditions += scopeCondition(query.scope, nowMillis)
+            conditions += scopeConditions(query.scope, nowMillis)
             conditions += filterConditions(query.filters)
             where = conditions.joinToString(" AND ")
         }
 
-        private fun scopeCondition(scope: LibraryScope, nowMillis: Long): String = when (scope) {
-            LibraryScope.Hidden -> "m.id IN (SELECT mediaId FROM hidden_media)"
+        private fun scopeConditions(scope: LibraryScope, nowMillis: Long): List<String> = when (scope) {
+            LibraryScope.Hidden -> listOf("m.id IN (SELECT mediaId FROM hidden_media)")
             is LibraryScope.Folder -> {
                 args += scope.relativePath
-                "m.relativePath = ? AND $NOT_HIDDEN"
+                listOf("m.relativePath = ?", NOT_HIDDEN)
             }
             is LibraryScope.RecentlyAdded -> {
                 args += nowMillis - scope.days * MILLIS_PER_DAY
-                "m.addedAt >= ? AND $NOT_HIDDEN"
+                listOf("m.addedAt >= ?", NOT_HIDDEN)
             }
-            is LibraryScope.Album, LibraryScope.Everything -> NOT_HIDDEN
+            is LibraryScope.Search -> searchConditions(scope.spec)
+            is LibraryScope.Album, LibraryScope.Everything -> listOf(NOT_HIDDEN)
+        }
+
+        /** Every term must match (AND); the parsed type/kind filters apply too; hidden items never do. */
+        private fun searchConditions(spec: SearchSpec): List<String> = buildList {
+            add(NOT_HIDDEN)
+            spec.terms.forEach { add(termCondition(it)) }
+            dateCondition(spec.dates)?.let { add(it) }
+            addAll(filterConditions(spec.filters))
+        }
+
+        /**
+         * One word matches a photo whose file name or recognized text starts with it, or, when it names a
+         * place, a photo taken there. The FTS query holds only letters and digits plus `*`, so user text
+         * cannot alter the query's structure.
+         */
+        private fun termCondition(term: SearchTerm): String {
+            val alternatives = mutableListOf<String>()
+            val fts = ftsPrefixQuery(term.text)
+            if (fts != null) {
+                alternatives += "m.id IN (SELECT rowid FROM media_search WHERE media_search MATCH ?)"
+                args += fts
+            }
+            term.place?.let { alternatives += placeCondition(it) }
+            return if (alternatives.isEmpty()) "0" else alternatives.joinToString(" OR ", "(", ")")
+        }
+
+        private fun placeCondition(place: PlaceMatch): String {
+            val tests = mutableListOf<String>()
+            if (place.cityIds.isNotEmpty()) tests += inList("g.cityId", place.cityIds.take(MAX_PLACE_IDS))
+            if (place.regionKeys.isNotEmpty()) tests += inList("g.regionKey", place.regionKeys.toList())
+            if (place.countryCodes.isNotEmpty()) tests += inList("g.countryCode", place.countryCodes.toList())
+            return "EXISTS (SELECT 1 FROM media_geo g WHERE g.mediaId = m.id AND (${tests.joinToString(" OR ")}))"
+        }
+
+        private fun inList(column: String, values: List<Any>): String {
+            args.addAll(values)
+            return "$column IN (${values.joinToString(",") { "?" }})"
+        }
+
+        /** Several dates are alternatives: photos from any of them match. */
+        private fun dateCondition(dates: List<DateSpec>): String? {
+            if (dates.isEmpty()) return null
+            return dates.joinToString(" OR ", "(", ")") { spec ->
+                when (spec) {
+                    is DateSpec.Range -> {
+                        args += spec.range.startMillis
+                        args += spec.range.endMillis
+                        "(m.takenAt >= ? AND m.takenAt < ?)"
+                    }
+                    is DateSpec.Months -> {
+                        val months = spec.months.filter { it in 1..12 }.joinToString(",")
+                        "CAST(strftime('%m', m.takenAt / 1000, 'unixepoch', 'localtime') AS INTEGER) IN ($months)"
+                    }
+                    is DateSpec.MonthDay -> {
+                        args += "%02d-%02d".format(spec.month, spec.day)
+                        "strftime('%m-%d', m.takenAt / 1000, 'unixepoch', 'localtime') = ?"
+                    }
+                }
+            }
         }
 
         private fun filterConditions(filters: LibraryFilters): List<String> = buildList {
@@ -104,6 +172,12 @@ object LibraryQueryBuilder {
             if (filters.favoritesOnly) add("m.isFavorite = 1")
             filters.category?.let { add(categoryCondition(it)) }
         }
+    }
+
+    /** `roma*`, `new* york*`: each word a prefix, all of them required. Null if nothing searchable remains. */
+    fun ftsPrefixQuery(text: String): String? {
+        val words = TextNormalizer.words(text)
+        return if (words.isEmpty()) null else words.joinToString(" ") { "$it*" }
     }
 
     private const val NOT_HIDDEN = "m.id NOT IN (SELECT mediaId FROM hidden_media)"

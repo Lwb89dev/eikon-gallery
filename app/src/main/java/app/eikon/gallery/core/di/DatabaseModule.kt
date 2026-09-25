@@ -3,8 +3,10 @@ package app.eikon.gallery.core.di
 import android.content.Context
 import androidx.room.Room
 import app.eikon.gallery.data.db.AlbumDao
+import app.eikon.gallery.data.db.DatabaseMigrations
 import app.eikon.gallery.data.db.EikonDatabase
 import app.eikon.gallery.data.db.HiddenDao
+import app.eikon.gallery.data.db.IndexDao
 import app.eikon.gallery.data.db.MediaDao
 import dagger.Module
 import dagger.Provides
@@ -19,7 +21,9 @@ object DatabaseModule {
     @Provides
     @Singleton
     fun database(@ApplicationContext context: Context): EikonDatabase =
-        Room.databaseBuilder(context, EikonDatabase::class.java, "eikon.db").build()
+        Room.databaseBuilder(context, EikonDatabase::class.java, "eikon.db")
+            .addMigrations(*DatabaseMigrations.ALL)
+            .build()
 
     @Provides
     fun mediaDao(database: EikonDatabase): MediaDao = database.mediaDao()
@@ -29,4 +33,7 @@ object DatabaseModule {
 
     @Provides
     fun hiddenDao(database: EikonDatabase): HiddenDao = database.hiddenDao()
+
+    @Provides
+    fun indexDao(database: EikonDatabase): IndexDao = database.indexDao()
 }

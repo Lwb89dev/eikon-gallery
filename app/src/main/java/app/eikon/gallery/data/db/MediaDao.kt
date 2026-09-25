@@ -49,16 +49,16 @@ interface MediaDao {
     )
     fun observeFolders(): Flow<List<FolderSummary>>
 
-    @RawQuery(observedEntities = [MediaEntity::class, AlbumItemEntity::class, HiddenMediaEntity::class])
+    @RawQuery(observedEntities = [MediaEntity::class, AlbumItemEntity::class, HiddenMediaEntity::class, MediaGeoEntity::class, MediaSearchEntity::class])
     fun observeCount(query: SupportSQLiteQuery): Flow<Int>
 
-    @RawQuery(observedEntities = [MediaEntity::class, AlbumItemEntity::class, HiddenMediaEntity::class])
+    @RawQuery(observedEntities = [MediaEntity::class, AlbumItemEntity::class, HiddenMediaEntity::class, MediaGeoEntity::class, MediaSearchEntity::class])
     fun observeCover(query: SupportSQLiteQuery): Flow<MediaEntity?>
 
     /** SQL comes from LibraryQueryBuilder, which only ever interpolates whitelisted constants. */
-    @RawQuery(observedEntities = [MediaEntity::class, AlbumItemEntity::class, HiddenMediaEntity::class])
+    @RawQuery(observedEntities = [MediaEntity::class, AlbumItemEntity::class, HiddenMediaEntity::class, MediaGeoEntity::class, MediaSearchEntity::class])
     fun pagingSource(query: SupportSQLiteQuery): PagingSource<Int, MediaEntity>
 
-    @RawQuery(observedEntities = [MediaEntity::class, AlbumItemEntity::class, HiddenMediaEntity::class])
+    @RawQuery(observedEntities = [MediaEntity::class, AlbumItemEntity::class, HiddenMediaEntity::class, MediaGeoEntity::class, MediaSearchEntity::class])
     fun observeSectionCounts(query: SupportSQLiteQuery): Flow<List<SectionCountRow>>
 }

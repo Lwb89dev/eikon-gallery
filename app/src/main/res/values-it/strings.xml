@@ -129,6 +129,7 @@
 
     <!-- Navigazione e collezioni -->
     <string name="nav_library">Libreria</string>
+    <string name="nav_search">Cerca</string>
     <string name="nav_collections">Collezioni</string>
     <string name="collections_title">Collezioni</string>
     <string name="section_albums">Album</string>

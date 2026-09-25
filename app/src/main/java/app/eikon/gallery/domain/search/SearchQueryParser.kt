@@ -196,6 +196,8 @@ class SearchQueryParser(
     private fun addPlainTerm(word: String, state: ParseState) {
         if (word in SearchLexicon.stopWords) return
         if (word.length < MIN_TERM_LENGTH) return
+        // "1" or "13" as a prefix would match almost every file name, so short bare numbers carry no meaning.
+        if (word.all { it.isDigit() } && word.length < MIN_NUMBER_LENGTH) return
         state.terms += SearchTerm(word)
     }
 
@@ -251,6 +253,7 @@ class SearchQueryParser(
         const val MAX_PHRASE = 2
         const val MAX_PLACE_WORDS = 3
         const val MIN_TERM_LENGTH = 2
+        const val MIN_NUMBER_LENGTH = 3
         const val MIN_YEAR = 1900
         const val MAX_YEAR = 2100
         const val WEEK_DAYS = 7L

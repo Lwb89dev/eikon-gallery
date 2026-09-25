@@ -9,6 +9,11 @@ import app.eikon.gallery.domain.SortField
 import app.eikon.gallery.domain.TimelineGrouping
 import app.eikon.gallery.domain.TimelineLayout
 import app.eikon.gallery.domain.TypeFilter
+import app.eikon.gallery.domain.search.DateSpec
+import app.eikon.gallery.domain.search.PlaceMatch
+import app.eikon.gallery.domain.search.SearchSpec
+import app.eikon.gallery.domain.search.SearchTerm
+import app.eikon.gallery.domain.search.TimeRange
 import java.io.File
 import java.sql.Connection
 import java.sql.DriverManager
@@ -53,6 +58,126 @@ class LibrarySqlTest {
         execute("INSERT INTO album (id, name, createdAt, position) VALUES (1, 'Trip', 0, 0)")
         listOf(1, 4, 8).forEach { execute("INSERT INTO album_item (albumId, mediaId, addedAt) VALUES (1, $it, 0)") }
         listOf(3, 8).forEach { execute("INSERT INTO hidden_media (mediaId, hiddenAt) VALUES ($it, 0)") }
+        seedSearchIndex()
+    }
+
+    /**
+     * Words and places for search tests. 1: receipt from Rome; 2: video from Milan; 3: hidden screenshot
+     * mentioning IKEA; 4: "Città" text, Naples; 5-7: plain camera files with no analysis data; 8: hidden.
+     */
+    private fun seedSearchIndex() {
+        val text = mapOf(
+            1L to ("IMG_20250110_101010" to "Ricevuta IKEA Roma"),
+            2L to ("VID_20250115" to ""),
+            3L to ("Screenshot_2025" to "ikea segreto"),
+            4L to ("IMG_0004" to "Città di Napoli"),
+            5L to ("IMG_0005" to ""), 6L to ("IMG_0006" to ""), 7L to ("holidayPhoto" to ""), 8L to ("IMG_0008" to "ikea"),
+        )
+        text.forEach { (id, pair) ->
+            execute("INSERT INTO media_search (rowid, filename, ocr) VALUES ($id, '${pair.first.lowercase().replace("_", " ")}', '${pair.second}')")
+        }
+        execute("INSERT INTO media_geo VALUES (1, 41.9, 12.5, 3169070, 'IT', 'IT.07')")
+        execute("INSERT INTO media_geo VALUES (2, 45.4, 9.2, 3173435, 'IT', 'IT.09')")
+        execute("INSERT INTO media_geo VALUES (4, 40.8, 14.3, 3172394, 'IT', 'IT.04')")
+        execute("INSERT INTO media_geo VALUES (5, 48.8, 2.3, 2988507, 'FR', 'FR.11')")
+    }
+
+    private fun search(spec: SearchSpec, scope: LibraryScope? = null) =
+        ids(LibraryQuery(scope = scope ?: LibraryScope.Search(spec)))
+
+    private val rome = PlaceMatch(cityIds = setOf(3169070L))
+    private val italy = PlaceMatch(countryCodes = setOf("IT"))
+    private val lombardy = PlaceMatch(regionKeys = setOf("IT.09"))
+
+    @Test
+    fun searchByTextFindsOcrWordsCaseAndAccentInsensitively() {
+        assertEquals(listOf(1L), search(SearchSpec(listOf(SearchTerm("ricevuta")))))
+        assertEquals(listOf(4L), search(SearchSpec(listOf(SearchTerm("citta")))))
+        assertEquals(listOf(4L), search(SearchSpec(listOf(SearchTerm("napoli")))))
+    }
+
+    @Test
+    fun searchByFileNameUsesPrefixes() {
+        assertEquals(listOf(1L), search(SearchSpec(listOf(SearchTerm("2025")))).filter { it == 1L })
+        assertEquals(listOf(2L), search(SearchSpec(listOf(SearchTerm("vid")))))
+        assertEquals(listOf(7L), search(SearchSpec(listOf(SearchTerm("holiday")))))
+    }
+
+    @Test
+    fun everyTermMustMatch() {
+        assertEquals(listOf(1L), search(SearchSpec(listOf(SearchTerm("ricevuta"), SearchTerm("ikea")))))
+        assertEquals(emptyList<Long>(), search(SearchSpec(listOf(SearchTerm("ricevuta"), SearchTerm("napoli")))))
+    }
+
+    @Test
+    fun hiddenItemsNeverAppearInSearchEvenWhenTheirTextMatches() {
+        // ids 3 and 8 mention IKEA but are hidden; only 1 is returned.
+        assertEquals(listOf(1L), search(SearchSpec(listOf(SearchTerm("ikea")))))
+    }
+
+    @Test
+    fun aPlaceTermMatchesByCityRegionOrCountry() {
+        assertEquals(listOf(1L), search(SearchSpec(listOf(SearchTerm("roma", rome)))))
+        assertEquals(listOf(2L), search(SearchSpec(listOf(SearchTerm("lombardia", lombardy)))))
+        assertEquals(listOf(1L, 2L, 4L), search(SearchSpec(listOf(SearchTerm("italia", italy)))).sortedBy { it })
+    }
+
+    @Test
+    fun aPlaceWordAlsoMatchesTheSameWordInText() {
+        // "roma" is in the OCR of photo 1 and is also Rome; both routes lead to the same single photo.
+        assertEquals(listOf(1L), search(SearchSpec(listOf(SearchTerm("roma", rome)))))
+    }
+
+    @Test
+    fun dateRangesMonthsAndDaysFilterByCaptureTime() {
+        // taken: id1/2 day 10 (Jan 11 2025), id4 day 9 (Jan 10), id5-7 day 5 (Jan 6), id8 day 40 (Feb 10).
+        fun range(fromDay: Int, toDay: Int) = DateSpec.Range(TimeRange(utcNoon(fromDay) - 43_200_000L, utcNoon(toDay) - 43_200_000L))
+        assertEquals(setOf(1L, 2L), search(SearchSpec(dates = listOf(range(10, 11)))).toSet())
+        assertEquals(setOf(1L, 2L, 4L, 5L, 6L, 7L), search(SearchSpec(dates = listOf(DateSpec.Months(setOf(1))))).toSet())
+        assertEquals(setOf(4L), search(SearchSpec(dates = listOf(DateSpec.MonthDay(1, 10)))).toSet())
+    }
+
+    @Test
+    fun severalDatesAreAlternatives() {
+        val jan10 = DateSpec.MonthDay(1, 10)
+        val jan6 = DateSpec.MonthDay(1, 6)
+        assertEquals(setOf(4L, 5L, 6L, 7L), search(SearchSpec(dates = listOf(jan10, jan6))).toSet())
+    }
+
+    @Test
+    fun parsedFiltersApplyToSearchResults() {
+        val onlyVideos = SearchSpec(dates = listOf(DateSpec.Months(setOf(1))), filters = LibraryFilters(TypeFilter.VIDEOS))
+        assertEquals(setOf(2L, 5L), search(onlyVideos).toSet())
+        val onlyFavorites = SearchSpec(filters = LibraryFilters(favoritesOnly = true))
+        assertEquals(setOf(2L, 4L), search(onlyFavorites).toSet())
+    }
+
+    @Test
+    fun textPlaceAndDateCombine() {
+        val spec = SearchSpec(listOf(SearchTerm("ikea"), SearchTerm("roma", rome)), listOf(DateSpec.Months(setOf(1))))
+        assertEquals(listOf(1L), search(spec))
+        val wrongMonth = SearchSpec(listOf(SearchTerm("ikea")), listOf(DateSpec.Months(setOf(7))))
+        assertEquals(emptyList<Long>(), search(wrongMonth))
+    }
+
+    @Test
+    fun userTextCannotInjectSqlOrFtsSyntax() {
+        val hostile = listOf("x' OR '1'='1", "\"quoted\"", "a AND b", "roma OR napoli", "NEAR(a b)", "col:val", "*", "-)(")
+        hostile.forEach { word ->
+            val result = runCatching { search(SearchSpec(listOf(SearchTerm(word)))) }
+            assertTrue("$word must not throw: ${result.exceptionOrNull()}", result.isSuccess)
+        }
+        assertEquals(6, ids(LibraryQuery()).size) // and the table is intact
+    }
+
+    @Test
+    fun searchSectionsMatchTheSearchResults() {
+        val specs = listOf(
+            SearchSpec(listOf(SearchTerm("italia", italy))),
+            SearchSpec(dates = listOf(DateSpec.Months(setOf(1)))),
+            SearchSpec(listOf(SearchTerm("img"))),
+        )
+        specs.forEach { assertSectionsMatchMedia(LibraryQuery(scope = LibraryScope.Search(it))) }
     }
 
     @After
@@ -263,7 +388,7 @@ class LibrarySqlTest {
                 continue
             }
             val sql = match.groupValues[2].replace("\\\"", "\"").replace("\${TABLE_NAME}", table)
-            if (sql.startsWith("CREATE TABLE") || sql.startsWith("CREATE INDEX")) statements += sql
+            if (sql.startsWith("CREATE")) statements += sql
         }
         return statements
     }
