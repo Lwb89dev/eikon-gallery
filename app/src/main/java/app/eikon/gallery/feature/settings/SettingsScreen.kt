@@ -1,6 +1,8 @@
 package app.eikon.gallery.feature.settings
 
-import androidx.compose.foundation.clickable
+import android.Manifest
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -20,6 +22,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Switch
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
@@ -33,8 +36,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.compose.LifecycleEventEffect
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.eikon.gallery.R
+import app.eikon.gallery.data.indexing.AnalysisStatus
+import app.eikon.gallery.data.settings.AnalysisSettings
 import app.eikon.gallery.data.settings.ThemeMode
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -45,6 +52,12 @@ fun SettingsScreen(
     viewModel: SettingsViewModel = hiltViewModel(),
 ) {
     val settings by viewModel.settings.collectAsStateWithLifecycle()
+    val analysis by viewModel.analysis.collectAsStateWithLifecycle()
+    val canReadLocation by viewModel.canReadLocation.collectAsStateWithLifecycle()
+    val locationPermission = rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) {
+        viewModel.refreshLocationPermission()
+    }
+    LifecycleEventEffect(Lifecycle.Event.ON_RESUME) { viewModel.refreshLocationPermission() }
     Scaffold(
         modifier = modifier,
         containerColor = MaterialTheme.colorScheme.background,
@@ -72,6 +85,10 @@ fun SettingsScreen(
                 ThemeOption(mode, selected = mode == settings.themeMode) { viewModel.setThemeMode(mode) }
             }
             Spacer(Modifier.height(24.dp))
+            AnalysisSection(settings.analysis, analysis, canReadLocation, viewModel, onAllowLocations = {
+                locationPermission.launch(Manifest.permission.ACCESS_MEDIA_LOCATION)
+            })
+            Spacer(Modifier.height(24.dp))
             GroupTitle(R.string.settings_security)
             SwitchRow(R.string.setting_lock_hidden, settings.lockHidden, viewModel::setLockHidden)
             SwitchRow(R.string.setting_lock_trash, settings.lockTrash, viewModel::setLockTrash)
@@ -94,6 +111,65 @@ fun SettingsScreen(
             Text(stringResource(R.string.settings_version, versionName()), style = MaterialTheme.typography.bodyMedium)
         }
     }
+}
+
+/** Progress of the background analysis and the switches that control it. */
+@Composable
+private fun AnalysisSection(
+    settings: AnalysisSettings,
+    status: AnalysisStatus?,
+    canReadLocation: Boolean,
+    viewModel: SettingsViewModel,
+    onAllowLocations: () -> Unit,
+) {
+    GroupTitle(R.string.settings_analysis)
+    AnalysisProgress(settings, status)
+    SwitchRow(R.string.setting_pause_analysis, settings.paused) { on -> viewModel.setAnalysis { it.copy(paused = on) } }
+    SwitchRow(R.string.setting_only_charging, settings.onlyWhileCharging) { on -> viewModel.setAnalysis { it.copy(onlyWhileCharging = on) } }
+    SwitchRow(R.string.setting_analyze_places, settings.places) { on -> viewModel.setAnalysis { it.copy(places = on) } }
+    if (settings.places && !canReadLocation) LocationPermissionPrompt(onAllowLocations)
+    SwitchRow(R.string.setting_analyze_text, settings.text) { on -> viewModel.setAnalysis { it.copy(text = on) } }
+    TextButton(onClick = viewModel::analyzeNow, enabled = !settings.paused && settings.anyEnabled) {
+        Text(stringResource(R.string.analyze_now))
+    }
+    Text(
+        text = stringResource(R.string.settings_analysis_body),
+        style = MaterialTheme.typography.bodySmall,
+        color = MaterialTheme.colorScheme.onSurfaceVariant,
+    )
+}
+
+@Composable
+private fun AnalysisProgress(settings: AnalysisSettings, status: AnalysisStatus?) {
+    if (status == null) return
+    if (settings.places) {
+        Text(stringResource(R.string.analysis_places_progress, status.places.done, status.places.total), style = MaterialTheme.typography.bodyMedium)
+    }
+    if (settings.text) {
+        Text(stringResource(R.string.analysis_text_progress, status.text.done, status.text.total), style = MaterialTheme.typography.bodyMedium)
+    }
+    val summary = when {
+        settings.paused || !settings.anyEnabled -> null
+        status.running -> R.string.analysis_running
+        isUpToDate(settings, status) -> R.string.analysis_up_to_date
+        else -> R.string.analysis_idle
+    }
+    if (summary != null) {
+        Text(stringResource(summary), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+    }
+}
+
+private fun isUpToDate(settings: AnalysisSettings, status: AnalysisStatus): Boolean =
+    (!settings.places || status.places.isComplete) && (!settings.text || status.text.isComplete)
+
+@Composable
+private fun LocationPermissionPrompt(onAllow: () -> Unit) {
+    Text(
+        text = stringResource(R.string.analysis_location_permission),
+        style = MaterialTheme.typography.bodySmall,
+        color = MaterialTheme.colorScheme.onSurfaceVariant,
+    )
+    TextButton(onClick = onAllow) { Text(stringResource(R.string.analysis_allow_locations)) }
 }
 
 @Composable

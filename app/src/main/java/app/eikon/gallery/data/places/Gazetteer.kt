@@ -145,7 +145,7 @@ class Gazetteer private constructor(
             val result = HashMap<String, MutableSet<String>>()
             for (code in Locale.getISOCountries()) {
                 for (locale in locales) {
-                    val name = TextNormalizer.name(Locale("", code).getDisplayCountry(locale))
+                    val name = TextNormalizer.name(Locale.Builder().setRegion(code).build().getDisplayCountry(locale))
                     if (name.isNotEmpty()) result.getOrPut(name) { mutableSetOf() } += code
                 }
             }

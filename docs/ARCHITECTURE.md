@@ -58,7 +58,7 @@ Writes to media (trash, favorite) never go through the index first: they go thro
 - Capture time is `datetaken`, falling back to `date_modified`, then `date_added`, because many files
   (downloads, screenshots) have no capture date.
 
-## Room schema (version 2)
+## Room schema (version 3)
 
 Schemas are exported to `app/schemas`. Two kinds of tables live in the database:
 
@@ -85,9 +85,18 @@ served straight from the index.
 | `album_item` (`albumId`, `mediaId`, `addedAt`) | membership; cascades on album delete; **no foreign key to `media`** so a re-sync can never destroy an album |
 | `hidden_media` (`mediaId`, `hiddenAt`) | items hidden from everything except the Hidden section |
 
+**Derived data** about photos, produced by the background analysis and cleared with the media cache:
+
+| Table | Meaning |
+| --- | --- |
+| `index_state` (`mediaId`, `stage`, `status`, `attempts`, `updatedAt`) | which analysis stage has been done for which photo, so work survives restarts |
+| `media_geo` (`mediaId`, `latitude`, `longitude`, `cityId`, `countryCode`, `regionKey`) | where a photo was taken, resolved offline to the nearest city |
+| `media_search` (FTS4, `rowid` = media id; `filename`, `ocr`) | full-text index over file-name words and recognized text; case and accent insensitive |
+
 Rows whose media is currently not visible (deleted, or outside a "selected photos" grant) are simply
 not shown and reappear if the media does. A destructive migration is never configured; version 1 to 2
-is an automatic migration covered by an instrumented test.
+is an automatic migration and version 2 to 3 an explicit one whose SQL is checked against the schema export
+and run on a real SQLite in a JVM test (and, separately, by an instrumented test).
 
 Category heuristics (`MediaClassifier`) rely on folder names, file names and image shape, because
 Android exposes no such flags. They can be wrong for renamed or moved files.
@@ -100,6 +109,19 @@ queries. It binds every value (album id, folder path, cutoff time) as an argumen
 hidden items are excluded from every scope except Hidden, so a screen cannot forget to. The same
 builder produces the paged rows, the date sections, counts and covers, and JVM tests run all of them
 against a real SQLite, checking that every item falls in the right section.
+
+## Search
+
+`SearchQueryParser` turns the typed text into a `SearchSpec` using plain rules (no model): dates in Italian
+and English (years, months, days, ISO and numeric forms, "yesterday", "this week", seasons), kind words
+("video", "screenshot", "favorites"), places from the offline gazetteer, and the rest as words. The screen
+shows the user how the text was understood. `LibraryQueryBuilder` turns the spec into SQL: every word must
+match either the full-text index (prefix match on file-name words and recognized text) or, if it names a
+place, a photo taken there; several dates are alternatives; hidden photos are always excluded. User text
+reaches the query only as letters and digits plus `*`, and as bound arguments.
+
+`Gazetteer` (`data/places`) is the offline place lookup: nearest city for a coordinate (grid index, 100 km
+limit) and place names, aliases and countries for a word. Its data is the bundled GeoNames extract.
 
 ## Locks
 

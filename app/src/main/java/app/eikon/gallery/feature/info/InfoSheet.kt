@@ -2,6 +2,8 @@ package app.eikon.gallery.feature.info
 
 import android.Manifest
 import android.content.ActivityNotFoundException
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.content.Intent
 import android.text.format.DateUtils
 import android.text.format.Formatter
@@ -17,6 +19,7 @@ import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
@@ -38,6 +41,7 @@ import androidx.core.net.toUri
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.eikon.gallery.R
+import app.eikon.gallery.data.metadata.IndexedInfo
 import app.eikon.gallery.domain.CameraDetails
 import app.eikon.gallery.domain.CaptureTime
 import app.eikon.gallery.domain.ExifFormat
@@ -83,17 +87,19 @@ private fun InfoBody(state: InfoState, onAllowLocation: () -> Unit) {
     when (state) {
         InfoState.Loading -> Muted(stringResource(R.string.info_loading))
         InfoState.Failed -> Muted(stringResource(R.string.info_error))
-        is InfoState.Loaded -> DetailsList(state.details, onAllowLocation)
+        is InfoState.Loaded -> DetailsList(state.details, state.indexed, onAllowLocation)
     }
 }
 
 @Composable
-private fun DetailsList(details: MediaDetails, onAllowLocation: () -> Unit) {
+private fun DetailsList(details: MediaDetails, indexed: IndexedInfo, onAllowLocation: () -> Unit) {
     FileSection(details)
     DateSection(details)
     LocationRow(details.location, onAllowLocation)
+    InfoRow(R.string.info_place, indexed.place)
     details.camera?.let { CameraSection(it) }
     details.video?.let { VideoSection(it) }
+    indexed.text?.let { TextFoundSection(it) }
 }
 
 @Composable
@@ -189,6 +195,21 @@ private fun VideoSection(video: VideoDetails) {
     InfoRow(R.string.info_audio_codec, video.audioCodec)
     InfoRow(R.string.info_bitrate, video.bitrate)
     InfoRow(R.string.info_dynamic_range, video.dynamicRange)
+}
+
+/** Text read from the photo by the background analysis: selectable, and one tap to copy it all. */
+@Composable
+private fun TextFoundSection(text: String) {
+    val context = LocalContext.current
+    Divider()
+    Section(R.string.info_text_found)
+    SelectionContainer { Text(text, style = MaterialTheme.typography.bodyMedium) }
+    TextButton(onClick = { copyToClipboard(context, text) }) { Text(stringResource(R.string.info_text_copy)) }
+}
+
+private fun copyToClipboard(context: android.content.Context, text: String) {
+    val clipboard = context.getSystemService(ClipboardManager::class.java)
+    clipboard?.setPrimaryClip(ClipData.newPlainText(null, text))
 }
 
 // --- Building blocks ---------------------------------------------------------------------------

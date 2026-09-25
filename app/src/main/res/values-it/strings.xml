@@ -234,4 +234,34 @@
     <string name="setting_lock_trash">Richiedi autenticazione per Eliminati di recente</string>
     <string name="setting_show_hidden">Mostra Nascosti nelle Collezioni</string>
     <string name="settings_security_body">Gli elementi nascosti non compaiono in Libreria, Collezioni e ricerca, e aprire Nascosti richiede impronta, volto o blocco schermo. I file non sono cifrati e restano nella memoria normale del telefono, dove altre app con accesso alle foto possono ancora vederli.</string>
+
+    <!-- Cerca -->
+    <string name="search_placeholder">Data, luogo, testo, nome file</string>
+    <string name="search_clear">Cancella ricerca</string>
+    <string name="search_no_results">Nessuna foto corrisponde</string>
+    <string name="search_hint_title">Cerca nella tua libreria</string>
+    <string name="search_hint_body">Prova con una data (\"agosto 2025\", \"ieri\"), un luogo (\"Roma\", \"Toscana\"), una parola che compare in una foto o nel suo nome file, o un genere (\"video\", \"screenshot\", \"preferiti\").\n\nLa ricerca non riconosce ancora cosa mostra un\'immagine, solo ciò che vi è scritto.</string>
+    <string name="search_analysis_off">La ricerca per luogo e per testo nelle foto è disattivata. Puoi attivarla in Impostazioni, Analisi.</string>
+    <string name="search_analysis_note">Analisi delle foto ancora in corso in background (%1$d%%). Alcuni risultati potrebbero mancare.</string>
+
+    <!-- Impostazioni: analisi -->
+    <string name="settings_analysis">Analisi</string>
+    <string name="analysis_places_progress">Luoghi: %1$,d di %2$,d</string>
+    <string name="analysis_text_progress">Testo nelle foto: %1$,d di %2$,d</string>
+    <string name="analysis_running">Analisi in corso…</string>
+    <string name="analysis_idle">In attesa del momento giusto (in carica, batteria non scarica)</string>
+    <string name="analysis_up_to_date">Tutto è stato analizzato</string>
+    <string name="setting_pause_analysis">Metti in pausa l\'analisi</string>
+    <string name="setting_only_charging">Solo in carica</string>
+    <string name="setting_analyze_places">Trova le foto per luogo</string>
+    <string name="setting_analyze_text">Trova il testo nelle foto</string>
+    <string name="analysis_location_permission">Android nasconde alle app dove sono state scattate le foto finché non lo consenti.</string>
+    <string name="analysis_allow_locations">Consenti l\'accesso alla posizione delle foto</string>
+    <string name="analyze_now">Analizza ora</string>
+    <string name="settings_analysis_body">L\'analisi avviene solo sul tuo telefono, in background, e si ferma quando la batteria è scarica o il telefono si scalda. Salva il luogo di ogni foto (calcolato offline, nessuna posizione viene inviata da nessuna parte) e l\'eventuale testo letto nella foto, così la ricerca può trovarli. La lettura del testo è lenta e usa molto il processore, per questo per impostazione predefinita attende la ricarica.</string>
+
+    <!-- Pannello info: dati derivati -->
+    <string name="info_place">Luogo più vicino</string>
+    <string name="info_text_found">Testo in questa foto</string>
+    <string name="info_text_copy">Copia il testo</string>
 </resources>

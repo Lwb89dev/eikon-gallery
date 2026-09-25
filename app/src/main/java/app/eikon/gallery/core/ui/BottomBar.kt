@@ -11,10 +11,11 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import app.eikon.gallery.R
 
-/** The top-level destinations. Search joins them when it is implemented, not before. */
+/** The top-level destinations. */
 enum class TopLevel(@StringRes val label: Int, @DrawableRes val icon: Int) {
     LIBRARY(R.string.nav_library, R.drawable.ic_photo),
     COLLECTIONS(R.string.nav_collections, R.drawable.ic_folder),
+    SEARCH(R.string.nav_search, R.drawable.ic_search),
 }
 
 @Composable

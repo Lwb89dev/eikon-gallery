@@ -31,6 +31,24 @@ import kotlinx.coroutines.flow.stateIn
 enum class ThemeMode { SYSTEM, LIGHT, DARK }
 
 /**
+ * What the background analysis may do. Everything it learns (places, text found in photos) stays in
+ * eikon's private database on the phone. Both steps are **off by default**: they store where photos were
+ * taken and the text in them (receipts, documents...), which the user should choose to have recorded.
+ */
+data class AnalysisSettings(
+    /** Stops all analysis until turned back on. */
+    val paused: Boolean = false,
+    /** Run only while the phone is charging (always also requires the battery not to be low). */
+    val onlyWhileCharging: Boolean = true,
+    /** Work out where photos were taken, to search by place. Needs the photo-location permission. */
+    val places: Boolean = false,
+    /** Read text inside photos, to search by it. The heaviest step. */
+    val text: Boolean = false,
+) {
+    val anyEnabled: Boolean get() = places || text
+}
+
+/**
  * Everything that must survive closing the app: look, the library view the user left, and the privacy
  * options. [filters] and the sort apply to the main Library; collections have their own fixed scope.
  */
@@ -46,6 +64,7 @@ data class AppSettings(
     val lockTrash: Boolean = false,
     /** Show the Hidden entry in Collections at all. */
     val showHidden: Boolean = true,
+    val analysis: AnalysisSettings = AnalysisSettings(),
 ) {
     /** The main library: everything not hidden, with the saved filters and order. */
     val libraryQuery: LibraryQuery
@@ -99,6 +118,17 @@ class SettingsRepository @Inject constructor(
         store.edit { it[SHOW_HIDDEN] = enabled }
     }
 
+    suspend fun setAnalysis(transform: (AnalysisSettings) -> AnalysisSettings) {
+        val current = state.value?.analysis ?: AnalysisSettings()
+        val next = transform(current)
+        store.edit {
+            it[ANALYSIS_PAUSED] = next.paused
+            it[ANALYSIS_CHARGING] = next.onlyWhileCharging
+            it[ANALYSIS_PLACES] = next.places
+            it[ANALYSIS_TEXT] = next.text
+        }
+    }
+
     suspend fun setSort(field: SortField, direction: SortDirection) {
         store.edit {
             it[SORT_FIELD] = field.name
@@ -120,6 +150,12 @@ class SettingsRepository @Inject constructor(
         lockHidden = prefs[LOCK_HIDDEN] ?: true,
         lockTrash = prefs[LOCK_TRASH] ?: false,
         showHidden = prefs[SHOW_HIDDEN] ?: true,
+        analysis = AnalysisSettings(
+            paused = prefs[ANALYSIS_PAUSED] ?: false,
+            onlyWhileCharging = prefs[ANALYSIS_CHARGING] ?: true,
+            places = prefs[ANALYSIS_PLACES] ?: false,
+            text = prefs[ANALYSIS_TEXT] ?: false,
+        ),
     )
 
     private inline fun <reified T : Enum<T>> enumOrDefault(name: String?, default: T): T =
@@ -134,6 +170,10 @@ class SettingsRepository @Inject constructor(
         val LOCK_HIDDEN = booleanPreferencesKey("lock_hidden")
         val LOCK_TRASH = booleanPreferencesKey("lock_trash")
         val SHOW_HIDDEN = booleanPreferencesKey("show_hidden")
+        val ANALYSIS_PAUSED = booleanPreferencesKey("analysis_paused")
+        val ANALYSIS_CHARGING = booleanPreferencesKey("analysis_only_charging")
+        val ANALYSIS_PLACES = booleanPreferencesKey("analysis_places")
+        val ANALYSIS_TEXT = booleanPreferencesKey("analysis_text")
         val SORT_FIELD = stringPreferencesKey("sort_field")
         val SORT_DIRECTION = stringPreferencesKey("sort_direction")
     }

@@ -48,7 +48,21 @@ and an exclusion, not encryption (stated in the app and in [PRIVACY.md](PRIVACY.
 day" is not implemented (drag-select covers ranges).
 
 ## Phase 3 — Search foundation
-Metadata, date, filename, location search; OCR.
+
+- [x] Search tab: date, file name, place and recognized-text search, with the interpretation shown
+- [x] Query parser (Italian and English dates, kinds, places), SQL run against a real SQLite in tests
+- [x] Offline places: bundled GeoNames data, nearest-city lookup, no network
+- [x] Background analysis with WorkManager: per-photo state, retries, time slices, thermal handling,
+      pause / charging-only / per-step switches, visible progress; both steps are **off by default**
+- [x] OCR with Tesseract (English and Italian), results filtered, text shown and copyable in Info
+- [x] Database version 3 with a tested migration; derived data cleared when access is revoked
+- [~] **Not run on a device yet**: the search screen, the WorkManager schedule, the OCR engine's native code
+      and models on real photos, the location-permission flow, the info panel additions. The logic around
+      them is covered by 100+ new JVM tests; new instrumented tests are written but have not been run.
+
+Known gaps: videos are not analyzed; no thumbnail-on-screen prioritization; no "select and copy text" overlay
+on the photo itself (text is shown in Info); no URL, phone or email detection in recognized text; only
+English and Italian text; region names are English except a small Italian alias list.
 
 ## Phase 4 — Intelligent indexing
 WorkManager pipeline, embeddings and semantic search, faces and people, pets. See

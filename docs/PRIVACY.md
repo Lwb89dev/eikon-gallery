@@ -6,7 +6,8 @@ This document says what eikon does with your data today, and where its guarantee
 
 | Data | Where | Content |
 | --- | --- | --- |
-| Library index | app-private database `eikon.db` | file name, MIME type, dates, dimensions, duration, size, folder, favorite flag, category flags. **No pixels, no thumbnails, no location, no faces, no text.** |
+| Library index | app-private database `eikon.db` | file name, MIME type, dates, dimensions, duration, size, folder, favorite flag, category flags. **No pixels and no thumbnails.** |
+| What analysis learned | same database | for each photo: where it was taken (coordinates and the nearest city, resolved offline) and the words found in it by text recognition, plus which analysis steps are done. **Off by default**: only created if you turn those steps on in Settings; wiped when you revoke photo access |
 | Albums and hidden list | same database | album names and which media ids belong to them; ids of hidden media. Kept when the library index is cleared |
 | Settings | app-private DataStore | theme, grid density, filter, sort |
 | Sync bookkeeping | app-private DataStore | last MediaStore generation and version, access level |
@@ -26,6 +27,8 @@ MediaStore after a restore.
 - No account, no analytics, no crash reporting, no advertising identifiers.
 - No map tiles: the info panel shows coordinates and hands them to *your* maps app only when you tap
   "Open in a maps app".
+- No online place lookup: turning coordinates into "Rome, Lazio, Italy" uses place data bundled inside the app
+  (GeoNames, see [NOTICE.md](../NOTICE.md)); the coordinates never leave the phone.
 
 ## Permissions
 
@@ -33,14 +36,24 @@ MediaStore after a restore.
 | --- | --- |
 | `READ_MEDIA_IMAGES`, `READ_MEDIA_VIDEO` (Android 13+), `READ_EXTERNAL_STORAGE` (up to 12L) | show your photos and videos |
 | `READ_MEDIA_VISUAL_USER_SELECTED` (Android 14+) | lets you share only some photos; eikon then works with that subset |
-| `ACCESS_MEDIA_LOCATION` | Android hides GPS from apps without it. Requested only when you tap "Allow" in the info panel; declining changes nothing else |
-| `ACCESS_NETWORK_STATE` | **not requested by eikon**: added to the merged manifest by the Media3 player library. It cannot send or receive data. Removing it is a tracked follow-up, to be done together with an on-device playback check |
+| `ACCESS_MEDIA_LOCATION` | Android hides GPS from apps without it. Requested only when you tap "Allow" (in the info panel, or in Settings to search by place); declining changes nothing else except that place search has nothing to work with |
+| `WAKE_LOCK`, `ACCESS_NETWORK_STATE`, `RECEIVE_BOOT_COMPLETED` | **not requested by eikon itself**: added to the merged manifest by WorkManager (background analysis, resumed after a reboot) and Media3. None of them can send or receive data; only `INTERNET` could, and it is absent |
 
-## Location
+## Location and text found in photos
 
-GPS coordinates are read from the file only when the info panel is open and you granted
-`ACCESS_MEDIA_LOCATION`. They are shown, then dropped. They are not written to the index. Nothing
-about location history is kept.
+If you turn the analysis steps on (they are **off by default**), eikon stores, on the phone only, where each geotagged photo was taken
+(coordinates plus the nearest city) and the text it could read inside each photo. That is a real record of
+places you have been and things you have photographed (receipts, documents, screenshots), which is why:
+
+- both steps are off until you switch them on in Settings, each has its own switch, and analysis can be paused entirely;
+- place analysis does nothing until you grant `ACCESS_MEDIA_LOCATION`;
+- it all lives in the app's private storage, is excluded from Android backups, and is deleted when you revoke
+  photo access or uninstall the app;
+- **hidden photos are excluded from search** and their text and places never appear in results;
+- nothing derived from your photos is ever sent anywhere.
+
+Like everything else, it is **not encrypted** (see the limits below), so it is readable by anyone with root
+access or a full image of the phone.
 
 ## Deleting and sharing
 

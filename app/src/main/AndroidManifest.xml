@@ -17,8 +17,11 @@
     <!-- Requested only when the user asks to see a photo's location: Android redacts GPS otherwise. -->
     <uses-permission android:name="android.permission.ACCESS_MEDIA_LOCATION" />
 
-    <!-- Pulled in by Media3 but only used with ExoPlayer.setWakeMode(), which eikon never calls. -->
-    <uses-permission android:name="android.permission.WAKE_LOCK" tools:node="remove" />
+    <!--
+        WAKE_LOCK, ACCESS_NETWORK_STATE and RECEIVE_BOOT_COMPLETED are added by WorkManager (and Media3),
+        which runs the background analysis and resumes it after a reboot. None of them allows network
+        access; only INTERNET would, and it is absent.
+    -->
 
     <application
         android:name=".EikonApplication"
@@ -33,6 +36,18 @@
         android:localeConfig="@xml/locales_config"
         android:supportsRtl="true"
         android:theme="@style/Theme.Eikon.Starting">
+
+        <!-- WorkManager is initialized by EikonApplication so that workers can be injected with Hilt. -->
+        <provider
+            android:name="androidx.startup.InitializationProvider"
+            android:authorities="${applicationId}.androidx-startup"
+            android:exported="false"
+            tools:node="merge">
+            <meta-data
+                android:name="androidx.work.WorkManagerInitializer"
+                android:value="androidx.startup"
+                tools:node="remove" />
+        </provider>
 
         <activity
             android:name=".MainActivity"

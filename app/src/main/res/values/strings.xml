@@ -226,4 +226,34 @@
     <string name="setting_lock_trash">Require authentication for Recently deleted</string>
     <string name="setting_show_hidden">Show Hidden in Collections</string>
     <string name="settings_security_body">Hidden items are left out of the Library, Collections and search, and opening Hidden asks for your fingerprint, face or screen lock. The files themselves are not encrypted and stay in your phone\'s normal storage, where other apps with photo access can still see them.</string>
+
+    <!-- Search -->
+    <string name="search_placeholder">Date, place, text, file name</string>
+    <string name="search_clear">Clear search</string>
+    <string name="search_no_results">No photos match</string>
+    <string name="search_hint_title">Search your library</string>
+    <string name="search_hint_body">Try a date (\"August 2025\", \"yesterday\"), a place (\"Rome\", \"Tuscany\"), a word that appears in a photo or in its file name, or a kind (\"videos\", \"screenshots\", \"favorites\").\n\nSearch does not recognize what a picture shows yet, only what is written in it.</string>
+    <string name="search_analysis_off">Searching by place and by text inside photos is off. You can turn it on in Settings, Analysis.</string>
+    <string name="search_analysis_note">Still analyzing photos in the background (%1$d%%). Some results may be missing.</string>
+
+    <!-- Settings: analysis -->
+    <string name="settings_analysis">Analysis</string>
+    <string name="analysis_places_progress">Places: %1$,d of %2$,d</string>
+    <string name="analysis_text_progress">Text in photos: %1$,d of %2$,d</string>
+    <string name="analysis_running">Analyzing now…</string>
+    <string name="analysis_idle">Waiting for the right moment (charging, battery not low)</string>
+    <string name="analysis_up_to_date">Everything is analyzed</string>
+    <string name="setting_pause_analysis">Pause analysis</string>
+    <string name="setting_only_charging">Only while charging</string>
+    <string name="setting_analyze_places">Find photos by place</string>
+    <string name="setting_analyze_text">Find text in photos</string>
+    <string name="analysis_location_permission">Android hides where photos were taken from apps until you allow it.</string>
+    <string name="analysis_allow_locations">Allow access to photo locations</string>
+    <string name="analyze_now">Analyze now</string>
+    <string name="settings_analysis_body">Analysis runs on your phone only, in the background, and pauses when the battery is low or the phone gets warm. It stores the place of each photo (resolved offline, no location is ever sent anywhere) and any text it reads in the photo, so Search can find them. Text reading is slow and uses the processor heavily, which is why it waits for charging by default.</string>
+
+    <!-- Info panel: derived data -->
+    <string name="info_place">Nearest place</string>
+    <string name="info_text_found">Text in this photo</string>
+    <string name="info_text_copy">Copy text</string>
 </resources>

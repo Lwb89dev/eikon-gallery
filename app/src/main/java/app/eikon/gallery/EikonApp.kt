@@ -32,6 +32,7 @@ import app.eikon.gallery.feature.trash.TrashScreen
 private object Routes {
     const val LIBRARY = "library"
     const val COLLECTIONS = "collections"
+    const val SEARCH = "search"
     const val GRID = "grid/{${LibraryViewModel.SOURCE_ARG}}"
     const val TRASH = "trash"
     const val SETTINGS = "settings"
@@ -51,6 +52,15 @@ fun EikonApp(settings: AppSettings) {
                 composable(Routes.LIBRARY) { LibraryDestination(navController) }
                 composable(Routes.COLLECTIONS) { CollectionsDestination(navController) }
                 composable(
+                    Routes.SEARCH,
+                    arguments = listOf(
+                        navArgument(LibraryViewModel.SOURCE_ARG) {
+                            type = NavType.StringType
+                            defaultValue = GridSource.Search.toArg()
+                        },
+                    ),
+                ) { SearchDestination(navController) }
+                composable(
                     Routes.GRID,
                     arguments = listOf(navArgument(LibraryViewModel.SOURCE_ARG) { type = NavType.StringType }),
                 ) { entry ->
@@ -65,7 +75,11 @@ fun EikonApp(settings: AppSettings) {
 }
 
 private fun NavHostController.goTopLevel(destination: TopLevel) {
-    val route = if (destination == TopLevel.LIBRARY) Routes.LIBRARY else Routes.COLLECTIONS
+    val route = when (destination) {
+        TopLevel.LIBRARY -> Routes.LIBRARY
+        TopLevel.COLLECTIONS -> Routes.COLLECTIONS
+        TopLevel.SEARCH -> Routes.SEARCH
+    }
     navigate(route) {
         popUpTo(Routes.LIBRARY) { saveState = true }
         launchSingleTop = true
@@ -83,6 +97,20 @@ private fun LibraryDestination(navController: NavHostController) {
             onOpenSettings = { navController.navigate(Routes.SETTINGS) },
             onBack = null,
             bottomBar = { EikonBottomBar(TopLevel.LIBRARY, navController::goTopLevel) },
+        )
+    }
+}
+
+@Composable
+private fun SearchDestination(navController: NavHostController) {
+    MediaAccessGate { access, onSelectMore, onOpenAppSettings ->
+        LibraryScreen(
+            access = access,
+            onSelectMoreMedia = onSelectMore,
+            onOpenAppSettings = onOpenAppSettings,
+            onOpenSettings = null,
+            onBack = null,
+            bottomBar = { EikonBottomBar(TopLevel.SEARCH, navController::goTopLevel) },
         )
     }
 }

@@ -11,19 +11,28 @@ import app.eikon.gallery.data.AlbumRepository
 import app.eikon.gallery.data.MediaRepository
 import app.eikon.gallery.data.db.AlbumEntity
 import app.eikon.gallery.data.db.AlbumSummary
+import app.eikon.gallery.data.indexing.AnalysisStatus
+import app.eikon.gallery.data.indexing.AnalysisStatusRepository
 import app.eikon.gallery.data.mediastore.MediaActions
+import app.eikon.gallery.data.places.GazetteerProvider
 import app.eikon.gallery.data.settings.AppSettings
 import app.eikon.gallery.data.settings.SettingsRepository
 import app.eikon.gallery.data.sync.LibrarySyncCoordinator
 import app.eikon.gallery.data.sync.SyncStatus
 import app.eikon.gallery.domain.GridSource
 import app.eikon.gallery.domain.LibraryFilters
+import app.eikon.gallery.domain.LibraryQuery
+import app.eikon.gallery.domain.LibraryScope
 import app.eikon.gallery.domain.MediaItem
+import app.eikon.gallery.domain.search.SearchQueryParser
+import app.eikon.gallery.domain.search.SearchSpec
 import app.eikon.gallery.domain.SortDirection
 import app.eikon.gallery.domain.SortField
 import app.eikon.gallery.domain.TimelineGrouping
 import app.eikon.gallery.domain.TimelineLayout
 import dagger.hilt.android.lifecycle.HiltViewModel
+import java.time.LocalDate
+import java.time.ZoneId
 import javax.inject.Inject
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.Channel
@@ -32,7 +41,10 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.debounce
+import kotlinx.coroutines.flow.mapLatest
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.flatMapLatest
@@ -77,7 +89,7 @@ private sealed interface PendingChange {
  * One grid screen. The same class serves the main Library and every collection (album, preset,
  * folder, Hidden); [source] comes from the navigation route and decides which slice is shown.
  */
-@OptIn(ExperimentalCoroutinesApi::class)
+@OptIn(ExperimentalCoroutinesApi::class, FlowPreview::class)
 @HiltViewModel
 class LibraryViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
@@ -86,25 +98,57 @@ class LibraryViewModel @Inject constructor(
     private val settingsRepository: SettingsRepository,
     private val actions: MediaActions,
     private val coordinator: LibrarySyncCoordinator,
+    private val gazetteers: GazetteerProvider,
+    analysisStatusRepository: AnalysisStatusRepository,
+    private val savedState: SavedStateHandle,
 ) : ViewModel() {
     val source: GridSource = GridSource.parse(savedStateHandle.get<String>(SOURCE_ARG))
 
     val settings: StateFlow<AppSettings?> = settingsRepository.state
 
     private val loadedSettings = settingsRepository.state.filterNotNull()
-    private val query = loadedSettings
-        .map { source.toQuery(it.filters, it.sortField, it.direction) }
+
+    // --- Search text (only used when this screen is the Search tab) ---------------------------
+
+    private val searchInput = MutableStateFlow(savedState.get<String>(SEARCH_TEXT_KEY).orEmpty())
+    val searchText: StateFlow<String> = searchInput.asStateFlow()
+
+    fun setSearchText(text: String) {
+        searchInput.value = text
+        savedState[SEARCH_TEXT_KEY] = text
+    }
+
+    /** What the typed text was understood as; shown to the user so the interpretation is never a mystery. */
+    val searchSpec: StateFlow<SearchSpec> = searchInput
+        .debounce(SEARCH_DEBOUNCE_MS)
         .distinctUntilChanged()
+        .mapLatest { text -> parser().parse(text) }
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(STOP_TIMEOUT_MS), SearchSpec())
+
+    private suspend fun parser() = SearchQueryParser(ZoneId.systemDefault(), { LocalDate.now() }, gazetteers.get())
+
+    /** The query to show, or null when there is nothing to show yet (an empty search box). */
+    private val query: Flow<LibraryQuery?> = if (source == GridSource.Search) {
+        combine(loadedSettings, searchSpec) { settings, spec ->
+            if (spec.isEmpty) null else LibraryQuery(LibraryScope.Search(spec), LibraryFilters.NONE, settings.sortField, settings.direction)
+        }.distinctUntilChanged()
+    } else {
+        loadedSettings.map { source.toQuery(it.filters, it.sortField, it.direction) }.distinctUntilChanged()
+    }
     private val grouping = loadedSettings.map { TimelineGrouping.forColumns(it.gridColumns) }.distinctUntilChanged()
 
     /** Media of this screen's slice, paged from the Room index. Shared by grid and viewer. */
     val media: Flow<PagingData<MediaItem>> = query
-        .flatMapLatest { repository.pagedMedia(it) }
+        .flatMapLatest { q -> if (q == null) flowOf(PagingData.empty()) else repository.pagedMedia(q) }
         .cachedIn(viewModelScope)
 
     /** Date sections of the same query; null until the first load. */
     val timeline: StateFlow<TimelineLayout?> = combine(query, grouping) { q, g -> q to g }
-        .flatMapLatest { (q, g) -> repository.timeline(q, g) }
+        .flatMapLatest { (q, g) -> if (q == null) flowOf(TimelineLayout.Empty) else repository.timeline(q, g) }
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(STOP_TIMEOUT_MS), null)
+
+    /** How much of the library the background analysis has covered, for the "results may be incomplete" note. */
+    val analysis: StateFlow<AnalysisStatus?> = analysisStatusRepository.status
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(STOP_TIMEOUT_MS), null)
 
     val syncStatus: StateFlow<SyncStatus> = coordinator.status
@@ -285,6 +329,8 @@ class LibraryViewModel @Inject constructor(
     companion object {
         /** Navigation argument that carries the [GridSource] in its string form. */
         const val SOURCE_ARG = "source"
+        private const val SEARCH_TEXT_KEY = "q"
+        private const val SEARCH_DEBOUNCE_MS = 250L
         private const val STOP_TIMEOUT_MS = 5_000L
     }
 }

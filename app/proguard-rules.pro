@@ -2,3 +2,8 @@
 # Keep line numbers so release stack traces remain readable when de-obfuscated locally.
 -keepattributes SourceFile,LineNumberTable
 -renamesourcefileattribute SourceFile
+
+# Tesseract4Android ships no consumer rules, and its native code finds these classes, fields
+# (e.g. mNativeData) and methods by name through JNI. Renaming or removing them breaks OCR at runtime.
+-keep class com.googlecode.tesseract.android.** { *; }
+-keep class com.googlecode.leptonica.android.** { *; }

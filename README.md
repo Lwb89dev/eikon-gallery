@@ -12,9 +12,11 @@ Repository: <https://github.com/Lwb89dev/eikon-gallery>
 
 ## Status
 
-Early development. Phases 1 (gallery foundation) and 2 (albums and utilities) are complete; search is
-in progress. The full plan, with what is done and what is not, is in [docs/ROADMAP.md](docs/ROADMAP.md).
-Features that are not built yet are not shown in the app.
+Early development. Phases 1 (gallery foundation), 2 (albums and utilities) and 3 (search foundation) are
+implemented. Phases 1 and 2 were checked on a real phone; **Phase 3 (the Search tab, background analysis,
+text recognition and place lookup) is covered by unit tests but has not been run on a device yet**. The
+full plan, with what is done and what is not, is in [docs/ROADMAP.md](docs/ROADMAP.md). Features that are
+not built yet are not shown in the app.
 
 ## Features
 
@@ -40,13 +42,25 @@ Features that are not built yet are not shown in the app.
   lock. See [docs/PRIVACY.md](docs/PRIVACY.md) for exactly what that does and does not protect.
 - **Recently deleted**: the system trash with days remaining, restore and delete-for-good.
 
+**Search**
+- A Search tab that understands what you type and shows how it read it: dates in Italian and English
+  ("agosto 2025", "estate 2025", "14 agosto", "yesterday", "last month"), photos or videos, file names,
+  places ("foto a Roma") and text found inside photos (a receipt, a document, a screenshot).
+- Places are resolved **offline**: a photo's coordinates are matched to the nearest city in a bundled
+  copy of GeoNames data. No lookup service is ever contacted.
+- Text in photos is read by Tesseract, on the phone, in English and Italian.
+- Place and text search need a background analysis of your library. **It is off by default**: you switch
+  on "Places" and/or "Text in photos" in Settings, choose whether it may run only while charging, and can
+  pause it. It works in short slices, resumes after interruptions, backs off when the phone gets warm, and
+  shows its progress. Hidden photos are never searchable.
+
 **Platform**
 - Works with Android 11 and newer, including Android 14+ "selected photos" access. Sharing, deleting
   and favoriting go through the platform's own confirmation dialogs.
 - Light, dark or system theme; English and Italian; TalkBack labels.
 
-Not implemented yet: search, OCR, people and pets, places, trips, memories, duplicates, editing and
-backup to a home server. The "selfie" and "edited" filters are missing because Android exposes
+Not implemented yet: search by what a photo shows ("dog in the snow"), people and pets, trips, memories,
+duplicates, editing and backup to a home server. The "selfie" and "edited" filters are missing because Android exposes
 nothing reliable to detect them.
 
 ## Privacy
@@ -54,8 +68,9 @@ nothing reliable to detect them.
 - No `INTERNET` permission, so the operating system itself stops eikon from sending anything anywhere.
 - No account, no analytics, no crash reporting.
 - Android backups of the app's data are disabled.
-- The local index holds file names, dates, sizes and folders. It is deleted when you uninstall the
-  app or revoke photo access.
+- The local index holds file names, dates, sizes and folders. If you turn on the analysis, it also holds
+  where your photos were taken and the text found in them; that is why it is off until you choose. All of
+  it is deleted when you uninstall the app or revoke photo access.
 
 Details, including the limits of these guarantees, are in [docs/PRIVACY.md](docs/PRIVACY.md).
 
@@ -86,12 +101,14 @@ them.
 
 ### Tests
 
-- **JVM unit tests** (`./gradlew :app:testDebugUnitTest`): the sync engine, every library query run
-  against a real SQLite (checking, for instance, that each item lands in the right date section),
-  timeline layout, classification heuristics, EXIF formatting, grid sources, locks and more.
+- **JVM unit tests** (`./gradlew :app:testDebugUnitTest`, 187 tests): the sync engine, every library and
+  search query run against a real SQLite including full-text search (checking, for instance, that each
+  item lands in the right date section), the database migrations, the search query parser, the offline
+  place lookup, the analysis runner (retries, resuming, pausing, heat), timeline layout, classification
+  heuristics, EXIF formatting, grid sources, locks and more.
 - **Instrumented tests** (`./gradlew :app:connectedDebugAndroidTest`, needs a device or emulator):
-  album and hidden-media behavior on Room, the queries on the device's own SQLite, and the real
-  database migration. They use an in-memory database and never touch app data. Note that Gradle
+  album and hidden-media behavior on Room, the queries on the device's own SQLite, the real database
+  migration, and the analysis pipeline on real images (written, not yet run). They use an in-memory database and never touch app data. Note that Gradle
   uninstalls the debug app when they finish.
 
 Some behaviors can only be confirmed on a device, for example unlocking Hidden with real
@@ -102,10 +119,12 @@ not been checked that way.
 
 ```
 app/src/main/java/app/eikon/gallery/
-  core/        dependency injection, theme, image loading, permissions, security
-  data/        Room index, MediaStore access and sync, metadata reading, settings
-  domain/      plain models and pure logic (timeline layout, EXIF formatting, grid sources)
-  feature/     library, collections, viewer, info, trash, security, settings screens
+  core/        dependency injection, theme, image loading, security
+  data/        Room index, MediaStore access and sync, background analysis, OCR, offline places,
+               metadata reading, settings
+  domain/      plain models and pure logic (timeline layout, search query parser, EXIF formatting)
+  feature/     library, search, collections, viewer, info, trash, security, settings, permissions
+app/src/main/assets/   place data (GeoNames) and OCR language data; see NOTICE.md
 docs/          architecture, indexing, privacy, ML notes, roadmap
 ```
 

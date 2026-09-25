@@ -69,6 +69,8 @@ import app.eikon.gallery.domain.TimelineGrouping
 import app.eikon.gallery.domain.TimelineLabelFormatter
 import app.eikon.gallery.domain.TimelineLayout
 import app.eikon.gallery.feature.info.InfoSheet
+import app.eikon.gallery.feature.search.SearchEmpty
+import app.eikon.gallery.feature.search.SearchTopBar
 import app.eikon.gallery.feature.viewer.MediaViewer
 import app.eikon.gallery.feature.viewer.PagingViewerItems
 import app.eikon.gallery.feature.viewer.ViewerAction
@@ -202,7 +204,9 @@ private fun GridTopBars(
     var pickingAlbum by rememberSaveable { mutableStateOf(false) }
     val album = (albumState as? AlbumState.Present)?.album
 
-    if (selection.isEmpty()) {
+    if (selection.isEmpty() && source == GridSource.Search) {
+        SearchTopBarHost(settings, viewModel)
+    } else if (selection.isEmpty()) {
         GridTopBar(
             source = source,
             albumName = album?.name,
@@ -235,6 +239,14 @@ private fun GridTopBars(
         if (pickingAlbum) AlbumPicker(selected, viewModel) { pickingAlbum = false }
     }
     AlbumDialogs(album?.name, renaming, deleting, viewModel, onCloseRename = { renaming = false }, onCloseDelete = { deleting = false })
+}
+
+@Composable
+private fun SearchTopBarHost(settings: AppSettings, viewModel: LibraryViewModel) {
+    val text by viewModel.searchText.collectAsStateWithLifecycle()
+    val spec by viewModel.searchSpec.collectAsStateWithLifecycle()
+    val analysis by viewModel.analysis.collectAsStateWithLifecycle()
+    SearchTopBar(text, viewModel::setSearchText, spec, analysis, settings.analysis)
 }
 
 @Composable
@@ -334,6 +346,11 @@ private fun LibraryBody(
 
 @Composable
 private fun EmptyBody(settings: AppSettings, syncStatus: SyncStatus, viewModel: LibraryViewModel) {
+    if (viewModel.source == GridSource.Search) {
+        val text by viewModel.searchText.collectAsStateWithLifecycle()
+        SearchEmpty(hasQuery = text.isNotBlank())
+        return
+    }
     if (syncStatus is SyncStatus.Running) {
         Box(Modifier.fillMaxSize(), Alignment.Center) { CircularProgressIndicator() }
         return

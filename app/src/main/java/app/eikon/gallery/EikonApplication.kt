@@ -1,6 +1,9 @@
 package app.eikon.gallery
 
 import android.app.Application
+import androidx.hilt.work.HiltWorkerFactory
+import androidx.work.Configuration
+import app.eikon.gallery.data.indexing.IndexingScheduler
 import app.eikon.gallery.core.image.MediaThumbnailFetcher
 import app.eikon.gallery.core.image.MediaThumbnailKeyer
 import coil3.ImageLoader
@@ -9,10 +12,26 @@ import coil3.SingletonImageLoader
 import coil3.memory.MemoryCache
 import coil3.request.crossfade
 import dagger.hilt.android.HiltAndroidApp
+import javax.inject.Inject
 import kotlinx.coroutines.Dispatchers
 
 @HiltAndroidApp
-class EikonApplication : Application(), SingletonImageLoader.Factory {
+class EikonApplication : Application(), SingletonImageLoader.Factory, Configuration.Provider {
+    @Inject
+    lateinit var workerFactory: HiltWorkerFactory
+
+    @Inject
+    lateinit var indexingScheduler: IndexingScheduler
+
+    /** WorkManager is initialized here (not by its startup provider) so workers can use Hilt. */
+    override val workManagerConfiguration: Configuration
+        get() = Configuration.Builder().setWorkerFactory(workerFactory).build()
+
+    override fun onCreate() {
+        super.onCreate()
+        indexingScheduler.start()
+    }
+
     /**
      * Only local images are ever loaded: no network fetcher is registered (coil-network is not even a
      * dependency), and nothing is written to a disk cache because MediaStore already caches thumbnails.
