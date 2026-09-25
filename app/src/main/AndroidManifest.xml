@@ -49,6 +49,20 @@
                 tools:node="remove" />
         </provider>
 
+        <!--
+            Hands another app the temporary picture of an edit that is being shared, and nothing else: it is not exported and only
+            grants the one file named in each share (the folder is cache/shared, see SharedFiles).
+        -->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.shared"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/shared_paths" />
+        </provider>
+
         <activity
             android:name=".MainActivity"
             android:exported="true"

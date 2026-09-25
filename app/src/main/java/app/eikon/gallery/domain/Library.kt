@@ -24,6 +24,8 @@ data class LibraryFilters(
     val type: TypeFilter = TypeFilter.ALL,
     val favoritesOnly: Boolean = false,
     val category: CategoryFilter? = null,
+    /** Only photos that have an edit made in eikon. */
+    val editedOnly: Boolean = false,
 ) {
     val isActive: Boolean get() = this != NONE
 

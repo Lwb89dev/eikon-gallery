@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The only place a FileProvider may hand files from: pictures of edits made to be shared, in the app's cache. -->
+<paths>
+    <cache-path name="shared" path="shared/" />
+</paths>

@@ -1,0 +1,12 @@
+# Baseline profile for eikon's own code.
+#
+# Compose, Paging, Room, Media3 and the other libraries ship profiles of their own, which the build merges; this file covers what is
+# left: this app's classes. It is written by hand and lists all of them, on purpose: the first screens (library grid, viewer), the
+# editor's renderer and the analysis steps all have hot loops, and a sideloaded app is otherwise compiled lazily, so early scrolling
+# and the first analysis run partly interpreted. The cost is a slightly longer first install and a larger compiled file.
+#
+# H = hot (compiled), S = used at startup, P = used after startup. The build (expandArtProfileWildcards) resolves the wildcards
+# against the classes that really exist and R8 rewrites them to the shrunk names. A profile *measured* by running the app is better;
+# see docs/PERFORMANCE.md for how to make one.
+HSPLapp/eikon/gallery/**;->**(**)**
+Lapp/eikon/gallery/**;

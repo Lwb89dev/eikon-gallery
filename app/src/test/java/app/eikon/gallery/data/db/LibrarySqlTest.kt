@@ -59,6 +59,8 @@ class LibrarySqlTest {
         listOf(1, 4, 8).forEach { execute("INSERT INTO album_item (albumId, mediaId, addedAt) VALUES (1, $it, 0)") }
         listOf(3, 8).forEach { execute("INSERT INTO hidden_media (mediaId, hiddenAt) VALUES ($it, 0)") }
         seedSearchIndex()
+        // Edits (the recipe text does not matter here) on 1, 4 and 6, and on 8, which is hidden.
+        listOf(1, 4, 6, 8).forEach { execute("INSERT INTO edit_recipe VALUES ($it, 'eikon-edit 1', 0, 0)") }
     }
 
     /**
@@ -284,6 +286,20 @@ class LibrarySqlTest {
     }
 
     @Test
+    fun theEditedFilterSelectsPhotosWithAnEditAndCombinesWithTheOthers() {
+        assertEquals(setOf(1L, 4L, 6L), ids(LibraryQuery(filters = LibraryFilters(editedOnly = true))).toSet())
+        assertEquals(setOf(4L), ids(LibraryQuery(filters = LibraryFilters(favoritesOnly = true, editedOnly = true))).toSet())
+        assertEquals(emptySet<Long>(), ids(LibraryQuery(filters = LibraryFilters(TypeFilter.VIDEOS, editedOnly = true))).toSet())
+    }
+
+    @Test
+    fun anEditedPhotoThatIsHiddenStaysHiddenEvenWithTheEditedFilter() {
+        val edited = LibraryFilters(editedOnly = true)
+        assertTrue(8L !in ids(LibraryQuery(filters = edited)))
+        assertEquals(listOf(8L), ids(LibraryQuery(scope = LibraryScope.Hidden, filters = edited)))
+    }
+
+    @Test
     fun screenshotsThatAreHiddenNeverLeakIntoTheirCategory() {
         // id 3 is the only visible-or-not screenshot in the library and it is hidden.
         val query = LibraryQuery(filters = LibraryFilters(category = CategoryFilter.SCREENSHOTS))
@@ -333,6 +349,7 @@ class LibrarySqlTest {
                 add(LibraryQuery(LibraryScope.Album(1), sortField = field, direction = direction))
                 add(LibraryQuery(LibraryScope.Folder("DCIM/Camera/"), sortField = field, direction = direction))
                 add(LibraryQuery(filters = LibraryFilters(TypeFilter.PHOTOS, favoritesOnly = true), sortField = field, direction = direction))
+                add(LibraryQuery(filters = LibraryFilters(editedOnly = true), sortField = field, direction = direction))
             }
         }
         queries.forEach(::assertSectionsMatchMedia)

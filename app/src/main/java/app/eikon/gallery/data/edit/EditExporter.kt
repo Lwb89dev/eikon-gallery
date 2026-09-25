@@ -13,6 +13,7 @@ import app.eikon.gallery.domain.edit.EditRecipe
 import app.eikon.gallery.domain.edit.EditRenderer
 import app.eikon.gallery.domain.edit.GeometryMap
 import dagger.hilt.android.qualifiers.ApplicationContext
+import java.io.File
 import java.io.IOException
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -42,6 +43,19 @@ class EditExporter @Inject constructor(
         val bitmap = draw(item, recipe, onProgress)
         try {
             store(item, bitmap)
+        } finally {
+            bitmap.recycle()
+        }
+    }
+
+    /**
+     * Draws the edit into [file] as a JPEG **without any metadata** (no location, no camera details: what is shared carries only the picture).
+     * Nothing is added to the library.
+     */
+    suspend fun renderTo(file: File, item: MediaItem, recipe: EditRecipe) = withContext(Dispatchers.Default) {
+        val bitmap = draw(item, recipe) {}
+        try {
+            file.outputStream().use { check(bitmap.compress(Bitmap.CompressFormat.JPEG, JPEG_QUALITY, it)) { "could not write the picture" } }
         } finally {
             bitmap.recycle()
         }

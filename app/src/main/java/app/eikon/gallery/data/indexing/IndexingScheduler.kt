@@ -10,6 +10,7 @@ import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
 import androidx.work.WorkerParameters
+import androidx.work.workDataOf
 import app.eikon.gallery.core.di.ApplicationScope
 import app.eikon.gallery.data.settings.SettingsRepository
 import dagger.assisted.Assisted
@@ -32,13 +33,15 @@ class IndexingWorker @AssistedInject constructor(
     private val runner: IndexingRunner,
 ) : CoroutineWorker(context, parameters) {
     override suspend fun doWork(): Result {
-        runner.run(RUN_BUDGET_MS)
+        runner.run(RUN_BUDGET_MS, manual = inputData.getBoolean(MANUAL, false))
         // Whatever is left is picked up by the next periodic run; progress is in the database.
         return Result.success()
     }
 
-    private companion object {
-        const val RUN_BUDGET_MS = 8 * 60 * 1000L
+    companion object {
+        /** Input data of a run the user asked for. */
+        const val MANUAL = "manual"
+        private const val RUN_BUDGET_MS = 8 * 60 * 1000L
     }
 }
 
@@ -62,10 +65,11 @@ class IndexingScheduler @Inject constructor(
         }
     }
 
-    /** Runs a slice right away (still not on a low battery), for the "Analyze now" button. */
+    /** Runs a slice right away (still not on a low battery, but even in Battery Saver: the user asked), for the "Analyze now" button. */
     fun analyzeNow() {
         val request = OneTimeWorkRequestBuilder<IndexingWorker>()
             .setConstraints(Constraints.Builder().setRequiresBatteryNotLow(true).build())
+            .setInputData(workDataOf(IndexingWorker.MANUAL to true))
             .build()
         workManager.enqueueUniqueWork(NOW_WORK, ExistingWorkPolicy.REPLACE, request)
     }

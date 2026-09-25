@@ -32,19 +32,22 @@ class MediaActions @Inject constructor(
     fun favoriteRequest(items: Collection<MediaItem>, favorite: Boolean): IntentSender =
         MediaStore.createFavoriteRequest(resolver, items.map { it.uri }, favorite).intentSender
 
-    /** Android Sharesheet intent for one or many items, videos and photos mixed included. */
-    fun shareIntent(items: List<MediaItem>): Intent {
-        val uris = ArrayList<Uri>(items.map { it.uri })
+    /** Android Sharesheet intent for one or many files, videos and photos mixed included. */
+    fun shareIntent(entries: List<ShareEntry>): Intent {
+        val uris = ArrayList<Uri>(entries.map { it.uri })
         val send = if (uris.size == 1) {
             Intent(Intent.ACTION_SEND).putExtra(Intent.EXTRA_STREAM, uris.first())
         } else {
             Intent(Intent.ACTION_SEND_MULTIPLE).putParcelableArrayListExtra(Intent.EXTRA_STREAM, uris)
         }
-        send.type = ShareMime.of(items.map { it.mimeType })
+        send.type = ShareMime.of(entries.map { it.mimeType })
         send.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
         return Intent.createChooser(send, null)
     }
 }
+
+/** Something to hand to another app: the address of a file and what kind of file it is. */
+class ShareEntry(val uri: Uri, val mimeType: String)
 
 /** Picks the MIME type advertised to the Sharesheet so it lists apps that accept every item. */
 object ShareMime {

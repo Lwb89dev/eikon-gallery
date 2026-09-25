@@ -44,7 +44,7 @@ import androidx.room.RoomDatabase
         MemoryPreferenceEntity::class,
         EditRecipeEntity::class,
     ],
-    version = 6,
+    version = 7,
     exportSchema = true,
     autoMigrations = [AutoMigration(from = 1, to = 2)],
 )

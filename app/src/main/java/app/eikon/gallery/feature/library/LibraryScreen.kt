@@ -21,12 +21,15 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.navigationBarsPadding
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.LazyGridState
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -52,6 +55,8 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalResources
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
@@ -191,6 +196,8 @@ private fun LibraryContent(
                 scope.launch { revealInGrid(gridState, layout, viewerIndex) }
             },
         )
+        val preparingShare by viewModel.isPreparingShare.collectAsStateWithLifecycle()
+        if (preparingShare) PreparingShare(Modifier.align(Alignment.TopCenter))
     }
 }
 
@@ -481,6 +488,13 @@ private fun LibraryViewer(
             infoSheet = { item, dismiss -> InfoSheet(item, dismiss) },
         )
     }
+}
+
+/** A thin moving line across the top while edited photos are drawn to be shared. */
+@Composable
+private fun PreparingShare(modifier: Modifier = Modifier) {
+    val label = stringResource(R.string.share_preparing)
+    LinearProgressIndicator(modifier.fillMaxWidth().statusBarsPadding().semantics { contentDescription = label })
 }
 
 /** After closing the viewer, scroll the grid so the last photo looked at is on screen. */

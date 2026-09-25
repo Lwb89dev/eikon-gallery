@@ -15,6 +15,7 @@ import app.eikon.gallery.data.db.PersonEntity
 import app.eikon.gallery.data.db.PersonSummary
 import app.eikon.gallery.data.edit.EditClipboard
 import app.eikon.gallery.data.edit.EditRepository
+import app.eikon.gallery.data.edit.EditedShare
 import app.eikon.gallery.data.indexing.AnalysisStatus
 import app.eikon.gallery.data.embedding.PetClassifier
 import app.eikon.gallery.data.places.PlacesRepository
@@ -130,6 +131,7 @@ class LibraryViewModel @Inject constructor(
     private val placesRepository: PlacesRepository,
     private val editRepository: EditRepository,
     private val editClipboard: EditClipboard,
+    private val editedShare: EditedShare,
     analysisStatusRepository: AnalysisStatusRepository,
     private val savedState: SavedStateHandle,
 ) : ViewModel() {
@@ -308,9 +310,26 @@ class LibraryViewModel @Inject constructor(
 
     // --- Actions on media ---------------------------------------------------------------------
 
+    private val preparingShare = MutableStateFlow(false)
+
+    /** True while edited photos are being drawn to be shared (a second or so each); nothing else waits. */
+    val isPreparingShare: StateFlow<Boolean> = preparingShare.asStateFlow()
+
+    /** Shares the items; a photo with an edit is shared as edited (see [EditedShare]), the others as the files they are. */
     fun share(items: List<MediaItem>) {
-        if (items.isEmpty()) return
-        sendEvent(LibraryEvent.Share(actions.shareIntent(items)))
+        if (items.isEmpty() || preparingShare.value) return
+        viewModelScope.launch {
+            preparingShare.value = true
+            try {
+                sendEvent(LibraryEvent.Share(actions.shareIntent(editedShare.prepare(items))))
+            } catch (_: Exception) {
+                sendEvent(LibraryEvent.ActionFailed)
+            } catch (_: OutOfMemoryError) {
+                sendEvent(LibraryEvent.ActionFailed)
+            } finally {
+                preparingShare.value = false
+            }
+        }
     }
 
     /** Favorites all given items, or un-favorites them when every one already is. */

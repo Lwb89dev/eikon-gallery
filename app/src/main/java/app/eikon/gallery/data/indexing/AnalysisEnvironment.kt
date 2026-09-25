@@ -10,7 +10,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 import kotlinx.coroutines.delay
 
-/** [RunnerEnvironment] over the real device: settings, permissions, thermal state and the clock. */
+/** [RunnerEnvironment] over the real device: settings, permissions, thermal and battery-saver state and the clock. */
 class AnalysisEnvironment @Inject constructor(
     @ApplicationContext private val context: Context,
     private val settings: SettingsRepository,
@@ -24,6 +24,8 @@ class AnalysisEnvironment @Inject constructor(
     override fun canReadLocation(): Boolean = access.canReadLocation()
 
     override fun thermalStatus(): Int = powerManager?.currentThermalStatus ?: PowerManager.THERMAL_STATUS_NONE
+
+    override fun isPowerSaveMode(): Boolean = powerManager?.isPowerSaveMode ?: false
 
     override fun nowMillis(): Long = clock.nowMillis()
 

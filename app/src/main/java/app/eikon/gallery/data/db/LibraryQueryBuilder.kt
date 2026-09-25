@@ -235,6 +235,7 @@ object LibraryQueryBuilder {
                 TypeFilter.VIDEOS -> add("m.isVideo = 1")
             }
             if (filters.favoritesOnly) add("m.isFavorite = 1")
+            if (filters.editedOnly) add("m.id IN (SELECT mediaId FROM edit_recipe)")
             filters.category?.let { add(categoryCondition(it)) }
         }
     }

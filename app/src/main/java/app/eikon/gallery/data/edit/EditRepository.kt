@@ -40,6 +40,10 @@ class EditRepository @Inject constructor(
         dao.upsert(EditRecipeEntity(item.id, EditRecipeCodec.encode(recipe), clock.nowMillis(), item.modifiedAt))
     }
 
+    /** The edits among [ids], by photo id (photos without an edit are not in the map). */
+    suspend fun recipes(ids: Collection<Long>): Map<Long, EditRecipe> = ids.chunked(CHUNK).flatMap { dao.get(it) }
+        .mapNotNull { row -> EditRecipeCodec.decode(row.recipe)?.let { row.mediaId to it } }.toMap()
+
     /** Which of [ids] have an edit. */
     suspend fun editedAmong(ids: Collection<Long>): Set<Long> = ids.chunked(CHUNK).flatMap { dao.get(it) }.mapTo(HashSet()) { it.mediaId }
 

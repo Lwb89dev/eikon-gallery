@@ -109,6 +109,7 @@ class SettingsRepository @Inject constructor(
         store.edit {
             it[FILTER_TYPE] = filters.type.name
             it[FILTER_FAVORITES] = filters.favoritesOnly
+            it[FILTER_EDITED] = filters.editedOnly
             if (filters.category == null) it.remove(FILTER_CATEGORY) else it[FILTER_CATEGORY] = filters.category.name
         }
     }
@@ -153,6 +154,7 @@ class SettingsRepository @Inject constructor(
         filters = LibraryFilters(
             type = enumOrDefault(prefs[FILTER_TYPE], TypeFilter.ALL),
             favoritesOnly = prefs[FILTER_FAVORITES] ?: false,
+            editedOnly = prefs[FILTER_EDITED] ?: false,
             category = CategoryFilter.entries.firstOrNull { it.name == prefs[FILTER_CATEGORY] },
         ),
         sortField = enumOrDefault(prefs[SORT_FIELD], SortField.DATE_TAKEN),
@@ -179,6 +181,7 @@ class SettingsRepository @Inject constructor(
         val COLUMNS = intPreferencesKey("grid_columns")
         val FILTER_TYPE = stringPreferencesKey("filter_type")
         val FILTER_FAVORITES = booleanPreferencesKey("filter_favorites")
+        val FILTER_EDITED = booleanPreferencesKey("filter_edited")
         val FILTER_CATEGORY = stringPreferencesKey("filter_category")
         val LOCK_HIDDEN = booleanPreferencesKey("lock_hidden")
         val LOCK_TRASH = booleanPreferencesKey("lock_trash")

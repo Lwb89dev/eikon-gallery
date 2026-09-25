@@ -82,5 +82,17 @@ object DatabaseMigrations {
         }
     }
 
-    val ALL: Array<Migration> = arrayOf(MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5, MIGRATION_5_6)
+    /** Two indexes so that a device folder is read straight from the index, in date order, however big the library around it is. */
+    val STATEMENTS_6_7: List<String> = listOf(
+        "CREATE INDEX IF NOT EXISTS `index_media_relativePath_takenAt` ON `media` (`relativePath`, `takenAt`)",
+        "CREATE INDEX IF NOT EXISTS `index_media_relativePath_addedAt` ON `media` (`relativePath`, `addedAt`)",
+    )
+
+    val MIGRATION_6_7: Migration = object : Migration(6, 7) {
+        override fun migrate(db: SupportSQLiteDatabase) {
+            STATEMENTS_6_7.forEach(db::execSQL)
+        }
+    }
+
+    val ALL: Array<Migration> = arrayOf(MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5, MIGRATION_5_6, MIGRATION_6_7)
 }

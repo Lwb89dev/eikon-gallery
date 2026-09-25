@@ -176,6 +176,31 @@ class MigrationSqlTest {
         v5.close()
     }
 
+    // --- 6 to 7 ----------------------------------------------------------------------------------
+
+    @Test
+    fun migration6To7StatementsAreExactlyTheIndexesRoomExportedForVersion7() {
+        val exportedNew = statementsOf(7).filter { sql -> "relativePath" in sql && sql.startsWith("CREATE INDEX") }
+        assertEquals(exportedNew.toSet(), DatabaseMigrations.STATEMENTS_6_7.toSet())
+    }
+
+    @Test
+    fun migration6To7KeepsEveryRowAndProducesTheSameObjectsAsAFreshVersion7() {
+        val v6 = DriverManager.getConnection("jdbc:sqlite::memory:")
+        statementsOf(6).forEach { v6.createStatement().use { s -> s.execute(it) } }
+        v6.createStatement().use { it.execute("INSERT INTO media VALUES (1, 'a.jpg', 'image/jpeg', 0, 5, 5, 5, 10, 10, 0, 7, 'DCIM/Camera/', 'Camera', 1, 0, 0, 0, 0)") }
+
+        DatabaseMigrations.STATEMENTS_6_7.forEach { v6.createStatement().use { s -> s.execute(it) } }
+
+        val fresh = DriverManager.getConnection("jdbc:sqlite::memory:")
+        statementsOf(7).forEach { fresh.createStatement().use { s -> s.execute(it) } }
+        assertEquals(userObjects(fresh), userObjects(v6))
+        assertTrue("index:index_media_relativePath_takenAt" in userObjects(v6))
+        assertEquals(1, v6.createStatement().use { st -> st.executeQuery("SELECT COUNT(*) FROM media").use { rs -> rs.next(); rs.getInt(1) } })
+        fresh.close()
+        v6.close()
+    }
+
     // --- helpers -------------------------------------------------------------------------------
 
     private fun execute(sql: String) = db.createStatement().use { it.execute(sql) }

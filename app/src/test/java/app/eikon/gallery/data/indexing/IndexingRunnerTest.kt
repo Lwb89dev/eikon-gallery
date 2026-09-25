@@ -212,6 +212,42 @@ class IndexingRunnerTest {
     }
 
     @Test
+    fun batterySaverStopsABackgroundRunBeforeItTouchesAnyPhoto() = runTest {
+        environment.powerSave = true
+        val report = runner().run(60_000)
+        assertEquals(StopReason.POWER_SAVE, report.stoppedBy)
+        assertEquals(0, report.processed)
+    }
+
+    @Test
+    fun batterySaverDoesNotCountAgainstThePhotosAndTheNextRunContinues() = runTest {
+        environment.powerSave = true
+        runner().run(60_000)
+        assertEquals(0, (1L..6L).count { queue.status(it, IndexStage.OCR) != null })
+
+        environment.powerSave = false
+        val later = runner().run(60_000)
+        assertNull(later.stoppedBy)
+        assertEquals(6, (1L..6L).count { queue.status(it, IndexStage.OCR) == IndexingRepositoryStatus.DONE })
+    }
+
+    @Test
+    fun aRunTheUserAskedForGoesAheadInBatterySaver() = runTest {
+        environment.powerSave = true
+        val report = runner().run(60_000, manual = true)
+        assertNull(report.stoppedBy)
+        assertEquals(12, report.processed)
+    }
+
+    @Test
+    fun batterySaverThatStartsMidRunStopsItAtTheNextPhoto() = runTest {
+        ocr.onProcess = { id -> if (id == 2L) environment.powerSave = true }
+        val report = runner().run(60_000)
+        assertEquals(StopReason.POWER_SAVE, report.stoppedBy)
+        assertTrue("stopped after ${report.processed}", report.processed in 1..11)
+    }
+
+    @Test
     fun aWarmPhoneSlowsDownInsteadOfStopping() = runTest {
         environment.thermal = 2 // moderate
         val report = runner().run(60_000)
@@ -279,12 +315,14 @@ class IndexingRunnerTest {
         var settings = ON
         var locationAllowed = true
         var thermal = 0
+        var powerSave = false
         var now = 1_000L
         val pauses = mutableListOf<Long>()
 
         override fun analysisSettings() = settings
         override fun canReadLocation() = locationAllowed
         override fun thermalStatus() = thermal
+        override fun isPowerSaveMode() = powerSave
         override fun nowMillis() = now
         override suspend fun pause(millis: Long) {
             pauses += millis

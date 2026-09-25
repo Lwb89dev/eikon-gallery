@@ -197,6 +197,9 @@
     <string name="filter_kind_title">Genere</string>
     <string name="filter_any">Qualsiasi</string>
     <string name="filter_favorites_only">Solo preferiti</string>
+    <string name="filter_edited">Modificate</string>
+    <string name="share_preparing">Preparazione delle foto modificate da condividere</string>
+    <string name="filter_edited_only">Solo modificate</string>
     <string name="filter_clear_all">Rimuovi filtri</string>
 
     <!-- Blocco -->
@@ -257,7 +260,7 @@
     <string name="analysis_duplicates_progress">Duplicati: %1$,d di %2$,d</string>
     <string name="analysis_text_progress">Testo nelle foto: %1$,d di %2$,d</string>
     <string name="analysis_running">Analisi in corso…</string>
-    <string name="analysis_idle">In attesa del momento giusto (in carica, batteria non scarica)</string>
+    <string name="analysis_idle">In attesa del momento giusto (batteria non scarica, Risparmio energetico spento e, se l\'hai scelto, in carica)</string>
     <string name="analysis_up_to_date">Tutto è stato analizzato</string>
     <string name="setting_pause_analysis">Metti in pausa l\'analisi</string>
     <string name="setting_only_charging">Solo in carica</string>
@@ -270,7 +273,7 @@
     <string name="analysis_location_permission">Android nasconde alle app dove sono state scattate le foto finché non lo consenti.</string>
     <string name="analysis_allow_locations">Consenti l\'accesso alla posizione delle foto</string>
     <string name="analyze_now">Analizza ora</string>
-    <string name="settings_analysis_body">L\'analisi avviene solo sul tuo telefono, in background, e si ferma quando la batteria è scarica o il telefono si scalda. Salva il luogo di ogni foto (calcolato offline, nessuna posizione viene inviata da nessuna parte), una descrizione numerica di ciò che la foto mostra (così puoi cercare «cane» o «tramonto»; non è una didascalia e non si può ricostruire l\'immagine) e l\'eventuale testo letto nella foto, così la ricerca può trovarli. Se attivi le persone, salva anche dove si trova ogni volto in una foto e una sua descrizione numerica, solo per raggruppare i volti che si assomigliano. Se attivi i duplicati, salva una breve impronta di ogni foto e dei file che hanno la stessa dimensione, solo per trovare le copie. Riconoscere cosa mostrano le foto e leggere il testo sono operazioni lente che usano molto il processore, per questo per impostazione predefinita l\'analisi attende la ricarica.</string>
+    <string name="settings_analysis_body">L\'analisi avviene solo sul tuo telefono, in background, e si ferma quando la batteria è scarica, il Risparmio energetico è attivo o il telefono si scalda (Analizza ora prosegue anche con il Risparmio energetico). Salva il luogo di ogni foto (calcolato offline, nessuna posizione viene inviata da nessuna parte), una descrizione numerica di ciò che la foto mostra (così puoi cercare «cane» o «tramonto»; non è una didascalia e non si può ricostruire l\'immagine) e l\'eventuale testo letto nella foto, così la ricerca può trovarli. Se attivi le persone, salva anche dove si trova ogni volto in una foto e una sua descrizione numerica, solo per raggruppare i volti che si assomigliano. Se attivi i duplicati, salva una breve impronta di ogni foto e dei file che hanno la stessa dimensione, solo per trovare le copie. Riconoscere cosa mostrano le foto e leggere il testo sono operazioni lente che usano molto il processore, per questo per impostazione predefinita l\'analisi attende la ricarica.</string>
 
     <!-- Pannello info: dati derivati -->
     <string name="info_place">Luogo più vicino</string>

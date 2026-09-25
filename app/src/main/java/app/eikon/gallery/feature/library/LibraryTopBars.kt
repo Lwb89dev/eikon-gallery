@@ -168,6 +168,7 @@ private fun periodTitle(period: GridSource.Period): String {
 private fun filterSummary(filters: LibraryFilters): String = buildList {
     if (filters.type != TypeFilter.ALL) add(stringResource(filters.type.labelRes()))
     if (filters.favoritesOnly) add(stringResource(R.string.filter_favorites))
+    if (filters.editedOnly) add(stringResource(R.string.filter_edited))
     filters.category?.let { add(stringResource(it.labelRes())) }
 }.joinToString(" · ")
 
@@ -258,6 +259,9 @@ private fun FilterMenu(filters: LibraryFilters, onChange: (LibraryFilters) -> Un
             HorizontalDivider()
             CheckableItem(stringResource(R.string.filter_favorites_only), filters.favoritesOnly) {
                 onChange(filters.copy(favoritesOnly = !filters.favoritesOnly))
+            }
+            CheckableItem(stringResource(R.string.filter_edited_only), filters.editedOnly) {
+                onChange(filters.copy(editedOnly = !filters.editedOnly))
             }
             HorizontalDivider()
             MenuHeader(R.string.filter_kind_title)

@@ -192,6 +192,9 @@
     <string name="filter_kind_title">Kind</string>
     <string name="filter_any">Any</string>
     <string name="filter_favorites_only">Favorites only</string>
+    <string name="filter_edited">Edited</string>
+    <string name="share_preparing">Preparing the edited photos to share</string>
+    <string name="filter_edited_only">Edited only</string>
     <string name="filter_clear_all">Clear filters</string>
 
     <!-- Locks -->
@@ -249,7 +252,7 @@
     <string name="analysis_duplicates_progress">Duplicates: %1$,d of %2$,d</string>
     <string name="analysis_text_progress">Text in photos: %1$,d of %2$,d</string>
     <string name="analysis_running">Analyzing now…</string>
-    <string name="analysis_idle">Waiting for the right moment (charging, battery not low)</string>
+    <string name="analysis_idle">Waiting for the right moment (battery not low, Battery Saver off, and charging if you chose that)</string>
     <string name="analysis_up_to_date">Everything is analyzed</string>
     <string name="setting_pause_analysis">Pause analysis</string>
     <string name="setting_only_charging">Only while charging</string>
@@ -262,7 +265,7 @@
     <string name="analysis_location_permission">Android hides where photos were taken from apps until you allow it.</string>
     <string name="analysis_allow_locations">Allow access to photo locations</string>
     <string name="analyze_now">Analyze now</string>
-    <string name="settings_analysis_body">Analysis runs on your phone only, in the background, and pauses when the battery is low or the phone gets warm. It stores the place of each photo (resolved offline, no location is ever sent anywhere), a numeric description of what the photo shows (so you can search "dog" or "sunset"; it is not a caption and cannot be read back as an image) and any text it reads in the photo, so Search can find them. If you turn on people, it also stores where each face is in a photo and a numeric description of it, only to group faces that look alike. If you turn on duplicates, it stores a short fingerprint of each photo and of files that share a size, only to find copies. Recognizing what photos show and reading text are slow and use the processor heavily, which is why analysis waits for charging by default.</string>
+    <string name="settings_analysis_body">Analysis runs on your phone only, in the background, and pauses when the battery is low, Battery Saver is on or the phone gets warm (Analyze now goes ahead in Battery Saver). It stores the place of each photo (resolved offline, no location is ever sent anywhere), a numeric description of what the photo shows (so you can search "dog" or "sunset"; it is not a caption and cannot be read back as an image) and any text it reads in the photo, so Search can find them. If you turn on people, it also stores where each face is in a photo and a numeric description of it, only to group faces that look alike. If you turn on duplicates, it stores a short fingerprint of each photo and of files that share a size, only to find copies. Recognizing what photos show and reading text are slow and use the processor heavily, which is why analysis waits for charging by default.</string>
 
     <!-- Info panel: derived data -->
     <string name="info_place">Nearest place</string>

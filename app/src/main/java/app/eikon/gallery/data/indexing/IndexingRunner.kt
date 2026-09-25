@@ -28,6 +28,9 @@ interface RunnerEnvironment {
 
     /** `PowerManager.THERMAL_STATUS_*`. */
     fun thermalStatus(): Int
+
+    /** Battery Saver is on: the user asked the phone to spend as little as possible. */
+    fun isPowerSaveMode(): Boolean = false
     fun nowMillis(): Long
     suspend fun pause(millis: Long)
 }
@@ -50,6 +53,9 @@ enum class StopReason {
     /** The phone is too warm. */
     THERMAL,
 
+    /** Battery Saver is on and the run was not started by the user; the next scheduled run tries again. */
+    POWER_SAVE,
+
     /** The user paused analysis or switched the step off while it was running. */
     PAUSED,
 }
@@ -70,12 +76,13 @@ class IndexingRunner @Inject constructor(
     private val environment: RunnerEnvironment,
     private val health: StageHealth = StageHealth(),
 ) {
-    suspend fun run(budgetMs: Long): RunReport {
-        val deadline = environment.nowMillis() + budgetMs
+    /** [manual] is a run the user asked for ("Analyze now"): it goes ahead even while Battery Saver is on. */
+    suspend fun run(budgetMs: Long, manual: Boolean = false): RunReport {
+        val slice = Slice(environment.nowMillis() + budgetMs, manual)
         var processed = 0
         try {
             for (stage in enabledStages()) {
-                val result = runStage(stage, deadline)
+                val result = runStage(stage, slice)
                 processed += result.processed
                 if (result.stoppedBy != null) return RunReport(processed, result.stoppedBy)
             }
@@ -86,6 +93,9 @@ class IndexingRunner @Inject constructor(
     }
 
     private class StageRun(val processed: Int, val stoppedBy: StopReason?)
+
+    /** The limits of one run: when its time is up, and whether the user asked for it. */
+    private class Slice(val deadline: Long, val manual: Boolean)
 
     /** Places first (fast), then the fingerprints for duplicates (fast), then what photos show, then the faces, then the slow text reading. A step is skipped when it is off or cannot work. */
     private fun enabledStages(): List<IndexStage> {
@@ -100,11 +110,11 @@ class IndexingRunner @Inject constructor(
         }.filter { it in processors }
     }
 
-    private suspend fun runStage(stage: IndexStage, deadline: Long): StageRun {
+    private suspend fun runStage(stage: IndexStage, slice: Slice): StageRun {
         val processor = processors.getValue(stage)
         val processed = intArrayOf(0)
         return try {
-            runBatches(stage, processor, deadline, processed).also { health.markWorking(stage) }
+            runBatches(stage, processor, slice, processed).also { health.markWorking(stage) }
         } catch (_: StageUnavailableException) {
             // Not the photos' fault: leave them untried, skip this step for now and let the others run.
             health.markUnavailable(stage)
@@ -112,12 +122,12 @@ class IndexingRunner @Inject constructor(
         }
     }
 
-    private suspend fun runBatches(stage: IndexStage, processor: StageProcessor, deadline: Long, processed: IntArray): StageRun {
+    private suspend fun runBatches(stage: IndexStage, processor: StageProcessor, slice: Slice, processed: IntArray): StageRun {
         while (true) {
             val batch = queue.pending(stage, BATCH_SIZE)
             if (batch.isEmpty()) return StageRun(processed[0], null)
             for (item in batch) {
-                val reason = stopReason(stage, deadline)
+                val reason = stopReason(stage, slice)
                 if (reason != null) return StageRun(processed[0], reason)
                 processOne(processor, stage, item)
                 processed[0]++
@@ -126,13 +136,14 @@ class IndexingRunner @Inject constructor(
         }
     }
 
-    private suspend fun stopReason(stage: IndexStage, deadline: Long): StopReason? {
+    private suspend fun stopReason(stage: IndexStage, slice: Slice): StopReason? {
         currentCoroutineContext().ensureActive()
         val settings = environment.analysisSettings()
         return when {
             settings.paused || !isEnabled(stage, settings) -> StopReason.PAUSED
+            !slice.manual && environment.isPowerSaveMode() -> StopReason.POWER_SAVE
             ThermalPolicy.decide(environment.thermalStatus()) == ThermalAction.STOP -> StopReason.THERMAL
-            environment.nowMillis() >= deadline -> StopReason.TIME_UP
+            environment.nowMillis() >= slice.deadline -> StopReason.TIME_UP
             else -> null
         }
     }
