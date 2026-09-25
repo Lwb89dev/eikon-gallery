@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Launch theme: system splash screen, then swaps to Theme.Eikon. -->
+    <style name="Theme.Eikon.Starting" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/splash_background</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_launcher_art</item>
+        <item name="postSplashScreenTheme">@style/Theme.Eikon</item>
+    </style>
+
+    <!-- The real UI is Compose; this only supplies the window background and system defaults. -->
+    <style name="Theme.Eikon" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:windowBackground">@color/window_background</item>
+    </style>
+</resources>

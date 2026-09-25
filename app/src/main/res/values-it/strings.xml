@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Libreria -->
+    <string name="library_title">Libreria</string>
+    <string name="today">Oggi</string>
+    <string name="yesterday">Ieri</string>
+    <string name="empty_library">Ancora nessuna foto o video</string>
+    <string name="empty_filter">Nessun elemento corrisponde al filtro</string>
+    <string name="empty_filter_clear">Mostra tutto</string>
+    <string name="sync_progress">Caricamento libreria: %1$,d / %2$,d</string>
+    <string name="sync_failed">Impossibile aggiornare la libreria</string>
+    <string name="sync_retry">Riprova</string>
+    <string name="scrubber_description">Scorri la libreria per data</string>
+
+    <!-- Permessi -->
+    <string name="permission_title">Le tue foto restano sul tuo dispositivo</string>
+    <string name="permission_body">eikon ha bisogno di accedere a foto e video per mostrarli. Nulla viene caricato: l\'app non ha alcun permesso per internet.</string>
+    <string name="permission_grant">Consenti l\'accesso</string>
+    <string name="permission_denied">L\'accesso è stato negato. Puoi consentirlo dalle impostazioni di sistema.</string>
+    <string name="permission_open_settings">Apri impostazioni</string>
+    <string name="limited_banner">Vengono mostrate solo le foto che hai selezionato</string>
+    <string name="limited_select_more">Selezionane altre</string>
+    <string name="limited_allow_all">Consenti tutto</string>
+
+    <!-- Menu e filtri -->
+    <string name="menu_filter">Filtra</string>
+    <string name="menu_sort">Ordina</string>
+    <string name="menu_settings">Impostazioni</string>
+    <string name="menu_more">Altre opzioni</string>
+    <string name="filter_all">Tutti</string>
+    <string name="filter_photos">Foto</string>
+    <string name="filter_videos">Video</string>
+    <string name="filter_favorites">Preferiti</string>
+    <string name="filter_screenshots">Screenshot</string>
+    <string name="filter_screen_recordings">Registrazioni schermo</string>
+    <string name="filter_panoramas">Panoramiche</string>
+    <string name="filter_raw">RAW</string>
+    <string name="filter_clear">Rimuovi filtro</string>
+    <string name="sort_by_date_taken">Data di scatto</string>
+    <string name="sort_by_date_added">Data di aggiunta</string>
+    <string name="sort_newest_first">Prima i più recenti</string>
+    <string name="sort_oldest_first">Prima i più vecchi</string>
+
+    <!-- Selezione e azioni -->
+    <plurals name="selected_count">
+        <item quantity="one">%d selezionato</item>
+        <item quantity="many">%d selezionati</item>
+        <item quantity="other">%d selezionati</item>
+    </plurals>
+    <string name="action_share">Condividi</string>
+    <string name="action_favorite">Aggiungi ai preferiti</string>
+    <string name="action_unfavorite">Rimuovi dai preferiti</string>
+    <string name="action_delete">Elimina</string>
+    <string name="action_info">Info</string>
+    <string name="action_back">Indietro</string>
+    <string name="action_clear_selection">Annulla selezione</string>
+    <string name="action_select">Seleziona</string>
+    <string name="action_failed">Qualcosa è andato storto</string>
+    <plurals name="moved_to_trash">
+        <item quantity="one">%d elemento spostato nel cestino. Android lo conserva per 30 giorni.</item>
+        <item quantity="many">%d elementi spostati nel cestino. Android li conserva per 30 giorni.</item>
+        <item quantity="other">%d elementi spostati nel cestino. Android li conserva per 30 giorni.</item>
+    </plurals>
+
+    <!-- Accessibilità -->
+    <string name="cd_photo">Foto, %1$s</string>
+    <string name="cd_video">Video, %1$s, %2$s</string>
+    <string name="cd_favorite_badge">Preferito</string>
+    <string name="viewer_position">%1$d di %2$d</string>
+
+    <!-- Video -->
+    <string name="video_play">Riproduci</string>
+    <string name="video_pause">Pausa</string>
+    <string name="video_mute">Disattiva audio</string>
+    <string name="video_unmute">Attiva audio</string>
+    <string name="video_seek">Posizione</string>
+
+    <!-- Pannello info -->
+    <string name="info_title">Info</string>
+    <string name="info_loading">Lettura dei dettagli…</string>
+    <string name="info_error">Impossibile leggere i dettagli di questo file</string>
+    <string name="info_section_file">File</string>
+    <string name="info_section_camera">Fotocamera</string>
+    <string name="info_section_video">Video</string>
+    <string name="info_name">Nome</string>
+    <string name="info_type">Tipo</string>
+    <string name="info_folder">Cartella</string>
+    <string name="info_album">Album</string>
+    <string name="info_resolution">Risoluzione</string>
+    <string name="info_megapixels">Megapixel</string>
+    <string name="info_size">Dimensione</string>
+    <string name="info_date">Data</string>
+    <string name="info_modified">Modificato</string>
+    <string name="info_color_profile">Profilo colore</string>
+    <string name="info_location">Posizione</string>
+    <string name="info_location_none">Nessuna posizione salvata in questo file</string>
+    <string name="info_location_hidden">Android nasconde la posizione delle foto alle app finché non lo consenti</string>
+    <string name="info_location_allow">Consenti</string>
+    <string name="info_location_open">Apri in un\'app di mappe</string>
+    <string name="info_camera">Dispositivo</string>
+    <string name="info_lens">Obiettivo</string>
+    <string name="info_focal_length">Lunghezza focale</string>
+    <string name="info_aperture">Apertura</string>
+    <string name="info_shutter">Tempo di scatto</string>
+    <string name="info_iso">Sensibilità</string>
+    <string name="info_exposure_bias">Compensazione esposizione</string>
+    <string name="info_flash">Flash</string>
+    <string name="info_flash_fired">Attivato</string>
+    <string name="info_flash_off">Non attivato</string>
+    <string name="info_orientation">Orientamento</string>
+    <string name="info_software">Software</string>
+    <string name="info_duration">Durata</string>
+    <string name="info_frame_rate">Fotogrammi al secondo</string>
+    <string name="info_video_codec">Codec video</string>
+    <string name="info_audio_codec">Codec audio</string>
+    <string name="info_bitrate">Bitrate</string>
+    <string name="info_dynamic_range">Gamma dinamica</string>
+
+    <!-- Impostazioni -->
+    <string name="settings_title">Impostazioni</string>
+    <string name="settings_appearance">Aspetto</string>
+    <string name="theme_system">Segui il sistema</string>
+    <string name="theme_light">Chiaro</string>
+    <string name="theme_dark">Scuro</string>
+    <string name="settings_privacy">Privacy</string>
+    <string name="settings_privacy_body">eikon funziona interamente sul tuo dispositivo. Non ha permessi per internet, né account, né analytics, e i suoi dati sono esclusi dai backup di Android.\n\nLe tue foto non vengono mai copiate: eikon conserva un indice locale con i dettagli dei file (nome, data, dimensione, cartella) per aprire subito la libreria. Disinstallando l\'app l\'indice viene eliminato.</string>
+    <string name="settings_about">Informazioni</string>
+    <string name="settings_version">Versione %1$s</string>
+
+    <!-- Navigazione e collezioni -->
+    <string name="nav_library">Libreria</string>
+    <string name="nav_collections">Collezioni</string>
+    <string name="collections_title">Collezioni</string>
+    <string name="section_albums">Album</string>
+    <string name="section_personal">Personali</string>
+    <string name="section_folders">Cartelle del dispositivo</string>
+    <string name="collection_favorites">Preferiti</string>
+    <string name="collection_recent">Aggiunti di recente</string>
+    <string name="collection_videos">Video</string>
+    <string name="collection_screenshots">Screenshot</string>
+    <string name="collection_screen_recordings">Registrazioni schermo</string>
+    <string name="collection_panoramas">Panoramiche</string>
+    <string name="collection_raw">RAW</string>
+    <string name="collection_trash">Eliminati di recente</string>
+    <string name="collection_hidden">Nascosti</string>
+    <plurals name="items_count">
+        <item quantity="one">%d elemento</item>
+        <item quantity="many">%d elementi</item>
+        <item quantity="other">%d elementi</item>
+    </plurals>
+    <string name="empty_album">Questo album è vuoto. Seleziona delle foto nella Libreria e scegli \"Aggiungi all\'album\".</string>
+    <string name="empty_hidden">Nessun elemento nascosto</string>
+    <string name="empty_collection">Ancora niente qui</string>
+
+    <!-- Album -->
+    <string name="album_new">Nuovo album</string>
+    <string name="album_name_hint">Nome dell\'album</string>
+    <string name="album_create">Crea</string>
+    <string name="album_rename">Rinomina</string>
+    <string name="album_delete">Elimina album</string>
+    <string name="album_delete_title">Eliminare questo album?</string>
+    <string name="album_delete_message">Viene eliminato solo l\'album. Foto e video al suo interno restano dove sono.</string>
+    <string name="album_move_earlier">Sposta prima</string>
+    <string name="album_move_later">Sposta dopo</string>
+    <string name="action_add_to_album">Aggiungi all\'album</string>
+    <string name="action_remove_from_album">Rimuovi dall\'album</string>
+    <string name="action_hide">Nascondi</string>
+    <string name="action_unhide">Mostra di nuovo</string>
+    <string name="action_cancel">Annulla</string>
+    <string name="action_save">Salva</string>
+    <plurals name="added_to_album">
+        <item quantity="one">%1$d elemento aggiunto a \"%2$s\"</item>
+        <item quantity="many">%1$d elementi aggiunti a \"%2$s\"</item>
+        <item quantity="other">%1$d elementi aggiunti a \"%2$s\"</item>
+    </plurals>
+    <plurals name="removed_from_album">
+        <item quantity="one">%d elemento rimosso dall\'album</item>
+        <item quantity="many">%d elementi rimossi dall\'album</item>
+        <item quantity="other">%d elementi rimossi dall\'album</item>
+    </plurals>
+    <plurals name="moved_to_hidden">
+        <item quantity="one">%d elemento nascosto. Lo trovi in Collezioni, Nascosti.</item>
+        <item quantity="many">%d elementi nascosti. Li trovi in Collezioni, Nascosti.</item>
+        <item quantity="other">%d elementi nascosti. Li trovi in Collezioni, Nascosti.</item>
+    </plurals>
+    <plurals name="unhidden">
+        <item quantity="one">%d elemento è di nuovo visibile</item>
+        <item quantity="many">%d elementi sono di nuovo visibili</item>
+        <item quantity="other">%d elementi sono di nuovo visibili</item>
+    </plurals>
+
+    <!-- Filtri -->
+    <string name="filter_type_title">Tipo</string>
+    <string name="filter_kind_title">Genere</string>
+    <string name="filter_any">Qualsiasi</string>
+    <string name="filter_favorites_only">Solo preferiti</string>
+    <string name="filter_clear_all">Rimuovi filtri</string>
+
+    <!-- Blocco -->
+    <string name="locked_title">Bloccato</string>
+    <string name="locked_body">Usa impronta, volto o blocco schermo per aprire.</string>
+    <string name="locked_unlock">Sblocca</string>
+    <string name="auth_subtitle">Conferma la tua identità</string>
+    <string name="auth_title_hidden">Sblocca Nascosti</string>
+    <string name="auth_title_trash">Sblocca Eliminati di recente</string>
+    <string name="auth_unavailable">L\'autenticazione non è disponibile in questo momento. Riprova tra poco.</string>
+    <string name="no_device_lock_notice">Questo telefono non ha un blocco schermo, quindi Nascosti non è protetto. Impostalo dalle impostazioni di sistema.</string>
+
+    <!-- Eliminati di recente -->
+    <string name="trash_info">Gli elementi vengono eliminati definitivamente dopo circa 30 giorni.</string>
+    <string name="trash_empty">Niente è stato eliminato di recente</string>
+    <string name="trash_restore">Ripristina</string>
+    <string name="trash_delete_forever">Elimina definitivamente</string>
+    <plurals name="days_left_short">
+        <item quantity="one">%d g</item>
+        <item quantity="many">%d g</item>
+        <item quantity="other">%d g</item>
+    </plurals>
+    <plurals name="trash_restored">
+        <item quantity="one">%d elemento ripristinato</item>
+        <item quantity="many">%d elementi ripristinati</item>
+        <item quantity="other">%d elementi ripristinati</item>
+    </plurals>
+    <plurals name="trash_deleted">
+        <item quantity="one">%d elemento eliminato definitivamente</item>
+        <item quantity="many">%d elementi eliminati definitivamente</item>
+        <item quantity="other">%d elementi eliminati definitivamente</item>
+    </plurals>
+
+    <!-- Impostazioni: sicurezza -->
+    <string name="settings_security">Sicurezza</string>
+    <string name="setting_lock_hidden">Richiedi autenticazione per Nascosti</string>
+    <string name="setting_lock_trash">Richiedi autenticazione per Eliminati di recente</string>
+    <string name="setting_show_hidden">Mostra Nascosti nelle Collezioni</string>
+    <string name="settings_security_body">Gli elementi nascosti non compaiono in Libreria, Collezioni e ricerca, e aprire Nascosti richiede impronta, volto o blocco schermo. I file non sono cifrati e restano nella memoria normale del telefono, dove altre app con accesso alle foto possono ancora vederli.</string>
+</resources>

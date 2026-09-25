@@ -1,0 +1,25 @@
+# Build output
+build/
+.gradle/
+.kotlin/
+*.apk
+*.aab
+
+# Toolchain caches that may be redirected into the checkout
+# (GRADLE_USER_HOME / ANDROID_USER_HOME), never to be committed
+.gradle-user-home/
+.android-user-home/
+
+# Machine-specific configuration (contains absolute paths)
+local.properties
+
+# Signing material
+*.jks
+*.keystore
+keystore.properties
+
+# IDE / OS
+.idea/
+*.iml
+.DS_Store
+captures/

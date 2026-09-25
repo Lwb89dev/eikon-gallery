@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- The launcher artwork is designed on white; the background must stay independent of night mode. -->
+    <color name="ic_launcher_background">#FFFFFF</color>
+    <color name="splash_background">#FFFFFF</color>
+    <color name="window_background">#FAFAF9</color>
+</resources>
