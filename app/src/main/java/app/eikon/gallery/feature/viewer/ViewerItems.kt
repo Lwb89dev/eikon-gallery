@@ -39,5 +39,7 @@ class ViewerAction(
     val icon: (MediaItem) -> Int,
     /** String resource id for the item. */
     val label: (MediaItem) -> Int,
+    /** Whether the button is offered for the item (editing, for one, is for photos only). */
+    val visible: (MediaItem) -> Boolean = { true },
     val onClick: (MediaItem) -> Unit,
 )

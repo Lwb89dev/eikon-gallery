@@ -1,11 +1,13 @@
 package app.eikon.gallery.data.sync
 
 import androidx.room.withTransaction
+import app.eikon.gallery.data.db.DuplicatesDao
 import app.eikon.gallery.data.db.EikonDatabase
 import app.eikon.gallery.data.db.IndexDao
 import app.eikon.gallery.data.db.MediaDao
 import app.eikon.gallery.data.db.MediaEntity
 import app.eikon.gallery.data.db.MediaSearchEntity
+import app.eikon.gallery.data.db.PeopleDao
 import app.eikon.gallery.domain.search.SearchText
 import javax.inject.Inject
 
@@ -18,6 +20,8 @@ class RoomMediaIndex @Inject constructor(
     private val database: EikonDatabase,
     private val dao: MediaDao,
     private val index: IndexDao,
+    private val people: PeopleDao,
+    private val duplicates: DuplicatesDao,
 ) : MediaIndex {
     override suspend fun upsertAll(items: List<MediaEntity>) {
         database.withTransaction {
@@ -35,12 +39,17 @@ class RoomMediaIndex @Inject constructor(
                 index.deleteStates(it)
                 index.deleteGeo(it)
                 index.deleteSearch(it)
+                index.deleteEmbeddings(it)
+                people.deleteFaces(it)
+                duplicates.deleteContentHashes(it)
+                duplicates.deletePerceptualHashes(it)
             }
+            people.deleteEmptyUnnamedPeople()
         }
     }
 
     /**
-     * Empties the media cache and everything derived from it (places, recognized text), so revoking photo
+     * Empties the media cache and everything derived from it (places, recognized text, image embeddings, faces and people, file fingerprints), so revoking photo
      * access also removes what eikon learned about the photos. Albums and the hidden list are user data
      * and are kept.
      */
@@ -50,6 +59,12 @@ class RoomMediaIndex @Inject constructor(
             index.clearStates()
             index.clearGeo()
             index.clearSearch()
+            index.clearEmbeddings()
+            index.clearHits()
+            people.clearFaces()
+            people.clearPeople()
+            duplicates.clearContentHashes()
+            duplicates.clearPerceptualHashes()
         }
     }
 

@@ -11,7 +11,14 @@ import app.eikon.gallery.data.AlbumRepository
 import app.eikon.gallery.data.MediaRepository
 import app.eikon.gallery.data.db.AlbumEntity
 import app.eikon.gallery.data.db.AlbumSummary
+import app.eikon.gallery.data.db.PersonEntity
+import app.eikon.gallery.data.db.PersonSummary
+import app.eikon.gallery.data.edit.EditClipboard
+import app.eikon.gallery.data.edit.EditRepository
 import app.eikon.gallery.data.indexing.AnalysisStatus
+import app.eikon.gallery.data.embedding.PetClassifier
+import app.eikon.gallery.data.places.PlacesRepository
+import app.eikon.gallery.data.embedding.SemanticSearchService
 import app.eikon.gallery.data.indexing.AnalysisStatusRepository
 import app.eikon.gallery.data.mediastore.MediaActions
 import app.eikon.gallery.data.places.GazetteerProvider
@@ -24,6 +31,8 @@ import app.eikon.gallery.domain.LibraryFilters
 import app.eikon.gallery.domain.LibraryQuery
 import app.eikon.gallery.domain.LibraryScope
 import app.eikon.gallery.domain.MediaItem
+import app.eikon.gallery.data.faces.PeopleRepository
+import app.eikon.gallery.domain.search.PeopleNames
 import app.eikon.gallery.domain.search.SearchQueryParser
 import app.eikon.gallery.domain.search.SearchSpec
 import app.eikon.gallery.domain.SortDirection
@@ -47,7 +56,9 @@ import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.mapLatest
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.receiveAsFlow
@@ -64,6 +75,10 @@ sealed interface LibraryEvent {
     data class Hidden(val count: Int) : LibraryEvent
     data class Unhidden(val count: Int) : LibraryEvent
     data class RemovedFromAlbum(val count: Int) : LibraryEvent
+    data class MovedToNewPerson(val count: Int) : LibraryEvent
+    data class RemovedFromPeople(val count: Int) : LibraryEvent
+    data class EditsPasted(val count: Int) : LibraryEvent
+    data class EditsReverted(val count: Int) : LibraryEvent
     data object ActionFailed : LibraryEvent
 }
 
@@ -75,6 +90,16 @@ sealed interface AlbumState {
 
     /** The album was deleted (from this screen or elsewhere). */
     data object Gone : AlbumState
+}
+
+/** State of the person behind a person screen. */
+sealed interface PersonState {
+    data object NotAPerson : PersonState
+    data object Loading : PersonState
+    data class Present(val person: PersonEntity) : PersonState
+
+    /** The person no longer exists (merged into someone else, or emptied). */
+    data object Gone : PersonState
 }
 
 /** A change waiting for the user to answer the system confirmation dialog. */
@@ -99,6 +124,12 @@ class LibraryViewModel @Inject constructor(
     private val actions: MediaActions,
     private val coordinator: LibrarySyncCoordinator,
     private val gazetteers: GazetteerProvider,
+    private val semanticSearch: SemanticSearchService,
+    private val peopleRepository: PeopleRepository,
+    private val petClassifier: PetClassifier,
+    private val placesRepository: PlacesRepository,
+    private val editRepository: EditRepository,
+    private val editClipboard: EditClipboard,
     analysisStatusRepository: AnalysisStatusRepository,
     private val savedState: SavedStateHandle,
 ) : ViewModel() {
@@ -125,11 +156,61 @@ class LibraryViewModel @Inject constructor(
         .mapLatest { text -> parser().parse(text) }
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(STOP_TIMEOUT_MS), SearchSpec())
 
-    private suspend fun parser() = SearchQueryParser(ZoneId.systemDefault(), { LocalDate.now() }, gazetteers.get())
+    private suspend fun parser() = SearchQueryParser(
+        ZoneId.systemDefault(),
+        { LocalDate.now() },
+        gazetteers.get(),
+        PeopleNames(peopleRepository.namedPeople().map { it.id to it.name }),
+    )
+
+    /**
+     * [searchSpec] plus, when the user turned on analysis of what photos show, the photos that matched the
+     * words by their content. Recomputed when the spec or that setting changes.
+     */
+    private val resolvedSpec: Flow<SearchSpec> = combine(searchSpec, loadedSettings.map { it.analysis.semantic }.distinctUntilChanged()) { spec, _ -> spec }
+        .mapLatest { spec -> semanticSearch.prepare(spec) }
+
+    /** The name of a place or area, looked up when this screen is one; null while it is being looked up. */
+    val sourceTitle: StateFlow<SourceTitle?> = flow { emit(resolveTitle()) }
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(STOP_TIMEOUT_MS), null)
+
+    private suspend fun resolveTitle(): SourceTitle? = when (val current = source) {
+        is GridSource.Place -> placesRepository.title(current.scope)?.let { SourceTitle.Text(it) } ?: SourceTitle.OtherPlaces
+        is GridSource.Area -> {
+            val area = current.scope
+            val near = placesRepository.nearestCityName((area.minLatitude + area.maxLatitude) / 2, (area.minLongitude + area.maxLongitude) / 2)
+            near?.let { SourceTitle.NearCity(it) } ?: SourceTitle.OtherPlaces
+        }
+        is GridSource.Memory -> SourceTitle.OfMemory(current.id, current.id.personId?.let { id -> peopleRepository.namedPeople().firstOrNull { it.id == id }?.name })
+        else -> null
+    }
+
+    // --- Pets (only when this screen is the dogs or cats collection) -------------------------------
+
+    /** The query id under which the photos of the pet were stored; null while searching or if there are none. */
+    private val petHits = MutableStateFlow<Long?>(null)
+    private val petsSearching = MutableStateFlow(source is GridSource.Pets)
+
+    /** True while the pets are being looked for: the first time this takes a moment (the text model has to load). */
+    val searchingPets: StateFlow<Boolean> = petsSearching.asStateFlow()
+
+    init {
+        val pets = source as? GridSource.Pets
+        if (pets != null) {
+            viewModelScope.launch {
+                petHits.value = petClassifier.find(pets.kind)
+                petsSearching.value = false
+            }
+        }
+    }
 
     /** The query to show, or null when there is nothing to show yet (an empty search box). */
-    private val query: Flow<LibraryQuery?> = if (source == GridSource.Search) {
-        combine(loadedSettings, searchSpec) { settings, spec ->
+    private val query: Flow<LibraryQuery?> = if (source is GridSource.Pets) {
+        combine(loadedSettings, petHits) { settings, id ->
+            id?.let { LibraryQuery(LibraryScope.Semantic(it), LibraryFilters.NONE, settings.sortField, settings.direction) }
+        }.distinctUntilChanged()
+    } else if (source == GridSource.Search) {
+        combine(loadedSettings, resolvedSpec) { settings, spec ->
             if (spec.isEmpty) null else LibraryQuery(LibraryScope.Search(spec), LibraryFilters.NONE, settings.sortField, settings.direction)
         }.distinctUntilChanged()
     } else {
@@ -160,6 +241,19 @@ class LibraryViewModel @Inject constructor(
             .map { if (it == null) AlbumState.Gone else AlbumState.Present(it) }
             .stateIn(viewModelScope, SharingStarted.WhileSubscribed(STOP_TIMEOUT_MS), AlbumState.Loading)
     }
+
+    /** Only meaningful when [source] is a person. */
+    val person: StateFlow<PersonState> = run {
+        val id = (source as? GridSource.Person)?.id ?: return@run MutableStateFlow(PersonState.NotAPerson)
+        peopleRepository.person(id)
+            .map { if (it == null) PersonState.Gone else PersonState.Present(it) }
+            .stateIn(viewModelScope, SharingStarted.WhileSubscribed(STOP_TIMEOUT_MS), PersonState.Loading)
+    }
+
+    /** People this one could be merged into (only observed while the picker is open). */
+    val mergeChoices: StateFlow<List<PersonSummary>> = peopleRepository.people
+        .map { all -> all.filter { it.id != (source as? GridSource.Person)?.id } }
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(STOP_TIMEOUT_MS), emptyList())
 
     /** Albums a selection can be added to (only observed while the picker is open). */
     val albumChoices: StateFlow<List<AlbumSummary>> = albumRepository.albumSummaries
@@ -276,6 +370,53 @@ class LibraryViewModel @Inject constructor(
         }
     }
 
+    // --- People (only when this screen is a person) -------------------------------------------------
+
+    private val personId: Long? get() = (source as? GridSource.Person)?.id
+
+    fun renamePerson(name: String) {
+        val id = personId ?: return
+        viewModelScope.launch { peopleRepository.rename(id, name) }
+    }
+
+    fun setPersonFavorite(favorite: Boolean) {
+        val id = personId ?: return
+        viewModelScope.launch { peopleRepository.setFavorite(id, favorite) }
+    }
+
+    fun setPersonHidden(hidden: Boolean) {
+        val id = personId ?: return
+        viewModelScope.launch { peopleRepository.setHidden(id, hidden) }
+    }
+
+    /** Makes this person and [into] one; this screen then finds its person gone and closes. */
+    fun mergePersonInto(into: Long) {
+        val id = personId ?: return
+        viewModelScope.launch { peopleRepository.merge(id, into) }
+    }
+
+    /** The selected photos are not this person: they move to a new person the user can name or merge elsewhere. */
+    fun splitFromPerson(items: Collection<MediaItem>) {
+        val id = personId ?: return
+        if (items.isEmpty()) return
+        viewModelScope.launch {
+            peopleRepository.split(id, items.map { it.id })
+            eventChannel.send(LibraryEvent.MovedToNewPerson(items.size))
+            clearSelection()
+        }
+    }
+
+    /** The faces in the selected photos are not faces, or should stay out of People. */
+    fun ignoreFacesOfPerson(items: Collection<MediaItem>) {
+        val id = personId ?: return
+        if (items.isEmpty()) return
+        viewModelScope.launch {
+            peopleRepository.ignoreFaces(id, items.map { it.id })
+            eventChannel.send(LibraryEvent.RemovedFromPeople(items.size))
+            clearSelection()
+        }
+    }
+
     fun deleteAlbum() {
         val albumId = (source as? GridSource.Album)?.id ?: return
         viewModelScope.launch { albumRepository.delete(albumId) }
@@ -295,6 +436,38 @@ class LibraryViewModel @Inject constructor(
         viewModelScope.launch {
             albumRepository.unhide(items.map { it.id })
             eventChannel.send(LibraryEvent.Unhidden(items.size))
+            clearSelection()
+        }
+    }
+
+    // --- Edits ----------------------------------------------------------------------------------------
+
+    /** True while some edits are copied and waiting to be pasted. */
+    val canPasteEdits: StateFlow<Boolean> = editClipboard.recipe
+        .map { it != null }
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(STOP_TIMEOUT_MS), false)
+
+    /** The photos among [items] take the look that was copied in the editor; each keeps its own crop, turns and straightening. Videos are left alone. */
+    fun pasteEdits(items: Collection<MediaItem>) {
+        val photos = items.filterNot { it.isVideo }
+        if (photos.isEmpty()) return
+        viewModelScope.launch {
+            val recipe = editClipboard.recipe.first() ?: return@launch eventChannel.send(LibraryEvent.ActionFailed)
+            editRepository.paste(photos, recipe)
+            eventChannel.send(LibraryEvent.EditsPasted(photos.size))
+            clearSelection()
+        }
+    }
+
+    /** The photos among [items] that have an edit go back to the original. Their files were never changed. */
+    fun revertEdits(items: Collection<MediaItem>) {
+        if (items.isEmpty()) return
+        viewModelScope.launch {
+            val edited = editRepository.editedAmong(items.map { it.id })
+            if (edited.isNotEmpty()) {
+                editRepository.revert(edited)
+                eventChannel.send(LibraryEvent.EditsReverted(edited.size))
+            }
             clearSelection()
         }
     }

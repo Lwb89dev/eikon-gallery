@@ -34,13 +34,19 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.util.lerp
+import app.eikon.gallery.core.image.EditTransformation
 import app.eikon.gallery.core.image.MediaThumbnail
+import app.eikon.gallery.domain.edit.EditRecipe
+import app.eikon.gallery.domain.edit.GeometryMap
 import app.eikon.gallery.domain.MediaItem
 import coil3.compose.AsyncImage
+import coil3.PlatformContext
 import coil3.compose.LocalPlatformContext
 import coil3.request.ImageRequest
+import coil3.request.transformations
 import coil3.size.Size as CoilSize
 import kotlin.math.abs
+import kotlin.math.max
 import kotlinx.coroutines.launch
 
 private const val MIN_SCALE = 1f
@@ -191,7 +197,7 @@ private fun applyGesture(event: PointerEvent, state: ZoomState, center: Offset) 
 /**
  * A photo page: thumbnail instantly, then a screen-sized decode, then (only while zoomed in) a much
  * larger one. Each layer is dropped when it is no longer needed so paging through a long sequence of
- * photos never accumulates full-size bitmaps.
+ * photos never accumulates full-size bitmaps. With a [recipe] every layer is drawn edited; the file itself is never touched.
  */
 @Composable
 fun ImagePage(
@@ -200,26 +206,25 @@ fun ImagePage(
     onTap: () -> Unit,
     onZoomedChange: (Boolean) -> Unit,
     modifier: Modifier = Modifier,
+    recipe: EditRecipe? = null,
 ) {
     val state = remember(item.id) { ZoomState() }
     LaunchedEffect(isCurrent) { if (!isCurrent) state.reset() }
     if (isCurrent) {
         LaunchedEffect(state) { snapshotFlow { state.isZoomed }.collect(onZoomedChange) }
     }
-    ZoomableBox(state, onTap, modifier) { LayeredImage(item, state) }
+    ZoomableBox(state, onTap, modifier) { LayeredImage(item, state, recipe) }
 }
 
 @Composable
-private fun LayeredImage(item: MediaItem, state: ZoomState) {
+private fun LayeredImage(item: MediaItem, state: ZoomState, recipe: EditRecipe?) {
     val context = LocalPlatformContext.current
-    var previewLoaded by remember(item.id) { mutableStateOf(false) }
-    if (!previewLoaded) MediaThumbnail(item, Modifier.fillMaxSize(), ContentScale.Fit)
+    var previewLoaded by remember(item.id, recipe) { mutableStateOf(false) }
+    if (!previewLoaded) MediaThumbnail(item, Modifier.fillMaxSize(), ContentScale.Fit, applyEdit = recipe != null)
 
     val container = state.containerSize
     if (container != IntSize.Zero) {
-        val preview = remember(item.id, container) {
-            ImageRequest.Builder(context).data(item.uri).size(CoilSize(container.width, container.height)).build()
-        }
+        val preview = remember(item.id, container, recipe) { previewRequest(context, item, recipe, container) }
         AsyncImage(
             model = preview,
             contentDescription = null,
@@ -231,14 +236,25 @@ private fun LayeredImage(item: MediaItem, state: ZoomState) {
             },
         )
     }
-    if (state.isZoomed) HighResLayer(item)
+    if (state.isZoomed) HighResLayer(item, recipe)
+}
+
+/** The screen-sized decode; for an edit with a crop the photo is decoded larger, so what is left after cropping still fills the screen. */
+private fun previewRequest(context: PlatformContext, item: MediaItem, recipe: EditRecipe?, container: IntSize): ImageRequest {
+    val builder = ImageRequest.Builder(context).data(item.uri)
+    if (recipe == null) return builder.size(CoilSize(container.width, container.height)).build()
+    val map = GeometryMap(item.width.coerceAtLeast(1), item.height.coerceAtLeast(1), recipe.geometry)
+    val edge = map.sourceEdgeFor(max(container.width, container.height), HIGH_RES_EDGE_PX)
+    return builder.size(CoilSize(edge, edge)).transformations(EditTransformation(recipe)).build()
 }
 
 @Composable
-private fun HighResLayer(item: MediaItem) {
+private fun HighResLayer(item: MediaItem, recipe: EditRecipe?) {
     val context = LocalPlatformContext.current
-    val request = remember(item.id) {
-        ImageRequest.Builder(context).data(item.uri).size(CoilSize(HIGH_RES_EDGE_PX, HIGH_RES_EDGE_PX)).build()
+    val request = remember(item.id, recipe) {
+        val builder = ImageRequest.Builder(context).data(item.uri).size(CoilSize(HIGH_RES_EDGE_PX, HIGH_RES_EDGE_PX))
+        recipe?.let { builder.transformations(EditTransformation(it)) }
+        builder.build()
     }
     AsyncImage(
         model = request,

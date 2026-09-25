@@ -3,6 +3,7 @@ package app.eikon.gallery.feature.settings
 import android.Manifest
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -40,7 +41,9 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LifecycleEventEffect
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.eikon.gallery.R
+import app.eikon.gallery.data.db.IndexStage
 import app.eikon.gallery.data.indexing.AnalysisStatus
+import app.eikon.gallery.data.indexing.StageProgress
 import app.eikon.gallery.data.settings.AnalysisSettings
 import app.eikon.gallery.data.settings.ThemeMode
 
@@ -128,6 +131,10 @@ private fun AnalysisSection(
     SwitchRow(R.string.setting_only_charging, settings.onlyWhileCharging) { on -> viewModel.setAnalysis { it.copy(onlyWhileCharging = on) } }
     SwitchRow(R.string.setting_analyze_places, settings.places) { on -> viewModel.setAnalysis { it.copy(places = on) } }
     if (settings.places && !canReadLocation) LocationPermissionPrompt(onAllowLocations)
+    SwitchRow(R.string.setting_analyze_semantic, settings.semantic) { on -> viewModel.setAnalysis { it.copy(semantic = on) } }
+    SwitchRow(R.string.setting_analyze_people, settings.people) { on -> viewModel.setAnalysis { it.copy(people = on) } }
+    if (settings.people) NoteText(R.string.setting_analyze_people_note)
+    SwitchRow(R.string.setting_analyze_duplicates, settings.duplicates) { on -> viewModel.setAnalysis { it.copy(duplicates = on) } }
     SwitchRow(R.string.setting_analyze_text, settings.text) { on -> viewModel.setAnalysis { it.copy(text = on) } }
     TextButton(onClick = viewModel::analyzeNow, enabled = !settings.paused && settings.anyEnabled) {
         Text(stringResource(R.string.analyze_now))
@@ -142,11 +149,16 @@ private fun AnalysisSection(
 @Composable
 private fun AnalysisProgress(settings: AnalysisSettings, status: AnalysisStatus?) {
     if (status == null) return
-    if (settings.places) {
-        Text(stringResource(R.string.analysis_places_progress, status.places.done, status.places.total), style = MaterialTheme.typography.bodyMedium)
+    ProgressLine(settings.places, R.string.analysis_places_progress, status.places)
+    ProgressLine(settings.semantic, R.string.analysis_semantic_progress, status.semantic)
+    ProgressLine(settings.people, R.string.analysis_people_progress, status.people)
+    ProgressLine(settings.duplicates, R.string.analysis_duplicates_progress, status.duplicates)
+    if (settings.people && IndexStage.FACES in status.unavailable) {
+        Text(stringResource(R.string.analysis_people_unavailable), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.error)
     }
-    if (settings.text) {
-        Text(stringResource(R.string.analysis_text_progress, status.text.done, status.text.total), style = MaterialTheme.typography.bodyMedium)
+    ProgressLine(settings.text, R.string.analysis_text_progress, status.text)
+    if (settings.semantic && IndexStage.EMBED in status.unavailable) {
+        Text(stringResource(R.string.analysis_semantic_unavailable), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.error)
     }
     val summary = when {
         settings.paused || !settings.anyEnabled -> null
@@ -159,8 +171,23 @@ private fun AnalysisProgress(settings: AnalysisSettings, status: AnalysisStatus?
     }
 }
 
+@Composable
+private fun NoteText(@StringRes text: Int) {
+    Text(stringResource(text), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+}
+
+@Composable
+private fun ProgressLine(enabled: Boolean, @StringRes label: Int, progress: StageProgress) {
+    if (!enabled) return
+    Text(stringResource(label, progress.done, progress.total), style = MaterialTheme.typography.bodyMedium)
+}
+
 private fun isUpToDate(settings: AnalysisSettings, status: AnalysisStatus): Boolean =
-    (!settings.places || status.places.isComplete) && (!settings.text || status.text.isComplete)
+    (!settings.places || status.places.isComplete) &&
+        (!settings.semantic || status.semantic.isComplete) &&
+        (!settings.people || status.people.isComplete) &&
+        (!settings.duplicates || status.duplicates.isComplete) &&
+        (!settings.text || status.text.isComplete)
 
 @Composable
 private fun LocationPermissionPrompt(onAllow: () -> Unit) {

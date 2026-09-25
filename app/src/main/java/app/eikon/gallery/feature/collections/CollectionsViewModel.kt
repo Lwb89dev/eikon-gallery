@@ -6,6 +6,10 @@ import app.eikon.gallery.data.AlbumRepository
 import app.eikon.gallery.data.MediaRepository
 import app.eikon.gallery.data.db.AlbumSummary
 import app.eikon.gallery.data.db.FolderSummary
+import app.eikon.gallery.data.db.PersonSummary
+import app.eikon.gallery.data.faces.PeopleRepository
+import app.eikon.gallery.data.places.PlaceCover
+import app.eikon.gallery.data.places.PlacesRepository
 import app.eikon.gallery.data.mediastore.TrashRepository
 import app.eikon.gallery.data.settings.AppSettings
 import app.eikon.gallery.data.settings.SettingsRepository
@@ -22,8 +26,12 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+
+/** Places found in the photos: how many countries (or unnamed group), and a photo to show. */
+data class PlacesTile(val placeCount: Int, val cover: PlaceCover)
 
 /** A ready-made collection with how many items it holds and its newest item as cover. */
 data class PresetTile(val kind: PresetKind, val count: Int, val cover: MediaItem?)
@@ -34,6 +42,8 @@ class CollectionsViewModel @Inject constructor(
     private val albumRepository: AlbumRepository,
     private val trashRepository: TrashRepository,
     settingsRepository: SettingsRepository,
+    peopleRepository: PeopleRepository,
+    placesRepository: PlacesRepository,
 ) : ViewModel() {
     val settings: StateFlow<AppSettings?> = settingsRepository.state
 
@@ -44,6 +54,16 @@ class CollectionsViewModel @Inject constructor(
 
     val albums: StateFlow<List<AlbumSummary>> = albumRepository.albumSummaries
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(STOP_TIMEOUT_MS), emptyList())
+
+    /** People eikon has found, for the People tile. Hidden ones are not counted or shown. */
+    val people: StateFlow<List<PersonSummary>> = peopleRepository.people
+        .map { all -> all.filterNot { it.isHidden } }
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(STOP_TIMEOUT_MS), emptyList())
+
+    /** The newest photo of the places found so far and how many places there are, for the Places tile. */
+    val places: StateFlow<PlacesTile?> = placesRepository.tree
+        .map { tree -> tree.takeIf { it.isNotEmpty() }?.let { PlacesTile(it.size, it.maxBy { node -> node.cover.takenAt }.cover) } }
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(STOP_TIMEOUT_MS), null)
 
     val folders: StateFlow<List<FolderSummary>> = albumRepository.folders
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(STOP_TIMEOUT_MS), emptyList())

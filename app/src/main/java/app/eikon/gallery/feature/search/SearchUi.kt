@@ -40,6 +40,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import app.eikon.gallery.R
+import app.eikon.gallery.data.db.IndexStage
 import app.eikon.gallery.data.indexing.AnalysisStatus
 import app.eikon.gallery.data.indexing.StageProgress
 import app.eikon.gallery.data.settings.AnalysisSettings
@@ -161,6 +162,9 @@ private fun AnalysisNote(analysis: AnalysisStatus?, settings: AnalysisSettings) 
         NoteText(stringResource(R.string.search_analysis_off))
         return
     }
+    if (settings.semantic && analysis != null && IndexStage.EMBED in analysis.unavailable) {
+        NoteText(stringResource(R.string.search_semantic_unavailable))
+    }
     val progress = incompleteProgress(analysis, settings) ?: return
     val percent = if (progress.total == 0) 0 else progress.done * PERCENT / progress.total
     NoteText(stringResource(R.string.search_analysis_note, percent))
@@ -178,7 +182,13 @@ private fun NoteText(text: String) {
 
 private fun incompleteProgress(analysis: AnalysisStatus?, settings: AnalysisSettings): StageProgress? {
     if (analysis == null || settings.paused) return null
-    val enabled = listOfNotNull(analysis.places.takeIf { settings.places }, analysis.text.takeIf { settings.text })
+    val enabled = listOfNotNull(
+        analysis.places.takeIf { settings.places },
+        analysis.semantic.takeIf { settings.semantic },
+        analysis.people.takeIf { settings.people },
+        analysis.duplicates.takeIf { settings.duplicates },
+        analysis.text.takeIf { settings.text },
+    )
     val unfinished = enabled.filter { it.total > 0 && !it.isComplete }
     return unfinished.minByOrNull { it.done.toDouble() / it.total }
 }

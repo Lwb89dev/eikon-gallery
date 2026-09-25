@@ -10,6 +10,9 @@ build/
 .gradle-user-home/
 .android-user-home/
 
+# Machine-learning models: downloaded and checksum-verified by `./gradlew :app:fetchModels`
+/app/models/
+
 # Machine-specific configuration (contains absolute paths)
 local.properties
 

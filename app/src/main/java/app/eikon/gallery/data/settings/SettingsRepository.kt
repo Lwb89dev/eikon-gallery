@@ -31,9 +31,10 @@ import kotlinx.coroutines.flow.stateIn
 enum class ThemeMode { SYSTEM, LIGHT, DARK }
 
 /**
- * What the background analysis may do. Everything it learns (places, text found in photos) stays in
- * eikon's private database on the phone. Both steps are **off by default**: they store where photos were
- * taken and the text in them (receipts, documents...), which the user should choose to have recorded.
+ * What the background analysis may do. Everything it learns (places, text found in photos, what
+ * photos show, faces) stays in eikon's private database on the phone. Every step is **off by default**: they
+ * store where photos were taken, the text in them (receipts, documents...) and a description of their
+ * content, which the user should choose to have recorded.
  */
 data class AnalysisSettings(
     /** Stops all analysis until turned back on. */
@@ -44,8 +45,14 @@ data class AnalysisSettings(
     val places: Boolean = false,
     /** Read text inside photos, to search by it. The heaviest step. */
     val text: Boolean = false,
+    /** Work out what each photo shows, to search by it ("dog", "sunset"). */
+    val semantic: Boolean = false,
+    /** Find the faces in photos and group them into people. Face data never leaves the phone. */
+    val people: Boolean = false,
+    /** Fingerprint photos and files so exact and near-identical copies can be found. No model involved. */
+    val duplicates: Boolean = false,
 ) {
-    val anyEnabled: Boolean get() = places || text
+    val anyEnabled: Boolean get() = places || text || semantic || people || duplicates
 }
 
 /**
@@ -126,6 +133,9 @@ class SettingsRepository @Inject constructor(
             it[ANALYSIS_CHARGING] = next.onlyWhileCharging
             it[ANALYSIS_PLACES] = next.places
             it[ANALYSIS_TEXT] = next.text
+            it[ANALYSIS_SEMANTIC] = next.semantic
+            it[ANALYSIS_PEOPLE] = next.people
+            it[ANALYSIS_DUPLICATES] = next.duplicates
         }
     }
 
@@ -155,6 +165,9 @@ class SettingsRepository @Inject constructor(
             onlyWhileCharging = prefs[ANALYSIS_CHARGING] ?: true,
             places = prefs[ANALYSIS_PLACES] ?: false,
             text = prefs[ANALYSIS_TEXT] ?: false,
+            semantic = prefs[ANALYSIS_SEMANTIC] ?: false,
+            people = prefs[ANALYSIS_PEOPLE] ?: false,
+            duplicates = prefs[ANALYSIS_DUPLICATES] ?: false,
         ),
     )
 
@@ -174,6 +187,9 @@ class SettingsRepository @Inject constructor(
         val ANALYSIS_CHARGING = booleanPreferencesKey("analysis_only_charging")
         val ANALYSIS_PLACES = booleanPreferencesKey("analysis_places")
         val ANALYSIS_TEXT = booleanPreferencesKey("analysis_text")
+        val ANALYSIS_SEMANTIC = booleanPreferencesKey("analysis_semantic")
+        val ANALYSIS_PEOPLE = booleanPreferencesKey("analysis_people")
+        val ANALYSIS_DUPLICATES = booleanPreferencesKey("analysis_duplicates")
         val SORT_FIELD = stringPreferencesKey("sort_field")
         val SORT_DIRECTION = stringPreferencesKey("sort_direction")
     }

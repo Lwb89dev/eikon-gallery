@@ -8,7 +8,7 @@ import androidx.room.Index
 import androidx.room.PrimaryKey
 
 /** The analysis steps a photo goes through. Each is tracked separately, per photo. */
-enum class IndexStage { GEO, OCR }
+enum class IndexStage { GEO, OCR, EMBED, FACES, PHASH, FILEHASH }
 
 /** Outcome of one stage for one photo. A photo with no row for a stage has not been tried yet. */
 object IndexStatus {
@@ -65,4 +65,30 @@ data class MediaSearchEntity(
     @PrimaryKey @ColumnInfo(name = "rowid") val rowId: Long,
     val filename: String,
     val ocr: String,
+)
+
+/**
+ * What a photo looks like to the image model: a 512-value vector, one signed byte per value (see
+ * `Embeddings`). [model] says which model made it, because vectors of different models are not comparable.
+ */
+@Entity(tableName = "media_embedding")
+class MediaEmbeddingEntity(
+    @PrimaryKey val mediaId: Long,
+    val model: String,
+    @ColumnInfo(typeAffinity = ColumnInfo.BLOB) val vector: ByteArray,
+)
+
+/** One stored vector as read back for searching. */
+class EmbeddingRow(val mediaId: Long, val vector: ByteArray)
+
+/**
+ * The photos that matched one semantic query, written just before the list query that reads them is built.
+ * Each query gets its own [queryId], so a list still paging in the results of an older query is not
+ * disturbed by a newer one. Scratch data: a handful of recent queries are kept, never user data.
+ */
+@Entity(tableName = "search_hit", primaryKeys = ["queryId", "mediaId"])
+data class SearchHitEntity(
+    val queryId: Long,
+    val mediaId: Long,
+    val score: Float,
 )

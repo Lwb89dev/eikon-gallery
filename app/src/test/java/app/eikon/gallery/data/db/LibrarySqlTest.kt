@@ -170,6 +170,75 @@ class LibrarySqlTest {
         assertEquals(6, ids(LibraryQuery()).size) // and the table is intact
     }
 
+    // --- what photos show (semantic hits) ----------------------------------------------------------------
+
+    private fun setHits(vararg ids: Long, queryId: Long = 7L) {
+        execute("DELETE FROM search_hit WHERE queryId = $queryId")
+        ids.forEach { execute("INSERT INTO search_hit VALUES ($queryId, $it, 0.3)") }
+    }
+
+    @Test
+    fun aPhotoMatchedByWhatItShowsSatisfiesTheWordsEvenWithoutTheWordInItsText() {
+        setHits(6, 7)
+        val spec = SearchSpec(listOf(SearchTerm("cane")), semanticQuery = 7L)
+        assertEquals(setOf(6L, 7L), search(spec).toSet())
+    }
+
+    @Test
+    fun hitsAreAddedToTextMatchesNotSubstitutedForThem() {
+        setHits(6)
+        val spec = SearchSpec(listOf(SearchTerm("ricevuta")), semanticQuery = 7L)
+        assertEquals(setOf(1L, 6L), search(spec).toSet())
+    }
+
+    @Test
+    fun eachQueryReadsOnlyItsOwnHits() {
+        setHits(6, queryId = 7L)
+        setHits(7, queryId = 8L)
+        assertEquals(listOf(6L), search(SearchSpec(listOf(SearchTerm("cane")), semanticQuery = 7L)))
+        assertEquals(listOf(7L), search(SearchSpec(listOf(SearchTerm("cane")), semanticQuery = 8L)))
+    }
+
+    @Test
+    fun hitsAreIgnoredUnlessTheSearchIsMarkedSemantic() {
+        setHits(6, 7)
+        assertEquals(emptyList<Long>(), search(SearchSpec(listOf(SearchTerm("cane")), semanticQuery = null)))
+    }
+
+    @Test
+    fun hitsStillHonourDatesPlacesFiltersAndHiding() {
+        setHits(1, 2, 3, 4, 5, 8) // 3 and 8 are hidden
+        val words = listOf(SearchTerm("cane"))
+
+        assertEquals(setOf(1L, 2L, 4L, 5L), search(SearchSpec(words, semanticQuery = 7L)).toSet())
+        assertEquals(setOf(2L, 5L), search(SearchSpec(words, filters = LibraryFilters(type = TypeFilter.VIDEOS), semanticQuery = 7L)).toSet())
+        assertEquals(listOf(1L), search(SearchSpec(words + SearchTerm("roma", rome), semanticQuery = 7L)))
+        assertEquals(setOf(4L), search(SearchSpec(words, listOf(DateSpec.MonthDay(1, 10)), semanticQuery = 7L)).toSet())
+    }
+
+    @Test
+    fun aPlaceWordIsNeverMatchedByLookingAtThePhotos() {
+        setHits(6, 7)
+        // Only place terms: nothing to look for in the pictures, so the hits must not widen the result.
+        assertEquals(listOf(1L), search(SearchSpec(listOf(SearchTerm("roma", rome)), semanticQuery = 7L)))
+    }
+
+    @Test
+    fun semanticResultsKeepTheirDateSectionsInStep() {
+        setHits(1, 2, 4, 5, 6, 7)
+        assertSectionsMatchMedia(LibraryQuery(scope = LibraryScope.Search(SearchSpec(listOf(SearchTerm("cane")), semanticQuery = 7L))))
+    }
+
+    @Test
+    fun aSemanticScopeListsTheVisibleHitsOfThatQueryOnly() {
+        setHits(1, 3, 4, 8, queryId = 5L) // 3 and 8 are hidden
+        setHits(6, queryId = 6L)
+
+        assertEquals(setOf(1L, 4L), ids(LibraryQuery(scope = LibraryScope.Semantic(5))).toSet())
+        assertEquals(listOf(6L), ids(LibraryQuery(scope = LibraryScope.Semantic(6))))
+        assertEquals(emptyList<Long>(), ids(LibraryQuery(scope = LibraryScope.Semantic(7))))
+    }
+
     @Test
     fun searchSectionsMatchTheSearchResults() {
         val specs = listOf(

@@ -19,8 +19,8 @@ Known gaps inside Phase 1, in priority order:
 
 1. Run on a device and fix what it reveals.
 2. Grid to viewer transition is a fade/scale, not a shared-element transition (Phase 7).
-3. "Selfies" and "edited" filters: no reliable signal in MediaStore. Selfies may become possible with
-   ML in Phase 4; edited media with eikon's own edits in Phase 6.
+3. "Selfies" and "edited" filters: no reliable signal in MediaStore. Selfies would need eikon to know who the
+   phone's owner is (it never asks). Edits made in eikon are known to eikon (Phase 6) but the filter is not built yet.
 4. No thumbnail scrubber for video; no editing of date/location/caption; "add to album" and "hide"
    in multi-select arrive with Phase 2.
 5. Media3 adds `ACCESS_NETWORK_STATE` to the manifest; remove it after checking playback on a device.
@@ -65,14 +65,56 @@ on the photo itself (text is shown in Info); no URL, phone or email detection in
 English and Italian text; region names are English except a small Italian alias list.
 
 ## Phase 4 — Intelligent indexing
-WorkManager pipeline, embeddings and semantic search, faces and people, pets. See
-[ML.md](ML.md) and [INDEXING.md](INDEXING.md).
+
+- [x] Image embeddings (CLIP ViT-B/32 int8) and multilingual text embeddings (Italian and English); ONNX Runtime pinned to
+      a version without telemetry; models fetched at build time with checksums, memory-mapped from the APK
+- [x] Semantic search: "cane", "tramonto", "una macchina rossa"; combines with dates, places, kinds, names and text; hits
+      kept per query; thresholds chosen on 1,000 labelled photos
+- [x] Face detection (YuNet, multi-scale) and description (SFace); grouping into people that only ever places
+      ungrouped faces
+- [x] People: list, per-person photos, name, rename, favorite, hide, merge, "Not this person" (split), "Not a face", people
+      in the info panel, names usable in Search ("foto di Giulia con il cane")
+- [x] Pets: dogs and cats collections from the image vectors
+- [x] Database version 4 with a tested migration; the build fails if the `INTERNET` permission ever appears
+- [~] **Not run on a device yet**: everything above except what the JVM tests exercise with the real models (they run
+      the models and compare with reference tooling). Speed, battery, memory and heat on a phone are **unmeasured**.
+      `SemanticOnDeviceTest` and `FacesOnDeviceTest` are written to measure them.
+
+Known gaps: videos are not analyzed; no thumbnail-on-screen prioritization; people cannot be told apart from pets or
+between two dogs; no age handling; no "selfies" collection (would need to know who the phone's owner is, which eikon
+never asks); no captions; the release APK is about 310 MB, mostly models (see [ML.md](ML.md)).
 
 ## Phase 5 — Smart collections
-Places, trips, memories, duplicates (exact, perceptual) and similar shots.
+
+- [x] Places: a list by country, region and city; a map with clustered markers drawn offline from bundled country outlines (public domain); tap a marker or a place to see its photos
+- [x] Trips: rules anyone can check (100 km from home for at least two days, or a busy day; 10 photos), each with the reason it counts; grouped by year
+- [x] Memories: On this day, A year ago, trips, weekends away, day trips, seasons, a person in a year; slideshow with the Ken Burns effect and a cross-fade; hide a memory,
+      show fewer like it, show less of a person, leave out a date; all of it undoable
+- [x] Duplicates: identical files (SHA-256, only for files sharing a size) and copies of the same picture (64-bit perceptual hash); suggests which to keep; moves to the trash only after Android's own confirmation, the kept copy joins the albums of the removed ones
+- [x] Similar shots: photos within two minutes whose image vectors are close; the user picks what to remove
+- [x] Database version 5 with a tested migration; the analysis gets two fingerprint steps (off by default)
+- [~] **Not run on a device yet**: every screen of this phase, the map's gestures and drawing, the slideshow's animation and the hash steps on real files. The logic (trip and
+      memory rules, clustering, projection, hashing, grouping, SQL) is covered by JVM tests, some against reference values.
+
+Known gaps: **no music** in memories; no memories about pets or "family moments" (no reliable signal); photo quality is favorites, size and faces only (no blur or exposure analysis);
+"merging" duplicates keeps the best copy and trashes the others, it does not combine metadata; videos are only compared as exact copies; the map has outlines and names of
+larger cities only (no roads, no imagery); trips need Places analysis and its permission; trip and memory titles use GeoNames' English region names.
 
 ## Phase 6 — Editing
-Non-destructive edit recipes, revert, copy/paste edits.
+
+- [x] Non-destructive by construction: an edit is a recipe (text) in the database; the original file is never written; no "replace original" exists; Revert deletes the recipe ([EDITING.md](EDITING.md))
+- [x] Tools: auto enhance, exposure, brightness, contrast, highlights, shadows, black point, saturation, vibrance, temperature, tint, sharpness, vignette, crop (free and fixed shapes), rotate, flip, straighten, perspective (vertical and horizontal)
+- [x] Eight filters with a strength; a thumbnail of each on the photo being edited
+- [x] Edits drawn in the editor, the grid and every thumbnail, the viewer (with an Edited chip to look at the original) and marked with a badge; "Edited" is now a real thing, not a guess
+- [x] Save a copy: full resolution (up to 24 megapixels), new JPEG next to the original with date, camera and (if allowed) location; nothing partial left on failure
+- [x] Copy edits, Paste edits (in the editor and on a multi-selection) and Remove edits; the crop and turns of each photo stay its own; an `EditAdaptation` seam for smarter pasting later
+- [x] Database version 6 with a tested migration
+- [~] **Not run on a device yet**: every screen, the crop overlay's gestures, how each tool looks on real photos, the renderer's speed and memory on a phone, and the saved copy's metadata. The renderer, recipe
+      format, copy/paste rules and database are covered by JVM tests on synthetic pictures; `EditOnDeviceTest` is written but not run.
+
+Known gaps: **Share sends the original file**, not the edit (save a copy to share it); videos cannot be edited; no undo stack inside a session; no local adjustments, curves, per-colour tools, noise
+reduction or retouching; perspective is two sliders, not four corners; no Ultra HDR or wide-gamut output (copies are sRGB JPEG); if another app changes the file afterwards, eikon still draws its recipe over it;
+the "selfies" filter still has no signal. The library's "Edited" filter is not added yet.
 
 ## Phase 7 — Polish
 Shared-element transitions, baseline profiles and large-library tuning, accessibility audit, battery

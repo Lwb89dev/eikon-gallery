@@ -36,6 +36,7 @@ import androidx.compose.ui.semantics.selected
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import app.eikon.gallery.R
+import app.eikon.gallery.core.image.LocalEditRecipeTexts
 import app.eikon.gallery.core.image.MediaThumbnail
 import app.eikon.gallery.core.ui.theme.SectionHeaderStyle
 import app.eikon.gallery.domain.ExifFormat
@@ -117,6 +118,7 @@ private fun BoxScope.CellContent(item: MediaItem, selected: Boolean, selectionMo
     )
     if (item.isVideo) VideoBadge(item.durationMs, Modifier.align(Alignment.BottomEnd))
     if (item.isFavorite) FavoriteBadge(Modifier.align(Alignment.BottomStart))
+    if (!item.isVideo && item.id in LocalEditRecipeTexts.current) EditedBadge(Modifier.align(Alignment.TopEnd))
     if (selectionMode) SelectionIndicator(selected, Modifier.align(Alignment.TopStart))
 }
 
@@ -140,6 +142,18 @@ private fun FavoriteBadge(modifier: Modifier = Modifier) {
         Icon(
             painterResource(R.drawable.ic_favorite),
             contentDescription = stringResource(R.string.cd_favorite_badge),
+            tint = Color.White,
+            modifier = Modifier.size(12.dp),
+        )
+    }
+}
+
+@Composable
+private fun EditedBadge(modifier: Modifier = Modifier) {
+    Box(modifier.padding(4.dp).size(20.dp).background(BadgeBackground, CircleShape), contentAlignment = Alignment.Center) {
+        Icon(
+            painterResource(R.drawable.ic_edit),
+            contentDescription = stringResource(R.string.cd_edited_badge),
             tint = Color.White,
             modifier = Modifier.size(12.dp),
         )

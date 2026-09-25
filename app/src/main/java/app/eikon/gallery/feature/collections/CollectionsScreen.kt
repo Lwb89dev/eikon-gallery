@@ -52,10 +52,14 @@ import app.eikon.gallery.R
 import app.eikon.gallery.core.image.MediaThumbnail
 import app.eikon.gallery.data.db.AlbumSummary
 import app.eikon.gallery.data.db.FolderSummary
+import app.eikon.gallery.data.db.PersonSummary
+import app.eikon.gallery.data.duplicates.DuplicateMode
 import app.eikon.gallery.domain.GridSource
+import app.eikon.gallery.domain.PetKind
 import app.eikon.gallery.feature.library.AlbumNameDialog
 import app.eikon.gallery.feature.library.ConfirmDialog
 import app.eikon.gallery.feature.library.labelRes
+import app.eikon.gallery.feature.people.FaceAvatar
 
 /** Everything the user can open from Collections, as the route argument of the grid it leads to. */
 fun interface OpenCollection {
@@ -67,6 +71,11 @@ fun interface OpenCollection {
 fun CollectionsScreen(
     onOpen: OpenCollection,
     onOpenTrash: () -> Unit,
+    onOpenPeople: () -> Unit,
+    onOpenPlaces: () -> Unit,
+    onOpenTrips: () -> Unit,
+    onOpenDuplicates: (DuplicateMode) -> Unit,
+    onOpenMemories: () -> Unit,
     bottomBar: @Composable () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: CollectionsViewModel = hiltViewModel(),
@@ -75,6 +84,8 @@ fun CollectionsScreen(
     val presets by viewModel.presets.collectAsStateWithLifecycle()
     val albums by viewModel.albums.collectAsStateWithLifecycle()
     val folders by viewModel.folders.collectAsStateWithLifecycle()
+    val people by viewModel.people.collectAsStateWithLifecycle()
+    val places by viewModel.places.collectAsStateWithLifecycle()
     val trashCount by viewModel.trashCount.collectAsStateWithLifecycle()
     var creating by rememberSaveable { mutableStateOf(false) }
     LifecycleEventEffect(Lifecycle.Event.ON_RESUME) { viewModel.refreshTrashCount() }
@@ -104,6 +115,13 @@ fun CollectionsScreen(
         ) {
             albumSection(albums, viewModel, onOpen)
             personalSection(presets, trashCount, settings?.showHidden == true, onOpen, onOpenTrash)
+            if (people.isNotEmpty() || settings?.analysis?.people == true) peopleSection(people, onOpenPeople)
+            if (settings?.analysis?.semantic == true) petsSection(onOpen)
+            if (places != null || settings?.analysis?.places == true) placesSection(places, onOpenPlaces, onOpenTrips)
+            memoriesSection(onOpenMemories)
+            val duplicatesOn = settings?.analysis?.duplicates == true
+            val similarOn = settings?.analysis?.semantic == true
+            if (duplicatesOn || similarOn) cleanupSection(duplicatesOn, similarOn, onOpenDuplicates)
             folderSection(folders, onOpen)
         }
     }
@@ -171,6 +189,65 @@ private fun LazyGridScope.personalSection(
             CollectionTile(title = stringResource(R.string.collection_hidden), count = null, onClick = { onOpen.open(GridSource.Hidden) }) {
                 IconCover(R.drawable.ic_lock)
             }
+        }
+    }
+}
+
+private fun LazyGridScope.peopleSection(people: List<PersonSummary>, onOpenPeople: () -> Unit) {
+    header(R.string.section_people)
+    item(key = "people") {
+        CollectionTile(title = stringResource(R.string.collection_people), count = people.size.takeIf { it > 0 }, onClick = onOpenPeople) {
+            val first = people.firstOrNull()
+            if (first == null) IconCover(R.drawable.ic_person) else FaceAvatar(first, Modifier.fillMaxSize().padding(16.dp))
+        }
+    }
+}
+
+private fun LazyGridScope.placesSection(places: PlacesTile?, onOpenPlaces: () -> Unit, onOpenTrips: () -> Unit) {
+    header(R.string.section_places)
+    item(key = "places") {
+        CollectionTile(title = stringResource(R.string.collection_places), count = null, onClick = onOpenPlaces) {
+            if (places == null) IconCover(R.drawable.ic_place) else MediaThumbnail(places.cover.mediaId, false, places.cover.modifiedAt, Modifier.fillMaxSize())
+        }
+    }
+    item(key = "trips") {
+        CollectionTile(title = stringResource(R.string.collection_trips), count = null, onClick = onOpenTrips) { IconCover(R.drawable.ic_trip) }
+    }
+}
+
+private fun LazyGridScope.memoriesSection(onOpenMemories: () -> Unit) {
+    header(R.string.section_memories)
+    item(key = "memories") {
+        CollectionTile(title = stringResource(R.string.collection_memories), count = null, onClick = onOpenMemories) { IconCover(R.drawable.ic_memories) }
+    }
+}
+
+/** Duplicate photos and similar shots: found by eikon, removed only by the user. */
+private fun LazyGridScope.cleanupSection(duplicates: Boolean, similar: Boolean, onOpen: (DuplicateMode) -> Unit) {
+    header(R.string.section_cleanup)
+    if (duplicates) {
+        item(key = "duplicates") {
+            CollectionTile(title = stringResource(R.string.collection_duplicates), count = null, onClick = { onOpen(DuplicateMode.DUPLICATES) }) {
+                IconCover(R.drawable.ic_duplicates)
+            }
+        }
+    }
+    if (similar) {
+        item(key = "similar") {
+            CollectionTile(title = stringResource(R.string.collection_similar), count = null, onClick = { onOpen(DuplicateMode.SIMILAR) }) {
+                IconCover(R.drawable.ic_duplicates)
+            }
+        }
+    }
+}
+
+/** Dogs and cats, found from what the photos show; no counts because they are worked out when a collection is opened. */
+private fun LazyGridScope.petsSection(onOpen: OpenCollection) {
+    header(R.string.section_pets)
+    items(PetKind.entries, key = { "pets-${it.name}" }) { kind ->
+        val title = if (kind == PetKind.DOG) R.string.collection_dogs else R.string.collection_cats
+        CollectionTile(title = stringResource(title), count = null, onClick = { onOpen.open(GridSource.Pets(kind)) }) {
+            IconCover(R.drawable.ic_pets)
         }
     }
 }

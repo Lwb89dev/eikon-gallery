@@ -59,6 +59,9 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import app.eikon.gallery.R
+import app.eikon.gallery.core.image.LocalEditRecipeTexts
+import app.eikon.gallery.data.db.PersonEntity
+import app.eikon.gallery.feature.people.MergePicker
 import app.eikon.gallery.data.settings.AppSettings
 import app.eikon.gallery.data.sync.SyncStatus
 import app.eikon.gallery.domain.GridSource
@@ -92,6 +95,7 @@ fun LibraryScreen(
     onOpenAppSettings: () -> Unit,
     onOpenSettings: (() -> Unit)?,
     onBack: (() -> Unit)?,
+    onEdit: (mediaId: Long) -> Unit,
     modifier: Modifier = Modifier,
     bottomBar: (@Composable () -> Unit)? = null,
     viewModel: LibraryViewModel = hiltViewModel(),
@@ -104,7 +108,7 @@ fun LibraryScreen(
         Box(modifier.fillMaxSize())
         return
     }
-    val screen = GridScreenConfig(access, onSelectMoreMedia, onOpenAppSettings, onOpenSettings, onBack, bottomBar)
+    val screen = GridScreenConfig(access, onSelectMoreMedia, onOpenAppSettings, onOpenSettings, onBack, onEdit, bottomBar)
     LibraryContent(loadedSettings, loadedLayout, screen, viewModel, modifier)
 }
 
@@ -115,6 +119,7 @@ private class GridScreenConfig(
     val onOpenAppSettings: () -> Unit,
     val onOpenSettings: (() -> Unit)?,
     val onBack: (() -> Unit)?,
+    val onEdit: (mediaId: Long) -> Unit,
     val bottomBar: (@Composable () -> Unit)?,
 )
 
@@ -131,6 +136,7 @@ private fun LibraryContent(
     val selection by viewModel.selection.collectAsStateWithLifecycle()
     val syncStatus by viewModel.syncStatus.collectAsStateWithLifecycle()
     val albumState by viewModel.album.collectAsStateWithLifecycle()
+    val personState by viewModel.person.collectAsStateWithLifecycle()
     val snackbar = remember { SnackbarHostState() }
     val scope = rememberCoroutineScope()
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
@@ -146,14 +152,14 @@ private fun LibraryContent(
         systemRequest.launch(IntentSenderRequest.Builder(sender).build())
     }
     BackHandler(enabled = selection.isNotEmpty() && !viewerOpen, onBack = viewModel::clearSelection)
-    if (albumState == AlbumState.Gone) LaunchedEffect(Unit) { screen.onBack?.invoke() }
+    if (albumState == AlbumState.Gone || personState == PersonState.Gone) LaunchedEffect(Unit) { screen.onBack?.invoke() }
 
     Box(modifier.fillMaxSize()) {
         Scaffold(
             modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
             containerColor = MaterialTheme.colorScheme.background,
             contentWindowInsets = WindowInsets(0, 0, 0, 0),
-            topBar = { GridTopBars(settings, selection, albumState, scrollBehavior, screen, viewModel) },
+            topBar = { GridTopBars(settings, selection, albumState, personState, scrollBehavior, screen, viewModel) },
             bottomBar = { screen.bottomBar?.invoke() },
             snackbarHost = {
                 val insetModifier = if (screen.bottomBar == null) Modifier.navigationBarsPadding() else Modifier
@@ -178,6 +184,7 @@ private fun LibraryContent(
             index = viewerIndex,
             items = items,
             viewModel = viewModel,
+            onEdit = screen.onEdit,
             onPageChanged = { viewerIndex = it },
             onClose = {
                 viewerOpen = false
@@ -194,6 +201,7 @@ private fun GridTopBars(
     settings: AppSettings,
     selection: Map<Long, MediaItem>,
     albumState: AlbumState,
+    personState: PersonState,
     scrollBehavior: TopAppBarScrollBehavior,
     screen: GridScreenConfig,
     viewModel: LibraryViewModel,
@@ -202,7 +210,10 @@ private fun GridTopBars(
     var renaming by rememberSaveable { mutableStateOf(false) }
     var deleting by rememberSaveable { mutableStateOf(false) }
     var pickingAlbum by rememberSaveable { mutableStateOf(false) }
+    var renamingPerson by rememberSaveable { mutableStateOf(false) }
+    var mergingPerson by rememberSaveable { mutableStateOf(false) }
     val album = (albumState as? AlbumState.Present)?.album
+    val person = (personState as? PersonState.Present)?.person
 
     if (selection.isEmpty() && source == GridSource.Search) {
         SearchTopBarHost(settings, viewModel)
@@ -218,10 +229,15 @@ private fun GridTopBars(
             onSortChange = viewModel::setSort,
             onOpenSettings = screen.onOpenSettings,
             albumMenu = if (album != null) AlbumMenuActions({ renaming = true }, { deleting = true }) else null,
+            personName = person?.name,
+            personMenu = person?.let { personMenu(it, viewModel, { renamingPerson = true }, { mergingPerson = true }) },
+            sourceTitle = viewModel.sourceTitle.collectAsStateWithLifecycle().value,
         )
     } else {
         val selected = selection.values.toList()
         val inHidden = source == GridSource.Hidden
+        val canPaste by viewModel.canPasteEdits.collectAsStateWithLifecycle()
+        val edits = LocalEditRecipeTexts.current
         SelectionTopBar(
             count = selected.size,
             allFavorites = selected.all { it.isFavorite },
@@ -234,11 +250,61 @@ private fun GridTopBars(
                 onAddToAlbum = { pickingAlbum = true },
                 onToggleHidden = { if (inHidden) viewModel.unhide(selected) else viewModel.hide(selected) },
                 onRemoveFromAlbum = if (source is GridSource.Album) ({ viewModel.removeFromAlbum(selected) }) else null,
+                onNotThisPerson = if (source is GridSource.Person) ({ viewModel.splitFromPerson(selected) }) else null,
+                onNotAFace = if (source is GridSource.Person) ({ viewModel.ignoreFacesOfPerson(selected) }) else null,
+                onPasteEdits = if (canPaste && selected.any { !it.isVideo }) ({ viewModel.pasteEdits(selected) }) else null,
+                onRevertEdits = if (selected.any { it.id in edits }) ({ viewModel.revertEdits(selected) }) else null,
             ),
         )
         if (pickingAlbum) AlbumPicker(selected, viewModel) { pickingAlbum = false }
     }
     AlbumDialogs(album?.name, renaming, deleting, viewModel, onCloseRename = { renaming = false }, onCloseDelete = { deleting = false })
+    PersonDialogs(person?.name, renamingPerson, mergingPerson, viewModel, onCloseRename = { renamingPerson = false }, onCloseMerge = { mergingPerson = false })
+}
+
+private fun personMenu(person: PersonEntity, viewModel: LibraryViewModel, onRename: () -> Unit, onMerge: () -> Unit) = PersonMenuActions(
+    hasName = person.name != null,
+    isFavorite = person.isFavorite,
+    isHidden = person.isHidden,
+    onRename = onRename,
+    onToggleFavorite = { viewModel.setPersonFavorite(!person.isFavorite) },
+    onToggleHidden = { viewModel.setPersonHidden(!person.isHidden) },
+    onMerge = onMerge,
+)
+
+@Composable
+private fun PersonDialogs(
+    personName: String?,
+    renaming: Boolean,
+    merging: Boolean,
+    viewModel: LibraryViewModel,
+    onCloseRename: () -> Unit,
+    onCloseMerge: () -> Unit,
+) {
+    if (renaming) {
+        AlbumNameDialog(
+            title = R.string.person_rename,
+            confirmLabel = R.string.action_save,
+            initialName = personName.orEmpty(),
+            onConfirm = {
+                onCloseRename()
+                viewModel.renamePerson(it)
+            },
+            onDismiss = onCloseRename,
+            hint = R.string.person_name_hint,
+        )
+    }
+    if (merging) {
+        val choices by viewModel.mergeChoices.collectAsStateWithLifecycle()
+        MergePicker(
+            choices = choices,
+            onPick = {
+                onCloseMerge()
+                viewModel.mergePersonInto(it.id)
+            },
+            onDismiss = onCloseMerge,
+        )
+    }
 }
 
 @Composable
@@ -351,7 +417,8 @@ private fun EmptyBody(settings: AppSettings, syncStatus: SyncStatus, viewModel: 
         SearchEmpty(hasQuery = text.isNotBlank())
         return
     }
-    if (syncStatus is SyncStatus.Running) {
+    val searchingPets by viewModel.searchingPets.collectAsStateWithLifecycle()
+    if (syncStatus is SyncStatus.Running || searchingPets) {
         Box(Modifier.fillMaxSize(), Alignment.Center) { CircularProgressIndicator() }
         return
     }
@@ -367,6 +434,9 @@ private fun EmptyBody(settings: AppSettings, syncStatus: SyncStatus, viewModel: 
 private fun emptyMessage(source: GridSource): Int = when (source) {
     GridSource.Library -> R.string.empty_library
     is GridSource.Album -> R.string.empty_album
+    is GridSource.Person -> R.string.person_photos_empty
+    is GridSource.Pets -> R.string.empty_pets
+    is GridSource.Place, is GridSource.Area, is GridSource.Period, is GridSource.Memory -> R.string.empty_collection
     GridSource.Hidden -> R.string.empty_hidden
     else -> R.string.empty_collection
 }
@@ -377,13 +447,16 @@ private fun LibraryViewer(
     index: Int,
     items: LazyPagingItems<MediaItem>,
     viewModel: LibraryViewModel,
+    onEdit: (mediaId: Long) -> Unit,
     onPageChanged: (Int) -> Unit,
     onClose: () -> Unit,
 ) {
     val viewerItems = remember(items) { PagingViewerItems(items) }
+    val currentEdit by rememberUpdatedState(onEdit)
     val leading = remember(viewModel) {
         listOf(
             ViewerAction({ R.drawable.ic_share }, { R.string.action_share }) { viewModel.share(listOf(it)) },
+            ViewerAction({ R.drawable.ic_edit }, { R.string.action_edit }, visible = { !it.isVideo }) { currentEdit(it.id) },
             ViewerAction(
                 icon = { if (it.isFavorite) R.drawable.ic_favorite else R.drawable.ic_favorite_border },
                 label = { if (it.isFavorite) R.string.action_unfavorite else R.string.action_favorite },
@@ -444,6 +517,10 @@ private fun eventMessage(event: LibraryEvent, resources: Resources): String? = w
     is LibraryEvent.Hidden -> resources.getQuantityString(R.plurals.moved_to_hidden, event.count, event.count)
     is LibraryEvent.Unhidden -> resources.getQuantityString(R.plurals.unhidden, event.count, event.count)
     is LibraryEvent.RemovedFromAlbum -> resources.getQuantityString(R.plurals.removed_from_album, event.count, event.count)
+    is LibraryEvent.MovedToNewPerson -> resources.getQuantityString(R.plurals.moved_to_new_person, event.count, event.count)
+    is LibraryEvent.RemovedFromPeople -> resources.getQuantityString(R.plurals.removed_from_people, event.count, event.count)
+    is LibraryEvent.EditsPasted -> resources.getQuantityString(R.plurals.edits_pasted, event.count, event.count)
+    is LibraryEvent.EditsReverted -> resources.getQuantityString(R.plurals.edits_reverted, event.count, event.count)
     LibraryEvent.ActionFailed -> resources.getString(R.string.action_failed)
     is LibraryEvent.LaunchSystemRequest, is LibraryEvent.Share -> null
 }

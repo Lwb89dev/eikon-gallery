@@ -4,9 +4,14 @@ import app.eikon.gallery.data.db.IndexStage
 import app.eikon.gallery.data.db.MediaEntity
 import app.eikon.gallery.data.settings.AnalysisSettings
 import javax.inject.Inject
+import javax.inject.Singleton
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.ensureActive
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 
 /** The queue of photos still to analyse and the way results are recorded. */
 interface WorkQueue {
@@ -25,6 +30,17 @@ interface RunnerEnvironment {
     fun thermalStatus(): Int
     fun nowMillis(): Long
     suspend fun pause(millis: Long)
+}
+
+/** Which analysis steps could not run in the latest run because their model would not load. */
+@Singleton
+class StageHealth @Inject constructor() {
+    private val stages = MutableStateFlow<Set<IndexStage>>(emptySet())
+    val unavailable: StateFlow<Set<IndexStage>> = stages.asStateFlow()
+
+    fun markUnavailable(stage: IndexStage) = stages.update { it + stage }
+
+    fun markWorking(stage: IndexStage) = stages.update { it - stage }
 }
 
 enum class StopReason {
@@ -52,6 +68,7 @@ class IndexingRunner @Inject constructor(
     private val processors: Map<IndexStage, @JvmSuppressWildcards StageProcessor>,
     private val queue: WorkQueue,
     private val environment: RunnerEnvironment,
+    private val health: StageHealth = StageHealth(),
 ) {
     suspend fun run(budgetMs: Long): RunReport {
         val deadline = environment.nowMillis() + budgetMs
@@ -70,27 +87,40 @@ class IndexingRunner @Inject constructor(
 
     private class StageRun(val processed: Int, val stoppedBy: StopReason?)
 
-    /** Places first (fast), then the slow text reading. A step is skipped when it is off or cannot work. */
+    /** Places first (fast), then the fingerprints for duplicates (fast), then what photos show, then the faces, then the slow text reading. A step is skipped when it is off or cannot work. */
     private fun enabledStages(): List<IndexStage> {
         val settings = environment.analysisSettings()
         if (settings.paused) return emptyList()
         return buildList {
             if (settings.places && environment.canReadLocation()) add(IndexStage.GEO)
+            if (settings.duplicates) addAll(listOf(IndexStage.PHASH, IndexStage.FILEHASH))
+            if (settings.semantic) add(IndexStage.EMBED)
+            if (settings.people) add(IndexStage.FACES)
             if (settings.text) add(IndexStage.OCR)
         }.filter { it in processors }
     }
 
     private suspend fun runStage(stage: IndexStage, deadline: Long): StageRun {
         val processor = processors.getValue(stage)
-        var processed = 0
+        val processed = intArrayOf(0)
+        return try {
+            runBatches(stage, processor, deadline, processed).also { health.markWorking(stage) }
+        } catch (_: StageUnavailableException) {
+            // Not the photos' fault: leave them untried, skip this step for now and let the others run.
+            health.markUnavailable(stage)
+            StageRun(processed[0], null)
+        }
+    }
+
+    private suspend fun runBatches(stage: IndexStage, processor: StageProcessor, deadline: Long, processed: IntArray): StageRun {
         while (true) {
             val batch = queue.pending(stage, BATCH_SIZE)
-            if (batch.isEmpty()) return StageRun(processed, null)
+            if (batch.isEmpty()) return StageRun(processed[0], null)
             for (item in batch) {
                 val reason = stopReason(stage, deadline)
-                if (reason != null) return StageRun(processed, reason)
+                if (reason != null) return StageRun(processed[0], reason)
                 processOne(processor, stage, item)
-                processed++
+                processed[0]++
                 coolDownIfWarm()
             }
         }
@@ -110,6 +140,9 @@ class IndexingRunner @Inject constructor(
     private fun isEnabled(stage: IndexStage, settings: AnalysisSettings) = when (stage) {
         IndexStage.GEO -> settings.places
         IndexStage.OCR -> settings.text
+        IndexStage.EMBED -> settings.semantic
+        IndexStage.FACES -> settings.people
+        IndexStage.PHASH, IndexStage.FILEHASH -> settings.duplicates
     }
 
     private suspend fun processOne(processor: StageProcessor, stage: IndexStage, item: MediaEntity) {
@@ -120,6 +153,8 @@ class IndexingRunner @Inject constructor(
             }
         } catch (cancelled: CancellationException) {
             throw cancelled
+        } catch (unavailable: StageUnavailableException) {
+            throw unavailable
         } catch (_: Exception) {
             queue.markFailed(item.id, stage)
         }

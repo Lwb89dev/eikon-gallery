@@ -1,6 +1,7 @@
 package app.eikon.gallery.data.indexing
 
 import app.eikon.gallery.data.Clock
+import app.eikon.gallery.data.db.DuplicatesDao
 import app.eikon.gallery.data.db.IndexDao
 import app.eikon.gallery.data.db.IndexStage
 import app.eikon.gallery.data.db.IndexStateEntity
@@ -21,6 +22,7 @@ data class StageProgress(val done: Int, val total: Int) {
 @Singleton
 class IndexingRepository @Inject constructor(
     private val dao: IndexDao,
+    private val duplicates: DuplicatesDao,
     private val clock: Clock,
 ) : WorkQueue {
     fun progress(stage: IndexStage): Flow<StageProgress> =
@@ -29,7 +31,11 @@ class IndexingRepository @Inject constructor(
         }
 
     /** Next photos to analyse for [stage]: newest first, never tried or failed fewer than [MAX_ATTEMPTS] times. */
-    override suspend fun pending(stage: IndexStage, limit: Int): List<MediaEntity> = dao.pending(stage.name, MAX_ATTEMPTS, limit)
+    override suspend fun pending(stage: IndexStage, limit: Int): List<MediaEntity> = when (stage) {
+        IndexStage.PHASH -> duplicates.pendingPerceptual(MAX_ATTEMPTS, limit)
+        IndexStage.FILEHASH -> duplicates.pendingContent(MAX_ATTEMPTS, limit)
+        else -> dao.pending(stage.name, MAX_ATTEMPTS, limit)
+    }
 
     override suspend fun markDone(mediaId: Long, stage: IndexStage) = record(mediaId, stage, IndexStatus.DONE, attempts = 0)
 

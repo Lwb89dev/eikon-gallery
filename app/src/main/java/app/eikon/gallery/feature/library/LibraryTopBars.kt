@@ -29,6 +29,7 @@ import app.eikon.gallery.R
 import app.eikon.gallery.domain.CategoryFilter
 import app.eikon.gallery.domain.GridSource
 import app.eikon.gallery.domain.LibraryFilters
+import app.eikon.gallery.domain.PetKind
 import app.eikon.gallery.domain.PresetKind
 import app.eikon.gallery.domain.SortDirection
 import app.eikon.gallery.domain.SortField
@@ -60,11 +61,30 @@ fun PresetKind.labelRes(): Int = when (this) {
     PresetKind.RAW -> R.string.collection_raw
 }
 
+/** The title of a screen whose name has to be looked up (a place from the place data). */
+sealed interface SourceTitle {
+    data class Text(val text: String) : SourceTitle
+    data class NearCity(val name: String) : SourceTitle
+    data object OtherPlaces : SourceTitle
+    data class OfMemory(val id: app.eikon.gallery.domain.memories.MemoryId, val personName: String?) : SourceTitle
+}
+
 /** What the sort menu currently shows as selected. */
 data class SortChoice(val field: SortField, val direction: SortDirection)
 
 /** Album-only actions in the overflow menu of an album screen. */
 class AlbumMenuActions(val onRename: () -> Unit, val onDelete: () -> Unit)
+
+/** Person-only actions in the overflow menu of a person screen. */
+class PersonMenuActions(
+    val hasName: Boolean,
+    val isFavorite: Boolean,
+    val isHidden: Boolean,
+    val onRename: () -> Unit,
+    val onToggleFavorite: () -> Unit,
+    val onToggleHidden: () -> Unit,
+    val onMerge: () -> Unit,
+)
 
 /**
  * Title bar of a grid screen. In the main Library, active filters are summarised in the title and the
@@ -84,11 +104,14 @@ fun GridTopBar(
     onSortChange: (SortField, SortDirection) -> Unit,
     onOpenSettings: (() -> Unit)?,
     albumMenu: AlbumMenuActions?,
+    personName: String? = null,
+    personMenu: PersonMenuActions? = null,
+    sourceTitle: SourceTitle? = null,
 ) {
     val isLibrary = source == GridSource.Library
     val filtered = isLibrary && filters.isActive
     TopAppBar(
-        title = { Text(gridTitle(source, albumName, filters)) },
+        title = { Text(gridTitle(source, albumName, personName, sourceTitle, filters)) },
         navigationIcon = {
             val onNavigate = if (filtered) ({ onFiltersChange(LibraryFilters.NONE) }) else onBack
             if (onNavigate != null) {
@@ -103,6 +126,7 @@ fun GridTopBar(
             SortMenu(sort, onSortChange)
             if (onOpenSettings != null) OverflowMenu { close -> SettingsItem { close(); onOpenSettings() } }
             if (albumMenu != null) AlbumOverflow(albumMenu)
+            if (personMenu != null) PersonOverflow(personMenu)
         },
         scrollBehavior = scrollBehavior,
         colors = TopAppBarDefaults.topAppBarColors(
@@ -113,13 +137,31 @@ fun GridTopBar(
 }
 
 @Composable
-private fun gridTitle(source: GridSource, albumName: String?, filters: LibraryFilters): String = when (source) {
+private fun gridTitle(source: GridSource, albumName: String?, personName: String?, sourceTitle: SourceTitle?, filters: LibraryFilters): String = when (source) {
     GridSource.Library -> if (filters.isActive) filterSummary(filters) else stringResource(R.string.library_title)
     is GridSource.Preset -> stringResource(source.kind.labelRes())
     is GridSource.Album -> albumName.orEmpty()
+    is GridSource.Person -> personName ?: stringResource(R.string.person_unnamed)
+    is GridSource.Pets -> stringResource(if (source.kind == PetKind.DOG) R.string.collection_dogs else R.string.collection_cats)
+    is GridSource.Place, is GridSource.Area -> when (sourceTitle) {
+        is SourceTitle.Text -> sourceTitle.text
+        is SourceTitle.NearCity -> stringResource(R.string.place_near, sourceTitle.name)
+        SourceTitle.OtherPlaces, null, is SourceTitle.OfMemory -> stringResource(R.string.place_unknown)
+    }
+    is GridSource.Period -> source.label ?: periodTitle(source)
+    is GridSource.Memory -> (sourceTitle as? SourceTitle.OfMemory)?.let { app.eikon.gallery.feature.memories.memoryTitle(it.id, it.personName) }.orEmpty()
     is GridSource.Folder -> source.relativePath.trimEnd('/').substringAfterLast('/')
     GridSource.Hidden -> stringResource(R.string.collection_hidden)
     GridSource.Search -> stringResource(R.string.nav_search)
+}
+
+@Composable
+private fun periodTitle(period: GridSource.Period): String {
+    val context = androidx.compose.ui.platform.LocalContext.current
+    return android.text.format.DateUtils.formatDateRange(
+        context, period.startMillis, period.endMillis - 1,
+        android.text.format.DateUtils.FORMAT_SHOW_DATE or android.text.format.DateUtils.FORMAT_SHOW_YEAR,
+    )
 }
 
 @Composable
@@ -140,6 +182,14 @@ class SelectionActions(
     val onToggleHidden: () -> Unit,
     /** Only inside an album. */
     val onRemoveFromAlbum: (() -> Unit)?,
+    /** Only inside a person: the selected photos are not this person. */
+    val onNotThisPerson: (() -> Unit)? = null,
+    /** Only inside a person: the faces in the selected photos are not faces. */
+    val onNotAFace: (() -> Unit)? = null,
+    /** Only when edits were copied and a photo is selected: give the selected photos that look. */
+    val onPasteEdits: (() -> Unit)? = null,
+    /** Only when a selected photo has an edit. */
+    val onRevertEdits: (() -> Unit)? = null,
 )
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -180,6 +230,10 @@ private fun SelectionOverflow(inHidden: Boolean, actions: SelectionActions) {
     OverflowMenu { close ->
         MenuItem(R.string.action_add_to_album) { close(); actions.onAddToAlbum() }
         actions.onRemoveFromAlbum?.let { remove -> MenuItem(R.string.action_remove_from_album) { close(); remove() } }
+        actions.onNotThisPerson?.let { split -> MenuItem(R.string.person_not_this) { close(); split() } }
+        actions.onNotAFace?.let { ignore -> MenuItem(R.string.person_remove_from_people) { close(); ignore() } }
+        actions.onPasteEdits?.let { paste -> MenuItem(R.string.action_paste_edits) { close(); paste() } }
+        actions.onRevertEdits?.let { revert -> MenuItem(R.string.action_revert_edits) { close(); revert() } }
         val hideLabel = if (inHidden) R.string.action_unhide else R.string.action_hide
         MenuItem(hideLabel) { close(); actions.onToggleHidden() }
     }
@@ -258,6 +312,16 @@ private fun AlbumOverflow(menu: AlbumMenuActions) {
     OverflowMenu { close ->
         MenuItem(R.string.album_rename) { close(); menu.onRename() }
         MenuItem(R.string.album_delete) { close(); menu.onDelete() }
+    }
+}
+
+@Composable
+private fun PersonOverflow(menu: PersonMenuActions) {
+    OverflowMenu { close ->
+        MenuItem(if (menu.hasName) R.string.person_rename else R.string.person_add_name) { close(); menu.onRename() }
+        MenuItem(if (menu.isFavorite) R.string.person_unfavorite else R.string.person_favorite) { close(); menu.onToggleFavorite() }
+        MenuItem(if (menu.isHidden) R.string.person_unhide else R.string.person_hide) { close(); menu.onToggleHidden() }
+        MenuItem(R.string.person_merge) { close(); menu.onMerge() }
     }
 }
 

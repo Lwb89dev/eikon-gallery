@@ -10,6 +10,7 @@ import app.eikon.gallery.domain.SortField
 import app.eikon.gallery.domain.TimelineGrouping
 import app.eikon.gallery.domain.TypeFilter
 import app.eikon.gallery.domain.search.DateSpec
+import app.eikon.gallery.domain.search.PersonMatch
 import app.eikon.gallery.domain.search.PlaceMatch
 import app.eikon.gallery.domain.search.SearchSpec
 import app.eikon.gallery.domain.search.SearchTerm
@@ -101,15 +102,61 @@ object LibraryQueryBuilder {
                 listOf("m.addedAt >= ?", NOT_HIDDEN)
             }
             is LibraryScope.Search -> searchConditions(scope.spec)
+            is LibraryScope.Place -> listOf(placeScopeCondition(scope), NOT_HIDDEN)
+            is LibraryScope.Area -> {
+                args.addAll(listOf(scope.minLatitude, scope.maxLatitude, scope.minLongitude, scope.maxLongitude))
+                listOf(
+                    "EXISTS (SELECT 1 FROM media_geo g WHERE g.mediaId = m.id AND g.latitude BETWEEN ? AND ? AND g.longitude BETWEEN ? AND ?)",
+                    NOT_HIDDEN,
+                )
+            }
+            is LibraryScope.Periods -> {
+                val ranges = scope.ranges.joinToString(" OR ", "(", ")") {
+                    args.add(it.startMillis)
+                    args.add(it.endMillis)
+                    "(m.takenAt >= ? AND m.takenAt < ?)"
+                }
+                val person = scope.personId?.let {
+                    args.add(it)
+                    "m.id IN (SELECT mediaId FROM face WHERE personId = ? AND ignored = 0)"
+                }
+                listOfNotNull(ranges, person, NOT_HIDDEN)
+            }
+            is LibraryScope.Between -> {
+                args.addAll(listOf(scope.startMillis, scope.endMillis))
+                listOf("(m.takenAt >= ? AND m.takenAt < ?)", NOT_HIDDEN)
+            }
+            is LibraryScope.Semantic -> {
+                args += scope.queryId
+                listOf("m.id IN (SELECT mediaId FROM search_hit WHERE queryId = ?)", NOT_HIDDEN)
+            }
+            is LibraryScope.Person -> {
+                args += scope.id
+                listOf("m.id IN (SELECT mediaId FROM face WHERE personId = ? AND ignored = 0)", NOT_HIDDEN)
+            }
             is LibraryScope.Album, LibraryScope.Everything -> listOf(NOT_HIDDEN)
         }
 
         /** Every term must match (AND); the parsed type/kind filters apply too; hidden items never do. */
         private fun searchConditions(spec: SearchSpec): List<String> = buildList {
             add(NOT_HIDDEN)
-            spec.terms.forEach { add(termCondition(it)) }
+            val (named, words) = spec.terms.partition { it.place != null || it.person != null }
+            named.forEach { add(termCondition(it)) }
+            wordsCondition(words, spec.semanticQuery)?.let { add(it) }
             dateCondition(spec.dates)?.let { add(it) }
             addAll(filterConditions(spec.filters))
+        }
+
+        /**
+         * The plain words must all match the text of the photo; when the search also looked at what photos
+         * show, a photo the image model matched to the words satisfies them too.
+         */
+        private fun wordsCondition(words: List<SearchTerm>, semanticQuery: Long?): String? {
+            if (words.isEmpty()) return null
+            val text = words.joinToString(" AND ", "(", ")") { termCondition(it) }
+            if (semanticQuery == null) return text
+            args += semanticQuery
+            return "($text OR m.id IN (SELECT mediaId FROM search_hit WHERE queryId = ?))"
         }
 
         /**
@@ -125,6 +172,7 @@ object LibraryQueryBuilder {
                 args += fts
             }
             term.place?.let { alternatives += placeCondition(it) }
+            term.person?.let { alternatives += personCondition(it) }
             return if (alternatives.isEmpty()) "0" else alternatives.joinToString(" OR ", "(", ")")
         }
 
@@ -134,6 +182,23 @@ object LibraryQueryBuilder {
             if (place.regionKeys.isNotEmpty()) tests += inList("g.regionKey", place.regionKeys.toList())
             if (place.countryCodes.isNotEmpty()) tests += inList("g.countryCode", place.countryCodes.toList())
             return "EXISTS (SELECT 1 FROM media_geo g WHERE g.mediaId = m.id AND (${tests.joinToString(" OR ")}))"
+        }
+
+        private fun placeScopeCondition(place: LibraryScope.Place): String = when {
+            place.city != null -> placeExists("g.cityId = ?", place.city)
+            place.region != null -> placeExists("g.regionKey = ?", place.region)
+            place.country != null -> placeExists("g.countryCode = ?", place.country)
+            else -> "EXISTS (SELECT 1 FROM media_geo g WHERE g.mediaId = m.id AND g.cityId IS NULL)"
+        }
+
+        private fun placeExists(test: String, value: Any): String {
+            args += value
+            return "EXISTS (SELECT 1 FROM media_geo g WHERE g.mediaId = m.id AND $test)"
+        }
+
+        private fun personCondition(person: PersonMatch): String {
+            val ids = person.personIds.take(MAX_PLACE_IDS)
+            return "EXISTS (SELECT 1 FROM face fc WHERE fc.mediaId = m.id AND fc.ignored = 0 AND ${inList("fc.personId", ids)})"
         }
 
         private fun inList(column: String, values: List<Any>): String {

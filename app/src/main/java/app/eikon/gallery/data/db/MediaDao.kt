@@ -16,6 +16,9 @@ interface MediaDao {
     @Upsert
     suspend fun upsertAll(items: List<MediaEntity>)
 
+    @Query("SELECT * FROM media WHERE id = :id")
+    suspend fun byId(id: Long): MediaEntity?
+
     @Query("SELECT id FROM media ORDER BY id")
     suspend fun allIds(): List<Long>
 
@@ -49,16 +52,16 @@ interface MediaDao {
     )
     fun observeFolders(): Flow<List<FolderSummary>>
 
-    @RawQuery(observedEntities = [MediaEntity::class, AlbumItemEntity::class, HiddenMediaEntity::class, MediaGeoEntity::class, MediaSearchEntity::class])
+    @RawQuery(observedEntities = [MediaEntity::class, AlbumItemEntity::class, HiddenMediaEntity::class, MediaGeoEntity::class, MediaSearchEntity::class, FaceEntity::class])
     fun observeCount(query: SupportSQLiteQuery): Flow<Int>
 
-    @RawQuery(observedEntities = [MediaEntity::class, AlbumItemEntity::class, HiddenMediaEntity::class, MediaGeoEntity::class, MediaSearchEntity::class])
+    @RawQuery(observedEntities = [MediaEntity::class, AlbumItemEntity::class, HiddenMediaEntity::class, MediaGeoEntity::class, MediaSearchEntity::class, FaceEntity::class])
     fun observeCover(query: SupportSQLiteQuery): Flow<MediaEntity?>
 
     /** SQL comes from LibraryQueryBuilder, which only ever interpolates whitelisted constants. */
-    @RawQuery(observedEntities = [MediaEntity::class, AlbumItemEntity::class, HiddenMediaEntity::class, MediaGeoEntity::class, MediaSearchEntity::class])
+    @RawQuery(observedEntities = [MediaEntity::class, AlbumItemEntity::class, HiddenMediaEntity::class, MediaGeoEntity::class, MediaSearchEntity::class, FaceEntity::class])
     fun pagingSource(query: SupportSQLiteQuery): PagingSource<Int, MediaEntity>
 
-    @RawQuery(observedEntities = [MediaEntity::class, AlbumItemEntity::class, HiddenMediaEntity::class, MediaGeoEntity::class, MediaSearchEntity::class])
+    @RawQuery(observedEntities = [MediaEntity::class, AlbumItemEntity::class, HiddenMediaEntity::class, MediaGeoEntity::class, MediaSearchEntity::class, FaceEntity::class])
     fun observeSectionCounts(query: SupportSQLiteQuery): Flow<List<SectionCountRow>>
 }

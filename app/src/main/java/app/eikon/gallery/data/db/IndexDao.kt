@@ -63,6 +63,27 @@ interface IndexDao {
     @Query("SELECT ocr FROM media_search WHERE rowid = :id")
     suspend fun ocr(id: Long): String?
 
+    // --- image embeddings and semantic search hits ---------------------------------------------
+
+    @Upsert
+    suspend fun upsertEmbedding(embedding: MediaEmbeddingEntity)
+
+    @Query("SELECT COUNT(*) FROM media_embedding WHERE model = :model")
+    suspend fun embeddingCount(model: String): Int
+
+    /** A page of stored vectors after [after], in id order, so the whole set can be read in bounded chunks. */
+    @Query("SELECT mediaId, vector FROM media_embedding WHERE model = :model AND mediaId > :after ORDER BY mediaId LIMIT :limit")
+    suspend fun embeddingRows(model: String, after: Long, limit: Int): List<EmbeddingRow>
+
+    @Query("DELETE FROM search_hit WHERE queryId < :oldest")
+    suspend fun clearHitsBefore(oldest: Long)
+
+    @Query("DELETE FROM search_hit")
+    suspend fun clearHits()
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertHits(hits: List<SearchHitEntity>)
+
     // --- cleanup when media disappears ---------------------------------------------------------
 
     @Query("DELETE FROM index_state WHERE mediaId IN (:ids)")
@@ -74,6 +95,9 @@ interface IndexDao {
     @Query("DELETE FROM media_search WHERE rowid IN (:ids)")
     suspend fun deleteSearch(ids: List<Long>)
 
+    @Query("DELETE FROM media_embedding WHERE mediaId IN (:ids)")
+    suspend fun deleteEmbeddings(ids: List<Long>)
+
     @Query("DELETE FROM index_state")
     suspend fun clearStates()
 
@@ -82,4 +106,7 @@ interface IndexDao {
 
     @Query("DELETE FROM media_search")
     suspend fun clearSearch()
+
+    @Query("DELETE FROM media_embedding")
+    suspend fun clearEmbeddings()
 }

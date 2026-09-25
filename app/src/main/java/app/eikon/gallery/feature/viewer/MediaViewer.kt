@@ -5,6 +5,7 @@ import androidx.compose.animation.core.animate
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectVerticalDragGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -16,6 +17,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.pager.HorizontalPager
@@ -36,6 +39,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.pointer.pointerInput
@@ -49,9 +53,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.material3.MaterialTheme
 import androidx.activity.compose.BackHandler
 import app.eikon.gallery.R
+import app.eikon.gallery.core.image.LocalEditRecipeTexts
 import app.eikon.gallery.core.ui.ImmersiveMode
 import app.eikon.gallery.core.ui.SystemBarIcons
 import app.eikon.gallery.domain.MediaItem
+import app.eikon.gallery.domain.edit.EditRecipeCodec
 import kotlin.math.abs
 import kotlinx.coroutines.launch
 
@@ -87,9 +93,16 @@ fun MediaViewer(
     var zoomed by remember { mutableStateOf(false) }
     val pull = rememberPullState()
     val currentItem = items.peek(pagerState.currentPage)
+    val edits = LocalEditRecipeTexts.current
+    // The photo being looked at without its edit; going to another photo puts the edits back.
+    var originalShownFor by rememberSaveable { mutableStateOf<Long?>(null) }
+    val editOf = { item: MediaItem -> if (item.isVideo || item.id == originalShownFor) null else edits[item.id] }
 
     LaunchedEffect(pagerState) { snapshotFlow { pagerState.currentPage }.collect(onPageChanged) }
-    LaunchedEffect(pagerState.currentPage) { zoomed = false }
+    LaunchedEffect(pagerState.currentPage) {
+        zoomed = false
+        originalShownFor = null
+    }
     BackHandler(onBack = onClose)
     ImmersiveMode(hidden = !chromeVisible)
     SystemBarIcons(lightIcons = true)
@@ -105,6 +118,7 @@ fun MediaViewer(
             items = items,
             pull = pull,
             chromeVisible = chromeVisible,
+            editOf = editOf,
             onToggleChrome = { chromeVisible = !chromeVisible },
             onZoomedChange = { zoomed = it },
         )
@@ -117,6 +131,9 @@ fun MediaViewer(
             leadingActions = leadingActions,
             trailingActions = trailingActions,
             onInfo = { infoOpen = true },
+            editedChip = currentItem?.takeIf { !it.isVideo && it.id in edits }?.let { item ->
+                { EditedChip(showingOriginal = item.id == originalShownFor) { originalShownFor = if (item.id == originalShownFor) null else item.id } }
+            },
         )
     }
     if (infoOpen && currentItem != null) infoSheet(currentItem) { infoOpen = false }
@@ -128,6 +145,7 @@ private fun ViewerPager(
     items: ViewerItems,
     pull: PullState,
     chromeVisible: Boolean,
+    editOf: (MediaItem) -> String?,
     onToggleChrome: () -> Unit,
     onZoomedChange: (Boolean) -> Unit,
 ) {
@@ -155,6 +173,7 @@ private fun ViewerPager(
                 isCurrent = page == pagerState.currentPage,
                 chromeVisible = chromeVisible,
                 controlsPadding = controlsPadding,
+                editText = editOf(item),
                 onTap = onToggleChrome,
                 onZoomedChange = onZoomedChange,
             )
@@ -170,15 +189,17 @@ private fun ViewerPage(
     isCurrent: Boolean,
     chromeVisible: Boolean,
     controlsPadding: Dp,
+    editText: String?,
     onTap: () -> Unit,
     onZoomedChange: (Boolean) -> Unit,
 ) {
+    val recipe = remember(editText) { editText?.let(EditRecipeCodec::decode)?.takeUnless { it.isIdentity } }
     val label = "${item.displayName}, ${stringResource(R.string.viewer_position, position, count)}"
     Box(Modifier.fillMaxSize().semantics { contentDescription = label }) {
         if (item.isVideo) {
             VideoPage(item, isCurrent, chromeVisible, controlsPadding, onTap)
         } else {
-            ImagePage(item, isCurrent, onTap, onZoomedChange)
+            ImagePage(item, isCurrent, onTap, onZoomedChange, recipe = recipe)
         }
     }
 }
@@ -195,10 +216,11 @@ private fun ViewerChrome(
     leadingActions: List<ViewerAction>,
     trailingActions: List<ViewerAction>,
     onInfo: () -> Unit,
+    editedChip: (@Composable () -> Unit)?,
 ) {
     Box(Modifier.fillMaxSize()) {
         AnimatedVisibility(visible, Modifier.align(Alignment.TopStart), enter = fadeIn(), exit = fadeOut()) {
-            ViewerTopBar(position, count, onClose)
+            ViewerTopBar(position, count, onClose, editedChip)
         }
         AnimatedVisibility(visible && item != null, Modifier.align(Alignment.BottomStart), enter = fadeIn(), exit = fadeOut()) {
             if (item != null) ViewerActionBar(item, leadingActions, trailingActions, onInfo)
@@ -209,7 +231,7 @@ private fun ViewerChrome(
 private val ChromeBackground = Color.Black.copy(alpha = 0.45f)
 
 @Composable
-private fun ViewerTopBar(position: Int, count: Int, onClose: () -> Unit) {
+private fun ViewerTopBar(position: Int, count: Int, onClose: () -> Unit, editedChip: (@Composable () -> Unit)?) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -225,8 +247,28 @@ private fun ViewerTopBar(position: Int, count: Int, onClose: () -> Unit) {
             text = stringResource(R.string.viewer_position, position, count),
             color = Color.White,
             style = MaterialTheme.typography.titleMedium,
-            modifier = Modifier.padding(start = 4.dp),
+            modifier = Modifier.padding(start = 4.dp).weight(1f),
         )
+        editedChip?.invoke()
+    }
+}
+
+/** Says the photo is shown edited and, when tapped, shows it as it was taken (and back). Nothing is changed by tapping it. */
+@Composable
+private fun EditedChip(showingOriginal: Boolean, onToggle: () -> Unit) {
+    val label = stringResource(if (showingOriginal) R.string.edit_original else R.string.edited_badge)
+    val action = stringResource(if (showingOriginal) R.string.viewer_show_edited else R.string.viewer_show_original)
+    Row(
+        modifier = Modifier
+            .padding(end = 12.dp)
+            .clip(RoundedCornerShape(50))
+            .background(Color.White.copy(alpha = 0.18f))
+            .clickable(onClickLabel = action, onClick = onToggle)
+            .padding(horizontal = 12.dp, vertical = 6.dp),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        Icon(painterResource(R.drawable.ic_edit), contentDescription = null, tint = Color.White, modifier = Modifier.size(16.dp))
+        Text(label, color = Color.White, style = MaterialTheme.typography.labelLarge, modifier = Modifier.padding(start = 6.dp))
     }
 }
 
@@ -246,9 +288,9 @@ private fun ViewerActionBar(
         horizontalArrangement = Arrangement.SpaceEvenly,
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        leadingActions.forEach { ActionButton(it.icon(item), it.label(item)) { it.onClick(item) } }
+        leadingActions.filter { it.visible(item) }.forEach { ActionButton(it.icon(item), it.label(item)) { it.onClick(item) } }
         ActionButton(R.drawable.ic_info, R.string.action_info, onInfo)
-        trailingActions.forEach { ActionButton(it.icon(item), it.label(item)) { it.onClick(item) } }
+        trailingActions.filter { it.visible(item) }.forEach { ActionButton(it.icon(item), it.label(item)) { it.onClick(item) } }
     }
 }
 

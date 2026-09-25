@@ -4,10 +4,17 @@ import android.content.Context
 import androidx.room.Room
 import app.eikon.gallery.data.db.AlbumDao
 import app.eikon.gallery.data.db.DatabaseMigrations
+import app.eikon.gallery.data.db.DuplicatesDao
+import app.eikon.gallery.data.db.EditDao
 import app.eikon.gallery.data.db.EikonDatabase
 import app.eikon.gallery.data.db.HiddenDao
 import app.eikon.gallery.data.db.IndexDao
 import app.eikon.gallery.data.db.MediaDao
+import app.eikon.gallery.data.db.MemoryDao
+import app.eikon.gallery.data.db.PeopleDao
+import app.eikon.gallery.data.db.PlacesDao
+import app.eikon.gallery.data.db.RoomTransactor
+import app.eikon.gallery.data.db.Transactor
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -26,6 +33,9 @@ object DatabaseModule {
             .build()
 
     @Provides
+    fun transactor(impl: RoomTransactor): Transactor = impl
+
+    @Provides
     fun mediaDao(database: EikonDatabase): MediaDao = database.mediaDao()
 
     @Provides
@@ -36,4 +46,19 @@ object DatabaseModule {
 
     @Provides
     fun indexDao(database: EikonDatabase): IndexDao = database.indexDao()
+
+    @Provides
+    fun peopleDao(database: EikonDatabase): PeopleDao = database.peopleDao()
+
+    @Provides
+    fun placesDao(database: EikonDatabase): PlacesDao = database.placesDao()
+
+    @Provides
+    fun duplicatesDao(database: EikonDatabase): DuplicatesDao = database.duplicatesDao()
+
+    @Provides
+    fun memoryDao(database: EikonDatabase): MemoryDao = database.memoryDao()
+
+    @Provides
+    fun editDao(database: EikonDatabase): EditDao = database.editDao()
 }

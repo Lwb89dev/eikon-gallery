@@ -65,6 +65,7 @@
     <!-- Accessibilità -->
     <string name="cd_photo">Foto, %1$s</string>
     <string name="cd_video">Video, %1$s, %2$s</string>
+    <string name="cd_edited_badge">Modificata</string>
     <string name="cd_favorite_badge">Preferito</string>
     <string name="viewer_position">%1$d di %2$d</string>
 
@@ -132,6 +133,7 @@
     <string name="nav_search">Cerca</string>
     <string name="nav_collections">Collezioni</string>
     <string name="collections_title">Collezioni</string>
+    <string name="section_people">Persone</string>
     <string name="section_albums">Album</string>
     <string name="section_personal">Personali</string>
     <string name="section_folders">Cartelle del dispositivo</string>
@@ -241,12 +243,18 @@
     <string name="search_no_results">Nessuna foto corrisponde</string>
     <string name="search_hint_title">Cerca nella tua libreria</string>
     <string name="search_hint_body">Prova con una data (\"agosto 2025\", \"ieri\"), un luogo (\"Roma\", \"Toscana\"), una parola che compare in una foto o nel suo nome file, o un genere (\"video\", \"screenshot\", \"preferiti\").\n\nLa ricerca non riconosce ancora cosa mostra un\'immagine, solo ciò che vi è scritto.</string>
-    <string name="search_analysis_off">La ricerca per luogo e per testo nelle foto è disattivata. Puoi attivarla in Impostazioni, Analisi.</string>
+    <string name="search_analysis_off">La ricerca per luogo, per testo nelle foto e per ciò che mostrano è disattivata. Puoi attivarla in Impostazioni, Analisi.</string>
     <string name="search_analysis_note">Analisi delle foto ancora in corso in background (%1$d%%). Alcuni risultati potrebbero mancare.</string>
 
     <!-- Impostazioni: analisi -->
     <string name="settings_analysis">Analisi</string>
     <string name="analysis_places_progress">Luoghi: %1$,d di %2$,d</string>
+    <string name="analysis_semantic_progress">Cosa mostrano le foto: %1$,d di %2$,d</string>
+    <string name="analysis_semantic_unavailable">Il modello che riconosce cosa mostrano le foto non è stato caricato, quindi questo passaggio non è in esecuzione.</string>
+    <string name="search_semantic_unavailable">La ricerca per ciò che mostrano le foto non è disponibile al momento (il modello non è stato caricato). Gli altri risultati funzionano.</string>
+    <string name="analysis_people_progress">Persone: %1$,d di %2$,d</string>
+    <string name="analysis_people_unavailable">I modelli che trovano i volti non sono stati caricati, quindi questo passaggio non è in esecuzione.</string>
+    <string name="analysis_duplicates_progress">Duplicati: %1$,d di %2$,d</string>
     <string name="analysis_text_progress">Testo nelle foto: %1$,d di %2$,d</string>
     <string name="analysis_running">Analisi in corso…</string>
     <string name="analysis_idle">In attesa del momento giusto (in carica, batteria non scarica)</string>
@@ -254,14 +262,235 @@
     <string name="setting_pause_analysis">Metti in pausa l\'analisi</string>
     <string name="setting_only_charging">Solo in carica</string>
     <string name="setting_analyze_places">Trova le foto per luogo</string>
+    <string name="setting_analyze_semantic">Trova le foto per ciò che mostrano</string>
+    <string name="setting_analyze_people">Trova le persone nelle foto</string>
+    <string name="setting_analyze_people_note">I volti vengono trovati e confrontati solo su questo telefono. Nulla di un volto ne esce mai, ed eikon non cerca mai di riconoscere qualcuno: raggruppa solo i volti che si assomigliano, e i gruppi li nomini tu.</string>
+    <string name="setting_analyze_duplicates">Trova le foto duplicate</string>
     <string name="setting_analyze_text">Trova il testo nelle foto</string>
     <string name="analysis_location_permission">Android nasconde alle app dove sono state scattate le foto finché non lo consenti.</string>
     <string name="analysis_allow_locations">Consenti l\'accesso alla posizione delle foto</string>
     <string name="analyze_now">Analizza ora</string>
-    <string name="settings_analysis_body">L\'analisi avviene solo sul tuo telefono, in background, e si ferma quando la batteria è scarica o il telefono si scalda. Salva il luogo di ogni foto (calcolato offline, nessuna posizione viene inviata da nessuna parte) e l\'eventuale testo letto nella foto, così la ricerca può trovarli. La lettura del testo è lenta e usa molto il processore, per questo per impostazione predefinita attende la ricarica.</string>
+    <string name="settings_analysis_body">L\'analisi avviene solo sul tuo telefono, in background, e si ferma quando la batteria è scarica o il telefono si scalda. Salva il luogo di ogni foto (calcolato offline, nessuna posizione viene inviata da nessuna parte), una descrizione numerica di ciò che la foto mostra (così puoi cercare «cane» o «tramonto»; non è una didascalia e non si può ricostruire l\'immagine) e l\'eventuale testo letto nella foto, così la ricerca può trovarli. Se attivi le persone, salva anche dove si trova ogni volto in una foto e una sua descrizione numerica, solo per raggruppare i volti che si assomigliano. Se attivi i duplicati, salva una breve impronta di ogni foto e dei file che hanno la stessa dimensione, solo per trovare le copie. Riconoscere cosa mostrano le foto e leggere il testo sono operazioni lente che usano molto il processore, per questo per impostazione predefinita l\'analisi attende la ricarica.</string>
 
     <!-- Pannello info: dati derivati -->
     <string name="info_place">Luogo più vicino</string>
     <string name="info_text_found">Testo in questa foto</string>
     <string name="info_text_copy">Copia il testo</string>
+
+    <!-- Persone -->
+    <string name="collection_people">Persone</string>
+    <string name="people_title">Persone</string>
+    <string name="person_unnamed">Persona senza nome</string>
+    <string name="person_add_name">Aggiungi un nome</string>
+    <string name="person_rename">Dai un nome a questa persona</string>
+    <string name="person_name_hint">Nome</string>
+    <string name="person_favorite">Segna come preferita</string>
+    <string name="person_unfavorite">Rimuovi dai preferiti</string>
+    <string name="person_hide">Nascondi questa persona</string>
+    <string name="person_unhide">Mostra questa persona</string>
+    <string name="person_merge">Unisci con un\'altra persona…</string>
+    <string name="person_merge_title">Unisci con</string>
+    <string name="person_merge_empty">Non c\'è nessun\'altra persona con cui unire.</string>
+    <string name="person_not_this">Non è questa persona</string>
+    <string name="person_remove_from_people">Non è un volto</string>
+    <string name="people_show_hidden">Mostra le persone nascoste (%1$d)</string>
+    <string name="people_hide_hidden">Nascondi le persone nascoste</string>
+    <string name="people_empty_off">Persone è disattivato. Attiva «Trova le persone nelle foto» in Impostazioni, Analisi, ed eikon raggrupperà i volti che trova. Tutto resta su questo telefono.</string>
+    <string name="people_empty_working">Nessun volto trovato per ora (%1$d%% delle foto analizzate). L\'analisi procede in background durante la ricarica.</string>
+    <string name="people_empty_done">Nessun volto trovato nelle tue foto.</string>
+    <string name="people_go_settings">Apri le impostazioni</string>
+    <string name="person_photos_empty">Nessuna foto.</string>
+    <plurals name="moved_to_new_person">
+        <item quantity="one">%d foto spostata in una nuova persona</item>
+        <item quantity="many">%d foto spostate in una nuova persona</item>
+        <item quantity="other">%d foto spostate in una nuova persona</item>
+    </plurals>
+    <plurals name="removed_from_people">
+        <item quantity="one">%d foto tolta da Persone</item>
+        <item quantity="many">%d foto tolte da Persone</item>
+        <item quantity="other">%d foto tolte da Persone</item>
+    </plurals>
+    <string name="info_people">Persone</string>
+    <plurals name="info_people_unnamed_count">
+        <item quantity="one">%d senza nome</item>
+        <item quantity="many">%d senza nome</item>
+        <item quantity="other">%d senza nome</item>
+    </plurals>
+
+    <string name="section_memories">Ricordi</string>
+    <string name="section_pets">Animali</string>
+    <string name="collection_dogs">Cani</string>
+    <string name="collection_cats">Gatti</string>
+    <string name="empty_pets">Nessun cane o gatto trovato per ora. Gli animali si riconoscono da ciò che le foto mostrano: attiva «Trova le foto per ciò che mostrano» in Impostazioni, Analisi, e attendi che finisca.</string>
+
+    <!-- Places -->
+    <string name="places_title">Luoghi</string>
+    <string name="places_tab_list">Elenco</string>
+    <string name="places_tab_map">Mappa</string>
+    <string name="place_unknown">Altri luoghi</string>
+    <string name="place_near">Vicino a %1$s</string>
+    <string name="places_expand">Mostra</string>
+    <string name="places_collapse">Nascondi</string>
+    <string name="collection_places">Luoghi</string>
+    <string name="places_map_note">Solo i contorni dei paesi e i nomi delle città più grandi: nessuna immagine di mappa viene scaricata e nessuna posizione lascia mai il telefono. Pizzica o tocca due volte per ingrandire, tocca un segnaposto per vedere le sue foto.</string>
+    <string name="places_map_description">Mappa di dove sono state scattate le foto, con segnaposto per gruppi di foto</string>
+    <string name="places_empty_off">Luoghi è disattivato. Attiva «Trova le foto per luogo» in Impostazioni, Analisi, ed eikon ricaverà dove sono state scattate le foto dai dati GPS, offline.</string>
+    <string name="places_empty_working">Nessun luogo trovato per ora (%1$d%% delle foto analizzate). L\'analisi procede in background durante la ricarica.</string>
+    <string name="places_empty_done">Nessuna delle tue foto ha una posizione, oppure eikon non può leggere la posizione delle foto (Impostazioni, Analisi).</string>
+    <string name="section_places">Luoghi e viaggi</string>
+
+    <!-- Viaggi -->
+    <string name="collection_trips">Viaggi</string>
+    <string name="trips_title">Viaggi</string>
+    <string name="trip_untitled">Viaggio</string>
+    <string name="trip_reason">A circa %1$d km da dove scatti la maggior parte delle foto (vicino a %2$s)</string>
+    <string name="trip_home_unknown">un luogo sconosciuto</string>
+    <plurals name="trip_summary_days">
+        <item quantity="one">%d giorno</item>
+        <item quantity="many">%d giorni</item>
+        <item quantity="other">%d giorni</item>
+    </plurals>
+    <string name="trips_empty">Nessun viaggio trovato. Un viaggio è un periodo di giorni, con almeno 10 foto, passato ad almeno 100 km da dove scatti la maggior parte delle foto. Serve la posizione delle foto: attiva «Trova le foto per luogo» in Impostazioni, Analisi.</string>
+
+    <!-- Duplicati e scatti simili -->
+    <string name="section_cleanup">Pulizia</string>
+    <string name="collection_duplicates">Duplicati</string>
+    <string name="collection_similar">Scatti simili</string>
+    <string name="duplicates_title">Duplicati</string>
+    <string name="similar_title">Scatti simili</string>
+    <string name="duplicates_note">eikon si limita a trovarli. Nulla viene rimosso finché non confermi nella finestra di Android, e le foto rimosse vanno in Eliminati di recente, da dove puoi ripristinarle. Se avevi aggiunto una copia agli album, la copia che tieni entra in quegli album.</string>
+    <plurals name="duplicate_exact">
+        <item quantity="one">%d file identico</item>
+        <item quantity="many">%d file identici</item>
+        <item quantity="other">%d file identici</item>
+    </plurals>
+    <plurals name="duplicate_visual">
+        <item quantity="one">%d copia della stessa immagine</item>
+        <item quantity="many">%d copie della stessa immagine</item>
+        <item quantity="other">%d copie della stessa immagine</item>
+    </plurals>
+    <plurals name="similar_group">
+        <item quantity="one">%d scatto</item>
+        <item quantity="many">%d scatti simili</item>
+        <item quantity="other">%d scatti simili</item>
+    </plurals>
+    <plurals name="duplicate_keep_best">
+        <item quantity="one">Tieni la migliore, sposta %d in Eliminati di recente</item>
+        <item quantity="many">Tieni la migliore, sposta %d in Eliminati di recente</item>
+        <item quantity="other">Tieni la migliore, sposta %d in Eliminati di recente</item>
+    </plurals>
+    <plurals name="similar_trash_marked">
+        <item quantity="one">Sposta %d in Eliminati di recente</item>
+        <item quantity="many">Sposta %d in Eliminati di recente</item>
+        <item quantity="other">Sposta %d in Eliminati di recente</item>
+    </plurals>
+    <string name="duplicate_best">Migliore</string>
+    <string name="duplicate_kept">Resta</string>
+    <string name="duplicate_marked">Da spostare</string>
+    <string name="duplicate_dismiss">Non sono duplicati</string>
+    <string name="similar_dismiss">Non sono simili</string>
+    <string name="duplicates_empty_off">Duplicati è disattivato. Attiva «Trova le foto duplicate» in Impostazioni, Analisi. eikon calcola un\'impronta delle foto solo su questo telefono, senza alcun modello.</string>
+    <string name="similar_empty_off">Scatti simili richiede «Trova le foto per ciò che mostrano» in Impostazioni, Analisi: confronta ciò che mostra ogni foto, per le foto scattate a meno di due minuti di distanza.</string>
+    <string name="duplicates_empty_working">Nessuno trovato per ora (%1$d%% analizzato). L\'analisi procede in background durante la ricarica.</string>
+    <string name="duplicates_empty_done">Nessun duplicato trovato.</string>
+    <string name="similar_empty_done">Nessuno scatto simile trovato.</string>
+
+    <!-- Ricordi -->
+    <string name="collection_memories">Ricordi</string>
+    <string name="memories_title">Ricordi</string>
+    <string name="memory_on_this_day">In questo giorno</string>
+    <string name="memory_year_ago">Un anno fa</string>
+    <string name="memory_weekend_in">Weekend a %1$s</string>
+    <string name="memory_weekend">Weekend fuori</string>
+    <string name="memory_day_trip_to">Gita a %1$s</string>
+    <string name="memory_day_trip">Gita</string>
+    <string name="memory_season">%1$s %2$d</string>
+    <string name="memory_person">%1$s, %2$d</string>
+    <string name="season_winter">Inverno</string>
+    <string name="season_spring">Primavera</string>
+    <string name="season_summer">Estate</string>
+    <string name="season_autumn">Autunno</string>
+    <string name="memory_hide">Nascondi questo ricordo</string>
+    <string name="memory_show_fewer">Mostra meno ricordi così</string>
+    <string name="memory_show_less_of">Mostra meno foto di %1$s</string>
+    <string name="memory_exclude_date">Escludi questa data</string>
+    <string name="memory_all_photos">Tutte le foto</string>
+    <string name="memory_replay">Rivedi</string>
+    <string name="memory_reset">Annulla le mie scelte</string>
+    <string name="memory_done">Fatto. Puoi annullare le scelte dal menu di Ricordi.</string>
+    <string name="memories_empty">Ancora nessun ricordo. eikon li crea da date, viaggi, stagioni e persone a cui hai dato un nome: «In questo giorno», «Un anno fa», viaggi e weekend fuori, una stagione, qualcuno in un anno. Per viaggi e weekend serve Luoghi, per le persone serve Persone (Impostazioni, Analisi). Nulla lascia il telefono.</string>
+    <string name="memories_note">Creati da date, luoghi e persone con nome, con regole semplici; non c\'è musica, e le foto sono scelte in base ai preferiti, alla dimensione e ai volti, non a quanto sono belle.</string>
+    <string name="memory_no_photos">Questo ricordo non ha più foto da mostrare.</string>
+
+    <!-- Modifica -->
+    <string name="action_edit">Modifica</string>
+    <string name="edit_title">Modifica</string>
+    <string name="edit_done">Fine</string>
+    <string name="edit_original">Originale</string>
+    <string name="edit_revert">Ripristina</string>
+    <string name="edit_revert_title">Tornare all\'originale?</string>
+    <string name="edit_revert_message">Cancella da questa modifica ogni regolazione, il filtro e il ritaglio. La foto originale non è mai stata cambiata. Premi Fine per tenere la foto ripristinata.</string>
+    <string name="edit_discard_title">Scartare le modifiche?</string>
+    <string name="edit_discard_message">Le modifiche fatte in questo editor andranno perse. La foto resta com\'era.</string>
+    <string name="edit_discard">Scarta</string>
+    <string name="edit_copy_edits">Copia le modifiche</string>
+    <string name="edit_paste_edits">Incolla le modifiche</string>
+    <string name="edit_save_copy">Salva una copia</string>
+    <string name="edit_copy_saved">Una copia è stata salvata accanto all\'originale, che non è stato cambiato.</string>
+    <string name="edit_copy_saved_no_details">Una copia è stata salvata accanto all\'originale, che non è stato cambiato. Non è stato possibile copiare i dati della fotocamera.</string>
+    <string name="edit_failed">Non è stato possibile completare la modifica. La foto non è stata cambiata.</string>
+    <string name="edited_badge">Modificata</string>
+    <string name="viewer_show_original">Mostra l\'originale</string>
+    <string name="viewer_show_edited">Mostra la foto modificata</string>
+    <string name="tool_auto">Auto</string>
+    <string name="tool_light">Luce</string>
+    <string name="tool_color">Colore</string>
+    <string name="tool_detail">Dettaglio</string>
+    <string name="tool_filters">Filtri</string>
+    <string name="tool_crop">Ritaglia</string>
+    <string name="adj_exposure">Esposizione</string>
+    <string name="adj_brightness">Luminosità</string>
+    <string name="adj_contrast">Contrasto</string>
+    <string name="adj_highlights">Alte luci</string>
+    <string name="adj_shadows">Ombre</string>
+    <string name="adj_black_point">Punto del nero</string>
+    <string name="adj_saturation">Saturazione</string>
+    <string name="adj_vibrance">Vividezza</string>
+    <string name="adj_temperature">Calore</string>
+    <string name="adj_tint">Tinta</string>
+    <string name="adj_sharpness">Nitidezza</string>
+    <string name="adj_vignette">Vignettatura</string>
+    <string name="geo_straighten">Raddrizza</string>
+    <string name="geo_perspective_vertical">Prospettiva verticale</string>
+    <string name="geo_perspective_horizontal">Prospettiva orizzontale</string>
+    <string name="filter_amount">Intensità</string>
+    <string name="filter_name_none">Originale</string>
+    <string name="filter_name_vivid">Vivido</string>
+    <string name="filter_name_warm">Caldo</string>
+    <string name="filter_name_cool">Freddo</string>
+    <string name="filter_name_mono">Mono</string>
+    <string name="filter_name_noir">Noir</string>
+    <string name="filter_name_fade">Sbiadito</string>
+    <string name="filter_name_chrome">Chrome</string>
+    <string name="filter_name_sepia">Seppia</string>
+    <string name="crop_rotate">Ruota</string>
+    <string name="crop_flip">Rifletti</string>
+    <string name="shape_free">Libero</string>
+    <string name="shape_original">Originale</string>
+    <string name="shape_square">1:1</string>
+    <string name="shape_4_3">4:3</string>
+    <string name="shape_3_2">3:2</string>
+    <string name="shape_16_9">16:9</string>
+    <string name="action_paste_edits">Incolla le modifiche</string>
+    <string name="action_revert_edits">Rimuovi le modifiche</string>
+    <plurals name="edits_pasted">
+        <item quantity="one">Modifiche applicate a %d foto</item>
+        <item quantity="many">Modifiche applicate a %d foto</item>
+        <item quantity="other">Modifiche applicate a %d foto</item>
+    </plurals>
+    <plurals name="edits_reverted">
+        <item quantity="one">Modifica rimossa da %d foto; l\'originale è com\'è sempre stato</item>
+        <item quantity="many">Modifiche rimosse da %d foto; gli originali sono come sono sempre stati</item>
+        <item quantity="other">Modifiche rimosse da %d foto; gli originali sono come sono sempre stati</item>
+    </plurals>
 </resources>

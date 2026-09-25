@@ -45,6 +45,17 @@ class Gazetteer private constructor(
 
     fun city(id: Long): City? = cities.firstOrNull { it.id == id }
 
+    /**
+     * Cities with at least [minPopulation] inhabitants inside the box, biggest first, at most [limit] of them: the
+     * names drawn on the map for orientation.
+     */
+    fun citiesIn(minLatitude: Double, maxLatitude: Double, minLongitude: Double, maxLongitude: Double, minPopulation: Long, limit: Int): List<City> =
+        cities.asSequence()
+            .filter { it.population >= minPopulation && it.latitude in minLatitude..maxLatitude && it.longitude in minLongitude..maxLongitude }
+            .sortedByDescending { it.population }
+            .take(limit)
+            .toList()
+
     /** The nearest city within [maxKm] of the point, or null in the middle of nowhere. */
     fun nearest(latitude: Double, longitude: Double, maxKm: Double = DEFAULT_MAX_KM): City? {
         for (radius in 1..MAX_CELL_RADIUS) {

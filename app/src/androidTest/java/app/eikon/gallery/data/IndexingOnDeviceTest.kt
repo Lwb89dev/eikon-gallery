@@ -35,8 +35,8 @@ class IndexingOnDeviceTest {
     @Before
     fun setUp() {
         db = inMemoryDatabase()
-        repository = IndexingRepository(db.indexDao()) { now++ }
-        index = RoomMediaIndex(db, db.mediaDao(), db.indexDao())
+        repository = IndexingRepository(db.indexDao(), db.duplicatesDao()) { now++ }
+        index = RoomMediaIndex(db, db.mediaDao(), db.indexDao(), db.peopleDao(), db.duplicatesDao())
     }
 
     @After

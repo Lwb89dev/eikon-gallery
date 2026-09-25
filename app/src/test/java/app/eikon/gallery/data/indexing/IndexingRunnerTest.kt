@@ -16,8 +16,18 @@ class IndexingRunnerTest {
     private val environment = FakeEnvironment()
     private val geo = FakeProcessor()
     private val ocr = FakeProcessor()
+    private val embed = FakeProcessor()
+    private val faces = FakeProcessor()
+    private val phash = FakeProcessor()
+    private val filehash = FakeProcessor()
+    private val health = StageHealth()
 
-    private fun runner() = IndexingRunner(mapOf(IndexStage.GEO to geo, IndexStage.OCR to ocr), queue, environment)
+    private fun runner() = IndexingRunner(
+        mapOf(IndexStage.GEO to geo, IndexStage.OCR to ocr, IndexStage.EMBED to embed, IndexStage.FACES to faces, IndexStage.PHASH to phash, IndexStage.FILEHASH to filehash),
+        queue,
+        environment,
+        health,
+    )
 
     @Test
     fun everyPendingPhotoIsProcessedAndRecorded() = runTest {
@@ -50,6 +60,77 @@ class IndexingRunnerTest {
         assertTrue(geo.seen.isEmpty())
         assertEquals(6, ocr.seen.size)
         assertNull(queue.status(1, IndexStage.GEO)) // untouched, not wrongly marked as having no location
+    }
+
+    @Test
+    fun whatPhotosShowRunsBetweenPlacesAndText() = runTest {
+        environment.settings = ON.copy(semantic = true)
+        val order = mutableListOf<IndexStage>()
+        geo.onProcess = { order += IndexStage.GEO }
+        embed.onProcess = { order += IndexStage.EMBED }
+        ocr.onProcess = { order += IndexStage.OCR }
+
+        runner().run(60_000)
+
+        assertEquals(List(6) { IndexStage.GEO } + List(6) { IndexStage.EMBED } + List(6) { IndexStage.OCR }, order)
+        assertEquals(6, (1L..6L).count { queue.status(it, IndexStage.EMBED) == IndexingRepositoryStatus.DONE })
+    }
+
+    @Test
+    fun peopleRunAfterWhatPhotosShowAndBeforeText() = runTest {
+        environment.settings = ON.copy(semantic = true, people = true)
+        val order = mutableListOf<IndexStage>()
+        embed.onProcess = { order += IndexStage.EMBED }
+        faces.onProcess = { order += IndexStage.FACES }
+        ocr.onProcess = { order += IndexStage.OCR }
+
+        runner().run(60_000)
+
+        assertEquals(List(6) { IndexStage.EMBED } + List(6) { IndexStage.FACES } + List(6) { IndexStage.OCR }, order)
+    }
+
+    @Test
+    fun fingerprintsForDuplicatesRunAfterPlacesAndBeforeTheHeavierSteps() = runTest {
+        environment.settings = ON.copy(semantic = true, duplicates = true)
+        val order = mutableListOf<IndexStage>()
+        geo.onProcess = { order += IndexStage.GEO }
+        phash.onProcess = { order += IndexStage.PHASH }
+        filehash.onProcess = { order += IndexStage.FILEHASH }
+        embed.onProcess = { order += IndexStage.EMBED }
+
+        runner().run(60_000)
+
+        assertEquals(List(6) { IndexStage.GEO } + List(6) { IndexStage.PHASH } + List(6) { IndexStage.FILEHASH } + List(6) { IndexStage.EMBED }, order)
+    }
+
+    @Test
+    fun findingPeopleAndDuplicatesIsOffUnlessTheUserTurnedItOn() = runTest {
+        runner().run(60_000)
+        assertTrue(faces.seen.isEmpty() && phash.seen.isEmpty() && filehash.seen.isEmpty())
+    }
+
+    @Test
+    fun whatPhotosShowIsOffUnlessTheUserTurnedItOn() = runTest {
+        runner().run(60_000)
+        assertTrue(embed.seen.isEmpty())
+    }
+
+    @Test
+    fun aModelThatCannotLoadStopsItsStepWithoutBlamingAnyPhotoAndOtherStepsStillRun() = runTest {
+        environment.settings = ON.copy(semantic = true)
+        embed.unavailable = true
+
+        val report = runner().run(60_000)
+
+        assertNull(report.stoppedBy)
+        assertEquals(setOf(IndexStage.EMBED), health.unavailable.value)
+        assertTrue((1L..6L).all { queue.status(it, IndexStage.EMBED) == null }) // nothing failed, nothing skipped
+        assertEquals(6, ocr.seen.size)
+
+        embed.unavailable = false // the next run, with the model loadable again, picks the photos up
+        runner().run(60_000)
+        assertTrue(health.unavailable.value.isEmpty())
+        assertEquals(6, (1L..6L).count { queue.status(it, IndexStage.EMBED) == IndexingRepositoryStatus.DONE })
     }
 
     @Test
@@ -217,8 +298,10 @@ class IndexingRunnerTest {
         var cancelAt: Long? = null
         var onProcess: (Long) -> Unit = {}
         var released = false
+        var unavailable = false
 
         override suspend fun process(item: MediaEntity): StageOutcome {
+            if (unavailable) throw StageUnavailableException("model missing")
             seen += item.id
             onProcess(item.id)
             if (item.id == cancelAt) throw CancellationException("stop")

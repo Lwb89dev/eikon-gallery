@@ -23,6 +23,7 @@ class SearchQueryParser(
     private val zone: ZoneId,
     private val today: () -> LocalDate,
     private val places: PlaceMatcher = PlaceMatcher.None,
+    private val people: PersonMatcher = PersonMatcher.None,
 ) {
     fun parse(input: String): SearchSpec {
         val state = ParseState()
@@ -178,20 +179,27 @@ class SearchQueryParser(
         return 1
     }
 
-    /** Anything else: a place (the longest run of words the gazetteer knows) or a plain search word. */
+    /**
+     * Anything else: a person the user named or a place (the longest run of words either knows), or a plain search
+     * word. A person is tried first, because the user chose that name.
+     */
     private fun consumeWord(t: List<String>, i: Int, state: ParseState): Int {
         for (length in MAX_PLACE_WORDS downTo 1) {
             if (i + length > t.size) continue
             val words = t.subList(i, i + length)
             if (words.all { it in SearchLexicon.stopWords }) continue
             val name = words.joinToString(" ")
-            val place = places.match(name)?.takeUnless { it.isEmpty } ?: continue
-            state.terms += SearchTerm(name, place)
+            val term = personTerm(name) ?: placeTerm(name) ?: continue
+            state.terms += term
             return length
         }
         addPlainTerm(t[i], state)
         return 1
     }
+
+    private fun personTerm(name: String): SearchTerm? = people.match(name)?.takeUnless { it.isEmpty }?.let { SearchTerm(name, person = it) }
+
+    private fun placeTerm(name: String): SearchTerm? = places.match(name)?.takeUnless { it.isEmpty }?.let { SearchTerm(name, place = it) }
 
     private fun addPlainTerm(word: String, state: ParseState) {
         if (word in SearchLexicon.stopWords) return

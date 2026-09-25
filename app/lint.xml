@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<lint>
+    <!-- ONNX Runtime is deliberately held at 1.28.x: 1.29 and later add telemetry code and the INTERNET
+         permission to the Android artifact (see docs/ML.md). The build also fails if INTERNET ever appears. -->
+    <issue id="NewerVersionAvailable">
+        <ignore regexp="onnxruntime"/>
+    </issue>
+    <!-- The release build is arm64 only on purpose (real phones); the x86_64 build exists for the emulator, in debug. -->
+    <issue id="ChromeOsAbiSupport" severity="ignore"/>
+</lint>

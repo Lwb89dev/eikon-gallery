@@ -35,6 +35,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.core.net.toUri
@@ -97,6 +98,7 @@ private fun DetailsList(details: MediaDetails, indexed: IndexedInfo, onAllowLoca
     DateSection(details)
     LocationRow(details.location, onAllowLocation)
     InfoRow(R.string.info_place, indexed.place)
+    InfoRow(R.string.info_people, peopleLabel(indexed))
     details.camera?.let { CameraSection(it) }
     details.video?.let { VideoSection(it) }
     indexed.text?.let { TextFoundSection(it) }
@@ -256,4 +258,16 @@ private fun InfoRow(label: Int, value: String?) {
         )
         Text(text = value, style = MaterialTheme.typography.bodyMedium, modifier = Modifier.weight(1f))
     }
+}
+
+/** "Marco, Giulia, 1 unnamed", or null when no face was found in the photo. */
+@Composable
+private fun peopleLabel(indexed: IndexedInfo): String? {
+    val unnamed = if (indexed.unnamedFaces > 0) {
+        listOf(pluralStringResource(R.plurals.info_people_unnamed_count, indexed.unnamedFaces, indexed.unnamedFaces))
+    } else {
+        emptyList()
+    }
+    val parts = indexed.people + unnamed
+    return parts.takeIf { it.isNotEmpty() }?.joinToString(", ")
 }

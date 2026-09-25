@@ -7,9 +7,10 @@ This document says what eikon does with your data today, and where its guarantee
 | Data | Where | Content |
 | --- | --- | --- |
 | Library index | app-private database `eikon.db` | file name, MIME type, dates, dimensions, duration, size, folder, favorite flag, category flags. **No pixels and no thumbnails.** |
-| What analysis learned | same database | for each photo: where it was taken (coordinates and the nearest city, resolved offline) and the words found in it by text recognition, plus which analysis steps are done. **Off by default**: only created if you turn those steps on in Settings; wiped when you revoke photo access |
+| What analysis learned | same database | for each photo, only for the steps you turned on: where it was taken (coordinates and the nearest city, resolved offline); the words found in it; a 512-number description of what it shows; where each face is and a 128-number description of it, with the group ("person") the face was put in and the name you gave that group. **Everything here is off by default**: only created if you turn those steps on in Settings; wiped when you revoke photo access |
 | Albums and hidden list | same database | album names and which media ids belong to them; ids of hidden media. Kept when the library index is cleared |
-| Settings | app-private DataStore | theme, grid density, filter, sort |
+| Edits | same database | for each edited photo, a few lines of text: the values of the sliders, the filter and the crop (see [EDITING.md](EDITING.md)). No pixels; the photo's file is never changed. Kept when the library index is cleared, because it cannot be rebuilt |
+| Settings | app-private DataStore | theme, grid density, filter, sort, and the look last copied with "Copy edits" (a few lines of text) |
 | Sync bookkeeping | app-private DataStore | last MediaStore generation and version, access level |
 | Memory cache | RAM only | decoded thumbnails; nothing is written to a disk cache |
 
@@ -54,6 +55,46 @@ places you have been and things you have photographed (receipts, documents, scre
 
 Like everything else, it is **not encrypted** (see the limits below), so it is readable by anyone with root
 access or a full image of the phone.
+
+## What a photo is described as, and faces
+
+Two more analysis steps are **off by default** and each has its own switch:
+
+- **What photos show.** A photo becomes 512 numbers (one signed byte each), a numeric description that lets a phrase like
+  "dog" or "sunset" be matched to it. It is not a caption, and the photo cannot be rebuilt from it.
+- **People.** Each face becomes a box and 128 numbers, and faces that look alike are grouped. **This is biometric data**
+  in the sense of the word: a face description can be used to tell whether two photos show the same person. So:
+  it is computed on the phone by models bundled in the app, stored only in the app's private database, excluded from
+  backups, never sent anywhere (there is no network permission to send it with), and deleted when you revoke photo access or
+  uninstall. eikon only groups faces **within your own library**; it never compares them with anything else, has no list
+  of known people, and a group only has a name if you typed one. Hiding a person removes them from the People list and from name
+  searches, but their photos stay in the Library; hide the photos to take them out of the Library.
+
+Photos you have hidden do not count towards a person's photos or picture, and never appear in a search or in a person's
+photos. Like everything else, none of this is encrypted (see the limits below).
+
+## Places, trips, memories and duplicates
+
+- **Places and trips reveal where you go.** A list of countries and cities, a map with a marker per group of photos, and trips (stretches away from where most of your photos are taken)
+  are a picture of your movements. They are drawn from the positions the Places analysis stored (off by default, needs `ACCESS_MEDIA_LOCATION`). The map is
+  drawn on the phone from country outlines bundled in the app, with no map tiles, no map service and no network permission: nothing about where you have been is ever sent.
+  "Home" is not a stored place or an address: it is worked out each time from where most photos were taken.
+- **Memories** are made from dates, trips and the people you named, on the phone. Photos you hid never appear in them, in trips, in places or in duplicate lists.
+  What you tell Memories (hide one, show fewer of a kind, show less of a person, leave out a date) is stored on the phone and can be undone from the menu of Memories.
+- **Duplicates** are found from fingerprints of your photos: a SHA-256 of the file (only for files that share their size with another) and a 64-bit description of
+  the picture; similar shots reuse the description stored for search. The fingerprints are private, excluded from backups and deleted when you revoke photo access. eikon
+  never removes anything by itself: a photo leaves only when you confirm in Android's own dialog, and goes to Recently deleted.
+
+## Editing and saved copies
+
+An edit changes nothing in the photo's file: it is a recipe in eikon's private database, drawn over the original (see [EDITING.md](EDITING.md)). It holds no picture and no personal
+data beyond the fact that you edited that photo. Like the rest of the database it is excluded from Android backups, so it is lost if you clear the app's data or uninstall.
+
+**Save a copy** creates a new JPEG in your library, next to the original. The copy keeps the original's date and camera details and, **if eikon holds the "read photo
+locations" permission, its location**, so that it sits at the right place in the timeline; sharing the copy shares that metadata like any other photo. eikon never deletes or
+replaces the original.
+
+**Sharing an edited photo from eikon shares the original file**, not the edited picture, because the edit only exists inside eikon. To share the edit, save a copy first.
 
 ## Deleting and sharing
 

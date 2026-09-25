@@ -50,6 +50,32 @@ sealed interface LibraryScope {
     /** Photos matching what the user typed in Search (text, place and date; hidden ones never appear). */
     data class Search(val spec: SearchSpec) : LibraryScope
 
+    /** Photos a person appears in (the People collection); hidden photos never appear. */
+    data class Person(val id: Long) : LibraryScope
+
+    /**
+     * Photos taken at a place, grouped as in Places: in one [city], one [region] (`IT.07`) or one [country]; or, with
+     * [unknown], geotagged photos too far from any known city to have a place name. Exactly one of the four is set.
+     */
+    data class Place(
+        val city: Long? = null,
+        val region: String? = null,
+        val country: String? = null,
+        val unknown: Boolean = false,
+    ) : LibraryScope
+
+    /** Photos whose position is inside a box (a cluster tapped on the map). */
+    data class Area(val minLatitude: Double, val maxLatitude: Double, val minLongitude: Double, val maxLongitude: Double) : LibraryScope
+
+    /** Photos taken in `[startMillis, endMillis)`, whether or not they have a position (a trip, a season, a week). */
+    data class Between(val startMillis: Long, val endMillis: Long) : LibraryScope
+
+    /** Photos taken in any of several periods, optionally only those a person is in (a memory); hidden photos never appear. */
+    data class Periods(val ranges: List<app.eikon.gallery.domain.search.TimeRange>, val personId: Long? = null) : LibraryScope
+
+    /** Photos stored under a semantic query id (for example the photos of dogs); hidden photos never appear. */
+    data class Semantic(val queryId: Long) : LibraryScope
+
     companion object {
         const val RECENT_DAYS = 30
     }

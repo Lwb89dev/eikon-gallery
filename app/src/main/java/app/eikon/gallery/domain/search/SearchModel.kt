@@ -33,21 +33,38 @@ data class PlaceMatch(
     val isEmpty: Boolean get() = cityIds.isEmpty() && countryCodes.isEmpty() && regionKeys.isEmpty()
 }
 
+/** People a word can refer to: the ones the user has named, matched by full name or by any single name. */
+@Immutable
+data class PersonMatch(val personIds: Set<Long>) {
+    val isEmpty: Boolean get() = personIds.isEmpty()
+}
+
 /**
  * One free-text word. It matches photos whose file name or recognized text starts with [text], or,
- * when [place] is set, photos taken at that place.
+ * when [place] is set, photos taken at that place, or, when [person] is set, photos that person is in.
  */
 @Immutable
-data class SearchTerm(val text: String, val place: PlaceMatch? = null)
+data class SearchTerm(val text: String, val place: PlaceMatch? = null, val person: PersonMatch? = null)
 
-/** A parsed search: everything must hold (AND), except that several dates are alternatives (OR). */
+/**
+ * A parsed search: everything must hold (AND), except that several dates are alternatives (OR).
+ *
+ * [semanticQuery] is set when the free words were also matched against what the photos look like (see
+ * SemanticSearchService): the photos that matched are then in the `search_hit` table under that id, and a
+ * photo satisfies the free words if its text matches them **or** it is one of those hits.
+ */
 @Immutable
 data class SearchSpec(
     val terms: List<SearchTerm> = emptyList(),
     val dates: List<DateSpec> = emptyList(),
     val filters: LibraryFilters = LibraryFilters.NONE,
+    val semanticQuery: Long? = null,
 ) {
     val isEmpty: Boolean get() = terms.isEmpty() && dates.isEmpty() && !filters.isActive
+
+    /** The free words that are not places or people, joined: what to look for in the photos themselves. Null if there are none. */
+    val semanticText: String?
+        get() = terms.filter { it.place == null && it.person == null }.joinToString(" ") { it.text }.ifBlank { null }
 }
 
 /** Resolves a normalized name ("roma", "new york", "italia") to places, or null. */
@@ -56,5 +73,14 @@ fun interface PlaceMatcher {
 
     companion object {
         val None = PlaceMatcher { null }
+    }
+}
+
+/** Resolves a normalized name ("marco", "marco rossi") to the people it names, or null. */
+fun interface PersonMatcher {
+    fun match(normalizedName: String): PersonMatch?
+
+    companion object {
+        val None = PersonMatcher { null }
     }
 }

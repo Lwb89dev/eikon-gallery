@@ -34,7 +34,7 @@ Writes to media (trash, favorite) never go through the index first: they go thro
 | Package | Contents |
 | --- | --- |
 | `core.di` | Hilt modules and qualifiers |
-| `core.image` | Coil thumbnail fetcher backed by `ContentResolver.loadThumbnail` |
+| `core.image` | Coil thumbnail fetcher backed by `ContentResolver.loadThumbnail` (draws a photo's edit on it), and the transformation that draws an edit in the viewer |
 | `core.permissions` | `MediaAccessChecker` (full / limited / none) |
 | `core.ui` | theme, system-bar helpers, paging helpers |
 | `data.db` | Room entity, DAO, database, `LibraryQueryBuilder` (SQL from a query object) |
@@ -43,6 +43,8 @@ Writes to media (trash, favorite) never go through the index first: they go thro
 | `data.metadata` | on-demand EXIF / container reading for the info panel |
 | `data.settings` | DataStore-backed settings |
 | `domain` | models, `TimelineLayout`, date labels, EXIF formatting (pure Kotlin) |
+| `domain.edit` | the edit recipe and its text format, the renderer (geometry, colour, detail), auto enhance and the crop tool's rules: pure Kotlin, see [EDITING.md](EDITING.md) |
+| `data.edit` | edits by photo, the copy/paste clipboard, decoding for editing and "Save a copy" |
 | `feature.*` | screens and view models |
 
 ## MediaStore model
@@ -58,7 +60,7 @@ Writes to media (trash, favorite) never go through the index first: they go thro
 - Capture time is `datetaken`, falling back to `date_modified`, then `date_added`, because many files
   (downloads, screenshots) have no capture date.
 
-## Room schema (version 3)
+## Room schema (version 6)
 
 Schemas are exported to `app/schemas`. Two kinds of tables live in the database:
 
@@ -85,6 +87,12 @@ served straight from the index.
 | `album_item` (`albumId`, `mediaId`, `addedAt`) | membership; cascades on album delete; **no foreign key to `media`** so a re-sync can never destroy an album |
 | `hidden_media` (`mediaId`, `hiddenAt`) | items hidden from everything except the Hidden section |
 
+**Edits** (`edit_recipe`: `mediaId`, `recipe` text, `updatedAt`, `baseModifiedAt`): one recipe per edited photo. User data, kept when the media cache is cleared, because it cannot be rebuilt. The photo's file is never changed;
+see [EDITING.md](EDITING.md).
+
+**What the user told eikon** about collections, kept when the media cache is cleared: `duplicate_dismissed` (`key`, `dismissedAt`: groups the user said are
+not copies) and `memory_preference` (`key`, `value`, `createdAt`: memories hidden, kinds to show fewer of, people to show less of, dates to leave out).
+
 **Derived data** about photos, produced by the background analysis and cleared with the media cache:
 
 | Table | Meaning |
@@ -92,10 +100,15 @@ served straight from the index.
 | `index_state` (`mediaId`, `stage`, `status`, `attempts`, `updatedAt`) | which analysis stage has been done for which photo, so work survives restarts |
 | `media_geo` (`mediaId`, `latitude`, `longitude`, `cityId`, `countryCode`, `regionKey`) | where a photo was taken, resolved offline to the nearest city |
 | `media_search` (FTS4, `rowid` = media id; `filename`, `ocr`) | full-text index over file-name words and recognized text; case and accent insensitive |
+| `media_embedding` (`mediaId`, `model`, `vector`) | what a photo looks like to the image model: 512 signed bytes; `model` says which model made it, older ones are ignored |
+| `search_hit` (`queryId`, `mediaId`, `score`) | scratch: the photos that matched one semantic query (a search, or the dogs collection); each query has its own id and only a few recent ones are kept |
+| `perceptual_hash` (`mediaId`, `hash`, `modifiedAt`) / `content_hash` (`mediaId`, `hash`, `modifiedAt`) | fingerprints of what a photo looks like and of a file's bytes, to find copies |
+| `face` (`id`, `mediaId`, box, `score`, `vector`, `personId`, `ignored`) | a face found in a photo, its 128-number description and the person it was grouped with |
+| `person` (`id`, `name`, `isFavorite`, `isHidden`, `isPinned`, `createdAt`) | a group of faces the user can name, merge, split, hide or favorite; wiped with the faces when photo access is revoked |
 
 Rows whose media is currently not visible (deleted, or outside a "selected photos" grant) are simply
 not shown and reappear if the media does. A destructive migration is never configured; version 1 to 2
-is an automatic migration and version 2 to 3 an explicit one whose SQL is checked against the schema export
+is an automatic migration, and versions 2 to 3, 3 to 4, 4 to 5 and 5 to 6 are explicit ones whose SQL is checked against the schema export
 and run on a real SQLite in a JVM test (and, separately, by an instrumented test).
 
 Category heuristics (`MediaClassifier`) rely on folder names, file names and image shape, because
@@ -103,7 +116,7 @@ Android exposes no such flags. They can be wrong for renamed or moved files.
 
 ## Slices of the library
 
-Every grid is a `GridSource` (Library, Preset, Album, Folder, Hidden) turned into one `LibraryQuery`
+Every grid is a `GridSource` (Library, Preset, Album, Folder, Hidden, Search, Person, Pets, Place, Area, Period, Memory) turned into one `LibraryQuery`
 (scope + filters + sort) and then into SQL by `LibraryQueryBuilder`, the single place that builds
 queries. It binds every value (album id, folder path, cutoff time) as an argument, and it is where
 hidden items are excluded from every scope except Hidden, so a screen cannot forget to. The same
@@ -122,6 +135,24 @@ reaches the query only as letters and digits plus `*`, and as bound arguments.
 
 `Gazetteer` (`data/places`) is the offline place lookup: nearest city for a coordinate (grid index, 100 km
 limit) and place names, aliases and countries for a word. Its data is the bundled GeoNames extract.
+
+## Places, trips, memories and duplicates
+
+These four are read from what the analysis stored, and never contact anything.
+
+- **Places.** `media_geo` grouped by country, region and city into a tree (`PlaceTree`), shown as a list and as a map. The map draws country outlines
+  (Natural Earth, 214 KB in `places/world.bin`) with Web Mercator (`MapProjection`), and clusters photo positions with a grid the size of a marker
+  (`PointClusterer`, tested for panning, zooming and photos split by a grid line). No map service is used, so no coordinate leaves the phone.
+- **Trips.** `TripDetector` (pure, `domain/places`) works on geotagged photos with rules anyone can check: each day gets a position (the median of its
+  photos), "home" is the busiest place in the half year around that day, a day is *away* at 100 km or more from home, and a run of away days with at
+  least 10 photos (and two days, or one busy day) is a trip. Names come from the gazetteer. The numbers are in `TripPolicy`.
+- **Memories.** `MemoryPlanner` (pure, `domain/memories`) proposes memories from dates, trips and named people: *On this day*, *A year ago*, trips, weekends away,
+  day trips, seasons, a person in a year; scores favour recent, larger and anniversary ones, a few of each kind are kept and no two are about the same days.
+  A `MemoryId` says everything needed to find a memory's photos, so it travels in a route. `KeyPhotoPicker` chooses up to 30 photos spread across the
+  memory, favoring favorites, larger photos and photos with faces. The slideshow zooms and drifts each photo (Ken Burns) on one animation clock that also drives the progress bar.
+- **Duplicates.** `DuplicateFinder` (pure) joins photos with the same byte hash and photos whose 64-bit perceptual hashes differ by at most 6 bits (eight one-byte
+  buckets guarantee any pair within seven bits is compared); `SimilarShotFinder` compares stored image vectors of photos taken within two minutes.
+  `DuplicatesViewModel` only ever asks Android to move photos to the trash, one group at a time, with the system's own confirmation.
 
 ## Locks
 
@@ -166,7 +197,7 @@ with a `ContentObserver` only while the UI is visible: nothing runs in the backg
   decodes a full-resolution image.
 - The viewer is an overlay on the library, sharing the grid's paged list. A photo is shown as
   thumbnail, then a screen-sized decode, then (only while zoomed) a decode up to 4096 px, dropped again
-  when zoom returns to 1. Only the visible video page owns an ExoPlayer.
+  when zoom returns to 1. A photo with an edit is drawn edited at each of those steps (see [EDITING.md](EDITING.md)). Only the visible video page owns an ExoPlayer.
 - Grid gestures: pinch (Initial pass, consumed only for two fingers), long-press-drag range selection
   (scrolling is disabled while dragging, with edge auto-scroll).
 

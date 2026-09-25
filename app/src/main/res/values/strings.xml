@@ -65,6 +65,7 @@
     <!-- Accessibility -->
     <string name="cd_photo">Photo, %1$s</string>
     <string name="cd_video">Video, %1$s, %2$s</string>
+    <string name="cd_edited_badge">Edited</string>
     <string name="cd_favorite_badge">Favorite</string>
     <string name="viewer_position">%1$d of %2$d</string>
 
@@ -132,6 +133,7 @@
     <string name="nav_search">Search</string>
     <string name="nav_collections">Collections</string>
     <string name="collections_title">Collections</string>
+    <string name="section_people">People</string>
     <string name="section_albums">Albums</string>
     <string name="section_personal">Personal</string>
     <string name="section_folders">Device folders</string>
@@ -233,12 +235,18 @@
     <string name="search_no_results">No photos match</string>
     <string name="search_hint_title">Search your library</string>
     <string name="search_hint_body">Try a date (\"August 2025\", \"yesterday\"), a place (\"Rome\", \"Tuscany\"), a word that appears in a photo or in its file name, or a kind (\"videos\", \"screenshots\", \"favorites\").\n\nSearch does not recognize what a picture shows yet, only what is written in it.</string>
-    <string name="search_analysis_off">Searching by place and by text inside photos is off. You can turn it on in Settings, Analysis.</string>
+    <string name="search_analysis_off">Searching by place, by text inside photos and by what they show is off. You can turn it on in Settings, Analysis.</string>
     <string name="search_analysis_note">Still analyzing photos in the background (%1$d%%). Some results may be missing.</string>
 
     <!-- Settings: analysis -->
     <string name="settings_analysis">Analysis</string>
     <string name="analysis_places_progress">Places: %1$,d of %2$,d</string>
+    <string name="analysis_semantic_progress">What photos show: %1$,d of %2$,d</string>
+    <string name="analysis_semantic_unavailable">The model that recognizes what photos show could not be loaded, so this step is not running.</string>
+    <string name="search_semantic_unavailable">Searching by what photos show is unavailable right now (the model could not be loaded). Other results still work.</string>
+    <string name="analysis_people_progress">People: %1$,d of %2$,d</string>
+    <string name="analysis_people_unavailable">The models that find faces could not be loaded, so this step is not running.</string>
+    <string name="analysis_duplicates_progress">Duplicates: %1$,d of %2$,d</string>
     <string name="analysis_text_progress">Text in photos: %1$,d of %2$,d</string>
     <string name="analysis_running">Analyzing now…</string>
     <string name="analysis_idle">Waiting for the right moment (charging, battery not low)</string>
@@ -246,14 +254,224 @@
     <string name="setting_pause_analysis">Pause analysis</string>
     <string name="setting_only_charging">Only while charging</string>
     <string name="setting_analyze_places">Find photos by place</string>
+    <string name="setting_analyze_semantic">Find photos by what they show</string>
+    <string name="setting_analyze_people">Find people in photos</string>
+    <string name="setting_analyze_people_note">Faces are found and compared on this phone only. Nothing about a face ever leaves it, and eikon never tries to recognize anyone: it only groups faces that look alike, and you name the groups.</string>
+    <string name="setting_analyze_duplicates">Find duplicate photos</string>
     <string name="setting_analyze_text">Find text in photos</string>
     <string name="analysis_location_permission">Android hides where photos were taken from apps until you allow it.</string>
     <string name="analysis_allow_locations">Allow access to photo locations</string>
     <string name="analyze_now">Analyze now</string>
-    <string name="settings_analysis_body">Analysis runs on your phone only, in the background, and pauses when the battery is low or the phone gets warm. It stores the place of each photo (resolved offline, no location is ever sent anywhere) and any text it reads in the photo, so Search can find them. Text reading is slow and uses the processor heavily, which is why it waits for charging by default.</string>
+    <string name="settings_analysis_body">Analysis runs on your phone only, in the background, and pauses when the battery is low or the phone gets warm. It stores the place of each photo (resolved offline, no location is ever sent anywhere), a numeric description of what the photo shows (so you can search "dog" or "sunset"; it is not a caption and cannot be read back as an image) and any text it reads in the photo, so Search can find them. If you turn on people, it also stores where each face is in a photo and a numeric description of it, only to group faces that look alike. If you turn on duplicates, it stores a short fingerprint of each photo and of files that share a size, only to find copies. Recognizing what photos show and reading text are slow and use the processor heavily, which is why analysis waits for charging by default.</string>
 
     <!-- Info panel: derived data -->
     <string name="info_place">Nearest place</string>
     <string name="info_text_found">Text in this photo</string>
     <string name="info_text_copy">Copy text</string>
+
+    <!-- People -->
+    <string name="collection_people">People</string>
+    <string name="people_title">People</string>
+    <string name="person_unnamed">Unnamed person</string>
+    <string name="person_add_name">Add a name</string>
+    <string name="person_rename">Name this person</string>
+    <string name="person_name_hint">Name</string>
+    <string name="person_favorite">Mark as favorite</string>
+    <string name="person_unfavorite">Remove from favorites</string>
+    <string name="person_hide">Hide this person</string>
+    <string name="person_unhide">Show this person</string>
+    <string name="person_merge">Merge with another person…</string>
+    <string name="person_merge_title">Merge into</string>
+    <string name="person_merge_empty">There is nobody else to merge with.</string>
+    <string name="person_not_this">Not this person</string>
+    <string name="person_remove_from_people">Not a face</string>
+    <string name="people_show_hidden">Show hidden people (%1$d)</string>
+    <string name="people_hide_hidden">Hide hidden people</string>
+    <string name="people_empty_off">People is off. Turn on “Find people in photos” in Settings, Analysis, and eikon will group the faces it finds. Everything stays on this phone.</string>
+    <string name="people_empty_working">No faces found yet (%1$d%% of your photos analyzed). Analysis runs in the background while charging.</string>
+    <string name="people_empty_done">No faces found in your photos.</string>
+    <string name="people_go_settings">Open settings</string>
+    <string name="person_photos_empty">No photos.</string>
+    <plurals name="moved_to_new_person">
+        <item quantity="one">%d photo moved to a new person</item>
+        <item quantity="other">%d photos moved to a new person</item>
+    </plurals>
+    <plurals name="removed_from_people">
+        <item quantity="one">%d photo removed from People</item>
+        <item quantity="other">%d photos removed from People</item>
+    </plurals>
+    <string name="info_people">People</string>
+    <plurals name="info_people_unnamed_count">
+        <item quantity="one">%d unnamed</item>
+        <item quantity="other">%d unnamed</item>
+    </plurals>
+
+    <string name="section_memories">Memories</string>
+    <string name="section_pets">Pets</string>
+    <string name="collection_dogs">Dogs</string>
+    <string name="collection_cats">Cats</string>
+    <string name="empty_pets">No dogs or cats found yet. Pets are recognized from what photos show: turn on “Find photos by what they show” in Settings, Analysis, and wait for it to finish.</string>
+
+    <!-- Places -->
+    <string name="places_title">Places</string>
+    <string name="places_tab_list">List</string>
+    <string name="places_tab_map">Map</string>
+    <string name="place_unknown">Other places</string>
+    <string name="place_near">Near %1$s</string>
+    <string name="places_expand">Show</string>
+    <string name="places_collapse">Hide</string>
+    <string name="collection_places">Places</string>
+    <string name="places_map_note">Outlines of countries and the names of larger cities only: no map images are downloaded, and no position ever leaves the phone. Pinch or double-tap to zoom, tap a marker to see its photos.</string>
+    <string name="places_map_description">Map of where your photos were taken, with markers for groups of photos</string>
+    <string name="places_empty_off">Places is off. Turn on “Find photos by place” in Settings, Analysis, and eikon will work out where your photos were taken from their GPS data, offline.</string>
+    <string name="places_empty_working">No places found yet (%1$d%% of your photos analyzed). Analysis runs in the background while charging.</string>
+    <string name="places_empty_done">None of your photos has a position, or eikon may not be allowed to read photo locations (Settings, Analysis).</string>
+    <string name="section_places">Places and trips</string>
+
+    <!-- Trips -->
+    <string name="collection_trips">Trips</string>
+    <string name="trips_title">Trips</string>
+    <string name="trip_untitled">Trip</string>
+    <string name="trip_reason">About %1$d km from where most of your photos are taken (near %2$s)</string>
+    <string name="trip_home_unknown">an unknown place</string>
+    <plurals name="trip_summary_days">
+        <item quantity="one">%d day</item>
+        <item quantity="other">%d days</item>
+    </plurals>
+    <string name="trips_empty">No trips found. A trip is a stretch of days, with at least 10 photos, spent at least 100 km from where most of your photos are taken. eikon needs the photos’ positions for that: turn on “Find photos by place” in Settings, Analysis.</string>
+
+    <!-- Duplicates and similar shots -->
+    <string name="section_cleanup">Clean up</string>
+    <string name="collection_duplicates">Duplicates</string>
+    <string name="collection_similar">Similar shots</string>
+    <string name="duplicates_title">Duplicates</string>
+    <string name="similar_title">Similar shots</string>
+    <string name="duplicates_note">eikon only finds them. Nothing is removed until you confirm in Android’s own dialog, and removed photos go to Recently deleted, where you can restore them. Copies of a photo you added to albums: the copy you keep joins those albums.</string>
+    <plurals name="duplicate_exact">
+        <item quantity="one">%d identical file</item>
+        <item quantity="other">%d identical files</item>
+    </plurals>
+    <plurals name="duplicate_visual">
+        <item quantity="one">%d copy of the same picture</item>
+        <item quantity="other">%d copies of the same picture</item>
+    </plurals>
+    <plurals name="similar_group">
+        <item quantity="one">%d shot</item>
+        <item quantity="other">%d similar shots</item>
+    </plurals>
+    <plurals name="duplicate_keep_best">
+        <item quantity="one">Keep the best, move %d to Recently deleted</item>
+        <item quantity="other">Keep the best, move %d to Recently deleted</item>
+    </plurals>
+    <plurals name="similar_trash_marked">
+        <item quantity="one">Move %d to Recently deleted</item>
+        <item quantity="other">Move %d to Recently deleted</item>
+    </plurals>
+    <string name="duplicate_best">Best</string>
+    <string name="duplicate_kept">Kept</string>
+    <string name="duplicate_marked">To be moved</string>
+    <string name="duplicate_dismiss">These are not duplicates</string>
+    <string name="similar_dismiss">These are not similar</string>
+    <string name="duplicates_empty_off">Duplicates is off. Turn on “Find duplicate photos” in Settings, Analysis. eikon fingerprints your photos on this phone only, without any model.</string>
+    <string name="similar_empty_off">Similar shots needs “Find photos by what they show” in Settings, Analysis: it compares what each photo shows, for photos taken within two minutes of each other.</string>
+    <string name="duplicates_empty_working">None found yet (%1$d%% analyzed). Analysis runs in the background while charging.</string>
+    <string name="duplicates_empty_done">No duplicates found.</string>
+    <string name="similar_empty_done">No similar shots found.</string>
+
+    <!-- Memories -->
+    <string name="collection_memories">Memories</string>
+    <string name="memories_title">Memories</string>
+    <string name="memory_on_this_day">On this day</string>
+    <string name="memory_year_ago">A year ago</string>
+    <string name="memory_weekend_in">Weekend in %1$s</string>
+    <string name="memory_weekend">Weekend away</string>
+    <string name="memory_day_trip_to">Day trip to %1$s</string>
+    <string name="memory_day_trip">Day trip</string>
+    <string name="memory_season">%1$s %2$d</string>
+    <string name="memory_person">%1$s, %2$d</string>
+    <string name="season_winter">Winter</string>
+    <string name="season_spring">Spring</string>
+    <string name="season_summer">Summer</string>
+    <string name="season_autumn">Autumn</string>
+    <string name="memory_hide">Hide this memory</string>
+    <string name="memory_show_fewer">Show fewer like this</string>
+    <string name="memory_show_less_of">Show less of %1$s</string>
+    <string name="memory_exclude_date">Leave out this date</string>
+    <string name="memory_all_photos">All photos</string>
+    <string name="memory_replay">Play again</string>
+    <string name="memory_reset">Undo my choices</string>
+    <string name="memory_done">Done. You can undo your choices from the menu of Memories.</string>
+    <string name="memories_empty">No memories yet. eikon makes them from dates, trips, seasons and the people you named: “On this day”, “A year ago”, trips and weekends away, a season, someone in a year. Trips and weekends need Places, people need People (Settings, Analysis). Nothing leaves the phone.</string>
+    <string name="memories_note">Made from dates, places and named people with plain rules; there is no music, and photos are chosen by favorites, size and faces, not by how good they look.</string>
+    <string name="memory_no_photos">This memory has no photos to show any more.</string>
+
+    <!-- Editing -->
+    <string name="action_edit">Edit</string>
+    <string name="edit_title">Edit</string>
+    <string name="edit_done">Done</string>
+    <string name="edit_original">Original</string>
+    <string name="edit_revert">Revert</string>
+    <string name="edit_revert_title">Revert to the original?</string>
+    <string name="edit_revert_message">This clears every adjustment, the filter and the crop from this edit. The original photo was never changed. Press Done to keep the reverted photo.</string>
+    <string name="edit_discard_title">Discard your changes?</string>
+    <string name="edit_discard_message">The changes you made in this editor will be lost. The photo stays as it was.</string>
+    <string name="edit_discard">Discard</string>
+    <string name="edit_copy_edits">Copy edits</string>
+    <string name="edit_paste_edits">Paste edits</string>
+    <string name="edit_save_copy">Save a copy</string>
+    <string name="edit_copy_saved">A copy was saved next to the original, which was not changed.</string>
+    <string name="edit_copy_saved_no_details">A copy was saved next to the original, which was not changed. Its camera details could not be copied.</string>
+    <string name="edit_failed">The edit could not be completed. The photo was not changed.</string>
+    <string name="edited_badge">Edited</string>
+    <string name="viewer_show_original">Show the original</string>
+    <string name="viewer_show_edited">Show the edited photo</string>
+    <string name="tool_auto">Auto</string>
+    <string name="tool_light">Light</string>
+    <string name="tool_color">Color</string>
+    <string name="tool_detail">Detail</string>
+    <string name="tool_filters">Filters</string>
+    <string name="tool_crop">Crop</string>
+    <string name="adj_exposure">Exposure</string>
+    <string name="adj_brightness">Brightness</string>
+    <string name="adj_contrast">Contrast</string>
+    <string name="adj_highlights">Highlights</string>
+    <string name="adj_shadows">Shadows</string>
+    <string name="adj_black_point">Black point</string>
+    <string name="adj_saturation">Saturation</string>
+    <string name="adj_vibrance">Vibrance</string>
+    <string name="adj_temperature">Warmth</string>
+    <string name="adj_tint">Tint</string>
+    <string name="adj_sharpness">Sharpness</string>
+    <string name="adj_vignette">Vignette</string>
+    <string name="geo_straighten">Straighten</string>
+    <string name="geo_perspective_vertical">Vertical perspective</string>
+    <string name="geo_perspective_horizontal">Horizontal perspective</string>
+    <string name="filter_amount">Strength</string>
+    <string name="filter_name_none">Original</string>
+    <string name="filter_name_vivid">Vivid</string>
+    <string name="filter_name_warm">Warm</string>
+    <string name="filter_name_cool">Cool</string>
+    <string name="filter_name_mono">Mono</string>
+    <string name="filter_name_noir">Noir</string>
+    <string name="filter_name_fade">Fade</string>
+    <string name="filter_name_chrome">Chrome</string>
+    <string name="filter_name_sepia">Sepia</string>
+    <string name="crop_rotate">Rotate</string>
+    <string name="crop_flip">Flip</string>
+    <string name="shape_free">Free</string>
+    <string name="shape_original">Original</string>
+    <string name="shape_square">1:1</string>
+    <string name="shape_4_3">4:3</string>
+    <string name="shape_3_2">3:2</string>
+    <string name="shape_16_9">16:9</string>
+    <string name="action_paste_edits">Paste edits</string>
+    <string name="action_revert_edits">Remove edits</string>
+    <plurals name="edits_pasted">
+        <item quantity="one">Edits applied to %d photo</item>
+        <item quantity="other">Edits applied to %d photos</item>
+    </plurals>
+    <plurals name="edits_reverted">
+        <item quantity="one">Edit removed from %d photo; the original is as it always was</item>
+        <item quantity="other">Edits removed from %d photos; the originals are as they always were</item>
+    </plurals>
 </resources>

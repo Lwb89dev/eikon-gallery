@@ -20,6 +20,24 @@ sealed interface GridSource {
     /** The Search tab. The query text is not part of the source: it changes as the user types. */
     data object Search : GridSource
 
+    /** The photos one person from People appears in. */
+    data class Person(val id: Long) : GridSource
+
+    /** The photos of dogs or of cats. */
+    data class Pets(val kind: PetKind) : GridSource
+
+    /** The photos taken at one place from Places. */
+    data class Place(val scope: LibraryScope.Place) : GridSource
+
+    /** The photos inside a box on the map. */
+    data class Area(val scope: LibraryScope.Area) : GridSource
+
+    /** All the photos of a memory (not just the few its slideshow shows). */
+    data class Memory(val id: app.eikon.gallery.domain.memories.MemoryId) : GridSource
+
+    /** The photos of a period: a trip or a memory. [label] is what the title shows. */
+    data class Period(val startMillis: Long, val endMillis: Long, val label: String? = null) : GridSource
+
     /** Round-trips through [parse]. */
     fun toArg(): String = when (this) {
         Library -> "library"
@@ -28,6 +46,12 @@ sealed interface GridSource {
         is Folder -> "folder:$relativePath"
         Hidden -> "hidden"
         Search -> "search"
+        is Person -> "person:$id"
+        is Pets -> "pets:${kind.name}"
+        is Place -> placeArg(scope)
+        is Area -> "area:${scope.minLatitude},${scope.maxLatitude},${scope.minLongitude},${scope.maxLongitude}"
+        is Period -> "period:$startMillis:$endMillis" + (label?.let { ":$it" } ?: "")
+        is Memory -> "memory:${id.toArg()}"
     }
 
     /**
@@ -37,6 +61,13 @@ sealed interface GridSource {
     fun toQuery(filters: LibraryFilters, sortField: SortField, direction: SortDirection): LibraryQuery = when (this) {
         Library -> LibraryQuery(LibraryScope.Everything, filters, sortField, direction)
         is Album -> LibraryQuery(LibraryScope.Album(id), LibraryFilters.NONE, sortField, direction)
+        is Person -> LibraryQuery(LibraryScope.Person(id), LibraryFilters.NONE, sortField, direction)
+        // The photos are found when the screen opens (see LibraryViewModel); until then this is empty.
+        is Pets -> LibraryQuery(LibraryScope.Semantic(0), LibraryFilters.NONE, sortField, direction)
+        is Place -> LibraryQuery(scope, LibraryFilters.NONE, sortField, direction)
+        is Area -> LibraryQuery(scope, LibraryFilters.NONE, sortField, direction)
+        is Period -> LibraryQuery(LibraryScope.Between(startMillis, endMillis), LibraryFilters.NONE, sortField, direction)
+        is Memory -> LibraryQuery(LibraryScope.Periods(id.periods(java.time.ZoneId.systemDefault()), id.personId), LibraryFilters.NONE, sortField, direction)
         is Folder -> LibraryQuery(LibraryScope.Folder(relativePath), LibraryFilters.NONE, sortField, direction)
         Hidden -> LibraryQuery(LibraryScope.Hidden, LibraryFilters.NONE, sortField, direction)
         // Search results are built from the typed text (see SearchViewModel); this is the empty state.
@@ -53,10 +84,47 @@ sealed interface GridSource {
                 text == "search" -> Search
                 text.startsWith("preset:") -> PresetKind.entries.firstOrNull { it.name == text.removePrefix("preset:") }
                     ?.let(::Preset) ?: Library
+                text.startsWith("place:") -> parsePlace(text.removePrefix("place:")) ?: Library
+                text.startsWith("area:") -> parseArea(text.removePrefix("area:")) ?: Library
+                text.startsWith("memory:") -> app.eikon.gallery.domain.memories.MemoryId.parse(text.removePrefix("memory:"))?.let(::Memory) ?: Library
+                text.startsWith("period:") -> parsePeriod(text.removePrefix("period:")) ?: Library
+                text.startsWith("pets:") -> PetKind.entries.firstOrNull { it.name == text.removePrefix("pets:") }?.let(::Pets) ?: Library
+                text.startsWith("person:") -> text.removePrefix("person:").toLongOrNull()?.let(::Person) ?: Library
                 text.startsWith("album:") -> text.removePrefix("album:").toLongOrNull()?.let(::Album) ?: Library
                 text.startsWith("folder:") -> Folder(text.removePrefix("folder:"))
                 else -> Library
             }
+        }
+
+        private fun placeArg(scope: LibraryScope.Place): String = when {
+            scope.city != null -> "place:city:${scope.city}"
+            scope.region != null -> "place:region:${scope.region}"
+            scope.country != null -> "place:country:${scope.country}"
+            else -> "place:unknown"
+        }
+
+        private fun parsePlace(text: String): GridSource? {
+            val (kind, value) = text.split(':', limit = 2).let { it[0] to it.getOrNull(1).orEmpty() }
+            val scope = when {
+                kind == "city" -> value.toLongOrNull()?.let { LibraryScope.Place(city = it) }
+                kind == "region" && value.isNotEmpty() -> LibraryScope.Place(region = value)
+                kind == "country" && value.isNotEmpty() -> LibraryScope.Place(country = value)
+                kind == "unknown" -> LibraryScope.Place(unknown = true)
+                else -> null
+            }
+            return scope?.let(::Place)
+        }
+
+        private fun parseArea(text: String): GridSource? {
+            val v = text.split(',').map { it.toDoubleOrNull() ?: return null }
+            return if (v.size == 4) Area(LibraryScope.Area(v[0], v[1], v[2], v[3])) else null
+        }
+
+        private fun parsePeriod(text: String): GridSource? {
+            val parts = text.split(':', limit = 3)
+            val start = parts.getOrNull(0)?.toLongOrNull() ?: return null
+            val end = parts.getOrNull(1)?.toLongOrNull() ?: return null
+            return Period(start, end, parts.getOrNull(2)?.takeIf { it.isNotEmpty() })
         }
 
         fun presetQuery(kind: PresetKind, sortField: SortField, direction: SortDirection): LibraryQuery {

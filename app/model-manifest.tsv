@@ -1,0 +1,11 @@
+# Machine-learning model files bundled in the app as assets. They are NOT stored in this repository:
+# `./gradlew :app:fetchModels` (run automatically by every build) downloads each one, checks its
+# SHA-256 and places it under app/models/assets/. A file that does not match is rejected.
+# Columns, separated by TAB: asset path, download URL (pinned to a commit), SHA-256.
+# Licenses and provenance: NOTICE.md and docs/ML.md.
+models/clip_vision_int8.onnx	https://huggingface.co/Xenova/clip-vit-base-patch32/resolve/d15189d7028b43f1d3e65039190477f6af591c2a/onnx/vision_model_int8.onnx	0ab0c1b3ace708e539633af1744d5a95247fe4e14d3e08ff197ef82a6cb9bd93
+models/clip_text_int8.onnx	https://huggingface.co/sentence-transformers/clip-ViT-B-32-multilingual-v1/resolve/58edf8cada9e398793dca955574a48cbb7f18be2/onnx/model_qint8_arm64.onnx	3bed77e83926519660b5c0833cb3321cfde952331edec4f7d501c7d384b8a8a7
+models/clip_text_vocab.txt	https://huggingface.co/sentence-transformers/clip-ViT-B-32-multilingual-v1/resolve/58edf8cada9e398793dca955574a48cbb7f18be2/vocab.txt	fe0fda7c425b48c516fc8f160d594c8022a0808447475c1a7c6d6479763f310c
+models/clip_text_projection.safetensors	https://huggingface.co/sentence-transformers/clip-ViT-B-32-multilingual-v1/resolve/58edf8cada9e398793dca955574a48cbb7f18be2/2_Dense/model.safetensors	d12568dc7300970a4d3dbb49068ad16cd89b99840b74b026f8e48071e9414f74
+models/yunet_face_detector.onnx	https://media.githubusercontent.com/media/opencv/opencv_zoo/47534e27c9851bb1128ccc0102f1145e27f23f98/models/face_detection_yunet/face_detection_yunet_2026may.onnx	ebafce4e3c118d6554634be5c27ab333b4c047a9a8c3faf1d7cf93101c22f0f0
+models/sface_recognizer.onnx	https://media.githubusercontent.com/media/opencv/opencv_zoo/47534e27c9851bb1128ccc0102f1145e27f23f98/models/face_recognition_sface/face_recognition_sface_2021dec.onnx	0ba9fbfa01b5270c96627c4ef784da859931e02f04419c829e83484087c34e79

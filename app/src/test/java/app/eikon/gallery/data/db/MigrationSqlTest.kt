@@ -10,8 +10,8 @@ import org.junit.Before
 import org.junit.Test
 
 /**
- * The 2 to 3 migration must (a) run on a real version 2 database without losing data and (b) create
- * exactly the tables Room expects. Room itself only notices a mismatch on a phone at first launch, which is
+ * The manual migrations must (a) run on a real database of the previous version without losing data and
+ * (b) create exactly the tables Room expects. Room itself only notices a mismatch on a phone at first launch, which is
  * far too late, so this runs the migration SQL against real SQLite and compares it with the schema export.
  */
 class MigrationSqlTest {
@@ -85,6 +85,95 @@ class MigrationSqlTest {
         execute("UPDATE media_search SET filename = 'trip' WHERE rowid = 1")
         assertEquals(emptyList<Long>(), rowsMatching("holiday"))
         assertEquals(listOf(1L), rowsMatching("farmacia"))
+    }
+
+    // --- 3 to 4 ----------------------------------------------------------------------------------
+
+    @Test
+    fun migration3To4StatementsAreExactlyWhatRoomExportedForVersion4() {
+        val exportedNew = statementsOf(4).filter { sql -> listOf("media_embedding", "search_hit", "person", "face").any { "`$it`" in sql } }
+        assertEquals(exportedNew.toSet(), DatabaseMigrations.STATEMENTS_3_4.toSet())
+    }
+
+    @Test
+    fun migration3To4KeepsEveryRowAndProducesTheSameObjectsAsAFreshVersion4() {
+        val v3 = DriverManager.getConnection("jdbc:sqlite::memory:")
+        statementsOf(3).forEach { v3.createStatement().use { s -> s.execute(it) } }
+        v3.createStatement().use { it.execute("INSERT INTO index_state VALUES (1, 'OCR', 1, 0, 0)") }
+        v3.createStatement().use { it.execute("INSERT INTO media_search (rowid, filename, ocr) VALUES (1, 'a', 'ricevuta')") }
+
+        DatabaseMigrations.STATEMENTS_3_4.forEach { v3.createStatement().use { s -> s.execute(it) } }
+
+        val fresh = DriverManager.getConnection("jdbc:sqlite::memory:")
+        statementsOf(4).forEach { fresh.createStatement().use { s -> s.execute(it) } }
+        assertEquals(userObjects(fresh), userObjects(v3))
+        assertEquals(1, v3.createStatement().use { st -> st.executeQuery("SELECT COUNT(*) FROM index_state").use { rs -> rs.next(); rs.getInt(1) } })
+        assertTrue("table:media_embedding" in userObjects(v3))
+        fresh.close()
+        v3.close()
+    }
+
+    @Test
+    fun aVectorRoundTripsThroughTheEmbeddingTable() {
+        DatabaseMigrations.STATEMENTS_2_3.forEach(::execute)
+        DatabaseMigrations.STATEMENTS_3_4.forEach(::execute)
+        val vector = ByteArray(512) { (it - 256).toByte() }
+        db.prepareStatement("INSERT INTO media_embedding VALUES (1, 'm', ?)").use { st ->
+            st.setBytes(1, vector)
+            st.executeUpdate()
+        }
+        val stored = db.createStatement().use { st -> st.executeQuery("SELECT vector FROM media_embedding WHERE mediaId = 1").use { rs -> rs.next(); rs.getBytes(1) } }
+        assertTrue(vector.contentEquals(stored))
+    }
+
+    // --- 4 to 5 ----------------------------------------------------------------------------------
+
+    @Test
+    fun migration4To5StatementsAreExactlyWhatRoomExportedForVersion5() {
+        val newTables = listOf("content_hash", "perceptual_hash", "duplicate_dismissed", "memory_preference")
+        val exportedNew = statementsOf(5).filter { sql -> newTables.any { "`$it`" in sql } }
+        assertEquals(exportedNew.toSet(), DatabaseMigrations.STATEMENTS_4_5.toSet())
+    }
+
+    @Test
+    fun migration4To5KeepsEveryRowAndProducesTheSameObjectsAsAFreshVersion5() {
+        val v4 = DriverManager.getConnection("jdbc:sqlite::memory:")
+        statementsOf(4).forEach { v4.createStatement().use { s -> s.execute(it) } }
+        v4.createStatement().use { it.execute("INSERT INTO person (id, name, isFavorite, isHidden, isPinned, createdAt) VALUES (1, 'Marco', 0, 0, 0, 0)") }
+
+        DatabaseMigrations.STATEMENTS_4_5.forEach { v4.createStatement().use { s -> s.execute(it) } }
+
+        val fresh = DriverManager.getConnection("jdbc:sqlite::memory:")
+        statementsOf(5).forEach { fresh.createStatement().use { s -> s.execute(it) } }
+        assertEquals(userObjects(fresh), userObjects(v4))
+        assertEquals(1, v4.createStatement().use { st -> st.executeQuery("SELECT COUNT(*) FROM person").use { rs -> rs.next(); rs.getInt(1) } })
+        fresh.close()
+        v4.close()
+    }
+
+    // --- 5 to 6 ----------------------------------------------------------------------------------
+
+    @Test
+    fun migration5To6StatementsAreExactlyWhatRoomExportedForVersion6() {
+        val exportedNew = statementsOf(6).filter { sql -> "`edit_recipe`" in sql }
+        assertEquals(exportedNew.toSet(), DatabaseMigrations.STATEMENTS_5_6.toSet())
+    }
+
+    @Test
+    fun migration5To6KeepsEveryRowAndProducesTheSameObjectsAsAFreshVersion6() {
+        val v5 = DriverManager.getConnection("jdbc:sqlite::memory:")
+        statementsOf(5).forEach { v5.createStatement().use { s -> s.execute(it) } }
+        v5.createStatement().use { it.execute("INSERT INTO person (id, name, isFavorite, isHidden, isPinned, createdAt) VALUES (1, 'Marco', 0, 0, 0, 0)") }
+
+        DatabaseMigrations.STATEMENTS_5_6.forEach { v5.createStatement().use { s -> s.execute(it) } }
+
+        val fresh = DriverManager.getConnection("jdbc:sqlite::memory:")
+        statementsOf(6).forEach { fresh.createStatement().use { s -> s.execute(it) } }
+        assertEquals(userObjects(fresh), userObjects(v5))
+        assertTrue("table:edit_recipe" in userObjects(v5))
+        assertEquals(1, v5.createStatement().use { st -> st.executeQuery("SELECT COUNT(*) FROM person").use { rs -> rs.next(); rs.getInt(1) } })
+        fresh.close()
+        v5.close()
     }
 
     // --- helpers -------------------------------------------------------------------------------

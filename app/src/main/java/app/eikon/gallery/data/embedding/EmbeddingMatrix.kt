@@ -1,0 +1,106 @@
+package app.eikon.gallery.data.embedding
+
+/** One photo that matched a semantic query, with its cosine similarity to it. */
+data class ScoredMedia(val mediaId: Long, val score: Float)
+
+/**
+ * Which photos count as a match. CLIP scores are only meaningful relative to each other, so two rules
+ * apply together: a match must clear an absolute [floor], and must be within [margin] of the best match.
+ * They were chosen on 1,000 labelled photos with Italian and English queries (see docs/ML.md): at these
+ * values about 93% of photos that clearly show the searched thing were kept while about 2% of photos
+ * without it got through. [maxHits] bounds the size of a result on very large libraries.
+ */
+data class SemanticCutoff(val floor: Float = 0.23f, val margin: Float = 0.07f, val maxHits: Int = 3_000)
+
+/**
+ * Every stored embedding of the library in one contiguous block, searched by brute force. 100,000 photos
+ * are about 50 MB and one query is a few tens of milliseconds, which is why there is no index structure.
+ */
+class EmbeddingMatrix(private val ids: LongArray, private val vectors: ByteArray) {
+    init {
+        require(vectors.size == ids.size * Embeddings.DIMENSIONS) { "vectors do not match the ids" }
+    }
+
+    val size: Int get() = ids.size
+
+    /** The media id of the [index]th vector. */
+    fun idAt(index: Int): Long = ids[index]
+
+    /** Cosine similarity between the [a]th and [b]th photos, from their stored (quantized) vectors. */
+    fun similarity(a: Int, b: Int): Float {
+        var sum = 0
+        val oa = a * Embeddings.DIMENSIONS
+        val ob = b * Embeddings.DIMENSIONS
+        for (i in 0 until Embeddings.DIMENSIONS) sum += vectors[oa + i] * vectors[ob + i]
+        return sum / (QUANT * QUANT)
+    }
+
+    /** Photos matching [query] (a unit vector), best first. Empty when nothing clears the cutoff. */
+    fun search(query: FloatArray, cutoff: SemanticCutoff = SemanticCutoff()): List<ScoredMedia> {
+        if (ids.isEmpty()) return emptyList()
+        val scores = FloatArray(ids.size) { Embeddings.similarity(query, vectors, it * Embeddings.DIMENSIONS) }
+        val threshold = maxOf(cutoff.floor, scores.max() - cutoff.margin)
+        val hits = ArrayList<ScoredMedia>()
+        for (i in scores.indices) if (scores[i] >= threshold) hits += ScoredMedia(ids[i], scores[i])
+        hits.sortByDescending { it.score }
+        return if (hits.size > cutoff.maxHits) hits.subList(0, cutoff.maxHits).toList() else hits
+    }
+
+    /**
+     * Photos whose most likely description among [prompts] is the one at [target], with a probability of at least
+     * [minProbability]. Each photo's similarities to all the prompts go through a softmax with CLIP's usual scale
+     * of 100, so the result does not depend on how many other photos there are (unlike [search]).
+     */
+    fun classify(prompts: List<FloatArray>, target: Int, minProbability: Float): List<ScoredMedia> {
+        val hits = ArrayList<ScoredMedia>()
+        val logits = FloatArray(prompts.size)
+        for (i in ids.indices) {
+            for (p in prompts.indices) logits[p] = LOGIT_SCALE * Embeddings.similarity(prompts[p], vectors, i * Embeddings.DIMENSIONS)
+            val probability = softmaxOf(logits, target)
+            if (probability >= minProbability && logits.indices.all { it == target || logits[it] < logits[target] }) hits += ScoredMedia(ids[i], probability)
+        }
+        return hits.sortedByDescending { it.score }
+    }
+
+    private fun softmaxOf(logits: FloatArray, index: Int): Float {
+        val top = logits.max()
+        var sum = 0.0
+        for (l in logits) sum += Math.exp((l - top).toDouble())
+        return (Math.exp((logits[index] - top).toDouble()) / sum).toFloat()
+    }
+
+    /** Collects vectors one by one into the contiguous layout, growing if there are more than announced. */
+    class Builder(expected: Int) {
+        private var ids = LongArray(expected)
+        private var vectors = ByteArray(expected * Embeddings.DIMENSIONS)
+        private var count = 0
+
+        fun add(mediaId: Long, vector: ByteArray) {
+            require(vector.size == Embeddings.DIMENSIONS) { "stored vector has ${vector.size} bytes" }
+            if (count == ids.size) grow()
+            ids[count] = mediaId
+            System.arraycopy(vector, 0, vectors, count * Embeddings.DIMENSIONS, Embeddings.DIMENSIONS)
+            count++
+        }
+
+        fun build() = EmbeddingMatrix(ids.copyOf(count), vectors.copyOf(count * Embeddings.DIMENSIONS))
+
+        private fun grow() {
+            val size = maxOf(MIN_GROWTH, ids.size * 2)
+            ids = ids.copyOf(size)
+            vectors = vectors.copyOf(size * Embeddings.DIMENSIONS)
+        }
+
+        private companion object {
+            const val MIN_GROWTH = 1_024
+        }
+    }
+
+    private companion object {
+        /** The stored bytes are `round(value * 127)`. */
+        const val QUANT = 127f
+
+        /** CLIP's learned temperature: similarities are multiplied by this before the softmax. */
+        const val LOGIT_SCALE = 100f
+    }
+}
