@@ -1,6 +1,8 @@
 package app.eikon.gallery.feature.trash
 
 import android.app.Activity
+import android.content.IntentSender
+import android.content.res.Resources
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.IntentSenderRequest
@@ -44,6 +46,7 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberUpdatedState
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
@@ -89,18 +92,17 @@ fun TrashScreen(
     BackHandler(enabled = selection.isNotEmpty() && !viewerOpen, onBack = viewModel::clearSelection)
 
     val items = (state as? TrashUiState.Loaded)?.items.orEmpty()
+    val openViewer = { index: Int ->
+        viewerIndex = index
+        viewerOpen = true
+    }
     Box(modifier.fillMaxSize()) {
         Scaffold(
             containerColor = MaterialTheme.colorScheme.background,
             topBar = { TrashTopBar(items, selection, onBack, viewModel) },
             snackbarHost = { SnackbarHost(snackbar, Modifier.navigationBarsPadding()) },
         ) { inner ->
-            Column(Modifier.fillMaxSize().padding(top = inner.calculateTopPadding())) {
-                TrashBody(state, items, selection, viewModel) { index ->
-                    viewerIndex = index
-                    viewerOpen = true
-                }
-            }
+            Column(Modifier.fillMaxSize().padding(top = inner.calculateTopPadding())) { TrashBody(state, items, selection, viewModel, openViewer) }
         }
         TrashViewer(viewerOpen, viewerIndex, items, viewModel, { viewerIndex = it }) { viewerOpen = false }
     }
@@ -112,11 +114,7 @@ private fun TrashTopBar(items: List<TrashedMedia>, selection: Set<Long>, onBack:
     if (selection.isEmpty()) {
         TopAppBar(
             title = { Text(stringResource(R.string.collection_trash)) },
-            navigationIcon = {
-                IconButton(onClick = onBack) {
-                    Icon(painterResource(R.drawable.ic_arrow_back), stringResource(R.string.action_back))
-                }
-            },
+            navigationIcon = { IconButton(onClick = onBack) { Icon(painterResource(R.drawable.ic_arrow_back), stringResource(R.string.action_back)) } },
             colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.background),
         )
         return
@@ -124,17 +122,16 @@ private fun TrashTopBar(items: List<TrashedMedia>, selection: Set<Long>, onBack:
     val chosen = items.filter { it.item.id in selection }.map { it.item }
     TopAppBar(
         title = { Text(pluralStringResource(R.plurals.selected_count, selection.size, selection.size)) },
-        navigationIcon = {
-            IconButton(onClick = viewModel::clearSelection) {
-                Icon(painterResource(R.drawable.ic_close), stringResource(R.string.action_clear_selection))
-            }
-        },
-        actions = {
-            TextButton(onClick = { viewModel.restore(chosen) }) { Text(stringResource(R.string.trash_restore)) }
-            TextButton(onClick = { viewModel.deleteForever(chosen) }) { Text(stringResource(R.string.trash_delete_forever)) }
-        },
+        navigationIcon = { IconButton(onClick = viewModel::clearSelection) { Icon(painterResource(R.drawable.ic_close), stringResource(R.string.action_clear_selection)) } },
+        actions = { SelectionActions(chosen, viewModel) },
         colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.surfaceContainer),
     )
+}
+
+@Composable
+private fun SelectionActions(chosen: List<MediaItem>, viewModel: TrashViewModel) {
+    TextButton(onClick = { viewModel.restore(chosen) }) { Text(stringResource(R.string.trash_restore)) }
+    TextButton(onClick = { viewModel.deleteForever(chosen) }) { Text(stringResource(R.string.trash_delete_forever)) }
 }
 
 @Composable
@@ -224,7 +221,7 @@ private fun TrashViewer(
             onClose = { onClose() },
             leadingActions = leading,
             trailingActions = trailing,
-            infoSheet = { item: MediaItem, dismiss -> InfoSheet(item, dismiss) },
+            infoSheet = { item: MediaItem, dismiss -> InfoSheet(item, dismiss, editable = false) },
         )
     }
 }
@@ -233,24 +230,28 @@ private fun TrashViewer(
 private fun TrashEventEffects(
     viewModel: TrashViewModel,
     snackbar: SnackbarHostState,
-    launchSystemRequest: (android.content.IntentSender) -> Unit,
+    launchSystemRequest: (IntentSender) -> Unit,
 ) {
     val resources = LocalResources.current
     val currentLaunch by rememberUpdatedState(launchSystemRequest)
     LaunchedEffect(viewModel) {
-        viewModel.events.collect { event ->
-            val text = when (event) {
-                is TrashEvent.LaunchSystemRequest -> {
-                    currentLaunch(event.sender)
-                    null
-                }
-                is TrashEvent.Restored -> resources.getQuantityString(R.plurals.trash_restored, event.count, event.count)
-                is TrashEvent.Deleted -> resources.getQuantityString(R.plurals.trash_deleted, event.count, event.count)
-                TrashEvent.ActionFailed -> resources.getString(R.string.action_failed)
-            }
-            if (text != null) launch { snackbar.showSnackbar(text) }
-        }
+        viewModel.events.collect { event -> handle(event, resources, snackbar, currentLaunch) }
     }
+}
+
+/** One event of the view model: the system dialog to open, or a message (shown on the side, so the next event is not held up by it). */
+private fun CoroutineScope.handle(event: TrashEvent, resources: Resources, snackbar: SnackbarHostState, launchSystemRequest: (IntentSender) -> Unit) {
+    when (event) {
+        is TrashEvent.LaunchSystemRequest -> launchSystemRequest(event.sender)
+        else -> messageOf(event, resources)?.let { text -> launch { snackbar.showSnackbar(text) } }
+    }
+}
+
+private fun messageOf(event: TrashEvent, resources: Resources): String? = when (event) {
+    is TrashEvent.LaunchSystemRequest -> null
+    is TrashEvent.Restored -> resources.getQuantityString(R.plurals.trash_restored, event.count, event.count)
+    is TrashEvent.Deleted -> resources.getQuantityString(R.plurals.trash_deleted, event.count, event.count)
+    TrashEvent.ActionFailed -> resources.getString(R.string.action_failed)
 }
 
 private const val GRID_COLUMNS = 4

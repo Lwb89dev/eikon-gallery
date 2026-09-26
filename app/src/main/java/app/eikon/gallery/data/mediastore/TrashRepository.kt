@@ -42,19 +42,28 @@ class TrashRepository @Inject constructor(
 ) {
     private val resolver: ContentResolver get() = context.contentResolver
 
+    /** How many photos and videos are in the trash, without reading anything about them. */
+    suspend fun count(): Int = withContext(Dispatchers.IO) {
+        resolver.query(filesUri, arrayOf(MediaColumns._ID), trashedOnly(), null)?.use { it.count } ?: 0
+    }
+
+    /** The query arguments that ask for the trashed photos and videos only, the ones expiring first coming first. */
+    private fun trashedOnly() = Bundle().apply {
+        putInt(MediaStore.QUERY_ARG_MATCH_TRASHED, MediaStore.MATCH_ONLY)
+        putString(ContentResolver.QUERY_ARG_SQL_SELECTION, "${FileColumns.MEDIA_TYPE} IN (?, ?)")
+        putStringArray(
+            ContentResolver.QUERY_ARG_SQL_SELECTION_ARGS,
+            arrayOf(FileColumns.MEDIA_TYPE_IMAGE.toString(), FileColumns.MEDIA_TYPE_VIDEO.toString()),
+        )
+        putStringArray(ContentResolver.QUERY_ARG_SORT_COLUMNS, arrayOf(MediaColumns.DATE_EXPIRES))
+        putInt(ContentResolver.QUERY_ARG_SORT_DIRECTION, ContentResolver.QUERY_SORT_DIRECTION_ASCENDING)
+    }
+
+    private val filesUri = MediaStore.Files.getContentUri(MediaStore.VOLUME_EXTERNAL)
+
     suspend fun load(): List<TrashedMedia> = withContext(Dispatchers.IO) {
-        val args = Bundle().apply {
-            putInt(MediaStore.QUERY_ARG_MATCH_TRASHED, MediaStore.MATCH_ONLY)
-            putString(ContentResolver.QUERY_ARG_SQL_SELECTION, "${FileColumns.MEDIA_TYPE} IN (?, ?)")
-            putStringArray(
-                ContentResolver.QUERY_ARG_SQL_SELECTION_ARGS,
-                arrayOf(FileColumns.MEDIA_TYPE_IMAGE.toString(), FileColumns.MEDIA_TYPE_VIDEO.toString()),
-            )
-            putStringArray(ContentResolver.QUERY_ARG_SORT_COLUMNS, arrayOf(MediaColumns.DATE_EXPIRES))
-            putInt(ContentResolver.QUERY_ARG_SORT_DIRECTION, ContentResolver.QUERY_SORT_DIRECTION_ASCENDING)
-        }
         val projection = MediaRowReader.PROJECTION + MediaColumns.DATE_EXPIRES
-        val cursor = resolver.query(MediaStore.Files.getContentUri(MediaStore.VOLUME_EXTERNAL), projection, args, null)
+        val cursor = resolver.query(filesUri, projection, trashedOnly(), null)
             ?: return@withContext emptyList()
         cursor.use {
             val reader = MediaRowReader(it)

@@ -5,7 +5,7 @@ never opened for writing. The recipe is drawn over the original whenever the pho
 
 ## The guarantee
 
-- The original file is only ever **read**. Nothing in the editor, the viewer or the grid writes to it, renames it or moves it.
+- The original file is **read**, never rewritten by the editor. Nothing in the editor, the viewer or the grid writes to it, renames it or moves it. (The one exception is not an edit of the picture: changing the date or the location written inside a file from the info panel, which is described at the end of this page and never happens without the system asking first.)
 - There is **no "replace the original" action, by design.** The only way an edit becomes a file is **Save a copy**, which creates a *new* JPEG next to the
   original. If the user wants the original gone, they delete it separately, through Android's own confirmation, like any photo.
 - "Revert" (in the editor) and "Remove edits" (in the grid's selection bar) delete the recipe. Nothing has to be restored, because nothing was changed.
@@ -130,3 +130,22 @@ it never falls back to sending the unedited file.
 - **Not run on a device yet.** The renderer, the recipe format, the copy/paste rules, the database and its migration are covered by JVM tests (85 of them plus the migration's, on synthetic pictures
   whose expected values are computed by hand or checked as properties). The screens, the gestures of the crop overlay, the look of every tool on real photos, the speed on a phone and the
   saved copy's metadata have **not** been checked; `EditOnDeviceTest` covers the Android bitmap glue and is written but not run.
+
+## The one place eikon writes to a photo: its date and its location
+
+From the info panel a photo's **date taken** and **location** can be changed. This changes what the file says about itself (its EXIF tags), not its picture. It is the only thing in eikon that writes to a file of yours, and it is built so that it cannot cost you the photo:
+
+1. **Only JPEG, PNG and WebP** (the formats Android's EXIF library can write). HEIC, GIF and videos show their date and location but cannot be changed.
+2. **The system asks first** (`MediaStore.createWriteRequest`), for that one photo. Nothing is written before the answer.
+3. **The location permission is required.** Without `ACCESS_MEDIA_LOCATION` Android shows eikon a copy of the file with the location taken out; writing that back would destroy the location, so eikon refuses to work without it.
+4. eikon copies the **original bytes** (asked for unredacted) to a safety copy in its private storage, makes a working copy, and changes the tags **there**, after writing down in its database what the file said before (only the first time, so the true original is never lost).
+5. Only then does it write the working copy over the photo, and **reads the photo back and compares it, byte for byte (SHA-256), with what it wrote**.
+6. If anything fails, or the app is stopped by the system while it works, the safety copy is written back over the photo. If even that cannot be done (the app was killed), the safety copy stays, the info panel says so and offers to restore it, and no new change is accepted for that photo until it is.
+7. "Undo" (revert date, revert location) writes the recorded original tags back the same way.
+
+The photo's date in the library is updated at once (MediaStore is told the new date taken), and the places analysis of that photo is redone from the new file.
+
+A **caption** is different: it is text in eikon's own database (searchable), never written into a file.
+
+What has been checked: the arithmetic (coordinate parsing, tag formatting and snapshot round-trip, the writer's order of steps and every failure path against a stand-in) on the JVM, and `MetadataFileEditorTest` on real EXIF files on a device (written, **not run**). Not checked: the system's write dialog, MediaStore's reaction to a rewritten file, on any real phone.
+

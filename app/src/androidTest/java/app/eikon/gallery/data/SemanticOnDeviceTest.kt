@@ -49,9 +49,7 @@ class SemanticOnDeviceTest {
             var queryMs = 0L
             for ((words, expected) in EXPECTED) {
                 var best = -1L
-                queryMs += measureTimeMillis {
-                    best = matrix.search(text!!.embed(SemanticQuery.phrase(words)), SemanticCutoff(floor = 0f, margin = 1f)).first().mediaId
-                }
+                queryMs += measureTimeMillis { best = bestPhotoFor(matrix, text!!, words) }
                 assertEquals("best photo for '$words'", expected, best)
             }
             assertTrue("vectors must be unit length", vectors.all { abs(it.sumOf { x -> (x * x).toDouble() } - 1.0) < 1e-3 })
@@ -61,6 +59,9 @@ class SemanticOnDeviceTest {
             text?.close()
         }
     }
+
+    private fun bestPhotoFor(matrix: EmbeddingMatrix, text: ClipTextEncoder, words: String): Long =
+        matrix.search(text.embed(SemanticQuery.phrase(words)), SemanticCutoff(floor = 0f, margin = 1f)).first().mediaId
 
     private fun report(loadImageMs: Long, loadTextMs: Long, embedMs: Long, queryMs: Long) {
         val line = "image model loaded in $loadImageMs ms, text model in $loadTextMs ms; " +

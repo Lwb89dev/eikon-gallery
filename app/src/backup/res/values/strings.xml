@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="settings_privacy_network">This build has internet permission only for the backup to a server you run yourself, which is off until you set it up. Nothing else uses the network.</string>
+    <string name="backup_title">Backup to your own server</string>
+    <string name="backup_intro">Copies your photos and videos to a server you run yourself, over an encrypted connection. Nothing leaves this phone until you turn the backup on, it goes only to the server below, and eikon never deletes or changes anything on it. The password or key is kept encrypted, in the Android Keystore.</string>
+    <string name="backup_kind_immich">Immich (also what Umbrel installs)</string>
+    <string name="backup_kind_nextcloud">Nextcloud, or any WebDAV server</string>
+    <string name="backup_address">Server address (https://…)</string>
+    <string name="backup_username">Login name</string>
+    <string name="backup_folder">Folder on the server</string>
+    <string name="backup_api_key">API key</string>
+    <string name="backup_app_password">App password</string>
+    <string name="backup_secret_saved">Saved. Leave empty to keep it</string>
+    <string name="backup_help_immich">In Immich: Account settings, API keys, New API key. The permission it needs is asset.upload.</string>
+    <string name="backup_help_nextcloud">In Nextcloud: Personal settings, Security, Devices and sessions, create a new app password. Use that, not your login password.</string>
+    <string name="backup_save_test">Save and test the connection</string>
+    <string name="backup_connected">Connected to %1$s.</string>
+    <string name="backup_failed">Could not connect: %1$s</string>
+    <string name="backup_certificate_declined">The certificate was not trusted, so nothing was sent and nothing will be.</string>
+    <string name="backup_certificate_title">This server\'s certificate is not from an authority your phone trusts</string>
+    <string name="backup_certificate_body">%1$s presented the certificate below. Compare its fingerprint with the one your server shows (for example with: openssl x509 -noout -fingerprint -sha256). Trust it only if they are identical: from then on this one certificate is accepted for this server, and no other.</string>
+    <string name="backup_certificate_subject">Issued to: %1$s</string>
+    <string name="backup_certificate_expires">Valid until %1$s</string>
+    <string name="backup_certificate_self_signed">It is signed by itself, as the certificate of a home server usually is.</string>
+    <string name="backup_certificate_trust">Trust this certificate</string>
+    <string name="backup_enable">Back up my photos and videos</string>
+    <string name="backup_test_first">Save and test the connection first.</string>
+    <string name="backup_wifi_only">Only on Wi-Fi</string>
+    <string name="backup_only_charging">Only while charging</string>
+    <string name="backup_videos">Include videos</string>
+    <string name="backup_hidden">Include hidden photos</string>
+    <string name="backup_hidden_note">Hidden photos will be sent to your server too, where they are as visible as anything else there.</string>
+    <string name="backup_confirm_title">Start the backup?</string>
+    <plurals name="backup_confirm_body">
+        <item quantity="one">%1$d photo or video will be copied to %2$s, a little at a time, when the phone is on the network you allowed. Nothing on the phone or on the server is deleted.</item>
+        <item quantity="other">%1$d photos and videos will be copied to %2$s, a little at a time, when the phone is on the network you allowed. Nothing on the phone or on the server is deleted.</item>
+    </plurals>
+    <string name="backup_confirm_start">Start</string>
+    <string name="backup_location_note">Android hides where photos were taken from apps that do not have the photo-location permission, so the copies on your server would have no location.</string>
+    <string name="backup_progress">Backed up: %1$,d of %2$,d</string>
+    <plurals name="backup_refused">
+        <item quantity="one">%1$d photo was refused by the server and will not be tried again until you ask.</item>
+        <item quantity="other">%1$d photos were refused by the server and will not be tried again until you ask.</item>
+    </plurals>
+    <string name="backup_running">Backing up now…</string>
+    <string name="backup_idle">Waiting for the right moment (the network you allowed, battery not low).</string>
+    <string name="backup_last_run">Last run %1$s. Sent: %2$d. Already there: %3$d. Refused: %4$d.</string>
+    <string name="backup_stopped">It stopped because %1$s</string>
+    <string name="backup_stop_power_save">Battery Saver is on.</string>
+    <string name="backup_stop_thermal">the phone was too warm.</string>
+    <string name="backup_stop_unreachable">the server could not be reached or was busy. It will try again.</string>
+    <string name="backup_stop_unauthorized">the server did not accept the key or password.</string>
+    <string name="backup_stop_untrusted">the server\'s certificate is not one you trusted.</string>
+    <string name="backup_stop_misconfigured">the address is not right for this kind of server.</string>
+    <string name="backup_stop_refusals">the server refused many files in a row, which points to a limit on the server, not to the photos.</string>
+    <string name="backup_now">Back up now</string>
+    <string name="backup_retry_refused">Try the refused ones again</string>
+</resources>

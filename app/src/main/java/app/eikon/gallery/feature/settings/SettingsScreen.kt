@@ -42,39 +42,36 @@ import androidx.lifecycle.compose.LifecycleEventEffect
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.eikon.gallery.R
 import app.eikon.gallery.data.db.IndexStage
+import app.eikon.gallery.data.db.encryption.Protection
+import app.eikon.gallery.data.db.encryption.ProtectionStatus
 import app.eikon.gallery.data.indexing.AnalysisStatus
 import app.eikon.gallery.data.indexing.StageProgress
 import app.eikon.gallery.data.settings.AnalysisSettings
+import app.eikon.gallery.data.settings.AppSettings
 import app.eikon.gallery.data.settings.ThemeMode
+import app.eikon.gallery.feature.backup.BackupSettingsSection
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SettingsScreen(
     onBack: () -> Unit,
+    onOpenLicenses: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: SettingsViewModel = hiltViewModel(),
 ) {
     val settings by viewModel.settings.collectAsStateWithLifecycle()
     val analysis by viewModel.analysis.collectAsStateWithLifecycle()
     val canReadLocation by viewModel.canReadLocation.collectAsStateWithLifecycle()
+    val storage by viewModel.storage.collectAsStateWithLifecycle()
     val locationPermission = rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) {
         viewModel.refreshLocationPermission()
     }
     LifecycleEventEffect(Lifecycle.Event.ON_RESUME) { viewModel.refreshLocationPermission() }
+    val allowLocations = { locationPermission.launch(Manifest.permission.ACCESS_MEDIA_LOCATION) }
     Scaffold(
         modifier = modifier,
         containerColor = MaterialTheme.colorScheme.background,
-        topBar = {
-            TopAppBar(
-                title = { Text(stringResource(R.string.settings_title)) },
-                navigationIcon = {
-                    IconButton(onClick = onBack) {
-                        Icon(painterResource(R.drawable.ic_arrow_back), stringResource(R.string.action_back))
-                    }
-                },
-                colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.background),
-            )
-        },
+        topBar = { SettingsTopBar(onBack) },
     ) { inner ->
         Column(
             Modifier
@@ -84,36 +81,65 @@ fun SettingsScreen(
                 .padding(horizontal = 16.dp, vertical = 8.dp),
         ) {
             GroupTitle(R.string.settings_appearance)
-            ThemeMode.entries.forEach { mode ->
-                ThemeOption(mode, selected = mode == settings.themeMode) { viewModel.setThemeMode(mode) }
-            }
+            ThemeOptions(settings.themeMode, viewModel::setThemeMode)
             Spacer(Modifier.height(24.dp))
-            AnalysisSection(settings.analysis, analysis, canReadLocation, viewModel, onAllowLocations = {
-                locationPermission.launch(Manifest.permission.ACCESS_MEDIA_LOCATION)
-            })
+            AnalysisSection(settings.analysis, analysis, canReadLocation, viewModel, allowLocations)
             Spacer(Modifier.height(24.dp))
-            GroupTitle(R.string.settings_security)
-            SwitchRow(R.string.setting_lock_hidden, settings.lockHidden, viewModel::setLockHidden)
-            SwitchRow(R.string.setting_lock_trash, settings.lockTrash, viewModel::setLockTrash)
-            SwitchRow(R.string.setting_show_hidden, settings.showHidden, viewModel::setShowHidden)
-            Text(
-                text = stringResource(R.string.settings_security_body),
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                modifier = Modifier.padding(top = 4.dp),
-            )
+            BackupSettingsSection()
             Spacer(Modifier.height(24.dp))
-            GroupTitle(R.string.settings_privacy)
-            Text(
-                text = stringResource(R.string.settings_privacy_body),
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-            )
+            SecuritySection(settings, viewModel)
             Spacer(Modifier.height(24.dp))
-            GroupTitle(R.string.settings_about)
-            Text(stringResource(R.string.settings_version, versionName()), style = MaterialTheme.typography.bodyMedium)
+            PrivacySection(storage)
+            Spacer(Modifier.height(24.dp))
+            AboutSection(onOpenLicenses)
         }
     }
+}
+
+/** How Hidden and Recently deleted are protected, and what the screen shows of eikon in the recent-apps list. */
+@Composable
+private fun SecuritySection(settings: AppSettings, viewModel: SettingsViewModel) {
+    GroupTitle(R.string.settings_security)
+    SwitchRow(R.string.setting_lock_hidden, settings.lockHidden, viewModel::setLockHidden)
+    SwitchRow(R.string.setting_lock_trash, settings.lockTrash, viewModel::setLockTrash)
+    SwitchRow(R.string.setting_show_hidden, settings.showHidden, viewModel::setShowHidden)
+    SwitchRow(R.string.setting_secure_screens, settings.secureScreens, viewModel::setSecureScreens)
+    Text(
+        text = stringResource(R.string.settings_security_body),
+        style = MaterialTheme.typography.bodySmall,
+        color = MaterialTheme.colorScheme.onSurfaceVariant,
+        modifier = Modifier.padding(top = 4.dp),
+    )
+}
+
+/** What eikon keeps, whether it uses the network, and whether the library's database is encrypted. */
+@Composable
+private fun PrivacySection(storage: ProtectionStatus?) {
+    GroupTitle(R.string.settings_privacy)
+    Text(
+        text = stringResource(R.string.settings_privacy_body),
+        style = MaterialTheme.typography.bodyMedium,
+        color = MaterialTheme.colorScheme.onSurfaceVariant,
+    )
+    NoteText(R.string.settings_privacy_network)
+    StorageNote(storage)
+}
+
+@Composable
+private fun AboutSection(onOpenLicenses: () -> Unit) {
+    GroupTitle(R.string.settings_about)
+    Text(stringResource(R.string.settings_version, versionName()), style = MaterialTheme.typography.bodyMedium)
+    TextButton(onClick = onOpenLicenses) { Text(stringResource(R.string.settings_licenses)) }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun SettingsTopBar(onBack: () -> Unit) {
+    TopAppBar(
+        title = { Text(stringResource(R.string.settings_title)) },
+        navigationIcon = { IconButton(onClick = onBack) { Icon(painterResource(R.drawable.ic_arrow_back), stringResource(R.string.action_back)) } },
+        colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.background),
+    )
 }
 
 /** Progress of the background analysis and the switches that control it. */
@@ -171,6 +197,21 @@ private fun AnalysisProgress(settings: AnalysisSettings, status: AnalysisStatus?
     }
 }
 
+/** Says whether the library's database is encrypted, and why not if it could not be. */
+@Composable
+private fun StorageNote(status: ProtectionStatus?) {
+    if (status == null) return
+    if (status.protection == Protection.NOT_ENCRYPTED) {
+        Text(
+            stringResource(R.string.settings_storage_not_encrypted, status.failure.orEmpty()),
+            style = MaterialTheme.typography.bodySmall,
+            color = MaterialTheme.colorScheme.error,
+        )
+        return
+    }
+    NoteText(R.string.settings_storage_encrypted)
+}
+
 @Composable
 private fun NoteText(@StringRes text: Int) {
     Text(stringResource(text), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
@@ -200,7 +241,7 @@ private fun LocationPermissionPrompt(onAllow: () -> Unit) {
 }
 
 @Composable
-private fun SwitchRow(label: Int, checked: Boolean, onChange: (Boolean) -> Unit) {
+internal fun SwitchRow(label: Int, checked: Boolean, onChange: (Boolean) -> Unit) {
     Row(
         Modifier
             .fillMaxWidth()
@@ -215,13 +256,18 @@ private fun SwitchRow(label: Int, checked: Boolean, onChange: (Boolean) -> Unit)
 }
 
 @Composable
-private fun GroupTitle(title: Int) {
+internal fun GroupTitle(title: Int) {
     Text(
         text = stringResource(title),
         style = MaterialTheme.typography.labelLarge,
         color = MaterialTheme.colorScheme.primary,
         modifier = Modifier.padding(vertical = 8.dp),
     )
+}
+
+@Composable
+private fun ThemeOptions(current: ThemeMode, onSelect: (ThemeMode) -> Unit) {
+    ThemeMode.entries.forEach { mode -> ThemeOption(mode, selected = mode == current) { onSelect(mode) } }
 }
 
 @Composable

@@ -7,7 +7,6 @@ import java.util.Locale
 import kotlin.math.asin
 import kotlin.math.cos
 import kotlin.math.floor
-import kotlin.math.max
 import kotlin.math.sin
 import kotlin.math.sqrt
 
@@ -43,7 +42,10 @@ class Gazetteer private constructor(
 ) : PlaceMatcher {
     val cityCount: Int get() = cities.size
 
-    fun city(id: Long): City? = cities.firstOrNull { it.id == id }
+    /** Position in [cities] by city id, so a city is found without reading the whole list (25,000 cities, asked for once per row of the Places list). */
+    private val cityIndex: Map<Long, Int> = cities.withIndex().associate { (index, city) -> city.id to index }
+
+    fun city(id: Long): City? = cityIndex[id]?.let { cities[it] }
 
     /**
      * Cities with at least [minPopulation] inhabitants inside the box, biggest first, at most [limit] of them: the
@@ -58,28 +60,27 @@ class Gazetteer private constructor(
 
     /** The nearest city within [maxKm] of the point, or null in the middle of nowhere. */
     fun nearest(latitude: Double, longitude: Double, maxKm: Double = DEFAULT_MAX_KM): City? {
+        var best: Pair<City, Double>? = null
         for (radius in 1..MAX_CELL_RADIUS) {
-            val best = bestInRing(latitude, longitude, radius) ?: continue
-            return if (best.second <= maxKm) best.first else null
+            best = nearestWithin(latitude, longitude, radius)
+            // A square of cells reaches at least this far from the point in every direction (a degree of longitude is shorter towards the poles), so
+            // a city nearer than that cannot be hiding outside it. A farther one might be beaten by a city outside, so a wider square is tried.
+            val reach = radius * KM_PER_DEGREE * cos(Math.toRadians(latitude))
+            if (best != null && best.second <= reach) break
         }
-        return null
+        return best?.takeIf { it.second <= maxKm }?.first
     }
 
-    private fun bestInRing(latitude: Double, longitude: Double, radius: Int): Pair<City, Double>? {
+    /** The nearest city among the grid cells within [radius] cells of the point's own, with its distance in kilometres. */
+    private fun nearestWithin(latitude: Double, longitude: Double, radius: Int): Pair<City, Double>? {
         val latCell = floor(latitude).toInt()
         val lonCell = floor(longitude).toInt()
-        var best: Pair<City, Double>? = null
-        for (dLat in -radius..radius) {
-            for (dLon in -radius..radius) {
-                val candidates = grid[cellKey(latCell + dLat, lonCell + dLon)] ?: continue
-                for (index in candidates) {
-                    val city = cities[index]
-                    val distance = haversineKm(latitude, longitude, city.latitude, city.longitude)
-                    if (best == null || distance < best.second) best = city to distance
-                }
-            }
-        }
-        return best
+        val around = -radius..radius
+        return around.asSequence()
+            .flatMap { dLat -> around.asSequence().map { dLon -> cellKey(latCell + dLat, lonCell + dLon) } }
+            .flatMap { key -> grid[key]?.asSequence().orEmpty() }
+            .map { index -> cities[index].let { it to haversineKm(latitude, longitude, it.latitude, it.longitude) } }
+            .minByOrNull { it.second }
     }
 
     override fun match(normalizedName: String): PlaceMatch? {
@@ -95,6 +96,7 @@ class Gazetteer private constructor(
         private const val MAX_CELL_RADIUS = 3
         private const val MAX_CITIES_PER_NAME = 50
         private const val EARTH_RADIUS_KM = 6371.0
+        private const val KM_PER_DEGREE = 111.0
 
         /**
          * Builds the lookup from the asset files.
@@ -182,7 +184,7 @@ class Gazetteer private constructor(
             val dLon = Math.toRadians(lon2 - lon1)
             val a = sin(dLat / 2) * sin(dLat / 2) +
                 cos(Math.toRadians(lat1)) * cos(Math.toRadians(lat2)) * sin(dLon / 2) * sin(dLon / 2)
-            return 2 * EARTH_RADIUS_KM * asin(sqrt(max(0.0, a)))
+            return 2 * EARTH_RADIUS_KM * asin(sqrt(a.coerceIn(0.0, 1.0)))
         }
     }
 }

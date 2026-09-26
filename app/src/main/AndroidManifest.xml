@@ -18,9 +18,10 @@
     <uses-permission android:name="android.permission.ACCESS_MEDIA_LOCATION" />
 
     <!--
-        WAKE_LOCK, ACCESS_NETWORK_STATE and RECEIVE_BOOT_COMPLETED are added by WorkManager (and Media3),
-        which runs the background analysis and resumes it after a reboot. None of them allows network
-        access; only INTERNET would, and it is absent.
+        WAKE_LOCK, ACCESS_NETWORK_STATE, FOREGROUND_SERVICE and RECEIVE_BOOT_COMPLETED are added by WorkManager (and
+        Media3), which runs the background analysis and resumes it after a reboot. None of them allows network
+        access; only INTERNET would. It is absent from the `standard` build (the build fails if it appears) and
+        declared only by the `backup` build (src/backup/AndroidManifest.xml).
     -->
 
     <application

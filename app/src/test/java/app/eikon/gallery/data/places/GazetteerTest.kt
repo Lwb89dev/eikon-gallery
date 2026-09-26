@@ -39,6 +39,23 @@ class GazetteerTest {
     }
 
     @Test
+    fun aCityJustOutsideTheNearestCellsIsNotMissedTowardsThePoles() {
+        // At 60 degrees north a degree of longitude is about 55 km. Vik is 27 km east and 66 km north of the point, in the point's own cell row; Hamn is 57 km away but two cells east.
+        val north = Gazetteer.build(
+            sequenceOf("1\tVik\t60.6\t10.5\tNO\t01\t20000\t", "2\tHamn\t60.0\t12.01\tNO\t01\t20000\t"),
+            emptySequence(), emptySequence(), listOf(Locale.ENGLISH),
+        )
+
+        assertEquals("Hamn", north.nearest(60.0, 10.99)!!.name)
+    }
+
+    @Test
+    fun aCityIsFoundByItsIdWithoutScanningAndAMissingOneIsNull() {
+        assertEquals("Milan", gazetteer.city(3173435)!!.name)
+        assertNull(gazetteer.city(42))
+    }
+
+    @Test
     fun aPointFarFromEveryCityIsUnknown() {
         assertNull(gazetteer.nearest(0.0, 0.0)) // mid-Atlantic
         assertNull(gazetteer.nearest(41.9, 12.5, maxKm = 0.1))

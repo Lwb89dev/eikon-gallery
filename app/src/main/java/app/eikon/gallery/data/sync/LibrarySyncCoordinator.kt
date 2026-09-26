@@ -72,7 +72,8 @@ class LibrarySyncCoordinator @Inject constructor(
         } catch (cancelled: CancellationException) {
             throw cancelled
         } catch (error: Exception) {
-            Log.w(TAG, "Library sync failed", error)
+            // Only the kind of error: its message (an SQL statement, a file address) can name what is in the library.
+            Log.w(TAG, "Library sync failed: ${error.javaClass.simpleName}")
             SyncStatus.Failed
         }
     }

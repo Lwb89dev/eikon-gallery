@@ -71,6 +71,8 @@ data class AppSettings(
     val lockTrash: Boolean = false,
     /** Show the Hidden entry in Collections at all. */
     val showHidden: Boolean = true,
+    /** Block screenshots and show a blank card in the recent-apps list, everywhere. Hidden and Recently deleted do it whatever this says. */
+    val secureScreens: Boolean = false,
     val analysis: AnalysisSettings = AnalysisSettings(),
 ) {
     /** The main library: everything not hidden, with the saved filters and order. */
@@ -126,6 +128,10 @@ class SettingsRepository @Inject constructor(
         store.edit { it[SHOW_HIDDEN] = enabled }
     }
 
+    suspend fun setSecureScreens(enabled: Boolean) {
+        store.edit { it[SECURE_SCREENS] = enabled }
+    }
+
     suspend fun setAnalysis(transform: (AnalysisSettings) -> AnalysisSettings) {
         val current = state.value?.analysis ?: AnalysisSettings()
         val next = transform(current)
@@ -162,6 +168,7 @@ class SettingsRepository @Inject constructor(
         lockHidden = prefs[LOCK_HIDDEN] ?: true,
         lockTrash = prefs[LOCK_TRASH] ?: false,
         showHidden = prefs[SHOW_HIDDEN] ?: true,
+        secureScreens = prefs[SECURE_SCREENS] ?: false,
         analysis = AnalysisSettings(
             paused = prefs[ANALYSIS_PAUSED] ?: false,
             onlyWhileCharging = prefs[ANALYSIS_CHARGING] ?: true,
@@ -186,6 +193,7 @@ class SettingsRepository @Inject constructor(
         val LOCK_HIDDEN = booleanPreferencesKey("lock_hidden")
         val LOCK_TRASH = booleanPreferencesKey("lock_trash")
         val SHOW_HIDDEN = booleanPreferencesKey("show_hidden")
+        val SECURE_SCREENS = booleanPreferencesKey("secure_screens")
         val ANALYSIS_PAUSED = booleanPreferencesKey("analysis_paused")
         val ANALYSIS_CHARGING = booleanPreferencesKey("analysis_only_charging")
         val ANALYSIS_PLACES = booleanPreferencesKey("analysis_places")

@@ -8,8 +8,6 @@ import javax.inject.Inject
 import javax.inject.Singleton
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.sync.Mutex
-import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.withContext
 
 /** How a search phrase is worded for the text model. */
@@ -34,10 +32,6 @@ class SemanticSearchService @Inject constructor(
     private val settings: SettingsRepository,
     private val health: StageHealth,
 ) {
-    private val matrixLock = Mutex()
-    private var matrix: EmbeddingMatrix? = null
-    private var matrixCount = -1
-
     /**
      * Returns [spec] marked as semantic when the free words found photos by what they show. When the feature
      * is off, there are no free words, or nothing matched, the spec comes back unchanged and the search
@@ -65,19 +59,8 @@ class SemanticSearchService @Inject constructor(
 
     /** Photos matching [words], best first. */
     suspend fun search(words: String): List<ScoredMedia> = withContext(Dispatchers.Default) {
-        val photos = currentMatrix()
+        val photos = repository.matrix()
         if (photos.size == 0) return@withContext emptyList()
         photos.search(textEncoders.embed(SemanticQuery.phrase(words)))
-    }
-
-    /** The in-memory copy of the vectors, reloaded only when photos have been analysed since. */
-    private suspend fun currentMatrix(): EmbeddingMatrix = matrixLock.withLock {
-        val count = repository.count()
-        val cached = matrix
-        if (cached != null && count == matrixCount) return cached
-        repository.loadMatrix().also {
-            matrix = it
-            matrixCount = count
-        }
     }
 }

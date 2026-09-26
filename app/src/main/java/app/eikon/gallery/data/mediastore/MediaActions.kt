@@ -29,6 +29,9 @@ class MediaActions @Inject constructor(
     fun trashRequest(items: Collection<MediaItem>): IntentSender =
         MediaStore.createTrashRequest(resolver, items.map { it.uri }, true).intentSender
 
+    /** Asks the user, through the system, to let eikon change the file of [item] (its date or location); nothing is written before the answer. */
+    fun writeRequest(item: MediaItem): IntentSender = MediaStore.createWriteRequest(resolver, listOf(item.uri)).intentSender
+
     fun favoriteRequest(items: Collection<MediaItem>, favorite: Boolean): IntentSender =
         MediaStore.createFavoriteRequest(resolver, items.map { it.uri }, favorite).intentSender
 

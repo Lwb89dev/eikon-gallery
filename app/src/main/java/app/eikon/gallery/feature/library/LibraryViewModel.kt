@@ -16,6 +16,7 @@ import app.eikon.gallery.data.db.PersonSummary
 import app.eikon.gallery.data.edit.EditClipboard
 import app.eikon.gallery.data.edit.EditRepository
 import app.eikon.gallery.data.edit.EditedShare
+import app.eikon.gallery.data.indexing.AnalysisPriority
 import app.eikon.gallery.data.indexing.AnalysisStatus
 import app.eikon.gallery.data.embedding.PetClassifier
 import app.eikon.gallery.data.places.PlacesRepository
@@ -44,6 +45,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import java.time.LocalDate
 import java.time.ZoneId
 import javax.inject.Inject
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
@@ -132,6 +134,7 @@ class LibraryViewModel @Inject constructor(
     private val editRepository: EditRepository,
     private val editClipboard: EditClipboard,
     private val editedShare: EditedShare,
+    private val analysisPriority: AnalysisPriority,
     analysisStatusRepository: AnalysisStatusRepository,
     private val savedState: SavedStateHandle,
 ) : ViewModel() {
@@ -322,6 +325,8 @@ class LibraryViewModel @Inject constructor(
             preparingShare.value = true
             try {
                 sendEvent(LibraryEvent.Share(actions.shareIntent(editedShare.prepare(items))))
+            } catch (cancelled: CancellationException) {
+                throw cancelled
             } catch (_: Exception) {
                 sendEvent(LibraryEvent.ActionFailed)
             } catch (_: OutOfMemoryError) {
@@ -458,6 +463,9 @@ class LibraryViewModel @Inject constructor(
             clearSelection()
         }
     }
+
+    /** The photos on screen: the analysis does these first (see [AnalysisPriority]). */
+    fun onVisible(ids: List<Long>) = analysisPriority.show(ids)
 
     // --- Edits ----------------------------------------------------------------------------------------
 

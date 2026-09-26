@@ -1,5 +1,6 @@
 package app.eikon.gallery.feature.edit
 
+import android.graphics.Bitmap
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.gestures.detectDragGestures
@@ -50,13 +51,7 @@ fun EditPreview(state: EditUiState, viewModel: EditViewModel, modifier: Modifier
             if (!cropping) detectTapGestures(onPress = { comparing = true; tryAwaitRelease(); comparing = false })
         },
     ) {
-        if (shown != null) {
-            Image(shown.asImageBitmap(), contentDescription = null, contentScale = ContentScale.Fit, modifier = Modifier.fillMaxSize())
-            if (cropping) {
-                val aspect = shown.width.toFloat() / shown.height
-                CropOverlay(aspect, state.recipe.geometry.crop, CropTool.ratioOf(state.cropShape, aspect)) { viewModel.geometry { g -> g.copy(crop = it) } }
-            }
-        }
+        if (shown != null) PreviewPicture(shown, state, viewModel, cropping)
         if (!cropping && !state.recipe.isIdentity) {
             // Holding the picture does the same; this is for whoever cannot hold (a screen reader, a shaky hand) or has not found that yet.
             FilterChip(
@@ -67,6 +62,15 @@ fun EditPreview(state: EditUiState, viewModel: EditViewModel, modifier: Modifier
             )
         }
     }
+}
+
+/** The picture, with the crop rectangle over it while the crop tool is open. */
+@Composable
+private fun PreviewPicture(shown: Bitmap, state: EditUiState, viewModel: EditViewModel, cropping: Boolean) {
+    Image(shown.asImageBitmap(), contentDescription = null, contentScale = ContentScale.Fit, modifier = Modifier.fillMaxSize())
+    if (!cropping) return
+    val aspect = shown.width.toFloat() / shown.height
+    CropOverlay(aspect, state.recipe.geometry.crop, CropTool.ratioOf(state.cropShape, aspect)) { viewModel.geometry { g -> g.copy(crop = it) } }
 }
 
 /**

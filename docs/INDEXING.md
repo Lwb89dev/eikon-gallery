@@ -36,7 +36,7 @@ Location clustering (the map's markers) is not a stage: it is computed when the 
   cancelled loses at most the photo in flight; the next run continues where it stopped. A photo that fails
   3 times is left alone.
 - **Order**: places first (fast), then the fingerprints for duplicates (fast), then what photos show, then faces, then text (slowest); within a stage, newest photos first, because those are the ones
-  most likely to be searched for. (Prioritizing what is currently on screen is not implemented.)
+  most likely to be searched for. The photos currently on screen come before the rest (`AnalysisPriority`: the screens tell the analysis which photos they show once scrolling settles; only ids, in memory, forgotten when the screen goes).
 - **Battery Saver**: a scheduled run does not start on a photo while Battery Saver is on (nothing is marked failed; the next run tries again). "Analyze now" is the user's own request and goes ahead.
 - **Battery and heat**: the runner reads the platform thermal status between photos. Moderate heat adds a
   pause after each photo; severe heat stops the run. The user can pause everything, turn each step off, and
@@ -66,6 +66,7 @@ All of it in the private app database, excluded from backups, and **deleted when
 - `index_state`: which stage has been done for which photo.
 - `media_embedding`: the 512-byte description of what each photo shows.
 - `perceptual_hash` and `content_hash`: fingerprints of pictures and files, each with the file's modification time so an edited photo is fingerprinted again.
+- When a sync finds that a photo's **file was rewritten** (its modification time moved *and* its size or dimensions changed; a time that moved alone, as marking a favorite may do, does not count), everything the analysis learned about it is forgotten (`FileChange`, `RoomMediaIndex`) so it is learned again from the file as it is now: a photo edited in another app no longer matches its old text, place or faces.
 - `face` and `person`: the faces found, their 128-number descriptions, and the groups they were put in and the names you gave them.
 
 See [PRIVACY.md](PRIVACY.md) for what this means for the user.

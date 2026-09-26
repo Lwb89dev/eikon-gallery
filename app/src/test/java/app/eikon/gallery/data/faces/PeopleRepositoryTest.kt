@@ -61,6 +61,19 @@ class PeopleRepositoryTest {
     }
 
     @Test
+    fun aPhotoWhoseFacesChangedNoLongerCountsTowardsThePersonItWasIn() = runTest {
+        // Photo 1 was first analysed as showing one person; edited since, it now shows someone quite different.
+        repository.saveFaces(1, listOf(face(1f, 0f, 0f)))
+        repository.saveFaces(1, listOf(face(0f, 1f, 0f)))
+
+        // A face like the first one must not be pulled to the person who is now in photo 1 by what photo 1 used to show.
+        repository.saveFaces(2, listOf(face(1f, 0f, 0f)))
+
+        assertNotEquals(personOf(1), personOf(2))
+        assertEquals("the person only the old picture showed is gone with it", 2, dao.people.size)
+    }
+
+    @Test
     fun aPhotoWithoutFacesStoresNothing() = runTest {
         repository.saveFaces(1, emptyList())
         assertEquals(0, dao.faces.size)
@@ -246,8 +259,10 @@ class PeopleRepositoryTest {
             people.keys.toList().forEach { if (people.getValue(it).name == null && it !in used) people.remove(it) }
         }
 
-        override suspend fun deleteFacesOfPhoto(mediaId: Long) {
+        override suspend fun deleteFacesOfPhoto(mediaId: Long): Int {
+            val before = faces.size
             faces.removeAll { it.mediaId == mediaId }
+            return before - faces.size
         }
 
         override suspend fun assignedVectors(after: Long, limit: Int): List<AssignedVector> =

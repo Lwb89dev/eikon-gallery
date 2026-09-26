@@ -35,7 +35,7 @@ class DuplicatesRepository @Inject constructor(
 
     suspend fun similar(): List<DuplicateEntry> = withContext(Dispatchers.Default) {
         val dismissed = dao.dismissedKeys().toSet()
-        val matrix = embeddings.loadMatrix()
+        val matrix = embeddings.matrix()
         if (matrix.size == 0) return@withContext emptyList()
         val times = dao.photoTimes().associate { it.id to it.takenAt }
         val duplicateSets = findDuplicates().map { group -> group.members.map { it.id }.toSet() }

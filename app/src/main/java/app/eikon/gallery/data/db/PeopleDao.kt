@@ -87,8 +87,9 @@ interface PeopleDao {
 
     // --- analysis ------------------------------------------------------------------------------------
 
+    /** Returns how many faces were removed, so the caller knows whether the photo had been analysed before. */
     @Query("DELETE FROM face WHERE mediaId = :mediaId")
-    suspend fun deleteFacesOfPhoto(mediaId: Long)
+    suspend fun deleteFacesOfPhoto(mediaId: Long): Int
 
     @Query("SELECT id, personId, vector FROM face WHERE personId IS NOT NULL AND ignored = 0 AND id > :after ORDER BY id LIMIT :limit")
     suspend fun assignedVectors(after: Long, limit: Int): List<AssignedVector>

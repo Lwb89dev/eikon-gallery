@@ -20,7 +20,7 @@ Known gaps inside Phase 1, in priority order:
 1. Run on a device and fix what it reveals.
 2. Grid to viewer transition: a flight of the thumbnail since Phase 7 (not seen on a device yet).
 3. "Selfies" filter: no reliable signal in MediaStore. It would need eikon to know who the phone's owner is (it never asks). The "Edited" filter exists since Phase 7.
-4. No thumbnail scrubber for video; no editing of date/location/caption; "add to album" and "hide"
+4. No thumbnail scrubber for video; date, location and caption can be edited since Phase 9; "add to album" and "hide"
    in multi-select arrive with Phase 2.
 5. Media3 adds `ACCESS_NETWORK_STATE` to the manifest; remove it after checking playback on a device.
 6. GIF/animated WebP are shown as still images.
@@ -59,7 +59,7 @@ day" is not implemented (drag-select covers ranges).
       and models on real photos, the location-permission flow, the info panel additions. The logic around
       them is covered by 100+ new JVM tests; new instrumented tests are written but have not been run.
 
-Known gaps: videos are not analyzed; no thumbnail-on-screen prioritization; no "select and copy text" overlay
+Known gaps: videos are not analyzed; on-screen photos are analysed first since Phase 9; no "select and copy text" overlay
 on the photo itself (text is shown in Info); no URL, phone or email detection in recognized text; only
 English and Italian text; region names are English except a small Italian alias list.
 
@@ -79,9 +79,9 @@ English and Italian text; region names are English except a small Italian alias 
       the models and compare with reference tooling). Speed, battery, memory and heat on a phone are **unmeasured**.
       `SemanticOnDeviceTest` and `FacesOnDeviceTest` are written to measure them.
 
-Known gaps: videos are not analyzed; no thumbnail-on-screen prioritization; people cannot be told apart from pets or
+Known gaps: videos are not analyzed; on-screen photos are analysed first since Phase 9; people cannot be told apart from pets or
 between two dogs; no age handling; no "selfies" collection (would need to know who the phone's owner is, which eikon
-never asks); no captions; the release APK is about 310 MB, mostly models (see [ML.md](ML.md)).
+never asks); captions exist since Phase 9; the release APK is about 310 MB, mostly models (see [ML.md](ML.md)).
 
 ## Phase 5 — Smart collections
 
@@ -126,7 +126,32 @@ the "selfies" filter still has no signal. (Sharing an edited photo shares the ed
 - [~] **Not run on a device**: the flight's alignment on real screens, whether the baseline profile speeds up the first launch, TalkBack, the FileProvider share and "Open with" from a real app. The battery policy, the migration, the query plans and the geometry are covered by JVM tests.
 
 Not done: a *measured* baseline profile (needs a Macrobenchmark module and a device); animated GIF and WebP still show their first frame; the Media3 `ACCESS_NETWORK_STATE` permission is still merged in (removing it needs playback checked on a
-device); on-screen photos are not analysed first; no thumbnail scrubber for video; very large albums sort their members for each page (see [PERFORMANCE.md](PERFORMANCE.md)).
+device); no thumbnail scrubber for video; very large albums sort their members for each page (see [PERFORMANCE.md](PERFORMANCE.md)).
 
-## Later — Home-server backup
-Opt-in automatic backup to a self-hosted server. Constraints are in [PRIVACY.md](PRIVACY.md).
+## Phase 8 — Backup to a home server
+
+- [x] A separate `backup` build (same app id, so it installs over the standard one); the `standard` build keeps having no network permission, checked by the build, and contains no network code ([BACKUP.md](BACKUP.md))
+- [x] Two servers behind one interface: **Immich** (what Umbrel installs for Android; upload with an API key, duplicates recognised by SHA-1) and **Nextcloud / WebDAV** (app password; files named by content so nothing is ever overwritten)
+- [x] TLS only, the phone's own authorities; a certificate outside them can be **pinned** after comparing its fingerprint; redirects never followed; the credential encrypted under an Android Keystore key and thrown away when the server changes
+- [x] Opt-in with a confirmation; only on Wi-Fi by default; battery not low; not in Battery Saver; heat checked; hidden photos left out by default; never deletes or overwrites
+- [x] Progress, the last run and why it stopped shown in Settings; "Back up now"; refused photos can be retried
+- [x] Database version 8 (`backup_item`) with a tested migration
+- [~] **Not run on a device and not tried against a real server.** The clients are tested against stand-ins that check every request, TLS with generated certificates is tested on real handshakes, and the whole path runs against stand-ins that remember what they are given. Umbrel's own Photos app cannot be used (iPhone only, no
+      public protocol): use Immich or Nextcloud on Umbrel.
+
+Known gaps: no restore; a file that cannot be sent within one 8-minute run is never finished (no resumable or chunked upload, no foreground service); edits, albums and the hidden list are not part of the backup; server messages are in English; Immich older than 1.120 is not supported.
+
+## Phase 9 — What the specification still asked for, and a hardening pass
+
+- [x] **The on-screen photos are analysed first** (`AnalysisPriority`; database v9 adds the index it needs for duplicates)
+- [x] **Captions** (searchable, kept only in eikon's database) and **changing a photo's date or location** from the info panel, with a safety copy, a read-back check and undo ([EDITING.md](EDITING.md), database v9)
+- [x] **What a photo shows**, in words, in the info panel (a short vocabulary matched against the stored image vector; no new analysis) and **pets** in it; a small offline **map** of where a photo was taken
+- [x] **The library's database is encrypted** (SQLCipher, AES-256, key sealed under the Android Keystore); an old readable database is converted with checks at every step and never deleted before the copy is verified ([PRIVACY.md](PRIVACY.md), [ARCHITECTURE.md](ARCHITECTURE.md))
+- [x] The backup's server address, login, pinned certificate and last message are sealed too; Hidden and Recently deleted mark the window secure (no screenshots, blank recent-apps card) and a setting does the same everywhere; shared pictures live an hour; logs carry no content; in-app open-source licenses screen (from `NOTICE.md`)
+- [x] **A line-by-line review of the whole code base**, with these changes: a memory whose period list is empty no longer builds invalid SQL; a photo whose file was rewritten no longer keeps the text, place, faces and description learned from the old file; the search vectors are shared, cached softly and refreshed when one is replaced;
+  the nearest-city search no longer misses a city just outside the first cells near the poles; faces of a photo that was analysed again no longer stay in a person's average; cancelling a share, a saved copy or a trash count is no longer swallowed as a failure; the Keystore is no longer asked on the main thread;
+  a damaged settings file is replaced instead of blocking the app; every function is now at most three levels deep (`tools`-style scan, 0 left in `main`, `backup` and `standard`)
+- [~] **Not run on a device**: the SQLCipher glue (`EncryptedDatabaseOnDeviceTest` is written), the conversion of a real library, the metadata writer on real files, the new screens and dialogs. The plan, the copy, the ordering and every failure path of the encryption are covered by JVM tests.
+
+Not done, and why: a video thumbnail scrubber; a "selfies" filter (no signal); music in memories; animated GIF and WebP; merging the metadata of duplicates; the Media3 `ACCESS_NETWORK_STATE` permission; chunked or resumable upload and a foreground service for the backup. Each needs a device to check, or a product decision, or has no reliable source of truth.
+

@@ -149,21 +149,21 @@ object PointClusterer {
     private fun absorbNear(marker: Accumulator, byCell: Map<Long, List<Accumulator>>, absorbed: MutableSet<Accumulator>, cell: Double) {
         val cx = Math.floor(marker.centreX / cell).toLong()
         val cy = Math.floor(marker.centreY / cell).toLong()
-        for (dx in -1L..1L) {
-            for (dy in -1L..1L) {
-                for (other in byCell[(cx + dx shl KEY_SHIFT) xor ((cy + dy) and KEY_MASK)].orEmpty()) {
-                    if (other === marker || other in absorbed) continue
-                    if (Math.hypot(other.centreX - marker.centreX, other.centreY - marker.centreY) < cell) {
-                        marker.merge(other)
-                        absorbed += other
-                    }
-                }
-            }
+        val around = -1L..1L
+        val neighbours = around.asSequence().flatMap { dx ->
+            around.asSequence().flatMap { dy -> byCell[cellKey(cx + dx, cy + dy)].orEmpty().asSequence() }
+        }
+        for (other in neighbours) {
+            if (other === marker || other in absorbed) continue
+            if (Math.hypot(other.centreX - marker.centreX, other.centreY - marker.centreY) >= cell) continue
+            marker.merge(other)
+            absorbed += other
         }
     }
 
-    private fun key(x: Double, y: Double, cell: Double): Long =
-        (Math.floor(x / cell).toLong() shl KEY_SHIFT) xor (Math.floor(y / cell).toLong() and KEY_MASK)
+    private fun cellKey(cellX: Long, cellY: Long): Long = (cellX shl KEY_SHIFT) xor (cellY and KEY_MASK)
+
+    private fun key(x: Double, y: Double, cell: Double): Long = cellKey(Math.floor(x / cell).toLong(), Math.floor(y / cell).toLong())
 
     private class Accumulator {
         var count = 0

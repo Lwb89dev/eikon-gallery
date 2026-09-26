@@ -87,6 +87,14 @@ fun DateScrubber(
 
     val fraction = if (dragging) dragFraction else scrollFraction
     val travel = (trackHeightPx - thumbPx).coerceAtLeast(1f)
+    val onDragStart = {
+        dragging = true
+        dragFraction = currentScrollFraction
+    }
+    val onDrag = { delta: Float ->
+        dragFraction = (dragFraction + delta / travel).coerceIn(0f, 1f)
+        state.requestScrollToItem((dragFraction * (total - 1)).roundToInt())
+    }
     Box(modifier.fillMaxHeight().width(ThumbTouchWidth + BubbleRoom).onSizeChanged { trackHeightPx = it.height }) {
         AnimatedVisibility(
             visible = visible && total > SCRUBBER_MIN_ITEMS,
@@ -97,14 +105,8 @@ fun DateScrubber(
             ScrubberThumb(
                 bubbleText = if (dragging) bubbleLabel(layout, fraction, monthLabel) else null,
                 dragKey = travel,
-                onDragStart = {
-                    dragging = true
-                    dragFraction = currentScrollFraction
-                },
-                onDrag = { delta ->
-                    dragFraction = (dragFraction + delta / travel).coerceIn(0f, 1f)
-                    state.requestScrollToItem((dragFraction * (total - 1)).roundToInt())
-                },
+                onDragStart = onDragStart,
+                onDrag = onDrag,
                 onDragEnd = { dragging = false },
             )
         }
@@ -139,17 +141,7 @@ private fun ScrubberThumb(
                 .width(ThumbTouchWidth)
                 .height(ThumbHeight)
                 .semantics { contentDescription = description }
-                .pointerInput(dragKey) {
-                    detectVerticalDragGestures(
-                        onDragStart = { onDragStart() },
-                        onDragEnd = onDragEnd,
-                        onDragCancel = onDragEnd,
-                        onVerticalDrag = { change, delta ->
-                            change.consume()
-                            onDrag(delta)
-                        },
-                    )
-                },
+                .dragToScrub(dragKey, onDragStart, onDrag, onDragEnd),
             contentAlignment = Alignment.CenterEnd,
         ) {
             Box(
@@ -160,6 +152,19 @@ private fun ScrubberThumb(
             )
         }
     }
+}
+
+/** Follows a finger dragging up and down, reporting each step in pixels. */
+private fun Modifier.dragToScrub(key: Any, onStart: () -> Unit, onDrag: (delta: Float) -> Unit, onEnd: () -> Unit): Modifier = pointerInput(key) {
+    detectVerticalDragGestures(
+        onDragStart = { onStart() },
+        onDragEnd = onEnd,
+        onDragCancel = onEnd,
+        onVerticalDrag = { change, delta ->
+            change.consume()
+            onDrag(delta)
+        },
+    )
 }
 
 @Composable

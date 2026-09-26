@@ -13,11 +13,12 @@ import app.eikon.gallery.domain.MediaItem
  * column comparisons.
  *
  * The date indexes serve the whole library in date order. A device folder is served by the two indexes that start with `relativePath`:
- * without them a small folder in a big library would read the whole date index and look up every row to find its few photos.
+ * without them a small folder in a big library would read the whole date index and look up every row to find its few photos. The index on
+ * `sizeBytes` is for finding files of the same size (candidates for identical copies) without comparing every file with every other.
  */
 @Entity(
     tableName = "media",
-    indices = [Index("takenAt"), Index("addedAt"), Index("relativePath", "takenAt"), Index("relativePath", "addedAt")],
+    indices = [Index("takenAt"), Index("addedAt"), Index("relativePath", "takenAt"), Index("relativePath", "addedAt"), Index("sizeBytes", "isVideo")],
 )
 data class MediaEntity(
     /** MediaStore `_id`; treated as unique across the merged external volume. */

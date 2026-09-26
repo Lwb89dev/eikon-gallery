@@ -63,28 +63,41 @@ fun PlacesScreen(
     Scaffold(
         modifier = modifier,
         containerColor = MaterialTheme.colorScheme.background,
-        topBar = {
-            TopAppBar(
-                title = { Text(stringResource(R.string.places_title)) },
-                navigationIcon = {
-                    IconButton(onClick = onBack) { Icon(painterResource(R.drawable.ic_arrow_back), stringResource(R.string.action_back)) }
-                },
-                colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.background),
-            )
-        },
+        topBar = { PlacesTopBar(onBack) },
     ) { inner ->
-        Column(Modifier.padding(inner).fillMaxSize()) {
-            if (state.tree.isEmpty()) {
-                if (state.loaded) EmptyPlaces(state, onOpenSettings)
-                return@Column
-            }
-            PrimaryTabRow(selectedTabIndex = tab) {
-                Tab(selected = tab == 0, onClick = { tab = 0 }, text = { Text(stringResource(R.string.places_tab_list)) })
-                Tab(selected = tab == 1, onClick = { tab = 1 }, text = { Text(stringResource(R.string.places_tab_map)) })
-            }
-            if (tab == 0) PlacesList(state.tree, onOpen) else PlacesMapTab(viewModel, onOpen)
-        }
+        Column(Modifier.padding(inner).fillMaxSize()) { PlacesContent(state, tab, { tab = it }, viewModel, onOpen, onOpenSettings) }
     }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun PlacesTopBar(onBack: () -> Unit) {
+    TopAppBar(
+        title = { Text(stringResource(R.string.places_title)) },
+        navigationIcon = { IconButton(onClick = onBack) { Icon(painterResource(R.drawable.ic_arrow_back), stringResource(R.string.action_back)) } },
+        colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.background),
+    )
+}
+
+/** What is left of the screen under the bar: the note when there is nothing to show yet, or the tabs with the list or the map. */
+@Composable
+private fun PlacesContent(
+    state: PlacesState,
+    tab: Int,
+    setTab: (Int) -> Unit,
+    viewModel: PlacesViewModel,
+    onOpen: (GridSource) -> Unit,
+    onOpenSettings: () -> Unit,
+) {
+    if (state.tree.isEmpty()) {
+        if (state.loaded) EmptyPlaces(state, onOpenSettings)
+        return
+    }
+    PrimaryTabRow(selectedTabIndex = tab) {
+        Tab(selected = tab == 0, onClick = { setTab(0) }, text = { Text(stringResource(R.string.places_tab_list)) })
+        Tab(selected = tab == 1, onClick = { setTab(1) }, text = { Text(stringResource(R.string.places_tab_map)) })
+    }
+    if (tab == 0) PlacesList(state.tree, onOpen) else PlacesMapTab(viewModel, onOpen)
 }
 
 @Composable

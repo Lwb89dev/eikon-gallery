@@ -110,6 +110,14 @@ class LibraryQueryPlanTest {
         assertTrue("edited reads the whole library: $edited", "SCAN m" !in edited)
     }
 
+    @Test
+    fun findingFilesOfTheSameSizeUsesTheSizeIndexInsteadOfComparingEveryFileWithEveryOther() {
+        val steps = db.prepareStatement("EXPLAIN QUERY PLAN ${DuplicateQueries.PENDING_CONTENT.replace(":maxAttempts", "3").replace(":limit", "25")}").use { st ->
+            st.executeQuery().use { rs -> generateSequence { if (rs.next()) rs.getString("detail") else null }.toList() }
+        }.joinToString(" | ")
+        assertTrue("no size index: $steps", "index_media_sizeBytes_isVideo" in steps)
+    }
+
     private companion object {
         const val ROWS = 20_000L
         const val NOW = 1_800_000_000_000L

@@ -36,6 +36,7 @@ import app.eikon.gallery.core.security.AreaLocks
 import app.eikon.gallery.core.security.AuthAvailability
 import app.eikon.gallery.core.security.BiometricAuthenticator
 import app.eikon.gallery.core.security.LockedArea
+import app.eikon.gallery.core.security.ScreenSecrecy
 import app.eikon.gallery.core.ui.findActivity
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -45,6 +46,7 @@ import kotlinx.coroutines.launch
 class LockViewModel @Inject constructor(
     val locks: AreaLocks,
     val authenticator: BiometricAuthenticator,
+    val secrecy: ScreenSecrecy,
 ) : ViewModel()
 
 /**
@@ -71,6 +73,11 @@ fun LockGate(
     val availability = remember { viewModel.authenticator.availability() }
     val open = !enabled || area in unlocked || availability == AuthAvailability.NO_DEVICE_LOCK
     if (open) {
+        // Whatever the area shows must not end up in a screenshot or in the recent-apps card.
+        DisposableEffect(Unit) {
+            viewModel.secrecy.enter()
+            onDispose { viewModel.secrecy.leave() }
+        }
         content(enabled && availability != AuthAvailability.NO_DEVICE_LOCK)
         return
     }
@@ -92,12 +99,7 @@ private fun LockedScreen(
     val promptSubtitle = stringResource(R.string.auth_subtitle)
     var failed by remember { mutableStateOf(false) }
     val unlock = {
-        if (activity != null) {
-            scope.launch {
-                val ok = viewModel.authenticator.authenticate(activity, promptTitle, promptSubtitle)
-                if (ok) viewModel.locks.unlock(area) else failed = true
-            }
-        }
+        if (activity != null) scope.launch { failed = !authenticate(viewModel, activity, area, promptTitle, promptSubtitle) }
     }
     // Ask right away on arrival; the button is for trying again after a cancel.
     LaunchedEffect(Unit) { if (availability == AuthAvailability.AVAILABLE) unlock() }
@@ -121,6 +123,13 @@ private fun LockedScreen(
         TextButton(onClick = onCancel) { Text(stringResource(R.string.action_back)) }
         if (failed) Spacer(Modifier.height(4.dp))
     }
+}
+
+/** Asks the system to check the user; the area is unlocked if it says yes. */
+private suspend fun authenticate(viewModel: LockViewModel, activity: FragmentActivity, area: LockedArea, title: String, subtitle: String): Boolean {
+    val ok = viewModel.authenticator.authenticate(activity, title, subtitle)
+    if (ok) viewModel.locks.unlock(area)
+    return ok
 }
 
 /** Banner shown above an open-but-unprotected area (no screen lock on the phone). */

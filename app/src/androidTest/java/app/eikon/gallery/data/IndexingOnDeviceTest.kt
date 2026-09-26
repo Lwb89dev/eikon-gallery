@@ -7,6 +7,8 @@ import app.eikon.gallery.data.db.HiddenMediaEntity
 import app.eikon.gallery.data.db.IndexStage
 import app.eikon.gallery.data.db.LibraryQueryBuilder
 import app.eikon.gallery.data.db.MediaGeoEntity
+import app.eikon.gallery.data.Clock
+import app.eikon.gallery.data.indexing.AnalysisPriority
 import app.eikon.gallery.data.indexing.IndexingRepository
 import app.eikon.gallery.data.sync.RoomMediaIndex
 import app.eikon.gallery.domain.LibraryQuery
@@ -18,6 +20,7 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
 import org.junit.After
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Before
@@ -35,8 +38,8 @@ class IndexingOnDeviceTest {
     @Before
     fun setUp() {
         db = inMemoryDatabase()
-        repository = IndexingRepository(db.indexDao(), db.duplicatesDao()) { now++ }
-        index = RoomMediaIndex(db, db.mediaDao(), db.indexDao(), db.peopleDao(), db.duplicatesDao())
+        repository = IndexingRepository(db.indexDao(), db.duplicatesDao(), Clock { now++ }, AnalysisPriority())
+        index = RoomMediaIndex(db, db.mediaDao(), db.indexDao(), db.peopleDao(), db.duplicatesDao(), db.backupDao())
     }
 
     @After
@@ -140,6 +143,26 @@ class IndexingOnDeviceTest {
         assertEquals(emptyList<Long>(), searchIds(SearchSpec(listOf(SearchTerm("scontrino")))))
         assertNull(db.indexDao().attempts(1, IndexStage.OCR.name))
         assertEquals(listOf(2L), db.indexDao().existingSearchRows(listOf(1L, 2L)))
+    }
+
+    @Test
+    fun aRewrittenFileForgetsWhatWasLearnedAboutItAndATouchedOneDoesNot() = runTest {
+        seed(media(1), media(2))
+        for (id in listOf(1L, 2L)) {
+            repository.saveText(id, "scontrino")
+            repository.saveGeo(MediaGeoEntity(id, 1.0, 2.0, null, null, null))
+            repository.markDone(id, IndexStage.OCR)
+        }
+
+        // Photo 1 was edited elsewhere (its file changed size); photo 2 only had its time moved, as marking a favorite may do.
+        index.upsertAll(listOf(media(1).copy(modifiedAt = 99, sizeBytes = 555), media(2).copy(modifiedAt = 99, isFavorite = true)))
+
+        assertNull(db.indexDao().geo(1))
+        assertNull(db.indexDao().attempts(1, IndexStage.OCR.name))
+        assertNull(repository.text(1))
+        assertEquals("what stays behind is the file name, still searchable", listOf(1L, 2L), db.indexDao().existingSearchRows(listOf(1L, 2L)))
+        assertNotNull(db.indexDao().geo(2))
+        assertEquals("scontrino", repository.text(2))
     }
 
     @Test

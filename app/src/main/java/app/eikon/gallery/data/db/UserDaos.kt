@@ -52,6 +52,10 @@ abstract class AlbumDao {
     @Query("SELECT * FROM album WHERE id = :id")
     abstract fun observeAlbum(id: Long): Flow<AlbumEntity?>
 
+    /** The names of the albums a photo is in, in the order of the albums. */
+    @Query("SELECT a.name FROM album a JOIN album_item ai ON ai.albumId = a.id WHERE ai.mediaId = :mediaId ORDER BY a.position, a.id")
+    abstract suspend fun namesOf(mediaId: Long): List<String>
+
     @Query("SELECT COALESCE(MAX(position), -1) + 1 FROM album")
     protected abstract suspend fun nextPosition(): Int
 

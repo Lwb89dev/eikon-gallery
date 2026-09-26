@@ -300,6 +300,23 @@ class LibrarySqlTest {
     }
 
     @Test
+    fun aCaptionIsFoundByItsWordsLikeTheFileNameAndTheTextAreAndAccentsAndCaseAreIgnored() {
+        execute("INSERT INTO media_caption (rowid, caption) VALUES (6, 'Nonna a Napoli, Pasqua')")
+
+        assertEquals(listOf(6L), search(SearchSpec(listOf(SearchTerm("NONNA")))))
+        assertEquals(listOf(6L), search(SearchSpec(listOf(SearchTerm("PASQ")))))
+        assertEquals(listOf(4L, 6L), search(SearchSpec(listOf(SearchTerm("napoli"))))) // photo 4 has it in its text, photo 6 in its caption
+        assertEquals(listOf(6L), search(SearchSpec(listOf(SearchTerm("nonna"), SearchTerm("napoli")))))
+        assertEquals(emptyList<Long>(), search(SearchSpec(listOf(SearchTerm("milano")))))
+    }
+
+    @Test
+    fun aCaptionOnAHiddenPhotoNeverBringsItIntoASearch() {
+        execute("INSERT INTO media_caption (rowid, caption) VALUES (3, 'segreto di famiglia')")
+        assertEquals(emptyList<Long>(), search(SearchSpec(listOf(SearchTerm("segreto")))))
+    }
+
+    @Test
     fun screenshotsThatAreHiddenNeverLeakIntoTheirCategory() {
         // id 3 is the only visible-or-not screenshot in the library and it is hidden.
         val query = LibraryQuery(filters = LibraryFilters(category = CategoryFilter.SCREENSHOTS))

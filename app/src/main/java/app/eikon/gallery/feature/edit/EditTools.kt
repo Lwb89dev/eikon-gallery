@@ -57,16 +57,20 @@ import java.util.Locale
 @Composable
 fun EditTools(state: EditUiState, viewModel: EditViewModel) {
     Column(Modifier.fillMaxWidth()) {
-        Box(Modifier.fillMaxWidth().heightIn(max = PANEL_MAX_HEIGHT).padding(horizontal = 16.dp)) {
-            when (state.tool) {
-                EditTool.LIGHT -> LightPanel(state.recipe.adjustments, viewModel)
-                EditTool.COLOR -> ColorPanel(state.recipe.adjustments, viewModel)
-                EditTool.DETAIL -> DetailPanel(state.recipe.adjustments, viewModel)
-                EditTool.FILTERS -> FilterPanel(state, viewModel)
-                EditTool.CROP -> CropPanel(state, viewModel)
-            }
-        }
+        Box(Modifier.fillMaxWidth().heightIn(max = PANEL_MAX_HEIGHT).padding(horizontal = 16.dp)) { ToolPanel(state, viewModel) }
         ToolRow(state, viewModel)
+    }
+}
+
+/** The controls of the tool that is open. */
+@Composable
+private fun ToolPanel(state: EditUiState, viewModel: EditViewModel) {
+    when (state.tool) {
+        EditTool.LIGHT -> LightPanel(state.recipe.adjustments, viewModel)
+        EditTool.COLOR -> ColorPanel(state.recipe.adjustments, viewModel)
+        EditTool.DETAIL -> DetailPanel(state.recipe.adjustments, viewModel)
+        EditTool.FILTERS -> FilterPanel(state, viewModel)
+        EditTool.CROP -> CropPanel(state, viewModel)
     }
 }
 
@@ -216,15 +220,21 @@ private fun CropPanel(state: EditUiState, viewModel: EditViewModel) {
         Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
             IconButton(onClick = viewModel::rotate) { Icon(painterResource(R.drawable.ic_rotate_right), stringResource(R.string.crop_rotate)) }
             IconButton(onClick = viewModel::flip) { Icon(painterResource(R.drawable.ic_flip), stringResource(R.string.crop_flip)) }
-            LazyRow(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
-                items(CropShape.entries.toList(), key = { it.name }) { shape ->
-                    FilterChip(selected = state.cropShape == shape, onClick = { viewModel.setCropShape(shape) }, label = { Text(stringResource(shapeName(shape)), textAlign = TextAlign.Center) })
-                }
-            }
+            ShapeChips(state.cropShape, viewModel::setCropShape)
         }
         AdjustSlider(R.string.geo_straighten, g.straightenDegrees, -Geometry.MAX_STRAIGHTEN..Geometry.MAX_STRAIGHTEN) { v -> viewModel.geometry { it.copy(straightenDegrees = v) } }
         AdjustSlider(R.string.geo_perspective_vertical, g.perspectiveVertical, UNIT) { v -> viewModel.geometry { it.copy(perspectiveVertical = v) } }
         AdjustSlider(R.string.geo_perspective_horizontal, g.perspectiveHorizontal, UNIT) { v -> viewModel.geometry { it.copy(perspectiveHorizontal = v) } }
+    }
+}
+
+/** The shapes the crop can be locked to, one chip each. */
+@Composable
+private fun ShapeChips(selected: CropShape, onSelect: (CropShape) -> Unit) {
+    LazyRow(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+        items(CropShape.entries.toList(), key = { it.name }) { shape ->
+            FilterChip(selected = selected == shape, onClick = { onSelect(shape) }, label = { Text(stringResource(shapeName(shape)), textAlign = TextAlign.Center) })
+        }
     }
 }
 

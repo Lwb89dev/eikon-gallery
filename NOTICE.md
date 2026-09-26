@@ -24,15 +24,46 @@ All runtime libraries are Apache License 2.0 unless noted:
 - Coil
 - [ONNX Runtime](https://github.com/microsoft/onnxruntime) 1.28.0 (MIT License), Copyright (c) Microsoft Corporation. Runs the models above.
 - Dagger / Hilt
+- [SQLCipher for Android](https://www.zetetic.net/sqlcipher/) 4.19.0, Community Edition (BSD-style license, full text below), Copyright (c) 2025 ZETETIC LLC. Encrypts the library's database on the phone. Its native library contains SQLite 3.53 (public domain) and LibTomCrypt (public domain).
+- [OkHttp](https://square.github.io/okhttp/) 5.5.0 and Okio (Apache License 2.0), Copyright Square, Inc. **Only in the `backup` build**: the HTTP client of the backup to your own server. The `standard` build does not contain it.
 - kotlinx.coroutines
 - [Tesseract4Android](https://github.com/adaptech-cz/Tesseract4Android) 4.9.0 (Apache License 2.0), which bundles
   native builds of Tesseract 5.5.1 (Apache License 2.0), Leptonica 1.85.0 (BSD-style), libjpeg v9f (IJG
   license) and libpng 1.6.48 (libpng license). Each keeps its own license and notices.
 
 Test-only, never shipped: JUnit (Eclipse Public License 1.0), sqlite-jdbc (Apache License 2.0),
-AndroidX Test (Apache License 2.0).
+AndroidX Test (Apache License 2.0), OkHttp MockWebServer and okhttp-tls (Apache License 2.0; the fake server and generated certificates of the backup's tests).
 
 Exact versions are pinned in [gradle/libs.versions.toml](gradle/libs.versions.toml).
+
+## SQLCipher license
+
+This is the license of SQLCipher Community Edition, reproduced as it requires:
+
+    Copyright (c) 2025, ZETETIC LLC
+    All rights reserved.
+
+    Redistribution and use in source and binary forms, with or without
+    modification, are permitted provided that the following conditions are met:
+        * Redistributions of source code must retain the above copyright
+          notice, this list of conditions and the following disclaimer.
+        * Redistributions in binary form must reproduce the above copyright
+          notice, this list of conditions and the following disclaimer in the
+          documentation and/or other materials provided with the distribution.
+        * Neither the name of the ZETETIC LLC nor the
+          names of its contributors may be used to endorse or promote products
+          derived from this software without specific prior written permission.
+
+    THIS SOFTWARE IS PROVIDED BY ZETETIC LLC ''AS IS'' AND ANY
+    EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+    WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+    DISCLAIMED. IN NO EVENT SHALL ZETETIC LLC BE LIABLE FOR ANY
+    DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+    (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+    LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+    ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+    (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+    SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 ## Not yet included
 

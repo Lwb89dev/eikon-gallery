@@ -31,6 +31,16 @@ object DuplicateQueries {
         LIMIT :limit
         """
 
+    /** [PENDING_PERCEPTUAL] restricted to some photos (the ones on screen). */
+    const val PENDING_PERCEPTUAL_AMONG = """
+        SELECT m.* FROM media m
+        LEFT JOIN perceptual_hash h ON h.mediaId = m.id
+        LEFT JOIN index_state s ON s.mediaId = m.id AND s.stage = 'PHASH'
+        WHERE m.isVideo = 0 AND m.id IN (:ids)
+          AND ((s.mediaId IS NULL) OR (s.status = 2 AND s.attempts < :maxAttempts) OR (h.mediaId IS NOT NULL AND h.modifiedAt != m.modifiedAt))
+        ORDER BY m.takenAt DESC, m.id DESC
+        """
+
     /**
      * Files to hash byte by byte: only those that have the same size as another file of the same kind, because identical
      * files always do, and reading every file in full would be far too slow.
@@ -44,6 +54,17 @@ object DuplicateQueries {
           AND ((h.mediaId IS NULL AND (s.mediaId IS NULL OR s.status != 2 OR s.attempts < :maxAttempts)) OR (h.mediaId IS NOT NULL AND h.modifiedAt != m.modifiedAt))
         ORDER BY m.takenAt DESC, m.id DESC
         LIMIT :limit
+        """
+
+    /** [PENDING_CONTENT] restricted to some files (the ones on screen). */
+    const val PENDING_CONTENT_AMONG = """
+        SELECT m.* FROM media m
+        LEFT JOIN content_hash h ON h.mediaId = m.id
+        LEFT JOIN index_state s ON s.mediaId = m.id AND s.stage = 'FILEHASH'
+        WHERE m.sizeBytes > 0 AND m.id IN (:ids)
+          AND EXISTS (SELECT 1 FROM media t WHERE t.sizeBytes = m.sizeBytes AND t.isVideo = m.isVideo AND t.id != m.id)
+          AND ((h.mediaId IS NULL AND (s.mediaId IS NULL OR s.status != 2 OR s.attempts < :maxAttempts)) OR (h.mediaId IS NOT NULL AND h.modifiedAt != m.modifiedAt))
+        ORDER BY m.takenAt DESC, m.id DESC
         """
 }
 
@@ -70,6 +91,12 @@ interface DuplicatesDao {
 
     @Query(DuplicateQueries.PENDING_CONTENT)
     suspend fun pendingContent(maxAttempts: Int, limit: Int): List<MediaEntity>
+
+    @Query(DuplicateQueries.PENDING_PERCEPTUAL_AMONG)
+    suspend fun pendingPerceptualAmong(maxAttempts: Int, ids: List<Long>): List<MediaEntity>
+
+    @Query(DuplicateQueries.PENDING_CONTENT_AMONG)
+    suspend fun pendingContentAmong(maxAttempts: Int, ids: List<Long>): List<MediaEntity>
 
     @Query("SELECT * FROM media WHERE id IN (:ids)")
     suspend fun media(ids: List<Long>): List<MediaEntity>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="settings_privacy_network">This build has no internet permission: Android itself stops eikon from connecting anywhere.</string>
+    <string name="backup_title">Backup to your own server</string>
+    <string name="backup_not_in_this_build">This build of eikon has no network access at all: Android itself stops it from connecting anywhere. Backup to a server you run yourself (Immich, Nextcloud) is in the \"backup\" build of the same app, which asks for the network permission and only uses it for that. It installs over this one and keeps your library, edits and albums. See docs/BACKUP.md.</string>
+</resources>

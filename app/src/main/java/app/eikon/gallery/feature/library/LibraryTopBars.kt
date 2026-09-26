@@ -112,15 +112,7 @@ fun GridTopBar(
     val filtered = isLibrary && filters.isActive
     TopAppBar(
         title = { Text(gridTitle(source, albumName, personName, sourceTitle, filters)) },
-        navigationIcon = {
-            val onNavigate = if (filtered) ({ onFiltersChange(LibraryFilters.NONE) }) else onBack
-            if (onNavigate != null) {
-                IconButton(onClick = onNavigate) {
-                    val label = if (filtered) R.string.filter_clear else R.string.action_back
-                    Icon(painterResource(R.drawable.ic_arrow_back), stringResource(label))
-                }
-            }
-        },
+        navigationIcon = { GridNavigationIcon(filtered, onBack) { onFiltersChange(LibraryFilters.NONE) } },
         actions = {
             if (isLibrary) FilterMenu(filters, onFiltersChange)
             SortMenu(sort, onSortChange)
@@ -134,6 +126,15 @@ fun GridTopBar(
             scrolledContainerColor = MaterialTheme.colorScheme.background,
         ),
     )
+}
+
+/** The arrow at the left of the title: it clears the filters when there are any (the filtered Library reads like a collection to step out of), and goes back otherwise. */
+@Composable
+private fun GridNavigationIcon(filtered: Boolean, onBack: (() -> Unit)?, onClearFilters: () -> Unit) {
+    val onNavigate = (if (filtered) onClearFilters else onBack) ?: return
+    IconButton(onClick = onNavigate) {
+        Icon(painterResource(R.drawable.ic_arrow_back), stringResource(if (filtered) R.string.filter_clear else R.string.action_back))
+    }
 }
 
 @Composable
@@ -252,32 +253,31 @@ private fun FilterMenu(filters: LibraryFilters, onChange: (LibraryFilters) -> Un
             Icon(painterResource(R.drawable.ic_filter_list), stringResource(R.string.menu_filter), tint = tint)
         }
         DropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
-            MenuHeader(R.string.filter_type_title)
-            TypeFilter.entries.forEach { type ->
-                CheckableItem(stringResource(type.labelRes()), filters.type == type) { onChange(filters.copy(type = type)) }
-            }
-            HorizontalDivider()
-            CheckableItem(stringResource(R.string.filter_favorites_only), filters.favoritesOnly) {
-                onChange(filters.copy(favoritesOnly = !filters.favoritesOnly))
-            }
-            CheckableItem(stringResource(R.string.filter_edited_only), filters.editedOnly) {
-                onChange(filters.copy(editedOnly = !filters.editedOnly))
-            }
-            HorizontalDivider()
-            MenuHeader(R.string.filter_kind_title)
-            CheckableItem(stringResource(R.string.filter_any), filters.category == null) { onChange(filters.copy(category = null)) }
-            CategoryFilter.entries.forEach { category ->
-                CheckableItem(stringResource(category.labelRes()), filters.category == category) {
-                    onChange(filters.copy(category = category))
-                }
-            }
-            if (filters.isActive) {
-                HorizontalDivider()
-                MenuItem(R.string.filter_clear_all) {
-                    expanded = false
-                    onChange(LibraryFilters.NONE)
-                }
-            }
+            FilterItems(filters, onChange, close = { expanded = false })
+        }
+    }
+}
+
+@Composable
+private fun FilterItems(filters: LibraryFilters, onChange: (LibraryFilters) -> Unit, close: () -> Unit) {
+    MenuHeader(R.string.filter_type_title)
+    TypeFilter.entries.forEach { type ->
+        CheckableItem(stringResource(type.labelRes()), filters.type == type) { onChange(filters.copy(type = type)) }
+    }
+    HorizontalDivider()
+    CheckableItem(stringResource(R.string.filter_favorites_only), filters.favoritesOnly) { onChange(filters.copy(favoritesOnly = !filters.favoritesOnly)) }
+    CheckableItem(stringResource(R.string.filter_edited_only), filters.editedOnly) { onChange(filters.copy(editedOnly = !filters.editedOnly)) }
+    HorizontalDivider()
+    MenuHeader(R.string.filter_kind_title)
+    CheckableItem(stringResource(R.string.filter_any), filters.category == null) { onChange(filters.copy(category = null)) }
+    CategoryFilter.entries.forEach { category ->
+        CheckableItem(stringResource(category.labelRes()), filters.category == category) { onChange(filters.copy(category = category)) }
+    }
+    if (filters.isActive) {
+        HorizontalDivider()
+        MenuItem(R.string.filter_clear_all) {
+            close()
+            onChange(LibraryFilters.NONE)
         }
     }
 }
@@ -285,30 +285,25 @@ private fun FilterMenu(filters: LibraryFilters, onChange: (LibraryFilters) -> Un
 @Composable
 private fun SortMenu(sort: SortChoice, onSortChange: (SortField, SortDirection) -> Unit) {
     var expanded by remember { mutableStateOf(false) }
+    val choose = { field: SortField, direction: SortDirection ->
+        expanded = false
+        onSortChange(field, direction)
+    }
     Box {
         IconButton(onClick = { expanded = true }) {
             Icon(painterResource(R.drawable.ic_sort), stringResource(R.string.menu_sort))
         }
-        DropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
-            val choose = { field: SortField, direction: SortDirection ->
-                expanded = false
-                onSortChange(field, direction)
-            }
-            CheckableItem(stringResource(R.string.sort_by_date_taken), sort.field == SortField.DATE_TAKEN) {
-                choose(SortField.DATE_TAKEN, sort.direction)
-            }
-            CheckableItem(stringResource(R.string.sort_by_date_added), sort.field == SortField.DATE_ADDED) {
-                choose(SortField.DATE_ADDED, sort.direction)
-            }
-            HorizontalDivider()
-            CheckableItem(stringResource(R.string.sort_newest_first), sort.direction == SortDirection.NEWEST_FIRST) {
-                choose(sort.field, SortDirection.NEWEST_FIRST)
-            }
-            CheckableItem(stringResource(R.string.sort_oldest_first), sort.direction == SortDirection.OLDEST_FIRST) {
-                choose(sort.field, SortDirection.OLDEST_FIRST)
-            }
-        }
+        DropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) { SortItems(sort, choose) }
     }
+}
+
+@Composable
+private fun SortItems(sort: SortChoice, choose: (SortField, SortDirection) -> Unit) {
+    CheckableItem(stringResource(R.string.sort_by_date_taken), sort.field == SortField.DATE_TAKEN) { choose(SortField.DATE_TAKEN, sort.direction) }
+    CheckableItem(stringResource(R.string.sort_by_date_added), sort.field == SortField.DATE_ADDED) { choose(SortField.DATE_ADDED, sort.direction) }
+    HorizontalDivider()
+    CheckableItem(stringResource(R.string.sort_newest_first), sort.direction == SortDirection.NEWEST_FIRST) { choose(sort.field, SortDirection.NEWEST_FIRST) }
+    CheckableItem(stringResource(R.string.sort_oldest_first), sort.direction == SortDirection.OLDEST_FIRST) { choose(sort.field, SortDirection.OLDEST_FIRST) }
 }
 
 @Composable

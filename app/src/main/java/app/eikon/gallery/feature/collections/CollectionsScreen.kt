@@ -93,17 +93,7 @@ fun CollectionsScreen(
     Scaffold(
         modifier = modifier,
         containerColor = MaterialTheme.colorScheme.background,
-        topBar = {
-            TopAppBar(
-                title = { Text(stringResource(R.string.collections_title)) },
-                actions = {
-                    IconButton(onClick = { creating = true }) {
-                        Icon(painterResource(R.drawable.ic_add), stringResource(R.string.album_new))
-                    }
-                },
-                colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.background),
-            )
-        },
+        topBar = { CollectionsTopBar(onCreateAlbum = { creating = true }) },
         bottomBar = bottomBar,
     ) { inner ->
         LazyVerticalGrid(
@@ -139,6 +129,18 @@ fun CollectionsScreen(
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun CollectionsTopBar(onCreateAlbum: () -> Unit) {
+    TopAppBar(
+        title = { Text(stringResource(R.string.collections_title)) },
+        actions = {
+            IconButton(onClick = onCreateAlbum) { Icon(painterResource(R.drawable.ic_add), stringResource(R.string.album_new)) }
+        },
+        colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.background),
+    )
+}
+
 private val TILE_MIN_WIDTH = 150.dp
 
 // --- Sections ------------------------------------------------------------------------------------
@@ -169,28 +171,23 @@ private fun LazyGridScope.personalSection(
     onOpenTrash: () -> Unit,
 ) {
     header(R.string.section_personal)
-    items(presets, key = { "preset-${it.kind}" }) { tile ->
-        CollectionTile(
-            title = stringResource(tile.kind.labelRes()),
-            count = tile.count,
-            onClick = { onOpen.open(GridSource.Preset(tile.kind)) },
-        ) {
-            if (tile.cover != null) MediaThumbnail(tile.cover, Modifier.fillMaxSize())
-        }
+    items(presets, key = { "preset-${it.kind}" }) { tile -> PresetTileView(tile) { onOpen.open(GridSource.Preset(tile.kind)) } }
+    item(key = "trash") { IconTile(R.string.collection_trash, trashCount, R.drawable.ic_delete, onOpenTrash) }
+    // No count and no cover: the entry must not reveal what is (or is not) hidden.
+    if (showHidden) item(key = "hidden") { IconTile(R.string.collection_hidden, null, R.drawable.ic_lock) { onOpen.open(GridSource.Hidden) } }
+}
+
+@Composable
+private fun PresetTileView(tile: PresetTile, onClick: () -> Unit) {
+    CollectionTile(title = stringResource(tile.kind.labelRes()), count = tile.count, onClick = onClick) {
+        if (tile.cover != null) MediaThumbnail(tile.cover, Modifier.fillMaxSize())
     }
-    item(key = "trash") {
-        CollectionTile(title = stringResource(R.string.collection_trash), count = trashCount, onClick = onOpenTrash) {
-            IconCover(R.drawable.ic_delete)
-        }
-    }
-    if (showHidden) {
-        item(key = "hidden") {
-            // No count and no cover: the entry must not reveal what is (or is not) hidden.
-            CollectionTile(title = stringResource(R.string.collection_hidden), count = null, onClick = { onOpen.open(GridSource.Hidden) }) {
-                IconCover(R.drawable.ic_lock)
-            }
-        }
-    }
+}
+
+/** A tile with a symbol instead of a picture. */
+@Composable
+private fun IconTile(@StringRes title: Int, count: Int?, @DrawableRes icon: Int, onClick: () -> Unit) {
+    CollectionTile(title = stringResource(title), count = count, onClick = onClick) { IconCover(icon) }
 }
 
 private fun LazyGridScope.peopleSection(people: List<PersonSummary>, onOpenPeople: () -> Unit) {
@@ -225,30 +222,15 @@ private fun LazyGridScope.memoriesSection(onOpenMemories: () -> Unit) {
 /** Duplicate photos and similar shots: found by eikon, removed only by the user. */
 private fun LazyGridScope.cleanupSection(duplicates: Boolean, similar: Boolean, onOpen: (DuplicateMode) -> Unit) {
     header(R.string.section_cleanup)
-    if (duplicates) {
-        item(key = "duplicates") {
-            CollectionTile(title = stringResource(R.string.collection_duplicates), count = null, onClick = { onOpen(DuplicateMode.DUPLICATES) }) {
-                IconCover(R.drawable.ic_duplicates)
-            }
-        }
-    }
-    if (similar) {
-        item(key = "similar") {
-            CollectionTile(title = stringResource(R.string.collection_similar), count = null, onClick = { onOpen(DuplicateMode.SIMILAR) }) {
-                IconCover(R.drawable.ic_duplicates)
-            }
-        }
-    }
+    if (duplicates) item(key = "duplicates") { IconTile(R.string.collection_duplicates, null, R.drawable.ic_duplicates) { onOpen(DuplicateMode.DUPLICATES) } }
+    if (similar) item(key = "similar") { IconTile(R.string.collection_similar, null, R.drawable.ic_duplicates) { onOpen(DuplicateMode.SIMILAR) } }
 }
 
 /** Dogs and cats, found from what the photos show; no counts because they are worked out when a collection is opened. */
 private fun LazyGridScope.petsSection(onOpen: OpenCollection) {
     header(R.string.section_pets)
     items(PetKind.entries, key = { "pets-${it.name}" }) { kind ->
-        val title = if (kind == PetKind.DOG) R.string.collection_dogs else R.string.collection_cats
-        CollectionTile(title = stringResource(title), count = null, onClick = { onOpen.open(GridSource.Pets(kind)) }) {
-            IconCover(R.drawable.ic_pets)
-        }
+        IconTile(if (kind == PetKind.DOG) R.string.collection_dogs else R.string.collection_cats, null, R.drawable.ic_pets) { onOpen.open(GridSource.Pets(kind)) }
     }
 }
 
@@ -316,11 +298,7 @@ private fun AlbumTile(album: AlbumSummary, viewModel: CollectionsViewModel, onCl
     var renaming by rememberSaveable { mutableStateOf(false) }
     var deleting by rememberSaveable { mutableStateOf(false) }
     Box {
-        CollectionTile(title = album.name, count = album.itemCount, onClick = onClick, onLongClick = { menuOpen = true }) {
-            if (album.coverId != null) {
-                MediaThumbnail(album.coverId, album.coverIsVideo ?: false, album.coverModifiedAt ?: 0, Modifier.fillMaxSize())
-            }
-        }
+        CollectionTile(title = album.name, count = album.itemCount, onClick = onClick, onLongClick = { menuOpen = true }) { AlbumCover(album) }
         AlbumMenu(menuOpen, { menuOpen = false }, album, viewModel, onRename = { renaming = true }, onDelete = { deleting = true })
     }
     if (renaming) {
@@ -335,6 +313,11 @@ private fun AlbumTile(album: AlbumSummary, viewModel: CollectionsViewModel, onCl
             viewModel.deleteAlbum(album.id)
         }, { deleting = false })
     }
+}
+
+@Composable
+private fun AlbumCover(album: AlbumSummary) {
+    if (album.coverId != null) MediaThumbnail(album.coverId, album.coverIsVideo ?: false, album.coverModifiedAt ?: 0, Modifier.fillMaxSize())
 }
 
 @Composable

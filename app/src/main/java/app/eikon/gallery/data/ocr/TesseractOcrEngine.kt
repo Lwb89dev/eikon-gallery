@@ -28,11 +28,13 @@ class TesseractOcrEngine @Inject constructor(
     override suspend fun recognize(bitmap: Bitmap): OcrResult = lock.withLock {
         withContext(Dispatchers.Default) {
             val engine = api ?: create().also { api = it }
-            engine.setImage(bitmap)
-            val text = engine.getUTF8Text().orEmpty()
-            val confidence = engine.meanConfidence()
-            engine.clear()
-            OcrResult(text, confidence)
+            try {
+                engine.setImage(bitmap)
+                OcrResult(engine.getUTF8Text().orEmpty(), engine.meanConfidence())
+            } finally {
+                // Also after a failure: what the engine kept of this picture must not be read as part of the next one.
+                engine.clear()
+            }
         }
     }
 

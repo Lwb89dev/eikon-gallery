@@ -3,6 +3,8 @@ package app.eikon.gallery.feature.settings
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import app.eikon.gallery.core.permissions.MediaAccessChecker
+import app.eikon.gallery.data.db.encryption.DatabaseProtectionState
+import app.eikon.gallery.data.db.encryption.ProtectionStatus
 import app.eikon.gallery.data.indexing.AnalysisStatus
 import app.eikon.gallery.data.indexing.AnalysisStatusRepository
 import app.eikon.gallery.data.indexing.IndexingScheduler
@@ -26,6 +28,7 @@ class SettingsViewModel @Inject constructor(
     statusRepository: AnalysisStatusRepository,
     private val scheduler: IndexingScheduler,
     private val access: MediaAccessChecker,
+    protection: DatabaseProtectionState,
 ) : ViewModel() {
     val settings: StateFlow<AppSettings> = repository.state
         .filterNotNull()
@@ -33,6 +36,9 @@ class SettingsViewModel @Inject constructor(
 
     val analysis: StateFlow<AnalysisStatus?> = statusRepository.status
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(STOP_TIMEOUT_MS), null)
+
+    /** How the library's database is protected; null until it has been opened. */
+    val storage: StateFlow<ProtectionStatus?> = protection.status
 
     private val locationAllowed = MutableStateFlow(access.canReadLocation())
 
@@ -58,6 +64,10 @@ class SettingsViewModel @Inject constructor(
 
     fun setShowHidden(enabled: Boolean) {
         viewModelScope.launch { repository.setShowHidden(enabled) }
+    }
+
+    fun setSecureScreens(enabled: Boolean) {
+        viewModelScope.launch { repository.setSecureScreens(enabled) }
     }
 
     fun setAnalysis(change: (AnalysisSettings) -> AnalysisSettings) {

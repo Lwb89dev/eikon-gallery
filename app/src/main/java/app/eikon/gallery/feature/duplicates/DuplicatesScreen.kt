@@ -1,8 +1,11 @@
 package app.eikon.gallery.feature.duplicates
 
 import android.app.Activity
+import android.content.res.Resources
+import android.content.IntentSender
 import android.text.format.DateUtils
 import android.text.format.Formatter
+import androidx.annotation.StringRes
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.IntentSenderRequest
 import androidx.activity.result.contract.ActivityResultContracts
@@ -13,7 +16,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -78,28 +80,14 @@ fun DuplicatesScreen(
         viewModel.onSystemRequestFinished(it.resultCode == Activity.RESULT_OK)
     }
     LaunchedEffect(viewModel) {
-        viewModel.events.collect { event ->
-            when (event) {
-                is DuplicatesEvent.LaunchSystemRequest -> systemRequest.launch(IntentSenderRequest.Builder(event.sender).build())
-                is DuplicatesEvent.MovedToTrash -> snackbar.showSnackbar(resources.getQuantityString(R.plurals.moved_to_trash, event.count, event.count))
-                DuplicatesEvent.ActionFailed -> snackbar.showSnackbar(resources.getString(R.string.action_failed))
-            }
-        }
+        viewModel.events.collect { event -> handle(event, snackbar, resources) { systemRequest.launch(IntentSenderRequest.Builder(it).build()) } }
     }
     val title = if (viewModel.mode == DuplicateMode.DUPLICATES) R.string.duplicates_title else R.string.similar_title
     Scaffold(
         modifier = modifier,
         containerColor = MaterialTheme.colorScheme.background,
         snackbarHost = { SnackbarHost(snackbar) },
-        topBar = {
-            TopAppBar(
-                title = { Text(stringResource(title)) },
-                navigationIcon = {
-                    IconButton(onClick = onBack) { Icon(painterResource(R.drawable.ic_arrow_back), stringResource(R.string.action_back)) }
-                },
-                colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.background),
-            )
-        },
+        topBar = { DuplicatesTopBar(title, onBack) },
     ) { inner ->
         when {
             state.loading -> Box(Modifier.padding(inner).fillMaxSize(), Alignment.Center) { CircularProgressIndicator() }
@@ -107,6 +95,25 @@ fun DuplicatesScreen(
             else -> GroupList(viewModel, state, inner)
         }
     }
+}
+
+/** One event of the view model: the system dialog to open, or what to say. */
+private suspend fun handle(event: DuplicatesEvent, snackbar: SnackbarHostState, resources: Resources, launch: (IntentSender) -> Unit) {
+    when (event) {
+        is DuplicatesEvent.LaunchSystemRequest -> launch(event.sender)
+        is DuplicatesEvent.MovedToTrash -> snackbar.showSnackbar(resources.getQuantityString(R.plurals.moved_to_trash, event.count, event.count))
+        DuplicatesEvent.ActionFailed -> snackbar.showSnackbar(resources.getString(R.string.action_failed))
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun DuplicatesTopBar(@StringRes title: Int, onBack: () -> Unit) {
+    TopAppBar(
+        title = { Text(stringResource(title)) },
+        navigationIcon = { IconButton(onClick = onBack) { Icon(painterResource(R.drawable.ic_arrow_back), stringResource(R.string.action_back)) } },
+        colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.background),
+    )
 }
 
 @Composable
@@ -132,11 +139,7 @@ private fun GroupCard(group: GroupState, viewModel: DuplicatesViewModel) {
         verticalArrangement = Arrangement.spacedBy(10.dp),
     ) {
         Text(groupTitle(entry.kind, entry.items.size), style = MaterialTheme.typography.titleSmall)
-        LazyRow(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-            items(entry.items, key = { it.id }) { item ->
-                ItemCell(item, marked = item.id in group.marked, best = item.id == entry.bestId) { viewModel.toggle(entry.key, item.id) }
-            }
-        }
+        ItemRow(group, viewModel)
         val count = group.marked.size
         Button(onClick = { viewModel.trashMarked(entry.key) }, enabled = count > 0 && count < entry.items.size, modifier = Modifier.fillMaxWidth()) {
             val label = if (similar) R.plurals.similar_trash_marked else R.plurals.duplicate_keep_best
@@ -144,6 +147,17 @@ private fun GroupCard(group: GroupState, viewModel: DuplicatesViewModel) {
         }
         TextButton(onClick = { viewModel.dismiss(entry.key) }) {
             Text(stringResource(if (similar) R.string.similar_dismiss else R.string.duplicate_dismiss))
+        }
+    }
+}
+
+/** The photos of a group side by side, each one a tap away from being marked to go. */
+@Composable
+private fun ItemRow(group: GroupState, viewModel: DuplicatesViewModel) {
+    val entry = group.entry
+    LazyRow(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+        items(entry.items, key = { it.id }) { item ->
+            ItemCell(item, marked = item.id in group.marked, best = item.id == entry.bestId) { viewModel.toggle(entry.key, item.id) }
         }
     }
 }
@@ -162,11 +176,7 @@ private fun ItemCell(item: MediaItem, marked: Boolean, best: Boolean, onClick: (
         val outline = if (marked) MaterialTheme.colorScheme.error else if (best) MaterialTheme.colorScheme.primary else Color.Transparent
         Box(Modifier.size(120.dp).clip(RoundedCornerShape(8.dp)).border(2.dp, outline, RoundedCornerShape(8.dp))) {
             MediaThumbnail(item, Modifier.fillMaxSize())
-            if (marked) {
-                Box(Modifier.fillMaxSize().background(Color.Black.copy(alpha = 0.35f)), Alignment.Center) {
-                    Icon(painterResource(R.drawable.ic_delete), stringResource(R.string.duplicate_marked), tint = Color.White)
-                }
-            }
+            if (marked) MarkedOverlay()
         }
         val badge = when {
             marked -> stringResource(R.string.duplicate_marked)
@@ -182,6 +192,14 @@ private fun ItemCell(item: MediaItem, marked: Boolean, best: Boolean, onClick: (
             color = MaterialTheme.colorScheme.onSurfaceVariant,
             maxLines = 1,
         )
+    }
+}
+
+/** Dims a photo that is marked to go and says so. */
+@Composable
+private fun MarkedOverlay() {
+    Box(Modifier.fillMaxSize().background(Color.Black.copy(alpha = 0.35f)), Alignment.Center) {
+        Icon(painterResource(R.drawable.ic_delete), stringResource(R.string.duplicate_marked), tint = Color.White)
     }
 }
 

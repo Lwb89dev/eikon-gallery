@@ -89,33 +89,33 @@ fun HeroLayer(controller: HeroController, modifier: Modifier = Modifier) {
     val density = LocalDensity.current
     val resting = flight.resting
     Box(modifier.fillMaxSize()) {
-        Box(
-            Modifier
-                .layout { measurable, constraints ->
-                    val window = controller.window() ?: resting
-                    val placeable = measurable.measure(Constraints.fixed(window.width.roundToInt().coerceAtLeast(1), window.height.roundToInt().coerceAtLeast(1)))
-                    layout(constraints.maxWidth, constraints.maxHeight) { placeable.place(window.left.roundToInt(), window.top.roundToInt()) }
-                }
-                .clipToBounds(),
-            contentAlignment = Alignment.Center,
-        ) {
+        Box(Modifier.inFlightWindow(controller, resting).clipToBounds(), contentAlignment = Alignment.Center) {
             // The picture has the size it has at rest in the viewer and is scaled to cover the window; it is asked for at the size of the cell, which is
             // what is already loaded, so it appears at once.
             MediaThumbnail(
                 item = flight.item,
                 modifier = Modifier
                     .requiredSize(with(density) { resting.width.toDp() }, with(density) { resting.height.toDp() })
-                    .graphicsLayer {
-                        val window = controller.window() ?: resting
-                        val scale = HeroGeometry.coverScale(window, resting)
-                        scaleX = scale
-                        scaleY = scale
-                    },
+                    .scaledToCover(controller, resting),
                 contentScale = ContentScale.Crop,
                 requestSize = IntSize(flight.cell.width.roundToInt().coerceAtLeast(1), flight.cell.height.roundToInt().coerceAtLeast(1)),
             )
         }
     }
+}
+
+/** Sizes and places what it holds as the window through which the flying picture is seen, wherever the flight has got to. */
+private fun Modifier.inFlightWindow(controller: HeroController, resting: Frame): Modifier = layout { measurable, constraints ->
+    val window = controller.window() ?: resting
+    val placeable = measurable.measure(Constraints.fixed(window.width.roundToInt().coerceAtLeast(1), window.height.roundToInt().coerceAtLeast(1)))
+    layout(constraints.maxWidth, constraints.maxHeight) { placeable.place(window.left.roundToInt(), window.top.roundToInt()) }
+}
+
+/** Scales the picture, which has its size at rest, up or down until it just covers the window. */
+private fun Modifier.scaledToCover(controller: HeroController, resting: Frame): Modifier = graphicsLayer {
+    val scale = HeroGeometry.coverScale(controller.window() ?: resting, resting)
+    scaleX = scale
+    scaleY = scale
 }
 
 /**

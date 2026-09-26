@@ -111,7 +111,8 @@ object LibraryQueryBuilder {
                 )
             }
             is LibraryScope.Periods -> {
-                val ranges = scope.ranges.joinToString(" OR ", "(", ")") {
+                // No period at all matches nothing (an empty "()" would not even be valid SQL).
+                val ranges = if (scope.ranges.isEmpty()) "0" else scope.ranges.joinToString(" OR ", "(", ")") {
                     args.add(it.startMillis)
                     args.add(it.endMillis)
                     "(m.takenAt >= ? AND m.takenAt < ?)"
@@ -160,7 +161,7 @@ object LibraryQueryBuilder {
         }
 
         /**
-         * One word matches a photo whose file name or recognized text starts with it, or, when it names a
+         * One word matches a photo whose file name, recognized text or caption starts with it, or, when it names a
          * place, a photo taken there. The FTS query holds only letters and digits plus `*`, so user text
          * cannot alter the query's structure.
          */
@@ -169,6 +170,8 @@ object LibraryQueryBuilder {
             val fts = ftsPrefixQuery(term.text)
             if (fts != null) {
                 alternatives += "m.id IN (SELECT rowid FROM media_search WHERE media_search MATCH ?)"
+                alternatives += "m.id IN (SELECT rowid FROM media_caption WHERE media_caption MATCH ?)"
+                args += fts
                 args += fts
             }
             term.place?.let { alternatives += placeCondition(it) }
@@ -207,24 +210,22 @@ object LibraryQueryBuilder {
         }
 
         /** Several dates are alternatives: photos from any of them match. */
-        private fun dateCondition(dates: List<DateSpec>): String? {
-            if (dates.isEmpty()) return null
-            return dates.joinToString(" OR ", "(", ")") { spec ->
-                when (spec) {
-                    is DateSpec.Range -> {
-                        args += spec.range.startMillis
-                        args += spec.range.endMillis
-                        "(m.takenAt >= ? AND m.takenAt < ?)"
-                    }
-                    is DateSpec.Months -> {
-                        val months = spec.months.filter { it in 1..12 }.joinToString(",")
-                        "CAST(strftime('%m', m.takenAt / 1000, 'unixepoch', 'localtime') AS INTEGER) IN ($months)"
-                    }
-                    is DateSpec.MonthDay -> {
-                        args += "%02d-%02d".format(spec.month, spec.day)
-                        "strftime('%m-%d', m.takenAt / 1000, 'unixepoch', 'localtime') = ?"
-                    }
-                }
+        private fun dateCondition(dates: List<DateSpec>): String? =
+            if (dates.isEmpty()) null else dates.joinToString(" OR ", "(", ")") { dateAlternative(it) }
+
+        private fun dateAlternative(spec: DateSpec): String = when (spec) {
+            is DateSpec.Range -> {
+                args += spec.range.startMillis
+                args += spec.range.endMillis
+                "(m.takenAt >= ? AND m.takenAt < ?)"
+            }
+            is DateSpec.Months -> {
+                val months = spec.months.filter { it in 1..12 }.joinToString(",")
+                "CAST(strftime('%m', m.takenAt / 1000, 'unixepoch', 'localtime') AS INTEGER) IN ($months)"
+            }
+            is DateSpec.MonthDay -> {
+                args += "%02d-%02d".format(spec.month, spec.day)
+                "strftime('%m-%d', m.takenAt / 1000, 'unixepoch', 'localtime') = ?"
             }
         }
 

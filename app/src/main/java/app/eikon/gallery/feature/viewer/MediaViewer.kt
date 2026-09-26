@@ -61,6 +61,7 @@ import app.eikon.gallery.core.ui.SystemBarIcons
 import app.eikon.gallery.domain.MediaItem
 import app.eikon.gallery.domain.edit.EditRecipeCodec
 import kotlin.math.abs
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 private val BottomBarHeight = 64.dp
@@ -104,6 +105,8 @@ fun MediaViewer(
     // The photo being looked at without its edit; going to another photo puts the edits back.
     var originalShownFor by rememberSaveable { mutableStateOf<Long?>(null) }
     val editOf = { item: MediaItem -> if (item.isVideo || item.id == originalShownFor) null else edits[item.id] }
+    val toggleOriginal = { item: MediaItem -> originalShownFor = if (item.id == originalShownFor) null else item.id }
+    val editedChip = editedChipOf(currentItem, edits, originalShownFor, toggleOriginal)
 
     LaunchedEffect(pagerState) { snapshotFlow { pagerState.currentPage }.collect(onPageChanged) }
     LaunchedEffect(pagerState.currentPage) {
@@ -139,13 +142,17 @@ fun MediaViewer(
                 leadingActions = leadingActions,
                 trailingActions = trailingActions,
                 onInfo = { infoOpen = true },
-                editedChip = currentItem?.takeIf { !it.isVideo && it.id in edits }?.let { item ->
-                    { EditedChip(showingOriginal = item.id == originalShownFor) { originalShownFor = if (item.id == originalShownFor) null else item.id } }
-                },
+                editedChip = editedChip,
             )
         }
     }
     if (infoOpen && currentItem != null) infoSheet(currentItem) { infoOpen = false }
+}
+
+/** The chip that switches between the edited photo and its original, for a photo that has an edit; null for any other. */
+private fun editedChipOf(item: MediaItem?, edits: Map<Long, String>, originalShownFor: Long?, toggle: (MediaItem) -> Unit): (@Composable () -> Unit)? {
+    if (item == null || item.isVideo || item.id !in edits) return null
+    return { EditedChip(showingOriginal = item.id == originalShownFor) { toggle(item) } }
 }
 
 @Composable
@@ -349,15 +356,18 @@ private fun Modifier.pullGestures(
                 change.consume()
                 pull.offset += delta
             },
-            onDragEnd = {
-                if (pull.offset > pull.thresholdPx) {
-                    onDismiss()
-                } else {
-                    if (pull.offset < -pull.thresholdPx) onPullUp()
-                    scope.launch { pull.settle() }
-                }
-            },
+            onDragEnd = { finishPull(pull, scope, onDismiss, onPullUp) },
             onDragCancel = { scope.launch { pull.settle() } },
         )
     }
+}
+
+/** The finger let go: past the threshold downwards closes, upwards opens the details; either way (or if short) the picture springs back. */
+private fun finishPull(pull: PullState, scope: CoroutineScope, onDismiss: () -> Unit, onPullUp: () -> Unit) {
+    if (pull.offset > pull.thresholdPx) {
+        onDismiss()
+        return
+    }
+    if (pull.offset < -pull.thresholdPx) onPullUp()
+    scope.launch { pull.settle() }
 }

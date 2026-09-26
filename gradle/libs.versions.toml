@@ -8,6 +8,8 @@ room = "2.8.5"
 paging = "3.5.1"
 media3 = "1.11.1"
 coil = "3.6.3"
+okhttp = "5.5.0"
+sqlcipher = "4.19.0"
 navigationCompose = "2.10.2"
 activityCompose = "1.13.0"
 coreKtx = "1.19.1"
@@ -46,6 +48,8 @@ androidx-compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling
 androidx-compose-foundation = { module = "androidx.compose.foundation:foundation" }
 androidx-compose-material3 = { module = "androidx.compose.material3:material3" }
 
+# Encrypts the database on the phone (AES-256, key held by the Android Keystore); BSD-style license, see NOTICE.md and Settings, About.
+sqlcipher-android = { module = "net.zetetic:sqlcipher-android", version.ref = "sqlcipher" }
 androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
 androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
 androidx-room-paging = { module = "androidx.room:room-paging", version.ref = "room" }
@@ -59,6 +63,10 @@ tesseract4android = { module = "cz.adaptech.tesseract4android:tesseract4android"
 onnxruntime-android = { module = "com.microsoft.onnxruntime:onnxruntime-android", version.ref = "onnxruntime" }
 onnxruntime-jvm = { module = "com.microsoft.onnxruntime:onnxruntime", version.ref = "onnxruntime" }
 coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil" }
+# Only in the backup build (see docs/BACKUP.md): the HTTP client, and for its tests a fake server and certificates made on the fly.
+okhttp = { module = "com.squareup.okhttp3:okhttp", version.ref = "okhttp" }
+okhttp-mockwebserver = { module = "com.squareup.okhttp3:mockwebserver3", version.ref = "okhttp" }
+okhttp-tls = { module = "com.squareup.okhttp3:okhttp-tls", version.ref = "okhttp" }
 
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
 hilt-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hilt" }

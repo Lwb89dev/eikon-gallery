@@ -86,7 +86,6 @@
     <string name="info_name">Nome</string>
     <string name="info_type">Tipo</string>
     <string name="info_folder">Cartella</string>
-    <string name="info_album">Album</string>
     <string name="info_resolution">Risoluzione</string>
     <string name="info_megapixels">Megapixel</string>
     <string name="info_size">Dimensione</string>
@@ -124,8 +123,15 @@
     <string name="theme_light">Chiaro</string>
     <string name="theme_dark">Scuro</string>
     <string name="settings_privacy">Privacy</string>
-    <string name="settings_privacy_body">eikon funziona interamente sul tuo dispositivo. Non ha permessi per internet, né account, né analytics, e i suoi dati sono esclusi dai backup di Android.\n\nLe tue foto non vengono mai copiate: eikon conserva un indice locale con i dettagli dei file (nome, data, dimensione, cartella) per aprire subito la libreria. Disinstallando l\'app l\'indice viene eliminato.</string>
+    <string name="settings_privacy_body">eikon funziona sul tuo dispositivo. Non ha account né analytics, e i suoi dati sono esclusi dai backup di Android.\n\nLe tue foto non vengono mai copiate: eikon conserva un indice locale con i dettagli dei file (nome, data, dimensione, cartella) per aprire subito la libreria. Disinstallando l\'app l\'indice viene eliminato.</string>
+    <string name="settings_storage_encrypted">Il database della libreria (l\'indice, gli album, le modifiche, le didascalie e ciò che l\'analisi ha trovato) è cifrato su questo telefono con AES-256. La sua chiave è custodita dal Keystore di Android.</string>
+    <string name="settings_storage_not_encrypted">Non è stato possibile cifrare il database della libreria (%1$s), quindi è ancora salvato in chiaro. eikon riprova a ogni avvio.</string>
+    <string name="settings_storage_reset_title">Database della libreria ricominciato</string>
+    <string name="settings_storage_reset">La chiave che proteggeva il database della libreria è andata persa, quindi eikon ne ha dovuto creare uno nuovo. Album, modifiche, didascalie e nomi che avevi aggiunto sono spariti. Le tue foto non sono state toccate e l\'analisi ripartirà.</string>
+    <string name="settings_storage_reset_ok">Ho capito</string>
     <string name="settings_about">Informazioni</string>
+    <string name="settings_licenses">Licenze open source</string>
+    <string name="licenses_title">Licenze open source</string>
     <string name="settings_version">Versione %1$s</string>
 
     <!-- Navigazione e collezioni -->
@@ -238,6 +244,7 @@
     <string name="setting_lock_hidden">Richiedi autenticazione per Nascosti</string>
     <string name="setting_lock_trash">Richiedi autenticazione per Eliminati di recente</string>
     <string name="setting_show_hidden">Mostra Nascosti nelle Collezioni</string>
+    <string name="setting_secure_screens">Nascondi eikon nelle app recenti e blocca gli screenshot</string>
     <string name="settings_security_body">Gli elementi nascosti non compaiono in Libreria, Collezioni e ricerca, e aprire Nascosti richiede impronta, volto o blocco schermo. I file non sono cifrati e restano nella memoria normale del telefono, dove altre app con accesso alle foto possono ancora vederli.</string>
 
     <!-- Cerca -->
@@ -510,4 +517,66 @@
     <string name="viewer_zoom_out">Riduci</string>
     <string name="external_photo">Foto</string>
     <string name="viewer_cannot_display">Questa foto non può essere mostrata.</string>
+
+    <!-- Info: caption, editing the date and location, what the photo shows -->
+    <string name="info_caption">Didascalia</string>
+    <string name="caption_add">Aggiungi una didascalia</string>
+    <string name="caption_edit">Modifica la didascalia</string>
+    <string name="caption_title">Didascalia</string>
+    <string name="caption_hint">Due parole su questa foto</string>
+    <string name="caption_note">Resta solo in eikon; il file della foto non cambia. La ricerca la trova.</string>
+    <string name="date_change">Cambia data e ora</string>
+    <string name="date_revert">Ripristina la data originale</string>
+    <string name="date_time_title">Ora del giorno</string>
+    <string name="action_next">Avanti</string>
+    <string name="location_title">Dove è stata scattata</string>
+    <string name="location_coordinates">Coordinate</string>
+    <string name="location_coordinates_note">Gradi decimali, prima la latitudine: 41.9028, 12.4964</string>
+    <string name="location_invalid">Non è una posizione: due numeri, latitudine tra -90 e 90 e longitudine tra -180 e 180</string>
+    <string name="location_city">Oppure cerca una città (funziona offline)</string>
+    <string name="location_remove">Rimuovi la posizione</string>
+    <string name="location_change">Cambia la posizione</string>
+    <string name="location_revert">Ripristina la posizione originale</string>
+    <string name="info_map_description">Una piccola mappa che mostra dove è stata scattata la foto</string>
+    <string name="metadata_done">Fatto. La foto ora dice questo; l\'originale è conservato e puoi ripristinarlo.</string>
+    <string name="metadata_not_writable">Questo tipo di file non si può modificare.</string>
+    <string name="metadata_needs_permission">Per cambiare la data o la posizione di una foto eikon deve poter leggere dove sono state scattate: senza, Android gliene mostra una copia senza posizione, e salvare la cancellerebbe.</string>
+    <string name="metadata_nothing_to_revert">Non c\'è nulla da ripristinare.</string>
+    <string name="metadata_interrupted">Una modifica precedente a questa foto non è finita. L\'originale è conservato: ripristinalo prima di cambiare altro.</string>
+    <string name="metadata_failed">La modifica non ha funzionato. La foto è stata rimessa esattamente com\'era.</string>
+    <string name="metadata_restore_file">Ripristina il file originale</string>
+    <string name="info_albums">Negli album</string>
+    <string name="info_pets">Animali</string>
+    <string name="info_shows">Potrebbe mostrare</string>
+    <string name="pet_dog">Cane</string>
+    <string name="pet_cat">Gatto</string>
+    <string name="info_album">Album del dispositivo</string>
+    <string name="label_landscape">Un paesaggio</string>
+    <string name="label_beach">Una spiaggia</string>
+    <string name="label_sea">Il mare</string>
+    <string name="label_mountain">Una montagna</string>
+    <string name="label_sunset">Un tramonto</string>
+    <string name="label_snow">La neve</string>
+    <string name="label_city">Una città</string>
+    <string name="label_building">Un edificio</string>
+    <string name="label_street">Una strada</string>
+    <string name="label_woods">Un bosco</string>
+    <string name="label_flower">Un fiore</string>
+    <string name="label_sky">Il cielo</string>
+    <string name="label_person">Una persona</string>
+    <string name="label_group">Un gruppo di persone</string>
+    <string name="label_food">Del cibo</string>
+    <string name="label_dessert">Un dolce</string>
+    <string name="label_drink">Una bevanda</string>
+    <string name="label_car">Un\'automobile</string>
+    <string name="label_bicycle">Una bicicletta</string>
+    <string name="label_airplane">Un aereo</string>
+    <string name="label_boat">Una barca</string>
+    <string name="label_bird">Un uccello</string>
+    <string name="label_horse">Un cavallo</string>
+    <string name="label_interior">Una stanza</string>
+    <string name="label_night">La notte</string>
+    <string name="label_party">Una festa</string>
+    <string name="label_sport">Un evento sportivo</string>
+    <string name="label_animal">Un animale</string>
 </resources>

@@ -45,10 +45,14 @@ class PeopleRepository @Inject constructor(
     suspend fun saveFaces(mediaId: Long, faces: List<NewFace>) = clusteringLock.withLock {
         ensureSeeded()
         try {
-            transactor.run {
-                dao.deleteFacesOfPhoto(mediaId)
+            val replaced = transactor.run {
+                val removed = dao.deleteFacesOfPhoto(mediaId)
                 dao.insertFaces(faces.map { face -> entity(mediaId, face, personFor(face.vector)) })
+                if (removed > 0) dao.deleteEmptyUnnamedPeople()
+                removed > 0
             }
+            // The averages in memory still hold the faces that were replaced: build them again from what is stored.
+            if (replaced) forgetClustering()
         } catch (e: Exception) {
             forgetClustering() // memory may hold faces the failed transaction did not keep
             throw e

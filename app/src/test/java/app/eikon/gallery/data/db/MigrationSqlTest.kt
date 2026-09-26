@@ -201,6 +201,58 @@ class MigrationSqlTest {
         v6.close()
     }
 
+    // --- 7 to 8 ----------------------------------------------------------------------------------
+
+    @Test
+    fun migration7To8StatementsAreExactlyWhatRoomExportedForVersion8() {
+        val exportedNew = statementsOf(8).filter { sql -> "`backup_item`" in sql }
+        assertEquals(exportedNew.toSet(), DatabaseMigrations.STATEMENTS_7_8.toSet())
+    }
+
+    @Test
+    fun migration7To8KeepsEveryRowAndProducesTheSameObjectsAsAFreshVersion8() {
+        val v7 = DriverManager.getConnection("jdbc:sqlite::memory:")
+        statementsOf(7).forEach { v7.createStatement().use { s -> s.execute(it) } }
+        v7.createStatement().use { it.execute("INSERT INTO media VALUES (1, 'a.jpg', 'image/jpeg', 0, 5, 5, 5, 10, 10, 0, 7, 'DCIM/Camera/', 'Camera', 1, 0, 0, 0, 0)") }
+
+        DatabaseMigrations.STATEMENTS_7_8.forEach { v7.createStatement().use { s -> s.execute(it) } }
+
+        val fresh = DriverManager.getConnection("jdbc:sqlite::memory:")
+        statementsOf(8).forEach { fresh.createStatement().use { s -> s.execute(it) } }
+        assertEquals(userObjects(fresh), userObjects(v7))
+        assertTrue("table:backup_item" in userObjects(v7))
+        assertEquals(1, v7.createStatement().use { st -> st.executeQuery("SELECT COUNT(*) FROM media").use { rs -> rs.next(); rs.getInt(1) } })
+        fresh.close()
+        v7.close()
+    }
+
+    // --- 8 to 9 ----------------------------------------------------------------------------------
+
+    @Test
+    fun migration8To9StatementsAreExactlyWhatRoomExportedForVersion9() {
+        val exportedNew = statementsOf(9).filter { sql -> "`media_caption`" in sql || "`metadata_original`" in sql || "index_media_sizeBytes_isVideo" in sql }
+        assertEquals(exportedNew.toSet(), DatabaseMigrations.STATEMENTS_8_9.toSet())
+    }
+
+    @Test
+    fun migration8To9KeepsEveryRowAndProducesTheSameObjectsAsAFreshVersion9() {
+        val v8 = DriverManager.getConnection("jdbc:sqlite::memory:")
+        statementsOf(8).forEach { v8.createStatement().use { s -> s.execute(it) } }
+        v8.createStatement().use { it.execute("INSERT INTO media VALUES (1, 'a.jpg', 'image/jpeg', 0, 5, 5, 5, 10, 10, 0, 7, 'DCIM/Camera/', 'Camera', 1, 0, 0, 0, 0)") }
+
+        DatabaseMigrations.STATEMENTS_8_9.forEach { v8.createStatement().use { s -> s.execute(it) } }
+
+        val fresh = DriverManager.getConnection("jdbc:sqlite::memory:")
+        statementsOf(9).forEach { fresh.createStatement().use { s -> s.execute(it) } }
+        assertEquals(userObjects(fresh), userObjects(v8))
+        assertTrue("index:index_media_sizeBytes_isVideo" in userObjects(v8))
+        assertEquals(1, v8.createStatement().use { st -> st.executeQuery("SELECT COUNT(*) FROM media").use { rs -> rs.next(); rs.getInt(1) } })
+        v8.createStatement().use { it.execute("INSERT INTO media_caption (rowid, caption) VALUES (1, 'Nonna a Napoli')") }
+        assertEquals(1, v8.createStatement().use { st -> st.executeQuery("SELECT COUNT(*) FROM media_caption WHERE media_caption MATCH 'napoli'").use { rs -> rs.next(); rs.getInt(1) } })
+        fresh.close()
+        v8.close()
+    }
+
     // --- helpers -------------------------------------------------------------------------------
 
     private fun execute(sql: String) = db.createStatement().use { it.execute(sql) }

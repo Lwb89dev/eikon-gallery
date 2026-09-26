@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!--
+        The backup build, and only it, may go online: to the one server the user configures, over TLS, to copy photos and videos there.
+        Nothing else in the app uses the network. Unencrypted traffic is refused outright, and the build fails if any permission
+        appears that is not on the reviewed list (VerifyBackupNetworkTask in build.gradle.kts, docs/BACKUP.md).
+    -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:usesCleartextTraffic="false"
+        tools:ignore="UnusedAttribute" />
+</manifest>

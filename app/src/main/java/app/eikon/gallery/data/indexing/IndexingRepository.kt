@@ -24,17 +24,32 @@ class IndexingRepository @Inject constructor(
     private val dao: IndexDao,
     private val duplicates: DuplicatesDao,
     private val clock: Clock,
+    private val priority: AnalysisPriority,
 ) : WorkQueue {
     fun progress(stage: IndexStage): Flow<StageProgress> =
         combine(dao.observePhotoCount(), dao.observeFinished(stage.name, MAX_ATTEMPTS)) { total, done ->
             StageProgress(done.coerceAtMost(total), total)
         }
 
-    /** Next photos to analyse for [stage]: newest first, never tried or failed fewer than [MAX_ATTEMPTS] times. */
-    override suspend fun pending(stage: IndexStage, limit: Int): List<MediaEntity> = when (stage) {
-        IndexStage.PHASH -> duplicates.pendingPerceptual(MAX_ATTEMPTS, limit)
-        IndexStage.FILEHASH -> duplicates.pendingContent(MAX_ATTEMPTS, limit)
-        else -> dao.pending(stage.name, MAX_ATTEMPTS, limit)
+    /**
+     * Next photos to analyse for [stage]: the ones on screen first, then newest first; never tried or failed fewer than [MAX_ATTEMPTS] times.
+     */
+    override suspend fun pending(stage: IndexStage, limit: Int): List<MediaEntity> {
+        val onScreen = priority.current().let { ids -> if (ids.isEmpty()) emptyList() else pendingAmong(stage, ids) }
+        if (onScreen.size >= limit) return onScreen.take(limit)
+        val rest = when (stage) {
+            IndexStage.PHASH -> duplicates.pendingPerceptual(MAX_ATTEMPTS, limit)
+            IndexStage.FILEHASH -> duplicates.pendingContent(MAX_ATTEMPTS, limit)
+            else -> dao.pending(stage.name, MAX_ATTEMPTS, limit)
+        }
+        val taken = onScreen.mapTo(HashSet()) { it.id }
+        return onScreen + rest.filterNot { it.id in taken }.take(limit - onScreen.size)
+    }
+
+    private suspend fun pendingAmong(stage: IndexStage, ids: List<Long>): List<MediaEntity> = when (stage) {
+        IndexStage.PHASH -> duplicates.pendingPerceptualAmong(MAX_ATTEMPTS, ids)
+        IndexStage.FILEHASH -> duplicates.pendingContentAmong(MAX_ATTEMPTS, ids)
+        else -> dao.pendingAmong(stage.name, MAX_ATTEMPTS, ids)
     }
 
     override suspend fun markDone(mediaId: Long, stage: IndexStage) = record(mediaId, stage, IndexStatus.DONE, attempts = 0)
@@ -51,6 +66,15 @@ class IndexingRepository @Inject constructor(
     suspend fun saveGeo(geo: MediaGeoEntity) = dao.upsertGeo(geo)
 
     suspend fun geo(mediaId: Long): MediaGeoEntity? = dao.geo(mediaId)
+
+    /**
+     * Forgets where [mediaId] was taken, so the places analysis reads it again from the file. Used after eikon itself changed the location written in the file: the change may not move the
+     * file's size, so a sync alone would not notice it (see `FileChange`).
+     */
+    suspend fun forgetPlace(mediaId: Long) {
+        dao.deleteGeo(listOf(mediaId))
+        dao.deleteState(mediaId, IndexStage.GEO.name)
+    }
 
     /** Stores the text found in a photo so Search can find it. */
     suspend fun saveText(mediaId: Long, text: String) = dao.setOcr(mediaId, text)

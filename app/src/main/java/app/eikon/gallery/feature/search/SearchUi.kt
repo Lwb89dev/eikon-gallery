@@ -86,13 +86,7 @@ private fun SearchField(text: String, onTextChange: (String) -> Unit) {
         singleLine = true,
         placeholder = { Text(stringResource(R.string.search_placeholder)) },
         leadingIcon = { Icon(painterResource(R.drawable.ic_search), contentDescription = null) },
-        trailingIcon = {
-            if (text.isNotEmpty()) {
-                IconButton(onClick = { onTextChange("") }) {
-                    Icon(painterResource(R.drawable.ic_close), stringResource(R.string.search_clear))
-                }
-            }
-        },
+        trailingIcon = { if (text.isNotEmpty()) ClearButton { onTextChange("") } },
         keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
         keyboardActions = KeyboardActions(onSearch = { focusManager.clearFocus() }),
         shape = RoundedCornerShape(28.dp),
@@ -107,6 +101,11 @@ private fun SearchField(text: String, onTextChange: (String) -> Unit) {
     )
 }
 
+@Composable
+private fun ClearButton(onClick: () -> Unit) {
+    IconButton(onClick = onClick) { Icon(painterResource(R.drawable.ic_close), stringResource(R.string.search_clear)) }
+}
+
 /** Chips for what was understood: dates, kinds, places and words. Not interactive; purely explanatory. */
 @Composable
 private fun Interpretation(spec: SearchSpec) {
@@ -117,16 +116,19 @@ private fun Interpretation(spec: SearchSpec) {
         horizontalArrangement = Arrangement.spacedBy(8.dp),
         modifier = Modifier.padding(bottom = 4.dp),
     ) {
-        items(labels) { label ->
-            Surface(shape = RoundedCornerShape(50), color = MaterialTheme.colorScheme.primaryContainer) {
-                Text(
-                    text = label,
-                    style = MaterialTheme.typography.labelLarge,
-                    color = MaterialTheme.colorScheme.onPrimaryContainer,
-                    modifier = Modifier.padding(horizontal = 12.dp, vertical = 6.dp),
-                )
-            }
-        }
+        items(labels) { label -> InterpretationChip(label) }
+    }
+}
+
+@Composable
+private fun InterpretationChip(label: String) {
+    Surface(shape = RoundedCornerShape(50), color = MaterialTheme.colorScheme.primaryContainer) {
+        Text(
+            text = label,
+            style = MaterialTheme.typography.labelLarge,
+            color = MaterialTheme.colorScheme.onPrimaryContainer,
+            modifier = Modifier.padding(horizontal = 12.dp, vertical = 6.dp),
+        )
     }
 }
 

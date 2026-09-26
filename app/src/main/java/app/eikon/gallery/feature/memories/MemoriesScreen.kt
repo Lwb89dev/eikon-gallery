@@ -62,43 +62,56 @@ fun MemoriesScreen(
     Scaffold(
         modifier = modifier,
         containerColor = MaterialTheme.colorScheme.background,
-        topBar = {
-            TopAppBar(
-                title = { Text(stringResource(R.string.memories_title)) },
-                navigationIcon = {
-                    IconButton(onClick = onBack) { Icon(painterResource(R.drawable.ic_arrow_back), stringResource(R.string.action_back)) }
-                },
-                actions = {
-                    Box {
-                        IconButton(onClick = { menuOpen = true }) { Icon(painterResource(R.drawable.ic_more_vert), stringResource(R.string.menu_more)) }
-                        DropdownMenu(expanded = menuOpen, onDismissRequest = { menuOpen = false }) {
-                            DropdownMenuItem(text = { Text(stringResource(R.string.memory_reset)) }, onClick = { menuOpen = false; viewModel.reset() })
-                        }
-                    }
-                },
-                colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.background),
-            )
-        },
-    ) { inner ->
-        val list = cards
-        when {
-            list == null -> Box(Modifier.padding(inner).fillMaxSize(), Alignment.Center) { CircularProgressIndicator() }
-            list.isEmpty() -> Text(
-                stringResource(R.string.memories_empty),
-                style = MaterialTheme.typography.bodyLarge,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                textAlign = TextAlign.Center,
-                modifier = Modifier.padding(inner).padding(horizontal = 32.dp, vertical = 48.dp),
-            )
-            else -> LazyColumn(
-                contentPadding = PaddingValues(top = inner.calculateTopPadding() + 8.dp, bottom = inner.calculateBottomPadding() + 24.dp, start = 16.dp, end = 16.dp),
-                verticalArrangement = Arrangement.spacedBy(16.dp),
-                modifier = Modifier.fillMaxSize(),
-            ) {
-                item(key = "note") { Text(stringResource(R.string.memories_note), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant) }
-                items(list, key = { it.memory.id.toArg() }) { card -> MemoryCardView(card, viewModel, onPlay) }
-            }
+        topBar = { MemoriesTopBar(onBack, menuOpen, { menuOpen = it }) { viewModel.reset() } },
+    ) { inner -> MemoriesBody(cards, inner, viewModel, onPlay) }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun MemoriesTopBar(onBack: () -> Unit, menuOpen: Boolean, setMenuOpen: (Boolean) -> Unit, onReset: () -> Unit) {
+    TopAppBar(
+        title = { Text(stringResource(R.string.memories_title)) },
+        navigationIcon = { IconButton(onClick = onBack) { Icon(painterResource(R.drawable.ic_arrow_back), stringResource(R.string.action_back)) } },
+        actions = { MemoriesMenu(menuOpen, setMenuOpen, onReset) },
+        colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.background),
+    )
+}
+
+@Composable
+private fun MemoriesMenu(open: Boolean, setOpen: (Boolean) -> Unit, onReset: () -> Unit) {
+    Box {
+        IconButton(onClick = { setOpen(true) }) { Icon(painterResource(R.drawable.ic_more_vert), stringResource(R.string.menu_more)) }
+        DropdownMenu(expanded = open, onDismissRequest = { setOpen(false) }) {
+            DropdownMenuItem(text = { Text(stringResource(R.string.memory_reset)) }, onClick = { setOpen(false); onReset() })
         }
+    }
+}
+
+/** The wait, the note that there is nothing yet, or the list of memories. */
+@Composable
+private fun MemoriesBody(cards: List<MemoryCard>?, inner: PaddingValues, viewModel: MemoriesViewModel, onPlay: (MemoryId) -> Unit) {
+    when {
+        cards == null -> Box(Modifier.padding(inner).fillMaxSize(), Alignment.Center) { CircularProgressIndicator() }
+        cards.isEmpty() -> Text(
+            stringResource(R.string.memories_empty),
+            style = MaterialTheme.typography.bodyLarge,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            textAlign = TextAlign.Center,
+            modifier = Modifier.padding(inner).padding(horizontal = 32.dp, vertical = 48.dp),
+        )
+        else -> MemoryList(cards, inner, viewModel, onPlay)
+    }
+}
+
+@Composable
+private fun MemoryList(cards: List<MemoryCard>, inner: PaddingValues, viewModel: MemoriesViewModel, onPlay: (MemoryId) -> Unit) {
+    LazyColumn(
+        contentPadding = PaddingValues(top = inner.calculateTopPadding() + 8.dp, bottom = inner.calculateBottomPadding() + 24.dp, start = 16.dp, end = 16.dp),
+        verticalArrangement = Arrangement.spacedBy(16.dp),
+        modifier = Modifier.fillMaxSize(),
+    ) {
+        item(key = "note") { Text(stringResource(R.string.memories_note), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant) }
+        items(cards, key = { it.memory.id.toArg() }) { card -> MemoryCardView(card, viewModel, onPlay) }
     }
 }
 
@@ -120,11 +133,14 @@ private fun MemoryCardView(card: MemoryCard, viewModel: MemoriesViewModel, onPla
         }
         Box(Modifier.align(Alignment.TopEnd)) {
             IconButton(onClick = { menuOpen = true }) { Icon(painterResource(R.drawable.ic_more_vert), stringResource(R.string.menu_more), tint = Color.White) }
-            DropdownMenu(expanded = menuOpen, onDismissRequest = { menuOpen = false }) {
-                MemoryMenuItems(id, card.personName, onDismiss = { menuOpen = false }, actions = viewModel)
-            }
+            CardMenu(menuOpen, { menuOpen = false }, id, card.personName, viewModel)
         }
     }
+}
+
+@Composable
+private fun CardMenu(open: Boolean, onDismiss: () -> Unit, id: MemoryId, personName: String?, actions: MemoryActions) {
+    DropdownMenu(expanded = open, onDismissRequest = onDismiss) { MemoryMenuItems(id, personName, onDismiss, actions) }
 }
 
 private const val CARD_RATIO = 16f / 10f

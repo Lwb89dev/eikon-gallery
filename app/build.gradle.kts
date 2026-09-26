@@ -66,7 +66,7 @@ abstract class FetchModelsTask : DefaultTask() {
     }
 }
 
-/** Fails the build if a merged manifest asks for the INTERNET permission (see docs/PRIVACY.md). */
+/** Fails the build if a merged manifest asks for the INTERNET permission (see docs/PRIVACY.md). Run on every variant of the `standard` build. */
 abstract class VerifyNoInternetTask : DefaultTask() {
     @get:InputFile
     abstract val mergedManifest: RegularFileProperty
@@ -81,11 +81,62 @@ abstract class VerifyNoInternetTask : DefaultTask() {
     }
 }
 
+/**
+ * The other side of the same promise, for the `backup` build: the network is there only for the backup, so the merged manifest must ask for INTERNET
+ * (a build that silently lost it would fail at the first upload), must forbid unencrypted traffic, and must not have gained any other permission that
+ * touches the network or the phone's identity than the ones listed here (see docs/BACKUP.md).
+ */
+abstract class VerifyBackupNetworkTask : DefaultTask() {
+    @get:InputFile
+    abstract val mergedManifest: RegularFileProperty
+
+    @TaskAction
+    fun verify() {
+        val text = mergedManifest.get().asFile.readText()
+        check("android.permission.INTERNET" in text) { "The backup build's merged manifest does not request INTERNET." }
+        check("android:usesCleartextTraffic=\"false\"" in text) { "The backup build must forbid unencrypted traffic (android:usesCleartextTraffic=\"false\")." }
+        val allowed = setOf(
+            "android.permission.INTERNET", "android.permission.ACCESS_NETWORK_STATE", "android.permission.WAKE_LOCK",
+            "android.permission.RECEIVE_BOOT_COMPLETED", "android.permission.FOREGROUND_SERVICE", "android.permission.READ_EXTERNAL_STORAGE", "android.permission.READ_MEDIA_IMAGES",
+            "android.permission.READ_MEDIA_VIDEO", "android.permission.READ_MEDIA_VISUAL_USER_SELECTED", "android.permission.ACCESS_MEDIA_LOCATION",
+            "android.permission.USE_BIOMETRIC", "android.permission.USE_FINGERPRINT",
+        )
+        val requested = Regex("<uses-permission[^>]*android:name=\"([^\"]+)\"").findAll(text).map { it.groupValues[1] }.toSet()
+        val unexpected = requested.filterNot { it in allowed || it.endsWith(".DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION") }
+        check(unexpected.isEmpty()) { "The backup build requests permissions nobody reviewed: $unexpected. Add them to docs/BACKUP.md and this task, or remove what brings them." }
+    }
+}
+
+/**
+ * Puts NOTICE.md into the APK as an asset, so the licenses of everything bundled can be read inside the app (Settings, Open-source licenses), not only in the source. Their terms ask
+ * for the notices to travel with the app; one file is the source of truth for both.
+ */
+abstract class BundleNoticeTask : DefaultTask() {
+    @get:InputFile
+    abstract val notice: RegularFileProperty
+
+    @get:OutputDirectory
+    abstract val outputDir: DirectoryProperty
+
+    @TaskAction
+    fun bundle() {
+        val target = outputDir.get().asFile.apply { mkdirs() }
+        notice.get().asFile.copyTo(File(target, "NOTICE.md"), overwrite = true)
+    }
+}
+
 val fetchModels = tasks.register<FetchModelsTask>("fetchModels") {
     group = "eikon"
     description = "Downloads and verifies the bundled machine-learning models."
     manifest.set(layout.projectDirectory.file("model-manifest.tsv"))
     outputDir.set(layout.projectDirectory.dir("models/assets"))
+}
+
+val bundleNotice = tasks.register<BundleNoticeTask>("bundleNotice") {
+    group = "eikon"
+    description = "Adds NOTICE.md to the APK's assets."
+    notice.set(rootProject.layout.projectDirectory.file("NOTICE.md"))
+    outputDir.set(layout.buildDirectory.dir("generated/notice"))
 }
 
 android {
@@ -102,6 +153,17 @@ android {
         versionName = "0.1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    // Two builds of the same app (see docs/BACKUP.md). `standard` has no network permission at all and the build fails if one ever appears; `backup` is the
+    // same app plus the backup to a server of your own. Same application id, so installing one over the other keeps everything.
+    flavorDimensions += "network"
+    productFlavors {
+        create("standard") { dimension = "network" }
+        create("backup") {
+            dimension = "network"
+            versionNameSuffix = "-backup"
+        }
     }
 
     androidResources {
@@ -164,10 +226,19 @@ tasks.matching { it.name.endsWith("UnitTest") && it.name.startsWith("test") }.co
 androidComponents {
     onVariants { variant ->
         variant.sources.assets?.addGeneratedSourceDirectory(fetchModels, FetchModelsTask::outputDir)
+        variant.sources.assets?.addGeneratedSourceDirectory(bundleNotice, BundleNoticeTask::outputDir)
 
-        val verify = tasks.register<VerifyNoInternetTask>("verifyNoInternet${variant.name.replaceFirstChar { it.uppercase() }}") {
-            group = "verification"
-            mergedManifest.set(variant.artifacts.get(SingleArtifact.MERGED_MANIFEST))
+        val taskSuffix = variant.name.replaceFirstChar { it.uppercase() }
+        val verify = if (variant.flavorName == "backup") {
+            tasks.register<VerifyBackupNetworkTask>("verifyBackupNetwork$taskSuffix") {
+                group = "verification"
+                mergedManifest.set(variant.artifacts.get(SingleArtifact.MERGED_MANIFEST))
+            }
+        } else {
+            tasks.register<VerifyNoInternetTask>("verifyNoInternet$taskSuffix") {
+                group = "verification"
+                mergedManifest.set(variant.artifacts.get(SingleArtifact.MERGED_MANIFEST))
+            }
         }
         tasks.matching { it.name == "assemble${variant.name.replaceFirstChar { c -> c.uppercase() }}" }
             .configureEach { dependsOn(verify) }
@@ -209,6 +280,7 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.tooling)
 
     implementation(libs.androidx.room.runtime)
+    implementation(libs.sqlcipher.android)
     implementation(libs.androidx.room.ktx)
     implementation(libs.androidx.room.paging)
     ksp(libs.androidx.room.compiler)
@@ -218,6 +290,11 @@ dependencies {
     implementation(libs.androidx.media3.ui.compose)
 
     implementation(libs.coil.compose)
+
+    // The HTTP client of the backup, in the backup build only: the standard build contains no network code at all.
+    "backupImplementation"(libs.okhttp)
+    "testBackupImplementation"(libs.okhttp.mockwebserver)
+    "testBackupImplementation"(libs.okhttp.tls)
 
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)

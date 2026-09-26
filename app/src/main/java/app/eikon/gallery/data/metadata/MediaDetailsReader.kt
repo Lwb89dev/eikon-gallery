@@ -25,8 +25,8 @@ import kotlinx.coroutines.withContext
 
 /**
  * Reads the real metadata of one file on demand (when the info panel opens). Nothing here is cached
- * or written anywhere: GPS and camera data are shown to the user and forgotten, never stored in the
- * index.
+ * or written anywhere: GPS and camera data are shown to the user and forgotten. (Where a photo was taken
+ * is stored only by the Places analysis, which is off until the user turns it on.)
  *
  * Android removes GPS from what apps read unless the app holds ACCESS_MEDIA_LOCATION *and* asks for
  * the original file with [MediaStore.setRequireOriginal]; both are done here, and only when the user

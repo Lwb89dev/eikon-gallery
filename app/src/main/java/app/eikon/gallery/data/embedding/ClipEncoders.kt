@@ -1,6 +1,5 @@
 package app.eikon.gallery.data.embedding
 
-import ai.onnxruntime.OnnxTensor
 import java.nio.ByteBuffer
 
 /** Turns a photo into a vector of the shared image/text space. Not thread-safe; call from one thread at a time. */

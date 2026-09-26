@@ -55,8 +55,19 @@ If a flight cannot be made (the cell is not on screen, the photo is not loaded y
   2-megapixel picture takes about 54 ms. Sharing edited photos draws each at full size (up to 24 megapixels) into the cache folder; a bar across the top says so while it works.
 - Nothing runs when the app is not visible except the scheduled analysis. The library sync runs only while the app is visible.
 
+## The backup (the `backup` build)
+
+- It runs as background work behind WorkManager: every 30 minutes at most, on the network the user allowed (Wi-Fi by default), battery not low, charging if chosen, **not in Battery Saver** (a run started with *Back up now* goes ahead there), 8-minute slices, and it stops
+  between photos when the phone is too hot ([BACKUP.md](BACKUP.md)).
+- Each photo is **read twice**: once to find its SHA-1 and exact size (a sequential read, 64 KB at a time), once to send it. That doubles the reading for the sake of two things the servers need (the checksum, which is what lets them recognise a copy, and a known length, which avoids chunked
+  upload); the alternative of computing the hash while sending cannot work for Immich, which wants the checksum before the upload. Nothing is held in memory: a photo is streamed, never loaded.
+- Hashing is cheap next to sending, but **neither has been measured on a phone**, nor has the battery cost of a first backup of a large library, which will take a long time on a real connection whatever the code does.
+- The queue is one indexed query (`backup_item` joined to `media`, newest first, `LIMIT`); its counts for the settings screen are three `COUNT(*)` queries that Room re-runs when either table changes.
+
 ## What is not tuned
 
 - Scrolling was measured on a phone in Phase 1 only. Nothing added since has been scrolled on a device: the edited badge, the per-photo edit lookup for thumbnails and the new folder indexes.
 - Analysis speed, battery cost and heat on a phone are unmeasured (see [ML.md](ML.md) for the desktop numbers of the models).
-- On-screen photos are not analysed first (the queue goes newest first).
+- On-screen photos are analysed first (`AnalysisPriority`: the screens report the ids on screen once scrolling settles, at most 200, in memory only); this has been tested against a real SQLite but not on a phone.
+- The vectors that search, pets, labels and similar shots read are kept in memory once (about 0.5 KB per photo, 50 MB for 100,000 photos) and shared; the copy is a *soft* reference, so Android may take it back under memory pressure, and it is read again only when a vector was added, replaced or removed.
+- The encrypted database costs a little on every read and write (AES on each page). It has not been measured on a phone; the queries and their plans are unchanged.

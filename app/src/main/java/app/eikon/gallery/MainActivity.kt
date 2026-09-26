@@ -3,6 +3,7 @@ package app.eikon.gallery
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.view.WindowManager
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
@@ -15,6 +16,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.lifecycle.ViewModel
 import app.eikon.gallery.core.security.AreaLocks
+import app.eikon.gallery.core.security.ScreenSecrecy
 import app.eikon.gallery.data.settings.AppSettings
 import app.eikon.gallery.data.settings.SettingsRepository
 import app.eikon.gallery.data.sync.LibrarySyncCoordinator
@@ -23,6 +25,10 @@ import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
 @HiltViewModel
@@ -37,6 +43,9 @@ class MainActivity : FragmentActivity() {
 
     @Inject
     lateinit var areaLocks: AreaLocks
+
+    @Inject
+    lateinit var secrecy: ScreenSecrecy
 
     private val appViewModel: AppViewModel by viewModels()
 
@@ -57,9 +66,22 @@ class MainActivity : FragmentActivity() {
                 repeatOnLifecycle(Lifecycle.State.STARTED) { syncCoordinator.keepFresh() }
             }
         }
+        keepWindowSecureWhenAsked()
         setContent {
             val settings by appViewModel.settings.collectAsState()
             settings?.let { EikonApp(it, externalImage, onCloseExternal = ::finish) }
+        }
+    }
+
+    /** The window is secure (no screenshots, blank recent-apps card) when the user asked for it everywhere, or while a protected area is open. */
+    private fun keepWindowSecureWhenAsked() {
+        val asked = appViewModel.settings.filterNotNull().map { it.secureScreens }
+        lifecycleScope.launch {
+            combine(asked, secrecy.protectedScreenOpen) { everywhere, protectedOpen -> everywhere || protectedOpen }
+                .distinctUntilChanged()
+                .collect { secure ->
+                    if (secure) window.addFlags(WindowManager.LayoutParams.FLAG_SECURE) else window.clearFlags(WindowManager.LayoutParams.FLAG_SECURE)
+                }
         }
     }
 

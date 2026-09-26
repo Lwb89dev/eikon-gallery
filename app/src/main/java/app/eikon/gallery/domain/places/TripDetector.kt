@@ -203,7 +203,8 @@ fun distanceKm(latitudeA: Double, longitudeA: Double, latitudeB: Double, longitu
     val dLat = Math.toRadians(latitudeB - latitudeA)
     val dLon = Math.toRadians(longitudeB - longitudeA)
     val a = sin(dLat / 2) * sin(dLat / 2) + cos(Math.toRadians(latitudeA)) * cos(Math.toRadians(latitudeB)) * sin(dLon / 2) * sin(dLon / 2)
-    return 2 * EARTH_RADIUS_KM * asin(sqrt(a))
+    // Rounding can push `a` a hair past 1 for opposite points, where asin would give NaN.
+    return 2 * EARTH_RADIUS_KM * asin(sqrt(a.coerceIn(0.0, 1.0)))
 }
 
 private const val EARTH_RADIUS_KM = 6371.0

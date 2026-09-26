@@ -72,7 +72,6 @@ fun LibraryGrid(
 ) {
     val dragSelect = rememberDragSelectState(state, layout, items, onBeginDragSelect, onDragSelect)
     val currentColumnsStep by rememberUpdatedState(onColumnsStep)
-    val selectionMode = selection.isNotEmpty()
     val selectLabel = stringResource(R.string.action_select)
 
     LazyVerticalGrid(
@@ -87,23 +86,39 @@ fun LibraryGrid(
             .pointerInput(dragSelect) { detectDragSelect(dragSelect) },
     ) {
         timelineItems(layout, items, headerLabel = { labels.label(it.bucket, grouping) }) { mediaIndex ->
-            val item = if (mediaIndex < items.itemCount) items[mediaIndex] else null
-            MediaCell(
-                item = item,
-                selected = item != null && item.id in selection,
-                selectionMode = selectionMode,
-                selectLabel = selectLabel,
-                // Releasing a long press without moving also reports a click on the cell; the drag
-                // session is still active at that moment, which is how the two are told apart.
-                onClick = {
-                    if (item != null && !dragSelect.active) {
-                        if (selectionMode) onToggleSelect(item) else onOpen(mediaIndex)
-                    }
-                },
-                onLongClick = { item?.let { if (!selectionMode) onToggleSelect(it) } },
-            )
+            GridCell(mediaIndex, items, selection, dragSelect, selectLabel, onOpen, onToggleSelect)
         }
     }
+}
+
+/** One thumbnail of the grid, with what a tap and a long press do to it. */
+@Composable
+private fun GridCell(
+    mediaIndex: Int,
+    items: LazyPagingItems<MediaItem>,
+    selection: Map<Long, MediaItem>,
+    dragSelect: DragSelectState,
+    selectLabel: String,
+    onOpen: (mediaIndex: Int) -> Unit,
+    onToggleSelect: (MediaItem) -> Unit,
+) {
+    val item = if (mediaIndex < items.itemCount) items[mediaIndex] else null
+    val selectionMode = selection.isNotEmpty()
+    MediaCell(
+        item = item,
+        selected = item != null && item.id in selection,
+        selectionMode = selectionMode,
+        selectLabel = selectLabel,
+        // Releasing a long press without moving also reports a click on the cell; the drag
+        // session is still active at that moment, which is how the two are told apart.
+        onClick = { if (item != null && !dragSelect.active) tap(item, mediaIndex, selectionMode, onToggleSelect, onOpen) },
+        onLongClick = { if (item != null && !selectionMode) onToggleSelect(item) },
+    )
+}
+
+/** A tap selects the photo while a selection is going on, and opens it otherwise. */
+private fun tap(item: MediaItem, mediaIndex: Int, selectionMode: Boolean, onToggleSelect: (MediaItem) -> Unit, onOpen: (Int) -> Unit) {
+    if (selectionMode) onToggleSelect(item) else onOpen(mediaIndex)
 }
 
 private fun LazyGridScope.timelineItems(
@@ -229,15 +244,19 @@ private fun rememberDragSelectState(
     val edgePx = with(LocalDensity.current) { AutoScrollEdge.toPx() }
     LaunchedEffect(drag.active) {
         while (drag.active) {
-            val delta = edgeScrollDelta(drag.pointer.y, state.layoutInfo.viewportSize.height.toFloat(), edgePx)
-            if (delta != 0f) {
-                state.scrollBy(delta)
-                drag.reselect()
-            }
+            scrollNearEdge(drag, state, edgePx)
             delay(FRAME_DELAY_MS)
         }
     }
     return drag
+}
+
+/** While the finger of a drag selection is near the top or bottom edge, scrolls the grid a little and applies the selection to what came under the finger. */
+private suspend fun scrollNearEdge(drag: DragSelectState, state: LazyGridState, edgePx: Float) {
+    val delta = edgeScrollDelta(drag.pointer.y, state.layoutInfo.viewportSize.height.toFloat(), edgePx)
+    if (delta == 0f) return
+    state.scrollBy(delta)
+    drag.reselect()
 }
 
 private suspend fun PointerInputScope.detectDragSelect(drag: DragSelectState) {

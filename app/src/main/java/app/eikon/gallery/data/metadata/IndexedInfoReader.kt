@@ -1,6 +1,7 @@
 package app.eikon.gallery.data.metadata
 
 import android.content.Context
+import app.eikon.gallery.data.db.AlbumDao
 import app.eikon.gallery.data.db.MediaGeoEntity
 import app.eikon.gallery.data.faces.PeopleRepository
 import app.eikon.gallery.data.indexing.IndexingRepository
@@ -20,6 +21,10 @@ data class IndexedInfo(
     val people: List<String> = emptyList(),
     /** Faces in the photo whose person has no name yet. */
     val unnamedFaces: Int = 0,
+    /** The names of the eikon albums the photo is in. */
+    val albums: List<String> = emptyList(),
+    /** The caption the user wrote for it. */
+    val caption: String? = null,
 )
 
 @Singleton
@@ -28,6 +33,8 @@ class IndexedInfoReader @Inject constructor(
     private val indexing: IndexingRepository,
     private val gazetteers: GazetteerProvider,
     private val people: PeopleRepository,
+    private val albums: AlbumDao,
+    private val metadata: MetadataRepository,
 ) {
     suspend fun read(mediaId: Long): IndexedInfo {
         val faces = people.facesOfPhoto(mediaId)
@@ -36,6 +43,8 @@ class IndexedInfoReader @Inject constructor(
             text = indexing.text(mediaId),
             people = faces.mapNotNull { it.name }.distinct(),
             unnamedFaces = faces.count { it.name == null },
+            albums = albums.namesOf(mediaId),
+            caption = metadata.caption(mediaId),
         )
     }
 

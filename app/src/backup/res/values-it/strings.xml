@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="settings_privacy_network">Questa versione ha il permesso internet solo per il backup verso un server tuo, spento finché non lo configuri. Nient\'altro usa la rete.</string>
+    <string name="backup_title">Backup sul tuo server</string>
+    <string name="backup_intro">Copia foto e video su un server che gestisci tu, con una connessione cifrata. Niente lascia questo telefono finché non attivi il backup, va solo al server indicato qui sotto, e eikon non cancella né modifica mai nulla su di esso. La password o la chiave è conservata cifrata, nel Keystore di Android.</string>
+    <string name="backup_kind_immich">Immich (è anche ciò che installa Umbrel)</string>
+    <string name="backup_kind_nextcloud">Nextcloud, o qualunque server WebDAV</string>
+    <string name="backup_address">Indirizzo del server (https://…)</string>
+    <string name="backup_username">Nome di accesso</string>
+    <string name="backup_folder">Cartella sul server</string>
+    <string name="backup_api_key">Chiave API</string>
+    <string name="backup_app_password">Password per app</string>
+    <string name="backup_secret_saved">Salvata. Lascia vuoto per tenerla</string>
+    <string name="backup_help_immich">In Immich: Impostazioni account, Chiavi API, Nuova chiave API. Il permesso necessario è asset.upload.</string>
+    <string name="backup_help_nextcloud">In Nextcloud: Impostazioni personali, Sicurezza, Dispositivi e sessioni, crea una nuova password per app. Usa quella, non la password di accesso.</string>
+    <string name="backup_save_test">Salva e prova la connessione</string>
+    <string name="backup_connected">Connesso a %1$s.</string>
+    <string name="backup_failed">Impossibile connettersi: %1$s</string>
+    <string name="backup_certificate_declined">Il certificato non è stato accettato, quindi non è stato inviato nulla e non verrà inviato.</string>
+    <string name="backup_certificate_title">Il certificato di questo server non viene da un\'autorità di cui il telefono si fida</string>
+    <string name="backup_certificate_body">%1$s ha presentato il certificato qui sotto. Confronta la sua impronta con quella mostrata dal tuo server (per esempio con: openssl x509 -noout -fingerprint -sha256). Accettalo solo se sono identiche: da quel momento questo certificato, e nessun altro, sarà accettato per questo server.</string>
+    <string name="backup_certificate_subject">Rilasciato a: %1$s</string>
+    <string name="backup_certificate_expires">Valido fino al %1$s</string>
+    <string name="backup_certificate_self_signed">È firmato da sé stesso, come di solito il certificato di un server casalingo.</string>
+    <string name="backup_certificate_trust">Accetta questo certificato</string>
+    <string name="backup_enable">Fai il backup di foto e video</string>
+    <string name="backup_test_first">Prima salva e prova la connessione.</string>
+    <string name="backup_wifi_only">Solo con il Wi-Fi</string>
+    <string name="backup_only_charging">Solo in carica</string>
+    <string name="backup_videos">Includi i video</string>
+    <string name="backup_hidden">Includi le foto nascoste</string>
+    <string name="backup_hidden_note">Anche le foto nascoste saranno inviate al tuo server, dove sono visibili come tutto il resto.</string>
+    <string name="backup_confirm_title">Avviare il backup?</string>
+    <plurals name="backup_confirm_body">
+        <item quantity="one">%1$d foto o video sarà copiato su %2$s, un po\' alla volta, quando il telefono è sulla rete che hai consentito. Nulla sul telefono né sul server viene cancellato.</item>
+        <item quantity="many">%1$d foto e video saranno copiati su %2$s, un po\' alla volta, quando il telefono è sulla rete che hai consentito. Nulla sul telefono né sul server viene cancellato.</item>
+        <item quantity="other">%1$d foto e video saranno copiati su %2$s, un po\' alla volta, quando il telefono è sulla rete che hai consentito. Nulla sul telefono né sul server viene cancellato.</item>
+    </plurals>
+    <string name="backup_confirm_start">Avvia</string>
+    <string name="backup_location_note">Android nasconde dove sono state scattate le foto alle app senza il permesso sulla posizione delle foto, quindi le copie sul tuo server non avrebbero la posizione.</string>
+    <string name="backup_progress">Salvate: %1$,d di %2$,d</string>
+    <plurals name="backup_refused">
+        <item quantity="one">%1$d foto è stata rifiutata dal server e non verrà riprovata finché non lo chiedi.</item>
+        <item quantity="many">%1$d foto sono state rifiutate dal server e non verranno riprovate finché non lo chiedi.</item>
+        <item quantity="other">%1$d foto sono state rifiutate dal server e non verranno riprovate finché non lo chiedi.</item>
+    </plurals>
+    <string name="backup_running">Backup in corso…</string>
+    <string name="backup_idle">In attesa del momento giusto (la rete che hai consentito, batteria non scarica).</string>
+    <string name="backup_last_run">Ultima esecuzione %1$s. Inviate: %2$d. Già presenti: %3$d. Rifiutate: %4$d.</string>
+    <string name="backup_stopped">Si è fermato perché %1$s</string>
+    <string name="backup_stop_power_save">il Risparmio energetico è attivo.</string>
+    <string name="backup_stop_thermal">il telefono era troppo caldo.</string>
+    <string name="backup_stop_unreachable">il server non era raggiungibile o era occupato. Riproverà.</string>
+    <string name="backup_stop_unauthorized">il server non ha accettato la chiave o la password.</string>
+    <string name="backup_stop_untrusted">il certificato del server non è uno di quelli che hai accettato.</string>
+    <string name="backup_stop_misconfigured">l\'indirizzo non è giusto per questo tipo di server.</string>
+    <string name="backup_stop_refusals">il server ha rifiutato molti file di seguito, il che indica un limite del server, non un problema delle foto.</string>
+    <string name="backup_now">Esegui il backup ora</string>
+    <string name="backup_retry_refused">Riprova quelle rifiutate</string>
+</resources>

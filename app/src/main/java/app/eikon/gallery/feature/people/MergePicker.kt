@@ -28,18 +28,21 @@ fun MergePicker(choices: List<PersonSummary>, onPick: (PersonSummary) -> Unit, o
     AlertDialog(
         onDismissRequest = onDismiss,
         title = { Text(stringResource(R.string.person_merge_title)) },
-        text = {
-            if (choices.isEmpty()) {
-                Text(stringResource(R.string.person_merge_empty))
-            } else {
-                LazyColumn(verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                    items(choices, key = { it.id }) { person -> ChoiceRow(person) { onPick(person) } }
-                }
-            }
-        },
+        text = { MergeChoices(choices, onPick) },
         confirmButton = {},
         dismissButton = { TextButton(onClick = onDismiss) { Text(stringResource(R.string.action_cancel)) } },
     )
+}
+
+@Composable
+private fun MergeChoices(choices: List<PersonSummary>, onPick: (PersonSummary) -> Unit) {
+    if (choices.isEmpty()) {
+        Text(stringResource(R.string.person_merge_empty))
+        return
+    }
+    LazyColumn(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+        items(choices, key = { it.id }) { person -> ChoiceRow(person) { onPick(person) } }
+    }
 }
 
 @Composable

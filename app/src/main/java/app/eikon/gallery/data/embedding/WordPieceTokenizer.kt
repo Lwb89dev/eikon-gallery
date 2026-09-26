@@ -59,13 +59,17 @@ class WordPieceTokenizer(vocabulary: List<String>, private val maxLength: Int = 
     // --- Pre-tokenization: split on spaces, isolate punctuation --------------------------------
 
     private fun words(text: String): List<IntArray> {
-        val words = ArrayList<IntArray>()
-        val current = ArrayList<Int>()
-        fun flush() {
-            if (current.isNotEmpty()) words += current.toIntArray()
-            current.clear()
-        }
-        text.codePoints().forEach { cp ->
+        val splitter = WordSplitter()
+        text.codePoints().forEach(splitter::add)
+        return splitter.finish()
+    }
+
+    /** Collects code points into words: a space ends one, and a punctuation mark is a word of its own. */
+    private inner class WordSplitter {
+        private val words = ArrayList<IntArray>()
+        private val current = ArrayList<Int>()
+
+        fun add(cp: Int) {
             when {
                 cp == ' '.code -> flush()
                 isPunctuation(cp) -> {
@@ -75,8 +79,16 @@ class WordPieceTokenizer(vocabulary: List<String>, private val maxLength: Int = 
                 else -> current += cp
             }
         }
-        flush()
-        return words
+
+        fun finish(): List<IntArray> {
+            flush()
+            return words
+        }
+
+        private fun flush() {
+            if (current.isNotEmpty()) words += current.toIntArray()
+            current.clear()
+        }
     }
 
     private fun isPunctuation(cp: Int): Boolean {

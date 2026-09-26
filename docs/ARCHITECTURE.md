@@ -38,12 +38,14 @@ Writes to media (trash, favorite) never go through the index first: they go thro
 | `core.permissions` | `MediaAccessChecker` (full / limited / none) |
 | `core.ui` | theme, system-bar helpers, paging helpers |
 | `data.db` | Room entity, DAO, database, `LibraryQueryBuilder` (SQL from a query object) |
+| `data.db.encryption` | the encryption of the database (see below): the key, the plan for what is on disk, the copy of an old database into an encrypted one, wiping the old file, and the SQLCipher glue |
 | `data.mediastore` | MediaStore reading, change observer, category heuristics, share/trash actions |
 | `data.sync` | sync engine, sync coordinator, state store |
 | `data.metadata` | on-demand EXIF / container reading for the info panel |
 | `data.settings` | DataStore-backed settings |
 | `domain` | models, `TimelineLayout`, date labels, EXIF formatting (pure Kotlin) |
 | `domain.edit` | the edit recipe and its text format, the renderer (geometry, colour, detail), auto enhance and the crop tool's rules: pure Kotlin, see [EDITING.md](EDITING.md) |
+| `data.backup` | the backup: settings, the queue over Room, the runner, remote names, the credential's encryption (shared); the Immich and WebDAV clients, TLS pinning and the worker (`backup` build only) |
 | `data.edit` | edits by photo, the copy/paste clipboard, decoding for editing and "Save a copy" |
 | `feature.*` | screens and view models |
 
@@ -60,7 +62,26 @@ Writes to media (trash, favorite) never go through the index first: they go thro
 - Capture time is `datetaken`, falling back to `date_modified`, then `date_added`, because many files
   (downloads, screenshots) have no capture date.
 
-## Room schema (version 7)
+## Two builds
+
+`standard` (no network permission; checked by the build) and `backup` (the same plus the backup to a server you run), both built from the same sources: `app/src/main` is everything shared, `app/src/backup` the HTTP clients, the worker, the settings
+screen and the network manifest, `app/src/standard` a stub and a note in Settings. The backup's logic that needs no network (settings, queue, runner, names, encryption of the credential) is in `main` and is tested in both; see [BACKUP.md](BACKUP.md).
+
+## The database is encrypted
+
+The database is opened through SQLCipher (`SupportOpenHelperFactory`) with a random 256-bit key that is stored sealed under a key of the Android Keystore (`KeystoreSecretStore.database`). The package `data.db.encryption` is split so that everything that
+decides something can be tested on the JVM, and only the last step needs a phone:
+
+- `EncryptionPlan` decides, from what is on disk (readable file, encrypted file) and what is known about the key (`KeyLookup`: absent, lost, ready), what to do: open, create, or convert. It is a pure function with a test for every combination.
+- `DatabaseEncryptor` carries the plan out over a `DatabaseEngine` (Room and SQLCipher on the phone; a stand-in with plain files in the tests). A conversion is: store the key first; bring the old file to the newest schema; make an empty encrypted database under another name (`eikon-encrypted.db.tmp`);
+  copy every table (`DatabaseCopy`, tested on a real SQLite: it finds the tables by asking the new database, matches columns by name, copies full-text tables as themselves, keeps the AUTOINCREMENT counters, checks every table's row count and SQLite's own check, all in one transaction); rename the staged file into place in one step; open it once as the app would
+  (`verify`); and only then overwrite and delete the readable file (`SecureFiles`). Every failure leaves the readable database alone and falls back to it, and the next start tries again.
+- `DeferredOpenHelper` is what Room is given: it does all of this the first time the database is really used (on a background thread), not when the app is built (on the main thread).
+- `DatabaseProtectionState` tells Settings how it ended (encrypted, not encrypted yet and why, or started over because the key was lost).
+
+A failure of the Keystore itself is never taken for a lost key (`SecretStore.read` throws instead of answering "unreadable"), because deleting a library over a passing fault would be far worse than an error at start-up.
+
+## Room schema (version 9)
 
 Schemas are exported to `app/schemas`. Two kinds of tables live in the database:
 
@@ -76,7 +97,7 @@ Schemas are exported to `app/schemas`. Two kinds of tables live in the database:
 | `isFavorite` | MediaStore `is_favorite` |
 | `isScreenshot`, `isScreenRecording`, `isPanorama`, `isRaw` | heuristic categories, see below |
 
-Indexes on `takenAt`, `addedAt`, and (`relativePath`, `takenAt`) and (`relativePath`, `addedAt`), the last two so that a device folder is read straight from the index in date order (see [PERFORMANCE.md](PERFORMANCE.md)). Because `id` is the rowid, `ORDER BY takenAt DESC, id DESC` is
+Indexes on `takenAt`, `addedAt`, and (`relativePath`, `takenAt`) and (`relativePath`, `addedAt`), the last two so that a device folder is read straight from the index in date order (see [PERFORMANCE.md](PERFORMANCE.md)), and on (`sizeBytes`, `isVideo`), for finding files of the same size. Because `id` is the rowid, `ORDER BY takenAt DESC, id DESC` is
 served straight from the index.
 
 **User data**, never derived from MediaStore and never touched when the cache is cleared or re-synced:
@@ -86,6 +107,10 @@ served straight from the index.
 | `album` (`id`, `name`, `createdAt`, `position`) | virtual albums, manual order |
 | `album_item` (`albumId`, `mediaId`, `addedAt`) | membership; cascades on album delete; **no foreign key to `media`** so a re-sync can never destroy an album |
 | `hidden_media` (`mediaId`, `hiddenAt`) | items hidden from everything except the Hidden section |
+| `media_caption` (FTS4, `rowid` = media id; `caption`) | the captions the user wrote, searchable, never written into a file |
+| `metadata_original` (`mediaId`, `field`, `value`, `savedAt`) | what a photo's file said about its date or location before eikon first changed it, so the change can be undone |
+
+**Backup** (`backup_item`: `mediaId`, `status`, `attempts`, `modifiedAt`, `sizeBytes`, `checksum`, `updatedAt`): what was sent to the server of the backup, per photo. Cleared when the server changes or photo access is revoked. Only used by the `backup` build.
 
 **Edits** (`edit_recipe`: `mediaId`, `recipe` text, `updatedAt`, `baseModifiedAt`): one recipe per edited photo. User data, kept when the media cache is cleared, because it cannot be rebuilt. The photo's file is never changed;
 see [EDITING.md](EDITING.md).
@@ -108,7 +133,7 @@ not copies) and `memory_preference` (`key`, `value`, `createdAt`: memories hidde
 
 Rows whose media is currently not visible (deleted, or outside a "selected photos" grant) are simply
 not shown and reappear if the media does. A destructive migration is never configured; version 1 to 2
-is an automatic migration, and versions 2 to 3, 3 to 4, 4 to 5, 5 to 6 and 6 to 7 are explicit ones whose SQL is checked against the schema export
+is an automatic migration, and versions 2 to 3, 3 to 4, 4 to 5, 5 to 6, 6 to 7 and 7 to 8 are explicit ones whose SQL is checked against the schema export
 and run on a real SQLite in a JVM test (and, separately, by an instrumented test).
 
 Category heuristics (`MediaClassifier`) rely on folder names, file names and image shape, because

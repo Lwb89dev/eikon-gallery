@@ -94,5 +94,29 @@ object DatabaseMigrations {
         }
     }
 
-    val ALL: Array<Migration> = arrayOf(MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5, MIGRATION_5_6, MIGRATION_6_7)
+    /** Adds the bookkeeping of the backup to a server (which photos were sent). Empty and unused unless the user turns the backup on. */
+    val STATEMENTS_7_8: List<String> = listOf(
+        "CREATE TABLE IF NOT EXISTS `backup_item` (`mediaId` INTEGER NOT NULL, `status` INTEGER NOT NULL, `attempts` INTEGER NOT NULL, `modifiedAt` INTEGER NOT NULL, `sizeBytes` INTEGER NOT NULL, `checksum` TEXT, `updatedAt` INTEGER NOT NULL, PRIMARY KEY(`mediaId`))",
+    )
+
+    val MIGRATION_7_8: Migration = object : Migration(7, 8) {
+        override fun migrate(db: SupportSQLiteDatabase) {
+            STATEMENTS_7_8.forEach(db::execSQL)
+        }
+    }
+
+    /** Captions (searchable), what a photo's date and location were before eikon changed them, and an index for finding files of the same size. */
+    val STATEMENTS_8_9: List<String> = listOf(
+        "CREATE VIRTUAL TABLE IF NOT EXISTS `media_caption` USING FTS4(`caption` TEXT NOT NULL, tokenize=unicode61 `remove_diacritics=2`)",
+        "CREATE TABLE IF NOT EXISTS `metadata_original` (`mediaId` INTEGER NOT NULL, `field` TEXT NOT NULL, `value` TEXT, `savedAt` INTEGER NOT NULL, PRIMARY KEY(`mediaId`, `field`))",
+        "CREATE INDEX IF NOT EXISTS `index_media_sizeBytes_isVideo` ON `media` (`sizeBytes`, `isVideo`)",
+    )
+
+    val MIGRATION_8_9: Migration = object : Migration(8, 9) {
+        override fun migrate(db: SupportSQLiteDatabase) {
+            STATEMENTS_8_9.forEach(db::execSQL)
+        }
+    }
+
+    val ALL: Array<Migration> = arrayOf(MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5, MIGRATION_5_6, MIGRATION_6_7, MIGRATION_7_8, MIGRATION_8_9)
 }

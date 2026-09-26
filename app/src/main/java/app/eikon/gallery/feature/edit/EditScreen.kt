@@ -1,8 +1,8 @@
 package app.eikon.gallery.feature.edit
 
+import android.content.res.Resources
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -57,24 +57,11 @@ fun EditScreen(onClose: () -> Unit, modifier: Modifier = Modifier, viewModel: Ed
 
     BackHandler(onBack = leave)
     LaunchedEffect(viewModel) {
-        viewModel.events.collect { event ->
-            when (event) {
-                EditEvent.Done -> onClose()
-                is EditEvent.CopySaved -> snackbar.showSnackbar(resources.getString(if (event.keptMetadata) R.string.edit_copy_saved else R.string.edit_copy_saved_no_details))
-                EditEvent.Failed -> snackbar.showSnackbar(resources.getString(R.string.edit_failed))
-            }
-        }
+        viewModel.events.collect { event -> handle(event, snackbar, resources, onClose) }
     }
 
     Box(modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)) {
-        Column(Modifier.fillMaxSize().statusBarsPadding().navigationBarsPadding()) {
-            EditTopBar(state, viewModel, onCancel = leave, onRevert = { confirmingRevert = true })
-            state.saving?.let { LinearProgressIndicator(progress = { it }, modifier = Modifier.fillMaxWidth()) }
-            Box(Modifier.weight(1f).fillMaxWidth()) {
-                if (state.loading) CircularProgressIndicator(Modifier.align(Alignment.Center)) else EditPreview(state, viewModel)
-            }
-            if (!state.loading) EditTools(state, viewModel)
-        }
+        EditBody(state, viewModel, onCancel = leave, onRevert = { confirmingRevert = true })
         SnackbarHost(snackbar, Modifier.align(Alignment.BottomCenter).navigationBarsPadding().padding(bottom = 96.dp))
     }
     if (confirmingDiscard) {
@@ -88,6 +75,28 @@ fun EditScreen(onClose: () -> Unit, modifier: Modifier = Modifier, viewModel: Ed
             confirmingRevert = false
             viewModel.revert()
         }, { confirmingRevert = false })
+    }
+}
+
+/** One event of the view model: leave, or say what happened. */
+private suspend fun handle(event: EditEvent, snackbar: SnackbarHostState, resources: Resources, onClose: () -> Unit) {
+    when (event) {
+        EditEvent.Done -> onClose()
+        is EditEvent.CopySaved -> snackbar.showSnackbar(resources.getString(if (event.keptMetadata) R.string.edit_copy_saved else R.string.edit_copy_saved_no_details))
+        EditEvent.Failed -> snackbar.showSnackbar(resources.getString(R.string.edit_failed))
+    }
+}
+
+/** The bar, the picture (or the wait for it) and the tools under it. */
+@Composable
+private fun EditBody(state: EditUiState, viewModel: EditViewModel, onCancel: () -> Unit, onRevert: () -> Unit) {
+    Column(Modifier.fillMaxSize().statusBarsPadding().navigationBarsPadding()) {
+        EditTopBar(state, viewModel, onCancel, onRevert)
+        state.saving?.let { LinearProgressIndicator(progress = { it }, modifier = Modifier.fillMaxWidth()) }
+        Box(Modifier.weight(1f).fillMaxWidth()) {
+            if (state.loading) CircularProgressIndicator(Modifier.align(Alignment.Center)) else EditPreview(state, viewModel)
+        }
+        if (!state.loading) EditTools(state, viewModel)
     }
 }
 

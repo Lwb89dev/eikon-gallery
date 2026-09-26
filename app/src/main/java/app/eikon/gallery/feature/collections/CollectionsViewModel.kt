@@ -20,6 +20,7 @@ import app.eikon.gallery.domain.SortDirection
 import app.eikon.gallery.domain.SortField
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -74,7 +75,15 @@ class CollectionsViewModel @Inject constructor(
     val trashCount: StateFlow<Int?> = mutableTrashCount.asStateFlow()
 
     fun refreshTrashCount() {
-        viewModelScope.launch { mutableTrashCount.value = runCatching { trashRepository.load().size }.getOrNull() }
+        viewModelScope.launch {
+            mutableTrashCount.value = try {
+                trashRepository.count()
+            } catch (cancelled: CancellationException) {
+                throw cancelled
+            } catch (_: Exception) {
+                null
+            }
+        }
     }
 
     fun createAlbum(name: String) {

@@ -78,6 +78,9 @@ class MediaEmbeddingEntity(
     @ColumnInfo(typeAffinity = ColumnInfo.BLOB) val vector: ByteArray,
 )
 
+/** How many vectors of a model are stored, and the sum of their photo ids (see `IndexDao.embeddingStats`). */
+class EmbeddingStats(val count: Int, val idSum: Long)
+
 /** One stored vector as read back for searching. */
 class EmbeddingRow(val mediaId: Long, val vector: ByteArray)
 

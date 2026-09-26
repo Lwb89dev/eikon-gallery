@@ -137,4 +137,13 @@ class LibraryQueryBuilderTest {
         assertTrue(LibraryQueryBuilder.cover(query, now).sql.endsWith("LIMIT 1"))
         assertEquals(media(query).args, LibraryQueryBuilder.count(query, now).args)
     }
+
+    @Test
+    fun aMemoryWithNoPeriodMatchesNothingInsteadOfBeingInvalidSql() {
+        // "On this day" for 29 February has no period in a library with no leap year.
+        val sql = media(LibraryQuery(scope = LibraryScope.Periods(emptyList())))
+        assertTrue(sql.sql, "WHERE 0 AND $notHidden" in sql.sql)
+        assertFalse("()" in sql.sql)
+        assertTrue(sql.args.isEmpty())
+    }
 }

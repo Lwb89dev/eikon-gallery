@@ -14,7 +14,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
+import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.drawscope.withTransform
 import androidx.compose.ui.input.pointer.pointerInput
@@ -22,6 +24,7 @@ import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextMeasurer
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.drawText
 import androidx.compose.ui.text.rememberTextMeasurer
@@ -92,31 +95,45 @@ fun PlacesMap(data: MapData, onOpenArea: (LibraryScope.Area) -> Unit, modifier: 
             },
     ) {
         if (size.width == 0 || size.height == 0) return@Canvas
+        val view = viewport ?: return@Canvas
         val w = size.width.toDouble()
         val h = size.height.toDouble()
-        val view = viewport ?: return@Canvas
-        val scale = view.worldPixels.toFloat()
-        val left = (w / 2 - view.centerX * view.worldPixels).toFloat()
-        val top = (h / 2 - view.centerY * view.worldPixels).toFloat()
-
-        withTransform({ translate(left, top); scale(scale, scale, Offset.Zero) }) {
-            for (i in paths.indices) {
-                if (!visible(bounds[i], view, w, h)) continue
-                drawPath(paths[i], land)
-                drawPath(paths[i], border, style = Stroke(width = 0.8.dp.toPx() / scale))
-            }
-        }
+        drawCountries(paths, bounds, view, land, border)
         drawCityLabels(data, view, w, h, textMeasurer, label)
-        for (cluster in PointClusterer.cluster(data.points, view, w, h, cellPx)) {
-            val at = Offset(view.screenX(cluster.x, w).toFloat(), view.screenY(cluster.y, h).toFloat())
-            val radius = markerRadius(cluster.count, cellPx.toFloat())
-            drawCircle(marker.copy(alpha = 0.85f), radius, at)
-            if (cluster.count > 1) {
-                val text = textMeasurer.measure(cluster.count.toString(), TextStyle(color = onMarker, fontSize = 12.sp))
-                drawText(text, topLeft = Offset(at.x - text.size.width / 2f, at.y - text.size.height / 2f))
-            }
+        drawMarkers(PointClusterer.cluster(data.points, view, w, h, cellPx), view, marker, onMarker, cellPx, textMeasurer)
+    }
+}
+
+/** The country outlines that are on screen, land filled and border stroked. */
+internal fun DrawScope.drawCountries(paths: List<Path>, bounds: List<FloatArray>, view: MapViewport, land: Color, border: Color) {
+    val w = size.width.toDouble()
+    val h = size.height.toDouble()
+    val scale = view.worldPixels.toFloat()
+    val left = (w / 2 - view.centerX * view.worldPixels).toFloat()
+    val top = (h / 2 - view.centerY * view.worldPixels).toFloat()
+    withTransform({ translate(left, top); scale(scale, scale, Offset.Zero) }) {
+        for (i in paths.indices) {
+            if (!visible(bounds[i], view, w, h)) continue
+            drawPath(paths[i], land)
+            drawPath(paths[i], border, style = Stroke(width = 0.8.dp.toPx() / scale))
         }
     }
+}
+
+/** A circle for each group of nearby photos, with the number of photos in it when there is more than one. */
+private fun DrawScope.drawMarkers(clusters: List<GeoCluster>, view: MapViewport, color: Color, numberColor: Color, cellPx: Double, measurer: TextMeasurer) {
+    val w = size.width.toDouble()
+    val h = size.height.toDouble()
+    for (cluster in clusters) {
+        val at = Offset(view.screenX(cluster.x, w).toFloat(), view.screenY(cluster.y, h).toFloat())
+        drawCircle(color.copy(alpha = 0.85f), markerRadius(cluster.count, cellPx.toFloat()), at)
+        if (cluster.count > 1) drawCount(cluster.count, at, numberColor, measurer)
+    }
+}
+
+private fun DrawScope.drawCount(count: Int, at: Offset, color: Color, measurer: TextMeasurer) {
+    val text = measurer.measure(count.toString(), TextStyle(color = color, fontSize = 12.sp))
+    drawText(text, topLeft = Offset(at.x - text.size.width / 2f, at.y - text.size.height / 2f))
 }
 
 private const val CLUSTER_CELL_DP = 44
@@ -141,13 +158,13 @@ private fun startingViewport(data: MapData, width: Double, height: Double): MapV
     return MapViewport.around(latMin, latMax, lonMin, lonMax, width, height)
 }
 
-private fun ringPath(ring: FloatArray): Path = Path().apply {
+internal fun ringPath(ring: FloatArray): Path = Path().apply {
     moveTo(ring[0], ring[1])
     for (i in 1 until ring.size / 2) lineTo(ring[2 * i], ring[2 * i + 1])
     close()
 }
 
-private fun ringBounds(ring: FloatArray): FloatArray {
+internal fun ringBounds(ring: FloatArray): FloatArray {
     var minX = Float.MAX_VALUE
     var maxX = -Float.MAX_VALUE
     var minY = Float.MAX_VALUE
@@ -159,7 +176,7 @@ private fun ringBounds(ring: FloatArray): FloatArray {
     return floatArrayOf(minX, minY, maxX, maxY)
 }
 
-private fun visible(box: FloatArray, view: MapViewport, w: Double, h: Double): Boolean {
+internal fun visible(box: FloatArray, view: MapViewport, w: Double, h: Double): Boolean {
     val left = view.worldX(0.0, w)
     val right = view.worldX(w, w)
     val top = view.worldY(0.0, h)
@@ -189,13 +206,13 @@ private fun areaOf(cluster: GeoCluster): LibraryScope.Area = LibraryScope.Area(
 private const val EDGE = 0.0001
 
 /** City names for orientation: only the bigger ones far out, more as the map is zoomed in. */
-private fun androidx.compose.ui.graphics.drawscope.DrawScope.drawCityLabels(
+private fun DrawScope.drawCityLabels(
     data: MapData,
     view: MapViewport,
     w: Double,
     h: Double,
-    measurer: androidx.compose.ui.text.TextMeasurer,
-    color: androidx.compose.ui.graphics.Color,
+    measurer: TextMeasurer,
+    color: Color,
 ) {
     val minPopulation = when {
         view.worldPixels < 1_500 -> return

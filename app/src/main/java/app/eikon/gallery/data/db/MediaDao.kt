@@ -19,6 +19,10 @@ interface MediaDao {
     @Query("SELECT * FROM media WHERE id = :id")
     suspend fun byId(id: Long): MediaEntity?
 
+    /** The rows as they are now, for finding out which ones a sync is about to change. */
+    @Query("SELECT * FROM media WHERE id IN (:ids)")
+    suspend fun byIds(ids: List<Long>): List<MediaEntity>
+
     @Query("SELECT id FROM media ORDER BY id")
     suspend fun allIds(): List<Long>
 

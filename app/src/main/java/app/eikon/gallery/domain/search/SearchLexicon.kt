@@ -10,9 +10,12 @@ internal object SearchLexicon {
     /** Lowercase, accents removed, apostrophes and punctuation turned into spaces. */
     fun normalize(text: String): String =
         Normalizer.normalize(text.lowercase(Locale.ROOT), Normalizer.Form.NFD)
-            .replace(Regex("\\p{M}+"), "")
-            .replace(Regex("[^\\p{L}\\p{N}/.\\-]+"), " ")
+            .replace(MARKS, "")
+            .replace(NOT_WORD_OR_DATE, " ")
             .trim()
+
+    private val MARKS = Regex("\\p{M}+")
+    private val NOT_WORD_OR_DATE = Regex("[^\\p{L}\\p{N}/.\\-]+")
 
     val monthsFull: Map<String, Int> = mapOf(
         "gennaio" to 1, "febbraio" to 2, "marzo" to 3, "aprile" to 4, "maggio" to 5, "giugno" to 6,

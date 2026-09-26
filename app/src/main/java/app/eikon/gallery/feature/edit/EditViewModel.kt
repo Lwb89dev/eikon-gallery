@@ -25,6 +25,7 @@ import app.eikon.gallery.domain.edit.Geometry
 import app.eikon.gallery.domain.edit.ImagePixelSource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.Channel
@@ -195,6 +196,8 @@ class EditViewModel @Inject constructor(
                 val copy = exporter.saveCopy(photo, ui.value.recipe) { progress -> ui.update { it.copy(saving = progress) } }
                 sync.requestSync(force = true)
                 eventChannel.send(EditEvent.CopySaved(copy.keptMetadata))
+            } catch (cancelled: CancellationException) {
+                throw cancelled
             } catch (_: Exception) {
                 eventChannel.send(EditEvent.Failed)
             } catch (_: OutOfMemoryError) {

@@ -39,6 +39,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.input.pointer.PointerInputScope
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -52,6 +53,7 @@ import app.eikon.gallery.domain.memories.MemoryId
 import coil3.compose.AsyncImage
 import java.time.Instant
 import java.time.ZoneId
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 /**
@@ -84,75 +86,108 @@ private fun EmptyPlayer(onClose: () -> Unit) {
     }
 }
 
-@Composable
-private fun Slideshow(id: MemoryId, state: PlayerState, viewModel: MemoryPlayerViewModel, onClose: () -> Unit, onOpenAll: (MemoryId) -> Unit) {
-    val photos = state.photos
-    var index by remember { mutableIntStateOf(0) }
-    var held by remember { mutableStateOf(false) }
-    var finished by remember { mutableStateOf(false) }
-    val progress = remember { Animatable(0f) }
-    val snackbar = remember { SnackbarHostState() }
-    val scope = rememberCoroutineScope()
-    val done = stringResource(R.string.memory_done)
+/** Where a slideshow is: which photo, whether a finger holds it, whether it has ended, and how far through the photo it is. One clock drives the bar and the slow zoom. */
+private class SlideshowState(private val count: Int, private val scope: CoroutineScope) {
+    var index by mutableIntStateOf(0)
+    var held by mutableStateOf(false)
+    var finished by mutableStateOf(false)
+    val progress = Animatable(0f)
 
-    // One clock drives both the progress bar and the slow zoom: it runs while nothing is held, then moves to the next photo.
-    LaunchedEffect(index, held, finished) {
-        if (held || finished) return@LaunchedEffect
+    /** Runs the clock while nothing holds it: what is left of this photo's time, then the next photo (or the end). */
+    suspend fun run() {
+        if (held || finished) return
         progress.animateTo(1f, tween(durationMillis = ((1f - progress.value) * SLIDE_MILLIS).toInt().coerceAtLeast(1), easing = LinearEasing))
-        if (index < photos.lastIndex) {
+        if (index < count - 1) {
             index++
             progress.snapTo(0f)
         } else {
             finished = true
         }
     }
+
     fun go(to: Int) {
-        index = to.coerceIn(0, photos.lastIndex)
+        index = to.coerceIn(0, count - 1)
         finished = false
         scope.launch { progress.snapTo(0f) }
     }
 
-    Box(
-        Modifier.fillMaxSize().pointerInput(photos.size) {
-            detectTapGestures(
-                onPress = {
-                    held = true
-                    tryAwaitRelease()
-                    held = false
-                },
-                onTap = { at -> if (at.x < size.width / SIDE_FRACTION) go(index - 1) else go(index + 1) },
-            )
-        },
-    ) {
-        Crossfade(targetState = index, animationSpec = tween(FADE_MILLIS), label = "slide") { i ->
-            KenBurns(photos[i], i, if (i == index) progress.value else 1f)
+    /** How full the bar of photo [i] is. */
+    fun fraction(i: Int): Float = when {
+        i < index || finished -> 1f
+        i == index -> progress.value
+        else -> 0f
+    }
+}
+
+@Composable
+private fun Slideshow(id: MemoryId, state: PlayerState, viewModel: MemoryPlayerViewModel, onClose: () -> Unit, onOpenAll: (MemoryId) -> Unit) {
+    val photos = state.photos
+    val scope = rememberCoroutineScope()
+    val show = remember(photos.size) { SlideshowState(photos.size, scope) }
+    val snackbar = remember { SnackbarHostState() }
+    val done = stringResource(R.string.memory_done)
+
+    LaunchedEffect(show.index, show.held, show.finished) { show.run() }
+    Box(Modifier.fillMaxSize().pointerInput(photos.size) { detectTaps(show, size.width) }) {
+        Crossfade(targetState = show.index, animationSpec = tween(FADE_MILLIS), label = "slide") { i ->
+            KenBurns(photos[i], i, if (i == show.index) show.progress.value else 1f)
         }
-        Column(Modifier.fillMaxWidth().statusBarsPadding().padding(horizontal = 8.dp, vertical = 8.dp)) {
-            Row(horizontalArrangement = Arrangement.spacedBy(4.dp), modifier = Modifier.fillMaxWidth()) {
-                photos.indices.forEach { i ->
-                    val fraction = when {
-                        i < index || finished -> 1f
-                        i == index -> progress.value
-                        else -> 0f
-                    }
-                    LinearProgressIndicator(progress = { fraction }, modifier = Modifier.weight(1f).height(3.dp), color = Color.White, trackColor = Color.White.copy(alpha = 0.3f))
-                }
-            }
-            Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
-                IconButton(onClick = onClose) { Icon(painterResource(R.drawable.ic_close), stringResource(R.string.action_back), tint = Color.White) }
-                Column(Modifier.weight(1f)) {
-                    Text(memoryTitle(id, state.personName), color = Color.White, style = MaterialTheme.typography.titleMedium, maxLines = 1)
-                    val subtitle = memorySubtitle(id)
-                    if (subtitle.isNotEmpty()) Text(subtitle, color = Color.White.copy(alpha = 0.85f), style = MaterialTheme.typography.bodySmall)
-                }
-                PlayerMenu(id, state.personName, photos[index], viewModel, onClose, onOpenAll) { scope.launch { snackbar.showSnackbar(done) } }
-            }
-        }
-        if (finished) {
-            Button(onClick = { go(0) }, modifier = Modifier.align(Alignment.BottomCenter).padding(bottom = 48.dp)) { Text(stringResource(R.string.memory_replay)) }
+        SlideshowHeader(id, state, show, viewModel, onClose, onOpenAll) { scope.launch { snackbar.showSnackbar(done) } }
+        if (show.finished) {
+            Button(onClick = { show.go(0) }, modifier = Modifier.align(Alignment.BottomCenter).padding(bottom = 48.dp)) { Text(stringResource(R.string.memory_replay)) }
         }
         SnackbarHost(snackbar, Modifier.align(Alignment.BottomCenter).padding(bottom = 16.dp))
     }
+}
+
+/** Holding pauses; a tap on the left third goes back, anywhere else goes on. */
+private suspend fun PointerInputScope.detectTaps(show: SlideshowState, width: Int) {
+    detectTapGestures(
+        onPress = {
+            show.held = true
+            tryAwaitRelease()
+            show.held = false
+        },
+        onTap = { at -> if (at.x < width / SIDE_FRACTION) show.go(show.index - 1) else show.go(show.index + 1) },
+    )
+}
+
+/** The bars that fill as the photos go by, and under them the title and the menu. */
+@Composable
+private fun SlideshowHeader(
+    id: MemoryId,
+    state: PlayerState,
+    show: SlideshowState,
+    viewModel: MemoryPlayerViewModel,
+    onClose: () -> Unit,
+    onOpenAll: (MemoryId) -> Unit,
+    onChosen: () -> Unit,
+) {
+    Column(Modifier.fillMaxWidth().statusBarsPadding().padding(horizontal = 8.dp, vertical = 8.dp)) {
+        ProgressBars(state.photos.size, show)
+        Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+            IconButton(onClick = onClose) { Icon(painterResource(R.drawable.ic_close), stringResource(R.string.action_back), tint = Color.White) }
+            Column(Modifier.weight(1f)) { MemoryTitles(id, state.personName) }
+            PlayerMenu(id, state.personName, state.photos[show.index], viewModel, onClose, onOpenAll, onChosen)
+        }
+    }
+}
+
+/** One thin bar for each photo: full for the ones gone by, filling for the one on screen. */
+@Composable
+private fun ProgressBars(count: Int, show: SlideshowState) {
+    Row(horizontalArrangement = Arrangement.spacedBy(4.dp), modifier = Modifier.fillMaxWidth()) {
+        for (i in 0 until count) {
+            LinearProgressIndicator(progress = { show.fraction(i) }, modifier = Modifier.weight(1f).height(3.dp), color = Color.White, trackColor = Color.White.copy(alpha = 0.3f))
+        }
+    }
+}
+
+@Composable
+private fun MemoryTitles(id: MemoryId, personName: String?) {
+    Text(memoryTitle(id, personName), color = Color.White, style = MaterialTheme.typography.titleMedium, maxLines = 1)
+    val subtitle = memorySubtitle(id)
+    if (subtitle.isNotEmpty()) Text(subtitle, color = Color.White.copy(alpha = 0.85f), style = MaterialTheme.typography.bodySmall)
 }
 
 /** A full-screen photo that slowly grows and drifts; every other photo drifts the opposite way so the show does not feel mechanical. */
@@ -188,16 +223,30 @@ private fun PlayerMenu(
         IconButton(onClick = { open = true }) { Icon(painterResource(R.drawable.ic_more_vert), stringResource(R.string.menu_more), tint = Color.White) }
         DropdownMenu(expanded = open, onDismissRequest = { open = false }) {
             DropdownMenuItem(text = { Text(stringResource(R.string.memory_all_photos)) }, onClick = { open = false; onOpenAll(id) })
-            MemoryMenuItems(id, personName, onDismiss = { open = false }, actions = object : MemoryActions {
-                override fun hide(id: MemoryId) { viewModel.hide(); onClose() }
-                override fun showFewer(id: MemoryId) { viewModel.showFewer(); onChosen() }
-                override fun showLessOf(personId: Long) { viewModel.showLessOf(personId); onChosen() }
-            })
+            MemoryMenuItems(id, personName, onDismiss = { open = false }, actions = playerActions(viewModel, onClose, onChosen))
             DropdownMenuItem(
                 text = { Text(stringResource(R.string.memory_exclude_date)) },
                 onClick = { open = false; viewModel.excludeDay(Instant.ofEpochMilli(current.takenAt).atZone(ZoneId.systemDefault()).toLocalDate()); onChosen() },
             )
         }
+    }
+}
+
+/** What the menu's choices do to the memory being played: hiding it ends the show, the others say they were heard. */
+private fun playerActions(viewModel: MemoryPlayerViewModel, onClose: () -> Unit, onChosen: () -> Unit) = object : MemoryActions {
+    override fun hide(id: MemoryId) {
+        viewModel.hide()
+        onClose()
+    }
+
+    override fun showFewer(id: MemoryId) {
+        viewModel.showFewer()
+        onChosen()
+    }
+
+    override fun showLessOf(personId: Long) {
+        viewModel.showLessOf(personId)
+        onChosen()
     }
 }
 

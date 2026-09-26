@@ -7,22 +7,40 @@ import androidx.room.Query
 import androidx.room.Upsert
 import kotlinx.coroutines.flow.Flow
 
-@Dao
-interface IndexDao {
+/** SQL kept as a constant so tests can run exactly this text against a real SQLite. */
+object IndexQueries {
     /**
-     * Photos still to analyse for [stage], newest first: the recent ones are what the user is most
-     * likely to search for. Photos only for now (videos have no stage yet).
+     * Photos still to analyse for a stage, newest first: the recent ones are what the user is most likely to search for.
+     * Photos only for now (videos have no stage yet).
      */
-    @Query(
-        """
+    const val PENDING = """
         SELECT m.* FROM media m
         LEFT JOIN index_state s ON s.mediaId = m.id AND s.stage = :stage
         WHERE m.isVideo = 0 AND (s.mediaId IS NULL OR (s.status = 2 AND s.attempts < :maxAttempts))
         ORDER BY m.takenAt DESC, m.id DESC
         LIMIT :limit
-        """,
-    )
+        """
+
+    /** [PENDING] restricted to some photos: the ones on screen, which are analysed before the rest of the library. */
+    const val PENDING_AMONG = """
+        SELECT m.* FROM media m
+        LEFT JOIN index_state s ON s.mediaId = m.id AND s.stage = :stage
+        WHERE m.isVideo = 0 AND m.id IN (:ids) AND (s.mediaId IS NULL OR (s.status = 2 AND s.attempts < :maxAttempts))
+        ORDER BY m.takenAt DESC, m.id DESC
+        """
+}
+
+@Dao
+interface IndexDao {
+    @Query(IndexQueries.PENDING)
     suspend fun pending(stage: String, maxAttempts: Int, limit: Int): List<MediaEntity>
+
+    @Query(IndexQueries.PENDING_AMONG)
+    suspend fun pendingAmong(stage: String, maxAttempts: Int, ids: List<Long>): List<MediaEntity>
+
+    /** The stored vector of one photo, or null if it has none (or only one from another model). */
+    @Query("SELECT vector FROM media_embedding WHERE mediaId = :mediaId AND model = :model")
+    suspend fun embedding(mediaId: Long, model: String): ByteArray?
 
     @Query("SELECT attempts FROM index_state WHERE mediaId = :mediaId AND stage = :stage")
     suspend fun attempts(mediaId: Long, stage: String): Int?
@@ -71,6 +89,10 @@ interface IndexDao {
     @Query("SELECT COUNT(*) FROM media_embedding WHERE model = :model")
     suspend fun embeddingCount(model: String): Int
 
+    /** How many vectors there are and the sum of their photo ids: together they change when a vector is added or removed, which is how a cached copy of them knows it is out of date. */
+    @Query("SELECT COUNT(*) AS count, COALESCE(SUM(mediaId), 0) AS idSum FROM media_embedding WHERE model = :model")
+    suspend fun embeddingStats(model: String): EmbeddingStats
+
     /** A page of stored vectors after [after], in id order, so the whole set can be read in bounded chunks. */
     @Query("SELECT mediaId, vector FROM media_embedding WHERE model = :model AND mediaId > :after ORDER BY mediaId LIMIT :limit")
     suspend fun embeddingRows(model: String, after: Long, limit: Int): List<EmbeddingRow>
@@ -88,6 +110,10 @@ interface IndexDao {
 
     @Query("DELETE FROM index_state WHERE mediaId IN (:ids)")
     suspend fun deleteStates(ids: List<Long>)
+
+    /** Takes one step off the done list of one photo, so the analysis does it again. */
+    @Query("DELETE FROM index_state WHERE mediaId = :mediaId AND stage = :stage")
+    suspend fun deleteState(mediaId: Long, stage: String)
 
     @Query("DELETE FROM media_geo WHERE mediaId IN (:ids)")
     suspend fun deleteGeo(ids: List<Long>)

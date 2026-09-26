@@ -1,6 +1,7 @@
 package app.eikon.gallery.feature.library
 
 import android.app.Activity
+import android.content.Context
 import android.content.IntentSender
 import android.content.res.Resources
 import android.text.format.DateFormat
@@ -84,6 +85,7 @@ import app.eikon.gallery.feature.viewer.MediaViewer
 import app.eikon.gallery.feature.viewer.PagingViewerItems
 import app.eikon.gallery.feature.viewer.ViewerAction
 import java.time.LocalDate
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 /**
@@ -160,6 +162,7 @@ private fun LibraryContent(
     BackHandler(enabled = selection.isNotEmpty() && !viewerOpen, onBack = viewModel::clearSelection)
     if (albumState == AlbumState.Gone || personState == PersonState.Gone) LaunchedEffect(Unit) { screen.onBack?.invoke() }
 
+    ReportVisiblePhotos(gridState, layout, items, viewModel)
     val flights = remember(scope) { ViewerFlights(scope) }
     val openViewer = { index: Int ->
         viewerIndex = index
@@ -170,11 +173,8 @@ private fun LibraryContent(
         val index = viewerIndex
         scope.launch {
             revealInGrid(gridState, layout, index)
-            if (animated) {
-                flights.close(items.peekOrNull(index), flights.cellFrame(gridState, layout, index)) { viewerOpen = false }
-            } else {
-                viewerOpen = false
-            }
+            val cell = flights.cellFrame(gridState, layout, index)
+            if (animated) flights.close(items.peekOrNull(index), cell) { viewerOpen = false } else viewerOpen = false
         }
         Unit
     }
@@ -191,21 +191,10 @@ private fun LibraryContent(
             contentWindowInsets = WindowInsets(0, 0, 0, 0),
             topBar = { GridTopBars(settings, selection, albumState, personState, scrollBehavior, screen, viewModel) },
             bottomBar = { screen.bottomBar?.invoke() },
-            snackbarHost = {
-                val insetModifier = if (screen.bottomBar == null) Modifier.navigationBarsPadding() else Modifier
-                SnackbarHost(snackbar, insetModifier)
-            },
+            snackbarHost = { SnackbarHost(snackbar, if (screen.bottomBar == null) Modifier.navigationBarsPadding() else Modifier) },
         ) { inner ->
-            val navigationInset = WindowInsets.navigationBars.asPaddingValues().calculateBottomPadding()
-            Column(Modifier.fillMaxSize().padding(top = inner.calculateTopPadding(), bottom = inner.calculateBottomPadding())) {
-                if (screen.access == MediaAccess.LIMITED && viewModel.source == GridSource.Library) {
-                    LimitedAccessBanner(screen.onSelectMoreMedia, screen.onOpenAppSettings)
-                }
-                SyncStatusLine(syncStatus, onRetry = viewModel::retrySync)
-                val bottomPadding = if (screen.bottomBar == null) navigationInset else 0.dp
-                val gridModifier = Modifier.onGloballyPositioned { flights.gridOrigin = it.positionInRoot() }
-                LibraryBody(settings, layout, items, selection, syncStatus, gridState, bottomPadding, viewModel, gridModifier, openViewer)
-            }
+            val shown = GridContent(settings, layout, items, selection, syncStatus, gridState)
+            LibraryColumn(inner, shown, screen, viewModel, flights, openViewer)
         }
         LibraryViewer(
             open = viewerOpen,
@@ -220,6 +209,36 @@ private fun LibraryContent(
         HeroLayer(flights.hero)
         val preparingShare by viewModel.isPreparingShare.collectAsStateWithLifecycle()
         if (preparingShare) PreparingShare(Modifier.align(Alignment.TopCenter))
+    }
+}
+
+/** What the grid screen is showing, gathered in one place to keep signatures short. */
+private class GridContent(
+    val settings: AppSettings,
+    val layout: TimelineLayout,
+    val items: LazyPagingItems<MediaItem>,
+    val selection: Map<Long, MediaItem>,
+    val syncStatus: SyncStatus,
+    val gridState: LazyGridState,
+)
+
+/** Under the top bar: the notes about access and syncing, then the grid (or what stands in for it). */
+@Composable
+private fun LibraryColumn(
+    inner: PaddingValues,
+    shown: GridContent,
+    screen: GridScreenConfig,
+    viewModel: LibraryViewModel,
+    flights: ViewerFlights,
+    openViewer: (Int) -> Unit,
+) {
+    val navigationInset = WindowInsets.navigationBars.asPaddingValues().calculateBottomPadding()
+    val bottomPadding = if (screen.bottomBar == null) navigationInset else 0.dp
+    val gridModifier = Modifier.onGloballyPositioned { flights.gridOrigin = it.positionInRoot() }
+    Column(Modifier.fillMaxSize().padding(top = inner.calculateTopPadding(), bottom = inner.calculateBottomPadding())) {
+        if (screen.access == MediaAccess.LIMITED && viewModel.source == GridSource.Library) LimitedAccessBanner(screen.onSelectMoreMedia, screen.onOpenAppSettings)
+        SyncStatusLine(shown.syncStatus, onRetry = viewModel::retrySync)
+        LibraryBody(shown.settings, shown.layout, shown.items, shown.selection, shown.syncStatus, shown.gridState, bottomPadding, viewModel, gridModifier, openViewer)
     }
 }
 
@@ -541,13 +560,22 @@ private fun LibraryEventEffects(
     val resources = LocalResources.current
     val currentLaunch by rememberUpdatedState(launchSystemRequest)
     LaunchedEffect(viewModel) {
-        viewModel.events.collect { event ->
-            when (event) {
-                is LibraryEvent.LaunchSystemRequest -> currentLaunch(event.sender)
-                is LibraryEvent.Share -> context.startActivity(event.intent)
-                else -> eventMessage(event, resources)?.let { text -> launch { snackbar.showSnackbar(text) } }
-            }
-        }
+        viewModel.events.collect { event -> handleEvent(event, context, resources, snackbar, currentLaunch) }
+    }
+}
+
+/** One event of the view model: a system dialog to open, the Sharesheet to show, or a message to say (which is shown on the side, so the next event is not held up by it). */
+private fun CoroutineScope.handleEvent(
+    event: LibraryEvent,
+    context: Context,
+    resources: Resources,
+    snackbar: SnackbarHostState,
+    launchSystemRequest: (IntentSender) -> Unit,
+) {
+    when (event) {
+        is LibraryEvent.LaunchSystemRequest -> launchSystemRequest(event.sender)
+        is LibraryEvent.Share -> context.startActivity(event.intent)
+        else -> eventMessage(event, resources)?.let { text -> launch { snackbar.showSnackbar(text) } }
     }
 }
 

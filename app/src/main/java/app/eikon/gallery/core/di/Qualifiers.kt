@@ -12,6 +12,11 @@ annotation class ApplicationScope
 @Retention(AnnotationRetention.BINARY)
 annotation class SettingsStore
 
+/** DataStore holding the backup's settings and the summary of its last run (the credential is not in it: it is encrypted, see SecretStore). */
+@Qualifier
+@Retention(AnnotationRetention.BINARY)
+annotation class BackupStore
+
 /** DataStore holding sync bookkeeping (last generation, MediaStore version, access level). */
 @Qualifier
 @Retention(AnnotationRetention.BINARY)

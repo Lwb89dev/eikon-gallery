@@ -47,7 +47,7 @@ class PetClassifier @Inject constructor(
     suspend fun find(kind: PetKind): Long? = withContext(Dispatchers.Default) {
         lock.withLock {
             val hits = try {
-                repository.loadMatrix().classify(prompts(), PetPrompts.index(kind), PetPrompts.MIN_PROBABILITY).also { health.markWorking(IndexStage.EMBED) }
+                repository.matrix().classify(prompts(), PetPrompts.index(kind), PetPrompts.MIN_PROBABILITY).also { health.markWorking(IndexStage.EMBED) }
             } catch (cancelled: CancellationException) {
                 throw cancelled
             } catch (_: Exception) {

@@ -67,15 +67,7 @@ class MigrationTest {
         val raw = SQLiteDatabase.openOrCreateDatabase(path, null)
         try {
             val entities = database.getJSONArray("entities")
-            for (i in 0 until entities.length()) {
-                val entity = entities.getJSONObject(i)
-                val table = entity.getString("tableName")
-                raw.execSQL(entity.getString("createSql").replace("\${TABLE_NAME}", table))
-                val indices = entity.optJSONArray("indices")
-                for (j in 0 until (indices?.length() ?: 0)) {
-                    raw.execSQL(indices!!.getJSONObject(j).getString("createSql").replace("\${TABLE_NAME}", table))
-                }
-            }
+            for (i in 0 until entities.length()) createTable(raw, entities.getJSONObject(i))
             val setup = database.getJSONArray("setupQueries")
             for (i in 0 until setup.length()) raw.execSQL(setup.getString(i))
             raw.execSQL(
@@ -87,6 +79,14 @@ class MigrationTest {
         } finally {
             raw.close()
         }
+    }
+
+    /** One table of the exported schema, and the indices it has. */
+    private fun createTable(raw: SQLiteDatabase, entity: JSONObject) {
+        val table = entity.getString("tableName")
+        raw.execSQL(entity.getString("createSql").replace("\${TABLE_NAME}", table))
+        val indices = entity.optJSONArray("indices") ?: return
+        for (j in 0 until indices.length()) raw.execSQL(indices.getJSONObject(j).getString("createSql").replace("\${TABLE_NAME}", table))
     }
 
     private companion object {

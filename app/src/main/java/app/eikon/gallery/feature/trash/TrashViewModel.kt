@@ -8,6 +8,7 @@ import app.eikon.gallery.data.mediastore.TrashedMedia
 import app.eikon.gallery.domain.MediaItem
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -59,9 +60,9 @@ class TrashViewModel @Inject constructor(
         viewModelScope.launch {
             mutableState.value = try {
                 TrashUiState.Loaded(repository.load())
-            } catch (_: SecurityException) {
-                TrashUiState.Failed
-            } catch (_: IllegalStateException) {
+            } catch (cancelled: CancellationException) {
+                throw cancelled
+            } catch (_: Exception) {
                 TrashUiState.Failed
             }
         }

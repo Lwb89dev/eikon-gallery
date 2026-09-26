@@ -24,7 +24,7 @@ class EditedShare @Inject constructor(
     private val exporter: EditExporter,
     private val clock: Clock,
 ) {
-    private val root: File get() = File(context.cacheDir, FOLDER)
+    private val root: File get() = File(context.cacheDir, SharedFiles.FOLDER)
 
     suspend fun prepare(items: List<MediaItem>): List<ShareEntry> {
         val recipes = edits.recipes(items.filterNot { it.isVideo }.map { it.id })
@@ -45,7 +45,6 @@ class EditedShare @Inject constructor(
     }
 
     private companion object {
-        const val FOLDER = "shared"
         const val AUTHORITY_SUFFIX = ".shared"
     }
 }

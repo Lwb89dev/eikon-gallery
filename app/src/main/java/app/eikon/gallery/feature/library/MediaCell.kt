@@ -80,24 +80,32 @@ fun MediaCell(
     val placeholder = MaterialTheme.colorScheme.surfaceContainer
     val context = LocalContext.current
     val resources = LocalResources.current
-    val interaction = if (item == null) {
-        Modifier
-    } else {
-        Modifier
-            .clickable(onClick = onClick)
-            .semantics {
-                contentDescription = accessibilityLabel(context, resources, item)
-                this.selected = selected
-                onLongClick(label = selectLabel) {
-                    onLongClick()
-                    true
-                }
-            }
-    }
+    val interaction = Modifier.cellInteraction(item, selected, selectLabel, context, resources, onClick, onLongClick)
     Box(modifier.aspectRatio(1f).background(placeholder).then(interaction)) {
         if (item != null) {
             CellContent(item, selected, selectionMode)
             overlay()
+        }
+    }
+}
+
+/** What a filled cell answers to: a tap, a long press, and the words a screen reader speaks for it. An empty (still loading) cell answers to nothing. */
+private fun Modifier.cellInteraction(
+    item: MediaItem?,
+    selected: Boolean,
+    selectLabel: String,
+    context: Context,
+    resources: Resources,
+    onClick: () -> Unit,
+    onLongClick: () -> Unit,
+): Modifier {
+    if (item == null) return this
+    return clickable(onClick = onClick).semantics {
+        contentDescription = accessibilityLabel(context, resources, item)
+        this.selected = selected
+        onLongClick(label = selectLabel) {
+            onLongClick()
+            true
         }
     }
 }

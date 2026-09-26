@@ -2,8 +2,10 @@ package app.eikon.gallery.core.di
 
 import android.content.Context
 import androidx.datastore.core.DataStore
+import androidx.datastore.core.handlers.ReplaceFileCorruptionHandler
 import androidx.datastore.preferences.core.PreferenceDataStoreFactory
 import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.emptyPreferences
 import androidx.datastore.preferences.preferencesDataStoreFile
 import app.eikon.gallery.data.Clock
 import app.eikon.gallery.data.mediastore.ContentResolverMediaStoreSource
@@ -47,15 +49,26 @@ object AppModule {
     @Provides
     fun clock(): Clock = Clock { System.currentTimeMillis() }
 
+    /** A file that cannot be read (it was cut short, the phone lost power) is replaced by an empty one: settings go back to their defaults, which is better than a screen that never opens. */
+    private fun stores(context: Context, name: String): DataStore<Preferences> = PreferenceDataStoreFactory.create(
+        corruptionHandler = ReplaceFileCorruptionHandler { emptyPreferences() },
+    ) { context.preferencesDataStoreFile(name) }
+
     @Provides
     @Singleton
     @SettingsStore
     fun settingsStore(@ApplicationContext context: Context): DataStore<Preferences> =
-        PreferenceDataStoreFactory.create { context.preferencesDataStoreFile("settings") }
+        stores(context, "settings")
+
+    @Provides
+    @Singleton
+    @BackupStore
+    fun backupStore(@ApplicationContext context: Context): DataStore<Preferences> =
+        stores(context, "backup")
 
     @Provides
     @Singleton
     @SyncStore
     fun syncStore(@ApplicationContext context: Context): DataStore<Preferences> =
-        PreferenceDataStoreFactory.create { context.preferencesDataStoreFile("sync_state") }
+        stores(context, "sync_state")
 }

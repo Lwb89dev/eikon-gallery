@@ -6,7 +6,7 @@ A local-first, privacy-first photo and video gallery for Android, built natively
 Jetpack Compose and inspired by the interaction model of Apple Photos.
 
 eikon reads your photos and videos where Android already keeps them (MediaStore). It never copies
-them, has no account, no analytics and no internet permission at all.
+them (unless you set up the optional backup to a server of your own), has no account, no analytics and, in its standard build, no internet permission at all.
 
 Repository: <https://github.com/Lwb89dev/eikon-gallery>
 
@@ -14,7 +14,7 @@ Repository: <https://github.com/Lwb89dev/eikon-gallery>
 
 Early development. Phases 1 (gallery foundation), 2 (albums and utilities), 3 (search foundation), 4
 (intelligent indexing: search by what photos show, people, pets), 5 (smart collections: places, trips,
-memories, duplicates), 6 (non-destructive editing) and 7 (polish: transitions, baseline profile, query tuning, battery, accessibility) are implemented. Phases 1 and 2 were checked on a real phone; **Phases 3 to 7 are covered
+memories, duplicates), 6 (non-destructive editing), 7 (polish: transitions, baseline profile, query tuning, battery, accessibility) 8 (backup to your own server, in a separate build) and 9 (what the specification still asked for, and a review and hardening pass, including an encrypted database) are implemented. Phases 1 and 2 were checked on a real phone; **Phases 3 to 9 are covered
 by unit tests, including tests that run the real models, but have not been run on a device yet**, so how fast and how
 battery-hungry the analysis is on a phone, how fast editing is, and how the new screens behave, is unchecked. The full plan, with what is done and what is not, is in [docs/ROADMAP.md](docs/ROADMAP.md).
 Features that are not built yet are not shown in the app.
@@ -35,7 +35,9 @@ Features that are not built yet are not shown in the app.
 - Full-screen viewer: swipe between items, pinch and double-tap zoom, immersive mode, drag down to
   close, drag up for details. Video playback with seek and mute.
 - Info panel with the real metadata of the file: resolution, size, dates, camera, lens, exposure,
-  color profile, location (on request), and for videos duration, frame rate, codecs and bitrate.
+  color profile, location (on request, with a small offline map), and for videos duration, frame rate, codecs and bitrate. If the photo has been analysed it also says, in a few words, what it shows (and any pet in it).
+- **Captions** you write for a photo (searchable, kept only in eikon's database) and **changing the date or the location** written in a JPEG, PNG or WebP file, with the system's own confirmation, a safety copy, a byte-for-byte check
+  and undo ([docs/EDITING.md](docs/EDITING.md)).
 
 **Collections**
 - Automatic collections (Favorites, Recently added, Videos, Screenshots, Screen recordings, Panoramas,
@@ -56,7 +58,7 @@ Features that are not built yet are not shown in the app.
 - Place, text, content and people search need a background analysis of your library. **It is off by default**:
   you switch on each step in Settings ("Places", "What photos show", "People", "Text in photos"), choose whether
   it may run only while charging, and can pause it. It works in short slices, resumes after interruptions,
-  backs off when the phone gets warm, and shows its progress. Hidden photos are never searchable.
+  backs off when the phone gets warm, and shows its progress. The photos on screen are analysed first. Hidden photos are never searchable.
 
 **Smart collections**
 - **Places**: photos grouped by country, region and city, and a **map** drawn offline from bundled country outlines: no map service, no tiles, no position ever sent.
@@ -75,6 +77,10 @@ Features that are not built yet are not shown in the app.
 - **Save a copy** writes a new JPEG next to the original, keeping its date and camera details. **Copy edits** and **Paste edits** apply one photo's look to many at once; each keeps its own crop.
 - Limits, stated up front: photos only; other apps see the original until you save a copy (Share sends the edit, without metadata); recipes are lost if the app's data is cleared. See [docs/EDITING.md](docs/EDITING.md).
 
+**Backup to a server of your own** (the `backup` build)
+- Copies photos and videos to **Immich** (what Umbrel installs for Android) or to **Nextcloud / any WebDAV server**, over TLS, only on the network you allow, and only after you turn it on and confirm. It **never deletes or overwrites** anything, on the server or the phone; files the server already has are recognised, not sent again.
+- The network permission exists **only in this build**; the standard build has none and contains no network code. A certificate that is not from an authority your phone knows can be pinned after you compare its fingerprint. The key or password is encrypted under an Android Keystore key. See [docs/BACKUP.md](docs/BACKUP.md).
+
 **People and pets**
 - **People**: eikon finds faces on the phone and *groups* the ones that look alike. It does not identify anyone and
   never compares faces with anything outside your library; a group has a name only when you type it. You can name,
@@ -87,20 +93,21 @@ Features that are not built yet are not shown in the app.
   and favoriting go through the platform's own confirmation dialogs.
 - Light, dark or system theme; English and Italian; TalkBack labels.
 
-Not implemented yet: backup to a home server. The "selfie" filter is missing because Android exposes
-nothing reliable to detect it, and the "edited" filter is not built yet.
+Not implemented: restoring from the backup, and backup of edits, albums and the hidden list. The "selfie" filter is missing because Android exposes
+nothing reliable to detect it; there is no thumbnail scrubber for video, no music in memories, and animated GIFs show their first frame.
 
 ## Privacy
 
-- No `INTERNET` permission, so the operating system itself stops eikon from sending anything anywhere.
+- The standard build has no `INTERNET` permission, so the operating system itself stops eikon from sending anything anywhere; the build fails if the permission ever appears. Only the separate `backup` build has it, for the backup you configure (TLS only, your server only).
 - No account, no analytics, no crash reporting.
 - Android backups of the app's data are disabled.
+- **The library's database is encrypted** (SQLCipher, AES-256) with a key held by the Android Keystore; an older readable database is converted safely at the first start. Hidden and Recently deleted block screenshots and the recent-apps preview while open, and a setting does it everywhere. Details and limits in [docs/PRIVACY.md](docs/PRIVACY.md).
 - Edits are recipes in the private database; **your files are never modified**. A copy you save keeps the original's date, camera details and (if you allowed it) location.
 - The local index holds file names, dates, sizes and folders. If you turn on the analysis, it also holds
   where your photos were taken, the text found in them, a numeric description of what they show, where the
   faces are with a numeric description of each, and fingerprints to find copies; that is why every step is off until you choose. All of it is
   deleted when you uninstall the app or revoke photo access.
-- The build fails if the `INTERNET` permission ever appears in the app's manifest, so a library update cannot add it silently.
+- The build fails if the `INTERNET` permission ever appears in the standard build's manifest, so a library update cannot add it silently; the backup build's manifest is checked against a reviewed list of permissions.
 
 Details, including the limits of these guarantees, are in [docs/PRIVACY.md](docs/PRIVACY.md).
 
@@ -118,14 +125,15 @@ git clone https://github.com/Lwb89dev/eikon-gallery.git
 cd eikon-gallery
 export ANDROID_HOME=/path/to/Android/Sdk   # or create local.properties with sdk.dir=...
 
-./gradlew :app:assembleDebug               # debug APK in app/build/outputs/apk/debug
-./gradlew :app:testDebugUnitTest           # unit tests (JVM)
-./gradlew :app:lintDebug                   # Android lint
-./gradlew :app:assembleRelease             # R8-shrunk, unsigned release APK
+# Two builds of the same app (see docs/BACKUP.md): `standard` has no network permission, `backup` adds the backup to a server of your own.
+./gradlew :app:assembleStandardDebug       # debug APK in app/build/outputs/apk/standard/debug
+./gradlew :app:testStandardDebugUnitTest :app:testBackupDebugUnitTest   # unit tests (JVM); the second also runs the backup's network tests
+./gradlew :app:lintStandardDebug :app:lintBackupDebug                   # Android lint
+./gradlew :app:assembleStandardRelease     # R8-shrunk, unsigned release APK (assembleBackupRelease for the other build)
 ```
 
 To try the real (fast) build on a connected phone, install the release variant signed with the debug
-key: `./gradlew :app:installRelease -Peikon.signReleaseWithDebugKey`. Debug builds are several times
+key: `./gradlew :app:installStandardRelease -Peikon.signReleaseWithDebugKey` (or `installBackupRelease`; the two have the same application id, so one installs over the other and keeps everything, provided they are signed with the same key). Debug builds are several times
 slower because Compose runs unoptimized (on one test phone, scrolling had a 57 ms median frame time in
 debug versus 6 ms in release), so judge smoothness on the release build.
 
@@ -136,9 +144,9 @@ them.
 
 ### Tests
 
-- **JVM unit tests** (`./gradlew :app:testDebugUnitTest`, 527 tests): the sync engine, every library and
+- **JVM unit tests** (`./gradlew :app:testStandardDebugUnitTest`, 704 tests; `testBackupDebugUnitTest` runs those and the backup's own network tests, 763 in all): the sync engine, every library and
   search query run against a real SQLite including full-text search (checking, for instance, that each
-  item lands in the right date section), the database migrations, the search query parser, the offline
+  item lands in the right date section), the database migrations, the encryption of the database (the plan, the copy of every table, every failure path), the search query parser, the offline
   place lookup, the analysis runner (retries, resuming, pausing, heat, a model that cannot load), the edit renderer and recipe format, timeline
   layout, classification heuristics, EXIF formatting, grid sources, locks and more. Some tests **run the real
   models** on the JVM with ONNX Runtime and compare them with reference tooling (a tokenizer, ONNX Runtime for Python,
@@ -146,7 +154,7 @@ them.
   detector, alignment and face vectors must match OpenCV's. Running the tests fetches the models first.
 - **Instrumented tests** (`./gradlew :app:connectedDebugAndroidTest`, needs a device or emulator):
   album and hidden-media behavior on Room, the queries on the device's own SQLite, the real database
-  migration, the edit renderer on Android bitmaps, the analysis pipeline, and the image and face models read out of the installed APK, which also
+  migration, the encrypted database with SQLCipher and the Keystore (conversion of a readable database, wrong key, lost key), the edit renderer on Android bitmaps, the analysis pipeline, and the image and face models read out of the installed APK, which also
   report how long each step takes on the phone (written, not yet run). They use an in-memory database and never touch app data. Note that Gradle
   uninstalls the debug app when they finish.
 
@@ -159,7 +167,7 @@ not been checked that way.
 ```
 app/src/main/java/app/eikon/gallery/
   core/        dependency injection, theme, image loading, security
-  data/        Room index, MediaStore access and sync, background analysis, OCR, offline places and trips,
+  data/        Room index (encrypted, `data/db/encryption`), MediaStore access and sync, background analysis, OCR, offline places and trips,
                image/text embeddings and semantic search, faces and people, duplicates, memories, edits and export, metadata, settings
   domain/      plain models and pure logic (timeline layout, search parser, map geometry, trip and memory rules, the edit recipe and renderer)
   feature/     library, search, collections, people, places, trips, memories, duplicates, edit, viewer, info, trash, security, settings

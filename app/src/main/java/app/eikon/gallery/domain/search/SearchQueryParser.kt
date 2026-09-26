@@ -28,7 +28,7 @@ class SearchQueryParser(
     fun parse(input: String): SearchSpec {
         val state = ParseState()
         val withoutNumericDates = extractNumericDates(SearchLexicon.normalize(input), state)
-        val tokens = withoutNumericDates.replace(Regex("[/.\\-]+"), " ").split(' ').filter { it.isNotBlank() }
+        val tokens = withoutNumericDates.replace(SEPARATORS, " ").split(' ').filter { it.isNotBlank() }
         var index = 0
         while (index < tokens.size) index += consume(tokens, index, state)
         return SearchSpec(state.terms.toList(), state.dates.distinct(), state.filters())
@@ -266,6 +266,7 @@ class SearchQueryParser(
         const val MAX_YEAR = 2100
         const val WEEK_DAYS = 7L
 
+        val SEPARATORS = Regex("[/.\\-]+")
         val ISO_DAY = Regex("(?<![\\d])(\\d{4})-(\\d{1,2})-(\\d{1,2})(?![\\d])")
         val EU_DAY = Regex("(?<![\\d])(\\d{1,2})[/.\\-](\\d{1,2})[/.\\-](\\d{4})(?![\\d])")
         val YEAR_MONTH = Regex("(?<![\\d])(\\d{4})-(\\d{1,2})(?![\\d-])")

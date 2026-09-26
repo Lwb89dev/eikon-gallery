@@ -43,6 +43,8 @@ import app.eikon.gallery.feature.trips.TripsScreen
 import app.eikon.gallery.feature.permissions.MediaAccessGate
 import app.eikon.gallery.feature.security.LockGate
 import app.eikon.gallery.feature.security.UnprotectedNotice
+import app.eikon.gallery.feature.settings.DatabaseResetNotice
+import app.eikon.gallery.feature.settings.LicensesScreen
 import app.eikon.gallery.feature.settings.SettingsScreen
 import app.eikon.gallery.feature.trash.TrashScreen
 import app.eikon.gallery.feature.viewer.ExternalImageViewer
@@ -61,28 +63,29 @@ private object Routes {
     const val EDIT = "edit/{${EditViewModel.ARG}}"
     const val TRASH = "trash"
     const val SETTINGS = "settings"
+    const val LICENSES = "licenses"
 }
 
 @Composable
 fun EikonApp(settings: AppSettings, externalImage: Uri? = null, onCloseExternal: () -> Unit = {}) {
     EikonTheme(settings.themeMode) {
-        if (externalImage != null) {
-            ExternalImageViewer(externalImage, onClose = onCloseExternal)
-            return@EikonTheme
-        }
-        val navController = rememberNavController()
-        // A Surface (not just a background) so text without an explicit colour is legible in dark mode.
-        Surface(
-            modifier = Modifier.fillMaxSize(),
-            color = MaterialTheme.colorScheme.background,
-            contentColor = MaterialTheme.colorScheme.onBackground,
-        ) {
-            val recipes by hiltViewModel<EditRecipesViewModel>().texts.collectAsStateWithLifecycle()
-            CompositionLocalProvider(LocalEditRecipeTexts provides recipes) {
-                EikonNavHost(navController, settings)
-            }
-        }
+        if (externalImage != null) ExternalImageViewer(externalImage, onClose = onCloseExternal) else LibraryApp(settings)
     }
+}
+
+@Composable
+private fun LibraryApp(settings: AppSettings) {
+    val navController = rememberNavController()
+    val recipes by hiltViewModel<EditRecipesViewModel>().texts.collectAsStateWithLifecycle()
+    // A Surface (not just a background) so text without an explicit colour is legible in dark mode.
+    Surface(
+        modifier = Modifier.fillMaxSize(),
+        color = MaterialTheme.colorScheme.background,
+        contentColor = MaterialTheme.colorScheme.onBackground,
+    ) {
+        CompositionLocalProvider(LocalEditRecipeTexts provides recipes) { EikonNavHost(navController, settings) }
+    }
+    DatabaseResetNotice()
 }
 
 @Composable
@@ -123,7 +126,10 @@ private fun EikonNavHost(navController: NavHostController, settings: AppSettings
             arguments = listOf(navArgument(EditViewModel.ARG) { type = NavType.LongType }),
         ) { EditDestination(navController) }
         composable(Routes.TRASH) { TrashDestination(navController, settings) }
-        composable(Routes.SETTINGS) { SettingsScreen(onBack = { navController.popBackStack() }) }
+        composable(Routes.SETTINGS) {
+            SettingsScreen(onBack = { navController.popBackStack() }, onOpenLicenses = { navController.navigate(Routes.LICENSES) })
+        }
+        composable(Routes.LICENSES) { LicensesScreen(onBack = { navController.popBackStack() }) }
     }
 }
 
@@ -190,17 +196,20 @@ private fun CollectionsDestination(navController: NavHostController) {
 private fun GridDestination(navController: NavHostController, source: GridSource, settings: AppSettings) {
     val back = { navController.popBackStack(); Unit }
     MediaAccessGate { access, onSelectMore, onOpenAppSettings ->
-        if (source == GridSource.Hidden) {
-            LockGate(LockedArea.HIDDEN, settings.lockHidden, R.string.auth_title_hidden, onCancel = back) { isProtected ->
-                Column {
-                    if (settings.lockHidden && !isProtected) UnprotectedNotice()
-                    Box(Modifier.fillMaxSize()) {
-                        LibraryScreen(access, onSelectMore, onOpenAppSettings, onOpenSettings = null, onBack = back, onEdit = navController::openEditor)
-                    }
-                }
-            }
-        } else {
+        val grid: @Composable () -> Unit = {
             LibraryScreen(access, onSelectMore, onOpenAppSettings, onOpenSettings = null, onBack = back, onEdit = navController::openEditor)
+        }
+        if (source == GridSource.Hidden) HiddenGate(settings, back, grid) else grid()
+    }
+}
+
+/** Hidden opens behind the screen lock when the setting asks for it, and says so when the phone has none to ask. */
+@Composable
+private fun HiddenGate(settings: AppSettings, onCancel: () -> Unit, content: @Composable () -> Unit) {
+    LockGate(LockedArea.HIDDEN, settings.lockHidden, R.string.auth_title_hidden, onCancel = onCancel) { isProtected ->
+        Column {
+            if (settings.lockHidden && !isProtected) UnprotectedNotice()
+            Box(Modifier.fillMaxSize()) { content() }
         }
     }
 }

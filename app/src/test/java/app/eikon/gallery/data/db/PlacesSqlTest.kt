@@ -52,19 +52,21 @@ class PlacesSqlTest {
 
     @Test
     fun theGroupsListEveryPlaceWithItsVisiblePhotosAndNewestPhotoAsCover() {
-        val rows = db.createStatement().use { st ->
-            st.executeQuery(PlacesQueries.GROUPS).use { rs ->
-                generateSequence {
-                    if (rs.next()) listOf(rs.getString("countryCode"), rs.getString("regionKey"), rs.getObject("cityId"), rs.getInt("photoCount"), rs.getLong("coverMediaId"), rs.getLong("coverTakenAt")) else null
-                }.toList()
-            }
-        }
+        val rows = groupRows()
         val byCity = rows.associateBy { it[2] }
         assertEquals(5, rows.size)
         assertEquals(1, byCity.getValue(100).let { it[3] }) // photo 6 is hidden and does not count
         assertEquals(1L, byCity.getValue(100)[4])
         assertEquals(listOf("null", "null", "null", "1", "5", "5000"), byCity.getValue(null).map { "$it" })
     }
+
+    /** One list per row of the query: country, region, city, photo count, cover photo, when the cover was taken. */
+    private fun groupRows(): List<List<Any?>> = db.createStatement().use { st ->
+        st.executeQuery(PlacesQueries.GROUPS).use { rs -> generateSequence { groupRow(rs) }.toList() }
+    }
+
+    private fun groupRow(rs: java.sql.ResultSet): List<Any?>? =
+        if (rs.next()) listOf(rs.getString("countryCode"), rs.getString("regionKey"), rs.getObject("cityId"), rs.getInt("photoCount"), rs.getLong("coverMediaId"), rs.getLong("coverTakenAt")) else null
 
     @Test
     fun aCityRegionOrCountryScopeSelectsItsVisiblePhotos() {

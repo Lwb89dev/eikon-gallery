@@ -86,13 +86,15 @@ private fun PeopleGrid(state: PeopleState, viewModel: PeopleViewModel, onOpenPer
         modifier = Modifier.fillMaxSize(),
     ) {
         items(state.people, key = { it.id }) { person -> PersonCell(person, viewModel) { onOpenPerson(person.id) } }
-        if (state.hiddenCount > 0) {
-            item(span = { GridItemSpan(maxLineSpan) }) {
-                val label = if (state.showHidden) stringResource(R.string.people_hide_hidden) else stringResource(R.string.people_show_hidden, state.hiddenCount)
-                TextButton(onClick = viewModel::toggleShowHidden) { Text(label) }
-            }
-        }
+        if (state.hiddenCount > 0) item(span = { GridItemSpan(maxLineSpan) }) { HiddenToggle(state, viewModel) }
     }
+}
+
+/** Shows or hides the people the user has hidden. */
+@Composable
+private fun HiddenToggle(state: PeopleState, viewModel: PeopleViewModel) {
+    val label = if (state.showHidden) stringResource(R.string.people_hide_hidden) else stringResource(R.string.people_show_hidden, state.hiddenCount)
+    TextButton(onClick = viewModel::toggleShowHidden) { Text(label) }
 }
 
 @OptIn(ExperimentalFoundationApi::class)

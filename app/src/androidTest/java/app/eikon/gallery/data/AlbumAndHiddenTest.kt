@@ -161,7 +161,7 @@ class AlbumAndHiddenTest {
         repository.addToAlbum(id, listOf(1, 2))
         repository.hide(listOf(2))
 
-        RoomMediaIndex(db, db.mediaDao(), db.indexDao(), db.peopleDao(), db.duplicatesDao()).clear() // what happens when photo access is revoked
+        RoomMediaIndex(db, db.mediaDao(), db.indexDao(), db.peopleDao(), db.duplicatesDao(), db.backupDao()).clear() // what happens when photo access is revoked
         assertTrue(db.mediaDao().allIds().isEmpty())
 
         seed(1, 2) // access is granted again and sync refills the cache
