@@ -149,8 +149,9 @@ android {
         applicationId = "app.eikon.gallery"
         minSdk = 30
         targetSdk = 36
-        versionCode = 1
-        versionName = "0.1.0"
+        // 1.0.0 is 10000 (major * 10000 + minor * 100 + patch), so later releases always sort higher.
+        versionCode = 10000
+        versionName = "1.0.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }

@@ -12,7 +12,7 @@ Repository: <https://github.com/Lwb89dev/eikon-gallery>
 
 ## Status
 
-Early development. Phases 1 (gallery foundation), 2 (albums and utilities), 3 (search foundation), 4
+Version 1.0.0 is the first release ([CHANGELOG.md](CHANGELOG.md)); it is feature-complete for the plan but **not field-tested**. Phases 1 (gallery foundation), 2 (albums and utilities), 3 (search foundation), 4
 (intelligent indexing: search by what photos show, people, pets), 5 (smart collections: places, trips,
 memories, duplicates), 6 (non-destructive editing), 7 (polish: transitions, baseline profile, query tuning, battery, accessibility) 8 (backup to your own server, in a separate build) and 9 (what the specification still asked for, and a review and hardening pass, including an encrypted database) are implemented. Phases 1 and 2 were checked on a real phone; **Phases 3 to 9 are covered
 by unit tests, including tests that run the real models, but have not been run on a device yet**, so how fast and how
@@ -144,7 +144,7 @@ them.
 
 ### Tests
 
-- **JVM unit tests** (`./gradlew :app:testStandardDebugUnitTest`, 704 tests; `testBackupDebugUnitTest` runs those and the backup's own network tests, 763 in all): the sync engine, every library and
+- **JVM unit tests** (`./gradlew :app:testStandardDebugUnitTest`, 705 tests; `testBackupDebugUnitTest` runs those and the backup's own network tests, 764 in all): the sync engine, every library and
   search query run against a real SQLite including full-text search (checking, for instance, that each
   item lands in the right date section), the database migrations, the encryption of the database (the plan, the copy of every table, every failure path), the search query parser, the offline
   place lookup, the analysis runner (retries, resuming, pausing, heat, a model that cannot load), the edit renderer and recipe format, timeline
@@ -180,7 +180,7 @@ docs/          architecture, indexing, editing, performance, accessibility, priv
 ## Documentation
 
 [Architecture](docs/ARCHITECTURE.md) · [Privacy](docs/PRIVACY.md) · [Indexing](docs/INDEXING.md) ·
-[Machine learning](docs/ML.md) · [Editing](docs/EDITING.md) · [Performance](docs/PERFORMANCE.md) · [Accessibility](docs/ACCESSIBILITY.md) · [Roadmap](docs/ROADMAP.md)
+[Machine learning](docs/ML.md) · [Editing](docs/EDITING.md) · [Performance](docs/PERFORMANCE.md) · [Accessibility](docs/ACCESSIBILITY.md) · [Roadmap](docs/ROADMAP.md) · [Releasing](docs/RELEASING.md) · [Changelog](CHANGELOG.md)
 
 ## License
 
