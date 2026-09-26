@@ -34,6 +34,7 @@ import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.onLongClick
 import androidx.compose.ui.semantics.selected
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import app.eikon.gallery.R
 import app.eikon.gallery.core.image.LocalEditRecipeTexts
@@ -62,6 +63,8 @@ fun SectionHeader(label: String, modifier: Modifier = Modifier) {
  * One grid cell. [item] is null while its page is still loading from the index: an empty tile keeps
  * the grid geometry stable so scrolling never jumps.
  *
+ * [thumbnailSize], when given, is the size the picture is asked for instead of the size of the cell (see ThumbnailSizes).
+ *
  * Everything here runs for every cell that scrolls into view, so it is kept cheap: the spoken
  * description is built inside the semantics block (evaluated only when an accessibility service reads
  * it), and selection visuals cost nothing outside selection mode.
@@ -75,6 +78,7 @@ fun MediaCell(
     onClick: () -> Unit,
     onLongClick: () -> Unit,
     modifier: Modifier = Modifier,
+    thumbnailSize: IntSize? = null,
     overlay: @Composable BoxScope.() -> Unit = {},
 ) {
     val placeholder = MaterialTheme.colorScheme.surfaceContainer
@@ -83,7 +87,7 @@ fun MediaCell(
     val interaction = Modifier.cellInteraction(item, selected, selectLabel, context, resources, onClick, onLongClick)
     Box(modifier.aspectRatio(1f).background(placeholder).then(interaction)) {
         if (item != null) {
-            CellContent(item, selected, selectionMode)
+            CellContent(item, selected, selectionMode, thumbnailSize)
             overlay()
         }
     }
@@ -111,7 +115,7 @@ private fun Modifier.cellInteraction(
 }
 
 @Composable
-private fun BoxScope.CellContent(item: MediaItem, selected: Boolean, selectionMode: Boolean) {
+private fun BoxScope.CellContent(item: MediaItem, selected: Boolean, selectionMode: Boolean, thumbnailSize: IntSize?) {
     // The animation and rounded clip exist only in selection mode; the thumbnail composable itself
     // stays in the same place so entering selection never reloads it.
     val inset = if (selectionMode) {
@@ -123,6 +127,7 @@ private fun BoxScope.CellContent(item: MediaItem, selected: Boolean, selectionMo
     MediaThumbnail(
         item = item,
         modifier = if (selectionMode) thumbnailModifier.clip(RoundedCornerShape(if (selected) 6.dp else 0.dp)) else thumbnailModifier,
+        requestSize = thumbnailSize,
     )
     if (item.isVideo) VideoBadge(item.durationMs, Modifier.align(Alignment.BottomEnd))
     if (item.isFavorite) FavoriteBadge(Modifier.align(Alignment.BottomStart))

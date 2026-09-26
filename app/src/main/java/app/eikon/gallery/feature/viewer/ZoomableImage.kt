@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.Stable
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -55,6 +56,7 @@ import coil3.request.transformations
 import coil3.size.Size as CoilSize
 import kotlin.math.abs
 import kotlin.math.max
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 private const val MIN_SCALE = 1f
@@ -65,6 +67,12 @@ private const val ZOOM_ANIMATION_MS = 260
 
 /** Longest edge requested once the user zooms in; bounds memory to about 64 MB for one bitmap. */
 internal const val HIGH_RES_EDGE_PX = 4096
+
+/**
+ * How long a photo has to be looked at, still, before its large version starts to be prepared. Decoding one (and, for an edited photo, drawing the edit on it)
+ * takes a moment that, started by the first pinch, stops the picture mid-gesture; started here, it is ready by then. Photos that are only swiped past cost nothing.
+ */
+internal const val HIGH_RES_DWELL_MS = 600L
 
 /**
  * Pan/zoom state of one photo. The image is drawn fitted into the container at scale 1; zooming
@@ -82,7 +90,9 @@ class ZoomState {
     /** Width / height of the image as displayed; 0 until the first bitmap has loaded. */
     var imageAspect by mutableFloatStateOf(0f)
 
-    val isZoomed: Boolean get() = scale > ZOOMED_THRESHOLD
+    // Derived, so that what reads it (the picture's layers, the zoom action's label) is composed again when it turns true or false and not at every step of a pinch.
+    private val zoomed = derivedStateOf { scale > ZOOMED_THRESHOLD }
+    val isZoomed: Boolean get() = zoomed.value
 
     fun reset() {
         scale = MIN_SCALE
@@ -226,11 +236,19 @@ fun ImagePage(
     if (isCurrent) {
         LaunchedEffect(state) { snapshotFlow { state.isZoomed }.collect(onZoomedChange) }
     }
-    ZoomableBox(state, onTap, modifier) { LayeredImage(item, state, recipe) }
+    // Once the photo has been on screen a moment it is worth having its large version ready, out of sight, for the first zoom.
+    var restedOn by remember(item.id, recipe) { mutableStateOf(false) }
+    LaunchedEffect(isCurrent, item.id, recipe) {
+        restedOn = false
+        if (!isCurrent) return@LaunchedEffect
+        delay(HIGH_RES_DWELL_MS)
+        restedOn = true
+    }
+    ZoomableBox(state, onTap, modifier) { LayeredImage(item, state, recipe, prepareLarge = restedOn) }
 }
 
 @Composable
-private fun LayeredImage(item: MediaItem, state: ZoomState, recipe: EditRecipe?) {
+private fun LayeredImage(item: MediaItem, state: ZoomState, recipe: EditRecipe?, prepareLarge: Boolean) {
     val context = LocalPlatformContext.current
     var previewLoaded by remember(item.id, recipe) { mutableStateOf(false) }
     var failed by remember(item.id, recipe) { mutableStateOf(false) }
@@ -252,7 +270,8 @@ private fun LayeredImage(item: MediaItem, state: ZoomState, recipe: EditRecipe?)
         )
     }
     if (failed) Box(Modifier.fillMaxSize(), contentAlignment = Alignment.BottomCenter) { CannotDisplay(Modifier.padding(bottom = 96.dp)) }
-    if (state.isZoomed) HighResLayer(item, recipe)
+    val hasMoreToShow = max(item.width, item.height) > max(container.width, container.height)
+    if (state.isZoomed || (prepareLarge && hasMoreToShow)) HighResLayer(item, recipe, state)
 }
 
 /** The screen-sized decode; for an edit with a crop the photo is decoded larger, so what is left after cropping still fills the screen. */
@@ -264,8 +283,9 @@ private fun previewRequest(context: PlatformContext, item: MediaItem, recipe: Ed
     return builder.size(CoilSize(edge, edge)).transformations(EditTransformation(recipe)).build()
 }
 
+/** The large decode, drawn over the screen-sized one while zoomed; before that, when only being prepared, it is not drawn. */
 @Composable
-private fun HighResLayer(item: MediaItem, recipe: EditRecipe?) {
+private fun HighResLayer(item: MediaItem, recipe: EditRecipe?, state: ZoomState) {
     val context = LocalPlatformContext.current
     val request = remember(item.id, recipe) {
         val builder = ImageRequest.Builder(context).data(item.uri).size(CoilSize(HIGH_RES_EDGE_PX, HIGH_RES_EDGE_PX))
@@ -276,6 +296,6 @@ private fun HighResLayer(item: MediaItem, recipe: EditRecipe?) {
         model = request,
         contentDescription = null,
         contentScale = ContentScale.Fit,
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier.fillMaxSize().graphicsLayer { alpha = if (state.isZoomed) 1f else 0f },
     )
 }

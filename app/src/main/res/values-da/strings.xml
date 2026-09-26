@@ -1,0 +1,659 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Library -->
+    <string name="library_title">Bibliotek</string>
+    <string name="today">I dag</string>
+    <string name="yesterday">I går</string>
+    <string name="empty_library">Ingen billeder eller videoer endnu</string>
+    <string name="empty_filter">Intet matcher dette filter</string>
+    <string name="empty_filter_clear">Vis alt</string>
+    <string name="sync_progress">Indlæser bibliotek: %1$,d / %2$,d</string>
+    <string name="sync_failed">Biblioteket kunne ikke opdateres</string>
+    <string name="sync_retry">Prøv igen</string>
+    <string name="scrubber_description">Rul gennem biblioteket efter dato</string>
+
+    <!-- Permissions -->
+    <string name="permission_title">Dine billeder bliver på din enhed</string>
+    <string name="permission_body">eikon har brug for adgang til dine billeder og videoer for at vise dem. De bliver på din enhed: intet uploades, medmindre du opsætter sikkerhedskopiering til din egen server.</string>
+    <string name="permission_grant">Tillad adgang</string>
+    <string name="permission_denied">Adgang blev afvist. Du kan tillade den i systemindstillingerne.</string>
+    <string name="permission_open_settings">Åbn indstillinger</string>
+    <string name="limited_banner">Kun de billeder, du har valgt, vises</string>
+    <string name="limited_select_more">Vælg flere</string>
+    <string name="limited_allow_all">Tillad alle</string>
+
+    <!-- Menus and filters -->
+    <string name="menu_filter">Filtrer</string>
+    <string name="menu_sort">Sortér</string>
+    <string name="menu_settings">Indstillinger</string>
+    <string name="menu_more">Flere muligheder</string>
+    <string name="filter_all">Alle</string>
+    <string name="filter_photos">Billeder</string>
+    <string name="filter_videos">Videoer</string>
+    <string name="filter_favorites">Favoritter</string>
+    <string name="filter_screenshots">Skærmbilleder</string>
+    <string name="filter_screen_recordings">Skærmoptagelser</string>
+    <string name="filter_panoramas">Panoramaer</string>
+    <string name="filter_raw">RAW</string>
+    <string name="filter_clear">Ryd filter</string>
+    <string name="sort_by_date_taken">Optagelsesdato</string>
+    <string name="sort_by_date_added">Tilføjelsesdato</string>
+    <string name="sort_newest_first">Nyeste først</string>
+    <string name="sort_oldest_first">Ældste først</string>
+
+    <!-- Selection and actions -->
+    <plurals name="selected_count">
+        <item quantity="one">%d valgt</item>
+        <item quantity="other">%d valgt</item>
+    </plurals>
+    <string name="action_share">Del</string>
+    <string name="action_favorite">Føj til favoritter</string>
+    <string name="action_unfavorite">Fjern fra favoritter</string>
+    <string name="action_delete">Slet</string>
+    <string name="action_info">Info</string>
+    <string name="action_back">Tilbage</string>
+    <string name="action_clear_selection">Ryd markering</string>
+    <string name="action_select">Markér</string>
+    <string name="action_failed">Noget gik galt</string>
+    <plurals name="moved_to_trash">
+        <item quantity="one">%d element flyttet til papirkurven. Android gemmer det i 30 dage.</item>
+        <item quantity="other">%d elementer flyttet til papirkurven. Android gemmer dem i 30 dage.</item>
+    </plurals>
+
+    <!-- Accessibility -->
+    <string name="cd_photo">Billede, %1$s</string>
+    <string name="cd_video">Video, %1$s, %2$s</string>
+    <string name="cd_edited_badge">Redigeret</string>
+    <string name="cd_favorite_badge">Favorit</string>
+    <string name="viewer_position">%1$d af %2$d</string>
+
+    <!-- Video -->
+    <string name="video_play">Afspil</string>
+    <string name="video_pause">Sæt på pause</string>
+    <string name="video_mute">Slå lyden fra</string>
+    <string name="video_unmute">Slå lyden til</string>
+    <string name="video_seek">Spol</string>
+
+    <!-- Info panel -->
+    <string name="info_title">Info</string>
+    <string name="info_loading">Læser detaljer…</string>
+    <string name="info_error">Detaljerne for denne fil kunne ikke læses</string>
+    <string name="info_section_file">Fil</string>
+    <string name="info_section_camera">Kamera</string>
+    <string name="info_section_video">Video</string>
+    <string name="info_name">Navn</string>
+    <string name="info_type">Type</string>
+    <string name="info_folder">Mappe</string>
+    <string name="info_resolution">Opløsning</string>
+    <string name="info_megapixels">Megapixel</string>
+    <string name="info_size">Størrelse</string>
+    <string name="info_date">Dato</string>
+    <string name="info_modified">Ændret</string>
+    <string name="info_color_profile">Farveprofil</string>
+    <string name="info_location">Placering</string>
+    <string name="info_location_none">Ingen placering er gemt i denne fil</string>
+    <string name="info_location_hidden">Android skjuler billedernes placeringer for apps, indtil du tillader det</string>
+    <string name="info_location_allow">Tillad</string>
+    <string name="info_location_open">Åbn i en kort-app</string>
+    <string name="info_camera">Enhed</string>
+    <string name="info_lens">Objektiv</string>
+    <string name="info_focal_length">Brændvidde</string>
+    <string name="info_aperture">Blænde</string>
+    <string name="info_shutter">Lukkertid</string>
+    <string name="info_iso">Følsomhed</string>
+    <string name="info_exposure_bias">Eksponeringskorrektion</string>
+    <string name="info_flash">Blitz</string>
+    <string name="info_flash_fired">Udløst</string>
+    <string name="info_flash_off">Ikke udløst</string>
+    <string name="info_orientation">Orientering</string>
+    <string name="info_software">Software</string>
+    <string name="info_duration">Varighed</string>
+    <string name="info_frame_rate">Billedhastighed</string>
+    <string name="info_video_codec">Videokodek</string>
+    <string name="info_audio_codec">Lydkodek</string>
+    <string name="info_bitrate">Bithastighed</string>
+    <string name="info_dynamic_range">Dynamisk område</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Indstillinger</string>
+    <string name="settings_appearance">Udseende</string>
+    <string name="theme_system">Følg systemet</string>
+    <string name="theme_light">Lyst</string>
+    <string name="theme_dark">Mørkt</string>
+    <string name="settings_privacy">Privatliv</string>
+    <string name="settings_privacy_body">eikon fungerer på din enhed. Det har ingen konto og ingen analyse af brugen, og dets data er udelukket fra Androids sikkerhedskopier.\n\nDine billeder kopieres aldrig: eikon fører et lokalt indeks med filoplysninger (navn, dato, størrelse, mappe), så biblioteket åbner med det samme. Hvis du sletter appen, slettes indekset også.</string>
+    <string name="settings_storage_encrypted">Bibliotekets database (indekset, album, redigeringer, billedtekster og det, analysen har fundet) er krypteret på denne telefon med AES-256. Nøglen opbevares af Android Keystore.</string>
+    <string name="settings_storage_not_encrypted">Bibliotekets database kunne ikke krypteres (%1$s), så den er stadig gemt ukrypteret. eikon prøver igen ved hver start.</string>
+    <string name="settings_storage_reset_title">Bibliotekets database er startet forfra</string>
+    <string name="settings_storage_reset">Nøglen, der beskyttede bibliotekets database, gik tabt, så eikon måtte oprette en ny. Album, redigeringer, billedtekster og navne, du havde tilføjet, er væk. Dine billeder er urørte, og analysen kører igen.</string>
+    <string name="settings_storage_reset_ok">Forstået</string>
+    <string name="settings_about">Om</string>
+    <string name="settings_licenses">Open source-licenser</string>
+    <string name="licenses_title">Open source-licenser</string>
+    <string name="settings_version">Version %1$s</string>
+
+    <!-- Navigation and collections -->
+    <string name="nav_library">Bibliotek</string>
+    <string name="nav_search">Søg</string>
+    <string name="nav_collections">Samlinger</string>
+    <string name="collections_title">Samlinger</string>
+    <string name="section_people">Personer</string>
+    <string name="section_albums">Album</string>
+    <string name="section_personal">Personligt</string>
+    <string name="section_folders">Enhedens mapper</string>
+    <string name="collection_favorites">Favoritter</string>
+    <string name="collection_recent">Nyligt tilføjet</string>
+    <string name="collection_videos">Videoer</string>
+    <string name="collection_screenshots">Skærmbilleder</string>
+    <string name="collection_screen_recordings">Skærmoptagelser</string>
+    <string name="collection_panoramas">Panoramaer</string>
+    <string name="collection_raw">RAW</string>
+    <string name="collection_trash">Nyligt slettet</string>
+    <string name="collection_hidden">Skjulte</string>
+    <plurals name="items_count">
+        <item quantity="one">%d element</item>
+        <item quantity="other">%d elementer</item>
+    </plurals>
+    <string name="empty_album">Dette album er tomt. Markér billeder i biblioteket, og vælg „Føj til album”.</string>
+    <string name="empty_hidden">Intet er skjult</string>
+    <string name="empty_collection">Intet her endnu</string>
+
+    <!-- Albums -->
+    <string name="album_new">Nyt album</string>
+    <string name="album_name_hint">Albumnavn</string>
+    <string name="album_create">Opret</string>
+    <string name="album_rename">Omdøb</string>
+    <string name="album_delete">Slet album</string>
+    <string name="album_delete_title">Vil du slette dette album?</string>
+    <string name="album_delete_message">Kun albummet slettes. Billederne og videoerne i det bliver, hvor de er.</string>
+    <string name="album_move_earlier">Flyt tidligere</string>
+    <string name="album_move_later">Flyt senere</string>
+    <string name="action_add_to_album">Føj til album</string>
+    <string name="action_remove_from_album">Fjern fra album</string>
+    <string name="action_hide">Skjul</string>
+    <string name="action_unhide">Vis</string>
+    <string name="action_cancel">Annuller</string>
+    <string name="action_save">Gem</string>
+    <plurals name="added_to_album">
+        <item quantity="one">%1$d element føjet til „%2$s”</item>
+        <item quantity="other">%1$d elementer føjet til „%2$s”</item>
+    </plurals>
+    <plurals name="removed_from_album">
+        <item quantity="one">%d element fjernet fra albummet</item>
+        <item quantity="other">%d elementer fjernet fra albummet</item>
+    </plurals>
+    <plurals name="moved_to_hidden">
+        <item quantity="one">%d element skjult. Du finder det under Samlinger, Skjulte.</item>
+        <item quantity="other">%d elementer skjult. Du finder dem under Samlinger, Skjulte.</item>
+    </plurals>
+    <plurals name="unhidden">
+        <item quantity="one">%d element er synligt igen</item>
+        <item quantity="other">%d elementer er synlige igen</item>
+    </plurals>
+
+    <!-- Filters -->
+    <string name="filter_type_title">Type</string>
+    <string name="filter_kind_title">Art</string>
+    <string name="filter_any">Alle</string>
+    <string name="filter_favorites_only">Kun favoritter</string>
+    <string name="filter_edited">Redigerede</string>
+    <string name="share_preparing">Forbereder de redigerede billeder til deling</string>
+    <string name="filter_edited_only">Kun redigerede</string>
+    <string name="filter_clear_all">Ryd filtre</string>
+
+    <!-- Locks -->
+    <string name="locked_title">Låst</string>
+    <string name="locked_body">Brug fingeraftryk, ansigt eller skærmlås for at åbne dette.</string>
+    <string name="locked_unlock">Lås op</string>
+    <string name="auth_subtitle">Bekræft, at det er dig</string>
+    <string name="auth_title_hidden">Lås „Skjulte” op</string>
+    <string name="auth_title_trash">Lås „Nyligt slettet” op</string>
+    <string name="auth_unavailable">Godkendelse er ikke tilgængelig lige nu. Prøv igen om et øjeblik.</string>
+    <string name="no_device_lock_notice">Denne telefon har ingen skærmlås, så „Skjulte” er ikke beskyttet. Opsæt en i systemindstillingerne.</string>
+
+    <!-- Recently deleted -->
+    <string name="trash_info">Elementer slettes permanent efter cirka 30 dage.</string>
+    <string name="trash_empty">Intet er slettet for nylig</string>
+    <string name="trash_restore">Gendan</string>
+    <string name="trash_delete_forever">Slet permanent</string>
+    <plurals name="days_left_short">
+        <item quantity="one">%d d</item>
+        <item quantity="other">%d d</item>
+    </plurals>
+    <plurals name="trash_restored">
+        <item quantity="one">%d element gendannet</item>
+        <item quantity="other">%d elementer gendannet</item>
+    </plurals>
+    <plurals name="trash_deleted">
+        <item quantity="one">%d element slettet permanent</item>
+        <item quantity="other">%d elementer slettet permanent</item>
+    </plurals>
+
+    <!-- Settings: security -->
+    <string name="settings_security">Sikkerhed</string>
+    <string name="setting_lock_hidden">Kræv godkendelse for „Skjulte”</string>
+    <string name="setting_lock_trash">Kræv godkendelse for „Nyligt slettet”</string>
+    <string name="setting_show_hidden">Vis „Skjulte” i Samlinger</string>
+    <string name="setting_secure_screens">Skjul eikon i seneste apps, og bloker skærmbilleder</string>
+    <string name="settings_security_body">Skjulte elementer udelades fra biblioteket, samlingerne og søgningen, og for at åbne „Skjulte” kræves dit fingeraftryk, dit ansigt eller din skærmlås. Selve filerne er ikke krypteret og ligger i telefonens almindelige lager, hvor andre apps med adgang til billeder stadig kan se dem.</string>
+
+    <!-- Search -->
+    <string name="search_placeholder">Dato, sted, tekst, filnavn</string>
+    <string name="search_clear">Ryd søgning</string>
+    <string name="search_no_results">Ingen billeder matcher</string>
+    <string name="search_hint_title">Søg i dit bibliotek</string>
+    <string name="search_hint_body">Prøv en dato („August 2025”, „yesterday”), et sted („Rome”, „Tuscany”), et ord, der optræder i et billede eller i dets filnavn, eller en art („videos”, „screenshots”, „favorites”).\n\nDatoer og arter forstås på engelsk og italiensk. Steder, tekst i billeder og det, de viser, findes, når analysen er kørt (Indstillinger, Analyse).</string>
+    <string name="search_analysis_off">Søgning efter sted, efter tekst i billeder og efter det, de viser, er slået fra. Du kan slå den til under Indstillinger, Analyse.</string>
+    <string name="search_analysis_note">Billederne analyseres stadig i baggrunden (%1$d %%). Nogle resultater kan mangle.</string>
+
+    <!-- Settings: analysis -->
+    <string name="settings_analysis">Analyse</string>
+    <string name="analysis_places_progress">Steder: %1$,d af %2$,d</string>
+    <string name="analysis_semantic_progress">Hvad billederne viser: %1$,d af %2$,d</string>
+    <string name="analysis_semantic_unavailable">Modellen, der genkender, hvad billederne viser, kunne ikke indlæses, så dette trin kører ikke.</string>
+    <string name="search_semantic_unavailable">Søgning efter, hvad billederne viser, er ikke tilgængelig lige nu (modellen kunne ikke indlæses). Andre resultater virker stadig.</string>
+    <string name="analysis_people_progress">Personer: %1$,d af %2$,d</string>
+    <string name="analysis_people_unavailable">Modellerne, der finder ansigter, kunne ikke indlæses, så dette trin kører ikke.</string>
+    <string name="analysis_duplicates_progress">Dubletter: %1$,d af %2$,d</string>
+    <string name="analysis_text_progress">Tekst i billeder: %1$,d af %2$,d</string>
+    <string name="analysis_running">Analyserer nu…</string>
+    <string name="analysis_idle">Venter på det rette tidspunkt (batteriet er ikke lavt, batterisparetilstand er slået fra og, hvis du har valgt det, opladning)</string>
+    <string name="analysis_up_to_date">Alt er analyseret</string>
+    <string name="setting_pause_analysis">Sæt analysen på pause</string>
+    <string name="setting_only_charging">Kun under opladning</string>
+    <string name="setting_analyze_places">Find billeder efter sted</string>
+    <string name="setting_analyze_semantic">Find billeder efter det, de viser</string>
+    <string name="setting_analyze_people">Find personer i billeder</string>
+    <string name="setting_analyze_people_note">Ansigter findes og sammenlignes kun på denne telefon. Intet om et ansigt forlader den nogensinde, og eikon forsøger aldrig at genkende nogen: det grupperer kun ansigter, der ligner hinanden, og du navngiver grupperne.</string>
+    <string name="setting_analyze_duplicates">Find dubletter af billeder</string>
+    <string name="setting_analyze_text">Find tekst i billeder</string>
+    <string name="analysis_location_permission">Android skjuler for apps, hvor billederne er taget, indtil du tillader det.</string>
+    <string name="analysis_allow_locations">Tillad adgang til billedernes placeringer</string>
+    <string name="analyze_now">Analysér nu</string>
+    <string name="settings_analysis_body">Analysen kører kun på din telefon, i baggrunden, og går på pause, når batteriet er lavt, batterisparetilstand er slået til, eller telefonen bliver varm („Analysér nu” fortsætter også i batterisparetilstand). Den gemmer stedet for hvert billede (fastlagt offline, ingen placering sendes nogensinde nogen steder hen), en numerisk beskrivelse af, hvad billedet viser (så du kan søge efter „hund” eller „solnedgang”; den er ikke en billedtekst og kan ikke læses tilbage som et billede) og al tekst, den læser i billedet, så Søg kan finde dem. Hvis du slår personer til, gemmer den også, hvor hvert ansigt er i et billede, og en numerisk beskrivelse af det, kun for at gruppere ansigter, der ligner hinanden. Hvis du slår dubletter til, gemmer den et kort fingeraftryk af hvert billede og af filer med samme størrelse, kun for at finde kopier. At genkende, hvad billeder viser, og at læse tekst er langsomt og belaster processoren kraftigt, hvorfor analysen som standard venter på opladning.</string>
+
+    <!-- Info panel: derived data -->
+    <string name="info_place">Nærmeste sted</string>
+    <string name="info_text_found">Tekst i dette billede</string>
+    <string name="info_text_copy">Kopiér tekst</string>
+
+    <!-- People -->
+    <string name="collection_people">Personer</string>
+    <string name="people_title">Personer</string>
+    <string name="person_unnamed">Person uden navn</string>
+    <string name="person_add_name">Tilføj et navn</string>
+    <string name="person_rename">Navngiv denne person</string>
+    <string name="person_name_hint">Navn</string>
+    <string name="person_same_name_note">Personer med samme navn samles til én.</string>
+    <string name="person_favorite">Markér som favorit</string>
+    <string name="person_unfavorite">Fjern fra favoritter</string>
+    <string name="person_hide">Skjul denne person</string>
+    <string name="person_unhide">Vis denne person</string>
+    <string name="person_merge">Slå sammen med en anden person…</string>
+    <string name="person_merge_title">Slå sammen med</string>
+    <string name="person_merge_empty">Der er ingen andre at slå sammen med.</string>
+    <string name="person_not_this">Ikke denne person</string>
+    <string name="person_remove_from_people">Ikke et ansigt</string>
+    <string name="people_show_hidden">Vis skjulte personer (%1$d)</string>
+    <string name="people_hide_hidden">Skjul skjulte personer</string>
+    <string name="people_empty_off">Personer er slået fra. Slå „Find personer i billeder” til under Indstillinger, Analyse, så grupperer eikon de ansigter, det finder. Alt bliver på denne telefon.</string>
+    <string name="people_empty_working">Ingen ansigter fundet endnu (%1$d %% af dine billeder analyseret). Analysen kører i baggrunden under opladning.</string>
+    <string name="people_empty_done">Der blev ikke fundet ansigter i dine billeder.</string>
+    <string name="people_go_settings">Åbn indstillinger</string>
+    <string name="person_photos_empty">Ingen billeder.</string>
+    <plurals name="moved_to_new_person">
+        <item quantity="one">%d billede flyttet til en ny person</item>
+        <item quantity="other">%d billeder flyttet til en ny person</item>
+    </plurals>
+    <plurals name="removed_from_people">
+        <item quantity="one">%d billede fjernet fra Personer</item>
+        <item quantity="other">%d billeder fjernet fra Personer</item>
+    </plurals>
+    <string name="info_people">Personer</string>
+    <plurals name="info_people_unnamed_count">
+        <item quantity="one">%d uden navn</item>
+        <item quantity="other">%d uden navn</item>
+    </plurals>
+
+    <string name="section_memories">Minder</string>
+    <string name="section_pets">Kæledyr</string>
+    <string name="collection_dogs">Hunde</string>
+    <string name="collection_cats">Katte</string>
+    <string name="empty_pets">Ingen hunde eller katte fundet endnu. Kæledyr genkendes ud fra det, billederne viser: slå „Find billeder efter det, de viser” til under Indstillinger, Analyse, og vent, til det er færdigt.</string>
+
+    <!-- Places -->
+    <string name="places_title">Steder</string>
+    <string name="places_tab_list">Liste</string>
+    <string name="places_tab_map">Kort</string>
+    <string name="place_unknown">Andre steder</string>
+    <string name="place_near">Nær %1$s</string>
+    <string name="places_expand">Vis</string>
+    <string name="places_collapse">Skjul</string>
+    <string name="collection_places">Steder</string>
+    <string name="places_map_note">Kun landes omrids og navne på større byer: der hentes ingen kortbilleder, og ingen position forlader nogensinde telefonen. Zoom ved at knibe eller dobbelttrykke, tryk på en markør for at se dens billeder.</string>
+    <string name="places_map_description">Kort over, hvor dine billeder er taget, med markører for grupper af billeder</string>
+    <string name="places_empty_off">Steder er slået fra. Slå „Find billeder efter sted” til under Indstillinger, Analyse, så finder eikon offline ud af, hvor dine billeder er taget, ud fra deres GPS-data.</string>
+    <string name="places_empty_working">Ingen steder fundet endnu (%1$d %% af dine billeder analyseret). Analysen kører i baggrunden under opladning.</string>
+    <string name="places_empty_done">Ingen af dine billeder har en position, eller også har eikon måske ikke tilladelse til at læse billedernes placeringer (Indstillinger, Analyse).</string>
+    <string name="section_places">Steder og rejser</string>
+
+    <!-- Trips -->
+    <string name="collection_trips">Rejser</string>
+    <string name="trips_title">Rejser</string>
+    <string name="trip_untitled">Rejse</string>
+    <string name="trip_reason">Cirka %1$d km fra der, hvor de fleste af dine billeder tages (nær %2$s)</string>
+    <string name="trip_home_unknown">et ukendt sted</string>
+    <plurals name="trip_summary_days">
+        <item quantity="one">%d dag</item>
+        <item quantity="other">%d dage</item>
+    </plurals>
+    <string name="trips_empty">Ingen rejser fundet. En rejse er en række dage med mindst 10 billeder, tilbragt mindst 100 km fra der, hvor de fleste af dine billeder tages. Til det har eikon brug for billedernes positioner: slå „Find billeder efter sted” til under Indstillinger, Analyse.</string>
+
+    <!-- Duplicates and similar shots -->
+    <string name="section_cleanup">Ryd op</string>
+    <string name="collection_duplicates">Dubletter</string>
+    <string name="collection_similar">Lignende billeder</string>
+    <string name="duplicates_title">Dubletter</string>
+    <string name="similar_title">Lignende billeder</string>
+    <string name="duplicates_note">eikon finder dem kun. Intet fjernes, før du bekræfter i Androids egen dialogboks, og fjernede billeder havner i „Nyligt slettet”, hvor du kan gendanne dem. Ved kopier af et billede, du har føjet til album: den kopi, du beholder, kommer med i disse album.</string>
+    <plurals name="duplicate_exact">
+        <item quantity="one">%d identisk fil</item>
+        <item quantity="other">%d identiske filer</item>
+    </plurals>
+    <plurals name="duplicate_visual">
+        <item quantity="one">%d kopi af det samme billede</item>
+        <item quantity="other">%d kopier af det samme billede</item>
+    </plurals>
+    <plurals name="similar_group">
+        <item quantity="one">%d billede</item>
+        <item quantity="other">%d lignende billeder</item>
+    </plurals>
+    <plurals name="duplicate_keep_best">
+        <item quantity="one">Behold det bedste, flyt %d til „Nyligt slettet”</item>
+        <item quantity="other">Behold det bedste, flyt %d til „Nyligt slettet”</item>
+    </plurals>
+    <plurals name="similar_trash_marked">
+        <item quantity="one">Flyt %d til „Nyligt slettet”</item>
+        <item quantity="other">Flyt %d til „Nyligt slettet”</item>
+    </plurals>
+    <string name="duplicate_best">Bedst</string>
+    <string name="duplicate_kept">Beholdt</string>
+    <string name="duplicate_marked">Skal flyttes</string>
+    <string name="duplicate_dismiss">Det er ikke dubletter</string>
+    <string name="similar_dismiss">De ligner ikke hinanden</string>
+    <string name="duplicates_empty_off">Dubletter er slået fra. Slå „Find dubletter af billeder” til under Indstillinger, Analyse. eikon laver fingeraftryk af dine billeder kun på denne telefon, uden nogen model.</string>
+    <string name="similar_empty_off">Lignende billeder kræver „Find billeder efter det, de viser” under Indstillinger, Analyse: det sammenligner, hvad hvert billede viser, for billeder taget inden for to minutter fra hinanden.</string>
+    <string name="duplicates_empty_working">Intet fundet endnu (%1$d %% analyseret). Analysen kører i baggrunden under opladning.</string>
+    <string name="duplicates_empty_done">Der blev ikke fundet dubletter.</string>
+    <string name="similar_empty_done">Der blev ikke fundet lignende billeder.</string>
+
+    <!-- Memories -->
+    <string name="collection_memories">Minder</string>
+    <string name="memories_title">Minder</string>
+    <string name="memory_on_this_day">På denne dag</string>
+    <string name="memory_year_ago">For et år siden</string>
+    <string name="memory_weekend_in">Weekend i %1$s</string>
+    <string name="memory_weekend">Weekend væk hjemmefra</string>
+    <string name="memory_day_trip_to">Dagstur til %1$s</string>
+    <string name="memory_day_trip">Dagstur</string>
+    <string name="memory_season">%1$s %2$d</string>
+    <string name="memory_person">%1$s, %2$d</string>
+    <string name="season_winter">Vinter</string>
+    <string name="season_spring">Forår</string>
+    <string name="season_summer">Sommer</string>
+    <string name="season_autumn">Efterår</string>
+    <string name="memory_hide">Skjul dette minde</string>
+    <string name="memory_show_fewer">Vis færre som dette</string>
+    <string name="memory_show_less_of">Vis mindre af %1$s</string>
+    <string name="memory_exclude_date">Udelad denne dato</string>
+    <string name="memory_all_photos">Alle billeder</string>
+    <string name="memory_replay">Afspil igen</string>
+    <string name="memory_reset">Fortryd mine valg</string>
+    <string name="memory_done">Færdig. Du kan fortryde dine valg fra menuen i Minder.</string>
+    <string name="memories_empty">Ingen minder endnu. eikon laver dem ud fra datoer, rejser, årstider og de personer, du har navngivet: „På denne dag”, „For et år siden”, rejser og weekender væk hjemmefra, en årstid, nogen i et år. Rejser og weekender kræver Steder, personer kræver Personer (Indstillinger, Analyse). Intet forlader telefonen.</string>
+    <string name="memories_note">Lavet ud fra datoer, steder og navngivne personer med enkle regler; der er ingen musik, og billederne vælges efter favoritter, størrelse og ansigter, ikke efter hvor godt de ser ud.</string>
+    <string name="memory_no_photos">Dette minde har ikke flere billeder at vise.</string>
+
+    <!-- Editing -->
+    <string name="action_edit">Rediger</string>
+    <string name="edit_title">Rediger</string>
+    <string name="edit_done">Færdig</string>
+    <string name="edit_original">Original</string>
+    <string name="edit_revert">Fortryd</string>
+    <string name="edit_revert_title">Vil du vende tilbage til originalen?</string>
+    <string name="edit_revert_message">Det rydder alle justeringer, filteret og beskæringen fra denne redigering. Det originale billede er aldrig blevet ændret. Tryk på Færdig for at beholde det gendannede billede.</string>
+    <string name="edit_discard_title">Vil du kassere dine ændringer?</string>
+    <string name="edit_discard_message">De ændringer, du har lavet i denne editor, går tabt. Billedet forbliver, som det var.</string>
+    <string name="edit_discard">Kassér</string>
+    <string name="edit_copy_edits">Kopiér redigeringer</string>
+    <string name="edit_paste_edits">Indsæt redigeringer</string>
+    <string name="edit_save_copy">Gem en kopi</string>
+    <string name="edit_copy_saved">En kopi blev gemt ved siden af originalen, som ikke blev ændret.</string>
+    <string name="edit_copy_saved_no_details">En kopi blev gemt ved siden af originalen, som ikke blev ændret. Kameraets oplysninger kunne ikke kopieres.</string>
+    <string name="edit_failed">Redigeringen kunne ikke gennemføres. Billedet blev ikke ændret.</string>
+    <string name="edited_badge">Redigeret</string>
+    <string name="viewer_show_original">Vis originalen</string>
+    <string name="viewer_show_edited">Vis det redigerede billede</string>
+    <string name="tool_auto">Auto</string>
+    <string name="tool_light">Lys</string>
+    <string name="tool_color">Farve</string>
+    <string name="tool_detail">Detaljer</string>
+    <string name="tool_filters">Filtre</string>
+    <string name="tool_crop">Beskær</string>
+    <string name="adj_exposure">Eksponering</string>
+    <string name="adj_brightness">Lysstyrke</string>
+    <string name="adj_contrast">Kontrast</string>
+    <string name="adj_highlights">Højlys</string>
+    <string name="adj_shadows">Skygger</string>
+    <string name="adj_black_point">Sortpunkt</string>
+    <string name="adj_saturation">Farvemætning</string>
+    <string name="adj_vibrance">Livfuldhed</string>
+    <string name="adj_temperature">Varme</string>
+    <string name="adj_tint">Nuance</string>
+    <string name="adj_sharpness">Skarphed</string>
+    <string name="adj_vignette">Vignettering</string>
+    <string name="geo_straighten">Ret op</string>
+    <string name="geo_perspective_vertical">Lodret perspektiv</string>
+    <string name="geo_perspective_horizontal">Vandret perspektiv</string>
+    <string name="filter_amount">Styrke</string>
+    <string name="filter_name_none">Original</string>
+    <string name="filter_name_vivid">Levende</string>
+    <string name="filter_name_warm">Varm</string>
+    <string name="filter_name_cool">Kølig</string>
+    <string name="filter_name_mono">Mono</string>
+    <string name="filter_name_noir">Noir</string>
+    <string name="filter_name_fade">Falmet</string>
+    <string name="filter_name_chrome">Krom</string>
+    <string name="filter_name_sepia">Sepia</string>
+    <string name="crop_rotate">Roter</string>
+    <string name="crop_flip">Vend</string>
+    <string name="shape_free">Fri</string>
+    <string name="shape_original">Original</string>
+    <string name="shape_square">1:1</string>
+    <string name="shape_4_3">4:3</string>
+    <string name="shape_3_2">3:2</string>
+    <string name="shape_16_9">16:9</string>
+    <string name="action_paste_edits">Indsæt redigeringer</string>
+    <string name="action_revert_edits">Fjern redigeringer</string>
+    <plurals name="edits_pasted">
+        <item quantity="one">Redigeringer anvendt på %d billede</item>
+        <item quantity="other">Redigeringer anvendt på %d billeder</item>
+    </plurals>
+    <plurals name="edits_reverted">
+        <item quantity="one">Redigering fjernet fra %d billede; originalen er, som den altid har været</item>
+        <item quantity="other">Redigeringer fjernet fra %d billeder; originalerne er, som de altid har været</item>
+    </plurals>
+
+    <!-- Accessibility -->
+    <string name="slider_reset">Nulstil til neutral</string>
+    <string name="crop_area">Beskæringsområde, fra %1$d %% til %2$d %% på tværs og fra %3$d %% til %4$d %% nedad</string>
+    <string name="crop_action_smaller">Gør beskæringen mindre</string>
+    <string name="crop_action_larger">Gør beskæringen større</string>
+    <string name="crop_action_left">Flyt beskæringen til venstre</string>
+    <string name="crop_action_right">Flyt beskæringen til højre</string>
+    <string name="crop_action_up">Flyt beskæringen op</string>
+    <string name="crop_action_down">Flyt beskæringen ned</string>
+    <string name="viewer_zoom_in">Zoom ind</string>
+    <string name="viewer_zoom_out">Zoom ud</string>
+    <string name="external_photo">Billede</string>
+    <string name="viewer_cannot_display">Dette billede kan ikke vises.</string>
+
+    <!-- Info: caption, editing the date and location, what the photo shows -->
+    <string name="info_caption">Billedtekst</string>
+    <string name="caption_add">Tilføj en billedtekst</string>
+    <string name="caption_edit">Rediger billedteksten</string>
+    <string name="caption_title">Billedtekst</string>
+    <string name="caption_hint">Et par ord om dette billede</string>
+    <string name="caption_note">Gemmes kun i eikon; billedets fil ændres ikke. Søg finder den.</string>
+    <string name="date_change">Skift dato og tid</string>
+    <string name="date_revert">Gendan den oprindelige dato</string>
+    <string name="date_time_title">Tidspunkt</string>
+    <string name="action_next">Næste</string>
+    <string name="location_title">Hvor det er taget</string>
+    <string name="location_coordinates">Koordinater</string>
+    <string name="location_coordinates_note">Decimalgrader, breddegrad først: 41.9028, 12.4964</string>
+    <string name="location_invalid">Ikke en position: to tal, breddegrad mellem -90 og 90 og længdegrad mellem -180 og 180</string>
+    <string name="location_city">Eller find en by (virker offline)</string>
+    <string name="location_remove">Fjern placeringen</string>
+    <string name="location_change">Skift placeringen</string>
+    <string name="location_revert">Gendan den oprindelige placering</string>
+    <string name="info_map_description">Et lille kort, der viser, hvor billedet er taget</string>
+    <string name="metadata_done">Færdig. Billedet siger nu dette; originalen er bevaret, så du kan gendanne den.</string>
+    <string name="metadata_not_writable">Denne type fil kan ikke ændres.</string>
+    <string name="metadata_needs_permission">For at ændre et billedes dato eller placering skal eikon kunne læse, hvor billederne er taget: ellers viser Android den en kopi uden placeringen, og at gemme ville slette den.</string>
+    <string name="metadata_nothing_to_revert">Der er intet at gendanne.</string>
+    <string name="metadata_interrupted">En tidligere ændring af dette billede blev ikke færdig. Dets original er bevaret: gendan den, før du ændrer andet.</string>
+    <string name="metadata_failed">Ændringen virkede ikke. Billedet blev sat tilbage præcis, som det var.</string>
+    <string name="metadata_restore_file">Gendan den originale fil</string>
+    <string name="info_albums">I album</string>
+    <string name="info_pets">Kæledyr</string>
+    <string name="info_shows">Det viser måske</string>
+    <string name="pet_dog">Hund</string>
+    <string name="pet_cat">Kat</string>
+    <string name="info_album">Enhedsalbum</string>
+    <string name="label_landscape">Et landskab</string>
+    <string name="label_beach">En strand</string>
+    <string name="label_sea">Havet</string>
+    <string name="label_mountain">Et bjerg</string>
+    <string name="label_sunset">En solnedgang</string>
+    <string name="label_snow">Sne</string>
+    <string name="label_city">En by</string>
+    <string name="label_building">En bygning</string>
+    <string name="label_street">En gade</string>
+    <string name="label_woods">Skov</string>
+    <string name="label_flower">En blomst</string>
+    <string name="label_sky">Himlen</string>
+    <string name="label_person">En person</string>
+    <string name="label_group">En gruppe mennesker</string>
+    <string name="label_food">Mad</string>
+    <string name="label_dessert">En dessert</string>
+    <string name="label_drink">En drik</string>
+    <string name="label_car">En bil</string>
+    <string name="label_bicycle">En cykel</string>
+    <string name="label_airplane">Et fly</string>
+    <string name="label_boat">En båd</string>
+    <string name="label_bird">En fugl</string>
+    <string name="label_horse">En hest</string>
+    <string name="label_interior">Et rum</string>
+    <string name="label_night">Nat</string>
+    <string name="label_party">En fest</string>
+    <string name="label_sport">En sportsbegivenhed</string>
+    <string name="label_animal">Et dyr</string>
+
+    <!-- Backup to your own server -->
+    <string name="backup_title">Sikkerhedskopiering til din egen server</string>
+    <string name="backup_intro">Kopierer dine billeder og videoer til en server, du selv driver, over en krypteret forbindelse. Intet forlader denne telefon, før du slår sikkerhedskopieringen til, alt går kun til serveren nedenfor, og eikon sletter eller ændrer aldrig noget på den. Adgangskoden eller nøglen opbevares krypteret i Android Keystore.</string>
+    <string name="backup_kind_immich">Immich (også det, Umbrel installerer)</string>
+    <string name="backup_kind_nextcloud">Nextcloud eller en hvilken som helst WebDAV-server</string>
+    <string name="backup_address">Serveradresse (https://…)</string>
+    <string name="backup_username">Loginnavn</string>
+    <string name="backup_folder">Mappe på serveren</string>
+    <string name="backup_api_key">API-nøgle</string>
+    <string name="backup_app_password">App-adgangskode</string>
+    <string name="backup_secret_saved">Gemt. Lad feltet stå tomt for at beholde den</string>
+    <string name="backup_help_immich">I Immich: Kontoindstillinger, API-nøgler, Ny API-nøgle. Den nødvendige tilladelse er asset.upload.</string>
+    <string name="backup_help_nextcloud">I Nextcloud: Personlige indstillinger, Sikkerhed, Enheder og sessioner, opret en ny app-adgangskode. Brug den, ikke din login-adgangskode.</string>
+    <string name="backup_save_test">Gem og test forbindelsen</string>
+    <string name="backup_connected">Forbundet til %1$s.</string>
+    <string name="backup_failed">Kunne ikke oprette forbindelse: %1$s</string>
+    <string name="backup_certificate_declined">Certifikatet blev ikke godkendt, så intet blev sendt, og intet vil blive det.</string>
+    <string name="backup_certificate_title">Denne servers certifikat er ikke fra en udsteder, din telefon stoler på</string>
+    <string name="backup_certificate_body">%1$s fremviste certifikatet nedenfor. Sammenlign dets fingeraftryk med det, din server viser (for eksempel med: openssl x509 -noout -fingerprint -sha256). Stol kun på det, hvis de er identiske: herefter accepteres netop dette ene certifikat, og ingen andre, for denne server.</string>
+    <string name="backup_certificate_subject">Udstedt til: %1$s</string>
+    <string name="backup_certificate_expires">Gyldigt til %1$s</string>
+    <string name="backup_certificate_self_signed">Det er underskrevet af sig selv, som en hjemmeservers certifikat som regel er.</string>
+    <string name="backup_certificate_trust">Stol på dette certifikat</string>
+    <string name="backup_enable">Sikkerhedskopiér mine billeder og videoer</string>
+    <string name="backup_test_first">Gem og test forbindelsen først.</string>
+    <string name="backup_wifi_only">Kun på Wi-Fi</string>
+    <string name="backup_only_charging">Kun under opladning</string>
+    <string name="backup_videos">Medtag videoer</string>
+    <string name="backup_hidden">Medtag skjulte billeder</string>
+    <string name="backup_hidden_note">Skjulte billeder sendes også til din server, hvor de er lige så synlige som alt andet der.</string>
+    <string name="backup_confirm_title">Start sikkerhedskopieringen?</string>
+    <plurals name="backup_confirm_body">
+        <item quantity="one">%1$d billede eller video kopieres til %2$s, lidt ad gangen, når telefonen er på det netværk, du har tilladt. Intet slettes på telefonen eller på serveren.</item>
+        <item quantity="other">%1$d billeder og videoer kopieres til %2$s, lidt ad gangen, når telefonen er på det netværk, du har tilladt. Intet slettes på telefonen eller på serveren.</item>
+    </plurals>
+    <string name="backup_confirm_start">Start</string>
+    <string name="backup_location_note">Android skjuler, hvor billeder er taget, for apps uden tilladelse til billedernes placeringer, så kopierne på din server ville ikke have nogen placering.</string>
+    <string name="backup_progress">Sikkerhedskopieret: %1$,d af %2$,d</string>
+    <plurals name="backup_refused">
+        <item quantity="one">%1$d billede blev afvist af serveren og prøves ikke igen, før du beder om det.</item>
+        <item quantity="other">%1$d billeder blev afvist af serveren og prøves ikke igen, før du beder om det.</item>
+    </plurals>
+    <string name="backup_running">Sikkerhedskopierer nu…</string>
+    <string name="backup_idle">Venter på det rette tidspunkt (det netværk, du har tilladt, batteriet ikke lavt).</string>
+    <string name="backup_last_run">Sidste kørsel %1$s. Sendt: %2$d. Fandtes allerede: %3$d. Afvist: %4$d.</string>
+    <string name="backup_stopped">Den stoppede, fordi %1$s</string>
+    <string name="backup_stop_power_save">batterisparetilstand er slået til.</string>
+    <string name="backup_stop_thermal">telefonen var for varm.</string>
+    <string name="backup_stop_unreachable">serveren ikke kunne nås eller var optaget. Den prøver igen.</string>
+    <string name="backup_stop_unauthorized">serveren ikke accepterede nøglen eller adgangskoden.</string>
+    <string name="backup_stop_untrusted">serverens certifikat ikke er et af dem, du har stolet på.</string>
+    <string name="backup_stop_misconfigured">adressen ikke er rigtig til denne slags server.</string>
+    <string name="backup_stop_refusals">serveren afviste mange filer i træk, hvilket peger på en grænse hos serveren, ikke på billederne.</string>
+    <string name="backup_now">Sikkerhedskopiér nu</string>
+    <string name="backup_retry_refused">Prøv de afviste igen</string>
+
+    <!-- Network consent -->
+    <string name="network_allow">Tillad eikon at bruge internettet</string>
+    <string name="network_allow_note">Slået fra, indtil du slår det til. eikon bruger kun netværket til at kopiere dine billeder til serveren nedenfor, og først efter at du har opsat en og slået sikkerhedskopieringen til. Når dette er slået fra, kan intet forbinde til noget som helst.</string>
+    <string name="settings_privacy_network">eikon kan kun gå online til én ting: den valgfri sikkerhedskopiering af dine billeder til en server, du selv driver. Den er slået fra, indtil du tillader den (Indstillinger, Sikkerhedskopiering) og opsætter serveren. Ingen analyse af brugen, ingen reklamer, ingen konti, ingen Google-tjenester og ingen egen sky: der findes ingen.</string>
+
+    <!-- First-run screens -->
+    <string name="onboarding_intro_title">Dine billeder, på din telefon</string>
+    <string name="onboarding_intro_body">eikon er et billed- og videogalleri til Android. Det viser de billeder, din telefon allerede har, finder dem efter dato, sted, personer eller det, de viser, og redigerer dem uden nogensinde at røre originalerne.</string>
+    <string name="onboarding_point_local">Alt bliver på denne enhed. Ingen konto, ingen analyse af brugen, ingen reklamer.</string>
+    <string name="onboarding_point_independent">Det er ikke afhængigt af noget uden for din telefon: ingen Google-tjenester, ingen sky, ingen tredjepartsservere.</string>
+    <string name="onboarding_point_yours">Hvis du vil have en sikkerhedskopi, går den kun til en server, du selv driver, og kun hvis du opsætter den.</string>
+    <string name="onboarding_next">Næste</string>
+    <string name="onboarding_start">Kom i gang</string>
+    <string name="onboarding_page">Side %1$d af %2$d</string>
+    <string name="onboarding_permissions_title">Hvad eikon beder om, og hvorfor</string>
+    <string name="onboarding_permissions_intro">Kun det første er nødvendigt. Du kan ændre hvert af dem senere i Indstillinger eller i telefonens indstillinger.</string>
+    <string name="onboarding_perm_media_title">Billeder og videoer</string>
+    <string name="onboarding_perm_media_body">Så eikon kan vise dit bibliotek. Det læser filerne, hvor Android allerede opbevarer dem, og kopierer dem ikke nogen steder hen. Hvis du foretrækker det, kan du tillade kun nogle billeder.</string>
+    <string name="onboarding_perm_location_title">Billedernes placeringer (valgfrit)</string>
+    <string name="onboarding_perm_location_body">Android skjuler for apps, hvor et billede er taget, medmindre du tillader det. eikon bruger det til at vise et billedes sted på et offlinekort og til at søge efter sted. Steder beregnes på telefonen: ingen position sendes nogensinde nogen steder hen.</string>
+    <string name="onboarding_perm_network_title">Internet (valgfrit)</string>
+    <string name="onboarding_perm_network_body">Bruges til én ting: at kopiere dine billeder til en server, du selv driver (Immich, Nextcloud), hvis du nogensinde opsætter det. Ellers forbinder eikon aldrig til noget. Det er slået fra, indtil du slår det til her, og du kan slå det fra igen når som helst i Indstillinger.</string>
+    <string name="onboarding_allow">Tillad</string>
+    <string name="onboarding_allowed">Tilladt</string>
+    <string name="onboarding_promise">Intet her afhænger af noget uden for din telefon: ingen Google-tjenester, ingen konti, ingen analyse af brugen. Dine billeder bliver på denne enhed eller, hvis du vælger det, går til din egen server.</string>
+
+    <!-- Support -->
+    <string name="support_title">Støtte</string>
+    <string name="support_body">eikon er gratis, har ingen reklamer og sporer dig ikke. Hvis du kan lide det, kan du sende nogle få sats over Lightning-netværket.</string>
+    <string name="support_button">Doner med Lightning</string>
+    <string name="support_copied">Ingen Lightning-tegnebog fundet — adressen er kopieret: %1$s</string>
+
+    <!-- Analyze now -->
+    <string name="analyze_now_running">Analyserer…</string>
+    <string name="analyze_now_hint">Starter med det samme, kun på denne telefon, også i batterisparetilstand.</string>
+    <string name="analyze_now_hint_off">Slå først mindst ét trin til ovenfor.</string>
+    <string name="analyze_now_hint_paused">Analysen er sat på pause: slå pausen fra for at analysere nu.</string>
+
+    <!-- Pictures from other apps -->
+    <string name="viewer_open_in_library">Åbn i biblioteket</string>
+</resources>

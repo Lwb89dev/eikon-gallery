@@ -184,6 +184,51 @@ class BackupSettingsRepositoryTest {
     }
 
     @Test
+    fun theConsentToTheNetworkSurvivesAChangeOfServer() = runTest(UnconfinedTestDispatcher()) {
+        val repository = repository()
+        repository.update { nextcloud.copy(networkAllowed = true) }
+        repository.update { it.copy(enabled = true) }
+
+        repository.update { it.copy(serverUrl = "https://elsewhere.example.com") }
+
+        val now = repository.current()
+        // A different server switches the backup off, but whether the app may use the network at all is not about any one server.
+        assertFalse(now.enabled)
+        assertTrue(now.networkAllowed)
+    }
+
+    @Test
+    fun theNetworkIsOffUntilTheUserAllowsIt() = runTest(UnconfinedTestDispatcher()) {
+        val repository = repository()
+        assertFalse(repository.current().networkAllowed)
+
+        repository.update { it.copy(networkAllowed = true) }
+        assertTrue(repository.current().networkAllowed)
+
+        repository.update { it.copy(networkAllowed = false) }
+        assertFalse(repository.current().networkAllowed)
+    }
+
+    @Test
+    fun aBackupThatWasAlreadyOnBeforeTheSwitchExistedKeepsItsConsent() = runTest(UnconfinedTestDispatcher()) {
+        val store = PreferenceDataStoreFactory.create(scope = backgroundScope) { File(directory, "v1.preferences_pb") }
+        store.edit { it[androidx.datastore.preferences.core.booleanPreferencesKey("enabled")] = true }
+        val repository = BackupSettingsRepository(store, secrets, dao)
+
+        // Version 1.0.0 had no such switch; someone who had turned the backup on had agreed to it going online.
+        assertTrue(repository.current().networkAllowed)
+    }
+
+    @Test
+    fun aBackupThatWasOffBeforeTheSwitchExistedStaysWithoutConsent() = runTest(UnconfinedTestDispatcher()) {
+        val store = PreferenceDataStoreFactory.create(scope = backgroundScope) { File(directory, "v1-off.preferences_pb") }
+        store.edit { it[androidx.datastore.preferences.core.stringPreferencesKey("kind")] = "IMMICH" }
+        val repository = BackupSettingsRepository(store, secrets, dao)
+
+        assertFalse(repository.current().networkAllowed)
+    }
+
+    @Test
     fun theInstallNameIsMadeOnceAndKept() = runTest(UnconfinedTestDispatcher()) {
         val repository = repository()
         val first = repository.installId()

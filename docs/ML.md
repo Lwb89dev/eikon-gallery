@@ -21,7 +21,7 @@ Why, from what was actually checked when choosing:
 | --- | --- | --- | --- |
 | License | Google ML Kit terms (proprietary, free) | Apache-2.0 (Tesseract 5.5.1) | Apache-2.0 models, MIT runtime |
 | Dependencies pulled in | Google Play services (base, basement, tasks), Firebase components and encoders, Google's data-transport library (`datatransport`, which ML Kit's usage logging is built on), and an init provider and component-discovery service in the manifest | none beyond the AAR; no manifest permissions, services or providers | ONNX Runtime AAR, hand-written pre/post-processing |
-| Fit with "no telemetry, no Google services" | usage-logging code and Google services present (nothing can be sent without INTERNET, but they ship inside the app) | yes | yes |
+| Fit with "no telemetry, no Google services" | usage-logging code and Google services present (they would ship inside the app, and eikon, which has the `INTERNET` permission for the backup since 1.1.0, could no longer point to the operating system for proof that they are silent) | yes | yes |
 | Speed and accuracy on photos | expected faster and better | slower (CPU, seconds per photo), good on documents | expected good; not built |
 | Distribution | Google Maven | JitPack only (pinned; that repository is restricted to this one group) | Maven Central |
 
@@ -123,8 +123,9 @@ photos, RAM and heat are unmeasured.
 - CLIP is weak at counting, at reading text (that is what OCR is for), and at telling apart things that look alike.
 - The vocabulary could be cut to Latin-script tokens to save about 38 MB; not done, so the shipped files are exactly the upstream ones.
 - The ONNX Runtime version is pinned at 1.28.0 on purpose: 1.29 and 1.30 add telemetry classes and the `INTERNET`
-  permission to the Android package. The build fails if `INTERNET` ever appears in the merged manifest, and the
-  int8 models give results that differ by about half a percent between ONNX Runtime versions (the tests' reference
+  permission to the Android package. eikon itself has `INTERNET` since 1.1.0 (for the backup, behind a consent switch), so a
+  permission added by a library would be caught by the build's reviewed list (`verifyNetworkPermissionsRelease`), but the telemetry classes would still be unwanted code. The
+  int8 models also give results that differ by about half a percent between ONNX Runtime versions (the tests' reference
   vectors come from the pinned version).
 - Changing the model means new vectors: `EMBEDDING_MODEL_ID` names the model that made the stored ones and older ones are ignored.
 

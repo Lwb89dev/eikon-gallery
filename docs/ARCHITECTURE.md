@@ -45,7 +45,7 @@ Writes to media (trash, favorite) never go through the index first: they go thro
 | `data.settings` | DataStore-backed settings |
 | `domain` | models, `TimelineLayout`, date labels, EXIF formatting (pure Kotlin) |
 | `domain.edit` | the edit recipe and its text format, the renderer (geometry, colour, detail), auto enhance and the crop tool's rules: pure Kotlin, see [EDITING.md](EDITING.md) |
-| `data.backup` | the backup: settings, the queue over Room, the runner, remote names, the credential's encryption (shared); the Immich and WebDAV clients, TLS pinning and the worker (`backup` build only) |
+| `data.backup` | the backup: settings, the queue over Room, the runner, remote names, the credential's encryption (shared); the Immich and WebDAV clients, TLS pinning and the worker |
 | `data.edit` | edits by photo, the copy/paste clipboard, decoding for editing and "Save a copy" |
 | `feature.*` | screens and view models |
 
@@ -62,10 +62,15 @@ Writes to media (trash, favorite) never go through the index first: they go thro
 - Capture time is `datetaken`, falling back to `date_modified`, then `date_added`, because many files
   (downloads, screenshots) have no capture date.
 
-## Two builds
+## One build, and the network behind a switch
 
-`standard` (no network permission; checked by the build) and `backup` (the same plus the backup to a server you run), both built from the same sources: `app/src/main` is everything shared, `app/src/backup` the HTTP clients, the worker, the settings
-screen and the network manifest, `app/src/standard` a stub and a note in Settings. The backup's logic that needs no network (settings, queue, runner, names, encryption of the credential) is in `main` and is tested in both; see [BACKUP.md](BACKUP.md).
+There is one APK. It holds the `INTERNET` permission for the backup to a server the user runs, and **`BackupSettings.networkAllowed` (off by default) gates every connection**: `active` (whether anything is scheduled), `BackupWorker`, `BackupRunner` and the creation of a target (`BackupException.NetworkOff`) all check it, each with a test. The
+manifest is checked at build time by `verifyNetworkPermissionsRelease` (INTERNET present, cleartext off, every permission on a reviewed list). Earlier versions had two flavors (`standard` without the permission, `backup` with it); they were merged in 1.1.0, so all backup code is in `app/src/main` and the tests are in one folder. See [BACKUP.md](BACKUP.md) and [PRIVACY.md](PRIVACY.md).
+
+## First run, and opening from other apps
+
+`OnboardingScreen` (three pages: what eikon is, what each permission is for with Allow buttons, and the promise) is shown until `SettingsRepository.onboardingCompleted` is set, and asks nothing the user cannot refuse except access to photos, which the app needs. `MainActivity` also answers `VIEW` and the camera's review
+actions (`com.android.camera.action.REVIEW`, `android.provider.action.REVIEW`): a photo that is in the library opens in the library's own viewer at its place (`LibraryViewModel.positionOf`, the same ordering as the grid), one that is not is shown on its own with a button to open it in the library (`ExternalImage.kt`, `OpenRequests`). An app cannot be made to look like the "official" one to the camera; eikon only answers what any gallery may answer.
 
 ## The database is encrypted
 
@@ -110,7 +115,7 @@ served straight from the index.
 | `media_caption` (FTS4, `rowid` = media id; `caption`) | the captions the user wrote, searchable, never written into a file |
 | `metadata_original` (`mediaId`, `field`, `value`, `savedAt`) | what a photo's file said about its date or location before eikon first changed it, so the change can be undone |
 
-**Backup** (`backup_item`: `mediaId`, `status`, `attempts`, `modifiedAt`, `sizeBytes`, `checksum`, `updatedAt`): what was sent to the server of the backup, per photo. Cleared when the server changes or photo access is revoked. Only used by the `backup` build.
+**Backup** (`backup_item`: `mediaId`, `status`, `attempts`, `modifiedAt`, `sizeBytes`, `checksum`, `updatedAt`): what was sent to the server of the backup, per photo. Cleared when the server changes or photo access is revoked. Used only by the backup.
 
 **Edits** (`edit_recipe`: `mediaId`, `recipe` text, `updatedAt`, `baseModifiedAt`): one recipe per edited photo. User data, kept when the media cache is cleared, because it cannot be rebuilt. The photo's file is never changed;
 see [EDITING.md](EDITING.md).

@@ -14,7 +14,7 @@
 
     <!-- Permessi -->
     <string name="permission_title">Le tue foto restano sul tuo dispositivo</string>
-    <string name="permission_body">eikon ha bisogno di accedere a foto e video per mostrarli. Nulla viene caricato: l\'app non ha alcun permesso per internet.</string>
+    <string name="permission_body">eikon ha bisogno di accedere a foto e video per mostrarli. Restano sul tuo dispositivo: nulla viene caricato a meno che tu non configuri un backup su un server tuo.</string>
     <string name="permission_grant">Consenti l\'accesso</string>
     <string name="permission_denied">L\'accesso è stato negato. Puoi consentirlo dalle impostazioni di sistema.</string>
     <string name="permission_open_settings">Apri impostazioni</string>
@@ -252,7 +252,7 @@
     <string name="search_clear">Cancella ricerca</string>
     <string name="search_no_results">Nessuna foto corrisponde</string>
     <string name="search_hint_title">Cerca nella tua libreria</string>
-    <string name="search_hint_body">Prova con una data (\"agosto 2025\", \"ieri\"), un luogo (\"Roma\", \"Toscana\"), una parola che compare in una foto o nel suo nome file, o un genere (\"video\", \"screenshot\", \"preferiti\").\n\nLa ricerca non riconosce ancora cosa mostra un\'immagine, solo ciò che vi è scritto.</string>
+    <string name="search_hint_body">Prova con una data (\"agosto 2025\", \"ieri\"), un luogo (\"Roma\", \"Toscana\"), una parola che compare in una foto o nel suo nome file, o un genere (\"video\", \"screenshot\", \"preferiti\").\n\nDate e generi sono compresi in italiano e in inglese. Luoghi, testo nelle foto e ciò che mostrano si trovano dopo che l\'analisi è stata eseguita (Impostazioni, Analisi).</string>
     <string name="search_analysis_off">La ricerca per luogo, per testo nelle foto e per ciò che mostrano è disattivata. Puoi attivarla in Impostazioni, Analisi.</string>
     <string name="search_analysis_note">Analisi delle foto ancora in corso in background (%1$d%%). Alcuni risultati potrebbero mancare.</string>
 
@@ -294,6 +294,7 @@
     <string name="person_add_name">Aggiungi un nome</string>
     <string name="person_rename">Dai un nome a questa persona</string>
     <string name="person_name_hint">Nome</string>
+    <string name="person_same_name_note">Le persone con lo stesso nome vengono unite in una sola.</string>
     <string name="person_favorite">Segna come preferita</string>
     <string name="person_unfavorite">Rimuovi dai preferiti</string>
     <string name="person_hide">Nascondi questa persona</string>
@@ -579,4 +580,103 @@
     <string name="label_party">Una festa</string>
     <string name="label_sport">Un evento sportivo</string>
     <string name="label_animal">Un animale</string>
+
+    <!-- Backup to your own server -->
+    <string name="backup_title">Backup sul tuo server</string>
+    <string name="backup_intro">Copia foto e video su un server che gestisci tu, con una connessione cifrata. Niente lascia questo telefono finché non attivi il backup, va solo al server indicato qui sotto, e eikon non cancella né modifica mai nulla su di esso. La password o la chiave è conservata cifrata, nel Keystore di Android.</string>
+    <string name="backup_kind_immich">Immich (è anche ciò che installa Umbrel)</string>
+    <string name="backup_kind_nextcloud">Nextcloud, o qualunque server WebDAV</string>
+    <string name="backup_address">Indirizzo del server (https://…)</string>
+    <string name="backup_username">Nome di accesso</string>
+    <string name="backup_folder">Cartella sul server</string>
+    <string name="backup_api_key">Chiave API</string>
+    <string name="backup_app_password">Password per app</string>
+    <string name="backup_secret_saved">Salvata. Lascia vuoto per tenerla</string>
+    <string name="backup_help_immich">In Immich: Impostazioni account, Chiavi API, Nuova chiave API. Il permesso necessario è asset.upload.</string>
+    <string name="backup_help_nextcloud">In Nextcloud: Impostazioni personali, Sicurezza, Dispositivi e sessioni, crea una nuova password per app. Usa quella, non la password di accesso.</string>
+    <string name="backup_save_test">Salva e prova la connessione</string>
+    <string name="backup_connected">Connesso a %1$s.</string>
+    <string name="backup_failed">Impossibile connettersi: %1$s</string>
+    <string name="backup_certificate_declined">Il certificato non è stato accettato, quindi non è stato inviato nulla e non verrà inviato.</string>
+    <string name="backup_certificate_title">Il certificato di questo server non viene da un\'autorità di cui il telefono si fida</string>
+    <string name="backup_certificate_body">%1$s ha presentato il certificato qui sotto. Confronta la sua impronta con quella mostrata dal tuo server (per esempio con: openssl x509 -noout -fingerprint -sha256). Accettalo solo se sono identiche: da quel momento questo certificato, e nessun altro, sarà accettato per questo server.</string>
+    <string name="backup_certificate_subject">Rilasciato a: %1$s</string>
+    <string name="backup_certificate_expires">Valido fino al %1$s</string>
+    <string name="backup_certificate_self_signed">È firmato da sé stesso, come di solito il certificato di un server casalingo.</string>
+    <string name="backup_certificate_trust">Accetta questo certificato</string>
+    <string name="backup_enable">Fai il backup di foto e video</string>
+    <string name="backup_test_first">Prima salva e prova la connessione.</string>
+    <string name="backup_wifi_only">Solo con il Wi-Fi</string>
+    <string name="backup_only_charging">Solo in carica</string>
+    <string name="backup_videos">Includi i video</string>
+    <string name="backup_hidden">Includi le foto nascoste</string>
+    <string name="backup_hidden_note">Anche le foto nascoste saranno inviate al tuo server, dove sono visibili come tutto il resto.</string>
+    <string name="backup_confirm_title">Avviare il backup?</string>
+    <plurals name="backup_confirm_body">
+        <item quantity="one">%1$d foto o video sarà copiato su %2$s, un po\' alla volta, quando il telefono è sulla rete che hai consentito. Nulla sul telefono né sul server viene cancellato.</item>
+        <item quantity="many">%1$d foto e video saranno copiati su %2$s, un po\' alla volta, quando il telefono è sulla rete che hai consentito. Nulla sul telefono né sul server viene cancellato.</item>
+        <item quantity="other">%1$d foto e video saranno copiati su %2$s, un po\' alla volta, quando il telefono è sulla rete che hai consentito. Nulla sul telefono né sul server viene cancellato.</item>
+    </plurals>
+    <string name="backup_confirm_start">Avvia</string>
+    <string name="backup_location_note">Android nasconde dove sono state scattate le foto alle app senza il permesso sulla posizione delle foto, quindi le copie sul tuo server non avrebbero la posizione.</string>
+    <string name="backup_progress">Salvate: %1$,d di %2$,d</string>
+    <plurals name="backup_refused">
+        <item quantity="one">%1$d foto è stata rifiutata dal server e non verrà riprovata finché non lo chiedi.</item>
+        <item quantity="many">%1$d foto sono state rifiutate dal server e non verranno riprovate finché non lo chiedi.</item>
+        <item quantity="other">%1$d foto sono state rifiutate dal server e non verranno riprovate finché non lo chiedi.</item>
+    </plurals>
+    <string name="backup_running">Backup in corso…</string>
+    <string name="backup_idle">In attesa del momento giusto (la rete che hai consentito, batteria non scarica).</string>
+    <string name="backup_last_run">Ultima esecuzione %1$s. Inviate: %2$d. Già presenti: %3$d. Rifiutate: %4$d.</string>
+    <string name="backup_stopped">Si è fermato perché %1$s</string>
+    <string name="backup_stop_power_save">il Risparmio energetico è attivo.</string>
+    <string name="backup_stop_thermal">il telefono era troppo caldo.</string>
+    <string name="backup_stop_unreachable">il server non era raggiungibile o era occupato. Riproverà.</string>
+    <string name="backup_stop_unauthorized">il server non ha accettato la chiave o la password.</string>
+    <string name="backup_stop_untrusted">il certificato del server non è uno di quelli che hai accettato.</string>
+    <string name="backup_stop_misconfigured">l\'indirizzo non è giusto per questo tipo di server.</string>
+    <string name="backup_stop_refusals">il server ha rifiutato molti file di seguito, il che indica un limite del server, non un problema delle foto.</string>
+    <string name="backup_now">Esegui il backup ora</string>
+    <string name="backup_retry_refused">Riprova quelle rifiutate</string>
+
+    <!-- Consenso alla rete -->
+    <string name="network_allow">Consenti a eikon di usare internet</string>
+    <string name="network_allow_note">Spento finché non lo attivi. eikon usa la rete solo per copiare le tue foto sul server qui sotto, e solo dopo che ne hai configurato uno e attivato il backup. Con questo spento, niente può connettersi da nessuna parte.</string>
+    <string name="settings_privacy_network">eikon può andare online per una cosa sola: il backup facoltativo delle tue foto su un server che gestisci tu. È spento finché non lo consenti (Impostazioni, Backup) e configuri il server. Niente analisi d\'uso, niente pubblicità, niente account, niente servizi Google e nessun nostro cloud: non ne esiste uno.</string>
+
+    <!-- Schermate del primo avvio -->
+    <string name="onboarding_intro_title">Le tue foto, sul tuo telefono</string>
+    <string name="onboarding_intro_body">eikon è una galleria di foto e video per Android. Mostra le immagini che il telefono già conserva, le trova per data, luogo, persone o ciò che mostrano, e le modifica senza mai toccare gli originali.</string>
+    <string name="onboarding_point_local">Tutto resta su questo dispositivo. Nessun account, nessuna analisi d\'uso, nessuna pubblicità.</string>
+    <string name="onboarding_point_independent">Non si appoggia a nulla fuori dal telefono: niente servizi Google, niente cloud, niente server di terzi.</string>
+    <string name="onboarding_point_yours">Se vuoi un backup, va solo su un server che gestisci tu, e solo se lo configuri.</string>
+    <string name="onboarding_next">Avanti</string>
+    <string name="onboarding_start">Inizia</string>
+    <string name="onboarding_page">Pagina %1$d di %2$d</string>
+    <string name="onboarding_permissions_title">Cosa chiede eikon, e perché</string>
+    <string name="onboarding_permissions_intro">Serve solo il primo. Puoi cambiarli tutti più tardi, nelle Impostazioni o nelle impostazioni del telefono.</string>
+    <string name="onboarding_perm_media_title">Foto e video</string>
+    <string name="onboarding_perm_media_body">Per poter mostrare la tua libreria. eikon legge i file dove Android li tiene già e non li copia da nessuna parte. Se preferisci puoi consentire solo alcune foto.</string>
+    <string name="onboarding_perm_location_title">Posizione delle foto (facoltativa)</string>
+    <string name="onboarding_perm_location_body">Android nasconde alle app dove è stata scattata una foto, a meno che tu non lo consenta. eikon la usa per mostrare il luogo di una foto su una mappa offline e per cercare per luogo. I luoghi sono calcolati sul telefono: nessuna posizione viene mai inviata da nessuna parte.</string>
+    <string name="onboarding_perm_network_title">Internet (facoltativo)</string>
+    <string name="onboarding_perm_network_body">Serve per una cosa sola: copiare le tue foto su un server che gestisci tu (Immich, Nextcloud), se mai lo configurerai. Altrimenti eikon non si connette a nulla. È spento finché non lo attivi qui, e puoi spegnerlo di nuovo quando vuoi nelle Impostazioni.</string>
+    <string name="onboarding_allow">Consenti</string>
+    <string name="onboarding_allowed">Consentito</string>
+    <string name="onboarding_promise">Qui niente dipende da qualcosa fuori dal tuo telefono: niente servizi Google, niente account, niente analisi d\'uso. Le tue foto restano su questo dispositivo o, se lo scegli, vanno sul tuo server.</string>
+
+    <!-- Sostegno -->
+    <string name="support_title">Sostegno</string>
+    <string name="support_body">eikon è gratuita, senza pubblicità e non ti traccia. Se ti piace, puoi inviare qualche sat con la Lightning Network.</string>
+    <string name="support_button">Dona con Lightning</string>
+    <string name="support_copied">Nessun wallet Lightning trovato — indirizzo copiato: %1$s</string>
+
+    <!-- Analizza ora -->
+    <string name="analyze_now_running">Analisi in corso…</string>
+    <string name="analyze_now_hint">Parte subito, solo su questo telefono, anche con il Risparmio energetico.</string>
+    <string name="analyze_now_hint_off">Prima attiva almeno un passaggio qui sopra.</string>
+    <string name="analyze_now_hint_paused">L\'analisi è in pausa: disattiva la pausa per analizzare ora.</string>
+
+    <!-- Immagini da altre app -->
+    <string name="viewer_open_in_library">Apri nella libreria</string>
 </resources>

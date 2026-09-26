@@ -1,0 +1,659 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Library -->
+    <string name="library_title">Kogu</string>
+    <string name="today">Täna</string>
+    <string name="yesterday">Eile</string>
+    <string name="empty_library">Fotosid ega videoid veel pole</string>
+    <string name="empty_filter">Miski ei vasta sellele filtrile</string>
+    <string name="empty_filter_clear">Näita kõike</string>
+    <string name="sync_progress">Kogu laadimine: %1$,d / %2$,d</string>
+    <string name="sync_failed">Kogu värskendamine ebaõnnestus</string>
+    <string name="sync_retry">Proovi uuesti</string>
+    <string name="scrubber_description">Kogus kerimine kuupäeva järgi</string>
+
+    <!-- Permissions -->
+    <string name="permission_title">Sinu fotod jäävad sinu seadmesse</string>
+    <string name="permission_body">eikon vajab juurdepääsu sinu fotodele ja videotele, et neid kuvada. Need jäävad sinu seadmesse: midagi ei laadita üles, kui sa just ei seadista varundamist oma serverisse.</string>
+    <string name="permission_grant">Luba juurdepääs</string>
+    <string name="permission_denied">Juurdepääs keelati. Saad selle lubada süsteemi seadetes.</string>
+    <string name="permission_open_settings">Ava seaded</string>
+    <string name="limited_banner">Kuvatakse ainult sinu valitud fotod</string>
+    <string name="limited_select_more">Vali rohkem</string>
+    <string name="limited_allow_all">Luba kõik</string>
+
+    <!-- Menus and filters -->
+    <string name="menu_filter">Filtreeri</string>
+    <string name="menu_sort">Sordi</string>
+    <string name="menu_settings">Seaded</string>
+    <string name="menu_more">Rohkem valikuid</string>
+    <string name="filter_all">Kõik</string>
+    <string name="filter_photos">Fotod</string>
+    <string name="filter_videos">Videod</string>
+    <string name="filter_favorites">Lemmikud</string>
+    <string name="filter_screenshots">Ekraanipildid</string>
+    <string name="filter_screen_recordings">Ekraanisalvestused</string>
+    <string name="filter_panoramas">Panoraamid</string>
+    <string name="filter_raw">RAW</string>
+    <string name="filter_clear">Tühjenda filter</string>
+    <string name="sort_by_date_taken">Pildistamise kuupäev</string>
+    <string name="sort_by_date_added">Lisamise kuupäev</string>
+    <string name="sort_newest_first">Uuemad enne</string>
+    <string name="sort_oldest_first">Vanemad enne</string>
+
+    <!-- Selection and actions -->
+    <plurals name="selected_count">
+        <item quantity="one">%d valitud</item>
+        <item quantity="other">%d valitud</item>
+    </plurals>
+    <string name="action_share">Jaga</string>
+    <string name="action_favorite">Lisa lemmikutesse</string>
+    <string name="action_unfavorite">Eemalda lemmikutest</string>
+    <string name="action_delete">Kustuta</string>
+    <string name="action_info">Teave</string>
+    <string name="action_back">Tagasi</string>
+    <string name="action_clear_selection">Tühista valik</string>
+    <string name="action_select">Vali</string>
+    <string name="action_failed">Midagi läks valesti</string>
+    <plurals name="moved_to_trash">
+        <item quantity="one">%d üksus teisaldati prügikasti. Android säilitab seda 30 päeva.</item>
+        <item quantity="other">%d üksust teisaldati prügikasti. Android säilitab neid 30 päeva.</item>
+    </plurals>
+
+    <!-- Accessibility -->
+    <string name="cd_photo">Foto, %1$s</string>
+    <string name="cd_video">Video, %1$s, %2$s</string>
+    <string name="cd_edited_badge">Muudetud</string>
+    <string name="cd_favorite_badge">Lemmik</string>
+    <string name="viewer_position">%1$d / %2$d</string>
+
+    <!-- Video -->
+    <string name="video_play">Esita</string>
+    <string name="video_pause">Peata</string>
+    <string name="video_mute">Vaigista</string>
+    <string name="video_unmute">Tühista vaigistus</string>
+    <string name="video_seek">Keri</string>
+
+    <!-- Info panel -->
+    <string name="info_title">Teave</string>
+    <string name="info_loading">Üksikasjade lugemine…</string>
+    <string name="info_error">Selle faili üksikasju ei õnnestunud lugeda</string>
+    <string name="info_section_file">Fail</string>
+    <string name="info_section_camera">Kaamera</string>
+    <string name="info_section_video">Video</string>
+    <string name="info_name">Nimi</string>
+    <string name="info_type">Tüüp</string>
+    <string name="info_folder">Kaust</string>
+    <string name="info_resolution">Eraldusvõime</string>
+    <string name="info_megapixels">Megapiksleid</string>
+    <string name="info_size">Suurus</string>
+    <string name="info_date">Kuupäev</string>
+    <string name="info_modified">Muudetud</string>
+    <string name="info_color_profile">Värviprofiil</string>
+    <string name="info_location">Asukoht</string>
+    <string name="info_location_none">Sellesse faili pole asukohta salvestatud</string>
+    <string name="info_location_hidden">Android peidab fotode asukohad rakenduste eest, kuni sa seda lubad</string>
+    <string name="info_location_allow">Luba</string>
+    <string name="info_location_open">Ava kaardirakenduses</string>
+    <string name="info_camera">Seade</string>
+    <string name="info_lens">Objektiiv</string>
+    <string name="info_focal_length">Fookuskaugus</string>
+    <string name="info_aperture">Ava</string>
+    <string name="info_shutter">Säriaeg</string>
+    <string name="info_iso">Tundlikkus</string>
+    <string name="info_exposure_bias">Särikorrektsioon</string>
+    <string name="info_flash">Välk</string>
+    <string name="info_flash_fired">Sähvatas</string>
+    <string name="info_flash_off">Ei sähvatanud</string>
+    <string name="info_orientation">Suund</string>
+    <string name="info_software">Tarkvara</string>
+    <string name="info_duration">Kestus</string>
+    <string name="info_frame_rate">Kaadrisagedus</string>
+    <string name="info_video_codec">Videokodek</string>
+    <string name="info_audio_codec">Helikodek</string>
+    <string name="info_bitrate">Bitikiirus</string>
+    <string name="info_dynamic_range">Dünaamiline ulatus</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Seaded</string>
+    <string name="settings_appearance">Välimus</string>
+    <string name="theme_system">Järgi süsteemi</string>
+    <string name="theme_light">Hele</string>
+    <string name="theme_dark">Tume</string>
+    <string name="settings_privacy">Privaatsus</string>
+    <string name="settings_privacy_body">eikon töötab sinu seadmes. Sellel pole kontot ega kasutusanalüütikat ning selle andmed on Androidi varukoopiatest välja jäetud.\n\nSinu fotosid ei kopeerita kunagi: eikon peab kohalikku registrit failide andmetega (nimi, kuupäev, suurus, kaust), et kogu avaneks kohe. Rakenduse kustutamine kustutab ka registri.</string>
+    <string name="settings_storage_encrypted">Kogu andmebaas (register, albumid, muudatused, pildiallkirjad ja analüüsi leiud) on sellel telefonil krüptitud AES-256-ga. Selle võtit hoiab Android Keystore.</string>
+    <string name="settings_storage_not_encrypted">Kogu andmebaasi ei õnnestunud krüptida (%1$s), seega on see endiselt salvestatud krüptimata. eikon proovib uuesti iga käivitamisel.</string>
+    <string name="settings_storage_reset_title">Kogu andmebaas alustati uuesti</string>
+    <string name="settings_storage_reset">Võti, mis kaitses kogu andmebaasi, läks kaotsi, seega pidi eikon looma uue. Sinu lisatud albumid, muudatused, pildiallkirjad ja nimed on kadunud. Sinu fotod on puutumata ning analüüs käivitub uuesti.</string>
+    <string name="settings_storage_reset_ok">Selge</string>
+    <string name="settings_about">Teave</string>
+    <string name="settings_licenses">Avatud lähtekoodiga litsentsid</string>
+    <string name="licenses_title">Avatud lähtekoodiga litsentsid</string>
+    <string name="settings_version">Versioon %1$s</string>
+
+    <!-- Navigation and collections -->
+    <string name="nav_library">Kogu</string>
+    <string name="nav_search">Otsing</string>
+    <string name="nav_collections">Kollektsioonid</string>
+    <string name="collections_title">Kollektsioonid</string>
+    <string name="section_people">Inimesed</string>
+    <string name="section_albums">Albumid</string>
+    <string name="section_personal">Isiklik</string>
+    <string name="section_folders">Seadme kaustad</string>
+    <string name="collection_favorites">Lemmikud</string>
+    <string name="collection_recent">Hiljuti lisatud</string>
+    <string name="collection_videos">Videod</string>
+    <string name="collection_screenshots">Ekraanipildid</string>
+    <string name="collection_screen_recordings">Ekraanisalvestused</string>
+    <string name="collection_panoramas">Panoraamid</string>
+    <string name="collection_raw">RAW</string>
+    <string name="collection_trash">Hiljuti kustutatud</string>
+    <string name="collection_hidden">Peidetud</string>
+    <plurals name="items_count">
+        <item quantity="one">%d üksus</item>
+        <item quantity="other">%d üksust</item>
+    </plurals>
+    <string name="empty_album">See album on tühi. Vali kogus fotod ja vali „Lisa albumisse”.</string>
+    <string name="empty_hidden">Midagi pole peidetud</string>
+    <string name="empty_collection">Siin pole veel midagi</string>
+
+    <!-- Albums -->
+    <string name="album_new">Uus album</string>
+    <string name="album_name_hint">Albumi nimi</string>
+    <string name="album_create">Loo</string>
+    <string name="album_rename">Nimeta ümber</string>
+    <string name="album_delete">Kustuta album</string>
+    <string name="album_delete_title">Kas kustutada see album?</string>
+    <string name="album_delete_message">Kustutatakse ainult album. Selles olevad fotod ja videod jäävad sinna, kus nad on.</string>
+    <string name="album_move_earlier">Liiguta varasemaks</string>
+    <string name="album_move_later">Liiguta hilisemaks</string>
+    <string name="action_add_to_album">Lisa albumisse</string>
+    <string name="action_remove_from_album">Eemalda albumist</string>
+    <string name="action_hide">Peida</string>
+    <string name="action_unhide">Näita</string>
+    <string name="action_cancel">Tühista</string>
+    <string name="action_save">Salvesta</string>
+    <plurals name="added_to_album">
+        <item quantity="one">%1$d üksus lisati albumisse „%2$s”</item>
+        <item quantity="other">%1$d üksust lisati albumisse „%2$s”</item>
+    </plurals>
+    <plurals name="removed_from_album">
+        <item quantity="one">%d üksus eemaldati albumist</item>
+        <item quantity="other">%d üksust eemaldati albumist</item>
+    </plurals>
+    <plurals name="moved_to_hidden">
+        <item quantity="one">%d üksus peideti. Leiad selle kohast Kollektsioonid, Peidetud.</item>
+        <item quantity="other">%d üksust peideti. Leiad need kohast Kollektsioonid, Peidetud.</item>
+    </plurals>
+    <plurals name="unhidden">
+        <item quantity="one">%d üksus on jälle nähtav</item>
+        <item quantity="other">%d üksust on jälle nähtavad</item>
+    </plurals>
+
+    <!-- Filters -->
+    <string name="filter_type_title">Tüüp</string>
+    <string name="filter_kind_title">Liik</string>
+    <string name="filter_any">Mistahes</string>
+    <string name="filter_favorites_only">Ainult lemmikud</string>
+    <string name="filter_edited">Muudetud</string>
+    <string name="share_preparing">Muudetud fotode ettevalmistamine jagamiseks</string>
+    <string name="filter_edited_only">Ainult muudetud</string>
+    <string name="filter_clear_all">Tühjenda filtrid</string>
+
+    <!-- Locks -->
+    <string name="locked_title">Lukustatud</string>
+    <string name="locked_body">Selle avamiseks kasuta sõrmejälge, nägu või ekraanilukku.</string>
+    <string name="locked_unlock">Ava lukk</string>
+    <string name="auth_subtitle">Kinnita, et see oled sina</string>
+    <string name="auth_title_hidden">Ava „Peidetud”</string>
+    <string name="auth_title_trash">Ava „Hiljuti kustutatud”</string>
+    <string name="auth_unavailable">Autentimine pole praegu saadaval. Proovi hetke pärast uuesti.</string>
+    <string name="no_device_lock_notice">Sellel telefonil pole ekraanilukku, seega pole „Peidetud” kaitstud. Määra süsteemi seadetes lukk.</string>
+
+    <!-- Recently deleted -->
+    <string name="trash_info">Üksused kustutatakse jäädavalt umbes 30 päeva pärast.</string>
+    <string name="trash_empty">Hiljuti pole midagi kustutatud</string>
+    <string name="trash_restore">Taasta</string>
+    <string name="trash_delete_forever">Kustuta jäädavalt</string>
+    <plurals name="days_left_short">
+        <item quantity="one">%d p</item>
+        <item quantity="other">%d p</item>
+    </plurals>
+    <plurals name="trash_restored">
+        <item quantity="one">%d üksus taastati</item>
+        <item quantity="other">%d üksust taastati</item>
+    </plurals>
+    <plurals name="trash_deleted">
+        <item quantity="one">%d üksus kustutati jäädavalt</item>
+        <item quantity="other">%d üksust kustutati jäädavalt</item>
+    </plurals>
+
+    <!-- Settings: security -->
+    <string name="settings_security">Turvalisus</string>
+    <string name="setting_lock_hidden">Nõua autentimist „Peidetud” avamiseks</string>
+    <string name="setting_lock_trash">Nõua autentimist „Hiljuti kustutatud” avamiseks</string>
+    <string name="setting_show_hidden">Näita „Peidetud” kollektsioonides</string>
+    <string name="setting_secure_screens">Peida eikon hiljutiste rakenduste seast ja blokeeri ekraanipildid</string>
+    <string name="settings_security_body">Peidetud üksused jäetakse kogust, kollektsioonidest ja otsingust välja ning „Peidetud” avamiseks küsitakse sinu sõrmejälge, nägu või ekraanilukku. Faile endid ei krüptita ja need jäävad telefoni tavalisse mällu, kus fotodele juurdepääsuga rakendused näevad neid endiselt.</string>
+
+    <!-- Search -->
+    <string name="search_placeholder">Kuupäev, koht, tekst, failinimi</string>
+    <string name="search_clear">Tühjenda otsing</string>
+    <string name="search_no_results">Ükski foto ei vasta</string>
+    <string name="search_hint_title">Otsi oma kogust</string>
+    <string name="search_hint_body">Proovi kuupäeva („August 2025”, „yesterday”), kohta („Rome”, „Tuscany”), sõna, mis esineb fotol või selle failinimes, või liiki („videos”, „screenshots”, „favorites”).\n\nKuupäevi ja liike mõistetakse inglise ja itaalia keeles. Kohad, fotodel olev tekst ja see, mida need kujutavad, leitakse pärast analüüsi käivitamist (Seaded, Analüüs).</string>
+    <string name="search_analysis_off">Otsing koha, fotodel oleva teksti ja kujutatu järgi on välja lülitatud. Saad selle sisse lülitada kohas Seaded, Analüüs.</string>
+    <string name="search_analysis_note">Fotosid analüüsitakse taustal veel (%1$d %%). Mõned tulemused võivad puududa.</string>
+
+    <!-- Settings: analysis -->
+    <string name="settings_analysis">Analüüs</string>
+    <string name="analysis_places_progress">Kohad: %1$,d / %2$,d</string>
+    <string name="analysis_semantic_progress">Mida fotod kujutavad: %1$,d / %2$,d</string>
+    <string name="analysis_semantic_unavailable">Mudelit, mis tunneb ära, mida fotod kujutavad, ei õnnestunud laadida, seega see samm ei tööta.</string>
+    <string name="search_semantic_unavailable">Otsing selle järgi, mida fotod kujutavad, pole praegu saadaval (mudelit ei õnnestunud laadida). Muud tulemused töötavad endiselt.</string>
+    <string name="analysis_people_progress">Inimesed: %1$,d / %2$,d</string>
+    <string name="analysis_people_unavailable">Nägusid leidvaid mudeleid ei õnnestunud laadida, seega see samm ei tööta.</string>
+    <string name="analysis_duplicates_progress">Duplikaadid: %1$,d / %2$,d</string>
+    <string name="analysis_text_progress">Tekst fotodel: %1$,d / %2$,d</string>
+    <string name="analysis_running">Analüüsimine käib…</string>
+    <string name="analysis_idle">Ootan õiget hetke (aku pole tühi, akusäästurežiim on väljas ja vajadusel laadimine, kui sa selle valisid)</string>
+    <string name="analysis_up_to_date">Kõik on analüüsitud</string>
+    <string name="setting_pause_analysis">Peata analüüs</string>
+    <string name="setting_only_charging">Ainult laadimise ajal</string>
+    <string name="setting_analyze_places">Leia fotosid koha järgi</string>
+    <string name="setting_analyze_semantic">Leia fotosid selle järgi, mida need kujutavad</string>
+    <string name="setting_analyze_people">Leia fotodelt inimesi</string>
+    <string name="setting_analyze_people_note">Nägusid leitakse ja võrreldakse ainult sellel telefonil. Midagi näo kohta ei lahku sellest kunagi ja eikon ei proovi kunagi kedagi ära tunda: ta rühmitab ainult üksteisega sarnaseid nägusid ning rühmadele paned nimed sina.</string>
+    <string name="setting_analyze_duplicates">Leia dubleerivaid fotosid</string>
+    <string name="setting_analyze_text">Leia fotodelt teksti</string>
+    <string name="analysis_location_permission">Android peidab rakenduste eest, kus fotod on tehtud, kuni sa seda lubad.</string>
+    <string name="analysis_allow_locations">Luba juurdepääs fotode asukohtadele</string>
+    <string name="analyze_now">Analüüsi kohe</string>
+    <string name="settings_analysis_body">Analüüs töötab ainult sinu telefonis, taustal, ja peatub, kui aku on tühi, akusäästurežiim on sees või telefon läheb soojaks („Analüüsi kohe” jätkub ka akusäästurežiimis). See salvestab iga foto koha (määratud võrguühenduseta, ühtegi asukohta ei saadeta kunagi kuhugi), numbrilise kirjelduse sellest, mida foto kujutab (et saaksid otsida näiteks „koer” või „päikeseloojang”; see pole pildiallkiri ja seda ei saa tagasi pildiks lugeda) ning kogu teksti, mida see fotol loeb, et Otsing need leiaks. Kui lülitad sisse inimesed, salvestab see ka iga näo asukoha fotol ja selle numbrilise kirjelduse, ainult üksteisega sarnaste nägude rühmitamiseks. Kui lülitad sisse duplikaadid, salvestab see iga foto ja sama suurusega failide lühikese sõrmejälje, ainult koopiate leidmiseks. Fotode kujutatu äratundmine ja teksti lugemine on aeglased ning koormavad protsessorit tugevalt, mistõttu analüüs ootab vaikimisi laadimist.</string>
+
+    <!-- Info panel: derived data -->
+    <string name="info_place">Lähim koht</string>
+    <string name="info_text_found">Tekst sellel fotol</string>
+    <string name="info_text_copy">Kopeeri tekst</string>
+
+    <!-- People -->
+    <string name="collection_people">Inimesed</string>
+    <string name="people_title">Inimesed</string>
+    <string name="person_unnamed">Nimetu inimene</string>
+    <string name="person_add_name">Lisa nimi</string>
+    <string name="person_rename">Pane sellele inimesele nimi</string>
+    <string name="person_name_hint">Nimi</string>
+    <string name="person_same_name_note">Sama nimega inimesed liidetakse üheks.</string>
+    <string name="person_favorite">Märgi lemmikuks</string>
+    <string name="person_unfavorite">Eemalda lemmikutest</string>
+    <string name="person_hide">Peida see inimene</string>
+    <string name="person_unhide">Näita seda inimest</string>
+    <string name="person_merge">Ühenda teise inimesega…</string>
+    <string name="person_merge_title">Ühenda inimesega</string>
+    <string name="person_merge_empty">Pole kedagi teist, kellega ühendada.</string>
+    <string name="person_not_this">Pole see inimene</string>
+    <string name="person_remove_from_people">Pole nägu</string>
+    <string name="people_show_hidden">Näita peidetud inimesi (%1$d)</string>
+    <string name="people_hide_hidden">Peida peidetud inimesed</string>
+    <string name="people_empty_off">Inimesed on välja lülitatud. Lülita kohas Seaded, Analüüs sisse „Leia fotodelt inimesi”, siis rühmitab eikon leitud näod. Kõik jääb sellesse telefoni.</string>
+    <string name="people_empty_working">Nägusid pole veel leitud (%1$d %% sinu fotodest analüüsitud). Analüüs töötab taustal laadimise ajal.</string>
+    <string name="people_empty_done">Sinu fotodelt ei leitud nägusid.</string>
+    <string name="people_go_settings">Ava seaded</string>
+    <string name="person_photos_empty">Fotosid pole.</string>
+    <plurals name="moved_to_new_person">
+        <item quantity="one">%d foto teisaldati uuele inimesele</item>
+        <item quantity="other">%d fotot teisaldati uuele inimesele</item>
+    </plurals>
+    <plurals name="removed_from_people">
+        <item quantity="one">%d foto eemaldati inimeste alt</item>
+        <item quantity="other">%d fotot eemaldati inimeste alt</item>
+    </plurals>
+    <string name="info_people">Inimesed</string>
+    <plurals name="info_people_unnamed_count">
+        <item quantity="one">%d nimetu</item>
+        <item quantity="other">%d nimetut</item>
+    </plurals>
+
+    <string name="section_memories">Mälestused</string>
+    <string name="section_pets">Lemmikloomad</string>
+    <string name="collection_dogs">Koerad</string>
+    <string name="collection_cats">Kassid</string>
+    <string name="empty_pets">Koeri ega kasse pole veel leitud. Lemmikloomi tuntakse ära selle järgi, mida fotod kujutavad: lülita kohas Seaded, Analüüs sisse „Leia fotosid selle järgi, mida need kujutavad” ja oota, kuni see valmib.</string>
+
+    <!-- Places -->
+    <string name="places_title">Kohad</string>
+    <string name="places_tab_list">Loend</string>
+    <string name="places_tab_map">Kaart</string>
+    <string name="place_unknown">Muud kohad</string>
+    <string name="place_near">%1$s lähedal</string>
+    <string name="places_expand">Näita</string>
+    <string name="places_collapse">Peida</string>
+    <string name="collection_places">Kohad</string>
+    <string name="places_map_note">Ainult riikide piirjooned ja suuremate linnade nimed: kaardipilte ei laadita alla ning ükski asukoht ei lahku kunagi telefonist. Suumimiseks näpista või topeltpuuduta, markerile puudutades näed selle fotosid.</string>
+    <string name="places_map_description">Kaart sellest, kus sinu fotod on tehtud, fotorühmade markeritega</string>
+    <string name="places_empty_off">Kohad on välja lülitatud. Lülita kohas Seaded, Analüüs sisse „Leia fotosid koha järgi”, siis selgitab eikon võrguühenduseta välja, kus sinu fotod on tehtud, nende GPS-andmete põhjal.</string>
+    <string name="places_empty_working">Kohti pole veel leitud (%1$d %% sinu fotodest analüüsitud). Analüüs töötab taustal laadimise ajal.</string>
+    <string name="places_empty_done">Ühelgi sinu fotol pole asukohta või eikonil ei pruugi olla luba fotode asukohti lugeda (Seaded, Analüüs).</string>
+    <string name="section_places">Kohad ja reisid</string>
+
+    <!-- Trips -->
+    <string name="collection_trips">Reisid</string>
+    <string name="trips_title">Reisid</string>
+    <string name="trip_untitled">Reis</string>
+    <string name="trip_reason">Umbes %1$d km kaugusel kohast, kus tehakse suurem osa sinu fotodest (%2$s lähedal)</string>
+    <string name="trip_home_unknown">tundmatu koht</string>
+    <plurals name="trip_summary_days">
+        <item quantity="one">%d päev</item>
+        <item quantity="other">%d päeva</item>
+    </plurals>
+    <string name="trips_empty">Reise ei leitud. Reis on päevade jada, vähemalt 10 fotoga, mis on veedetud vähemalt 100 km kaugusel kohast, kus tehakse suurem osa sinu fotodest. Selleks vajab eikon fotode asukohti: lülita kohas Seaded, Analüüs sisse „Leia fotosid koha järgi”.</string>
+
+    <!-- Duplicates and similar shots -->
+    <string name="section_cleanup">Korrastamine</string>
+    <string name="collection_duplicates">Duplikaadid</string>
+    <string name="collection_similar">Sarnased kaadrid</string>
+    <string name="duplicates_title">Duplikaadid</string>
+    <string name="similar_title">Sarnased kaadrid</string>
+    <string name="duplicates_note">eikon ainult leiab need. Midagi ei eemaldata enne, kui kinnitad Androidi enda dialoogiaknas, ja eemaldatud fotod lähevad kausta „Hiljuti kustutatud”, kust saad need taastada. Albumitesse lisatud foto koopiate puhul: sinu säilitatav koopia liidetakse nendesse albumitesse.</string>
+    <plurals name="duplicate_exact">
+        <item quantity="one">%d identne fail</item>
+        <item quantity="other">%d identset faili</item>
+    </plurals>
+    <plurals name="duplicate_visual">
+        <item quantity="one">%d koopia samast pildist</item>
+        <item quantity="other">%d koopiat samast pildist</item>
+    </plurals>
+    <plurals name="similar_group">
+        <item quantity="one">%d kaader</item>
+        <item quantity="other">%d sarnast kaadrit</item>
+    </plurals>
+    <plurals name="duplicate_keep_best">
+        <item quantity="one">Säilita parim, teisalda %d kausta „Hiljuti kustutatud”</item>
+        <item quantity="other">Säilita parim, teisalda %d kausta „Hiljuti kustutatud”</item>
+    </plurals>
+    <plurals name="similar_trash_marked">
+        <item quantity="one">Teisalda %d kausta „Hiljuti kustutatud”</item>
+        <item quantity="other">Teisalda %d kausta „Hiljuti kustutatud”</item>
+    </plurals>
+    <string name="duplicate_best">Parim</string>
+    <string name="duplicate_kept">Säilitatud</string>
+    <string name="duplicate_marked">Teisaldatakse</string>
+    <string name="duplicate_dismiss">Need pole duplikaadid</string>
+    <string name="similar_dismiss">Need pole sarnased</string>
+    <string name="duplicates_empty_off">Duplikaadid on välja lülitatud. Lülita kohas Seaded, Analüüs sisse „Leia dubleerivaid fotosid”. eikon teeb sinu fotodest sõrmejäljed ainult sellel telefonil, ilma ühegi mudelita.</string>
+    <string name="similar_empty_off">Sarnased kaadrid vajab kohas Seaded, Analüüs valikut „Leia fotosid selle järgi, mida need kujutavad”: see võrdleb, mida iga foto kujutab, kahe minuti jooksul tehtud fotode puhul.</string>
+    <string name="duplicates_empty_working">Midagi pole veel leitud (%1$d %% analüüsitud). Analüüs töötab taustal laadimise ajal.</string>
+    <string name="duplicates_empty_done">Duplikaate ei leitud.</string>
+    <string name="similar_empty_done">Sarnaseid kaadreid ei leitud.</string>
+
+    <!-- Memories -->
+    <string name="collection_memories">Mälestused</string>
+    <string name="memories_title">Mälestused</string>
+    <string name="memory_on_this_day">Sel päeval</string>
+    <string name="memory_year_ago">Aasta tagasi</string>
+    <string name="memory_weekend_in">Nädalavahetus: %1$s</string>
+    <string name="memory_weekend">Nädalavahetus kodust eemal</string>
+    <string name="memory_day_trip_to">Päevareis: %1$s</string>
+    <string name="memory_day_trip">Päevareis</string>
+    <string name="memory_season">%1$s %2$d</string>
+    <string name="memory_person">%1$s, %2$d</string>
+    <string name="season_winter">Talv</string>
+    <string name="season_spring">Kevad</string>
+    <string name="season_summer">Suvi</string>
+    <string name="season_autumn">Sügis</string>
+    <string name="memory_hide">Peida see mälestus</string>
+    <string name="memory_show_fewer">Näita vähem selliseid</string>
+    <string name="memory_show_less_of">Näita vähem: %1$s</string>
+    <string name="memory_exclude_date">Jäta see kuupäev välja</string>
+    <string name="memory_all_photos">Kõik fotod</string>
+    <string name="memory_replay">Esita uuesti</string>
+    <string name="memory_reset">Võta minu valikud tagasi</string>
+    <string name="memory_done">Valmis. Oma valikud saad tagasi võtta Mälestuste menüüst.</string>
+    <string name="memories_empty">Mälestusi pole veel. eikon loob need kuupäevade, reiside, aastaaegade ja sinu nimetatud inimeste põhjal: „Sel päeval”, „Aasta tagasi”, reisid ja nädalavahetused kodust eemal, aastaaeg, keegi aasta jooksul. Reisid ja nädalavahetused vajavad Kohti, inimesed vajavad Inimesi (Seaded, Analüüs). Miski ei lahku telefonist.</string>
+    <string name="memories_note">Loodud kuupäevadest, kohtadest ja nimetatud inimestest lihtsate reeglitega; muusikat pole ning fotod valitakse lemmikute, suuruse ja nägude järgi, mitte selle järgi, kui head need välja näevad.</string>
+    <string name="memory_no_photos">Sellel mälestusel pole enam kuvatavaid fotosid.</string>
+
+    <!-- Editing -->
+    <string name="action_edit">Muuda</string>
+    <string name="edit_title">Muutmine</string>
+    <string name="edit_done">Valmis</string>
+    <string name="edit_original">Originaal</string>
+    <string name="edit_revert">Taasta</string>
+    <string name="edit_revert_title">Kas taastada originaal?</string>
+    <string name="edit_revert_message">See eemaldab sellest muudatusest kõik kohandused, filtri ja kärpimise. Algset fotot pole kunagi muudetud. Taastatud foto säilitamiseks vajuta Valmis.</string>
+    <string name="edit_discard_title">Kas loobuda muudatustest?</string>
+    <string name="edit_discard_message">Selles redaktoris tehtud muudatused lähevad kaotsi. Foto jääb selliseks, nagu see oli.</string>
+    <string name="edit_discard">Loobu</string>
+    <string name="edit_copy_edits">Kopeeri muudatused</string>
+    <string name="edit_paste_edits">Kleebi muudatused</string>
+    <string name="edit_save_copy">Salvesta koopia</string>
+    <string name="edit_copy_saved">Koopia salvestati originaali kõrvale, originaali ei muudetud.</string>
+    <string name="edit_copy_saved_no_details">Koopia salvestati originaali kõrvale, originaali ei muudetud. Kaamera andmeid ei õnnestunud kopeerida.</string>
+    <string name="edit_failed">Muutmist ei õnnestunud lõpetada. Fotot ei muudetud.</string>
+    <string name="edited_badge">Muudetud</string>
+    <string name="viewer_show_original">Näita originaali</string>
+    <string name="viewer_show_edited">Näita muudetud fotot</string>
+    <string name="tool_auto">Auto</string>
+    <string name="tool_light">Valgus</string>
+    <string name="tool_color">Värv</string>
+    <string name="tool_detail">Detailid</string>
+    <string name="tool_filters">Filtrid</string>
+    <string name="tool_crop">Kärbi</string>
+    <string name="adj_exposure">Säritus</string>
+    <string name="adj_brightness">Heledus</string>
+    <string name="adj_contrast">Kontrast</string>
+    <string name="adj_highlights">Heledad alad</string>
+    <string name="adj_shadows">Varjud</string>
+    <string name="adj_black_point">Mustpunkt</string>
+    <string name="adj_saturation">Küllastus</string>
+    <string name="adj_vibrance">Erksus</string>
+    <string name="adj_temperature">Soojus</string>
+    <string name="adj_tint">Varjund</string>
+    <string name="adj_sharpness">Teravus</string>
+    <string name="adj_vignette">Vinjett</string>
+    <string name="geo_straighten">Sirgenda</string>
+    <string name="geo_perspective_vertical">Vertikaalne perspektiiv</string>
+    <string name="geo_perspective_horizontal">Horisontaalne perspektiiv</string>
+    <string name="filter_amount">Tugevus</string>
+    <string name="filter_name_none">Originaal</string>
+    <string name="filter_name_vivid">Elav</string>
+    <string name="filter_name_warm">Soe</string>
+    <string name="filter_name_cool">Jahe</string>
+    <string name="filter_name_mono">Mono</string>
+    <string name="filter_name_noir">Noir</string>
+    <string name="filter_name_fade">Luitunud</string>
+    <string name="filter_name_chrome">Kroom</string>
+    <string name="filter_name_sepia">Seepia</string>
+    <string name="crop_rotate">Pööra</string>
+    <string name="crop_flip">Peegelda</string>
+    <string name="shape_free">Vaba</string>
+    <string name="shape_original">Originaal</string>
+    <string name="shape_square">1:1</string>
+    <string name="shape_4_3">4:3</string>
+    <string name="shape_3_2">3:2</string>
+    <string name="shape_16_9">16:9</string>
+    <string name="action_paste_edits">Kleebi muudatused</string>
+    <string name="action_revert_edits">Eemalda muudatused</string>
+    <plurals name="edits_pasted">
+        <item quantity="one">Muudatused rakendati %d fotole</item>
+        <item quantity="other">Muudatused rakendati %d fotole</item>
+    </plurals>
+    <plurals name="edits_reverted">
+        <item quantity="one">Muudatus eemaldati %d fotolt; originaal on selline nagu alati</item>
+        <item quantity="other">Muudatused eemaldati %d fotolt; originaalid on sellised nagu alati</item>
+    </plurals>
+
+    <!-- Accessibility -->
+    <string name="slider_reset">Lähtesta neutraalseks</string>
+    <string name="crop_area">Kärpimisala, %1$d %% kuni %2$d %% ristisuunas ja %3$d %% kuni %4$d %% allapoole</string>
+    <string name="crop_action_smaller">Tee kärpimine väiksemaks</string>
+    <string name="crop_action_larger">Tee kärpimine suuremaks</string>
+    <string name="crop_action_left">Liiguta kärpimist vasakule</string>
+    <string name="crop_action_right">Liiguta kärpimist paremale</string>
+    <string name="crop_action_up">Liiguta kärpimist üles</string>
+    <string name="crop_action_down">Liiguta kärpimist alla</string>
+    <string name="viewer_zoom_in">Suumi sisse</string>
+    <string name="viewer_zoom_out">Suumi välja</string>
+    <string name="external_photo">Foto</string>
+    <string name="viewer_cannot_display">Seda fotot ei saa kuvada.</string>
+
+    <!-- Info: caption, editing the date and location, what the photo shows -->
+    <string name="info_caption">Pildiallkiri</string>
+    <string name="caption_add">Lisa pildiallkiri</string>
+    <string name="caption_edit">Muuda pildiallkirja</string>
+    <string name="caption_title">Pildiallkiri</string>
+    <string name="caption_hint">Mõni sõna sellest fotost</string>
+    <string name="caption_note">Hoitakse ainult eikonis; foto faili ei muudeta. Otsing leiab selle.</string>
+    <string name="date_change">Muuda kuupäeva ja kellaaega</string>
+    <string name="date_revert">Taasta algne kuupäev</string>
+    <string name="date_time_title">Kellaaeg</string>
+    <string name="action_next">Edasi</string>
+    <string name="location_title">Kus see on tehtud</string>
+    <string name="location_coordinates">Koordinaadid</string>
+    <string name="location_coordinates_note">Kümnendkraadid, esmalt laiuskraad: 41.9028, 12.4964</string>
+    <string name="location_invalid">Pole asukoht: kaks arvu, laiuskraad vahemikus -90 kuni 90 ja pikkuskraad vahemikus -180 kuni 180</string>
+    <string name="location_city">Või leia linn (töötab võrguühenduseta)</string>
+    <string name="location_remove">Eemalda asukoht</string>
+    <string name="location_change">Muuda asukohta</string>
+    <string name="location_revert">Taasta algne asukoht</string>
+    <string name="info_map_description">Väike kaart, mis näitab, kus foto on tehtud</string>
+    <string name="metadata_done">Valmis. Foto ütleb nüüd seda; originaal on säilitatud, et saaksid selle taastada.</string>
+    <string name="metadata_not_writable">Seda tüüpi faili ei saa muuta.</string>
+    <string name="metadata_needs_permission">Foto kuupäeva või asukoha muutmiseks peab eikon saama lugeda, kus fotod on tehtud: muidu näitab Android sellele koopiat ilma asukohata ja salvestamine kustutaks selle.</string>
+    <string name="metadata_nothing_to_revert">Pole midagi taastada.</string>
+    <string name="metadata_interrupted">Selle foto varasem muudatus ei lõppenud. Selle originaal on säilitatud: taasta see enne kui midagi muud muudad.</string>
+    <string name="metadata_failed">Muudatus ei õnnestunud. Foto pandi tagasi täpselt selliseks, nagu see oli.</string>
+    <string name="metadata_restore_file">Taasta originaalfail</string>
+    <string name="info_albums">Albumites</string>
+    <string name="info_pets">Lemmikloomad</string>
+    <string name="info_shows">See võib kujutada</string>
+    <string name="pet_dog">Koer</string>
+    <string name="pet_cat">Kass</string>
+    <string name="info_album">Seadme album</string>
+    <string name="label_landscape">Maastikku</string>
+    <string name="label_beach">Randa</string>
+    <string name="label_sea">Merd</string>
+    <string name="label_mountain">Mäge</string>
+    <string name="label_sunset">Päikeseloojangut</string>
+    <string name="label_snow">Lund</string>
+    <string name="label_city">Linna</string>
+    <string name="label_building">Hoonet</string>
+    <string name="label_street">Tänavat</string>
+    <string name="label_woods">Metsa</string>
+    <string name="label_flower">Lille</string>
+    <string name="label_sky">Taevast</string>
+    <string name="label_person">Inimest</string>
+    <string name="label_group">Inimeste rühma</string>
+    <string name="label_food">Toitu</string>
+    <string name="label_dessert">Magustoitu</string>
+    <string name="label_drink">Jooki</string>
+    <string name="label_car">Autot</string>
+    <string name="label_bicycle">Jalgratast</string>
+    <string name="label_airplane">Lennukit</string>
+    <string name="label_boat">Paati</string>
+    <string name="label_bird">Lindu</string>
+    <string name="label_horse">Hobust</string>
+    <string name="label_interior">Tuba</string>
+    <string name="label_night">Ööd</string>
+    <string name="label_party">Pidu</string>
+    <string name="label_sport">Spordiüritust</string>
+    <string name="label_animal">Looma</string>
+
+    <!-- Backup to your own server -->
+    <string name="backup_title">Varundamine oma serverisse</string>
+    <string name="backup_intro">Kopeerib sinu fotod ja videod krüptitud ühenduse kaudu serverisse, mida sa ise haldad. Miski ei lahku sellest telefonist enne, kui lülitad varundamise sisse, kõik läheb ainult allolevasse serverisse ning eikon ei kustuta ega muuda seal kunagi midagi. Parooli või võtit hoitakse krüptituna Android Keystore’is.</string>
+    <string name="backup_kind_immich">Immich (ka see, mille Umbrel paigaldab)</string>
+    <string name="backup_kind_nextcloud">Nextcloud või mistahes WebDAV-server</string>
+    <string name="backup_address">Serveri aadress (https://…)</string>
+    <string name="backup_username">Sisselogimisnimi</string>
+    <string name="backup_folder">Kaust serveris</string>
+    <string name="backup_api_key">API-võti</string>
+    <string name="backup_app_password">Rakenduse parool</string>
+    <string name="backup_secret_saved">Salvestatud. Säilitamiseks jäta tühjaks</string>
+    <string name="backup_help_immich">Immichis: Konto seaded, API-võtmed, Uus API-võti. Vajalik õigus on asset.upload.</string>
+    <string name="backup_help_nextcloud">Nextcloudis: Isiklikud seaded, Turvalisus, Seadmed ja seansid, loo uus rakenduse parool. Kasuta seda, mitte oma sisselogimisparooli.</string>
+    <string name="backup_save_test">Salvesta ja testi ühendust</string>
+    <string name="backup_connected">Ühendatud: %1$s.</string>
+    <string name="backup_failed">Ühendamine ebaõnnestus: %1$s</string>
+    <string name="backup_certificate_declined">Sertifikaati ei usaldatud, seega ei saadetud midagi ega saadeta ka edaspidi.</string>
+    <string name="backup_certificate_title">Selle serveri sertifikaat ei pärine asutuselt, keda sinu telefon usaldab</string>
+    <string name="backup_certificate_body">%1$s esitas alloleva sertifikaadi. Võrdle selle sõrmejälge sellega, mida sinu server näitab (näiteks käsuga: openssl x509 -noout -fingerprint -sha256). Usalda seda ainult siis, kui need on identsed: sellest hetkest aktsepteeritakse selle serveri jaoks just seda ühte sertifikaati ja ühtegi teist mitte.</string>
+    <string name="backup_certificate_subject">Välja antud: %1$s</string>
+    <string name="backup_certificate_expires">Kehtib kuni %1$s</string>
+    <string name="backup_certificate_self_signed">See on ise allkirjastatud, nagu koduserveri sertifikaat tavaliselt on.</string>
+    <string name="backup_certificate_trust">Usalda seda sertifikaati</string>
+    <string name="backup_enable">Varunda minu fotod ja videod</string>
+    <string name="backup_test_first">Salvesta ja testi kõigepealt ühendust.</string>
+    <string name="backup_wifi_only">Ainult WiFi-ga</string>
+    <string name="backup_only_charging">Ainult laadimise ajal</string>
+    <string name="backup_videos">Kaasa videod</string>
+    <string name="backup_hidden">Kaasa peidetud fotod</string>
+    <string name="backup_hidden_note">Peidetud fotod saadetakse samuti sinu serverisse, kus need on sama nähtavad kui kõik muu seal.</string>
+    <string name="backup_confirm_title">Kas alustada varundamist?</string>
+    <plurals name="backup_confirm_body">
+        <item quantity="one">%1$d foto või video kopeeritakse serverisse %2$s, natukehaaval, kui telefon on sinu lubatud võrgus. Midagi ei kustutata ei telefonis ega serveris.</item>
+        <item quantity="other">%1$d fotot ja videot kopeeritakse serverisse %2$s, natukehaaval, kui telefon on sinu lubatud võrgus. Midagi ei kustutata ei telefonis ega serveris.</item>
+    </plurals>
+    <string name="backup_confirm_start">Alusta</string>
+    <string name="backup_location_note">Android peidab fotode tegemise koha nende rakenduste eest, millel pole fotode asukohtade luba, seega poleks sinu serveris olevatel koopiatel asukohta.</string>
+    <string name="backup_progress">Varundatud: %1$,d / %2$,d</string>
+    <plurals name="backup_refused">
+        <item quantity="one">Server lükkas %1$d foto tagasi ja seda ei proovita uuesti, kuni sa seda ei palu.</item>
+        <item quantity="other">Server lükkas %1$d fotot tagasi ja neid ei proovita uuesti, kuni sa seda ei palu.</item>
+    </plurals>
+    <string name="backup_running">Varundamine käib…</string>
+    <string name="backup_idle">Ootan õiget hetke (sinu lubatud võrk, aku pole tühi).</string>
+    <string name="backup_last_run">Viimane käivitus %1$s. Saadetud: %2$d. Juba olemas: %3$d. Tagasi lükatud: %4$d.</string>
+    <string name="backup_stopped">See peatus, sest %1$s</string>
+    <string name="backup_stop_power_save">akusäästurežiim on sees.</string>
+    <string name="backup_stop_thermal">telefon oli liiga soe.</string>
+    <string name="backup_stop_unreachable">server polnud kättesaadav või oli hõivatud. See proovib uuesti.</string>
+    <string name="backup_stop_unauthorized">server ei võtnud võtit ega parooli vastu.</string>
+    <string name="backup_stop_untrusted">serveri sertifikaat pole üks neist, mida oled usaldanud.</string>
+    <string name="backup_stop_misconfigured">aadress ei sobi seda tüüpi serverile.</string>
+    <string name="backup_stop_refusals">server lükkas tagasi palju faile järjest, mis viitab serveri piirangule, mitte fotodele.</string>
+    <string name="backup_now">Varunda kohe</string>
+    <string name="backup_retry_refused">Proovi tagasi lükatuid uuesti</string>
+
+    <!-- Network consent -->
+    <string name="network_allow">Luba eikonil internetti kasutada</string>
+    <string name="network_allow_note">Väljas, kuni lülitad sisse. eikon kasutab võrku ainult sinu fotode kopeerimiseks allolevasse serverisse ja alles pärast seda, kui oled serveri seadistanud ja varundamise sisse lülitanud. Kui see on väljas, ei saa miski kuhugi ühenduda.</string>
+    <string name="settings_privacy_network">eikon võib minna võrku vaid ühe asja pärast: sinu fotode valikuline varundamine serverisse, mida sa ise haldad. See on väljas, kuni sa selle lubad (Seaded, Varundamine) ja serveri seadistad. Ei kasutusanalüütikat, ei reklaame, ei kontosid, ei Google’i teenuseid ega meie oma pilve: sellist pole olemas.</string>
+
+    <!-- First-run screens -->
+    <string name="onboarding_intro_title">Sinu fotod, sinu telefonis</string>
+    <string name="onboarding_intro_body">eikon on foto- ja videogalerii Androidile. See kuvab pildid, mida sinu telefon juba säilitab, leiab need kuupäeva, koha, inimeste või kujutatu järgi ning muudab neid, puudutamata kunagi originaale.</string>
+    <string name="onboarding_point_local">Kõik jääb sellesse seadmesse. Ei kontot, ei kasutusanalüütikat, ei reklaame.</string>
+    <string name="onboarding_point_independent">See ei toetu millelegi väljaspool sinu telefoni: ei Google’i teenuseid, ei pilve, ei kolmandate osapoolte servereid.</string>
+    <string name="onboarding_point_yours">Kui soovid varukoopiat, läheb see ainult serverisse, mida sa ise haldad, ja ainult siis, kui sa selle seadistad.</string>
+    <string name="onboarding_next">Edasi</string>
+    <string name="onboarding_start">Alusta</string>
+    <string name="onboarding_page">Leht %1$d / %2$d</string>
+    <string name="onboarding_permissions_title">Mida eikon küsib ja miks</string>
+    <string name="onboarding_permissions_intro">Vaja on ainult esimest. Igaüht neist saad hiljem muuta Seadetes või telefoni seadetes.</string>
+    <string name="onboarding_perm_media_title">Fotod ja videod</string>
+    <string name="onboarding_perm_media_body">Et eikon saaks sinu kogu kuvada. See loeb faile seal, kus Android neid juba säilitab, ega kopeeri neid kuhugi. Soovi korral võid lubada vaid mõned fotod.</string>
+    <string name="onboarding_perm_location_title">Fotode asukohad (valikuline)</string>
+    <string name="onboarding_perm_location_body">Android peidab rakenduste eest, kus foto on tehtud, kui sa seda ei luba. eikon kasutab seda foto koha näitamiseks võrguühenduseta kaardil ja koha järgi otsimiseks. Kohad arvutatakse telefonis: ühtegi asukohta ei saadeta kunagi kuhugi.</string>
+    <string name="onboarding_perm_network_title">Internet (valikuline)</string>
+    <string name="onboarding_perm_network_body">Kasutatakse ainult ühe asja jaoks: sinu fotode kopeerimiseks serverisse, mida sa ise haldad (Immich, Nextcloud), kui sa selle kunagi seadistad. Muidu ei ühendu eikon kunagi millegagi. See on väljas, kuni lülitad selle siin sisse, ja saad selle igal ajal Seadetes uuesti välja lülitada.</string>
+    <string name="onboarding_allow">Luba</string>
+    <string name="onboarding_allowed">Lubatud</string>
+    <string name="onboarding_promise">Miski siin ei sõltu millestki väljaspool sinu telefoni: ei Google’i teenuseid, ei kontosid, ei kasutusanalüütikat. Sinu fotod jäävad sellesse seadmesse või lähevad, kui nii valid, sinu enda serverisse.</string>
+
+    <!-- Support -->
+    <string name="support_title">Toetus</string>
+    <string name="support_body">eikon on tasuta, selles pole reklaame ja see ei jälgi sind. Kui see sulle meeldib, võid saata mõne sati Lightning-võrgu kaudu.</string>
+    <string name="support_button">Anneta Lightningiga</string>
+    <string name="support_copied">Lightning-rahakotti ei leitud — aadress kopeeriti: %1$s</string>
+
+    <!-- Analyze now -->
+    <string name="analyze_now_running">Analüüsin…</string>
+    <string name="analyze_now_hint">Algab kohe, ainult sellel telefonil, ka akusäästurežiimis.</string>
+    <string name="analyze_now_hint_off">Lülita kõigepealt ülal sisse vähemalt üks samm.</string>
+    <string name="analyze_now_hint_paused">Analüüs on peatatud: lülita paus välja, et kohe analüüsida.</string>
+
+    <!-- Pictures from other apps -->
+    <string name="viewer_open_in_library">Ava kogus</string>
+</resources>

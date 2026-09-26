@@ -25,6 +25,7 @@ import coil3.fetch.FetchResult
 import coil3.fetch.Fetcher
 import coil3.fetch.ImageFetchResult
 import coil3.key.Keyer
+import coil3.memory.MemoryCache
 import coil3.request.ImageRequest
 import coil3.request.Options
 import coil3.size.pxOrElse
@@ -40,8 +41,12 @@ import android.util.Size as AndroidSize
 data class MediaThumbnailData(val uri: Uri, val modifiedAt: Long, val recipe: String? = null)
 
 class MediaThumbnailKeyer : Keyer<MediaThumbnailData> {
-    override fun key(data: MediaThumbnailData, options: Options): String =
-        "thumb:${data.uri}:${data.modifiedAt}:${data.recipe.orEmpty().hashCode()}"
+    override fun key(data: MediaThumbnailData, options: Options): String = memoryKey(data)
+
+    companion object {
+        /** What the memory cache knows a thumbnail by: the photo and the version of it (and of its edit), not the size it was loaded at. */
+        fun memoryKey(data: MediaThumbnailData): String = "thumb:${data.uri}:${data.modifiedAt}:${data.recipe.orEmpty().hashCode()}"
+    }
 }
 
 /**
@@ -121,9 +126,12 @@ fun MediaThumbnail(
     val context = LocalPlatformContext.current
     val recipe = if (isVideo || !applyEdit) null else LocalEditRecipeTexts.current[id]
     val request = remember(id, modifiedAt, recipe, requestSize) {
-        val builder = ImageRequest.Builder(context).data(MediaThumbnailData(mediaContentUri(id, isVideo), modifiedAt, recipe))
+        val data = MediaThumbnailData(mediaContentUri(id, isVideo), modifiedAt, recipe)
+        val builder = ImageRequest.Builder(context).data(data)
         // A size given by the caller wins over the size of the layout, so a picture that is drawn large but was already loaded small is not loaded again.
         requestSize?.let { builder.size(it.width, it.height) }
+        // The same picture at another size (the grid changing density) is shown while the right one loads, instead of an empty cell.
+        builder.placeholderMemoryCacheKey(MemoryCache.Key(MediaThumbnailKeyer.memoryKey(data)))
         builder.build()
     }
     AsyncImage(

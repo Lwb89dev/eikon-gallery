@@ -1,5 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- The languages the app is translated into (docs/TRANSLATING.md): the 24 official languages of the EU, Simplified Chinese, Russian and Japanese. Shown in the per-app language picker. -->
 <locale-config xmlns:android="http://schemas.android.com/apk/res/android">
     <locale android:name="en" />
+    <locale android:name="bg" />
+    <locale android:name="cs" />
+    <locale android:name="da" />
+    <locale android:name="de" />
+    <locale android:name="el" />
+    <locale android:name="es" />
+    <locale android:name="et" />
+    <locale android:name="fi" />
+    <locale android:name="fr" />
+    <locale android:name="ga" />
+    <locale android:name="hr" />
+    <locale android:name="hu" />
     <locale android:name="it" />
+    <locale android:name="lt" />
+    <locale android:name="lv" />
+    <locale android:name="mt" />
+    <locale android:name="nl" />
+    <locale android:name="pl" />
+    <locale android:name="pt" />
+    <locale android:name="ro" />
+    <locale android:name="sk" />
+    <locale android:name="sl" />
+    <locale android:name="sv" />
+    <locale android:name="zh-CN" />
+    <locale android:name="ru" />
+    <locale android:name="ja" />
 </locale-config>

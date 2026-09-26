@@ -11,17 +11,23 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.selection.toggleable
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Switch
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.Text
@@ -29,6 +35,8 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -50,6 +58,7 @@ import app.eikon.gallery.data.settings.AnalysisSettings
 import app.eikon.gallery.data.settings.AppSettings
 import app.eikon.gallery.data.settings.ThemeMode
 import app.eikon.gallery.feature.backup.BackupSettingsSection
+import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -68,10 +77,14 @@ fun SettingsScreen(
     }
     LifecycleEventEffect(Lifecycle.Event.ON_RESUME) { viewModel.refreshLocationPermission() }
     val allowLocations = { locationPermission.launch(Manifest.permission.ACCESS_MEDIA_LOCATION) }
+    val snackbar = remember { SnackbarHostState() }
+    val scope = rememberCoroutineScope()
+    val addressCopied = stringResource(R.string.support_copied, Support.LIGHTNING_ADDRESS)
     Scaffold(
         modifier = modifier,
         containerColor = MaterialTheme.colorScheme.background,
         topBar = { SettingsTopBar(onBack) },
+        snackbarHost = { SnackbarHost(snackbar) },
     ) { inner ->
         Column(
             Modifier
@@ -92,6 +105,9 @@ fun SettingsScreen(
             PrivacySection(storage)
             Spacer(Modifier.height(24.dp))
             AboutSection(onOpenLicenses)
+            Spacer(Modifier.height(24.dp))
+            SupportSection(onCopied = { scope.launch { snackbar.showSnackbar(addressCopied) } })
+            Spacer(Modifier.height(16.dp))
         }
     }
 }
@@ -162,13 +178,36 @@ private fun AnalysisSection(
     if (settings.people) NoteText(R.string.setting_analyze_people_note)
     SwitchRow(R.string.setting_analyze_duplicates, settings.duplicates) { on -> viewModel.setAnalysis { it.copy(duplicates = on) } }
     SwitchRow(R.string.setting_analyze_text, settings.text) { on -> viewModel.setAnalysis { it.copy(text = on) } }
-    TextButton(onClick = viewModel::analyzeNow, enabled = !settings.paused && settings.anyEnabled) {
-        Text(stringResource(R.string.analyze_now))
-    }
+    AnalyzeNowButton(settings, running = status?.running == true, onClick = viewModel::analyzeNow)
     Text(
         text = stringResource(R.string.settings_analysis_body),
         style = MaterialTheme.typography.bodySmall,
         color = MaterialTheme.colorScheme.onSurfaceVariant,
+    )
+}
+
+/**
+ * The way to start the analysis without waiting for the right moment. A full-width button (the setting rows above are all switches, so a bare text link disappeared among them),
+ * with the reason underneath when it cannot be pressed, and a spinner while it works.
+ */
+@Composable
+private fun AnalyzeNowButton(settings: AnalysisSettings, running: Boolean, onClick: () -> Unit) {
+    val ready = !settings.paused && settings.anyEnabled
+    FilledTonalButton(onClick = onClick, enabled = ready && !running, modifier = Modifier.fillMaxWidth().padding(top = 12.dp)) {
+        if (running) CircularProgressIndicator(Modifier.size(18.dp), strokeWidth = 2.dp) else Icon(painterResource(R.drawable.ic_analyze), contentDescription = null, modifier = Modifier.size(18.dp))
+        Spacer(Modifier.width(8.dp))
+        Text(stringResource(if (running) R.string.analyze_now_running else R.string.analyze_now))
+    }
+    val hint = when {
+        settings.paused -> R.string.analyze_now_hint_paused
+        !settings.anyEnabled -> R.string.analyze_now_hint_off
+        else -> R.string.analyze_now_hint
+    }
+    Text(
+        text = stringResource(hint),
+        style = MaterialTheme.typography.bodySmall,
+        color = MaterialTheme.colorScheme.onSurfaceVariant,
+        modifier = Modifier.padding(top = 4.dp, bottom = 8.dp),
     )
 }
 

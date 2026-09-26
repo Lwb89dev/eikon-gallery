@@ -1,5 +1,7 @@
 package app.eikon.gallery.data.embedding
 
+import app.eikon.gallery.data.db.EmbeddingRow
+
 /** One photo that matched a semantic query, with its cosine similarity to it. */
 data class ScoredMedia(val mediaId: Long, val score: Float)
 
@@ -22,6 +24,32 @@ class EmbeddingMatrix(private val ids: LongArray, private val vectors: ByteArray
     }
 
     val size: Int get() = ids.size
+
+    /** The sum of the photo ids, which with [size] tells whether the stored vectors are the ones held here (see `IndexDao.embeddingStats`). */
+    val idSum: Long get() = ids.sum()
+
+    /**
+     * A copy in which the vectors of [rows] replace those of the same photos and, for photos not held yet, are inserted at their place in id order. The matrix has to be
+     * in id order already, which is how it is read. Faster than reading everything again when analysis has stored a few more.
+     */
+    fun withRows(rows: List<EmbeddingRow>): EmbeddingMatrix {
+        if (rows.isEmpty()) return this
+        val changes = rows.asReversed().distinctBy { it.mediaId }.sortedBy { it.mediaId } // a photo given twice takes its last vector
+        changes.forEach { require(it.vector.size == Embeddings.DIMENSIONS) { "stored vector has ${it.vector.size} bytes" } }
+        val added = changes.count { java.util.Arrays.binarySearch(ids, it.mediaId) < 0 }
+        val builder = Builder(ids.size + added)
+        var next = 0
+        for (i in ids.indices) {
+            while (next < changes.size && changes[next].mediaId < ids[i]) builder.add(changes[next].mediaId, changes[next++].vector)
+            if (next < changes.size && changes[next].mediaId == ids[i]) {
+                builder.add(ids[i], changes[next++].vector)
+            } else {
+                builder.addFrom(ids[i], vectors, i * Embeddings.DIMENSIONS)
+            }
+        }
+        while (next < changes.size) builder.add(changes[next].mediaId, changes[next++].vector)
+        return builder.build()
+    }
 
     /** The media id of the [index]th vector. */
     fun idAt(index: Int): Long = ids[index]
@@ -77,13 +105,20 @@ class EmbeddingMatrix(private val ids: LongArray, private val vectors: ByteArray
 
         fun add(mediaId: Long, vector: ByteArray) {
             require(vector.size == Embeddings.DIMENSIONS) { "stored vector has ${vector.size} bytes" }
+            addFrom(mediaId, vector, 0)
+        }
+
+        /** Adds the vector that starts at [from] in [source] (copied straight into place, so a whole matrix can be carried over without a copy per photo). */
+        fun addFrom(mediaId: Long, source: ByteArray, from: Int) {
             if (count == ids.size) grow()
             ids[count] = mediaId
-            System.arraycopy(vector, 0, vectors, count * Embeddings.DIMENSIONS, Embeddings.DIMENSIONS)
+            System.arraycopy(source, from, vectors, count * Embeddings.DIMENSIONS, Embeddings.DIMENSIONS)
             count++
         }
 
-        fun build() = EmbeddingMatrix(ids.copyOf(count), vectors.copyOf(count * Embeddings.DIMENSIONS))
+        /** The builder is not used again afterwards, so when it is exactly full its arrays are handed over rather than copied (a copy of a large matrix is 50 MB more on the heap). */
+        fun build() =
+            if (count == ids.size) EmbeddingMatrix(ids, vectors) else EmbeddingMatrix(ids.copyOf(count), vectors.copyOf(count * Embeddings.DIMENSIONS))
 
         private fun grow() {
             val size = maxOf(MIN_GROWTH, ids.size * 2)

@@ -206,6 +206,114 @@ class PeopleRepositoryTest {
         assertNull(dao.people.getValue(id).name)
     }
 
+    // --- two groups with one name are one person ---------------------------------------------------------
+
+    private suspend fun twoGroups(): Pair<Long, Long> {
+        repository.saveFaces(1, listOf(face(1f, 0f)))
+        repository.saveFaces(2, listOf(face(0f, 1f)))
+        return personOf(1)!! to personOf(2)!!
+    }
+
+    @Test
+    fun namingAGroupLikeAnotherJoinsTheTwoIntoTheOneBeingNamed() = runTest {
+        val (a, b) = twoGroups()
+        repository.rename(a, "Marco")
+
+        val joined = repository.rename(b, "Marco")
+
+        assertEquals(1, joined)
+        assertEquals("both photos are now in b's gallery", setOf(b), dao.faces.map { it.personId }.toSet())
+        assertNull(dao.people[a])
+        assertEquals("Marco", dao.people.getValue(b).name)
+    }
+
+    @Test
+    fun theSameNameIsRecognisedIgnoringCaseAccentsAndSpacing() = runTest {
+        val (a, b) = twoGroups()
+        repository.rename(a, "José  Álvarez")
+
+        assertEquals(1, repository.rename(b, " jose alvarez"))
+
+        assertEquals(setOf(b), dao.faces.map { it.personId }.toSet())
+        assertEquals("the name is kept as it was typed for the group that stays", "jose alvarez", dao.people.getValue(b).name)
+    }
+
+    @Test
+    fun differentNamesStayDifferentPeopleEvenWithAWordInCommon() = runTest {
+        val (a, b) = twoGroups()
+        repository.rename(a, "Marco Rossi")
+
+        assertEquals(0, repository.rename(b, "Marco Bianchi"))
+
+        assertEquals(setOf(a, b), dao.faces.map { it.personId }.toSet())
+    }
+
+    @Test
+    fun aFavoriteStaysAFavoriteWhenItsGroupIsJoined() = runTest {
+        val (a, b) = twoGroups()
+        repository.rename(a, "Marco")
+        repository.setFavorite(a, true)
+
+        repository.rename(b, "Marco")
+
+        assertEquals(true, dao.people.getValue(b).isFavorite)
+    }
+
+    @Test
+    fun aHiddenPersonJoinsNobodyAndNobodyJoinsThem() = runTest {
+        val (a, b) = twoGroups()
+        repository.rename(a, "Marco")
+        repository.setHidden(a, true)
+
+        assertEquals("a hidden group is not a twin", 0, repository.rename(b, "Marco"))
+        assertEquals(setOf(a, b), dao.faces.map { it.personId }.toSet())
+
+        repository.setHidden(a, false)
+        repository.setHidden(b, true)
+        assertEquals("a hidden group does not swallow a visible one", 0, repository.rename(b, "Marco"))
+        assertEquals(setOf(a, b), dao.faces.map { it.personId }.toSet())
+    }
+
+    @Test
+    fun clearingANameJoinsNothing() = runTest {
+        val (a, b) = twoGroups()
+        repository.rename(a, "Marco")
+
+        assertEquals(0, repository.rename(b, "  "))
+
+        assertEquals(setOf(a, b), dao.faces.map { it.personId }.toSet())
+    }
+
+    @Test
+    fun groupsThatAlreadyShareANameAreJoinedIntoTheOldestOne() = runTest {
+        repository.saveFaces(1, listOf(face(1f, 0f, 0f, 0f)))
+        repository.saveFaces(2, listOf(face(0f, 1f, 0f, 0f)))
+        repository.saveFaces(3, listOf(face(0f, 0f, 1f, 0f)))
+        repository.saveFaces(4, listOf(face(0f, 0f, 0f, 1f)))
+        val (a, b, c, d) = listOf(1L, 2L, 3L, 4L).map { personOf(it)!! }
+        // Named before naming a person joined groups: the same name twice, once with other capitals.
+        dao.people[a] = dao.people.getValue(a).copy(name = "Anna")
+        dao.people[b] = dao.people.getValue(b).copy(name = "ANNA")
+        dao.people[c] = dao.people.getValue(c).copy(name = "Luca")
+
+        val joined = repository.mergeSameNames()
+
+        assertEquals(1, joined)
+        assertEquals(setOf(a, c, d), dao.faces.map { it.personId }.toSet())
+        assertEquals(a, personOf(2))
+        assertNull(dao.people[b])
+    }
+
+    @Test
+    fun nothingIsJoinedWhenNoTwoNamesMatch() = runTest {
+        val (a, b) = twoGroups()
+        repository.rename(a, "Anna")
+        repository.rename(b, "Luca")
+
+        assertEquals(0, repository.mergeSameNames())
+        assertEquals(setOf(a, b), dao.faces.map { it.personId }.toSet())
+    }
+
     // --- in-memory database --------------------------------------------------------------------------
 
     private class FakePeopleDao : PeopleDao {

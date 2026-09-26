@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- The launcher artwork is designed on white; the background must stay independent of night mode. -->
-    <color name="ic_launcher_background">#FFFFFF</color>
+    <!-- The launcher icon is the squircle itself, drawn by the foreground; its background is deliberately empty, so that whatever shape a launcher masks icons to (circle, squircle,
+         teardrop) the icon still shows as a squircle. Independent of night mode. -->
+    <color name="ic_launcher_background">#00000000</color>
     <color name="splash_background">#FFFFFF</color>
     <color name="window_background">#FAFAF9</color>
 </resources>

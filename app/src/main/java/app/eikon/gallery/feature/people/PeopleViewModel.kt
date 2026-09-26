@@ -51,6 +51,11 @@ class PeopleViewModel @Inject constructor(
         )
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(STOP_TIMEOUT_MS), PeopleState())
 
+    init {
+        // People the user named alike from before naming one joined the two are one person; this is where that is put right.
+        viewModelScope.launch { repository.mergeSameNames() }
+    }
+
     fun toggleShowHidden() = showHidden.update { !it }
 
     fun rename(id: Long, name: String) {

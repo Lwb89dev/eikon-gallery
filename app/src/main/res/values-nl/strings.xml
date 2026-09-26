@@ -1,0 +1,659 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Library -->
+    <string name="library_title">Bibliotheek</string>
+    <string name="today">Vandaag</string>
+    <string name="yesterday">Gisteren</string>
+    <string name="empty_library">Nog geen foto’s of video’s</string>
+    <string name="empty_filter">Niets komt overeen met dit filter</string>
+    <string name="empty_filter_clear">Alles tonen</string>
+    <string name="sync_progress">Bibliotheek laden: %1$,d / %2$,d</string>
+    <string name="sync_failed">De bibliotheek kon niet worden ververst</string>
+    <string name="sync_retry">Opnieuw proberen</string>
+    <string name="scrubber_description">Door de bibliotheek bladeren op datum</string>
+
+    <!-- Permissions -->
+    <string name="permission_title">Je foto’s blijven op je apparaat</string>
+    <string name="permission_body">eikon heeft toegang nodig tot je foto’s en video’s om ze te tonen. Ze blijven op je apparaat: er wordt niets geüpload, tenzij je een back-up naar een eigen server instelt.</string>
+    <string name="permission_grant">Toegang toestaan</string>
+    <string name="permission_denied">De toegang is geweigerd. Je kunt die toestaan in de systeeminstellingen.</string>
+    <string name="permission_open_settings">Instellingen openen</string>
+    <string name="limited_banner">Alleen de foto’s die je hebt geselecteerd worden getoond</string>
+    <string name="limited_select_more">Meer selecteren</string>
+    <string name="limited_allow_all">Alles toestaan</string>
+
+    <!-- Menus and filters -->
+    <string name="menu_filter">Filteren</string>
+    <string name="menu_sort">Sorteren</string>
+    <string name="menu_settings">Instellingen</string>
+    <string name="menu_more">Meer opties</string>
+    <string name="filter_all">Alles</string>
+    <string name="filter_photos">Foto’s</string>
+    <string name="filter_videos">Video’s</string>
+    <string name="filter_favorites">Favorieten</string>
+    <string name="filter_screenshots">Schermafbeeldingen</string>
+    <string name="filter_screen_recordings">Schermopnamen</string>
+    <string name="filter_panoramas">Panorama’s</string>
+    <string name="filter_raw">RAW</string>
+    <string name="filter_clear">Filter wissen</string>
+    <string name="sort_by_date_taken">Opnamedatum</string>
+    <string name="sort_by_date_added">Datum toegevoegd</string>
+    <string name="sort_newest_first">Nieuwste eerst</string>
+    <string name="sort_oldest_first">Oudste eerst</string>
+
+    <!-- Selection and actions -->
+    <plurals name="selected_count">
+        <item quantity="one">%d geselecteerd</item>
+        <item quantity="other">%d geselecteerd</item>
+    </plurals>
+    <string name="action_share">Delen</string>
+    <string name="action_favorite">Toevoegen aan favorieten</string>
+    <string name="action_unfavorite">Verwijderen uit favorieten</string>
+    <string name="action_delete">Verwijderen</string>
+    <string name="action_info">Info</string>
+    <string name="action_back">Terug</string>
+    <string name="action_clear_selection">Selectie wissen</string>
+    <string name="action_select">Selecteren</string>
+    <string name="action_failed">Er is iets misgegaan</string>
+    <plurals name="moved_to_trash">
+        <item quantity="one">%d item naar de prullenbak verplaatst. Android bewaart het 30 dagen.</item>
+        <item quantity="other">%d items naar de prullenbak verplaatst. Android bewaart ze 30 dagen.</item>
+    </plurals>
+
+    <!-- Accessibility -->
+    <string name="cd_photo">Foto, %1$s</string>
+    <string name="cd_video">Video, %1$s, %2$s</string>
+    <string name="cd_edited_badge">Bewerkt</string>
+    <string name="cd_favorite_badge">Favoriet</string>
+    <string name="viewer_position">%1$d van %2$d</string>
+
+    <!-- Video -->
+    <string name="video_play">Afspelen</string>
+    <string name="video_pause">Pauzeren</string>
+    <string name="video_mute">Dempen</string>
+    <string name="video_unmute">Dempen opheffen</string>
+    <string name="video_seek">Zoeken in de video</string>
+
+    <!-- Info panel -->
+    <string name="info_title">Info</string>
+    <string name="info_loading">Details lezen…</string>
+    <string name="info_error">De details van dit bestand konden niet worden gelezen</string>
+    <string name="info_section_file">Bestand</string>
+    <string name="info_section_camera">Camera</string>
+    <string name="info_section_video">Video</string>
+    <string name="info_name">Naam</string>
+    <string name="info_type">Type</string>
+    <string name="info_folder">Map</string>
+    <string name="info_resolution">Resolutie</string>
+    <string name="info_megapixels">Megapixels</string>
+    <string name="info_size">Grootte</string>
+    <string name="info_date">Datum</string>
+    <string name="info_modified">Gewijzigd</string>
+    <string name="info_color_profile">Kleurprofiel</string>
+    <string name="info_location">Locatie</string>
+    <string name="info_location_none">In dit bestand is geen locatie opgeslagen</string>
+    <string name="info_location_hidden">Android verbergt de locatie van foto’s voor apps totdat je dit toestaat</string>
+    <string name="info_location_allow">Toestaan</string>
+    <string name="info_location_open">Openen in een kaartenapp</string>
+    <string name="info_camera">Apparaat</string>
+    <string name="info_lens">Lens</string>
+    <string name="info_focal_length">Brandpuntsafstand</string>
+    <string name="info_aperture">Diafragma</string>
+    <string name="info_shutter">Sluitertijd</string>
+    <string name="info_iso">Gevoeligheid</string>
+    <string name="info_exposure_bias">Belichtingscorrectie</string>
+    <string name="info_flash">Flits</string>
+    <string name="info_flash_fired">Afgegaan</string>
+    <string name="info_flash_off">Niet afgegaan</string>
+    <string name="info_orientation">Oriëntatie</string>
+    <string name="info_software">Software</string>
+    <string name="info_duration">Duur</string>
+    <string name="info_frame_rate">Framesnelheid</string>
+    <string name="info_video_codec">Videocodec</string>
+    <string name="info_audio_codec">Audiocodec</string>
+    <string name="info_bitrate">Bitrate</string>
+    <string name="info_dynamic_range">Dynamisch bereik</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Instellingen</string>
+    <string name="settings_appearance">Weergave</string>
+    <string name="theme_system">Systeem volgen</string>
+    <string name="theme_light">Licht</string>
+    <string name="theme_dark">Donker</string>
+    <string name="settings_privacy">Privacy</string>
+    <string name="settings_privacy_body">eikon werkt op je apparaat. Er is geen account en geen gebruiksanalyse, en de gegevens zijn uitgesloten van Android-back-ups.\n\nJe foto’s worden nooit gekopieerd: eikon houdt een lokale index bij met bestandsgegevens (naam, datum, grootte, map) zodat de bibliotheek meteen opent. Als je de app verwijdert, verdwijnt ook de index.</string>
+    <string name="settings_storage_encrypted">De database van de bibliotheek (de index, albums, bewerkingen, bijschriften en wat de analyse heeft gevonden) is op deze telefoon versleuteld met AES-256. De sleutel wordt bewaard door de Android Keystore.</string>
+    <string name="settings_storage_not_encrypted">De database van de bibliotheek kon niet worden versleuteld (%1$s) en is dus nog steeds onversleuteld opgeslagen. eikon probeert het bij elke start opnieuw.</string>
+    <string name="settings_storage_reset_title">Database van de bibliotheek opnieuw begonnen</string>
+    <string name="settings_storage_reset">De sleutel die de database van de bibliotheek beschermde is verloren gegaan, dus eikon moest een nieuwe beginnen. Albums, bewerkingen, bijschriften en namen die je had toegevoegd zijn weg. Je foto’s zijn onaangeroerd en de analyse wordt opnieuw uitgevoerd.</string>
+    <string name="settings_storage_reset_ok">Begrepen</string>
+    <string name="settings_about">Over</string>
+    <string name="settings_licenses">Open-sourcelicenties</string>
+    <string name="licenses_title">Open-sourcelicenties</string>
+    <string name="settings_version">Versie %1$s</string>
+
+    <!-- Navigation and collections -->
+    <string name="nav_library">Bibliotheek</string>
+    <string name="nav_search">Zoeken</string>
+    <string name="nav_collections">Collecties</string>
+    <string name="collections_title">Collecties</string>
+    <string name="section_people">Personen</string>
+    <string name="section_albums">Albums</string>
+    <string name="section_personal">Persoonlijk</string>
+    <string name="section_folders">Mappen op het apparaat</string>
+    <string name="collection_favorites">Favorieten</string>
+    <string name="collection_recent">Recent toegevoegd</string>
+    <string name="collection_videos">Video’s</string>
+    <string name="collection_screenshots">Schermafbeeldingen</string>
+    <string name="collection_screen_recordings">Schermopnamen</string>
+    <string name="collection_panoramas">Panorama’s</string>
+    <string name="collection_raw">RAW</string>
+    <string name="collection_trash">Recent verwijderd</string>
+    <string name="collection_hidden">Verborgen</string>
+    <plurals name="items_count">
+        <item quantity="one">%d item</item>
+        <item quantity="other">%d items</item>
+    </plurals>
+    <string name="empty_album">Dit album is leeg. Selecteer foto’s in de bibliotheek en kies “Toevoegen aan album”.</string>
+    <string name="empty_hidden">Er is niets verborgen</string>
+    <string name="empty_collection">Nog niets hier</string>
+
+    <!-- Albums -->
+    <string name="album_new">Nieuw album</string>
+    <string name="album_name_hint">Albumnaam</string>
+    <string name="album_create">Aanmaken</string>
+    <string name="album_rename">Naam wijzigen</string>
+    <string name="album_delete">Album verwijderen</string>
+    <string name="album_delete_title">Dit album verwijderen?</string>
+    <string name="album_delete_message">Alleen het album wordt verwijderd. De foto’s en video’s erin blijven waar ze zijn.</string>
+    <string name="album_move_earlier">Eerder plaatsen</string>
+    <string name="album_move_later">Later plaatsen</string>
+    <string name="action_add_to_album">Toevoegen aan album</string>
+    <string name="action_remove_from_album">Verwijderen uit album</string>
+    <string name="action_hide">Verbergen</string>
+    <string name="action_unhide">Zichtbaar maken</string>
+    <string name="action_cancel">Annuleren</string>
+    <string name="action_save">Opslaan</string>
+    <plurals name="added_to_album">
+        <item quantity="one">%1$d item toegevoegd aan “%2$s”</item>
+        <item quantity="other">%1$d items toegevoegd aan “%2$s”</item>
+    </plurals>
+    <plurals name="removed_from_album">
+        <item quantity="one">%d item uit het album verwijderd</item>
+        <item quantity="other">%d items uit het album verwijderd</item>
+    </plurals>
+    <plurals name="moved_to_hidden">
+        <item quantity="one">%d item verborgen. Je vindt het bij Collecties, Verborgen.</item>
+        <item quantity="other">%d items verborgen. Je vindt ze bij Collecties, Verborgen.</item>
+    </plurals>
+    <plurals name="unhidden">
+        <item quantity="one">%d item is weer zichtbaar</item>
+        <item quantity="other">%d items zijn weer zichtbaar</item>
+    </plurals>
+
+    <!-- Filters -->
+    <string name="filter_type_title">Type</string>
+    <string name="filter_kind_title">Soort</string>
+    <string name="filter_any">Alle</string>
+    <string name="filter_favorites_only">Alleen favorieten</string>
+    <string name="filter_edited">Bewerkt</string>
+    <string name="share_preparing">De bewerkte foto’s worden klaargemaakt om te delen</string>
+    <string name="filter_edited_only">Alleen bewerkte</string>
+    <string name="filter_clear_all">Filters wissen</string>
+
+    <!-- Locks -->
+    <string name="locked_title">Vergrendeld</string>
+    <string name="locked_body">Gebruik je vingerafdruk, gezicht of schermvergrendeling om dit te openen.</string>
+    <string name="locked_unlock">Ontgrendelen</string>
+    <string name="auth_subtitle">Bevestig dat jij het bent</string>
+    <string name="auth_title_hidden">“Verborgen” ontgrendelen</string>
+    <string name="auth_title_trash">“Recent verwijderd” ontgrendelen</string>
+    <string name="auth_unavailable">Verificatie is nu niet beschikbaar. Probeer het zo meteen opnieuw.</string>
+    <string name="no_device_lock_notice">Deze telefoon heeft geen schermvergrendeling, dus “Verborgen” is niet beveiligd. Stel er een in via de systeeminstellingen.</string>
+
+    <!-- Recently deleted -->
+    <string name="trash_info">Items worden na ongeveer 30 dagen definitief verwijderd.</string>
+    <string name="trash_empty">Er is recent niets verwijderd</string>
+    <string name="trash_restore">Herstellen</string>
+    <string name="trash_delete_forever">Definitief verwijderen</string>
+    <plurals name="days_left_short">
+        <item quantity="one">%d d</item>
+        <item quantity="other">%d d</item>
+    </plurals>
+    <plurals name="trash_restored">
+        <item quantity="one">%d item hersteld</item>
+        <item quantity="other">%d items hersteld</item>
+    </plurals>
+    <plurals name="trash_deleted">
+        <item quantity="one">%d item definitief verwijderd</item>
+        <item quantity="other">%d items definitief verwijderd</item>
+    </plurals>
+
+    <!-- Settings: security -->
+    <string name="settings_security">Beveiliging</string>
+    <string name="setting_lock_hidden">Verificatie vereisen voor “Verborgen”</string>
+    <string name="setting_lock_trash">Verificatie vereisen voor “Recent verwijderd”</string>
+    <string name="setting_show_hidden">“Verborgen” tonen bij Collecties</string>
+    <string name="setting_secure_screens">eikon verbergen bij recente apps en schermafbeeldingen blokkeren</string>
+    <string name="settings_security_body">Verborgen items blijven buiten de bibliotheek, de collecties en het zoeken, en om “Verborgen” te openen wordt je vingerafdruk, gezicht of schermvergrendeling gevraagd. De bestanden zelf zijn niet versleuteld en blijven in de gewone opslag van je telefoon, waar andere apps met toegang tot foto’s ze nog steeds kunnen zien.</string>
+
+    <!-- Search -->
+    <string name="search_placeholder">Datum, plaats, tekst, bestandsnaam</string>
+    <string name="search_clear">Zoekopdracht wissen</string>
+    <string name="search_no_results">Geen foto’s gevonden</string>
+    <string name="search_hint_title">Zoek in je bibliotheek</string>
+    <string name="search_hint_body">Probeer een datum (“August 2025”, “yesterday”), een plaats (“Rome”, “Tuscany”), een woord dat in een foto of in de bestandsnaam voorkomt, of een soort (“videos”, “screenshots”, “favorites”).\n\nDatums en soorten worden begrepen in het Engels en het Italiaans. Plaatsen, tekst in foto’s en wat ze tonen worden gevonden zodra de analyse heeft gedraaid (Instellingen, Analyse).</string>
+    <string name="search_analysis_off">Zoeken op plaats, op tekst in foto’s en op wat ze tonen staat uit. Je kunt het aanzetten bij Instellingen, Analyse.</string>
+    <string name="search_analysis_note">De foto’s worden nog op de achtergrond geanalyseerd (%1$d %%). Sommige resultaten kunnen ontbreken.</string>
+
+    <!-- Settings: analysis -->
+    <string name="settings_analysis">Analyse</string>
+    <string name="analysis_places_progress">Plaatsen: %1$,d van %2$,d</string>
+    <string name="analysis_semantic_progress">Wat foto’s tonen: %1$,d van %2$,d</string>
+    <string name="analysis_semantic_unavailable">Het model dat herkent wat foto’s tonen kon niet worden geladen, dus deze stap draait niet.</string>
+    <string name="search_semantic_unavailable">Zoeken op wat foto’s tonen is nu niet beschikbaar (het model kon niet worden geladen). Andere resultaten werken nog.</string>
+    <string name="analysis_people_progress">Personen: %1$,d van %2$,d</string>
+    <string name="analysis_people_unavailable">De modellen die gezichten vinden konden niet worden geladen, dus deze stap draait niet.</string>
+    <string name="analysis_duplicates_progress">Dubbele foto’s: %1$,d van %2$,d</string>
+    <string name="analysis_text_progress">Tekst in foto’s: %1$,d van %2$,d</string>
+    <string name="analysis_running">Bezig met analyseren…</string>
+    <string name="analysis_idle">Wacht op het juiste moment (batterij niet bijna leeg, Batterijbesparing uit en, als je dat hebt gekozen, aan de oplader)</string>
+    <string name="analysis_up_to_date">Alles is geanalyseerd</string>
+    <string name="setting_pause_analysis">Analyse onderbreken</string>
+    <string name="setting_only_charging">Alleen tijdens het opladen</string>
+    <string name="setting_analyze_places">Foto’s zoeken op plaats</string>
+    <string name="setting_analyze_semantic">Foto’s zoeken op wat ze tonen</string>
+    <string name="setting_analyze_people">Personen in foto’s vinden</string>
+    <string name="setting_analyze_people_note">Gezichten worden alleen op deze telefoon gevonden en vergeleken. Niets over een gezicht verlaat de telefoon ooit, en eikon probeert nooit iemand te herkennen: het groepeert alleen gezichten die op elkaar lijken, en jij geeft de groepen een naam.</string>
+    <string name="setting_analyze_duplicates">Dubbele foto’s vinden</string>
+    <string name="setting_analyze_text">Tekst in foto’s vinden</string>
+    <string name="analysis_location_permission">Android verbergt voor apps waar foto’s zijn genomen totdat je dit toestaat.</string>
+    <string name="analysis_allow_locations">Toegang tot fotolocaties toestaan</string>
+    <string name="analyze_now">Nu analyseren</string>
+    <string name="settings_analysis_body">De analyse draait alleen op je telefoon, op de achtergrond, en pauzeert als de batterij bijna leeg is, Batterijbesparing aan staat of de telefoon warm wordt (“Nu analyseren” gaat wel door bij Batterijbesparing). Ze slaat de plaats van elke foto op (offline bepaald, er wordt nooit een locatie ergens naartoe gestuurd), een numerieke beschrijving van wat de foto toont (zodat je kunt zoeken op “hond” of “zonsondergang”; het is geen bijschrift en kan niet weer als afbeelding worden uitgelezen) en alle tekst die ze in de foto leest, zodat Zoeken ze kan vinden. Als je personen aanzet, slaat ze ook op waar elk gezicht in een foto zit en een numerieke beschrijving ervan, alleen om gezichten te groeperen die op elkaar lijken. Als je dubbele foto’s aanzet, slaat ze een korte vingerafdruk op van elke foto en van bestanden met dezelfde grootte, alleen om kopieën te vinden. Herkennen wat foto’s tonen en tekst lezen zijn traag en belasten de processor sterk, daarom wacht de analyse standaard op het opladen.</string>
+
+    <!-- Info panel: derived data -->
+    <string name="info_place">Dichtstbijzijnde plaats</string>
+    <string name="info_text_found">Tekst in deze foto</string>
+    <string name="info_text_copy">Tekst kopiëren</string>
+
+    <!-- People -->
+    <string name="collection_people">Personen</string>
+    <string name="people_title">Personen</string>
+    <string name="person_unnamed">Persoon zonder naam</string>
+    <string name="person_add_name">Een naam toevoegen</string>
+    <string name="person_rename">Deze persoon een naam geven</string>
+    <string name="person_name_hint">Naam</string>
+    <string name="person_same_name_note">Personen met dezelfde naam worden samengevoegd tot één.</string>
+    <string name="person_favorite">Markeren als favoriet</string>
+    <string name="person_unfavorite">Verwijderen uit favorieten</string>
+    <string name="person_hide">Deze persoon verbergen</string>
+    <string name="person_unhide">Deze persoon tonen</string>
+    <string name="person_merge">Samenvoegen met een andere persoon…</string>
+    <string name="person_merge_title">Samenvoegen met</string>
+    <string name="person_merge_empty">Er is niemand anders om mee samen te voegen.</string>
+    <string name="person_not_this">Niet deze persoon</string>
+    <string name="person_remove_from_people">Geen gezicht</string>
+    <string name="people_show_hidden">Verborgen personen tonen (%1$d)</string>
+    <string name="people_hide_hidden">Verborgen personen verbergen</string>
+    <string name="people_empty_off">Personen staat uit. Zet “Personen in foto’s vinden” aan bij Instellingen, Analyse, en eikon groepeert de gezichten die het vindt. Alles blijft op deze telefoon.</string>
+    <string name="people_empty_working">Nog geen gezichten gevonden (%1$d %% van je foto’s geanalyseerd). De analyse draait op de achtergrond tijdens het opladen.</string>
+    <string name="people_empty_done">Geen gezichten gevonden in je foto’s.</string>
+    <string name="people_go_settings">Instellingen openen</string>
+    <string name="person_photos_empty">Geen foto’s.</string>
+    <plurals name="moved_to_new_person">
+        <item quantity="one">%d foto naar een nieuwe persoon verplaatst</item>
+        <item quantity="other">%d foto’s naar een nieuwe persoon verplaatst</item>
+    </plurals>
+    <plurals name="removed_from_people">
+        <item quantity="one">%d foto uit Personen verwijderd</item>
+        <item quantity="other">%d foto’s uit Personen verwijderd</item>
+    </plurals>
+    <string name="info_people">Personen</string>
+    <plurals name="info_people_unnamed_count">
+        <item quantity="one">%d zonder naam</item>
+        <item quantity="other">%d zonder naam</item>
+    </plurals>
+
+    <string name="section_memories">Herinneringen</string>
+    <string name="section_pets">Huisdieren</string>
+    <string name="collection_dogs">Honden</string>
+    <string name="collection_cats">Katten</string>
+    <string name="empty_pets">Nog geen honden of katten gevonden. Huisdieren worden herkend aan wat foto’s tonen: zet “Foto’s zoeken op wat ze tonen” aan bij Instellingen, Analyse, en wacht tot het klaar is.</string>
+
+    <!-- Places -->
+    <string name="places_title">Plaatsen</string>
+    <string name="places_tab_list">Lijst</string>
+    <string name="places_tab_map">Kaart</string>
+    <string name="place_unknown">Andere plaatsen</string>
+    <string name="place_near">Bij %1$s</string>
+    <string name="places_expand">Tonen</string>
+    <string name="places_collapse">Verbergen</string>
+    <string name="collection_places">Plaatsen</string>
+    <string name="places_map_note">Alleen contouren van landen en de namen van grotere steden: er worden geen kaartafbeeldingen gedownload en er verlaat nooit een positie de telefoon. Knijp of tik dubbel om te zoomen, tik op een markering om de foto’s ervan te zien.</string>
+    <string name="places_map_description">Kaart van waar je foto’s zijn genomen, met markeringen voor groepen foto’s</string>
+    <string name="places_empty_off">Plaatsen staat uit. Zet “Foto’s zoeken op plaats” aan bij Instellingen, Analyse, en eikon bepaalt offline waar je foto’s zijn genomen aan de hand van hun gps-gegevens.</string>
+    <string name="places_empty_working">Nog geen plaatsen gevonden (%1$d %% van je foto’s geanalyseerd). De analyse draait op de achtergrond tijdens het opladen.</string>
+    <string name="places_empty_done">Geen van je foto’s heeft een positie, of eikon mag de fotolocaties misschien niet lezen (Instellingen, Analyse).</string>
+    <string name="section_places">Plaatsen en reizen</string>
+
+    <!-- Trips -->
+    <string name="collection_trips">Reizen</string>
+    <string name="trips_title">Reizen</string>
+    <string name="trip_untitled">Reis</string>
+    <string name="trip_reason">Ongeveer %1$d km van waar de meeste van je foto’s worden genomen (bij %2$s)</string>
+    <string name="trip_home_unknown">een onbekende plaats</string>
+    <plurals name="trip_summary_days">
+        <item quantity="one">%d dag</item>
+        <item quantity="other">%d dagen</item>
+    </plurals>
+    <string name="trips_empty">Geen reizen gevonden. Een reis is een reeks dagen, met minstens 10 foto’s, doorgebracht op minstens 100 km van waar de meeste van je foto’s worden genomen. Daarvoor heeft eikon de posities van de foto’s nodig: zet “Foto’s zoeken op plaats” aan bij Instellingen, Analyse.</string>
+
+    <!-- Duplicates and similar shots -->
+    <string name="section_cleanup">Opruimen</string>
+    <string name="collection_duplicates">Dubbele foto’s</string>
+    <string name="collection_similar">Vergelijkbare opnamen</string>
+    <string name="duplicates_title">Dubbele foto’s</string>
+    <string name="similar_title">Vergelijkbare opnamen</string>
+    <string name="duplicates_note">eikon vindt ze alleen. Er wordt niets verwijderd totdat je het bevestigt in het eigen dialoogvenster van Android, en verwijderde foto’s gaan naar Recent verwijderd, waar je ze kunt herstellen. Kopieën van een foto die je aan albums hebt toegevoegd: de kopie die je bewaart komt in die albums.</string>
+    <plurals name="duplicate_exact">
+        <item quantity="one">%d identiek bestand</item>
+        <item quantity="other">%d identieke bestanden</item>
+    </plurals>
+    <plurals name="duplicate_visual">
+        <item quantity="one">%d kopie van dezelfde afbeelding</item>
+        <item quantity="other">%d kopieën van dezelfde afbeelding</item>
+    </plurals>
+    <plurals name="similar_group">
+        <item quantity="one">%d opname</item>
+        <item quantity="other">%d vergelijkbare opnamen</item>
+    </plurals>
+    <plurals name="duplicate_keep_best">
+        <item quantity="one">Het beste bewaren, %d naar Recent verwijderd verplaatsen</item>
+        <item quantity="other">Het beste bewaren, %d naar Recent verwijderd verplaatsen</item>
+    </plurals>
+    <plurals name="similar_trash_marked">
+        <item quantity="one">%d naar Recent verwijderd verplaatsen</item>
+        <item quantity="other">%d naar Recent verwijderd verplaatsen</item>
+    </plurals>
+    <string name="duplicate_best">Beste</string>
+    <string name="duplicate_kept">Bewaard</string>
+    <string name="duplicate_marked">Wordt verplaatst</string>
+    <string name="duplicate_dismiss">Dit zijn geen dubbele foto’s</string>
+    <string name="similar_dismiss">Dit zijn geen vergelijkbare opnamen</string>
+    <string name="duplicates_empty_off">Dubbele foto’s staat uit. Zet “Dubbele foto’s vinden” aan bij Instellingen, Analyse. eikon maakt vingerafdrukken van je foto’s alleen op deze telefoon, zonder enig model.</string>
+    <string name="similar_empty_off">Vergelijkbare opnamen heeft “Foto’s zoeken op wat ze tonen” nodig bij Instellingen, Analyse: het vergelijkt wat elke foto toont, voor foto’s die binnen twee minuten na elkaar zijn genomen.</string>
+    <string name="duplicates_empty_working">Nog niets gevonden (%1$d %% geanalyseerd). De analyse draait op de achtergrond tijdens het opladen.</string>
+    <string name="duplicates_empty_done">Geen dubbele foto’s gevonden.</string>
+    <string name="similar_empty_done">Geen vergelijkbare opnamen gevonden.</string>
+
+    <!-- Memories -->
+    <string name="collection_memories">Herinneringen</string>
+    <string name="memories_title">Herinneringen</string>
+    <string name="memory_on_this_day">Op deze dag</string>
+    <string name="memory_year_ago">Een jaar geleden</string>
+    <string name="memory_weekend_in">Weekend in %1$s</string>
+    <string name="memory_weekend">Weekendje weg</string>
+    <string name="memory_day_trip_to">Dagtrip naar %1$s</string>
+    <string name="memory_day_trip">Dagtrip</string>
+    <string name="memory_season">%1$s %2$d</string>
+    <string name="memory_person">%1$s, %2$d</string>
+    <string name="season_winter">Winter</string>
+    <string name="season_spring">Lente</string>
+    <string name="season_summer">Zomer</string>
+    <string name="season_autumn">Herfst</string>
+    <string name="memory_hide">Deze herinnering verbergen</string>
+    <string name="memory_show_fewer">Minder van dit soort tonen</string>
+    <string name="memory_show_less_of">Minder van %1$s tonen</string>
+    <string name="memory_exclude_date">Deze datum overslaan</string>
+    <string name="memory_all_photos">Alle foto’s</string>
+    <string name="memory_replay">Opnieuw afspelen</string>
+    <string name="memory_reset">Mijn keuzes ongedaan maken</string>
+    <string name="memory_done">Klaar. Je kunt je keuzes ongedaan maken via het menu van Herinneringen.</string>
+    <string name="memories_empty">Nog geen herinneringen. eikon maakt ze op basis van datums, reizen, seizoenen en de personen die je een naam hebt gegeven: “Op deze dag”, “Een jaar geleden”, reizen en weekendjes weg, een seizoen, iemand in een jaar. Reizen en weekenden hebben Plaatsen nodig, personen hebben Personen nodig (Instellingen, Analyse). Er verlaat niets de telefoon.</string>
+    <string name="memories_note">Gemaakt op basis van datums, plaatsen en benoemde personen met eenvoudige regels; er is geen muziek, en foto’s worden gekozen op favorieten, grootte en gezichten, niet op hoe goed ze eruitzien.</string>
+    <string name="memory_no_photos">Deze herinnering heeft geen foto’s meer om te tonen.</string>
+
+    <!-- Editing -->
+    <string name="action_edit">Bewerken</string>
+    <string name="edit_title">Bewerken</string>
+    <string name="edit_done">Klaar</string>
+    <string name="edit_original">Origineel</string>
+    <string name="edit_revert">Terugzetten</string>
+    <string name="edit_revert_title">Terugzetten naar het origineel?</string>
+    <string name="edit_revert_message">Hiermee worden alle aanpassingen, het filter en de uitsnede van deze bewerking gewist. De originele foto is nooit gewijzigd. Tik op Klaar om de teruggezette foto te bewaren.</string>
+    <string name="edit_discard_title">Je wijzigingen negeren?</string>
+    <string name="edit_discard_message">De wijzigingen die je in deze editor hebt gemaakt gaan verloren. De foto blijft zoals hij was.</string>
+    <string name="edit_discard">Negeren</string>
+    <string name="edit_copy_edits">Bewerkingen kopiëren</string>
+    <string name="edit_paste_edits">Bewerkingen plakken</string>
+    <string name="edit_save_copy">Een kopie opslaan</string>
+    <string name="edit_copy_saved">Er is een kopie naast het origineel opgeslagen; het origineel is niet gewijzigd.</string>
+    <string name="edit_copy_saved_no_details">Er is een kopie naast het origineel opgeslagen; het origineel is niet gewijzigd. De cameragegevens konden niet worden gekopieerd.</string>
+    <string name="edit_failed">De bewerking kon niet worden voltooid. De foto is niet gewijzigd.</string>
+    <string name="edited_badge">Bewerkt</string>
+    <string name="viewer_show_original">Het origineel tonen</string>
+    <string name="viewer_show_edited">De bewerkte foto tonen</string>
+    <string name="tool_auto">Auto</string>
+    <string name="tool_light">Licht</string>
+    <string name="tool_color">Kleur</string>
+    <string name="tool_detail">Detail</string>
+    <string name="tool_filters">Filters</string>
+    <string name="tool_crop">Uitsnijden</string>
+    <string name="adj_exposure">Belichting</string>
+    <string name="adj_brightness">Helderheid</string>
+    <string name="adj_contrast">Contrast</string>
+    <string name="adj_highlights">Hoge lichten</string>
+    <string name="adj_shadows">Schaduwen</string>
+    <string name="adj_black_point">Zwartpunt</string>
+    <string name="adj_saturation">Verzadiging</string>
+    <string name="adj_vibrance">Levendigheid</string>
+    <string name="adj_temperature">Warmte</string>
+    <string name="adj_tint">Tint</string>
+    <string name="adj_sharpness">Scherpte</string>
+    <string name="adj_vignette">Vignettering</string>
+    <string name="geo_straighten">Rechtzetten</string>
+    <string name="geo_perspective_vertical">Verticaal perspectief</string>
+    <string name="geo_perspective_horizontal">Horizontaal perspectief</string>
+    <string name="filter_amount">Sterkte</string>
+    <string name="filter_name_none">Origineel</string>
+    <string name="filter_name_vivid">Levendig</string>
+    <string name="filter_name_warm">Warm</string>
+    <string name="filter_name_cool">Koel</string>
+    <string name="filter_name_mono">Mono</string>
+    <string name="filter_name_noir">Noir</string>
+    <string name="filter_name_fade">Vervaagd</string>
+    <string name="filter_name_chrome">Chroom</string>
+    <string name="filter_name_sepia">Sepia</string>
+    <string name="crop_rotate">Draaien</string>
+    <string name="crop_flip">Spiegelen</string>
+    <string name="shape_free">Vrij</string>
+    <string name="shape_original">Origineel</string>
+    <string name="shape_square">1:1</string>
+    <string name="shape_4_3">4:3</string>
+    <string name="shape_3_2">3:2</string>
+    <string name="shape_16_9">16:9</string>
+    <string name="action_paste_edits">Bewerkingen plakken</string>
+    <string name="action_revert_edits">Bewerkingen verwijderen</string>
+    <plurals name="edits_pasted">
+        <item quantity="one">Bewerkingen toegepast op %d foto</item>
+        <item quantity="other">Bewerkingen toegepast op %d foto’s</item>
+    </plurals>
+    <plurals name="edits_reverted">
+        <item quantity="one">Bewerking van %d foto verwijderd; het origineel is zoals het altijd was</item>
+        <item quantity="other">Bewerkingen van %d foto’s verwijderd; de originelen zijn zoals ze altijd waren</item>
+    </plurals>
+
+    <!-- Accessibility -->
+    <string name="slider_reset">Terugzetten naar neutraal</string>
+    <string name="crop_area">Uitsnedegebied, van %1$d %% tot %2$d %% horizontaal en van %3$d %% tot %4$d %% verticaal</string>
+    <string name="crop_action_smaller">De uitsnede kleiner maken</string>
+    <string name="crop_action_larger">De uitsnede groter maken</string>
+    <string name="crop_action_left">De uitsnede naar links verplaatsen</string>
+    <string name="crop_action_right">De uitsnede naar rechts verplaatsen</string>
+    <string name="crop_action_up">De uitsnede omhoog verplaatsen</string>
+    <string name="crop_action_down">De uitsnede omlaag verplaatsen</string>
+    <string name="viewer_zoom_in">Inzoomen</string>
+    <string name="viewer_zoom_out">Uitzoomen</string>
+    <string name="external_photo">Foto</string>
+    <string name="viewer_cannot_display">Deze foto kan niet worden getoond.</string>
+
+    <!-- Info: caption, editing the date and location, what the photo shows -->
+    <string name="info_caption">Bijschrift</string>
+    <string name="caption_add">Een bijschrift toevoegen</string>
+    <string name="caption_edit">Het bijschrift bewerken</string>
+    <string name="caption_title">Bijschrift</string>
+    <string name="caption_hint">Een paar woorden over deze foto</string>
+    <string name="caption_note">Alleen bewaard in eikon; het bestand van de foto wordt niet gewijzigd. Zoeken vindt het.</string>
+    <string name="date_change">Datum en tijd wijzigen</string>
+    <string name="date_revert">De oorspronkelijke datum herstellen</string>
+    <string name="date_time_title">Tijdstip</string>
+    <string name="action_next">Volgende</string>
+    <string name="location_title">Waar hij is genomen</string>
+    <string name="location_coordinates">Coördinaten</string>
+    <string name="location_coordinates_note">Decimale graden, eerst de breedtegraad: 41.9028, 12.4964</string>
+    <string name="location_invalid">Geen positie: twee getallen, breedtegraad tussen -90 en 90 en lengtegraad tussen -180 en 180</string>
+    <string name="location_city">Of zoek een stad (werkt offline)</string>
+    <string name="location_remove">De locatie verwijderen</string>
+    <string name="location_change">De locatie wijzigen</string>
+    <string name="location_revert">De oorspronkelijke locatie herstellen</string>
+    <string name="info_map_description">Een kleine kaart die toont waar de foto is genomen</string>
+    <string name="metadata_done">Klaar. De foto zegt nu dit; het origineel wordt bewaard zodat je het kunt herstellen.</string>
+    <string name="metadata_not_writable">Dit soort bestand kan niet worden gewijzigd.</string>
+    <string name="metadata_needs_permission">Om de datum of locatie van een foto te wijzigen moet eikon kunnen lezen waar foto’s zijn genomen: anders toont Android een kopie zonder de locatie, en zou opslaan die wissen.</string>
+    <string name="metadata_nothing_to_revert">Er is niets om te herstellen.</string>
+    <string name="metadata_interrupted">Een eerdere wijziging aan deze foto is niet afgerond. Het origineel wordt bewaard: herstel het voordat je iets anders wijzigt.</string>
+    <string name="metadata_failed">De wijziging is niet gelukt. De foto is precies zo teruggezet als hij was.</string>
+    <string name="metadata_restore_file">Het originele bestand herstellen</string>
+    <string name="info_albums">In albums</string>
+    <string name="info_pets">Huisdieren</string>
+    <string name="info_shows">Toont mogelijk</string>
+    <string name="pet_dog">Hond</string>
+    <string name="pet_cat">Kat</string>
+    <string name="info_album">Apparaatalbum</string>
+    <string name="label_landscape">Een landschap</string>
+    <string name="label_beach">Een strand</string>
+    <string name="label_sea">De zee</string>
+    <string name="label_mountain">Een berg</string>
+    <string name="label_sunset">Een zonsondergang</string>
+    <string name="label_snow">Sneeuw</string>
+    <string name="label_city">Een stad</string>
+    <string name="label_building">Een gebouw</string>
+    <string name="label_street">Een straat</string>
+    <string name="label_woods">Een bos</string>
+    <string name="label_flower">Een bloem</string>
+    <string name="label_sky">De lucht</string>
+    <string name="label_person">Een persoon</string>
+    <string name="label_group">Een groep mensen</string>
+    <string name="label_food">Eten</string>
+    <string name="label_dessert">Een dessert</string>
+    <string name="label_drink">Een drankje</string>
+    <string name="label_car">Een auto</string>
+    <string name="label_bicycle">Een fiets</string>
+    <string name="label_airplane">Een vliegtuig</string>
+    <string name="label_boat">Een boot</string>
+    <string name="label_bird">Een vogel</string>
+    <string name="label_horse">Een paard</string>
+    <string name="label_interior">Een kamer</string>
+    <string name="label_night">De nacht</string>
+    <string name="label_party">Een feest</string>
+    <string name="label_sport">Een sportevenement</string>
+    <string name="label_animal">Een dier</string>
+
+    <!-- Backup to your own server -->
+    <string name="backup_title">Back-up naar je eigen server</string>
+    <string name="backup_intro">Kopieert je foto’s en video’s via een versleutelde verbinding naar een server die je zelf beheert. Er verlaat niets deze telefoon totdat je de back-up aanzet, alles gaat alleen naar de server hieronder, en eikon verwijdert of wijzigt er nooit iets op. Het wachtwoord of de sleutel wordt versleuteld bewaard in de Android Keystore.</string>
+    <string name="backup_kind_immich">Immich (ook wat Umbrel installeert)</string>
+    <string name="backup_kind_nextcloud">Nextcloud, of een andere WebDAV-server</string>
+    <string name="backup_address">Serveradres (https://…)</string>
+    <string name="backup_username">Inlognaam</string>
+    <string name="backup_folder">Map op de server</string>
+    <string name="backup_api_key">API-sleutel</string>
+    <string name="backup_app_password">App-wachtwoord</string>
+    <string name="backup_secret_saved">Opgeslagen. Laat leeg om het te behouden</string>
+    <string name="backup_help_immich">In Immich: Accountinstellingen, API-sleutels, Nieuwe API-sleutel. De machtiging die nodig is, is asset.upload.</string>
+    <string name="backup_help_nextcloud">In Nextcloud: Persoonlijke instellingen, Beveiliging, Apparaten en sessies, maak een nieuw app-wachtwoord aan. Gebruik dat, niet je inlogwachtwoord.</string>
+    <string name="backup_save_test">Opslaan en de verbinding testen</string>
+    <string name="backup_connected">Verbonden met %1$s.</string>
+    <string name="backup_failed">Kon geen verbinding maken: %1$s</string>
+    <string name="backup_certificate_declined">Het certificaat werd niet vertrouwd, dus er is niets verzonden en er wordt niets verzonden.</string>
+    <string name="backup_certificate_title">Het certificaat van deze server komt niet van een instantie die je telefoon vertrouwt</string>
+    <string name="backup_certificate_body">%1$s presenteerde het onderstaande certificaat. Vergelijk de vingerafdruk ervan met die je server toont (bijvoorbeeld met: openssl x509 -noout -fingerprint -sha256). Vertrouw het alleen als ze identiek zijn: vanaf dan wordt dit ene certificaat, en geen ander, voor deze server geaccepteerd.</string>
+    <string name="backup_certificate_subject">Uitgegeven aan: %1$s</string>
+    <string name="backup_certificate_expires">Geldig tot %1$s</string>
+    <string name="backup_certificate_self_signed">Het is door zichzelf ondertekend, zoals het certificaat van een thuisserver meestal is.</string>
+    <string name="backup_certificate_trust">Dit certificaat vertrouwen</string>
+    <string name="backup_enable">Een back-up maken van mijn foto’s en video’s</string>
+    <string name="backup_test_first">Sla eerst de verbinding op en test die.</string>
+    <string name="backup_wifi_only">Alleen via wifi</string>
+    <string name="backup_only_charging">Alleen tijdens het opladen</string>
+    <string name="backup_videos">Video’s opnemen</string>
+    <string name="backup_hidden">Verborgen foto’s opnemen</string>
+    <string name="backup_hidden_note">Verborgen foto’s worden ook naar je server gestuurd, waar ze net zo zichtbaar zijn als al het andere daar.</string>
+    <string name="backup_confirm_title">De back-up starten?</string>
+    <plurals name="backup_confirm_body">
+        <item quantity="one">%1$d foto of video wordt, beetje bij beetje, naar %2$s gekopieerd wanneer de telefoon op het netwerk zit dat je hebt toegestaan. Er wordt niets verwijderd op de telefoon of op de server.</item>
+        <item quantity="other">%1$d foto’s en video’s worden, beetje bij beetje, naar %2$s gekopieerd wanneer de telefoon op het netwerk zit dat je hebt toegestaan. Er wordt niets verwijderd op de telefoon of op de server.</item>
+    </plurals>
+    <string name="backup_confirm_start">Starten</string>
+    <string name="backup_location_note">Android verbergt voor apps zonder de machtiging voor fotolocaties waar foto’s zijn genomen, dus de kopieën op je server zouden geen locatie hebben.</string>
+    <string name="backup_progress">Gekopieerd: %1$,d van %2$,d</string>
+    <plurals name="backup_refused">
+        <item quantity="one">%1$d foto is door de server geweigerd en wordt niet opnieuw geprobeerd totdat je erom vraagt.</item>
+        <item quantity="other">%1$d foto’s zijn door de server geweigerd en worden niet opnieuw geprobeerd totdat je erom vraagt.</item>
+    </plurals>
+    <string name="backup_running">Bezig met back-uppen…</string>
+    <string name="backup_idle">Wacht op het juiste moment (het netwerk dat je hebt toegestaan, batterij niet bijna leeg).</string>
+    <string name="backup_last_run">Laatste keer %1$s. Verzonden: %2$d. Al aanwezig: %3$d. Geweigerd: %4$d.</string>
+    <string name="backup_stopped">Gestopt omdat %1$s</string>
+    <string name="backup_stop_power_save">Batterijbesparing aan staat.</string>
+    <string name="backup_stop_thermal">de telefoon te warm was.</string>
+    <string name="backup_stop_unreachable">de server niet bereikbaar of druk bezig was. Er wordt opnieuw geprobeerd.</string>
+    <string name="backup_stop_unauthorized">de server de sleutel of het wachtwoord niet accepteerde.</string>
+    <string name="backup_stop_untrusted">het certificaat van de server niet een is dat je hebt vertrouwd.</string>
+    <string name="backup_stop_misconfigured">het adres niet klopt voor dit soort server.</string>
+    <string name="backup_stop_refusals">de server veel bestanden achter elkaar heeft geweigerd, wat wijst op een limiet van de server, niet op de foto’s.</string>
+    <string name="backup_now">Nu back-uppen</string>
+    <string name="backup_retry_refused">De geweigerde opnieuw proberen</string>
+
+    <!-- Network consent -->
+    <string name="network_allow">eikon toestaan internet te gebruiken</string>
+    <string name="network_allow_note">Uit totdat je het aanzet. eikon gebruikt het netwerk alleen om je foto’s naar de server hieronder te kopiëren, en pas nadat je er een hebt ingesteld en de back-up hebt aangezet. Als dit uit staat, kan niets ergens verbinding mee maken.</string>
+    <string name="settings_privacy_network">eikon kan voor één ding online gaan: de optionele back-up van je foto’s naar een server die je zelf beheert. Die staat uit totdat je hem toestaat (Instellingen, Back-up) en de server instelt. Geen gebruiksanalyse, geen advertenties, geen accounts, geen Google-diensten en geen cloud van ons: die is er niet.</string>
+
+    <!-- First-run screens -->
+    <string name="onboarding_intro_title">Je foto’s, op je telefoon</string>
+    <string name="onboarding_intro_body">eikon is een foto- en videogalerij voor Android. Ze toont de afbeeldingen die je telefoon al bewaart, vindt ze op datum, plaats, personen of wat ze tonen, en bewerkt ze zonder de originelen ooit aan te raken.</string>
+    <string name="onboarding_point_local">Alles blijft op dit apparaat. Geen account, geen gebruiksanalyse, geen advertenties.</string>
+    <string name="onboarding_point_independent">Ze is van niets buiten je telefoon afhankelijk: geen Google-diensten, geen cloud, geen servers van derden.</string>
+    <string name="onboarding_point_yours">Als je een back-up wilt, gaat die alleen naar een server die je zelf beheert, en alleen als je die instelt.</string>
+    <string name="onboarding_next">Volgende</string>
+    <string name="onboarding_start">Aan de slag</string>
+    <string name="onboarding_page">Pagina %1$d van %2$d</string>
+    <string name="onboarding_permissions_title">Waar eikon om vraagt, en waarom</string>
+    <string name="onboarding_permissions_intro">Alleen de eerste is nodig. Je kunt elk ervan later wijzigen, in Instellingen of in de instellingen van je telefoon.</string>
+    <string name="onboarding_perm_media_title">Foto’s en video’s</string>
+    <string name="onboarding_perm_media_body">Zodat eikon je bibliotheek kan tonen. Het leest de bestanden waar Android ze al bewaart en kopieert ze nergens naartoe. Als je wilt, kun je ook alleen sommige foto’s toestaan.</string>
+    <string name="onboarding_perm_location_title">Fotolocaties (optioneel)</string>
+    <string name="onboarding_perm_location_body">Android verbergt voor apps waar een foto is genomen, tenzij je dit toestaat. eikon gebruikt het om de plaats van een foto op een offlinekaart te tonen en om op plaats te zoeken. Plaatsen worden op de telefoon bepaald: er wordt nooit een positie ergens naartoe gestuurd.</string>
+    <string name="onboarding_perm_network_title">Internet (optioneel)</string>
+    <string name="onboarding_perm_network_body">Wordt voor één ding gebruikt: je foto’s kopiëren naar een server die je zelf beheert (Immich, Nextcloud), als je dat ooit instelt. Anders maakt eikon nergens verbinding mee. Het staat uit totdat je het hier aanzet, en je kunt het op elk moment weer uitzetten in Instellingen.</string>
+    <string name="onboarding_allow">Toestaan</string>
+    <string name="onboarding_allowed">Toegestaan</string>
+    <string name="onboarding_promise">Niets hier is afhankelijk van iets buiten je telefoon: geen Google-diensten, geen accounts, geen gebruiksanalyse. Je foto’s blijven op dit apparaat of gaan, als je dat kiest, naar je eigen server.</string>
+
+    <!-- Support -->
+    <string name="support_title">Steun</string>
+    <string name="support_body">eikon is gratis, heeft geen advertenties en volgt je niet. Als je het leuk vindt, kun je een paar sats sturen via het Lightning-netwerk.</string>
+    <string name="support_button">Doneren met Lightning</string>
+    <string name="support_copied">Geen Lightning-wallet gevonden — adres gekopieerd: %1$s</string>
+
+    <!-- Analyze now -->
+    <string name="analyze_now_running">Bezig met analyseren…</string>
+    <string name="analyze_now_hint">Begint meteen, alleen op deze telefoon, zelfs bij Batterijbesparing.</string>
+    <string name="analyze_now_hint_off">Zet hierboven eerst minstens één stap aan.</string>
+    <string name="analyze_now_hint_paused">De analyse is gepauzeerd: zet de pauze uit om nu te analyseren.</string>
+
+    <!-- Pictures from other apps -->
+    <string name="viewer_open_in_library">Openen in de bibliotheek</string>
+</resources>

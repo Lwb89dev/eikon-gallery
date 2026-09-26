@@ -1,5 +1,35 @@
 # Changelog
 
+## 1.1.0 — unreleased
+
+One APK instead of two, first-run screens, 27 languages, and a round of fixes to the grid, the viewer, People and Search. eikon is still local-first: no account, no analytics, no Google services, and it does not talk to the network unless you allow it, for the backup to a server of your own.
+
+### One APK, and a switch for the network
+- The `standard` and `backup` builds are **merged into one APK** (`eikon-1.1.0-arm64-v8a.apk`, same application id and signing key, so it installs over 1.0.0 and keeps everything). It holds the `INTERNET` permission, but **"Allow eikon to use the internet" is off by default** and every place that could connect checks it; the first-run screens and Settings both offer it.
+- **What this changes, honestly:** 1.0.0's `standard` APK made connecting impossible at the operating-system level, because it had no permission. That guarantee is now the app's own switch plus a build check (the build fails if the manifest allows unencrypted traffic or asks for any permission that is not on a reviewed list). It can be read and verified, but the operating system no longer enforces it. If you need the stricter guarantee, keep 1.0.0's `standard` APK.
+- Anyone who had the backup switched on in 1.0.0's `backup` build keeps it on after updating.
+- No Google Play services, Firebase or ML Kit is in the app (checked in the dependency tree and the APK); the emoji-font initializer that would ask Google's font provider is removed.
+
+### First run and other apps
+- **First-run screens**: what eikon is, what each permission is for (photos, optional photo locations, optional internet) with Allow buttons, and the promise that nothing depends on anything outside your phone.
+- **Open from the camera**: a photo just taken opens in eikon's viewer, inside your library, at its place (the camera's review action and "open with"); one that is not in the library yet is shown on its own with a button to open it in the library.
+
+### Languages and look
+- **27 languages**: English plus the other 23 official languages of the European Union, Simplified Chinese, Russian and Japanese, by the phone's language or per app in the system settings. **The translations were written by an AI model and have not been reviewed by native speakers**: expect stiff phrasing, and corrections are welcome ([docs/TRANSLATING.md](docs/TRANSLATING.md)). Search still understands English and Italian only.
+- A **squircle launcher icon** (whether the phone shows a squircle or its own shape depends on the launcher), a clearer **Analyze now** button, a visible **Original** toggle in the editor, and a small **Support** section at the bottom of Settings with a Lightning address if you wish to send a few sats.
+
+### Fixes
+- **Grid zoom**: pinching follows your fingers continuously and settles on the nearest column count, instead of jumping.
+- **The first zoom of a photo** no longer stops the picture for a moment: the large version is prepared once you have looked at the photo for a moment.
+- **Closing a photo** no longer flashes the photo you just closed over the grid.
+- **Videos zoom** (pinch, double tap, drag) and **the seek bar shows the picture as you drag it**, instead of freezing until you let go.
+- **People**: two groups given the same name become one, and groups that already shared a name are joined when People opens. (A person hidden by you joins nobody.)
+- **Search**: results no longer redo themselves after every photo the analysis finishes, but when you are not scrolling; searching while the analysis runs no longer reads all image data from the database again; and the words that link a query ("cane sulla neve", "foto all'aperto", "le mie foto del gatto nel giardino") are ignored properly. Other lists no longer redo themselves for the analysis at all, and the *Edited* filter now follows edits.
+
+### What has and has not been checked
+- 845 automated tests, including new ones for the network switch at every place that connects, the pinch maths, the translations (every string, plural form and placeholder in every language), the camera hand-over, the viewer's landing, video scrubbing, the same-name merge and which lists read what the analysis writes. Lint is clean.
+- **Not run on a device yet**: the first-run screens, the grid pinch, the icon, the camera hand-over, the translations on screen, and every fix above. The diagnoses of the first-zoom stall and of the search scrolling stall are likely causes, **not profiled ones**: treat them as attempts until you have tried them. Search results are still listed by date, not by how well they match.
+
 ## 1.0.0 — 2026-09-26
 
 First release. eikon is a local-first, privacy-first photo and video gallery for Android (11 and newer), built natively with Kotlin and Jetpack Compose, inspired by the interaction model of Apple Photos.

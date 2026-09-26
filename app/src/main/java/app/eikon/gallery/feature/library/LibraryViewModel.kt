@@ -56,11 +56,14 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.debounce
+import kotlinx.coroutines.flow.drop
+import kotlinx.coroutines.flow.sample
 import kotlinx.coroutines.flow.mapLatest
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.map
@@ -68,6 +71,7 @@ import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withTimeoutOrNull
 
 /** One-shot things the screen must do (launch a system dialog, show a message). */
 sealed interface LibraryEvent {
@@ -136,6 +140,7 @@ class LibraryViewModel @Inject constructor(
     private val editedShare: EditedShare,
     private val analysisPriority: AnalysisPriority,
     analysisStatusRepository: AnalysisStatusRepository,
+    private val openRequests: OpenRequests,
     private val savedState: SavedStateHandle,
 ) : ViewModel() {
     val source: GridSource = GridSource.parse(savedStateHandle.get<String>(SOURCE_ARG))
@@ -228,8 +233,42 @@ class LibraryViewModel @Inject constructor(
         .flatMapLatest { q -> if (q == null) flowOf(PagingData.empty()) else repository.pagedMedia(q) }
         .cachedIn(viewModelScope)
 
+    /**
+     * Where the picture the user asked to see in the library is in this list, emitted once the index has it (the sync may still be reading it in) and only by the main Library.
+     * A request the list cannot satisfy within [OPEN_WAIT_MS] (the picture is hidden, or the saved filter excludes it) is dropped.
+     */
+    val requestedPositions: Flow<Int> = if (source != GridSource.Library) emptyFlow() else openRequests.pending.filterNotNull().mapLatest { id ->
+        try {
+            withTimeoutOrNull(OPEN_WAIT_MS) { positionOf(id) }
+        } finally {
+            openRequests.done(id)
+        }
+    }.filterNotNull()
+
+    private suspend fun positionOf(mediaId: Long): Int = loadedSettings
+        .flatMapLatest { s -> repository.positionOf(source.toQuery(s.filters, s.sortField, s.direction), mediaId) }
+        .filterNotNull()
+        .first()
+
+    /**
+     * The analysis stored something a search reads (text found in photos, places, faces), at most once in [SEARCH_REFRESH_MS]; only for the Search screen. A search's list does not
+     * redo itself for that (it would shift under the finger, and redoing it after every photo analysed made scrolling it stall): the screen calls [refreshSearchResults] when the
+     * person is not scrolling.
+     */
+    val searchIndexChanges: Flow<Unit> = if (source == GridSource.Search) {
+        repository.analysisChanges().drop(1).sample(SEARCH_REFRESH_MS).map { }
+    } else {
+        emptyFlow()
+    }
+    private val searchRefreshes = MutableStateFlow(0)
+
+    /** Reads the date sections of the search results again; the screen refreshes the list itself at the same moment. */
+    fun refreshSearchResults() {
+        searchRefreshes.update { it + 1 }
+    }
+
     /** Date sections of the same query; null until the first load. */
-    val timeline: StateFlow<TimelineLayout?> = combine(query, grouping) { q, g -> q to g }
+    val timeline: StateFlow<TimelineLayout?> = combine(query, grouping, searchRefreshes) { q, g, _ -> q to g }
         .flatMapLatest { (q, g) -> if (q == null) flowOf(TimelineLayout.Empty) else repository.timeline(q, g) }
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(STOP_TIMEOUT_MS), null)
 
@@ -531,6 +570,10 @@ class LibraryViewModel @Inject constructor(
         const val SOURCE_ARG = "source"
         private const val SEARCH_TEXT_KEY = "q"
         private const val SEARCH_DEBOUNCE_MS = 250L
+        private const val SEARCH_REFRESH_MS = 8_000L
         private const val STOP_TIMEOUT_MS = 5_000L
+
+        /** How long a picture that was handed over waits for the index to have it (the first sync of a fresh install can take a while). */
+        private const val OPEN_WAIT_MS = 15_000L
     }
 }

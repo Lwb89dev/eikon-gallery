@@ -1,26 +1,25 @@
 # Backup to a server of your own
 
-eikon can copy your photos and videos to a server **you** run, over an encrypted connection. It is opt-in, it lives in a separate build of the app, and it only ever *adds*: eikon never
+eikon can copy your photos and videos to a server **you** run, over an encrypted connection. It is opt-in and it only ever *adds*: eikon never
 deletes, overwrites or changes anything on the server or on the phone because of it.
 
-## Two builds
+## One APK, and a switch you own
 
-Until now eikon's strongest promise was that it has **no `INTERNET` permission**, so Android itself stops it from connecting anywhere. A backup needs the network, so instead of
-weakening that promise for everyone the project now has two builds of the same app:
+Version 1.0.0 was built twice: a `standard` APK with no `INTERNET` permission, so that Android itself stopped it from connecting anywhere, and a `backup` APK that had it. That kept a strong promise, but it made
+people choose between two downloads and made every install after a switch start again. **From 1.1.0 there is one APK.** It holds the `INTERNET` permission (granted at install, with no prompt to refuse) and keeps the promise itself:
 
-| Build | Network | Contains |
-| --- | --- | --- |
-| `standard` | none: no `INTERNET` permission, and **the build fails if one ever appears** (`verifyNoInternet…`) | everything except the backup; Settings says the backup is not in this build and why |
-| `backup` | `INTERNET`, used only for the backup, TLS only (`usesCleartextTraffic="false"`, a network-security config that forbids unencrypted traffic) | the same app plus the backup and its HTTP client (OkHttp). The build fails if its manifest lacks `INTERNET`, allows unencrypted traffic, or has any permission that is not on the reviewed list (`verifyBackupNetwork…`) |
+- **"Allow eikon to use the internet" is off by default.** The first-run screens explain what the network is for and offer it (Allow / not now); Settings, Backup has the same switch and turns everything below it on only when it is on.
+- The switch is checked at **every place that could connect**: `BackupSettings.active` (used to decide whether to schedule anything), the worker, the runner and the creation of a connection (`BackupException.NetworkOff`). Each has a test that fails if it connects without consent.
+- TLS only: `usesCleartextTraffic="false"` and a network-security config that forbids unencrypted traffic. Nothing but the server you configured is ever contacted.
+- The build checks the merged manifest (`verifyNetworkPermissionsRelease`, run by `assembleRelease`): `INTERNET` is present, cleartext is off, and **every permission is on a reviewed list**, so a library update cannot add one silently.
+- Someone who had 1.0.0's backup build with the backup on keeps it on after updating (the consent is inferred from it); anyone else starts with it off.
 
-They have the same application id, so installing one over the other keeps your library, edits, albums and settings (the same signing key is needed). The standard APK contains no network code at all:
-the OkHttp classes are not in it.
+What is lost, honestly: with 1.0.0's `standard` APK the operating system made connecting impossible; now the guarantee is the app's own switch and the build check, which a reader of the code can verify but the operating system does not enforce. If you want the stricter guarantee, keep 1.0.0's `standard` APK.
 
 ```sh
-./gradlew :app:assembleStandardRelease    # no network
-./gradlew :app:assembleBackupRelease      # with the backup
-./gradlew :app:testStandardDebugUnitTest :app:testBackupDebugUnitTest   # the backup's network tests run in the second
-./gradlew :app:installBackupRelease -Peikon.signReleaseWithDebugKey     # to try it on a phone
+./gradlew :app:assembleRelease                       # the APK; also runs verifyNetworkPermissionsRelease
+./gradlew :app:testDebugUnitTest                     # includes the backup's network tests (against a local server)
+./gradlew :app:installRelease -Peikon.signReleaseWithDebugKey   # to try it on a phone
 ```
 
 ## Which servers
@@ -36,7 +35,7 @@ Two kinds, behind one interface (`BackupTarget`), chosen in Settings:
 1. **Immich**: Account settings, *API keys*, *New API key*, with the permission `asset.upload` (or all). Paste the key into eikon. The address is the one you open Immich at (`https://photos.example.com`, with a port and path if it has them).
 2. **Nextcloud**: Personal settings, *Security*, *Devices and sessions*, create a new **app password**. Use it, not your login password, with your login name. The photos go in a folder you name (default `eikon`).
 3. In eikon, Settings, Backup: choose the kind, fill the form, **Save and test the connection**. The test reaches the server, checks the certificate, checks the credential (and for Immich that the key may upload) and, for Nextcloud, makes the folder.
-4. Turn on **Back up my photos and videos**. eikon says how many will be copied and to which server, and waits for your yes.
+4. Switch on **Allow eikon to use the internet** (if you did not in the first-run screens), then turn on **Back up my photos and videos**. eikon says how many will be copied and to which server, and waits for your yes.
 
 Options: only on Wi-Fi (default on), only while charging, include videos (on), include hidden photos (**off**: hiding a photo was a choice about who sees it; if you include them they are as visible on the server as anything else).
 

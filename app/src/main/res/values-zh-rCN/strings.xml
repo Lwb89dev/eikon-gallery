@@ -1,0 +1,636 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Library -->
+    <string name="library_title">图库</string>
+    <string name="today">今天</string>
+    <string name="yesterday">昨天</string>
+    <string name="empty_library">还没有照片或视频</string>
+    <string name="empty_filter">没有符合此筛选条件的内容</string>
+    <string name="empty_filter_clear">显示全部</string>
+    <string name="sync_progress">正在加载图库：%1$,d / %2$,d</string>
+    <string name="sync_failed">无法刷新图库</string>
+    <string name="sync_retry">重试</string>
+    <string name="scrubber_description">按日期滚动浏览图库</string>
+
+    <!-- Permissions -->
+    <string name="permission_title">你的照片只保存在你的设备上</string>
+    <string name="permission_body">eikon 需要访问你的照片和视频才能显示它们。它们会保留在你的设备上：除非你设置备份到自己的服务器，否则不会上传任何内容。</string>
+    <string name="permission_grant">允许访问</string>
+    <string name="permission_denied">访问被拒绝。你可以在系统设置中允许。</string>
+    <string name="permission_open_settings">打开设置</string>
+    <string name="limited_banner">仅显示你选择的照片</string>
+    <string name="limited_select_more">选择更多</string>
+    <string name="limited_allow_all">全部允许</string>
+
+    <!-- Menus and filters -->
+    <string name="menu_filter">筛选</string>
+    <string name="menu_sort">排序</string>
+    <string name="menu_settings">设置</string>
+    <string name="menu_more">更多选项</string>
+    <string name="filter_all">全部</string>
+    <string name="filter_photos">照片</string>
+    <string name="filter_videos">视频</string>
+    <string name="filter_favorites">收藏</string>
+    <string name="filter_screenshots">屏幕截图</string>
+    <string name="filter_screen_recordings">屏幕录制</string>
+    <string name="filter_panoramas">全景照片</string>
+    <string name="filter_raw">RAW</string>
+    <string name="filter_clear">清除筛选</string>
+    <string name="sort_by_date_taken">拍摄日期</string>
+    <string name="sort_by_date_added">添加日期</string>
+    <string name="sort_newest_first">最新的在前</string>
+    <string name="sort_oldest_first">最旧的在前</string>
+
+    <!-- Selection and actions -->
+    <plurals name="selected_count">
+        <item quantity="other">已选择 %d 项</item>
+    </plurals>
+    <string name="action_share">分享</string>
+    <string name="action_favorite">添加到收藏</string>
+    <string name="action_unfavorite">从收藏中移除</string>
+    <string name="action_delete">删除</string>
+    <string name="action_info">信息</string>
+    <string name="action_back">返回</string>
+    <string name="action_clear_selection">取消选择</string>
+    <string name="action_select">选择</string>
+    <string name="action_failed">出了点问题</string>
+    <plurals name="moved_to_trash">
+        <item quantity="other">已将 %d 项移到回收站。Android 会保留 30 天。</item>
+    </plurals>
+
+    <!-- Accessibility -->
+    <string name="cd_photo">照片，%1$s</string>
+    <string name="cd_video">视频，%1$s，%2$s</string>
+    <string name="cd_edited_badge">已编辑</string>
+    <string name="cd_favorite_badge">已收藏</string>
+    <string name="viewer_position">第 %1$d 项，共 %2$d 项</string>
+
+    <!-- Video -->
+    <string name="video_play">播放</string>
+    <string name="video_pause">暂停</string>
+    <string name="video_mute">静音</string>
+    <string name="video_unmute">取消静音</string>
+    <string name="video_seek">拖动进度</string>
+
+    <!-- Info panel -->
+    <string name="info_title">信息</string>
+    <string name="info_loading">正在读取详细信息…</string>
+    <string name="info_error">无法读取此文件的详细信息</string>
+    <string name="info_section_file">文件</string>
+    <string name="info_section_camera">相机</string>
+    <string name="info_section_video">视频</string>
+    <string name="info_name">名称</string>
+    <string name="info_type">类型</string>
+    <string name="info_folder">文件夹</string>
+    <string name="info_resolution">分辨率</string>
+    <string name="info_megapixels">百万像素</string>
+    <string name="info_size">大小</string>
+    <string name="info_date">日期</string>
+    <string name="info_modified">修改时间</string>
+    <string name="info_color_profile">色彩配置文件</string>
+    <string name="info_location">位置</string>
+    <string name="info_location_none">此文件中没有保存位置信息</string>
+    <string name="info_location_hidden">在你允许之前，Android 会对应用隐藏照片的位置</string>
+    <string name="info_location_allow">允许</string>
+    <string name="info_location_open">在地图应用中打开</string>
+    <string name="info_camera">设备</string>
+    <string name="info_lens">镜头</string>
+    <string name="info_focal_length">焦距</string>
+    <string name="info_aperture">光圈</string>
+    <string name="info_shutter">快门速度</string>
+    <string name="info_iso">感光度</string>
+    <string name="info_exposure_bias">曝光补偿</string>
+    <string name="info_flash">闪光灯</string>
+    <string name="info_flash_fired">已闪光</string>
+    <string name="info_flash_off">未闪光</string>
+    <string name="info_orientation">方向</string>
+    <string name="info_software">软件</string>
+    <string name="info_duration">时长</string>
+    <string name="info_frame_rate">帧率</string>
+    <string name="info_video_codec">视频编码</string>
+    <string name="info_audio_codec">音频编码</string>
+    <string name="info_bitrate">比特率</string>
+    <string name="info_dynamic_range">动态范围</string>
+
+    <!-- Settings -->
+    <string name="settings_title">设置</string>
+    <string name="settings_appearance">外观</string>
+    <string name="theme_system">跟随系统</string>
+    <string name="theme_light">浅色</string>
+    <string name="theme_dark">深色</string>
+    <string name="settings_privacy">隐私</string>
+    <string name="settings_privacy_body">eikon 在你的设备上运行。它没有账号，也没有使用情况分析，其数据不包含在 Android 备份中。\n\n你的照片永远不会被复制：eikon 只保存一份包含文件信息（名称、日期、大小、文件夹）的本地索引，让图库瞬间打开。删除应用时，索引也会一并删除。</string>
+    <string name="settings_storage_encrypted">图库数据库（索引、相册、编辑、说明文字和分析结果）在这部手机上使用 AES-256 加密，密钥由 Android Keystore 保管。</string>
+    <string name="settings_storage_not_encrypted">无法加密图库数据库（%1$s），因此它仍以未加密的形式存储。eikon 每次启动时都会重试。</string>
+    <string name="settings_storage_reset_title">图库数据库已重新创建</string>
+    <string name="settings_storage_reset">保护图库数据库的密钥已丢失，eikon 只能创建新的数据库。你添加过的相册、编辑、说明文字和名称都已丢失。你的照片没有受到影响，分析将重新运行。</string>
+    <string name="settings_storage_reset_ok">知道了</string>
+    <string name="settings_about">关于</string>
+    <string name="settings_licenses">开源许可</string>
+    <string name="licenses_title">开源许可</string>
+    <string name="settings_version">版本 %1$s</string>
+
+    <!-- Navigation and collections -->
+    <string name="nav_library">图库</string>
+    <string name="nav_search">搜索</string>
+    <string name="nav_collections">合集</string>
+    <string name="collections_title">合集</string>
+    <string name="section_people">人物</string>
+    <string name="section_albums">相册</string>
+    <string name="section_personal">个人</string>
+    <string name="section_folders">设备文件夹</string>
+    <string name="collection_favorites">收藏</string>
+    <string name="collection_recent">最近添加</string>
+    <string name="collection_videos">视频</string>
+    <string name="collection_screenshots">屏幕截图</string>
+    <string name="collection_screen_recordings">屏幕录制</string>
+    <string name="collection_panoramas">全景照片</string>
+    <string name="collection_raw">RAW</string>
+    <string name="collection_trash">最近删除</string>
+    <string name="collection_hidden">已隐藏</string>
+    <plurals name="items_count">
+        <item quantity="other">%d 项</item>
+    </plurals>
+    <string name="empty_album">此相册为空。请在图库中选择照片，然后选择“添加到相册”。</string>
+    <string name="empty_hidden">没有隐藏的内容</string>
+    <string name="empty_collection">这里还没有内容</string>
+
+    <!-- Albums -->
+    <string name="album_new">新相册</string>
+    <string name="album_name_hint">相册名称</string>
+    <string name="album_create">创建</string>
+    <string name="album_rename">重命名</string>
+    <string name="album_delete">删除相册</string>
+    <string name="album_delete_title">删除此相册？</string>
+    <string name="album_delete_message">只会删除相册本身。其中的照片和视频仍保留在原处。</string>
+    <string name="album_move_earlier">前移</string>
+    <string name="album_move_later">后移</string>
+    <string name="action_add_to_album">添加到相册</string>
+    <string name="action_remove_from_album">从相册中移除</string>
+    <string name="action_hide">隐藏</string>
+    <string name="action_unhide">取消隐藏</string>
+    <string name="action_cancel">取消</string>
+    <string name="action_save">保存</string>
+    <plurals name="added_to_album">
+        <item quantity="other">已将 %1$d 项添加到“%2$s”</item>
+    </plurals>
+    <plurals name="removed_from_album">
+        <item quantity="other">已从相册中移除 %d 项</item>
+    </plurals>
+    <plurals name="moved_to_hidden">
+        <item quantity="other">已隐藏 %d 项。可在“合集”中的“已隐藏”里找到。</item>
+    </plurals>
+    <plurals name="unhidden">
+        <item quantity="other">%d 项已重新显示</item>
+    </plurals>
+
+    <!-- Filters -->
+    <string name="filter_type_title">类型</string>
+    <string name="filter_kind_title">种类</string>
+    <string name="filter_any">任意</string>
+    <string name="filter_favorites_only">仅收藏</string>
+    <string name="filter_edited">已编辑</string>
+    <string name="share_preparing">正在准备要分享的已编辑照片</string>
+    <string name="filter_edited_only">仅已编辑</string>
+    <string name="filter_clear_all">清除筛选</string>
+
+    <!-- Locks -->
+    <string name="locked_title">已锁定</string>
+    <string name="locked_body">请使用指纹、面部或屏幕锁定来打开。</string>
+    <string name="locked_unlock">解锁</string>
+    <string name="auth_subtitle">确认是你本人</string>
+    <string name="auth_title_hidden">解锁“已隐藏”</string>
+    <string name="auth_title_trash">解锁“最近删除”</string>
+    <string name="auth_unavailable">身份验证目前不可用。请稍后再试。</string>
+    <string name="no_device_lock_notice">这部手机没有设置屏幕锁定，因此“已隐藏”没有受到保护。请在系统设置中设置屏幕锁定。</string>
+
+    <!-- Recently deleted -->
+    <string name="trash_info">项目大约 30 天后会被永久删除。</string>
+    <string name="trash_empty">最近没有删除任何内容</string>
+    <string name="trash_restore">恢复</string>
+    <string name="trash_delete_forever">永久删除</string>
+    <plurals name="days_left_short">
+        <item quantity="other">%d 天</item>
+    </plurals>
+    <plurals name="trash_restored">
+        <item quantity="other">已恢复 %d 项</item>
+    </plurals>
+    <plurals name="trash_deleted">
+        <item quantity="other">已永久删除 %d 项</item>
+    </plurals>
+
+    <!-- Settings: security -->
+    <string name="settings_security">安全</string>
+    <string name="setting_lock_hidden">打开“已隐藏”时需要验证身份</string>
+    <string name="setting_lock_trash">打开“最近删除”时需要验证身份</string>
+    <string name="setting_show_hidden">在“合集”中显示“已隐藏”</string>
+    <string name="setting_secure_screens">在最近任务中隐藏 eikon 并禁止截屏</string>
+    <string name="settings_security_body">隐藏的项目不会出现在图库、合集和搜索中，打开“已隐藏”需要指纹、面部或屏幕锁定。文件本身并未加密，仍保存在手机的常规存储中，其他有照片访问权限的应用仍然可以看到它们。</string>
+
+    <!-- Search -->
+    <string name="search_placeholder">日期、地点、文字、文件名</string>
+    <string name="search_clear">清除搜索</string>
+    <string name="search_no_results">没有匹配的照片</string>
+    <string name="search_hint_title">搜索你的图库</string>
+    <string name="search_hint_body">可以试试日期（“August 2025”、“yesterday”）、地点（“Rome”、“Tuscany”）、照片中或文件名里出现的词，或种类（“videos”、“screenshots”、“favorites”）。\n\n日期和种类支持英语和意大利语。地点、照片中的文字以及照片所显示的内容，需要在分析运行之后才能找到（设置，分析）。</string>
+    <string name="search_analysis_off">按地点、照片中的文字以及照片内容搜索已关闭。你可以在“设置，分析”中开启。</string>
+    <string name="search_analysis_note">照片仍在后台分析中（%1$d%%）。部分结果可能缺失。</string>
+
+    <!-- Settings: analysis -->
+    <string name="settings_analysis">分析</string>
+    <string name="analysis_places_progress">地点：%1$,d / %2$,d</string>
+    <string name="analysis_semantic_progress">照片内容：%1$,d / %2$,d</string>
+    <string name="analysis_semantic_unavailable">无法加载识别照片内容的模型，因此此步骤没有运行。</string>
+    <string name="search_semantic_unavailable">按照片内容搜索目前不可用（无法加载模型）。其他结果仍然可用。</string>
+    <string name="analysis_people_progress">人物：%1$,d / %2$,d</string>
+    <string name="analysis_people_unavailable">无法加载查找面部的模型，因此此步骤没有运行。</string>
+    <string name="analysis_duplicates_progress">重复项：%1$,d / %2$,d</string>
+    <string name="analysis_text_progress">照片中的文字：%1$,d / %2$,d</string>
+    <string name="analysis_running">正在分析…</string>
+    <string name="analysis_idle">等待合适的时机（电量不低、省电模式已关闭，若你选择了则需在充电时）</string>
+    <string name="analysis_up_to_date">全部已分析</string>
+    <string name="setting_pause_analysis">暂停分析</string>
+    <string name="setting_only_charging">仅在充电时</string>
+    <string name="setting_analyze_places">按地点查找照片</string>
+    <string name="setting_analyze_semantic">按内容查找照片</string>
+    <string name="setting_analyze_people">在照片中查找人物</string>
+    <string name="setting_analyze_people_note">面部仅在这部手机上查找和比较。关于面部的任何信息都不会离开手机，eikon 也从不尝试识别任何人：它只会把相似的面部归为一组，由你为各组命名。</string>
+    <string name="setting_analyze_duplicates">查找重复照片</string>
+    <string name="setting_analyze_text">查找照片中的文字</string>
+    <string name="analysis_location_permission">在你允许之前，Android 会对应用隐藏照片的拍摄地点。</string>
+    <string name="analysis_allow_locations">允许访问照片位置</string>
+    <string name="analyze_now">立即分析</string>
+    <string name="settings_analysis_body">分析只在你的手机上于后台运行，并会在电量低、省电模式开启或手机发热时暂停（“立即分析”在省电模式下仍会继续）。它会保存每张照片的地点（离线确定，任何位置信息都不会被发送到任何地方）、对照片内容的数字化描述（这样你就可以搜索“狗”或“日落”；它不是说明文字，也无法还原成图像），以及它在照片中读到的所有文字，以便搜索能找到它们。如果你开启“人物”，它还会保存每张面部在照片中的位置及其数字化描述，仅用于把相似的面部归为一组。如果你开启“重复项”，它会保存每张照片以及大小相同的文件的简短指纹，仅用于找出副本。识别照片内容和读取文字速度较慢，会大量占用处理器，因此分析默认等待充电时进行。</string>
+
+    <!-- Info panel: derived data -->
+    <string name="info_place">最近的地点</string>
+    <string name="info_text_found">这张照片中的文字</string>
+    <string name="info_text_copy">复制文字</string>
+
+    <!-- People -->
+    <string name="collection_people">人物</string>
+    <string name="people_title">人物</string>
+    <string name="person_unnamed">未命名的人物</string>
+    <string name="person_add_name">添加名称</string>
+    <string name="person_rename">为此人物命名</string>
+    <string name="person_name_hint">名称</string>
+    <string name="person_same_name_note">同名的人物会合并为一人。</string>
+    <string name="person_favorite">标为收藏</string>
+    <string name="person_unfavorite">从收藏中移除</string>
+    <string name="person_hide">隐藏此人物</string>
+    <string name="person_unhide">显示此人物</string>
+    <string name="person_merge">与其他人物合并…</string>
+    <string name="person_merge_title">合并到</string>
+    <string name="person_merge_empty">没有其他可合并的人物。</string>
+    <string name="person_not_this">不是此人</string>
+    <string name="person_remove_from_people">不是面部</string>
+    <string name="people_show_hidden">显示已隐藏的人物（%1$d）</string>
+    <string name="people_hide_hidden">隐藏已隐藏的人物</string>
+    <string name="people_empty_off">“人物”已关闭。请在“设置，分析”中开启“在照片中查找人物”，eikon 会把找到的面部分组。一切都留在这部手机上。</string>
+    <string name="people_empty_working">尚未找到面部（已分析你 %1$d%% 的照片）。分析会在充电时于后台运行。</string>
+    <string name="people_empty_done">在你的照片中没有找到面部。</string>
+    <string name="people_go_settings">打开设置</string>
+    <string name="person_photos_empty">没有照片。</string>
+    <plurals name="moved_to_new_person">
+        <item quantity="other">已将 %d 张照片移到新人物</item>
+    </plurals>
+    <plurals name="removed_from_people">
+        <item quantity="other">已从“人物”中移除 %d 张照片</item>
+    </plurals>
+    <string name="info_people">人物</string>
+    <plurals name="info_people_unnamed_count">
+        <item quantity="other">%d 位未命名</item>
+    </plurals>
+
+    <string name="section_memories">回忆</string>
+    <string name="section_pets">宠物</string>
+    <string name="collection_dogs">狗</string>
+    <string name="collection_cats">猫</string>
+    <string name="empty_pets">尚未找到狗或猫。宠物是根据照片内容识别的：请在“设置，分析”中开启“按内容查找照片”，并等待其完成。</string>
+
+    <!-- Places -->
+    <string name="places_title">地点</string>
+    <string name="places_tab_list">列表</string>
+    <string name="places_tab_map">地图</string>
+    <string name="place_unknown">其他地点</string>
+    <string name="place_near">%1$s 附近</string>
+    <string name="places_expand">显示</string>
+    <string name="places_collapse">隐藏</string>
+    <string name="collection_places">地点</string>
+    <string name="places_map_note">仅包含国家轮廓和较大城市的名称：不会下载任何地图图像，任何位置信息也不会离开手机。双指捏合或双击可缩放，点按标记可查看其照片。</string>
+    <string name="places_map_description">你的照片拍摄地点地图，带有照片分组标记</string>
+    <string name="places_empty_off">“地点”已关闭。请在“设置，分析”中开启“按地点查找照片”，eikon 会根据照片的 GPS 数据离线推算拍摄地点。</string>
+    <string name="places_empty_working">尚未找到地点（已分析你 %1$d%% 的照片）。分析会在充电时于后台运行。</string>
+    <string name="places_empty_done">你的照片都没有位置信息，或者 eikon 可能没有读取照片位置的权限（设置，分析）。</string>
+    <string name="section_places">地点与旅行</string>
+
+    <!-- Trips -->
+    <string name="collection_trips">旅行</string>
+    <string name="trips_title">旅行</string>
+    <string name="trip_untitled">旅行</string>
+    <string name="trip_reason">距离你拍摄大部分照片的地点约 %1$d 公里（%2$s 附近）</string>
+    <string name="trip_home_unknown">未知地点</string>
+    <plurals name="trip_summary_days">
+        <item quantity="other">%d 天</item>
+    </plurals>
+    <string name="trips_empty">没有找到旅行。旅行是指连续几天、至少有 10 张照片、且在距离你拍摄大部分照片的地点至少 100 公里之外度过的时间。为此 eikon 需要照片的位置信息：请在“设置，分析”中开启“按地点查找照片”。</string>
+
+    <!-- Duplicates and similar shots -->
+    <string name="section_cleanup">清理</string>
+    <string name="collection_duplicates">重复项</string>
+    <string name="collection_similar">相似照片</string>
+    <string name="duplicates_title">重复项</string>
+    <string name="similar_title">相似照片</string>
+    <string name="duplicates_note">eikon 只负责找出它们。在你于 Android 自己的对话框中确认之前，不会移除任何内容，被移除的照片会进入“最近删除”，你可以在那里恢复。对于已加入相册的照片的副本：你保留的那份会加入这些相册。</string>
+    <plurals name="duplicate_exact">
+        <item quantity="other">%d 个相同的文件</item>
+    </plurals>
+    <plurals name="duplicate_visual">
+        <item quantity="other">同一图像的 %d 个副本</item>
+    </plurals>
+    <plurals name="similar_group">
+        <item quantity="other">%d 张相似照片</item>
+    </plurals>
+    <plurals name="duplicate_keep_best">
+        <item quantity="other">保留最好的，将 %d 项移到“最近删除”</item>
+    </plurals>
+    <plurals name="similar_trash_marked">
+        <item quantity="other">将 %d 项移到“最近删除”</item>
+    </plurals>
+    <string name="duplicate_best">最佳</string>
+    <string name="duplicate_kept">已保留</string>
+    <string name="duplicate_marked">将被移动</string>
+    <string name="duplicate_dismiss">这些不是重复项</string>
+    <string name="similar_dismiss">这些并不相似</string>
+    <string name="duplicates_empty_off">“重复项”已关闭。请在“设置，分析”中开启“查找重复照片”。eikon 只在这部手机上为你的照片生成指纹，不使用任何模型。</string>
+    <string name="similar_empty_off">“相似照片”需要在“设置，分析”中开启“按内容查找照片”：它会对相隔两分钟以内拍摄的照片，比较每张照片所显示的内容。</string>
+    <string name="duplicates_empty_working">尚未找到任何内容（已分析 %1$d%%）。分析会在充电时于后台运行。</string>
+    <string name="duplicates_empty_done">没有找到重复项。</string>
+    <string name="similar_empty_done">没有找到相似照片。</string>
+
+    <!-- Memories -->
+    <string name="collection_memories">回忆</string>
+    <string name="memories_title">回忆</string>
+    <string name="memory_on_this_day">往年今日</string>
+    <string name="memory_year_ago">一年前</string>
+    <string name="memory_weekend_in">%1$s 周末</string>
+    <string name="memory_weekend">外出周末</string>
+    <string name="memory_day_trip_to">%1$s 一日游</string>
+    <string name="memory_day_trip">一日游</string>
+    <string name="memory_season">%2$d 年%1$s</string>
+    <string name="memory_person">%1$s，%2$d</string>
+    <string name="season_winter">冬季</string>
+    <string name="season_spring">春季</string>
+    <string name="season_summer">夏季</string>
+    <string name="season_autumn">秋季</string>
+    <string name="memory_hide">隐藏此回忆</string>
+    <string name="memory_show_fewer">减少类似的回忆</string>
+    <string name="memory_show_less_of">减少显示 %1$s</string>
+    <string name="memory_exclude_date">排除这一天</string>
+    <string name="memory_all_photos">所有照片</string>
+    <string name="memory_replay">重新播放</string>
+    <string name="memory_reset">撤销我的选择</string>
+    <string name="memory_done">完成。你可以在“回忆”的菜单中撤销你的选择。</string>
+    <string name="memories_empty">还没有回忆。eikon 会根据日期、旅行、季节以及你命名的人物来生成回忆：“往年今日”“一年前”、旅行和外出周末、某个季节、某年中的某个人。旅行和周末需要“地点”，人物需要“人物”（设置，分析）。任何内容都不会离开手机。</string>
+    <string name="memories_note">根据日期、地点和已命名的人物，用简单的规则生成；没有音乐，照片是根据收藏、大小和面部挑选的，而不是根据好不好看。</string>
+    <string name="memory_no_photos">这条回忆已没有可显示的照片。</string>
+
+    <!-- Editing -->
+    <string name="action_edit">编辑</string>
+    <string name="edit_title">编辑</string>
+    <string name="edit_done">完成</string>
+    <string name="edit_original">原图</string>
+    <string name="edit_revert">还原</string>
+    <string name="edit_revert_title">还原为原图？</string>
+    <string name="edit_revert_message">这会清除此次编辑中的所有调整、滤镜和裁剪。原始照片从未被更改。点按“完成”即可保留还原后的照片。</string>
+    <string name="edit_discard_title">放弃你的更改？</string>
+    <string name="edit_discard_message">你在此编辑器中所做的更改将会丢失。照片保持原样。</string>
+    <string name="edit_discard">放弃</string>
+    <string name="edit_copy_edits">拷贝编辑</string>
+    <string name="edit_paste_edits">粘贴编辑</string>
+    <string name="edit_save_copy">保存副本</string>
+    <string name="edit_copy_saved">已在原图旁保存了一份副本，原图未被更改。</string>
+    <string name="edit_copy_saved_no_details">已在原图旁保存了一份副本，原图未被更改。无法复制相机信息。</string>
+    <string name="edit_failed">无法完成编辑。照片未被更改。</string>
+    <string name="edited_badge">已编辑</string>
+    <string name="viewer_show_original">显示原图</string>
+    <string name="viewer_show_edited">显示已编辑的照片</string>
+    <string name="tool_auto">自动</string>
+    <string name="tool_light">光线</string>
+    <string name="tool_color">色彩</string>
+    <string name="tool_detail">细节</string>
+    <string name="tool_filters">滤镜</string>
+    <string name="tool_crop">裁剪</string>
+    <string name="adj_exposure">曝光</string>
+    <string name="adj_brightness">亮度</string>
+    <string name="adj_contrast">对比度</string>
+    <string name="adj_highlights">高光</string>
+    <string name="adj_shadows">阴影</string>
+    <string name="adj_black_point">黑点</string>
+    <string name="adj_saturation">饱和度</string>
+    <string name="adj_vibrance">自然饱和度</string>
+    <string name="adj_temperature">色温</string>
+    <string name="adj_tint">色调</string>
+    <string name="adj_sharpness">锐度</string>
+    <string name="adj_vignette">暗角</string>
+    <string name="geo_straighten">拉直</string>
+    <string name="geo_perspective_vertical">垂直透视</string>
+    <string name="geo_perspective_horizontal">水平透视</string>
+    <string name="filter_amount">强度</string>
+    <string name="filter_name_none">原图</string>
+    <string name="filter_name_vivid">鲜艳</string>
+    <string name="filter_name_warm">暖色</string>
+    <string name="filter_name_cool">冷色</string>
+    <string name="filter_name_mono">单色</string>
+    <string name="filter_name_noir">黑白经典</string>
+    <string name="filter_name_fade">褪色</string>
+    <string name="filter_name_chrome">铬黄</string>
+    <string name="filter_name_sepia">怀旧</string>
+    <string name="crop_rotate">旋转</string>
+    <string name="crop_flip">翻转</string>
+    <string name="shape_free">自由</string>
+    <string name="shape_original">原始比例</string>
+    <string name="shape_square">1:1</string>
+    <string name="shape_4_3">4:3</string>
+    <string name="shape_3_2">3:2</string>
+    <string name="shape_16_9">16:9</string>
+    <string name="action_paste_edits">粘贴编辑</string>
+    <string name="action_revert_edits">移除编辑</string>
+    <plurals name="edits_pasted">
+        <item quantity="other">已将编辑应用到 %d 张照片</item>
+    </plurals>
+    <plurals name="edits_reverted">
+        <item quantity="other">已从 %d 张照片中移除编辑；原图一如既往</item>
+    </plurals>
+
+    <!-- Accessibility -->
+    <string name="slider_reset">重置为中性值</string>
+    <string name="crop_area">裁剪区域，横向 %1$d%% 至 %2$d%%，纵向 %3$d%% 至 %4$d%%</string>
+    <string name="crop_action_smaller">缩小裁剪区域</string>
+    <string name="crop_action_larger">放大裁剪区域</string>
+    <string name="crop_action_left">向左移动裁剪区域</string>
+    <string name="crop_action_right">向右移动裁剪区域</string>
+    <string name="crop_action_up">向上移动裁剪区域</string>
+    <string name="crop_action_down">向下移动裁剪区域</string>
+    <string name="viewer_zoom_in">放大</string>
+    <string name="viewer_zoom_out">缩小</string>
+    <string name="external_photo">照片</string>
+    <string name="viewer_cannot_display">无法显示这张照片。</string>
+
+    <!-- Info: caption, editing the date and location, what the photo shows -->
+    <string name="info_caption">说明文字</string>
+    <string name="caption_add">添加说明文字</string>
+    <string name="caption_edit">编辑说明文字</string>
+    <string name="caption_title">说明文字</string>
+    <string name="caption_hint">简单描述一下这张照片</string>
+    <string name="caption_note">仅保存在 eikon 中；照片文件不会被更改。搜索可以找到它。</string>
+    <string name="date_change">更改日期和时间</string>
+    <string name="date_revert">恢复原始日期</string>
+    <string name="date_time_title">时间</string>
+    <string name="action_next">下一步</string>
+    <string name="location_title">拍摄地点</string>
+    <string name="location_coordinates">坐标</string>
+    <string name="location_coordinates_note">十进制度数，先写纬度：41.9028, 12.4964</string>
+    <string name="location_invalid">不是有效的位置：需要两个数字，纬度在 -90 到 90 之间，经度在 -180 到 180 之间</string>
+    <string name="location_city">或者查找城市（可离线使用）</string>
+    <string name="location_remove">移除位置</string>
+    <string name="location_change">更改位置</string>
+    <string name="location_revert">恢复原始位置</string>
+    <string name="info_map_description">显示照片拍摄地点的小地图</string>
+    <string name="metadata_done">完成。照片现在显示的是这些信息；原始文件已保留，你可以随时恢复。</string>
+    <string name="metadata_not_writable">无法更改这种类型的文件。</string>
+    <string name="metadata_needs_permission">要更改照片的日期或位置，eikon 必须能读取照片的拍摄地点：否则 Android 只会给它一份去掉位置信息的副本，保存会把位置信息抹掉。</string>
+    <string name="metadata_nothing_to_revert">没有可恢复的内容。</string>
+    <string name="metadata_interrupted">这张照片之前的一次更改没有完成。它的原始文件已保留：请先恢复它，再进行其他更改。</string>
+    <string name="metadata_failed">更改未成功。照片已完全恢复原样。</string>
+    <string name="metadata_restore_file">恢复原始文件</string>
+    <string name="info_albums">所在相册</string>
+    <string name="info_pets">宠物</string>
+    <string name="info_shows">可能显示了</string>
+    <string name="pet_dog">狗</string>
+    <string name="pet_cat">猫</string>
+    <string name="info_album">设备相册</string>
+    <string name="label_landscape">风景</string>
+    <string name="label_beach">海滩</string>
+    <string name="label_sea">大海</string>
+    <string name="label_mountain">山</string>
+    <string name="label_sunset">日落</string>
+    <string name="label_snow">雪</string>
+    <string name="label_city">城市</string>
+    <string name="label_building">建筑</string>
+    <string name="label_street">街道</string>
+    <string name="label_woods">树林</string>
+    <string name="label_flower">花</string>
+    <string name="label_sky">天空</string>
+    <string name="label_person">人</string>
+    <string name="label_group">一群人</string>
+    <string name="label_food">美食</string>
+    <string name="label_dessert">甜点</string>
+    <string name="label_drink">饮品</string>
+    <string name="label_car">汽车</string>
+    <string name="label_bicycle">自行车</string>
+    <string name="label_airplane">飞机</string>
+    <string name="label_boat">船</string>
+    <string name="label_bird">鸟</string>
+    <string name="label_horse">马</string>
+    <string name="label_interior">房间</string>
+    <string name="label_night">夜晚</string>
+    <string name="label_party">派对</string>
+    <string name="label_sport">体育赛事</string>
+    <string name="label_animal">动物</string>
+
+    <!-- Backup to your own server -->
+    <string name="backup_title">备份到你自己的服务器</string>
+    <string name="backup_intro">通过加密连接把你的照片和视频复制到你自己运行的服务器。在你开启备份之前，任何内容都不会离开这部手机；数据只会发送到下面的服务器，eikon 也绝不会删除或更改服务器上的任何内容。密码或密钥以加密方式保存在 Android Keystore 中。</string>
+    <string name="backup_kind_immich">Immich（Umbrel 也会安装它）</string>
+    <string name="backup_kind_nextcloud">Nextcloud 或任何 WebDAV 服务器</string>
+    <string name="backup_address">服务器地址（https://…）</string>
+    <string name="backup_username">登录名</string>
+    <string name="backup_folder">服务器上的文件夹</string>
+    <string name="backup_api_key">API 密钥</string>
+    <string name="backup_app_password">应用专用密码</string>
+    <string name="backup_secret_saved">已保存。留空即可保留</string>
+    <string name="backup_help_immich">在 Immich 中：账号设置，API 密钥，新建 API 密钥。所需权限是 asset.upload。</string>
+    <string name="backup_help_nextcloud">在 Nextcloud 中：个人设置，安全，设备与会话，创建一个新的应用专用密码。请使用它，而不是你的登录密码。</string>
+    <string name="backup_save_test">保存并测试连接</string>
+    <string name="backup_connected">已连接到 %1$s。</string>
+    <string name="backup_failed">无法连接：%1$s</string>
+    <string name="backup_certificate_declined">该证书未被信任，因此没有发送任何内容，以后也不会发送。</string>
+    <string name="backup_certificate_title">此服务器的证书不是由你的手机所信任的机构签发的</string>
+    <string name="backup_certificate_body">%1$s 出示了下面的证书。请将其指纹与你的服务器显示的指纹进行比对（例如使用：openssl x509 -noout -fingerprint -sha256）。只有两者完全一致时才信任它：从此以后，此服务器只会接受这一份证书，不接受其他任何证书。</string>
+    <string name="backup_certificate_subject">颁发给：%1$s</string>
+    <string name="backup_certificate_expires">有效期至 %1$s</string>
+    <string name="backup_certificate_self_signed">它是自签名的，家用服务器的证书通常都是如此。</string>
+    <string name="backup_certificate_trust">信任此证书</string>
+    <string name="backup_enable">备份我的照片和视频</string>
+    <string name="backup_test_first">请先保存并测试连接。</string>
+    <string name="backup_wifi_only">仅在 Wi-Fi 下</string>
+    <string name="backup_only_charging">仅在充电时</string>
+    <string name="backup_videos">包含视频</string>
+    <string name="backup_hidden">包含已隐藏的照片</string>
+    <string name="backup_hidden_note">已隐藏的照片也会发送到你的服务器，在那里它们和其他内容一样可见。</string>
+    <string name="backup_confirm_title">开始备份？</string>
+    <plurals name="backup_confirm_body">
+        <item quantity="other">当手机处于你允许的网络时，%1$d 张照片和视频将逐步复制到 %2$s。手机和服务器上都不会删除任何内容。</item>
+    </plurals>
+    <string name="backup_confirm_start">开始</string>
+    <string name="backup_location_note">Android 会对没有照片位置权限的应用隐藏照片的拍摄地点，因此你服务器上的副本将没有位置信息。</string>
+    <string name="backup_progress">已备份：%1$,d / %2$,d</string>
+    <plurals name="backup_refused">
+        <item quantity="other">服务器拒绝了 %1$d 张照片，在你提出要求之前不会再次尝试。</item>
+    </plurals>
+    <string name="backup_running">正在备份…</string>
+    <string name="backup_idle">等待合适的时机（你允许的网络，电量不低）。</string>
+    <string name="backup_last_run">上次运行于 %1$s。已发送：%2$d。已存在：%3$d。被拒绝：%4$d。</string>
+    <string name="backup_stopped">已停止，因为%1$s</string>
+    <string name="backup_stop_power_save">省电模式已开启。</string>
+    <string name="backup_stop_thermal">手机过热。</string>
+    <string name="backup_stop_unreachable">无法连接服务器或服务器繁忙。它会再次尝试。</string>
+    <string name="backup_stop_unauthorized">服务器不接受该密钥或密码。</string>
+    <string name="backup_stop_untrusted">服务器的证书不是你信任过的证书之一。</string>
+    <string name="backup_stop_misconfigured">该地址不适用于这种类型的服务器。</string>
+    <string name="backup_stop_refusals">服务器连续拒绝了很多文件，这说明是服务器的限制，而不是照片的问题。</string>
+    <string name="backup_now">立即备份</string>
+    <string name="backup_retry_refused">重试被拒绝的项目</string>
+
+    <!-- Network consent -->
+    <string name="network_allow">允许 eikon 使用互联网</string>
+    <string name="network_allow_note">在你开启之前保持关闭。eikon 只会用网络把你的照片复制到下面的服务器，并且只在你设置好服务器并开启备份之后。此项关闭时，任何内容都无法连接到任何地方。</string>
+    <string name="settings_privacy_network">eikon 只会为一件事联网：可选的、把你的照片备份到你自己运行的服务器。在你允许（设置，备份）并设置好服务器之前，它一直处于关闭状态。没有使用情况分析，没有广告，没有账号，没有 Google 服务，也没有我们自己的云：根本不存在。</string>
+
+    <!-- First-run screens -->
+    <string name="onboarding_intro_title">你的照片，在你的手机上</string>
+    <string name="onboarding_intro_body">eikon 是一款适用于 Android 的照片和视频图库。它会显示你的手机已经保存的图像，按日期、地点、人物或内容查找它们，并在从不触碰原图的前提下进行编辑。</string>
+    <string name="onboarding_point_local">一切都留在这台设备上。没有账号，没有使用情况分析，没有广告。</string>
+    <string name="onboarding_point_independent">它不依赖手机以外的任何东西：没有 Google 服务，没有云，没有第三方服务器。</string>
+    <string name="onboarding_point_yours">如果你想要备份，它只会发送到你自己运行的服务器，而且仅在你设置之后才会进行。</string>
+    <string name="onboarding_next">下一步</string>
+    <string name="onboarding_start">开始使用</string>
+    <string name="onboarding_page">第 %1$d 页，共 %2$d 页</string>
+    <string name="onboarding_permissions_title">eikon 需要什么权限，为什么</string>
+    <string name="onboarding_permissions_intro">只有第一项是必需的。你可以稍后在设置或手机的系统设置中更改其中任何一项。</string>
+    <string name="onboarding_perm_media_title">照片和视频</string>
+    <string name="onboarding_perm_media_body">这样 eikon 才能显示你的图库。它直接读取 Android 已经保存的文件，不会把它们复制到任何地方。如果你愿意，也可以只允许部分照片。</string>
+    <string name="onboarding_perm_location_title">照片位置（可选）</string>
+    <string name="onboarding_perm_location_body">除非你允许，否则 Android 会对应用隐藏照片的拍摄地点。eikon 用它在离线地图上显示照片的地点，并支持按地点搜索。地点在手机上计算：任何位置信息都不会被发送到任何地方。</string>
+    <string name="onboarding_perm_network_title">互联网（可选）</string>
+    <string name="onboarding_perm_network_body">只用于一件事：如果你将来设置了，可把你的照片复制到你自己运行的服务器（Immich、Nextcloud）。除此之外，eikon 从不连接任何东西。在你于此处开启之前它是关闭的，你也可以随时在设置中再次关闭。</string>
+    <string name="onboarding_allow">允许</string>
+    <string name="onboarding_allowed">已允许</string>
+    <string name="onboarding_promise">这里的一切都不依赖手机以外的任何东西：没有 Google 服务，没有账号，没有使用情况分析。你的照片留在这台设备上，或者，如果你选择，发送到你自己的服务器。</string>
+
+    <!-- Support -->
+    <string name="support_title">支持</string>
+    <string name="support_body">eikon 免费、没有广告，也不会追踪你。如果你喜欢它，可以通过 Lightning 网络发送一点聪。</string>
+    <string name="support_button">通过 Lightning 捐赠</string>
+    <string name="support_copied">未找到 Lightning 钱包 — 地址已复制：%1$s</string>
+
+    <!-- Analyze now -->
+    <string name="analyze_now_running">正在分析…</string>
+    <string name="analyze_now_hint">立即开始，仅在这部手机上进行，省电模式下也会执行。</string>
+    <string name="analyze_now_hint_off">请先在上方至少开启一个步骤。</string>
+    <string name="analyze_now_hint_paused">分析已暂停：请关闭暂停以立即分析。</string>
+
+    <!-- Pictures from other apps -->
+    <string name="viewer_open_in_library">在图库中打开</string>
+</resources>

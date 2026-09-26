@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Artwork: assets/icon.png (cropped, cleaned and re-encoded, without its embedded provenance metadata). -->
+<!--
+    Artwork: assets/icon.png, cut to a squircle (superellipse) and re-encoded, without its embedded provenance metadata. The squircle is 60 dp wide on the 108 dp canvas, which keeps
+    its corners inside the circle a launcher may mask to (72 dp across), and the background layer is transparent: the icon is a squircle whatever the launcher's shape is.
+-->
 <adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
     <background android:drawable="@color/ic_launcher_background" />
     <foreground android:drawable="@drawable/ic_launcher_art" />

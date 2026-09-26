@@ -1,0 +1,705 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Library -->
+    <string name="library_title">Библиотека</string>
+    <string name="today">Сегодня</string>
+    <string name="yesterday">Вчера</string>
+    <string name="empty_library">Пока нет ни фото, ни видео</string>
+    <string name="empty_filter">Ничего не подходит под этот фильтр</string>
+    <string name="empty_filter_clear">Показать всё</string>
+    <string name="sync_progress">Загрузка библиотеки: %1$,d / %2$,d</string>
+    <string name="sync_failed">Не удалось обновить библиотеку</string>
+    <string name="sync_retry">Повторить</string>
+    <string name="scrubber_description">Прокрутка библиотеки по дате</string>
+
+    <!-- Permissions -->
+    <string name="permission_title">Ваши фото остаются на вашем устройстве</string>
+    <string name="permission_body">eikon нужен доступ к вашим фото и видео, чтобы их показывать. Они остаются на вашем устройстве: ничего не загружается, если только вы не настроите резервное копирование на собственный сервер.</string>
+    <string name="permission_grant">Разрешить доступ</string>
+    <string name="permission_denied">Доступ отклонён. Вы можете разрешить его в настройках системы.</string>
+    <string name="permission_open_settings">Открыть настройки</string>
+    <string name="limited_banner">Показаны только выбранные вами фото</string>
+    <string name="limited_select_more">Выбрать ещё</string>
+    <string name="limited_allow_all">Разрешить все</string>
+
+    <!-- Menus and filters -->
+    <string name="menu_filter">Фильтр</string>
+    <string name="menu_sort">Сортировка</string>
+    <string name="menu_settings">Настройки</string>
+    <string name="menu_more">Ещё</string>
+    <string name="filter_all">Все</string>
+    <string name="filter_photos">Фото</string>
+    <string name="filter_videos">Видео</string>
+    <string name="filter_favorites">Избранное</string>
+    <string name="filter_screenshots">Скриншоты</string>
+    <string name="filter_screen_recordings">Записи экрана</string>
+    <string name="filter_panoramas">Панорамы</string>
+    <string name="filter_raw">RAW</string>
+    <string name="filter_clear">Сбросить фильтр</string>
+    <string name="sort_by_date_taken">Дата съёмки</string>
+    <string name="sort_by_date_added">Дата добавления</string>
+    <string name="sort_newest_first">Сначала новые</string>
+    <string name="sort_oldest_first">Сначала старые</string>
+
+    <!-- Selection and actions -->
+    <plurals name="selected_count">
+        <item quantity="one">Выбран %d</item>
+        <item quantity="few">Выбрано %d</item>
+        <item quantity="many">Выбрано %d</item>
+        <item quantity="other">Выбрано %d</item>
+    </plurals>
+    <string name="action_share">Поделиться</string>
+    <string name="action_favorite">Добавить в избранное</string>
+    <string name="action_unfavorite">Убрать из избранного</string>
+    <string name="action_delete">Удалить</string>
+    <string name="action_info">Сведения</string>
+    <string name="action_back">Назад</string>
+    <string name="action_clear_selection">Снять выделение</string>
+    <string name="action_select">Выбрать</string>
+    <string name="action_failed">Что-то пошло не так</string>
+    <plurals name="moved_to_trash">
+        <item quantity="one">%d элемент перемещён в корзину. Android хранит его 30 дней.</item>
+        <item quantity="few">%d элемента перемещены в корзину. Android хранит их 30 дней.</item>
+        <item quantity="many">%d элементов перемещено в корзину. Android хранит их 30 дней.</item>
+        <item quantity="other">%d элемента перемещено в корзину. Android хранит их 30 дней.</item>
+    </plurals>
+
+    <!-- Accessibility -->
+    <string name="cd_photo">Фото, %1$s</string>
+    <string name="cd_video">Видео, %1$s, %2$s</string>
+    <string name="cd_edited_badge">Изменено</string>
+    <string name="cd_favorite_badge">В избранном</string>
+    <string name="viewer_position">%1$d из %2$d</string>
+
+    <!-- Video -->
+    <string name="video_play">Воспроизвести</string>
+    <string name="video_pause">Пауза</string>
+    <string name="video_mute">Выключить звук</string>
+    <string name="video_unmute">Включить звук</string>
+    <string name="video_seek">Перемотка</string>
+
+    <!-- Info panel -->
+    <string name="info_title">Сведения</string>
+    <string name="info_loading">Чтение подробностей…</string>
+    <string name="info_error">Не удалось прочитать сведения об этом файле</string>
+    <string name="info_section_file">Файл</string>
+    <string name="info_section_camera">Камера</string>
+    <string name="info_section_video">Видео</string>
+    <string name="info_name">Имя</string>
+    <string name="info_type">Тип</string>
+    <string name="info_folder">Папка</string>
+    <string name="info_resolution">Разрешение</string>
+    <string name="info_megapixels">Мегапиксели</string>
+    <string name="info_size">Размер</string>
+    <string name="info_date">Дата</string>
+    <string name="info_modified">Изменён</string>
+    <string name="info_color_profile">Цветовой профиль</string>
+    <string name="info_location">Местоположение</string>
+    <string name="info_location_none">В этом файле не сохранено местоположение</string>
+    <string name="info_location_hidden">Android скрывает местоположение фото от приложений, пока вы этого не разрешите</string>
+    <string name="info_location_allow">Разрешить</string>
+    <string name="info_location_open">Открыть в приложении с картами</string>
+    <string name="info_camera">Устройство</string>
+    <string name="info_lens">Объектив</string>
+    <string name="info_focal_length">Фокусное расстояние</string>
+    <string name="info_aperture">Диафрагма</string>
+    <string name="info_shutter">Выдержка</string>
+    <string name="info_iso">Чувствительность</string>
+    <string name="info_exposure_bias">Экспокоррекция</string>
+    <string name="info_flash">Вспышка</string>
+    <string name="info_flash_fired">Сработала</string>
+    <string name="info_flash_off">Не сработала</string>
+    <string name="info_orientation">Ориентация</string>
+    <string name="info_software">Программа</string>
+    <string name="info_duration">Длительность</string>
+    <string name="info_frame_rate">Частота кадров</string>
+    <string name="info_video_codec">Видеокодек</string>
+    <string name="info_audio_codec">Аудиокодек</string>
+    <string name="info_bitrate">Битрейт</string>
+    <string name="info_dynamic_range">Динамический диапазон</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Настройки</string>
+    <string name="settings_appearance">Оформление</string>
+    <string name="theme_system">Как в системе</string>
+    <string name="theme_light">Светлая</string>
+    <string name="theme_dark">Тёмная</string>
+    <string name="settings_privacy">Конфиденциальность</string>
+    <string name="settings_privacy_body">eikon работает на вашем устройстве. В нём нет учётной записи и аналитики использования, а его данные исключены из резервных копий Android.\n\nВаши фото никогда не копируются: eikon ведёт локальный индекс со сведениями о файлах (имя, дата, размер, папка), чтобы библиотека открывалась мгновенно. При удалении приложения индекс удаляется.</string>
+    <string name="settings_storage_encrypted">База данных библиотеки (индекс, альбомы, правки, подписи и то, что нашёл анализ) зашифрована на этом телефоне алгоритмом AES-256. Её ключ хранится в Android Keystore.</string>
+    <string name="settings_storage_not_encrypted">Не удалось зашифровать базу данных библиотеки (%1$s), поэтому она по-прежнему хранится без шифрования. eikon повторяет попытку при каждом запуске.</string>
+    <string name="settings_storage_reset_title">База данных библиотеки создана заново</string>
+    <string name="settings_storage_reset">Ключ, защищавший базу данных библиотеки, был утерян, поэтому eikon пришлось создать новую. Добавленные вами альбомы, правки, подписи и имена пропали. Ваши фото не тронуты, а анализ будет выполнен заново.</string>
+    <string name="settings_storage_reset_ok">Понятно</string>
+    <string name="settings_about">О приложении</string>
+    <string name="settings_licenses">Лицензии открытого ПО</string>
+    <string name="licenses_title">Лицензии открытого ПО</string>
+    <string name="settings_version">Версия %1$s</string>
+
+    <!-- Navigation and collections -->
+    <string name="nav_library">Библиотека</string>
+    <string name="nav_search">Поиск</string>
+    <string name="nav_collections">Коллекции</string>
+    <string name="collections_title">Коллекции</string>
+    <string name="section_people">Люди</string>
+    <string name="section_albums">Альбомы</string>
+    <string name="section_personal">Личное</string>
+    <string name="section_folders">Папки устройства</string>
+    <string name="collection_favorites">Избранное</string>
+    <string name="collection_recent">Недавно добавленные</string>
+    <string name="collection_videos">Видео</string>
+    <string name="collection_screenshots">Скриншоты</string>
+    <string name="collection_screen_recordings">Записи экрана</string>
+    <string name="collection_panoramas">Панорамы</string>
+    <string name="collection_raw">RAW</string>
+    <string name="collection_trash">Недавно удалённые</string>
+    <string name="collection_hidden">Скрытые</string>
+    <plurals name="items_count">
+        <item quantity="one">%d элемент</item>
+        <item quantity="few">%d элемента</item>
+        <item quantity="many">%d элементов</item>
+        <item quantity="other">%d элемента</item>
+    </plurals>
+    <string name="empty_album">Этот альбом пуст. Выберите фото в библиотеке и нажмите «Добавить в альбом».</string>
+    <string name="empty_hidden">Ничего не скрыто</string>
+    <string name="empty_collection">Здесь пока ничего нет</string>
+
+    <!-- Albums -->
+    <string name="album_new">Новый альбом</string>
+    <string name="album_name_hint">Название альбома</string>
+    <string name="album_create">Создать</string>
+    <string name="album_rename">Переименовать</string>
+    <string name="album_delete">Удалить альбом</string>
+    <string name="album_delete_title">Удалить этот альбом?</string>
+    <string name="album_delete_message">Удаляется только альбом. Фото и видео в нём остаются на своих местах.</string>
+    <string name="album_move_earlier">Переместить раньше</string>
+    <string name="album_move_later">Переместить позже</string>
+    <string name="action_add_to_album">Добавить в альбом</string>
+    <string name="action_remove_from_album">Убрать из альбома</string>
+    <string name="action_hide">Скрыть</string>
+    <string name="action_unhide">Показать</string>
+    <string name="action_cancel">Отмена</string>
+    <string name="action_save">Сохранить</string>
+    <plurals name="added_to_album">
+        <item quantity="one">%1$d элемент добавлен в «%2$s»</item>
+        <item quantity="few">%1$d элемента добавлены в «%2$s»</item>
+        <item quantity="many">%1$d элементов добавлено в «%2$s»</item>
+        <item quantity="other">%1$d элемента добавлено в «%2$s»</item>
+    </plurals>
+    <plurals name="removed_from_album">
+        <item quantity="one">%d элемент убран из альбома</item>
+        <item quantity="few">%d элемента убраны из альбома</item>
+        <item quantity="many">%d элементов убрано из альбома</item>
+        <item quantity="other">%d элемента убрано из альбома</item>
+    </plurals>
+    <plurals name="moved_to_hidden">
+        <item quantity="one">%d элемент скрыт. Найдите его в разделе Коллекции, Скрытые.</item>
+        <item quantity="few">%d элемента скрыты. Найдите их в разделе Коллекции, Скрытые.</item>
+        <item quantity="many">%d элементов скрыто. Найдите их в разделе Коллекции, Скрытые.</item>
+        <item quantity="other">%d элемента скрыто. Найдите их в разделе Коллекции, Скрытые.</item>
+    </plurals>
+    <plurals name="unhidden">
+        <item quantity="one">%d элемент снова виден</item>
+        <item quantity="few">%d элемента снова видны</item>
+        <item quantity="many">%d элементов снова видны</item>
+        <item quantity="other">%d элемента снова видны</item>
+    </plurals>
+
+    <!-- Filters -->
+    <string name="filter_type_title">Тип</string>
+    <string name="filter_kind_title">Вид</string>
+    <string name="filter_any">Любой</string>
+    <string name="filter_favorites_only">Только избранное</string>
+    <string name="filter_edited">Изменённые</string>
+    <string name="share_preparing">Подготовка изменённых фото для отправки</string>
+    <string name="filter_edited_only">Только изменённые</string>
+    <string name="filter_clear_all">Сбросить фильтры</string>
+
+    <!-- Locks -->
+    <string name="locked_title">Заблокировано</string>
+    <string name="locked_body">Чтобы открыть, используйте отпечаток пальца, лицо или блокировку экрана.</string>
+    <string name="locked_unlock">Разблокировать</string>
+    <string name="auth_subtitle">Подтвердите, что это вы</string>
+    <string name="auth_title_hidden">Разблокировать «Скрытые»</string>
+    <string name="auth_title_trash">Разблокировать «Недавно удалённые»</string>
+    <string name="auth_unavailable">Аутентификация сейчас недоступна. Повторите попытку через мгновение.</string>
+    <string name="no_device_lock_notice">На этом телефоне нет блокировки экрана, поэтому «Скрытые» не защищены. Настройте её в настройках системы.</string>
+
+    <!-- Recently deleted -->
+    <string name="trash_info">Элементы удаляются окончательно примерно через 30 дней.</string>
+    <string name="trash_empty">Недавно ничего не удалялось</string>
+    <string name="trash_restore">Восстановить</string>
+    <string name="trash_delete_forever">Удалить навсегда</string>
+    <plurals name="days_left_short">
+        <item quantity="one">%d д.</item>
+        <item quantity="few">%d д.</item>
+        <item quantity="many">%d д.</item>
+        <item quantity="other">%d д.</item>
+    </plurals>
+    <plurals name="trash_restored">
+        <item quantity="one">%d элемент восстановлен</item>
+        <item quantity="few">%d элемента восстановлены</item>
+        <item quantity="many">%d элементов восстановлено</item>
+        <item quantity="other">%d элемента восстановлено</item>
+    </plurals>
+    <plurals name="trash_deleted">
+        <item quantity="one">%d элемент удалён навсегда</item>
+        <item quantity="few">%d элемента удалены навсегда</item>
+        <item quantity="many">%d элементов удалено навсегда</item>
+        <item quantity="other">%d элемента удалено навсегда</item>
+    </plurals>
+
+    <!-- Settings: security -->
+    <string name="settings_security">Безопасность</string>
+    <string name="setting_lock_hidden">Требовать аутентификацию для «Скрытых»</string>
+    <string name="setting_lock_trash">Требовать аутентификацию для «Недавно удалённых»</string>
+    <string name="setting_show_hidden">Показывать «Скрытые» в Коллекциях</string>
+    <string name="setting_secure_screens">Скрывать eikon в списке недавних приложений и запретить скриншоты</string>
+    <string name="settings_security_body">Скрытые элементы не попадают в библиотеку, коллекции и поиск, а для открытия «Скрытых» требуется отпечаток пальца, лицо или блокировка экрана. Сами файлы не зашифрованы и остаются в обычном хранилище телефона, где другие приложения с доступом к фото по-прежнему могут их видеть.</string>
+
+    <!-- Search -->
+    <string name="search_placeholder">Дата, место, текст, имя файла</string>
+    <string name="search_clear">Очистить поиск</string>
+    <string name="search_no_results">Подходящих фото нет</string>
+    <string name="search_hint_title">Поиск по библиотеке</string>
+    <string name="search_hint_body">Попробуйте дату («August 2025», «yesterday»), место («Rome», «Tuscany»), слово, которое есть на фото или в имени его файла, либо вид («videos», «screenshots», «favorites»).\n\nДаты и виды понимаются на английском и итальянском. Места, текст на фото и то, что на них изображено, находятся после выполнения анализа (Настройки, Анализ).</string>
+    <string name="search_analysis_off">Поиск по месту, по тексту на фото и по их содержимому выключен. Включить его можно в разделе Настройки, Анализ.</string>
+    <string name="search_analysis_note">Фото ещё анализируются в фоне (%1$d %%). Некоторые результаты могут отсутствовать.</string>
+
+    <!-- Settings: analysis -->
+    <string name="settings_analysis">Анализ</string>
+    <string name="analysis_places_progress">Места: %1$,d из %2$,d</string>
+    <string name="analysis_semantic_progress">Что на фото: %1$,d из %2$,d</string>
+    <string name="analysis_semantic_unavailable">Не удалось загрузить модель, распознающую содержимое фото, поэтому этот шаг не выполняется.</string>
+    <string name="search_semantic_unavailable">Поиск по содержимому фото сейчас недоступен (не удалось загрузить модель). Остальные результаты работают.</string>
+    <string name="analysis_people_progress">Люди: %1$,d из %2$,d</string>
+    <string name="analysis_people_unavailable">Не удалось загрузить модели, находящие лица, поэтому этот шаг не выполняется.</string>
+    <string name="analysis_duplicates_progress">Дубликаты: %1$,d из %2$,d</string>
+    <string name="analysis_text_progress">Текст на фото: %1$,d из %2$,d</string>
+    <string name="analysis_running">Идёт анализ…</string>
+    <string name="analysis_idle">Ожидание подходящего момента (батарея не разряжена, режим энергосбережения выключен и, если вы так выбрали, идёт зарядка)</string>
+    <string name="analysis_up_to_date">Всё проанализировано</string>
+    <string name="setting_pause_analysis">Приостановить анализ</string>
+    <string name="setting_only_charging">Только во время зарядки</string>
+    <string name="setting_analyze_places">Искать фото по месту</string>
+    <string name="setting_analyze_semantic">Искать фото по содержимому</string>
+    <string name="setting_analyze_people">Искать людей на фото</string>
+    <string name="setting_analyze_people_note">Лица находятся и сравниваются только на этом телефоне. Ничто о лице никогда его не покидает, и eikon никогда не пытается никого опознать: он лишь группирует похожие лица, а имена группам даёте вы.</string>
+    <string name="setting_analyze_duplicates">Искать дубликаты фото</string>
+    <string name="setting_analyze_text">Искать текст на фото</string>
+    <string name="analysis_location_permission">Android скрывает от приложений, где сделаны фото, пока вы этого не разрешите.</string>
+    <string name="analysis_allow_locations">Разрешить доступ к местоположению фото</string>
+    <string name="analyze_now">Анализировать сейчас</string>
+    <string name="settings_analysis_body">Анализ выполняется только на вашем телефоне, в фоне, и приостанавливается, когда батарея разряжена, включён режим энергосбережения или телефон нагрелся («Анализировать сейчас» продолжает работу и в режиме энергосбережения). Он сохраняет место каждого фото (определяется офлайн, никакие координаты никуда не отправляются), числовое описание того, что изображено на фото (чтобы вы могли искать, например, «собака» или «закат»; это не подпись, и по нему нельзя восстановить изображение) и любой текст, который он прочитает на фото, чтобы Поиск мог их находить. Если вы включите людей, он также сохраняет, где на фото находится каждое лицо, и его числовое описание — только чтобы группировать похожие лица. Если вы включите дубликаты, он сохраняет короткий отпечаток каждого фото и файлов одинакового размера — только чтобы находить копии. Распознавание содержимого фото и чтение текста медленны и сильно нагружают процессор, поэтому по умолчанию анализ ждёт зарядки.</string>
+
+    <!-- Info panel: derived data -->
+    <string name="info_place">Ближайшее место</string>
+    <string name="info_text_found">Текст на этом фото</string>
+    <string name="info_text_copy">Копировать текст</string>
+
+    <!-- People -->
+    <string name="collection_people">Люди</string>
+    <string name="people_title">Люди</string>
+    <string name="person_unnamed">Человек без имени</string>
+    <string name="person_add_name">Добавить имя</string>
+    <string name="person_rename">Назвать этого человека</string>
+    <string name="person_name_hint">Имя</string>
+    <string name="person_same_name_note">Люди с одинаковым именем объединяются в одного.</string>
+    <string name="person_favorite">Добавить в избранное</string>
+    <string name="person_unfavorite">Убрать из избранного</string>
+    <string name="person_hide">Скрыть этого человека</string>
+    <string name="person_unhide">Показать этого человека</string>
+    <string name="person_merge">Объединить с другим человеком…</string>
+    <string name="person_merge_title">Объединить с</string>
+    <string name="person_merge_empty">Больше не с кем объединять.</string>
+    <string name="person_not_this">Это не он</string>
+    <string name="person_remove_from_people">Это не лицо</string>
+    <string name="people_show_hidden">Показать скрытых людей (%1$d)</string>
+    <string name="people_hide_hidden">Скрыть скрытых людей</string>
+    <string name="people_empty_off">Раздел «Люди» выключен. Включите «Искать людей на фото» в разделе Настройки, Анализ, и eikon сгруппирует найденные лица. Всё остаётся на этом телефоне.</string>
+    <string name="people_empty_working">Лица пока не найдены (проанализировано %1$d %% ваших фото). Анализ выполняется в фоне во время зарядки.</string>
+    <string name="people_empty_done">На ваших фото лица не найдены.</string>
+    <string name="people_go_settings">Открыть настройки</string>
+    <string name="person_photos_empty">Нет фото.</string>
+    <plurals name="moved_to_new_person">
+        <item quantity="one">%d фото перемещено к новому человеку</item>
+        <item quantity="few">%d фото перемещены к новому человеку</item>
+        <item quantity="many">%d фото перемещено к новому человеку</item>
+        <item quantity="other">%d фото перемещено к новому человеку</item>
+    </plurals>
+    <plurals name="removed_from_people">
+        <item quantity="one">%d фото убрано из раздела «Люди»</item>
+        <item quantity="few">%d фото убраны из раздела «Люди»</item>
+        <item quantity="many">%d фото убрано из раздела «Люди»</item>
+        <item quantity="other">%d фото убрано из раздела «Люди»</item>
+    </plurals>
+    <string name="info_people">Люди</string>
+    <plurals name="info_people_unnamed_count">
+        <item quantity="one">%d без имени</item>
+        <item quantity="few">%d без имени</item>
+        <item quantity="many">%d без имени</item>
+        <item quantity="other">%d без имени</item>
+    </plurals>
+
+    <string name="section_memories">Воспоминания</string>
+    <string name="section_pets">Питомцы</string>
+    <string name="collection_dogs">Собаки</string>
+    <string name="collection_cats">Кошки</string>
+    <string name="empty_pets">Собаки и кошки пока не найдены. Питомцев распознают по содержимому фото: включите «Искать фото по содержимому» в разделе Настройки, Анализ, и дождитесь окончания.</string>
+
+    <!-- Places -->
+    <string name="places_title">Места</string>
+    <string name="places_tab_list">Список</string>
+    <string name="places_tab_map">Карта</string>
+    <string name="place_unknown">Другие места</string>
+    <string name="place_near">Рядом с местом: %1$s</string>
+    <string name="places_expand">Показать</string>
+    <string name="places_collapse">Скрыть</string>
+    <string name="collection_places">Места</string>
+    <string name="places_map_note">Только контуры стран и названия крупных городов: изображения карты не загружаются, а координаты никогда не покидают телефон. Для масштабирования сведите пальцы или дважды коснитесь экрана, коснитесь маркера, чтобы увидеть его фото.</string>
+    <string name="places_map_description">Карта мест, где сделаны ваши фото, с маркерами для групп фото</string>
+    <string name="places_empty_off">Раздел «Места» выключен. Включите «Искать фото по месту» в разделе Настройки, Анализ, и eikon определит офлайн, где сделаны ваши фото, по их данным GPS.</string>
+    <string name="places_empty_working">Места пока не найдены (проанализировано %1$d %% ваших фото). Анализ выполняется в фоне во время зарядки.</string>
+    <string name="places_empty_done">Ни у одного из ваших фото нет координат, либо у eikon может не быть разрешения читать местоположение фото (Настройки, Анализ).</string>
+    <string name="section_places">Места и поездки</string>
+
+    <!-- Trips -->
+    <string name="collection_trips">Поездки</string>
+    <string name="trips_title">Поездки</string>
+    <string name="trip_untitled">Поездка</string>
+    <string name="trip_reason">Примерно в %1$d км от места, где сделана большая часть ваших фото (рядом с местом: %2$s)</string>
+    <string name="trip_home_unknown">неизвестное место</string>
+    <plurals name="trip_summary_days">
+        <item quantity="one">%d день</item>
+        <item quantity="few">%d дня</item>
+        <item quantity="many">%d дней</item>
+        <item quantity="other">%d дня</item>
+    </plurals>
+    <string name="trips_empty">Поездки не найдены. Поездка — это несколько дней, не менее чем с 10 фото, проведённых не менее чем в 100 км от места, где сделана большая часть ваших фото. Для этого eikon нужны координаты фото: включите «Искать фото по месту» в разделе Настройки, Анализ.</string>
+
+    <!-- Duplicates and similar shots -->
+    <string name="section_cleanup">Очистка</string>
+    <string name="collection_duplicates">Дубликаты</string>
+    <string name="collection_similar">Похожие снимки</string>
+    <string name="duplicates_title">Дубликаты</string>
+    <string name="similar_title">Похожие снимки</string>
+    <string name="duplicates_note">eikon только находит их. Ничто не удаляется, пока вы не подтвердите это в системном диалоге Android, а удалённые фото попадают в «Недавно удалённые», откуда их можно восстановить. Для копий фото, добавленного в альбомы: оставленная вами копия попадает в эти альбомы.</string>
+    <plurals name="duplicate_exact">
+        <item quantity="one">%d одинаковый файл</item>
+        <item quantity="few">%d одинаковых файла</item>
+        <item quantity="many">%d одинаковых файлов</item>
+        <item quantity="other">%d одинакового файла</item>
+    </plurals>
+    <plurals name="duplicate_visual">
+        <item quantity="one">%d копия одного и того же изображения</item>
+        <item quantity="few">%d копии одного и того же изображения</item>
+        <item quantity="many">%d копий одного и того же изображения</item>
+        <item quantity="other">%d копии одного и того же изображения</item>
+    </plurals>
+    <plurals name="similar_group">
+        <item quantity="one">%d снимок</item>
+        <item quantity="few">%d похожих снимка</item>
+        <item quantity="many">%d похожих снимков</item>
+        <item quantity="other">%d похожего снимка</item>
+    </plurals>
+    <plurals name="duplicate_keep_best">
+        <item quantity="one">Оставить лучшее, переместить %d в «Недавно удалённые»</item>
+        <item quantity="few">Оставить лучшее, переместить %d в «Недавно удалённые»</item>
+        <item quantity="many">Оставить лучшее, переместить %d в «Недавно удалённые»</item>
+        <item quantity="other">Оставить лучшее, переместить %d в «Недавно удалённые»</item>
+    </plurals>
+    <plurals name="similar_trash_marked">
+        <item quantity="one">Переместить %d в «Недавно удалённые»</item>
+        <item quantity="few">Переместить %d в «Недавно удалённые»</item>
+        <item quantity="many">Переместить %d в «Недавно удалённые»</item>
+        <item quantity="other">Переместить %d в «Недавно удалённые»</item>
+    </plurals>
+    <string name="duplicate_best">Лучшее</string>
+    <string name="duplicate_kept">Оставлено</string>
+    <string name="duplicate_marked">Будет перемещено</string>
+    <string name="duplicate_dismiss">Это не дубликаты</string>
+    <string name="similar_dismiss">Они не похожи</string>
+    <string name="duplicates_empty_off">Раздел «Дубликаты» выключен. Включите «Искать дубликаты фото» в разделе Настройки, Анализ. eikon вычисляет отпечатки ваших фото только на этом телефоне, без какой-либо модели.</string>
+    <string name="similar_empty_off">Для «Похожих снимков» нужно включить «Искать фото по содержимому» в разделе Настройки, Анализ: eikon сравнивает, что изображено на каждом фото, для снимков, сделанных с интервалом не более двух минут.</string>
+    <string name="duplicates_empty_working">Пока ничего не найдено (проанализировано %1$d %%). Анализ выполняется в фоне во время зарядки.</string>
+    <string name="duplicates_empty_done">Дубликаты не найдены.</string>
+    <string name="similar_empty_done">Похожие снимки не найдены.</string>
+
+    <!-- Memories -->
+    <string name="collection_memories">Воспоминания</string>
+    <string name="memories_title">Воспоминания</string>
+    <string name="memory_on_this_day">В этот день</string>
+    <string name="memory_year_ago">Год назад</string>
+    <string name="memory_weekend_in">Выходные: %1$s</string>
+    <string name="memory_weekend">Выходные вне дома</string>
+    <string name="memory_day_trip_to">Однодневная поездка: %1$s</string>
+    <string name="memory_day_trip">Однодневная поездка</string>
+    <string name="memory_season">%1$s %2$d</string>
+    <string name="memory_person">%1$s, %2$d</string>
+    <string name="season_winter">Зима</string>
+    <string name="season_spring">Весна</string>
+    <string name="season_summer">Лето</string>
+    <string name="season_autumn">Осень</string>
+    <string name="memory_hide">Скрыть это воспоминание</string>
+    <string name="memory_show_fewer">Показывать меньше таких</string>
+    <string name="memory_show_less_of">Показывать меньше: %1$s</string>
+    <string name="memory_exclude_date">Исключить эту дату</string>
+    <string name="memory_all_photos">Все фото</string>
+    <string name="memory_replay">Воспроизвести снова</string>
+    <string name="memory_reset">Отменить мои выборы</string>
+    <string name="memory_done">Готово. Свои выборы можно отменить в меню «Воспоминаний».</string>
+    <string name="memories_empty">Воспоминаний пока нет. eikon создаёт их из дат, поездок, времён года и людей, которым вы дали имена: «В этот день», «Год назад», поездки и выходные вне дома, время года, кто-то в течение года. Для поездок и выходных нужны Места, для людей — Люди (Настройки, Анализ). Ничто не покидает телефон.</string>
+    <string name="memories_note">Создаются из дат, мест и названных людей по простым правилам; музыки нет, а фото выбираются по избранному, размеру и лицам, а не по тому, насколько они хороши.</string>
+    <string name="memory_no_photos">В этом воспоминании больше нет фото для показа.</string>
+
+    <!-- Editing -->
+    <string name="action_edit">Изменить</string>
+    <string name="edit_title">Редактирование</string>
+    <string name="edit_done">Готово</string>
+    <string name="edit_original">Оригинал</string>
+    <string name="edit_revert">Вернуть</string>
+    <string name="edit_revert_title">Вернуть оригинал?</string>
+    <string name="edit_revert_message">Это сбросит все настройки, фильтр и обрезку этой правки. Исходное фото никогда не менялось. Нажмите «Готово», чтобы сохранить возвращённое фото.</string>
+    <string name="edit_discard_title">Отменить изменения?</string>
+    <string name="edit_discard_message">Изменения, сделанные в этом редакторе, будут потеряны. Фото останется таким, каким было.</string>
+    <string name="edit_discard">Отменить</string>
+    <string name="edit_copy_edits">Копировать правки</string>
+    <string name="edit_paste_edits">Вставить правки</string>
+    <string name="edit_save_copy">Сохранить копию</string>
+    <string name="edit_copy_saved">Копия сохранена рядом с оригиналом, который не изменён.</string>
+    <string name="edit_copy_saved_no_details">Копия сохранена рядом с оригиналом, который не изменён. Сведения о камере скопировать не удалось.</string>
+    <string name="edit_failed">Не удалось завершить редактирование. Фото не изменено.</string>
+    <string name="edited_badge">Изменено</string>
+    <string name="viewer_show_original">Показать оригинал</string>
+    <string name="viewer_show_edited">Показать изменённое фото</string>
+    <string name="tool_auto">Авто</string>
+    <string name="tool_light">Свет</string>
+    <string name="tool_color">Цвет</string>
+    <string name="tool_detail">Детали</string>
+    <string name="tool_filters">Фильтры</string>
+    <string name="tool_crop">Обрезка</string>
+    <string name="adj_exposure">Экспозиция</string>
+    <string name="adj_brightness">Яркость</string>
+    <string name="adj_contrast">Контрастность</string>
+    <string name="adj_highlights">Света</string>
+    <string name="adj_shadows">Тени</string>
+    <string name="adj_black_point">Точка чёрного</string>
+    <string name="adj_saturation">Насыщенность</string>
+    <string name="adj_vibrance">Красочность</string>
+    <string name="adj_temperature">Теплота</string>
+    <string name="adj_tint">Оттенок</string>
+    <string name="adj_sharpness">Резкость</string>
+    <string name="adj_vignette">Виньетирование</string>
+    <string name="geo_straighten">Выровнять</string>
+    <string name="geo_perspective_vertical">Вертикальная перспектива</string>
+    <string name="geo_perspective_horizontal">Горизонтальная перспектива</string>
+    <string name="filter_amount">Сила</string>
+    <string name="filter_name_none">Оригинал</string>
+    <string name="filter_name_vivid">Яркий</string>
+    <string name="filter_name_warm">Тёплый</string>
+    <string name="filter_name_cool">Холодный</string>
+    <string name="filter_name_mono">Моно</string>
+    <string name="filter_name_noir">Нуар</string>
+    <string name="filter_name_fade">Выцветший</string>
+    <string name="filter_name_chrome">Хром</string>
+    <string name="filter_name_sepia">Сепия</string>
+    <string name="crop_rotate">Повернуть</string>
+    <string name="crop_flip">Отразить</string>
+    <string name="shape_free">Свободно</string>
+    <string name="shape_original">Оригинал</string>
+    <string name="shape_square">1:1</string>
+    <string name="shape_4_3">4:3</string>
+    <string name="shape_3_2">3:2</string>
+    <string name="shape_16_9">16:9</string>
+    <string name="action_paste_edits">Вставить правки</string>
+    <string name="action_revert_edits">Убрать правки</string>
+    <plurals name="edits_pasted">
+        <item quantity="one">Правки применены к %d фото</item>
+        <item quantity="few">Правки применены к %d фото</item>
+        <item quantity="many">Правки применены к %d фото</item>
+        <item quantity="other">Правки применены к %d фото</item>
+    </plurals>
+    <plurals name="edits_reverted">
+        <item quantity="one">Правка убрана с %d фото; оригинал такой, каким был всегда</item>
+        <item quantity="few">Правки убраны с %d фото; оригиналы такие, какими были всегда</item>
+        <item quantity="many">Правки убраны с %d фото; оригиналы такие, какими были всегда</item>
+        <item quantity="other">Правки убраны с %d фото; оригиналы такие, какими были всегда</item>
+    </plurals>
+
+    <!-- Accessibility -->
+    <string name="slider_reset">Сбросить до нейтрального значения</string>
+    <string name="crop_area">Область обрезки: от %1$d %% до %2$d %% по ширине и от %3$d %% до %4$d %% по высоте</string>
+    <string name="crop_action_smaller">Уменьшить область обрезки</string>
+    <string name="crop_action_larger">Увеличить область обрезки</string>
+    <string name="crop_action_left">Сдвинуть область обрезки влево</string>
+    <string name="crop_action_right">Сдвинуть область обрезки вправо</string>
+    <string name="crop_action_up">Сдвинуть область обрезки вверх</string>
+    <string name="crop_action_down">Сдвинуть область обрезки вниз</string>
+    <string name="viewer_zoom_in">Увеличить</string>
+    <string name="viewer_zoom_out">Уменьшить</string>
+    <string name="external_photo">Фото</string>
+    <string name="viewer_cannot_display">Это фото не удаётся показать.</string>
+
+    <!-- Info: caption, editing the date and location, what the photo shows -->
+    <string name="info_caption">Подпись</string>
+    <string name="caption_add">Добавить подпись</string>
+    <string name="caption_edit">Изменить подпись</string>
+    <string name="caption_title">Подпись</string>
+    <string name="caption_hint">Несколько слов об этом фото</string>
+    <string name="caption_note">Хранится только в eikon; файл фото не изменяется. Поиск её находит.</string>
+    <string name="date_change">Изменить дату и время</string>
+    <string name="date_revert">Восстановить исходную дату</string>
+    <string name="date_time_title">Время суток</string>
+    <string name="action_next">Далее</string>
+    <string name="location_title">Где сделано</string>
+    <string name="location_coordinates">Координаты</string>
+    <string name="location_coordinates_note">Десятичные градусы, сначала широта: 41.9028, 12.4964</string>
+    <string name="location_invalid">Это не координаты: два числа, широта от -90 до 90 и долгота от -180 до 180</string>
+    <string name="location_city">Или найдите город (работает офлайн)</string>
+    <string name="location_remove">Удалить местоположение</string>
+    <string name="location_change">Изменить местоположение</string>
+    <string name="location_revert">Восстановить исходное местоположение</string>
+    <string name="info_map_description">Небольшая карта, показывающая, где сделано фото</string>
+    <string name="metadata_done">Готово. Теперь фото указывает это; оригинал сохранён, чтобы вы могли его восстановить.</string>
+    <string name="metadata_not_writable">Этот вид файла изменить нельзя.</string>
+    <string name="metadata_needs_permission">Чтобы изменить дату или местоположение фото, eikon должен уметь читать, где сделаны фото: иначе Android показывает ему копию без местоположения, и сохранение его сотрёт.</string>
+    <string name="metadata_nothing_to_revert">Восстанавливать нечего.</string>
+    <string name="metadata_interrupted">Предыдущее изменение этого фото не завершилось. Его оригинал сохранён: восстановите его, прежде чем менять что-либо ещё.</string>
+    <string name="metadata_failed">Изменение не удалось. Фото возвращено ровно таким, каким было.</string>
+    <string name="metadata_restore_file">Восстановить исходный файл</string>
+    <string name="info_albums">В альбомах</string>
+    <string name="info_pets">Питомцы</string>
+    <string name="info_shows">Возможно, на фото</string>
+    <string name="pet_dog">Собака</string>
+    <string name="pet_cat">Кошка</string>
+    <string name="info_album">Альбом устройства</string>
+    <string name="label_landscape">Пейзаж</string>
+    <string name="label_beach">Пляж</string>
+    <string name="label_sea">Море</string>
+    <string name="label_mountain">Гора</string>
+    <string name="label_sunset">Закат</string>
+    <string name="label_snow">Снег</string>
+    <string name="label_city">Город</string>
+    <string name="label_building">Здание</string>
+    <string name="label_street">Улица</string>
+    <string name="label_woods">Лес</string>
+    <string name="label_flower">Цветок</string>
+    <string name="label_sky">Небо</string>
+    <string name="label_person">Человек</string>
+    <string name="label_group">Группа людей</string>
+    <string name="label_food">Еда</string>
+    <string name="label_dessert">Десерт</string>
+    <string name="label_drink">Напиток</string>
+    <string name="label_car">Автомобиль</string>
+    <string name="label_bicycle">Велосипед</string>
+    <string name="label_airplane">Самолёт</string>
+    <string name="label_boat">Лодка</string>
+    <string name="label_bird">Птица</string>
+    <string name="label_horse">Лошадь</string>
+    <string name="label_interior">Комната</string>
+    <string name="label_night">Ночь</string>
+    <string name="label_party">Вечеринка</string>
+    <string name="label_sport">Спортивное событие</string>
+    <string name="label_animal">Животное</string>
+
+    <!-- Backup to your own server -->
+    <string name="backup_title">Резервное копирование на свой сервер</string>
+    <string name="backup_intro">Копирует ваши фото и видео на сервер, которым вы управляете сами, по зашифрованному соединению. Ничто не покидает этот телефон, пока вы не включите резервное копирование, всё уходит только на указанный ниже сервер, а eikon никогда ничего на нём не удаляет и не изменяет. Пароль или ключ хранится в зашифрованном виде в Android Keystore.</string>
+    <string name="backup_kind_immich">Immich (это же устанавливает и Umbrel)</string>
+    <string name="backup_kind_nextcloud">Nextcloud или любой сервер WebDAV</string>
+    <string name="backup_address">Адрес сервера (https://…)</string>
+    <string name="backup_username">Имя для входа</string>
+    <string name="backup_folder">Папка на сервере</string>
+    <string name="backup_api_key">Ключ API</string>
+    <string name="backup_app_password">Пароль приложения</string>
+    <string name="backup_secret_saved">Сохранён. Оставьте пустым, чтобы сохранить его</string>
+    <string name="backup_help_immich">В Immich: Настройки учётной записи, Ключи API, Новый ключ API. Необходимое разрешение — asset.upload.</string>
+    <string name="backup_help_nextcloud">В Nextcloud: Личные настройки, Безопасность, Устройства и сеансы, создайте новый пароль приложения. Используйте его, а не пароль для входа.</string>
+    <string name="backup_save_test">Сохранить и проверить соединение</string>
+    <string name="backup_connected">Подключено к %1$s.</string>
+    <string name="backup_failed">Не удалось подключиться: %1$s</string>
+    <string name="backup_certificate_declined">Сертификату не доверились, поэтому ничего не отправлено и не будет отправлено.</string>
+    <string name="backup_certificate_title">Сертификат этого сервера выдан не тем центром, которому доверяет ваш телефон</string>
+    <string name="backup_certificate_body">%1$s предъявил приведённый ниже сертификат. Сравните его отпечаток с тем, что показывает ваш сервер (например, командой: openssl x509 -noout -fingerprint -sha256). Доверяйте ему, только если они совпадают: с этого момента для данного сервера принимается именно этот сертификат и никакой другой.</string>
+    <string name="backup_certificate_subject">Выдан: %1$s</string>
+    <string name="backup_certificate_expires">Действителен до %1$s</string>
+    <string name="backup_certificate_self_signed">Он подписан самим собой, как обычно и бывает у сертификата домашнего сервера.</string>
+    <string name="backup_certificate_trust">Доверять этому сертификату</string>
+    <string name="backup_enable">Резервно копировать мои фото и видео</string>
+    <string name="backup_test_first">Сначала сохраните и проверьте соединение.</string>
+    <string name="backup_wifi_only">Только по Wi-Fi</string>
+    <string name="backup_only_charging">Только во время зарядки</string>
+    <string name="backup_videos">Включить видео</string>
+    <string name="backup_hidden">Включить скрытые фото</string>
+    <string name="backup_hidden_note">Скрытые фото тоже будут отправлены на ваш сервер, где они так же видны, как и всё остальное.</string>
+    <string name="backup_confirm_title">Начать резервное копирование?</string>
+    <plurals name="backup_confirm_body">
+        <item quantity="one">%1$d фото или видео будет скопировано на %2$s понемногу, когда телефон будет в разрешённой вами сети. Ничего не удаляется ни на телефоне, ни на сервере.</item>
+        <item quantity="few">%1$d фото и видео будут скопированы на %2$s понемногу, когда телефон будет в разрешённой вами сети. Ничего не удаляется ни на телефоне, ни на сервере.</item>
+        <item quantity="many">%1$d фото и видео будет скопировано на %2$s понемногу, когда телефон будет в разрешённой вами сети. Ничего не удаляется ни на телефоне, ни на сервере.</item>
+        <item quantity="other">%1$d фото и видео будет скопировано на %2$s понемногу, когда телефон будет в разрешённой вами сети. Ничего не удаляется ни на телефоне, ни на сервере.</item>
+    </plurals>
+    <string name="backup_confirm_start">Начать</string>
+    <string name="backup_location_note">Android скрывает, где сделаны фото, от приложений без разрешения на местоположение фото, поэтому у копий на вашем сервере не было бы местоположения.</string>
+    <string name="backup_progress">Скопировано: %1$,d из %2$,d</string>
+    <plurals name="backup_refused">
+        <item quantity="one">Сервер отклонил %1$d фото, и оно не будет пробоваться снова, пока вы не попросите.</item>
+        <item quantity="few">Сервер отклонил %1$d фото, и они не будут пробоваться снова, пока вы не попросите.</item>
+        <item quantity="many">Сервер отклонил %1$d фото, и они не будут пробоваться снова, пока вы не попросите.</item>
+        <item quantity="other">Сервер отклонил %1$d фото, и они не будут пробоваться снова, пока вы не попросите.</item>
+    </plurals>
+    <string name="backup_running">Идёт резервное копирование…</string>
+    <string name="backup_idle">Ожидание подходящего момента (разрешённая вами сеть, батарея не разряжена).</string>
+    <string name="backup_last_run">Последний запуск %1$s. Отправлено: %2$d. Уже было: %3$d. Отклонено: %4$d.</string>
+    <string name="backup_stopped">Остановилось, потому что %1$s</string>
+    <string name="backup_stop_power_save">включён режим энергосбережения.</string>
+    <string name="backup_stop_thermal">телефон был слишком горячим.</string>
+    <string name="backup_stop_unreachable">сервер был недоступен или занят. Оно попробует снова.</string>
+    <string name="backup_stop_unauthorized">сервер не принял ключ или пароль.</string>
+    <string name="backup_stop_untrusted">сертификат сервера не из тех, которым вы доверились.</string>
+    <string name="backup_stop_misconfigured">адрес не подходит для этого вида сервера.</string>
+    <string name="backup_stop_refusals">сервер отклонил много файлов подряд, что указывает на ограничение сервера, а не на проблему с фото.</string>
+    <string name="backup_now">Копировать сейчас</string>
+    <string name="backup_retry_refused">Повторить отклонённые</string>
+
+    <!-- Network consent -->
+    <string name="network_allow">Разрешить eikon использовать интернет</string>
+    <string name="network_allow_note">Выключено, пока вы не включите. eikon использует сеть только для копирования ваших фото на указанный ниже сервер, и только после того, как вы настроите его и включите резервное копирование. Пока это выключено, ничто не может никуда подключиться.</string>
+    <string name="settings_privacy_network">eikon может выходить в интернет только ради одного: необязательного резервного копирования ваших фото на сервер, которым вы управляете сами. Оно выключено, пока вы его не разрешите (Настройки, Резервное копирование) и не настроите сервер. Никакой аналитики использования, рекламы, учётных записей, сервисов Google и собственного облака: его нет.</string>
+
+    <!-- First-run screens -->
+    <string name="onboarding_intro_title">Ваши фото — на вашем телефоне</string>
+    <string name="onboarding_intro_body">eikon — галерея фото и видео для Android. Она показывает изображения, которые ваш телефон уже хранит, находит их по дате, месту, людям или содержимому и редактирует, никогда не трогая оригиналы.</string>
+    <string name="onboarding_point_local">Всё остаётся на этом устройстве. Без учётной записи, аналитики использования и рекламы.</string>
+    <string name="onboarding_point_independent">Она ни от чего не зависит за пределами вашего телефона: без сервисов Google, облака и серверов третьих сторон.</string>
+    <string name="onboarding_point_yours">Если вы хотите резервную копию, она уходит только на сервер, которым вы управляете сами, и только если вы её настроите.</string>
+    <string name="onboarding_next">Далее</string>
+    <string name="onboarding_start">Начать</string>
+    <string name="onboarding_page">Страница %1$d из %2$d</string>
+    <string name="onboarding_permissions_title">Что просит eikon и зачем</string>
+    <string name="onboarding_permissions_intro">Нужно только первое. Любое из них можно изменить позже в Настройках или в настройках телефона.</string>
+    <string name="onboarding_perm_media_title">Фото и видео</string>
+    <string name="onboarding_perm_media_body">Чтобы eikon мог показывать вашу библиотеку. Он читает файлы там, где Android их уже хранит, и никуда их не копирует. При желании можно разрешить только некоторые фото.</string>
+    <string name="onboarding_perm_location_title">Местоположение фото (по желанию)</string>
+    <string name="onboarding_perm_location_body">Android скрывает от приложений, где сделано фото, если вы этого не разрешите. eikon использует это, чтобы показывать место фото на офлайн-карте и искать по месту. Места определяются на телефоне: никакие координаты никуда не отправляются.</string>
+    <string name="onboarding_perm_network_title">Интернет (по желанию)</string>
+    <string name="onboarding_perm_network_body">Используется только для одного: копирования ваших фото на сервер, которым вы управляете сами (Immich, Nextcloud), если вы когда-нибудь его настроите. В остальном eikon никуда не подключается. Это выключено, пока вы не включите здесь, и вы можете в любой момент снова выключить это в Настройках.</string>
+    <string name="onboarding_allow">Разрешить</string>
+    <string name="onboarding_allowed">Разрешено</string>
+    <string name="onboarding_promise">Здесь ничто не зависит от чего-либо за пределами вашего телефона: без сервисов Google, учётных записей и аналитики использования. Ваши фото остаются на этом устройстве или, если вы выберете, уходят на ваш собственный сервер.</string>
+
+    <!-- Support -->
+    <string name="support_title">Поддержка</string>
+    <string name="support_body">eikon бесплатен, в нём нет рекламы, и он не следит за вами. Если он вам нравится, можете отправить немного сатоши через сеть Lightning.</string>
+    <string name="support_button">Поддержать через Lightning</string>
+    <string name="support_copied">Кошелёк Lightning не найден — адрес скопирован: %1$s</string>
+
+    <!-- Analyze now -->
+    <string name="analyze_now_running">Анализ…</string>
+    <string name="analyze_now_hint">Начинается сразу, только на этом телефоне, даже в режиме энергосбережения.</string>
+    <string name="analyze_now_hint_off">Сначала включите выше хотя бы один шаг.</string>
+    <string name="analyze_now_hint_paused">Анализ приостановлен: отключите паузу, чтобы анализировать сейчас.</string>
+
+    <!-- Pictures from other apps -->
+    <string name="viewer_open_in_library">Открыть в библиотеке</string>
+</resources>

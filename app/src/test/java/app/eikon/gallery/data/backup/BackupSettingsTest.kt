@@ -37,8 +37,17 @@ class BackupSettingsTest {
     }
 
     @Test
+    fun theBackupRunsOnlyWithTheNetworkAllowedAndTheBackupSwitchedOn() {
+        assertEquals(false, BackupSettings().active)
+        assertEquals(false, BackupSettings(enabled = true).active)
+        assertEquals(false, BackupSettings(networkAllowed = true).active)
+        assertEquals(true, BackupSettings(networkAllowed = true, enabled = true).active)
+    }
+
+    @Test
     fun nothingIsOnByDefault() {
         val defaults = BackupSettings()
+        assertEquals(false, defaults.networkAllowed)
         assertEquals(false, defaults.enabled)
         assertEquals(false, defaults.includeHidden)
         assertEquals(true, defaults.wifiOnly)

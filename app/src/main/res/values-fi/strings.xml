@@ -1,0 +1,659 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Library -->
+    <string name="library_title">Kirjasto</string>
+    <string name="today">Tänään</string>
+    <string name="yesterday">Eilen</string>
+    <string name="empty_library">Ei vielä kuvia tai videoita</string>
+    <string name="empty_filter">Mikään ei vastaa tätä suodatinta</string>
+    <string name="empty_filter_clear">Näytä kaikki</string>
+    <string name="sync_progress">Ladataan kirjastoa: %1$,d / %2$,d</string>
+    <string name="sync_failed">Kirjastoa ei voitu päivittää</string>
+    <string name="sync_retry">Yritä uudelleen</string>
+    <string name="scrubber_description">Selaa kirjastoa päivämäärän mukaan</string>
+
+    <!-- Permissions -->
+    <string name="permission_title">Kuvasi pysyvät laitteellasi</string>
+    <string name="permission_body">eikon tarvitsee pääsyn kuviisi ja videoihisi voidakseen näyttää ne. Ne pysyvät laitteellasi: mitään ei lähetetä, ellet ota käyttöön varmuuskopiointia omalle palvelimellesi.</string>
+    <string name="permission_grant">Salli pääsy</string>
+    <string name="permission_denied">Pääsy evättiin. Voit sallia sen järjestelmän asetuksissa.</string>
+    <string name="permission_open_settings">Avaa asetukset</string>
+    <string name="limited_banner">Vain valitsemasi kuvat näytetään</string>
+    <string name="limited_select_more">Valitse lisää</string>
+    <string name="limited_allow_all">Salli kaikki</string>
+
+    <!-- Menus and filters -->
+    <string name="menu_filter">Suodata</string>
+    <string name="menu_sort">Järjestä</string>
+    <string name="menu_settings">Asetukset</string>
+    <string name="menu_more">Lisää vaihtoehtoja</string>
+    <string name="filter_all">Kaikki</string>
+    <string name="filter_photos">Kuvat</string>
+    <string name="filter_videos">Videot</string>
+    <string name="filter_favorites">Suosikit</string>
+    <string name="filter_screenshots">Näyttökuvat</string>
+    <string name="filter_screen_recordings">Näyttötallenteet</string>
+    <string name="filter_panoramas">Panoraamat</string>
+    <string name="filter_raw">RAW</string>
+    <string name="filter_clear">Tyhjennä suodatin</string>
+    <string name="sort_by_date_taken">Ottamispäivä</string>
+    <string name="sort_by_date_added">Lisäyspäivä</string>
+    <string name="sort_newest_first">Uusimmat ensin</string>
+    <string name="sort_oldest_first">Vanhimmat ensin</string>
+
+    <!-- Selection and actions -->
+    <plurals name="selected_count">
+        <item quantity="one">%d valittu</item>
+        <item quantity="other">%d valittu</item>
+    </plurals>
+    <string name="action_share">Jaa</string>
+    <string name="action_favorite">Lisää suosikkeihin</string>
+    <string name="action_unfavorite">Poista suosikeista</string>
+    <string name="action_delete">Poista</string>
+    <string name="action_info">Tiedot</string>
+    <string name="action_back">Takaisin</string>
+    <string name="action_clear_selection">Tyhjennä valinta</string>
+    <string name="action_select">Valitse</string>
+    <string name="action_failed">Jokin meni pieleen</string>
+    <plurals name="moved_to_trash">
+        <item quantity="one">%d kohde siirretty roskakoriin. Android säilyttää sen 30 päivää.</item>
+        <item quantity="other">%d kohdetta siirretty roskakoriin. Android säilyttää ne 30 päivää.</item>
+    </plurals>
+
+    <!-- Accessibility -->
+    <string name="cd_photo">Kuva, %1$s</string>
+    <string name="cd_video">Video, %1$s, %2$s</string>
+    <string name="cd_edited_badge">Muokattu</string>
+    <string name="cd_favorite_badge">Suosikki</string>
+    <string name="viewer_position">%1$d / %2$d</string>
+
+    <!-- Video -->
+    <string name="video_play">Toista</string>
+    <string name="video_pause">Tauko</string>
+    <string name="video_mute">Mykistä</string>
+    <string name="video_unmute">Poista mykistys</string>
+    <string name="video_seek">Siirry kohtaan</string>
+
+    <!-- Info panel -->
+    <string name="info_title">Tiedot</string>
+    <string name="info_loading">Luetaan tietoja…</string>
+    <string name="info_error">Tämän tiedoston tietoja ei voitu lukea</string>
+    <string name="info_section_file">Tiedosto</string>
+    <string name="info_section_camera">Kamera</string>
+    <string name="info_section_video">Video</string>
+    <string name="info_name">Nimi</string>
+    <string name="info_type">Tyyppi</string>
+    <string name="info_folder">Kansio</string>
+    <string name="info_resolution">Tarkkuus</string>
+    <string name="info_megapixels">Megapikselit</string>
+    <string name="info_size">Koko</string>
+    <string name="info_date">Päivämäärä</string>
+    <string name="info_modified">Muokattu</string>
+    <string name="info_color_profile">Väriprofiili</string>
+    <string name="info_location">Sijainti</string>
+    <string name="info_location_none">Tähän tiedostoon ei ole tallennettu sijaintia</string>
+    <string name="info_location_hidden">Android piilottaa kuvien sijainnit sovelluksilta, kunnes sallit sen</string>
+    <string name="info_location_allow">Salli</string>
+    <string name="info_location_open">Avaa karttasovelluksessa</string>
+    <string name="info_camera">Laite</string>
+    <string name="info_lens">Objektiivi</string>
+    <string name="info_focal_length">Polttoväli</string>
+    <string name="info_aperture">Aukko</string>
+    <string name="info_shutter">Suljinaika</string>
+    <string name="info_iso">Herkkyys</string>
+    <string name="info_exposure_bias">Valotuksen korjaus</string>
+    <string name="info_flash">Salama</string>
+    <string name="info_flash_fired">Lauennut</string>
+    <string name="info_flash_off">Ei lauennut</string>
+    <string name="info_orientation">Suunta</string>
+    <string name="info_software">Ohjelmisto</string>
+    <string name="info_duration">Kesto</string>
+    <string name="info_frame_rate">Kuvataajuus</string>
+    <string name="info_video_codec">Videokoodekki</string>
+    <string name="info_audio_codec">Äänikoodekki</string>
+    <string name="info_bitrate">Bittinopeus</string>
+    <string name="info_dynamic_range">Dynamiikka-alue</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Asetukset</string>
+    <string name="settings_appearance">Ulkoasu</string>
+    <string name="theme_system">Seuraa järjestelmää</string>
+    <string name="theme_light">Vaalea</string>
+    <string name="theme_dark">Tumma</string>
+    <string name="settings_privacy">Yksityisyys</string>
+    <string name="settings_privacy_body">eikon toimii laitteellasi. Siinä ei ole tiliä eikä käytön analytiikkaa, ja sen tiedot on rajattu Androidin varmuuskopioiden ulkopuolelle.\n\nKuviasi ei koskaan kopioida: eikon pitää paikallista hakemistoa tiedostojen tiedoista (nimi, päivämäärä, koko, kansio), jotta kirjasto aukeaa heti. Sovelluksen poistaminen poistaa myös hakemiston.</string>
+    <string name="settings_storage_encrypted">Kirjaston tietokanta (hakemisto, albumit, muokkaukset, kuvatekstit ja analyysin löydökset) on salattu tällä puhelimella AES-256:lla. Sen avainta säilyttää Android Keystore.</string>
+    <string name="settings_storage_not_encrypted">Kirjaston tietokantaa ei voitu salata (%1$s), joten se on edelleen tallennettu salaamattomana. eikon yrittää uudelleen joka käynnistyksellä.</string>
+    <string name="settings_storage_reset_title">Kirjaston tietokanta aloitettu alusta</string>
+    <string name="settings_storage_reset">Kirjaston tietokantaa suojannut avain hävisi, joten eikonin oli luotava uusi tietokanta. Lisäämäsi albumit, muokkaukset, kuvatekstit ja nimet ovat poissa. Kuvasi ovat koskemattomia, ja analyysi ajetaan uudelleen.</string>
+    <string name="settings_storage_reset_ok">Selvä</string>
+    <string name="settings_about">Tietoja</string>
+    <string name="settings_licenses">Avoimen lähdekoodin lisenssit</string>
+    <string name="licenses_title">Avoimen lähdekoodin lisenssit</string>
+    <string name="settings_version">Versio %1$s</string>
+
+    <!-- Navigation and collections -->
+    <string name="nav_library">Kirjasto</string>
+    <string name="nav_search">Haku</string>
+    <string name="nav_collections">Kokoelmat</string>
+    <string name="collections_title">Kokoelmat</string>
+    <string name="section_people">Henkilöt</string>
+    <string name="section_albums">Albumit</string>
+    <string name="section_personal">Henkilökohtainen</string>
+    <string name="section_folders">Laitteen kansiot</string>
+    <string name="collection_favorites">Suosikit</string>
+    <string name="collection_recent">Äskettäin lisätyt</string>
+    <string name="collection_videos">Videot</string>
+    <string name="collection_screenshots">Näyttökuvat</string>
+    <string name="collection_screen_recordings">Näyttötallenteet</string>
+    <string name="collection_panoramas">Panoraamat</string>
+    <string name="collection_raw">RAW</string>
+    <string name="collection_trash">Äskettäin poistetut</string>
+    <string name="collection_hidden">Piilotetut</string>
+    <plurals name="items_count">
+        <item quantity="one">%d kohde</item>
+        <item quantity="other">%d kohdetta</item>
+    </plurals>
+    <string name="empty_album">Tämä albumi on tyhjä. Valitse kuvia kirjastosta ja valitse ”Lisää albumiin”.</string>
+    <string name="empty_hidden">Mitään ei ole piilotettu</string>
+    <string name="empty_collection">Täällä ei ole vielä mitään</string>
+
+    <!-- Albums -->
+    <string name="album_new">Uusi albumi</string>
+    <string name="album_name_hint">Albumin nimi</string>
+    <string name="album_create">Luo</string>
+    <string name="album_rename">Nimeä uudelleen</string>
+    <string name="album_delete">Poista albumi</string>
+    <string name="album_delete_title">Poistetaanko tämä albumi?</string>
+    <string name="album_delete_message">Vain albumi poistetaan. Sen sisältämät kuvat ja videot pysyvät siellä missä ovat.</string>
+    <string name="album_move_earlier">Siirrä aiemmaksi</string>
+    <string name="album_move_later">Siirrä myöhemmäksi</string>
+    <string name="action_add_to_album">Lisää albumiin</string>
+    <string name="action_remove_from_album">Poista albumista</string>
+    <string name="action_hide">Piilota</string>
+    <string name="action_unhide">Näytä</string>
+    <string name="action_cancel">Peruuta</string>
+    <string name="action_save">Tallenna</string>
+    <plurals name="added_to_album">
+        <item quantity="one">%1$d kohde lisätty albumiin ”%2$s”</item>
+        <item quantity="other">%1$d kohdetta lisätty albumiin ”%2$s”</item>
+    </plurals>
+    <plurals name="removed_from_album">
+        <item quantity="one">%d kohde poistettu albumista</item>
+        <item quantity="other">%d kohdetta poistettu albumista</item>
+    </plurals>
+    <plurals name="moved_to_hidden">
+        <item quantity="one">%d kohde piilotettu. Löydät sen kohdasta Kokoelmat, Piilotetut.</item>
+        <item quantity="other">%d kohdetta piilotettu. Löydät ne kohdasta Kokoelmat, Piilotetut.</item>
+    </plurals>
+    <plurals name="unhidden">
+        <item quantity="one">%d kohde on taas näkyvissä</item>
+        <item quantity="other">%d kohdetta on taas näkyvissä</item>
+    </plurals>
+
+    <!-- Filters -->
+    <string name="filter_type_title">Tyyppi</string>
+    <string name="filter_kind_title">Laji</string>
+    <string name="filter_any">Mikä tahansa</string>
+    <string name="filter_favorites_only">Vain suosikit</string>
+    <string name="filter_edited">Muokatut</string>
+    <string name="share_preparing">Valmistellaan muokattuja kuvia jaettavaksi</string>
+    <string name="filter_edited_only">Vain muokatut</string>
+    <string name="filter_clear_all">Tyhjennä suodattimet</string>
+
+    <!-- Locks -->
+    <string name="locked_title">Lukittu</string>
+    <string name="locked_body">Avaa tämä sormenjäljellä, kasvoilla tai näytön lukituksella.</string>
+    <string name="locked_unlock">Avaa lukitus</string>
+    <string name="auth_subtitle">Vahvista, että se olet sinä</string>
+    <string name="auth_title_hidden">Avaa ”Piilotetut”</string>
+    <string name="auth_title_trash">Avaa ”Äskettäin poistetut”</string>
+    <string name="auth_unavailable">Todennus ei ole juuri nyt käytettävissä. Yritä hetken päästä uudelleen.</string>
+    <string name="no_device_lock_notice">Tässä puhelimessa ei ole näytön lukitusta, joten ”Piilotetut” ei ole suojattu. Määritä lukitus järjestelmän asetuksissa.</string>
+
+    <!-- Recently deleted -->
+    <string name="trash_info">Kohteet poistetaan pysyvästi noin 30 päivän kuluttua.</string>
+    <string name="trash_empty">Mitään ei ole poistettu äskettäin</string>
+    <string name="trash_restore">Palauta</string>
+    <string name="trash_delete_forever">Poista pysyvästi</string>
+    <plurals name="days_left_short">
+        <item quantity="one">%d pv</item>
+        <item quantity="other">%d pv</item>
+    </plurals>
+    <plurals name="trash_restored">
+        <item quantity="one">%d kohde palautettu</item>
+        <item quantity="other">%d kohdetta palautettu</item>
+    </plurals>
+    <plurals name="trash_deleted">
+        <item quantity="one">%d kohde poistettu pysyvästi</item>
+        <item quantity="other">%d kohdetta poistettu pysyvästi</item>
+    </plurals>
+
+    <!-- Settings: security -->
+    <string name="settings_security">Turvallisuus</string>
+    <string name="setting_lock_hidden">Vaadi todennus ”Piilotetut”-kohtaan</string>
+    <string name="setting_lock_trash">Vaadi todennus ”Äskettäin poistetut”-kohtaan</string>
+    <string name="setting_show_hidden">Näytä ”Piilotetut” kokoelmissa</string>
+    <string name="setting_secure_screens">Piilota eikon viimeaikaisista sovelluksista ja estä näyttökuvat</string>
+    <string name="settings_security_body">Piilotetut kohteet jäävät pois kirjastosta, kokoelmista ja hausta, ja ”Piilotetut”-kohdan avaaminen vaatii sormenjäljen, kasvot tai näytön lukituksen. Itse tiedostoja ei ole salattu, ja ne pysyvät puhelimesi tavallisessa tallennustilassa, jossa muut kuviin pääsevät sovellukset voivat yhä nähdä ne.</string>
+
+    <!-- Search -->
+    <string name="search_placeholder">Päivämäärä, paikka, teksti, tiedostonimi</string>
+    <string name="search_clear">Tyhjennä haku</string>
+    <string name="search_no_results">Yksikään kuva ei vastaa</string>
+    <string name="search_hint_title">Hae kirjastostasi</string>
+    <string name="search_hint_body">Kokeile päivämäärää (”August 2025”, ”yesterday”), paikkaa (”Rome”, ”Tuscany”), sanaa, joka esiintyy kuvassa tai sen tiedostonimessä, tai lajia (”videos”, ”screenshots”, ”favorites”).\n\nPäivämäärät ja lajit ymmärretään englanniksi ja italiaksi. Paikat, kuvien teksti ja se, mitä kuvat esittävät, löytyvät kun analyysi on ajettu (Asetukset, Analyysi).</string>
+    <string name="search_analysis_off">Haku paikan, kuvien tekstin ja kuvien sisällön mukaan on pois päältä. Voit ottaa sen käyttöön kohdassa Asetukset, Analyysi.</string>
+    <string name="search_analysis_note">Kuvia analysoidaan vielä taustalla (%1$d %%). Joitakin tuloksia voi puuttua.</string>
+
+    <!-- Settings: analysis -->
+    <string name="settings_analysis">Analyysi</string>
+    <string name="analysis_places_progress">Paikat: %1$,d / %2$,d</string>
+    <string name="analysis_semantic_progress">Mitä kuvat esittävät: %1$,d / %2$,d</string>
+    <string name="analysis_semantic_unavailable">Mallia, joka tunnistaa mitä kuvat esittävät, ei voitu ladata, joten tämä vaihe ei ole käynnissä.</string>
+    <string name="search_semantic_unavailable">Haku kuvien sisällön mukaan ei ole juuri nyt käytettävissä (mallia ei voitu ladata). Muut tulokset toimivat edelleen.</string>
+    <string name="analysis_people_progress">Henkilöt: %1$,d / %2$,d</string>
+    <string name="analysis_people_unavailable">Kasvoja löytäviä malleja ei voitu ladata, joten tämä vaihe ei ole käynnissä.</string>
+    <string name="analysis_duplicates_progress">Kaksoiskappaleet: %1$,d / %2$,d</string>
+    <string name="analysis_text_progress">Teksti kuvissa: %1$,d / %2$,d</string>
+    <string name="analysis_running">Analysoidaan…</string>
+    <string name="analysis_idle">Odotetaan oikeaa hetkeä (akku ei ole vähissä, virransäästö on pois ja tarvittaessa lataus, jos valitsit sen)</string>
+    <string name="analysis_up_to_date">Kaikki on analysoitu</string>
+    <string name="setting_pause_analysis">Keskeytä analyysi</string>
+    <string name="setting_only_charging">Vain latauksen aikana</string>
+    <string name="setting_analyze_places">Etsi kuvia paikan mukaan</string>
+    <string name="setting_analyze_semantic">Etsi kuvia sen mukaan, mitä ne esittävät</string>
+    <string name="setting_analyze_people">Etsi henkilöitä kuvista</string>
+    <string name="setting_analyze_people_note">Kasvot löydetään ja niitä verrataan vain tällä puhelimella. Mikään kasvoista ei koskaan poistu siitä, eikä eikon koskaan yritä tunnistaa ketään: se vain ryhmittelee toisiaan muistuttavat kasvot, ja ryhmille annat nimet sinä.</string>
+    <string name="setting_analyze_duplicates">Etsi kaksoiskappaleita kuvista</string>
+    <string name="setting_analyze_text">Etsi tekstiä kuvista</string>
+    <string name="analysis_location_permission">Android piilottaa sovelluksilta, missä kuvat on otettu, kunnes sallit sen.</string>
+    <string name="analysis_allow_locations">Salli pääsy kuvien sijainteihin</string>
+    <string name="analyze_now">Analysoi nyt</string>
+    <string name="settings_analysis_body">Analyysi toimii vain puhelimellasi, taustalla, ja keskeytyy, kun akku on vähissä, virransäästö on päällä tai puhelin lämpenee (”Analysoi nyt” jatkuu virransäästössäkin). Se tallentaa jokaisen kuvan paikan (määritetään ilman verkkoyhteyttä, sijaintia ei koskaan lähetetä minnekään), numeerisen kuvauksen siitä, mitä kuva esittää (jotta voit hakea esimerkiksi ”koira” tai ”auringonlasku”; se ei ole kuvateksti eikä sitä voi lukea takaisin kuvaksi) ja kaiken kuvasta lukemansa tekstin, jotta Haku löytää ne. Jos otat henkilöt käyttöön, se tallentaa myös kunkin kasvon paikan kuvassa ja sen numeerisen kuvauksen, vain toisiaan muistuttavien kasvojen ryhmittelyä varten. Jos otat kaksoiskappaleet käyttöön, se tallentaa lyhyen sormenjäljen jokaisesta kuvasta ja samankokoisista tiedostoista, vain kopioiden löytämistä varten. Kuvien sisällön tunnistaminen ja tekstin lukeminen ovat hitaita ja kuormittavat suoritinta voimakkaasti, minkä vuoksi analyysi odottaa oletuksena latausta.</string>
+
+    <!-- Info panel: derived data -->
+    <string name="info_place">Lähin paikka</string>
+    <string name="info_text_found">Teksti tässä kuvassa</string>
+    <string name="info_text_copy">Kopioi teksti</string>
+
+    <!-- People -->
+    <string name="collection_people">Henkilöt</string>
+    <string name="people_title">Henkilöt</string>
+    <string name="person_unnamed">Nimetön henkilö</string>
+    <string name="person_add_name">Lisää nimi</string>
+    <string name="person_rename">Nimeä tämä henkilö</string>
+    <string name="person_name_hint">Nimi</string>
+    <string name="person_same_name_note">Samannimiset henkilöt yhdistetään yhdeksi.</string>
+    <string name="person_favorite">Merkitse suosikiksi</string>
+    <string name="person_unfavorite">Poista suosikeista</string>
+    <string name="person_hide">Piilota tämä henkilö</string>
+    <string name="person_unhide">Näytä tämä henkilö</string>
+    <string name="person_merge">Yhdistä toiseen henkilöön…</string>
+    <string name="person_merge_title">Yhdistä henkilöön</string>
+    <string name="person_merge_empty">Ei ketään muuta, johon yhdistää.</string>
+    <string name="person_not_this">Ei tämä henkilö</string>
+    <string name="person_remove_from_people">Ei kasvot</string>
+    <string name="people_show_hidden">Näytä piilotetut henkilöt (%1$d)</string>
+    <string name="people_hide_hidden">Piilota piilotetut henkilöt</string>
+    <string name="people_empty_off">Henkilöt on pois päältä. Ota ”Etsi henkilöitä kuvista” käyttöön kohdassa Asetukset, Analyysi, niin eikon ryhmittelee löytämänsä kasvot. Kaikki pysyy tällä puhelimella.</string>
+    <string name="people_empty_working">Kasvoja ei ole vielä löydetty (%1$d %% kuvistasi analysoitu). Analyysi toimii taustalla latauksen aikana.</string>
+    <string name="people_empty_done">Kuvistasi ei löytynyt kasvoja.</string>
+    <string name="people_go_settings">Avaa asetukset</string>
+    <string name="person_photos_empty">Ei kuvia.</string>
+    <plurals name="moved_to_new_person">
+        <item quantity="one">%d kuva siirretty uudelle henkilölle</item>
+        <item quantity="other">%d kuvaa siirretty uudelle henkilölle</item>
+    </plurals>
+    <plurals name="removed_from_people">
+        <item quantity="one">%d kuva poistettu Henkilöistä</item>
+        <item quantity="other">%d kuvaa poistettu Henkilöistä</item>
+    </plurals>
+    <string name="info_people">Henkilöt</string>
+    <plurals name="info_people_unnamed_count">
+        <item quantity="one">%d nimetön</item>
+        <item quantity="other">%d nimetöntä</item>
+    </plurals>
+
+    <string name="section_memories">Muistot</string>
+    <string name="section_pets">Lemmikit</string>
+    <string name="collection_dogs">Koirat</string>
+    <string name="collection_cats">Kissat</string>
+    <string name="empty_pets">Koiria tai kissoja ei ole vielä löydetty. Lemmikit tunnistetaan sen perusteella, mitä kuvat esittävät: ota ”Etsi kuvia sen mukaan, mitä ne esittävät” käyttöön kohdassa Asetukset, Analyysi, ja odota, että se valmistuu.</string>
+
+    <!-- Places -->
+    <string name="places_title">Paikat</string>
+    <string name="places_tab_list">Luettelo</string>
+    <string name="places_tab_map">Kartta</string>
+    <string name="place_unknown">Muut paikat</string>
+    <string name="place_near">Lähellä: %1$s</string>
+    <string name="places_expand">Näytä</string>
+    <string name="places_collapse">Piilota</string>
+    <string name="collection_places">Paikat</string>
+    <string name="places_map_note">Vain maiden ääriviivat ja suurempien kaupunkien nimet: karttakuvia ei ladata, eikä mikään sijainti poistu koskaan puhelimesta. Zoomaa nipistämällä tai kaksoisnapauttamalla, napauta merkkiä nähdäksesi sen kuvat.</string>
+    <string name="places_map_description">Kartta paikoista, joissa kuvasi on otettu, ja merkit kuvaryhmille</string>
+    <string name="places_empty_off">Paikat on pois päältä. Ota ”Etsi kuvia paikan mukaan” käyttöön kohdassa Asetukset, Analyysi, niin eikon selvittää ilman verkkoyhteyttä, missä kuvasi on otettu, niiden GPS-tietojen perusteella.</string>
+    <string name="places_empty_working">Paikkoja ei ole vielä löydetty (%1$d %% kuvistasi analysoitu). Analyysi toimii taustalla latauksen aikana.</string>
+    <string name="places_empty_done">Yhdelläkään kuvallasi ei ole sijaintia, tai eikonilla ei ehkä ole lupaa lukea kuvien sijainteja (Asetukset, Analyysi).</string>
+    <string name="section_places">Paikat ja matkat</string>
+
+    <!-- Trips -->
+    <string name="collection_trips">Matkat</string>
+    <string name="trips_title">Matkat</string>
+    <string name="trip_untitled">Matka</string>
+    <string name="trip_reason">Noin %1$d km:n päässä paikasta, jossa suurin osa kuvistasi otetaan (lähellä: %2$s)</string>
+    <string name="trip_home_unknown">tuntematon paikka</string>
+    <plurals name="trip_summary_days">
+        <item quantity="one">%d päivä</item>
+        <item quantity="other">%d päivää</item>
+    </plurals>
+    <string name="trips_empty">Matkoja ei löytynyt. Matka on joukko päiviä, joilta on vähintään 10 kuvaa ja jotka on vietetty vähintään 100 km:n päässä paikasta, jossa suurin osa kuvistasi otetaan. Tätä varten eikon tarvitsee kuvien sijainnit: ota ”Etsi kuvia paikan mukaan” käyttöön kohdassa Asetukset, Analyysi.</string>
+
+    <!-- Duplicates and similar shots -->
+    <string name="section_cleanup">Siivous</string>
+    <string name="collection_duplicates">Kaksoiskappaleet</string>
+    <string name="collection_similar">Samankaltaiset otokset</string>
+    <string name="duplicates_title">Kaksoiskappaleet</string>
+    <string name="similar_title">Samankaltaiset otokset</string>
+    <string name="duplicates_note">eikon vain löytää ne. Mitään ei poisteta, ennen kuin vahvistat Androidin omassa ikkunassa, ja poistetut kuvat siirtyvät kohtaan ”Äskettäin poistetut”, josta voit palauttaa ne. Albumeihin lisätyn kuvan kopioissa: säilyttämäsi kopio liittyy näihin albumeihin.</string>
+    <plurals name="duplicate_exact">
+        <item quantity="one">%d identtinen tiedosto</item>
+        <item quantity="other">%d identtistä tiedostoa</item>
+    </plurals>
+    <plurals name="duplicate_visual">
+        <item quantity="one">%d kopio samasta kuvasta</item>
+        <item quantity="other">%d kopiota samasta kuvasta</item>
+    </plurals>
+    <plurals name="similar_group">
+        <item quantity="one">%d otos</item>
+        <item quantity="other">%d samankaltaista otosta</item>
+    </plurals>
+    <plurals name="duplicate_keep_best">
+        <item quantity="one">Säilytä paras, siirrä %d kohtaan ”Äskettäin poistetut”</item>
+        <item quantity="other">Säilytä paras, siirrä %d kohtaan ”Äskettäin poistetut”</item>
+    </plurals>
+    <plurals name="similar_trash_marked">
+        <item quantity="one">Siirrä %d kohtaan ”Äskettäin poistetut”</item>
+        <item quantity="other">Siirrä %d kohtaan ”Äskettäin poistetut”</item>
+    </plurals>
+    <string name="duplicate_best">Paras</string>
+    <string name="duplicate_kept">Säilytetty</string>
+    <string name="duplicate_marked">Siirretään</string>
+    <string name="duplicate_dismiss">Nämä eivät ole kaksoiskappaleita</string>
+    <string name="similar_dismiss">Nämä eivät ole samankaltaisia</string>
+    <string name="duplicates_empty_off">Kaksoiskappaleet on pois päältä. Ota ”Etsi kaksoiskappaleita kuvista” käyttöön kohdassa Asetukset, Analyysi. eikon laskee kuvistasi sormenjäljet vain tällä puhelimella, ilman mitään mallia.</string>
+    <string name="similar_empty_off">Samankaltaiset otokset vaatii ”Etsi kuvia sen mukaan, mitä ne esittävät” -asetuksen kohdassa Asetukset, Analyysi: se vertaa, mitä kukin kuva esittää, kahden minuutin sisällä otetuille kuville.</string>
+    <string name="duplicates_empty_working">Mitään ei ole vielä löydetty (%1$d %% analysoitu). Analyysi toimii taustalla latauksen aikana.</string>
+    <string name="duplicates_empty_done">Kaksoiskappaleita ei löytynyt.</string>
+    <string name="similar_empty_done">Samankaltaisia otoksia ei löytynyt.</string>
+
+    <!-- Memories -->
+    <string name="collection_memories">Muistot</string>
+    <string name="memories_title">Muistot</string>
+    <string name="memory_on_this_day">Tänä päivänä</string>
+    <string name="memory_year_ago">Vuosi sitten</string>
+    <string name="memory_weekend_in">Viikonloppu: %1$s</string>
+    <string name="memory_weekend">Viikonloppu poissa kotoa</string>
+    <string name="memory_day_trip_to">Päiväretki: %1$s</string>
+    <string name="memory_day_trip">Päiväretki</string>
+    <string name="memory_season">%1$s %2$d</string>
+    <string name="memory_person">%1$s, %2$d</string>
+    <string name="season_winter">Talvi</string>
+    <string name="season_spring">Kevät</string>
+    <string name="season_summer">Kesä</string>
+    <string name="season_autumn">Syksy</string>
+    <string name="memory_hide">Piilota tämä muisto</string>
+    <string name="memory_show_fewer">Näytä vähemmän tällaisia</string>
+    <string name="memory_show_less_of">Näytä vähemmän: %1$s</string>
+    <string name="memory_exclude_date">Jätä tämä päivämäärä pois</string>
+    <string name="memory_all_photos">Kaikki kuvat</string>
+    <string name="memory_replay">Toista uudelleen</string>
+    <string name="memory_reset">Kumoa valintani</string>
+    <string name="memory_done">Valmis. Voit kumota valintasi Muistojen valikosta.</string>
+    <string name="memories_empty">Muistoja ei ole vielä. eikon luo ne päivämääristä, matkoista, vuodenajoista ja nimeämistäsi henkilöistä: ”Tänä päivänä”, ”Vuosi sitten”, matkat ja viikonloput poissa kotoa, vuodenaika, joku tiettynä vuonna. Matkat ja viikonloput tarvitsevat Paikat, henkilöt tarvitsevat Henkilöt (Asetukset, Analyysi). Mikään ei poistu puhelimesta.</string>
+    <string name="memories_note">Luodaan päivämääristä, paikoista ja nimetyistä henkilöistä yksinkertaisilla säännöillä; musiikkia ei ole, ja kuvat valitaan suosikkien, koon ja kasvojen perusteella, ei sen mukaan, miten hyviä ne ovat.</string>
+    <string name="memory_no_photos">Tällä muistolla ei ole enää näytettäviä kuvia.</string>
+
+    <!-- Editing -->
+    <string name="action_edit">Muokkaa</string>
+    <string name="edit_title">Muokkaus</string>
+    <string name="edit_done">Valmis</string>
+    <string name="edit_original">Alkuperäinen</string>
+    <string name="edit_revert">Palauta</string>
+    <string name="edit_revert_title">Palautetaanko alkuperäinen?</string>
+    <string name="edit_revert_message">Tämä tyhjentää tämän muokkauksen kaikki säädöt, suodattimen ja rajauksen. Alkuperäistä kuvaa ei ole koskaan muutettu. Paina Valmis säilyttääksesi palautetun kuvan.</string>
+    <string name="edit_discard_title">Hylätäänkö muutokset?</string>
+    <string name="edit_discard_message">Tässä muokkaimessa tekemäsi muutokset menetetään. Kuva pysyy sellaisena kuin se oli.</string>
+    <string name="edit_discard">Hylkää</string>
+    <string name="edit_copy_edits">Kopioi muokkaukset</string>
+    <string name="edit_paste_edits">Liitä muokkaukset</string>
+    <string name="edit_save_copy">Tallenna kopio</string>
+    <string name="edit_copy_saved">Kopio tallennettiin alkuperäisen viereen, jota ei muutettu.</string>
+    <string name="edit_copy_saved_no_details">Kopio tallennettiin alkuperäisen viereen, jota ei muutettu. Kameran tietoja ei voitu kopioida.</string>
+    <string name="edit_failed">Muokkausta ei voitu viimeistellä. Kuvaa ei muutettu.</string>
+    <string name="edited_badge">Muokattu</string>
+    <string name="viewer_show_original">Näytä alkuperäinen</string>
+    <string name="viewer_show_edited">Näytä muokattu kuva</string>
+    <string name="tool_auto">Auto</string>
+    <string name="tool_light">Valo</string>
+    <string name="tool_color">Väri</string>
+    <string name="tool_detail">Yksityiskohdat</string>
+    <string name="tool_filters">Suodattimet</string>
+    <string name="tool_crop">Rajaa</string>
+    <string name="adj_exposure">Valotus</string>
+    <string name="adj_brightness">Kirkkaus</string>
+    <string name="adj_contrast">Kontrasti</string>
+    <string name="adj_highlights">Kirkkaat kohdat</string>
+    <string name="adj_shadows">Varjot</string>
+    <string name="adj_black_point">Mustapiste</string>
+    <string name="adj_saturation">Kylläisyys</string>
+    <string name="adj_vibrance">Eloisuus</string>
+    <string name="adj_temperature">Lämpö</string>
+    <string name="adj_tint">Sävy</string>
+    <string name="adj_sharpness">Terävyys</string>
+    <string name="adj_vignette">Vinjetointi</string>
+    <string name="geo_straighten">Suorista</string>
+    <string name="geo_perspective_vertical">Pystysuuntainen perspektiivi</string>
+    <string name="geo_perspective_horizontal">Vaakasuuntainen perspektiivi</string>
+    <string name="filter_amount">Voimakkuus</string>
+    <string name="filter_name_none">Alkuperäinen</string>
+    <string name="filter_name_vivid">Eloisa</string>
+    <string name="filter_name_warm">Lämmin</string>
+    <string name="filter_name_cool">Viileä</string>
+    <string name="filter_name_mono">Mono</string>
+    <string name="filter_name_noir">Noir</string>
+    <string name="filter_name_fade">Haalistunut</string>
+    <string name="filter_name_chrome">Kromi</string>
+    <string name="filter_name_sepia">Seepia</string>
+    <string name="crop_rotate">Käännä</string>
+    <string name="crop_flip">Peilaa</string>
+    <string name="shape_free">Vapaa</string>
+    <string name="shape_original">Alkuperäinen</string>
+    <string name="shape_square">1:1</string>
+    <string name="shape_4_3">4:3</string>
+    <string name="shape_3_2">3:2</string>
+    <string name="shape_16_9">16:9</string>
+    <string name="action_paste_edits">Liitä muokkaukset</string>
+    <string name="action_revert_edits">Poista muokkaukset</string>
+    <plurals name="edits_pasted">
+        <item quantity="one">Muokkaukset käytetty %d kuvaan</item>
+        <item quantity="other">Muokkaukset käytetty %d kuvaan</item>
+    </plurals>
+    <plurals name="edits_reverted">
+        <item quantity="one">Muokkaus poistettu %d kuvasta; alkuperäinen on sellainen kuin se on aina ollut</item>
+        <item quantity="other">Muokkaukset poistettu %d kuvasta; alkuperäiset ovat sellaisia kuin ne ovat aina olleet</item>
+    </plurals>
+
+    <!-- Accessibility -->
+    <string name="slider_reset">Palauta neutraaliksi</string>
+    <string name="crop_area">Rajausalue, %1$d %%–%2$d %% vaakasuunnassa ja %3$d %%–%4$d %% pystysuunnassa</string>
+    <string name="crop_action_smaller">Pienennä rajausta</string>
+    <string name="crop_action_larger">Suurenna rajausta</string>
+    <string name="crop_action_left">Siirrä rajausta vasemmalle</string>
+    <string name="crop_action_right">Siirrä rajausta oikealle</string>
+    <string name="crop_action_up">Siirrä rajausta ylös</string>
+    <string name="crop_action_down">Siirrä rajausta alas</string>
+    <string name="viewer_zoom_in">Lähennä</string>
+    <string name="viewer_zoom_out">Loitonna</string>
+    <string name="external_photo">Kuva</string>
+    <string name="viewer_cannot_display">Tätä kuvaa ei voi näyttää.</string>
+
+    <!-- Info: caption, editing the date and location, what the photo shows -->
+    <string name="info_caption">Kuvateksti</string>
+    <string name="caption_add">Lisää kuvateksti</string>
+    <string name="caption_edit">Muokkaa kuvatekstiä</string>
+    <string name="caption_title">Kuvateksti</string>
+    <string name="caption_hint">Muutama sana tästä kuvasta</string>
+    <string name="caption_note">Säilytetään vain eikonissa; kuvan tiedostoa ei muuteta. Haku löytää sen.</string>
+    <string name="date_change">Muuta päivämäärää ja kellonaikaa</string>
+    <string name="date_revert">Palauta alkuperäinen päivämäärä</string>
+    <string name="date_time_title">Kellonaika</string>
+    <string name="action_next">Seuraava</string>
+    <string name="location_title">Missä se on otettu</string>
+    <string name="location_coordinates">Koordinaatit</string>
+    <string name="location_coordinates_note">Desimaaliasteet, leveysaste ensin: 41.9028, 12.4964</string>
+    <string name="location_invalid">Ei ole sijainti: kaksi lukua, leveysaste välillä -90 ja 90 ja pituusaste välillä -180 ja 180</string>
+    <string name="location_city">Tai etsi kaupunki (toimii ilman verkkoyhteyttä)</string>
+    <string name="location_remove">Poista sijainti</string>
+    <string name="location_change">Muuta sijaintia</string>
+    <string name="location_revert">Palauta alkuperäinen sijainti</string>
+    <string name="info_map_description">Pieni kartta, joka näyttää, missä kuva on otettu</string>
+    <string name="metadata_done">Valmis. Kuva kertoo nyt tämän; alkuperäinen säilytetään, jotta voit palauttaa sen.</string>
+    <string name="metadata_not_writable">Tämän tyyppistä tiedostoa ei voi muuttaa.</string>
+    <string name="metadata_needs_permission">Kuvan päivämäärän tai sijainnin muuttaminen edellyttää, että eikon voi lukea, missä kuvat on otettu: ilman sitä Android näyttää sille kopion ilman sijaintia, ja tallennus poistaisi sen.</string>
+    <string name="metadata_nothing_to_revert">Ei mitään palautettavaa.</string>
+    <string name="metadata_interrupted">Tämän kuvan aiempi muutos ei valmistunut. Sen alkuperäinen on säilytetty: palauta se ennen kuin muutat mitään muuta.</string>
+    <string name="metadata_failed">Muutos ei onnistunut. Kuva palautettiin täsmälleen sellaiseksi kuin se oli.</string>
+    <string name="metadata_restore_file">Palauta alkuperäinen tiedosto</string>
+    <string name="info_albums">Albumeissa</string>
+    <string name="info_pets">Lemmikit</string>
+    <string name="info_shows">Saattaa esittää</string>
+    <string name="pet_dog">Koira</string>
+    <string name="pet_cat">Kissa</string>
+    <string name="info_album">Laitteen albumi</string>
+    <string name="label_landscape">Maiseman</string>
+    <string name="label_beach">Rannan</string>
+    <string name="label_sea">Meren</string>
+    <string name="label_mountain">Vuoren</string>
+    <string name="label_sunset">Auringonlaskun</string>
+    <string name="label_snow">Lumen</string>
+    <string name="label_city">Kaupungin</string>
+    <string name="label_building">Rakennuksen</string>
+    <string name="label_street">Kadun</string>
+    <string name="label_woods">Metsän</string>
+    <string name="label_flower">Kukan</string>
+    <string name="label_sky">Taivaan</string>
+    <string name="label_person">Henkilön</string>
+    <string name="label_group">Ihmisryhmän</string>
+    <string name="label_food">Ruoan</string>
+    <string name="label_dessert">Jälkiruoan</string>
+    <string name="label_drink">Juoman</string>
+    <string name="label_car">Auton</string>
+    <string name="label_bicycle">Polkupyörän</string>
+    <string name="label_airplane">Lentokoneen</string>
+    <string name="label_boat">Veneen</string>
+    <string name="label_bird">Linnun</string>
+    <string name="label_horse">Hevosen</string>
+    <string name="label_interior">Huoneen</string>
+    <string name="label_night">Yön</string>
+    <string name="label_party">Juhlat</string>
+    <string name="label_sport">Urheilutapahtuman</string>
+    <string name="label_animal">Eläimen</string>
+
+    <!-- Backup to your own server -->
+    <string name="backup_title">Varmuuskopiointi omalle palvelimelle</string>
+    <string name="backup_intro">Kopioi kuvasi ja videosi itse ylläpitämällesi palvelimelle salatun yhteyden kautta. Mikään ei poistu tältä puhelimelta, ennen kuin otat varmuuskopioinnin käyttöön, kaikki menee vain alla olevalle palvelimelle, eikä eikon koskaan poista tai muuta siellä mitään. Salasana tai avain säilytetään salattuna Android Keystoressa.</string>
+    <string name="backup_kind_immich">Immich (myös se, minkä Umbrel asentaa)</string>
+    <string name="backup_kind_nextcloud">Nextcloud tai mikä tahansa WebDAV-palvelin</string>
+    <string name="backup_address">Palvelimen osoite (https://…)</string>
+    <string name="backup_username">Kirjautumisnimi</string>
+    <string name="backup_folder">Kansio palvelimella</string>
+    <string name="backup_api_key">API-avain</string>
+    <string name="backup_app_password">Sovellussalasana</string>
+    <string name="backup_secret_saved">Tallennettu. Jätä tyhjäksi säilyttääksesi sen</string>
+    <string name="backup_help_immich">Immichissä: Tilin asetukset, API-avaimet, Uusi API-avain. Tarvittava oikeus on asset.upload.</string>
+    <string name="backup_help_nextcloud">Nextcloudissa: Henkilökohtaiset asetukset, Suojaus, Laitteet ja istunnot, luo uusi sovellussalasana. Käytä sitä, älä kirjautumissalasanaasi.</string>
+    <string name="backup_save_test">Tallenna ja testaa yhteys</string>
+    <string name="backup_connected">Yhdistetty: %1$s.</string>
+    <string name="backup_failed">Yhteyden muodostaminen epäonnistui: %1$s</string>
+    <string name="backup_certificate_declined">Varmennetta ei hyväksytty, joten mitään ei lähetetty eikä lähetetä.</string>
+    <string name="backup_certificate_title">Tämän palvelimen varmenne ei ole peräisin taholta, johon puhelimesi luottaa</string>
+    <string name="backup_certificate_body">%1$s esitti alla olevan varmenteen. Vertaa sen sormenjälkeä palvelimesi näyttämään (esimerkiksi komennolla: openssl x509 -noout -fingerprint -sha256). Luota siihen vain, jos ne ovat identtiset: tästä lähtien tämä yksi varmenne, eikä mikään muu, hyväksytään tälle palvelimelle.</string>
+    <string name="backup_certificate_subject">Myönnetty: %1$s</string>
+    <string name="backup_certificate_expires">Voimassa %1$s asti</string>
+    <string name="backup_certificate_self_signed">Se on itse allekirjoitettu, kuten kotipalvelimen varmenne yleensä on.</string>
+    <string name="backup_certificate_trust">Luota tähän varmenteeseen</string>
+    <string name="backup_enable">Varmuuskopioi kuvani ja videoni</string>
+    <string name="backup_test_first">Tallenna ja testaa ensin yhteys.</string>
+    <string name="backup_wifi_only">Vain Wi-Fi-yhteydellä</string>
+    <string name="backup_only_charging">Vain latauksen aikana</string>
+    <string name="backup_videos">Sisällytä videot</string>
+    <string name="backup_hidden">Sisällytä piilotetut kuvat</string>
+    <string name="backup_hidden_note">Myös piilotetut kuvat lähetetään palvelimellesi, missä ne ovat yhtä näkyvillä kuin kaikki muukin siellä.</string>
+    <string name="backup_confirm_title">Aloitetaanko varmuuskopiointi?</string>
+    <plurals name="backup_confirm_body">
+        <item quantity="one">%1$d kuva tai video kopioidaan palvelimelle %2$s vähän kerrallaan, kun puhelin on sallimassasi verkossa. Mitään ei poisteta puhelimelta eikä palvelimelta.</item>
+        <item quantity="other">%1$d kuvaa ja videota kopioidaan palvelimelle %2$s vähän kerrallaan, kun puhelin on sallimassasi verkossa. Mitään ei poisteta puhelimelta eikä palvelimelta.</item>
+    </plurals>
+    <string name="backup_confirm_start">Aloita</string>
+    <string name="backup_location_note">Android piilottaa sovelluksilta, missä kuvat on otettu, jos niillä ei ole lupaa kuvien sijainteihin, joten palvelimellasi olevilla kopioilla ei olisi sijaintia.</string>
+    <string name="backup_progress">Varmuuskopioitu: %1$,d / %2$,d</string>
+    <plurals name="backup_refused">
+        <item quantity="one">Palvelin hylkäsi %1$d kuvan, eikä sitä yritetä uudelleen, ennen kuin pyydät.</item>
+        <item quantity="other">Palvelin hylkäsi %1$d kuvaa, eikä niitä yritetä uudelleen, ennen kuin pyydät.</item>
+    </plurals>
+    <string name="backup_running">Varmuuskopioidaan…</string>
+    <string name="backup_idle">Odotetaan oikeaa hetkeä (sallimasi verkko, akku ei ole vähissä).</string>
+    <string name="backup_last_run">Viimeksi ajettu %1$s. Lähetetty: %2$d. Jo olemassa: %3$d. Hylätty: %4$d.</string>
+    <string name="backup_stopped">Se pysähtyi, koska %1$s</string>
+    <string name="backup_stop_power_save">virransäästö on päällä.</string>
+    <string name="backup_stop_thermal">puhelin oli liian kuuma.</string>
+    <string name="backup_stop_unreachable">palvelinta ei tavoitettu tai se oli varattu. Se yrittää uudelleen.</string>
+    <string name="backup_stop_unauthorized">palvelin ei hyväksynyt avainta tai salasanaa.</string>
+    <string name="backup_stop_untrusted">palvelimen varmenne ei ole yksi niistä, joihin olet luottanut.</string>
+    <string name="backup_stop_misconfigured">osoite ei sovi tämän tyyppiselle palvelimelle.</string>
+    <string name="backup_stop_refusals">palvelin hylkäsi monta tiedostoa peräkkäin, mikä viittaa palvelimen rajoitukseen, ei kuviin.</string>
+    <string name="backup_now">Varmuuskopioi nyt</string>
+    <string name="backup_retry_refused">Yritä hylättyjä uudelleen</string>
+
+    <!-- Network consent -->
+    <string name="network_allow">Salli eikonin käyttää internetiä</string>
+    <string name="network_allow_note">Pois päältä, kunnes otat sen käyttöön. eikon käyttää verkkoa vain kuviesi kopioimiseen alla olevalle palvelimelle, ja vasta kun olet määrittänyt palvelimen ja ottanut varmuuskopioinnin käyttöön. Kun tämä on pois päältä, mikään ei voi muodostaa yhteyttä minnekään.</string>
+    <string name="settings_privacy_network">eikon voi mennä verkkoon vain yhtä asiaa varten: kuviesi valinnaista varmuuskopiointia itse ylläpitämällesi palvelimelle. Se on pois päältä, kunnes sallit sen (Asetukset, Varmuuskopiointi) ja määrität palvelimen. Ei käytön analytiikkaa, ei mainoksia, ei tilejä, ei Googlen palveluita eikä omaa pilveämme: sellaista ei ole.</string>
+
+    <!-- First-run screens -->
+    <string name="onboarding_intro_title">Kuvasi, puhelimellasi</string>
+    <string name="onboarding_intro_body">eikon on kuva- ja videogalleria Androidille. Se näyttää kuvat, joita puhelimesi jo säilyttää, löytää ne päivämäärän, paikan, henkilöiden tai sisällön mukaan ja muokkaa niitä koskematta koskaan alkuperäisiin.</string>
+    <string name="onboarding_point_local">Kaikki pysyy tällä laitteella. Ei tiliä, ei käytön analytiikkaa, ei mainoksia.</string>
+    <string name="onboarding_point_independent">Se ei nojaa mihinkään puhelimesi ulkopuoliseen: ei Googlen palveluita, ei pilveä, ei kolmansien osapuolten palvelimia.</string>
+    <string name="onboarding_point_yours">Jos haluat varmuuskopion, se menee vain itse ylläpitämällesi palvelimelle, ja vain jos otat sen käyttöön.</string>
+    <string name="onboarding_next">Seuraava</string>
+    <string name="onboarding_start">Aloita</string>
+    <string name="onboarding_page">Sivu %1$d / %2$d</string>
+    <string name="onboarding_permissions_title">Mitä eikon pyytää ja miksi</string>
+    <string name="onboarding_permissions_intro">Vain ensimmäinen on välttämätön. Voit muuttaa mitä tahansa niistä myöhemmin Asetuksissa tai puhelimen asetuksissa.</string>
+    <string name="onboarding_perm_media_title">Kuvat ja videot</string>
+    <string name="onboarding_perm_media_body">Jotta eikon voi näyttää kirjastosi. Se lukee tiedostot siellä, missä Android jo säilyttää niitä, eikä kopioi niitä minnekään. Halutessasi voit sallia vain joitakin kuvia.</string>
+    <string name="onboarding_perm_location_title">Kuvien sijainnit (valinnainen)</string>
+    <string name="onboarding_perm_location_body">Android piilottaa sovelluksilta, missä kuva on otettu, ellet salli sitä. eikon käyttää sitä näyttääkseen kuvan paikan offline-kartalla ja hakua varten paikan mukaan. Paikat lasketaan puhelimessa: mitään sijaintia ei koskaan lähetetä minnekään.</string>
+    <string name="onboarding_perm_network_title">Internet (valinnainen)</string>
+    <string name="onboarding_perm_network_body">Käytetään vain yhteen asiaan: kuviesi kopioimiseen itse ylläpitämällesi palvelimelle (Immich, Nextcloud), jos joskus otat sen käyttöön. Muuten eikon ei koskaan yhdistä mihinkään. Se on pois päältä, kunnes otat sen käyttöön tässä, ja voit sammuttaa sen milloin tahansa Asetuksissa.</string>
+    <string name="onboarding_allow">Salli</string>
+    <string name="onboarding_allowed">Sallittu</string>
+    <string name="onboarding_promise">Mikään täällä ei riipu mistään puhelimesi ulkopuolisesta: ei Googlen palveluita, ei tilejä, ei käytön analytiikkaa. Kuvasi pysyvät tällä laitteella tai, jos niin valitset, menevät omalle palvelimellesi.</string>
+
+    <!-- Support -->
+    <string name="support_title">Tuki</string>
+    <string name="support_body">eikon on ilmainen, siinä ei ole mainoksia eikä se seuraa sinua. Jos pidät siitä, voit lähettää muutaman satoshin Lightning-verkon kautta.</string>
+    <string name="support_button">Lahjoita Lightningilla</string>
+    <string name="support_copied">Lightning-lompakkoa ei löytynyt — osoite kopioitu: %1$s</string>
+
+    <!-- Analyze now -->
+    <string name="analyze_now_running">Analysoidaan…</string>
+    <string name="analyze_now_hint">Alkaa heti, vain tällä puhelimella, virransäästössäkin.</string>
+    <string name="analyze_now_hint_off">Ota ensin käyttöön ainakin yksi vaihe yllä.</string>
+    <string name="analyze_now_hint_paused">Analyysi on tauolla: poista tauko käytöstä analysoidaksesi nyt.</string>
+
+    <!-- Pictures from other apps -->
+    <string name="viewer_open_in_library">Avaa kirjastossa</string>
+</resources>

@@ -1,0 +1,705 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Library -->
+    <string name="library_title">Knižnica</string>
+    <string name="today">Dnes</string>
+    <string name="yesterday">Včera</string>
+    <string name="empty_library">Zatiaľ žiadne fotky ani videá</string>
+    <string name="empty_filter">Tomuto filtru nič nezodpovedá</string>
+    <string name="empty_filter_clear">Zobraziť všetko</string>
+    <string name="sync_progress">Načítava sa knižnica: %1$,d / %2$,d</string>
+    <string name="sync_failed">Knižnicu sa nepodarilo obnoviť</string>
+    <string name="sync_retry">Skúsiť znova</string>
+    <string name="scrubber_description">Prechádzať knižnicu podľa dátumu</string>
+
+    <!-- Permissions -->
+    <string name="permission_title">Vaše fotky zostávajú vo vašom zariadení</string>
+    <string name="permission_body">eikon potrebuje prístup k vašim fotkám a videám, aby ich mohol zobraziť. Zostávajú vo vašom zariadení: nič sa nenahráva, pokiaľ si nenastavíte zálohu na vlastný server.</string>
+    <string name="permission_grant">Povoliť prístup</string>
+    <string name="permission_denied">Prístup bol zamietnutý. Môžete ho povoliť v nastaveniach systému.</string>
+    <string name="permission_open_settings">Otvoriť nastavenia</string>
+    <string name="limited_banner">Zobrazujú sa iba fotky, ktoré ste vybrali</string>
+    <string name="limited_select_more">Vybrať ďalšie</string>
+    <string name="limited_allow_all">Povoliť všetky</string>
+
+    <!-- Menus and filters -->
+    <string name="menu_filter">Filter</string>
+    <string name="menu_sort">Zoradiť</string>
+    <string name="menu_settings">Nastavenia</string>
+    <string name="menu_more">Ďalšie možnosti</string>
+    <string name="filter_all">Všetko</string>
+    <string name="filter_photos">Fotky</string>
+    <string name="filter_videos">Videá</string>
+    <string name="filter_favorites">Obľúbené</string>
+    <string name="filter_screenshots">Snímky obrazovky</string>
+    <string name="filter_screen_recordings">Nahrávky obrazovky</string>
+    <string name="filter_panoramas">Panorámy</string>
+    <string name="filter_raw">RAW</string>
+    <string name="filter_clear">Zrušiť filter</string>
+    <string name="sort_by_date_taken">Dátum vytvorenia</string>
+    <string name="sort_by_date_added">Dátum pridania</string>
+    <string name="sort_newest_first">Najnovšie ako prvé</string>
+    <string name="sort_oldest_first">Najstaršie ako prvé</string>
+
+    <!-- Selection and actions -->
+    <plurals name="selected_count">
+        <item quantity="one">Vybratá %d položka</item>
+        <item quantity="few">Vybraté %d položky</item>
+        <item quantity="many">Vybraté %d položky</item>
+        <item quantity="other">Vybratých %d položiek</item>
+    </plurals>
+    <string name="action_share">Zdieľať</string>
+    <string name="action_favorite">Pridať medzi obľúbené</string>
+    <string name="action_unfavorite">Odstrániť z obľúbených</string>
+    <string name="action_delete">Odstrániť</string>
+    <string name="action_info">Informácie</string>
+    <string name="action_back">Späť</string>
+    <string name="action_clear_selection">Zrušiť výber</string>
+    <string name="action_select">Vybrať</string>
+    <string name="action_failed">Niečo sa pokazilo</string>
+    <plurals name="moved_to_trash">
+        <item quantity="one">%d položka bola presunutá do koša. Android ju uchováva 30 dní.</item>
+        <item quantity="few">%d položky boli presunuté do koša. Android ich uchováva 30 dní.</item>
+        <item quantity="many">%d položky boli presunuté do koša. Android ich uchováva 30 dní.</item>
+        <item quantity="other">%d položiek bolo presunutých do koša. Android ich uchováva 30 dní.</item>
+    </plurals>
+
+    <!-- Accessibility -->
+    <string name="cd_photo">Fotka, %1$s</string>
+    <string name="cd_video">Video, %1$s, %2$s</string>
+    <string name="cd_edited_badge">Upravené</string>
+    <string name="cd_favorite_badge">Obľúbené</string>
+    <string name="viewer_position">%1$d z %2$d</string>
+
+    <!-- Video -->
+    <string name="video_play">Prehrať</string>
+    <string name="video_pause">Pozastaviť</string>
+    <string name="video_mute">Stlmiť</string>
+    <string name="video_unmute">Zapnúť zvuk</string>
+    <string name="video_seek">Posúvať</string>
+
+    <!-- Info panel -->
+    <string name="info_title">Informácie</string>
+    <string name="info_loading">Čítajú sa podrobnosti…</string>
+    <string name="info_error">Podrobnosti tohto súboru sa nepodarilo prečítať</string>
+    <string name="info_section_file">Súbor</string>
+    <string name="info_section_camera">Fotoaparát</string>
+    <string name="info_section_video">Video</string>
+    <string name="info_name">Názov</string>
+    <string name="info_type">Typ</string>
+    <string name="info_folder">Priečinok</string>
+    <string name="info_resolution">Rozlíšenie</string>
+    <string name="info_megapixels">Megapixely</string>
+    <string name="info_size">Veľkosť</string>
+    <string name="info_date">Dátum</string>
+    <string name="info_modified">Zmenené</string>
+    <string name="info_color_profile">Farebný profil</string>
+    <string name="info_location">Poloha</string>
+    <string name="info_location_none">V tomto súbore nie je uložená žiadna poloha</string>
+    <string name="info_location_hidden">Android skrýva polohu fotiek pred aplikáciami, kým to nepovolíte</string>
+    <string name="info_location_allow">Povoliť</string>
+    <string name="info_location_open">Otvoriť v aplikácii s mapami</string>
+    <string name="info_camera">Zariadenie</string>
+    <string name="info_lens">Objektív</string>
+    <string name="info_focal_length">Ohnisková vzdialenosť</string>
+    <string name="info_aperture">Clona</string>
+    <string name="info_shutter">Expozičný čas</string>
+    <string name="info_iso">Citlivosť</string>
+    <string name="info_exposure_bias">Korekcia expozície</string>
+    <string name="info_flash">Blesk</string>
+    <string name="info_flash_fired">Použitý</string>
+    <string name="info_flash_off">Nepoužitý</string>
+    <string name="info_orientation">Orientácia</string>
+    <string name="info_software">Softvér</string>
+    <string name="info_duration">Trvanie</string>
+    <string name="info_frame_rate">Snímková frekvencia</string>
+    <string name="info_video_codec">Video kodek</string>
+    <string name="info_audio_codec">Audio kodek</string>
+    <string name="info_bitrate">Dátový tok</string>
+    <string name="info_dynamic_range">Dynamický rozsah</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Nastavenia</string>
+    <string name="settings_appearance">Vzhľad</string>
+    <string name="theme_system">Podľa systému</string>
+    <string name="theme_light">Svetlý</string>
+    <string name="theme_dark">Tmavý</string>
+    <string name="settings_privacy">Súkromie</string>
+    <string name="settings_privacy_body">eikon pracuje vo vašom zariadení. Nemá účet ani analytiku a jeho údaje sú vylúčené zo záloh Androidu.\n\nVaše fotky sa nikdy nekopírujú: eikon vedie lokálny index s údajmi o súboroch (názov, dátum, veľkosť, priečinok), aby sa knižnica otvorila okamžite. Odstránením aplikácie sa odstráni aj index.</string>
+    <string name="settings_storage_encrypted">Databáza knižnice (index, albumy, úpravy, popisky a to, čo našla analýza) je v tomto telefóne šifrovaná pomocou AES-256. Jej kľúč uchováva Android Keystore.</string>
+    <string name="settings_storage_not_encrypted">Databázu knižnice sa nepodarilo zašifrovať (%1$s), takže je stále uložená nešifrovane. eikon to skúsi znova pri každom spustení.</string>
+    <string name="settings_storage_reset_title">Databáza knižnice bola založená odznova</string>
+    <string name="settings_storage_reset">Kľúč, ktorý chránil databázu knižnice, sa stratil, preto musel eikon založiť novú. Albumy, úpravy, popisky a mená, ktoré ste pridali, sú preč. Vaše fotky zostali nedotknuté a analýza prebehne znova.</string>
+    <string name="settings_storage_reset_ok">Rozumiem</string>
+    <string name="settings_about">O aplikácii</string>
+    <string name="settings_licenses">Open-source licencie</string>
+    <string name="licenses_title">Open-source licencie</string>
+    <string name="settings_version">Verzia %1$s</string>
+
+    <!-- Navigation and collections -->
+    <string name="nav_library">Knižnica</string>
+    <string name="nav_search">Hľadať</string>
+    <string name="nav_collections">Kolekcie</string>
+    <string name="collections_title">Kolekcie</string>
+    <string name="section_people">Ľudia</string>
+    <string name="section_albums">Albumy</string>
+    <string name="section_personal">Osobné</string>
+    <string name="section_folders">Priečinky zariadenia</string>
+    <string name="collection_favorites">Obľúbené</string>
+    <string name="collection_recent">Nedávno pridané</string>
+    <string name="collection_videos">Videá</string>
+    <string name="collection_screenshots">Snímky obrazovky</string>
+    <string name="collection_screen_recordings">Nahrávky obrazovky</string>
+    <string name="collection_panoramas">Panorámy</string>
+    <string name="collection_raw">RAW</string>
+    <string name="collection_trash">Nedávno odstránené</string>
+    <string name="collection_hidden">Skryté</string>
+    <plurals name="items_count">
+        <item quantity="one">%d položka</item>
+        <item quantity="few">%d položky</item>
+        <item quantity="many">%d položky</item>
+        <item quantity="other">%d položiek</item>
+    </plurals>
+    <string name="empty_album">Tento album je prázdny. Vyberte fotky v knižnici a zvoľte „Pridať do albumu“.</string>
+    <string name="empty_hidden">Nič nie je skryté</string>
+    <string name="empty_collection">Zatiaľ tu nič nie je</string>
+
+    <!-- Albums -->
+    <string name="album_new">Nový album</string>
+    <string name="album_name_hint">Názov albumu</string>
+    <string name="album_create">Vytvoriť</string>
+    <string name="album_rename">Premenovať</string>
+    <string name="album_delete">Odstrániť album</string>
+    <string name="album_delete_title">Odstrániť tento album?</string>
+    <string name="album_delete_message">Odstráni sa len album. Fotky a videá v ňom zostanú tam, kde sú.</string>
+    <string name="album_move_earlier">Posunúť dopredu</string>
+    <string name="album_move_later">Posunúť dozadu</string>
+    <string name="action_add_to_album">Pridať do albumu</string>
+    <string name="action_remove_from_album">Odstrániť z albumu</string>
+    <string name="action_hide">Skryť</string>
+    <string name="action_unhide">Zobraziť</string>
+    <string name="action_cancel">Zrušiť</string>
+    <string name="action_save">Uložiť</string>
+    <plurals name="added_to_album">
+        <item quantity="one">%1$d položka bola pridaná do albumu „%2$s“</item>
+        <item quantity="few">%1$d položky boli pridané do albumu „%2$s“</item>
+        <item quantity="many">%1$d položky boli pridané do albumu „%2$s“</item>
+        <item quantity="other">%1$d položiek bolo pridaných do albumu „%2$s“</item>
+    </plurals>
+    <plurals name="removed_from_album">
+        <item quantity="one">%d položka bola odstránená z albumu</item>
+        <item quantity="few">%d položky boli odstránené z albumu</item>
+        <item quantity="many">%d položky boli odstránené z albumu</item>
+        <item quantity="other">%d položiek bolo odstránených z albumu</item>
+    </plurals>
+    <plurals name="moved_to_hidden">
+        <item quantity="one">%d položka bola skrytá. Nájdete ju v Kolekcie, Skryté.</item>
+        <item quantity="few">%d položky boli skryté. Nájdete ich v Kolekcie, Skryté.</item>
+        <item quantity="many">%d položky boli skryté. Nájdete ich v Kolekcie, Skryté.</item>
+        <item quantity="other">%d položiek bolo skrytých. Nájdete ich v Kolekcie, Skryté.</item>
+    </plurals>
+    <plurals name="unhidden">
+        <item quantity="one">%d položka je opäť viditeľná</item>
+        <item quantity="few">%d položky sú opäť viditeľné</item>
+        <item quantity="many">%d položky sú opäť viditeľné</item>
+        <item quantity="other">%d položiek je opäť viditeľných</item>
+    </plurals>
+
+    <!-- Filters -->
+    <string name="filter_type_title">Typ</string>
+    <string name="filter_kind_title">Druh</string>
+    <string name="filter_any">Akýkoľvek</string>
+    <string name="filter_favorites_only">Len obľúbené</string>
+    <string name="filter_edited">Upravené</string>
+    <string name="share_preparing">Pripravujú sa upravené fotky na zdieľanie</string>
+    <string name="filter_edited_only">Len upravené</string>
+    <string name="filter_clear_all">Zrušiť filtre</string>
+
+    <!-- Locks -->
+    <string name="locked_title">Zamknuté</string>
+    <string name="locked_body">Na otvorenie použite odtlačok prsta, tvár alebo zámku obrazovky.</string>
+    <string name="locked_unlock">Odomknúť</string>
+    <string name="auth_subtitle">Potvrďte, že ste to vy</string>
+    <string name="auth_title_hidden">Odomknúť „Skryté“</string>
+    <string name="auth_title_trash">Odomknúť „Nedávno odstránené“</string>
+    <string name="auth_unavailable">Overenie momentálne nie je k dispozícii. Skúste to o chvíľu znova.</string>
+    <string name="no_device_lock_notice">Tento telefón nemá zámku obrazovky, takže „Skryté“ nie je chránené. Nastavte si ju v nastaveniach systému.</string>
+
+    <!-- Recently deleted -->
+    <string name="trash_info">Položky sa natrvalo odstránia po približne 30 dňoch.</string>
+    <string name="trash_empty">Nedávno nebolo nič odstránené</string>
+    <string name="trash_restore">Obnoviť</string>
+    <string name="trash_delete_forever">Odstrániť natrvalo</string>
+    <plurals name="days_left_short">
+        <item quantity="one">%d d</item>
+        <item quantity="few">%d d</item>
+        <item quantity="many">%d d</item>
+        <item quantity="other">%d d</item>
+    </plurals>
+    <plurals name="trash_restored">
+        <item quantity="one">%d položka bola obnovená</item>
+        <item quantity="few">%d položky boli obnovené</item>
+        <item quantity="many">%d položky boli obnovené</item>
+        <item quantity="other">%d položiek bolo obnovených</item>
+    </plurals>
+    <plurals name="trash_deleted">
+        <item quantity="one">%d položka bola natrvalo odstránená</item>
+        <item quantity="few">%d položky boli natrvalo odstránené</item>
+        <item quantity="many">%d položky boli natrvalo odstránené</item>
+        <item quantity="other">%d položiek bolo natrvalo odstránených</item>
+    </plurals>
+
+    <!-- Settings: security -->
+    <string name="settings_security">Zabezpečenie</string>
+    <string name="setting_lock_hidden">Vyžadovať overenie pre „Skryté“</string>
+    <string name="setting_lock_trash">Vyžadovať overenie pre „Nedávno odstránené“</string>
+    <string name="setting_show_hidden">Zobrazovať „Skryté“ v Kolekciách</string>
+    <string name="setting_secure_screens">Skryť eikon v nedávnych aplikáciách a blokovať snímky obrazovky</string>
+    <string name="settings_security_body">Skryté položky sa nezobrazujú v knižnici, v kolekciách ani vo vyhľadávaní a otvorenie „Skryté“ vyžaduje odtlačok prsta, tvár alebo zámku obrazovky. Samotné súbory nie sú šifrované a zostávajú v bežnom úložisku telefónu, kde ich môžu naďalej vidieť iné aplikácie s prístupom k fotkám.</string>
+
+    <!-- Search -->
+    <string name="search_placeholder">Dátum, miesto, text, názov súboru</string>
+    <string name="search_clear">Vymazať vyhľadávanie</string>
+    <string name="search_no_results">Žiadne fotky nezodpovedajú</string>
+    <string name="search_hint_title">Hľadajte vo svojej knižnici</string>
+    <string name="search_hint_body">Skúste dátum („August 2025“, „yesterday“), miesto („Rome“, „Tuscany“), slovo, ktoré sa objavuje na fotke alebo v názve súboru, alebo druh („videos“, „screenshots“, „favorites“).\n\nDátumy a druhy sa rozpoznávajú v angličtine a taliančine. Miesta, text vo fotkách a to, čo zobrazujú, sa nájdu po spustení analýzy (Nastavenia, Analýza).</string>
+    <string name="search_analysis_off">Vyhľadávanie podľa miesta, textu vo fotkách a toho, čo zobrazujú, je vypnuté. Môžete ho zapnúť v Nastavenia, Analýza.</string>
+    <string name="search_analysis_note">Fotky sa na pozadí stále analyzujú (%1$d %%). Niektoré výsledky môžu chýbať.</string>
+
+    <!-- Settings: analysis -->
+    <string name="settings_analysis">Analýza</string>
+    <string name="analysis_places_progress">Miesta: %1$,d z %2$,d</string>
+    <string name="analysis_semantic_progress">Čo fotky zobrazujú: %1$,d z %2$,d</string>
+    <string name="analysis_semantic_unavailable">Model, ktorý rozpoznáva, čo fotky zobrazujú, sa nepodarilo načítať, takže tento krok nebeží.</string>
+    <string name="search_semantic_unavailable">Vyhľadávanie podľa toho, čo fotky zobrazujú, momentálne nie je dostupné (model sa nepodarilo načítať). Ostatné výsledky fungujú ďalej.</string>
+    <string name="analysis_people_progress">Ľudia: %1$,d z %2$,d</string>
+    <string name="analysis_people_unavailable">Modely, ktoré hľadajú tváre, sa nepodarilo načítať, takže tento krok nebeží.</string>
+    <string name="analysis_duplicates_progress">Duplikáty: %1$,d z %2$,d</string>
+    <string name="analysis_text_progress">Text vo fotkách: %1$,d z %2$,d</string>
+    <string name="analysis_running">Prebieha analýza…</string>
+    <string name="analysis_idle">Čaká sa na vhodný okamih (batéria nie je slabá, Šetrič batérie je vypnutý a prípadne prebieha nabíjanie, ak ste to zvolili)</string>
+    <string name="analysis_up_to_date">Všetko je analyzované</string>
+    <string name="setting_pause_analysis">Pozastaviť analýzu</string>
+    <string name="setting_only_charging">Len pri nabíjaní</string>
+    <string name="setting_analyze_places">Hľadať fotky podľa miesta</string>
+    <string name="setting_analyze_semantic">Hľadať fotky podľa toho, čo zobrazujú</string>
+    <string name="setting_analyze_people">Hľadať ľudí na fotkách</string>
+    <string name="setting_analyze_people_note">Tváre sa hľadajú a porovnávajú len v tomto telefóne. Nič o tvári ho nikdy neopustí a eikon sa nikdy nepokúša nikoho rozpoznať: iba zoskupuje tváre, ktoré sa podobajú, a skupiny pomenúvate vy.</string>
+    <string name="setting_analyze_duplicates">Hľadať duplicitné fotky</string>
+    <string name="setting_analyze_text">Hľadať text vo fotkách</string>
+    <string name="analysis_location_permission">Android skrýva pred aplikáciami, kde boli fotky urobené, kým to nepovolíte.</string>
+    <string name="analysis_allow_locations">Povoliť prístup k polohe fotiek</string>
+    <string name="analyze_now">Analyzovať teraz</string>
+    <string name="settings_analysis_body">Analýza beží len vo vašom telefóne, na pozadí, a pozastaví sa, keď je batéria slabá, je zapnutý Šetrič batérie alebo sa telefón zahreje („Analyzovať teraz“ pokračuje aj pri Šetriči batérie). Ukladá miesto každej fotky (určené offline, žiadna poloha sa nikdy nikam neodosiela), číselný popis toho, čo fotka zobrazuje (aby ste mohli hľadať „pes“ alebo „západ slnka“; nie je to popisok a nedá sa z neho spätne zložiť obrázok) a akýkoľvek text, ktorý vo fotke prečíta, aby ho Hľadanie mohlo nájsť. Ak zapnete ľudí, ukladá aj to, kde sa vo fotke nachádza každá tvár, a jej číselný popis, iba na zoskupenie podobných tvárí. Ak zapnete duplikáty, ukladá krátky odtlačok každej fotky a súborov s rovnakou veľkosťou, iba na nájdenie kópií. Rozpoznávanie toho, čo fotky zobrazujú, a čítanie textu sú pomalé a silne zaťažujú procesor, preto analýza predvolene čaká na nabíjanie.</string>
+
+    <!-- Info panel: derived data -->
+    <string name="info_place">Najbližšie miesto</string>
+    <string name="info_text_found">Text v tejto fotke</string>
+    <string name="info_text_copy">Kopírovať text</string>
+
+    <!-- People -->
+    <string name="collection_people">Ľudia</string>
+    <string name="people_title">Ľudia</string>
+    <string name="person_unnamed">Osoba bez mena</string>
+    <string name="person_add_name">Pridať meno</string>
+    <string name="person_rename">Pomenovať túto osobu</string>
+    <string name="person_name_hint">Meno</string>
+    <string name="person_same_name_note">Ľudia s rovnakým menom sa spoja do jedného.</string>
+    <string name="person_favorite">Označiť ako obľúbenú</string>
+    <string name="person_unfavorite">Odstrániť z obľúbených</string>
+    <string name="person_hide">Skryť túto osobu</string>
+    <string name="person_unhide">Zobraziť túto osobu</string>
+    <string name="person_merge">Zlúčiť s inou osobou…</string>
+    <string name="person_merge_title">Zlúčiť s</string>
+    <string name="person_merge_empty">Nie je s kým zlúčiť.</string>
+    <string name="person_not_this">Nie je to táto osoba</string>
+    <string name="person_remove_from_people">Nie je to tvár</string>
+    <string name="people_show_hidden">Zobraziť skryté osoby (%1$d)</string>
+    <string name="people_hide_hidden">Skryť skryté osoby</string>
+    <string name="people_empty_off">Ľudia sú vypnutí. Zapnite „Hľadať ľudí na fotkách“ v Nastavenia, Analýza, a eikon zoskupí nájdené tváre. Všetko zostane v tomto telefóne.</string>
+    <string name="people_empty_working">Zatiaľ neboli nájdené žiadne tváre (analyzovaných %1$d %% vašich fotiek). Analýza beží na pozadí pri nabíjaní.</string>
+    <string name="people_empty_done">Na vašich fotkách neboli nájdené žiadne tváre.</string>
+    <string name="people_go_settings">Otvoriť nastavenia</string>
+    <string name="person_photos_empty">Žiadne fotky.</string>
+    <plurals name="moved_to_new_person">
+        <item quantity="one">%d fotka bola presunutá k novej osobe</item>
+        <item quantity="few">%d fotky boli presunuté k novej osobe</item>
+        <item quantity="many">%d fotky boli presunuté k novej osobe</item>
+        <item quantity="other">%d fotiek bolo presunutých k novej osobe</item>
+    </plurals>
+    <plurals name="removed_from_people">
+        <item quantity="one">%d fotka bola odstránená z Ľudí</item>
+        <item quantity="few">%d fotky boli odstránené z Ľudí</item>
+        <item quantity="many">%d fotky boli odstránené z Ľudí</item>
+        <item quantity="other">%d fotiek bolo odstránených z Ľudí</item>
+    </plurals>
+    <string name="info_people">Ľudia</string>
+    <plurals name="info_people_unnamed_count">
+        <item quantity="one">%d bez mena</item>
+        <item quantity="few">%d bez mena</item>
+        <item quantity="many">%d bez mena</item>
+        <item quantity="other">%d bez mena</item>
+    </plurals>
+
+    <string name="section_memories">Spomienky</string>
+    <string name="section_pets">Domáce zvieratá</string>
+    <string name="collection_dogs">Psy</string>
+    <string name="collection_cats">Mačky</string>
+    <string name="empty_pets">Zatiaľ neboli nájdené žiadne psy ani mačky. Domáce zvieratá sa rozpoznávajú podľa toho, čo fotky zobrazujú: zapnite „Hľadať fotky podľa toho, čo zobrazujú“ v Nastavenia, Analýza, a počkajte, kým sa dokončí.</string>
+
+    <!-- Places -->
+    <string name="places_title">Miesta</string>
+    <string name="places_tab_list">Zoznam</string>
+    <string name="places_tab_map">Mapa</string>
+    <string name="place_unknown">Iné miesta</string>
+    <string name="place_near">Pri mieste %1$s</string>
+    <string name="places_expand">Zobraziť</string>
+    <string name="places_collapse">Skryť</string>
+    <string name="collection_places">Miesta</string>
+    <string name="places_map_note">Len obrysy krajín a názvy väčších miest: nesťahujú sa žiadne obrázky máp a žiadna poloha nikdy neopustí telefón. Priblížite ju stiahnutím prstov alebo dvojitým ťuknutím, ťuknutím na značku zobrazíte jej fotky.</string>
+    <string name="places_map_description">Mapa miest, kde boli vaše fotky urobené, so značkami pre skupiny fotiek</string>
+    <string name="places_empty_off">Miesta sú vypnuté. Zapnite „Hľadať fotky podľa miesta“ v Nastavenia, Analýza, a eikon offline určí, kde boli vaše fotky urobené, z ich údajov GPS.</string>
+    <string name="places_empty_working">Zatiaľ neboli nájdené žiadne miesta (analyzovaných %1$d %% vašich fotiek). Analýza beží na pozadí pri nabíjaní.</string>
+    <string name="places_empty_done">Žiadna z vašich fotiek nemá polohu, alebo eikon možno nesmie čítať polohu fotiek (Nastavenia, Analýza).</string>
+    <string name="section_places">Miesta a cesty</string>
+
+    <!-- Trips -->
+    <string name="collection_trips">Cesty</string>
+    <string name="trips_title">Cesty</string>
+    <string name="trip_untitled">Cesta</string>
+    <string name="trip_reason">Asi %1$d km od miesta, kde robíte väčšinu fotiek (pri: %2$s)</string>
+    <string name="trip_home_unknown">neznáme miesto</string>
+    <plurals name="trip_summary_days">
+        <item quantity="one">%d deň</item>
+        <item quantity="few">%d dni</item>
+        <item quantity="many">%d dňa</item>
+        <item quantity="other">%d dní</item>
+    </plurals>
+    <string name="trips_empty">Neboli nájdené žiadne cesty. Cesta je séria dní, s najmenej 10 fotkami, strávených aspoň 100 km od miesta, kde robíte väčšinu fotiek. Na to eikon potrebuje polohy fotiek: zapnite „Hľadať fotky podľa miesta“ v Nastavenia, Analýza.</string>
+
+    <!-- Duplicates and similar shots -->
+    <string name="section_cleanup">Upratovanie</string>
+    <string name="collection_duplicates">Duplikáty</string>
+    <string name="collection_similar">Podobné zábery</string>
+    <string name="duplicates_title">Duplikáty</string>
+    <string name="similar_title">Podobné zábery</string>
+    <string name="duplicates_note">eikon ich iba nájde. Nič sa neodstráni, kým to nepotvrdíte v dialógu samotného Androidu, a odstránené fotky idú do „Nedávno odstránené“, kde ich môžete obnoviť. Pri kópiách fotky, ktorú ste pridali do albumov: kópia, ktorú ponecháte, sa pridá do týchto albumov.</string>
+    <plurals name="duplicate_exact">
+        <item quantity="one">%d rovnaký súbor</item>
+        <item quantity="few">%d rovnaké súbory</item>
+        <item quantity="many">%d rovnakého súboru</item>
+        <item quantity="other">%d rovnakých súborov</item>
+    </plurals>
+    <plurals name="duplicate_visual">
+        <item quantity="one">%d kópia rovnakého obrázka</item>
+        <item quantity="few">%d kópie rovnakého obrázka</item>
+        <item quantity="many">%d kópie rovnakého obrázka</item>
+        <item quantity="other">%d kópií rovnakého obrázka</item>
+    </plurals>
+    <plurals name="similar_group">
+        <item quantity="one">%d záber</item>
+        <item quantity="few">%d podobné zábery</item>
+        <item quantity="many">%d podobného záberu</item>
+        <item quantity="other">%d podobných záberov</item>
+    </plurals>
+    <plurals name="duplicate_keep_best">
+        <item quantity="one">Ponechať najlepší, %d presunúť do „Nedávno odstránené“</item>
+        <item quantity="few">Ponechať najlepší, %d presunúť do „Nedávno odstránené“</item>
+        <item quantity="many">Ponechať najlepší, %d presunúť do „Nedávno odstránené“</item>
+        <item quantity="other">Ponechať najlepší, %d presunúť do „Nedávno odstránené“</item>
+    </plurals>
+    <plurals name="similar_trash_marked">
+        <item quantity="one">Presunúť %d do „Nedávno odstránené“</item>
+        <item quantity="few">Presunúť %d do „Nedávno odstránené“</item>
+        <item quantity="many">Presunúť %d do „Nedávno odstránené“</item>
+        <item quantity="other">Presunúť %d do „Nedávno odstránené“</item>
+    </plurals>
+    <string name="duplicate_best">Najlepší</string>
+    <string name="duplicate_kept">Ponechané</string>
+    <string name="duplicate_marked">Na presunutie</string>
+    <string name="duplicate_dismiss">Nie sú to duplikáty</string>
+    <string name="similar_dismiss">Nie sú podobné</string>
+    <string name="duplicates_empty_off">Duplikáty sú vypnuté. Zapnite „Hľadať duplicitné fotky“ v Nastavenia, Analýza. eikon vytvára odtlačky vašich fotiek len v tomto telefóne, bez akéhokoľvek modelu.</string>
+    <string name="similar_empty_off">Podobné zábery potrebujú „Hľadať fotky podľa toho, čo zobrazujú“ v Nastavenia, Analýza: porovnávajú, čo každá fotka zobrazuje, pri fotkách urobených s odstupom do dvoch minút.</string>
+    <string name="duplicates_empty_working">Zatiaľ nič nenájdené (analyzované %1$d %%). Analýza beží na pozadí pri nabíjaní.</string>
+    <string name="duplicates_empty_done">Neboli nájdené žiadne duplikáty.</string>
+    <string name="similar_empty_done">Neboli nájdené žiadne podobné zábery.</string>
+
+    <!-- Memories -->
+    <string name="collection_memories">Spomienky</string>
+    <string name="memories_title">Spomienky</string>
+    <string name="memory_on_this_day">V tento deň</string>
+    <string name="memory_year_ago">Pred rokom</string>
+    <string name="memory_weekend_in">Víkend: %1$s</string>
+    <string name="memory_weekend">Víkend mimo domova</string>
+    <string name="memory_day_trip_to">Jednodňový výlet: %1$s</string>
+    <string name="memory_day_trip">Jednodňový výlet</string>
+    <string name="memory_season">%1$s %2$d</string>
+    <string name="memory_person">%1$s, %2$d</string>
+    <string name="season_winter">Zima</string>
+    <string name="season_spring">Jar</string>
+    <string name="season_summer">Leto</string>
+    <string name="season_autumn">Jeseň</string>
+    <string name="memory_hide">Skryť túto spomienku</string>
+    <string name="memory_show_fewer">Zobrazovať menej takýchto</string>
+    <string name="memory_show_less_of">Zobrazovať menej: %1$s</string>
+    <string name="memory_exclude_date">Vynechať tento dátum</string>
+    <string name="memory_all_photos">Všetky fotky</string>
+    <string name="memory_replay">Prehrať znova</string>
+    <string name="memory_reset">Vrátiť moje voľby</string>
+    <string name="memory_done">Hotovo. Svoje voľby môžete vrátiť v ponuke Spomienok.</string>
+    <string name="memories_empty">Zatiaľ žiadne spomienky. eikon ich vytvára z dátumov, ciest, ročných období a ľudí, ktorých ste pomenovali: „V tento deň“, „Pred rokom“, cesty a víkendy mimo domova, ročné obdobie, niekto v určitom roku. Cesty a víkendy potrebujú Miesta, ľudia potrebujú Ľudí (Nastavenia, Analýza). Nič neopustí telefón.</string>
+    <string name="memories_note">Vytvorené z dátumov, miest a pomenovaných ľudí podľa jednoduchých pravidiel; nie je tu žiadna hudba a fotky sa vyberajú podľa obľúbených, veľkosti a tvárí, nie podľa toho, ako dobre vyzerajú.</string>
+    <string name="memory_no_photos">Táto spomienka už nemá žiadne fotky na zobrazenie.</string>
+
+    <!-- Editing -->
+    <string name="action_edit">Upraviť</string>
+    <string name="edit_title">Úpravy</string>
+    <string name="edit_done">Hotovo</string>
+    <string name="edit_original">Originál</string>
+    <string name="edit_revert">Vrátiť späť</string>
+    <string name="edit_revert_title">Vrátiť sa k originálu?</string>
+    <string name="edit_revert_message">Týmto sa z tejto úpravy odstránia všetky nastavenia, filter aj orezanie. Pôvodná fotka nebola nikdy zmenená. Stlačením Hotovo ponecháte vrátenú fotku.</string>
+    <string name="edit_discard_title">Zahodiť zmeny?</string>
+    <string name="edit_discard_message">Zmeny vykonané v tomto editore sa stratia. Fotka zostane taká, aká bola.</string>
+    <string name="edit_discard">Zahodiť</string>
+    <string name="edit_copy_edits">Kopírovať úpravy</string>
+    <string name="edit_paste_edits">Prilepiť úpravy</string>
+    <string name="edit_save_copy">Uložiť kópiu</string>
+    <string name="edit_copy_saved">Kópia bola uložená vedľa originálu, ktorý nebol zmenený.</string>
+    <string name="edit_copy_saved_no_details">Kópia bola uložená vedľa originálu, ktorý nebol zmenený. Údaje o fotoaparáte sa nepodarilo skopírovať.</string>
+    <string name="edit_failed">Úpravu sa nepodarilo dokončiť. Fotka nebola zmenená.</string>
+    <string name="edited_badge">Upravené</string>
+    <string name="viewer_show_original">Zobraziť originál</string>
+    <string name="viewer_show_edited">Zobraziť upravenú fotku</string>
+    <string name="tool_auto">Auto</string>
+    <string name="tool_light">Svetlo</string>
+    <string name="tool_color">Farba</string>
+    <string name="tool_detail">Detail</string>
+    <string name="tool_filters">Filtre</string>
+    <string name="tool_crop">Orezať</string>
+    <string name="adj_exposure">Expozícia</string>
+    <string name="adj_brightness">Jas</string>
+    <string name="adj_contrast">Kontrast</string>
+    <string name="adj_highlights">Svetlá</string>
+    <string name="adj_shadows">Tiene</string>
+    <string name="adj_black_point">Čierny bod</string>
+    <string name="adj_saturation">Sýtosť</string>
+    <string name="adj_vibrance">Živosť</string>
+    <string name="adj_temperature">Teplota</string>
+    <string name="adj_tint">Odtieň</string>
+    <string name="adj_sharpness">Ostrosť</string>
+    <string name="adj_vignette">Vinetácia</string>
+    <string name="geo_straighten">Narovnať</string>
+    <string name="geo_perspective_vertical">Zvislá perspektíva</string>
+    <string name="geo_perspective_horizontal">Vodorovná perspektíva</string>
+    <string name="filter_amount">Sila</string>
+    <string name="filter_name_none">Originál</string>
+    <string name="filter_name_vivid">Sýty</string>
+    <string name="filter_name_warm">Teplý</string>
+    <string name="filter_name_cool">Studený</string>
+    <string name="filter_name_mono">Mono</string>
+    <string name="filter_name_noir">Noir</string>
+    <string name="filter_name_fade">Vyblednutie</string>
+    <string name="filter_name_chrome">Chróm</string>
+    <string name="filter_name_sepia">Sépia</string>
+    <string name="crop_rotate">Otočiť</string>
+    <string name="crop_flip">Prevrátiť</string>
+    <string name="shape_free">Voľne</string>
+    <string name="shape_original">Originál</string>
+    <string name="shape_square">1:1</string>
+    <string name="shape_4_3">4:3</string>
+    <string name="shape_3_2">3:2</string>
+    <string name="shape_16_9">16:9</string>
+    <string name="action_paste_edits">Prilepiť úpravy</string>
+    <string name="action_revert_edits">Odstrániť úpravy</string>
+    <plurals name="edits_pasted">
+        <item quantity="one">Úpravy boli použité na %d fotku</item>
+        <item quantity="few">Úpravy boli použité na %d fotky</item>
+        <item quantity="many">Úpravy boli použité na %d fotky</item>
+        <item quantity="other">Úpravy boli použité na %d fotiek</item>
+    </plurals>
+    <plurals name="edits_reverted">
+        <item quantity="one">Úprava bola odstránená z %d fotky; originál je taký, aký vždy bol</item>
+        <item quantity="few">Úpravy boli odstránené z %d fotiek; originály sú také, aké vždy boli</item>
+        <item quantity="many">Úpravy boli odstránené z %d fotiek; originály sú také, aké vždy boli</item>
+        <item quantity="other">Úpravy boli odstránené z %d fotiek; originály sú také, aké vždy boli</item>
+    </plurals>
+
+    <!-- Accessibility -->
+    <string name="slider_reset">Obnoviť neutrálnu hodnotu</string>
+    <string name="crop_area">Oblasť orezania, od %1$d %% do %2$d %% na šírku a od %3$d %% do %4$d %% na výšku</string>
+    <string name="crop_action_smaller">Zmenšiť orezanie</string>
+    <string name="crop_action_larger">Zväčšiť orezanie</string>
+    <string name="crop_action_left">Posunúť orezanie doľava</string>
+    <string name="crop_action_right">Posunúť orezanie doprava</string>
+    <string name="crop_action_up">Posunúť orezanie nahor</string>
+    <string name="crop_action_down">Posunúť orezanie nadol</string>
+    <string name="viewer_zoom_in">Priblížiť</string>
+    <string name="viewer_zoom_out">Oddialiť</string>
+    <string name="external_photo">Fotka</string>
+    <string name="viewer_cannot_display">Túto fotku nie je možné zobraziť.</string>
+
+    <!-- Info: caption, editing the date and location, what the photo shows -->
+    <string name="info_caption">Popisok</string>
+    <string name="caption_add">Pridať popisok</string>
+    <string name="caption_edit">Upraviť popisok</string>
+    <string name="caption_title">Popisok</string>
+    <string name="caption_hint">Pár slov o tejto fotke</string>
+    <string name="caption_note">Uchované len v eikone; súbor fotky sa nemení. Hľadanie ho nájde.</string>
+    <string name="date_change">Zmeniť dátum a čas</string>
+    <string name="date_revert">Obnoviť pôvodný dátum</string>
+    <string name="date_time_title">Denný čas</string>
+    <string name="action_next">Ďalej</string>
+    <string name="location_title">Kde bola urobená</string>
+    <string name="location_coordinates">Súradnice</string>
+    <string name="location_coordinates_note">Desatinné stupne, najprv zemepisná šírka: 41.9028, 12.4964</string>
+    <string name="location_invalid">Nie je to poloha: dve čísla, zemepisná šírka od -90 do 90 a zemepisná dĺžka od -180 do 180</string>
+    <string name="location_city">Alebo nájdite mesto (funguje offline)</string>
+    <string name="location_remove">Odstrániť polohu</string>
+    <string name="location_change">Zmeniť polohu</string>
+    <string name="location_revert">Obnoviť pôvodnú polohu</string>
+    <string name="info_map_description">Malá mapa ukazujúca, kde bola fotka urobená</string>
+    <string name="metadata_done">Hotovo. Fotka teraz uvádza toto; originál je zachovaný, aby ste ho mohli obnoviť.</string>
+    <string name="metadata_not_writable">Tento druh súboru nie je možné zmeniť.</string>
+    <string name="metadata_needs_permission">Aby eikon mohol zmeniť dátum alebo polohu fotky, musí vedieť čítať, kde boli fotky urobené: bez toho mu Android ukáže kópiu bez polohy a uloženie by ju vymazalo.</string>
+    <string name="metadata_nothing_to_revert">Nie je čo obnoviť.</string>
+    <string name="metadata_interrupted">Predchádzajúca zmena tejto fotky sa nedokončila. Jej originál je zachovaný: obnovte ho skôr, než niečo iné zmeníte.</string>
+    <string name="metadata_failed">Zmena sa nepodarila. Fotka bola vrátená presne tak, ako bola.</string>
+    <string name="metadata_restore_file">Obnoviť pôvodný súbor</string>
+    <string name="info_albums">V albumoch</string>
+    <string name="info_pets">Domáce zvieratá</string>
+    <string name="info_shows">Môže zobrazovať</string>
+    <string name="pet_dog">Pes</string>
+    <string name="pet_cat">Mačka</string>
+    <string name="info_album">Album zariadenia</string>
+    <string name="label_landscape">Krajinu</string>
+    <string name="label_beach">Pláž</string>
+    <string name="label_sea">More</string>
+    <string name="label_mountain">Horu</string>
+    <string name="label_sunset">Západ slnka</string>
+    <string name="label_snow">Sneh</string>
+    <string name="label_city">Mesto</string>
+    <string name="label_building">Budovu</string>
+    <string name="label_street">Ulicu</string>
+    <string name="label_woods">Les</string>
+    <string name="label_flower">Kvetinu</string>
+    <string name="label_sky">Oblohu</string>
+    <string name="label_person">Osobu</string>
+    <string name="label_group">Skupinu ľudí</string>
+    <string name="label_food">Jedlo</string>
+    <string name="label_dessert">Dezert</string>
+    <string name="label_drink">Nápoj</string>
+    <string name="label_car">Auto</string>
+    <string name="label_bicycle">Bicykel</string>
+    <string name="label_airplane">Lietadlo</string>
+    <string name="label_boat">Loď</string>
+    <string name="label_bird">Vtáka</string>
+    <string name="label_horse">Koňa</string>
+    <string name="label_interior">Miestnosť</string>
+    <string name="label_night">Noc</string>
+    <string name="label_party">Oslavu</string>
+    <string name="label_sport">Športovú udalosť</string>
+    <string name="label_animal">Zviera</string>
+
+    <!-- Backup to your own server -->
+    <string name="backup_title">Záloha na vlastný server</string>
+    <string name="backup_intro">Kopíruje vaše fotky a videá na server, ktorý sami prevádzkujete, cez šifrované spojenie. Nič neopustí tento telefón, kým zálohu nezapnete, všetko ide iba na server uvedený nižšie a eikon na ňom nikdy nič neodstraňuje ani nemení. Heslo alebo kľúč je uložené zašifrované v Android Keystore.</string>
+    <string name="backup_kind_immich">Immich (aj to, čo inštaluje Umbrel)</string>
+    <string name="backup_kind_nextcloud">Nextcloud alebo akýkoľvek server WebDAV</string>
+    <string name="backup_address">Adresa servera (https://…)</string>
+    <string name="backup_username">Prihlasovacie meno</string>
+    <string name="backup_folder">Priečinok na serveri</string>
+    <string name="backup_api_key">Kľúč API</string>
+    <string name="backup_app_password">Heslo aplikácie</string>
+    <string name="backup_secret_saved">Uložené. Nechajte prázdne, aby zostalo</string>
+    <string name="backup_help_immich">V Immiche: Nastavenia účtu, Kľúče API, Nový kľúč API. Potrebné oprávnenie je asset.upload.</string>
+    <string name="backup_help_nextcloud">V Nextcloude: Osobné nastavenia, Zabezpečenie, Zariadenia a relácie, vytvorte nové heslo aplikácie. Použite ho namiesto prihlasovacieho hesla.</string>
+    <string name="backup_save_test">Uložiť a otestovať pripojenie</string>
+    <string name="backup_connected">Pripojené k %1$s.</string>
+    <string name="backup_failed">Pripojenie sa nepodarilo: %1$s</string>
+    <string name="backup_certificate_declined">Certifikátu sa nedôverovalo, takže nič nebolo odoslané a nič sa odosielať nebude.</string>
+    <string name="backup_certificate_title">Certifikát tohto servera nepochádza od autority, ktorej váš telefón dôveruje</string>
+    <string name="backup_certificate_body">%1$s predložil nižšie uvedený certifikát. Porovnajte jeho odtlačok s tým, ktorý zobrazuje váš server (napríklad príkazom: openssl x509 -noout -fingerprint -sha256). Dôverujte mu, iba ak sú rovnaké: od tej chvíle sa pre tento server prijíma tento jeden certifikát a žiadny iný.</string>
+    <string name="backup_certificate_subject">Vydaný pre: %1$s</string>
+    <string name="backup_certificate_expires">Platný do %1$s</string>
+    <string name="backup_certificate_self_signed">Je podpísaný sám sebou, ako to pri certifikáte domáceho servera býva.</string>
+    <string name="backup_certificate_trust">Dôverovať tomuto certifikátu</string>
+    <string name="backup_enable">Zálohovať moje fotky a videá</string>
+    <string name="backup_test_first">Najprv uložte a otestujte pripojenie.</string>
+    <string name="backup_wifi_only">Len cez Wi-Fi</string>
+    <string name="backup_only_charging">Len pri nabíjaní</string>
+    <string name="backup_videos">Zahrnúť videá</string>
+    <string name="backup_hidden">Zahrnúť skryté fotky</string>
+    <string name="backup_hidden_note">Skryté fotky sa odošlú aj na váš server, kde sú rovnako viditeľné ako všetko ostatné.</string>
+    <string name="backup_confirm_title">Spustiť zálohovanie?</string>
+    <plurals name="backup_confirm_body">
+        <item quantity="one">%1$d fotka alebo video sa bude postupne kopírovať na %2$s, keď bude telefón v sieti, ktorú ste povolili. Nič sa neodstraňuje v telefóne ani na serveri.</item>
+        <item quantity="few">%1$d fotky a videá sa budú postupne kopírovať na %2$s, keď bude telefón v sieti, ktorú ste povolili. Nič sa neodstraňuje v telefóne ani na serveri.</item>
+        <item quantity="many">%1$d fotky a videá sa budú postupne kopírovať na %2$s, keď bude telefón v sieti, ktorú ste povolili. Nič sa neodstraňuje v telefóne ani na serveri.</item>
+        <item quantity="other">%1$d fotiek a videí sa bude postupne kopírovať na %2$s, keď bude telefón v sieti, ktorú ste povolili. Nič sa neodstraňuje v telefóne ani na serveri.</item>
+    </plurals>
+    <string name="backup_confirm_start">Spustiť</string>
+    <string name="backup_location_note">Android skrýva pred aplikáciami bez oprávnenia na polohu fotiek, kde boli fotky urobené, takže kópie na vašom serveri by nemali polohu.</string>
+    <string name="backup_progress">Zálohované: %1$,d z %2$,d</string>
+    <plurals name="backup_refused">
+        <item quantity="one">Server odmietol %1$d fotku a nebude sa o ňu znova pokúšať, kým o to nepožiadate.</item>
+        <item quantity="few">Server odmietol %1$d fotky a nebude sa o ne znova pokúšať, kým o to nepožiadate.</item>
+        <item quantity="many">Server odmietol %1$d fotky a nebude sa o ne znova pokúšať, kým o to nepožiadate.</item>
+        <item quantity="other">Server odmietol %1$d fotiek a nebude sa o ne znova pokúšať, kým o to nepožiadate.</item>
+    </plurals>
+    <string name="backup_running">Prebieha zálohovanie…</string>
+    <string name="backup_idle">Čaká sa na vhodný okamih (sieť, ktorú ste povolili, batéria nie je slabá).</string>
+    <string name="backup_last_run">Posledné spustenie %1$s. Odoslané: %2$d. Už tam boli: %3$d. Odmietnuté: %4$d.</string>
+    <string name="backup_stopped">Zastavilo sa, pretože %1$s</string>
+    <string name="backup_stop_power_save">je zapnutý Šetrič batérie.</string>
+    <string name="backup_stop_thermal">telefón bol príliš horúci.</string>
+    <string name="backup_stop_unreachable">server bol nedostupný alebo vyťažený. Skúsi to znova.</string>
+    <string name="backup_stop_unauthorized">server neprijal kľúč ani heslo.</string>
+    <string name="backup_stop_untrusted">certifikát servera nie je jedným z tých, ktorým ste dôverovali.</string>
+    <string name="backup_stop_misconfigured">adresa nie je správna pre tento druh servera.</string>
+    <string name="backup_stop_refusals">server odmietol veľa súborov za sebou, čo ukazuje na limit servera, nie na problém s fotkami.</string>
+    <string name="backup_now">Zálohovať teraz</string>
+    <string name="backup_retry_refused">Skúsiť znova odmietnuté</string>
+
+    <!-- Network consent -->
+    <string name="network_allow">Povoliť eikonu používať internet</string>
+    <string name="network_allow_note">Vypnuté, kým to nezapnete. eikon používa sieť iba na kopírovanie vašich fotiek na server nižšie, a to až potom, ako nejaký nastavíte a zapnete zálohovanie. Keď je toto vypnuté, nič sa nemôže nikam pripojiť.</string>
+    <string name="settings_privacy_network">eikon môže ísť online kvôli jedinej veci: voliteľnej záloze vašich fotiek na server, ktorý sami prevádzkujete. Tá je vypnutá, kým ju nepovolíte (Nastavenia, Záloha) a nenastavíte server. Žiadna analytika, žiadne reklamy, žiadne účty, žiadne služby Googlu a žiadny náš cloud: žiadny neexistuje.</string>
+
+    <!-- First-run screens -->
+    <string name="onboarding_intro_title">Vaše fotky, vo vašom telefóne</string>
+    <string name="onboarding_intro_body">eikon je galéria fotiek a videí pre Android. Zobrazuje obrázky, ktoré váš telefón už uchováva, nájde ich podľa dátumu, miesta, ľudí alebo toho, čo zobrazujú, a upravuje ich bez toho, aby sa niekedy dotkol originálov.</string>
+    <string name="onboarding_point_local">Všetko zostáva v tomto zariadení. Žiadny účet, žiadna analytika, žiadne reklamy.</string>
+    <string name="onboarding_point_independent">Nespolieha sa na nič mimo vášho telefónu: žiadne služby Googlu, žiadny cloud, žiadne servery tretích strán.</string>
+    <string name="onboarding_point_yours">Ak chcete zálohu, ide len na server, ktorý sami prevádzkujete, a len ak ju nastavíte.</string>
+    <string name="onboarding_next">Ďalej</string>
+    <string name="onboarding_start">Začať</string>
+    <string name="onboarding_page">Strana %1$d z %2$d</string>
+    <string name="onboarding_permissions_title">O čo eikon žiada a prečo</string>
+    <string name="onboarding_permissions_intro">Potrebné je len prvé. Ktorékoľvek z nich môžete neskôr zmeniť v Nastaveniach alebo v nastaveniach telefónu.</string>
+    <string name="onboarding_perm_media_title">Fotky a videá</string>
+    <string name="onboarding_perm_media_body">Aby eikon mohol zobraziť vašu knižnicu. Číta súbory tam, kde ich Android už uchováva, a nikam ich nekopíruje. Ak chcete, môžete povoliť len niektoré fotky.</string>
+    <string name="onboarding_perm_location_title">Poloha fotiek (voliteľné)</string>
+    <string name="onboarding_perm_location_body">Android skrýva pred aplikáciami, kde bola fotka urobená, ak to nepovolíte. eikon to používa na zobrazenie miesta fotky na offline mape a na vyhľadávanie podľa miesta. Miesta sa určujú v telefóne: žiadna poloha sa nikdy nikam neodosiela.</string>
+    <string name="onboarding_perm_network_title">Internet (voliteľné)</string>
+    <string name="onboarding_perm_network_body">Používa sa len na jednu vec: kopírovanie vašich fotiek na server, ktorý sami prevádzkujete (Immich, Nextcloud), ak to niekedy nastavíte. Inak sa eikon k ničomu nepripája. Je to vypnuté, kým to tu nezapnete, a kedykoľvek to môžete v Nastaveniach znova vypnúť.</string>
+    <string name="onboarding_allow">Povoliť</string>
+    <string name="onboarding_allowed">Povolené</string>
+    <string name="onboarding_promise">Nič tu nezávisí od ničoho mimo vášho telefónu: žiadne služby Googlu, žiadne účty, žiadna analytika. Vaše fotky zostávajú v tomto zariadení alebo, ak sa tak rozhodnete, idú na váš vlastný server.</string>
+
+    <!-- Support -->
+    <string name="support_title">Podpora</string>
+    <string name="support_body">eikon je zadarmo, nemá reklamy a nesleduje vás. Ak sa vám páči, môžete poslať pár satoshi cez sieť Lightning.</string>
+    <string name="support_button">Prispieť cez Lightning</string>
+    <string name="support_copied">Nenašla sa žiadna peňaženka Lightning — adresa bola skopírovaná: %1$s</string>
+
+    <!-- Analyze now -->
+    <string name="analyze_now_running">Analyzujem…</string>
+    <string name="analyze_now_hint">Spustí sa hneď, len v tomto telefóne, aj pri Šetriči batérie.</string>
+    <string name="analyze_now_hint_off">Najprv vyššie zapnite aspoň jeden krok.</string>
+    <string name="analyze_now_hint_paused">Analýza je pozastavená: vypnite pozastavenie, aby ste mohli analyzovať teraz.</string>
+
+    <!-- Pictures from other apps -->
+    <string name="viewer_open_in_library">Otvoriť v knižnici</string>
+</resources>

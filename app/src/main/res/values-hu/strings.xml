@@ -1,0 +1,659 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Library -->
+    <string name="library_title">Könyvtár</string>
+    <string name="today">Ma</string>
+    <string name="yesterday">Tegnap</string>
+    <string name="empty_library">Még nincsenek fotók vagy videók</string>
+    <string name="empty_filter">Semmi sem felel meg ennek a szűrőnek</string>
+    <string name="empty_filter_clear">Minden megjelenítése</string>
+    <string name="sync_progress">A könyvtár betöltése: %1$,d / %2$,d</string>
+    <string name="sync_failed">A könyvtárat nem sikerült frissíteni</string>
+    <string name="sync_retry">Újra</string>
+    <string name="scrubber_description">Görgetés a könyvtárban dátum szerint</string>
+
+    <!-- Permissions -->
+    <string name="permission_title">A fotóid az eszközödön maradnak</string>
+    <string name="permission_body">Az eikonnak hozzáférésre van szüksége a fotóidhoz és videóidhoz, hogy megjeleníthesse őket. Az eszközödön maradnak: semmi sem töltődik fel, kivéve ha biztonsági mentést állítasz be a saját szervereden.</string>
+    <string name="permission_grant">Hozzáférés engedélyezése</string>
+    <string name="permission_denied">A hozzáférést megtagadtad. A rendszerbeállításokban engedélyezheted.</string>
+    <string name="permission_open_settings">Beállítások megnyitása</string>
+    <string name="limited_banner">Csak a kiválasztott fotók jelennek meg</string>
+    <string name="limited_select_more">Továbbiak kiválasztása</string>
+    <string name="limited_allow_all">Mindegyik engedélyezése</string>
+
+    <!-- Menus and filters -->
+    <string name="menu_filter">Szűrő</string>
+    <string name="menu_sort">Rendezés</string>
+    <string name="menu_settings">Beállítások</string>
+    <string name="menu_more">További lehetőségek</string>
+    <string name="filter_all">Mind</string>
+    <string name="filter_photos">Fotók</string>
+    <string name="filter_videos">Videók</string>
+    <string name="filter_favorites">Kedvencek</string>
+    <string name="filter_screenshots">Képernyőképek</string>
+    <string name="filter_screen_recordings">Képernyőfelvételek</string>
+    <string name="filter_panoramas">Panorámák</string>
+    <string name="filter_raw">RAW</string>
+    <string name="filter_clear">Szűrő törlése</string>
+    <string name="sort_by_date_taken">Készítés dátuma</string>
+    <string name="sort_by_date_added">Hozzáadás dátuma</string>
+    <string name="sort_newest_first">Legújabb elöl</string>
+    <string name="sort_oldest_first">Legrégebbi elöl</string>
+
+    <!-- Selection and actions -->
+    <plurals name="selected_count">
+        <item quantity="one">%d kiválasztva</item>
+        <item quantity="other">%d kiválasztva</item>
+    </plurals>
+    <string name="action_share">Megosztás</string>
+    <string name="action_favorite">Hozzáadás a kedvencekhez</string>
+    <string name="action_unfavorite">Eltávolítás a kedvencekből</string>
+    <string name="action_delete">Törlés</string>
+    <string name="action_info">Információ</string>
+    <string name="action_back">Vissza</string>
+    <string name="action_clear_selection">Kijelölés törlése</string>
+    <string name="action_select">Kijelölés</string>
+    <string name="action_failed">Valami elromlott</string>
+    <plurals name="moved_to_trash">
+        <item quantity="one">%d elem a Kukába került. Az Android 30 napig őrzi.</item>
+        <item quantity="other">%d elem a Kukába került. Az Android 30 napig őrzi őket.</item>
+    </plurals>
+
+    <!-- Accessibility -->
+    <string name="cd_photo">Fotó, %1$s</string>
+    <string name="cd_video">Videó, %1$s, %2$s</string>
+    <string name="cd_edited_badge">Szerkesztve</string>
+    <string name="cd_favorite_badge">Kedvenc</string>
+    <string name="viewer_position">%1$d / %2$d</string>
+
+    <!-- Video -->
+    <string name="video_play">Lejátszás</string>
+    <string name="video_pause">Szünet</string>
+    <string name="video_mute">Némítás</string>
+    <string name="video_unmute">Némítás feloldása</string>
+    <string name="video_seek">Tekerés</string>
+
+    <!-- Info panel -->
+    <string name="info_title">Információ</string>
+    <string name="info_loading">Részletek beolvasása…</string>
+    <string name="info_error">A fájl részleteit nem sikerült beolvasni</string>
+    <string name="info_section_file">Fájl</string>
+    <string name="info_section_camera">Kamera</string>
+    <string name="info_section_video">Videó</string>
+    <string name="info_name">Név</string>
+    <string name="info_type">Típus</string>
+    <string name="info_folder">Mappa</string>
+    <string name="info_resolution">Felbontás</string>
+    <string name="info_megapixels">Megapixel</string>
+    <string name="info_size">Méret</string>
+    <string name="info_date">Dátum</string>
+    <string name="info_modified">Módosítva</string>
+    <string name="info_color_profile">Színprofil</string>
+    <string name="info_location">Hely</string>
+    <string name="info_location_none">Ebben a fájlban nincs mentett hely</string>
+    <string name="info_location_hidden">Az Android elrejti a fotók helyét az alkalmazások elől, amíg nem engedélyezed</string>
+    <string name="info_location_allow">Engedélyezés</string>
+    <string name="info_location_open">Megnyitás térképalkalmazásban</string>
+    <string name="info_camera">Eszköz</string>
+    <string name="info_lens">Objektív</string>
+    <string name="info_focal_length">Gyújtótávolság</string>
+    <string name="info_aperture">Rekesz</string>
+    <string name="info_shutter">Záridő</string>
+    <string name="info_iso">Érzékenység</string>
+    <string name="info_exposure_bias">Expozíciókorrekció</string>
+    <string name="info_flash">Vaku</string>
+    <string name="info_flash_fired">Villant</string>
+    <string name="info_flash_off">Nem villant</string>
+    <string name="info_orientation">Tájolás</string>
+    <string name="info_software">Szoftver</string>
+    <string name="info_duration">Időtartam</string>
+    <string name="info_frame_rate">Képkockasebesség</string>
+    <string name="info_video_codec">Videokodek</string>
+    <string name="info_audio_codec">Hangkodek</string>
+    <string name="info_bitrate">Bitráta</string>
+    <string name="info_dynamic_range">Dinamikatartomány</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Beállítások</string>
+    <string name="settings_appearance">Megjelenés</string>
+    <string name="theme_system">A rendszert követi</string>
+    <string name="theme_light">Világos</string>
+    <string name="theme_dark">Sötét</string>
+    <string name="settings_privacy">Adatvédelem</string>
+    <string name="settings_privacy_body">Az eikon az eszközödön működik. Nincs fiók és nincs használati elemzés, az adatai pedig ki vannak zárva az Android biztonsági mentéseiből.\n\nA fotóidat soha nem másolja: az eikon helyi indexet vezet a fájlok adataival (név, dátum, méret, mappa), hogy a könyvtár azonnal megnyíljon. Az alkalmazás törlésével az index is törlődik.</string>
+    <string name="settings_storage_encrypted">A könyvtár adatbázisa (az index, az albumok, a szerkesztések, a feliratok és az elemzés eredményei) ezen a telefonon AES-256-tal titkosítva van. A kulcsát az Android Keystore őrzi.</string>
+    <string name="settings_storage_not_encrypted">A könyvtár adatbázisát nem sikerült titkosítani (%1$s), ezért továbbra is titkosítatlanul van tárolva. Az eikon minden indításkor újra megpróbálja.</string>
+    <string name="settings_storage_reset_title">A könyvtár adatbázisa újrakezdődött</string>
+    <string name="settings_storage_reset">A könyvtár adatbázisát védő kulcs elveszett, ezért az eikonnak újat kellett kezdenie. Az általad hozzáadott albumok, szerkesztések, feliratok és nevek eltűntek. A fotóid érintetlenek, az elemzés pedig újra lefut.</string>
+    <string name="settings_storage_reset_ok">Értem</string>
+    <string name="settings_about">Névjegy</string>
+    <string name="settings_licenses">Nyílt forráskódú licencek</string>
+    <string name="licenses_title">Nyílt forráskódú licencek</string>
+    <string name="settings_version">Verzió: %1$s</string>
+
+    <!-- Navigation and collections -->
+    <string name="nav_library">Könyvtár</string>
+    <string name="nav_search">Keresés</string>
+    <string name="nav_collections">Gyűjtemények</string>
+    <string name="collections_title">Gyűjtemények</string>
+    <string name="section_people">Személyek</string>
+    <string name="section_albums">Albumok</string>
+    <string name="section_personal">Személyes</string>
+    <string name="section_folders">Az eszköz mappái</string>
+    <string name="collection_favorites">Kedvencek</string>
+    <string name="collection_recent">Nemrég hozzáadott</string>
+    <string name="collection_videos">Videók</string>
+    <string name="collection_screenshots">Képernyőképek</string>
+    <string name="collection_screen_recordings">Képernyőfelvételek</string>
+    <string name="collection_panoramas">Panorámák</string>
+    <string name="collection_raw">RAW</string>
+    <string name="collection_trash">Nemrég törölt</string>
+    <string name="collection_hidden">Rejtett</string>
+    <plurals name="items_count">
+        <item quantity="one">%d elem</item>
+        <item quantity="other">%d elem</item>
+    </plurals>
+    <string name="empty_album">Ez az album üres. Jelölj ki fotókat a könyvtárban, és válaszd az „Hozzáadás albumhoz” lehetőséget.</string>
+    <string name="empty_hidden">Nincs semmi elrejtve</string>
+    <string name="empty_collection">Itt még nincs semmi</string>
+
+    <!-- Albums -->
+    <string name="album_new">Új album</string>
+    <string name="album_name_hint">Album neve</string>
+    <string name="album_create">Létrehozás</string>
+    <string name="album_rename">Átnevezés</string>
+    <string name="album_delete">Album törlése</string>
+    <string name="album_delete_title">Törlöd ezt az albumot?</string>
+    <string name="album_delete_message">Csak az album törlődik. A benne lévő fotók és videók ott maradnak, ahol vannak.</string>
+    <string name="album_move_earlier">Előrébb</string>
+    <string name="album_move_later">Hátrébb</string>
+    <string name="action_add_to_album">Hozzáadás albumhoz</string>
+    <string name="action_remove_from_album">Eltávolítás az albumból</string>
+    <string name="action_hide">Elrejtés</string>
+    <string name="action_unhide">Megjelenítés</string>
+    <string name="action_cancel">Mégse</string>
+    <string name="action_save">Mentés</string>
+    <plurals name="added_to_album">
+        <item quantity="one">%1$d elem hozzáadva a(z) „%2$s” albumhoz</item>
+        <item quantity="other">%1$d elem hozzáadva a(z) „%2$s” albumhoz</item>
+    </plurals>
+    <plurals name="removed_from_album">
+        <item quantity="one">%d elem eltávolítva az albumból</item>
+        <item quantity="other">%d elem eltávolítva az albumból</item>
+    </plurals>
+    <plurals name="moved_to_hidden">
+        <item quantity="one">%d elem elrejtve. A Gyűjtemények, Rejtett alatt találod.</item>
+        <item quantity="other">%d elem elrejtve. A Gyűjtemények, Rejtett alatt találod őket.</item>
+    </plurals>
+    <plurals name="unhidden">
+        <item quantity="one">%d elem újra látható</item>
+        <item quantity="other">%d elem újra látható</item>
+    </plurals>
+
+    <!-- Filters -->
+    <string name="filter_type_title">Típus</string>
+    <string name="filter_kind_title">Fajta</string>
+    <string name="filter_any">Bármely</string>
+    <string name="filter_favorites_only">Csak kedvencek</string>
+    <string name="filter_edited">Szerkesztett</string>
+    <string name="share_preparing">A szerkesztett fotók előkészítése megosztáshoz</string>
+    <string name="filter_edited_only">Csak szerkesztett</string>
+    <string name="filter_clear_all">Szűrők törlése</string>
+
+    <!-- Locks -->
+    <string name="locked_title">Zárolva</string>
+    <string name="locked_body">A megnyitáshoz használd az ujjlenyomatodat, az arcodat vagy a képernyőzárat.</string>
+    <string name="locked_unlock">Feloldás</string>
+    <string name="auth_subtitle">Erősítsd meg, hogy te vagy az</string>
+    <string name="auth_title_hidden">A „Rejtett” feloldása</string>
+    <string name="auth_title_trash">A „Nemrég törölt” feloldása</string>
+    <string name="auth_unavailable">A hitelesítés jelenleg nem érhető el. Próbáld újra egy pillanat múlva.</string>
+    <string name="no_device_lock_notice">Ezen a telefonon nincs képernyőzár, ezért a „Rejtett” nincs védve. Állíts be egyet a rendszerbeállításokban.</string>
+
+    <!-- Recently deleted -->
+    <string name="trash_info">Az elemek körülbelül 30 nap után véglegesen törlődnek.</string>
+    <string name="trash_empty">Nemrég nem törlődött semmi</string>
+    <string name="trash_restore">Visszaállítás</string>
+    <string name="trash_delete_forever">Végleges törlés</string>
+    <plurals name="days_left_short">
+        <item quantity="one">%d n</item>
+        <item quantity="other">%d n</item>
+    </plurals>
+    <plurals name="trash_restored">
+        <item quantity="one">%d elem visszaállítva</item>
+        <item quantity="other">%d elem visszaállítva</item>
+    </plurals>
+    <plurals name="trash_deleted">
+        <item quantity="one">%d elem véglegesen törölve</item>
+        <item quantity="other">%d elem véglegesen törölve</item>
+    </plurals>
+
+    <!-- Settings: security -->
+    <string name="settings_security">Biztonság</string>
+    <string name="setting_lock_hidden">Hitelesítés kérése a „Rejtett” megnyitásához</string>
+    <string name="setting_lock_trash">Hitelesítés kérése a „Nemrég törölt” megnyitásához</string>
+    <string name="setting_show_hidden">A „Rejtett” megjelenítése a Gyűjteményekben</string>
+    <string name="setting_secure_screens">Az eikon elrejtése a legutóbbi alkalmazások között és a képernyőképek letiltása</string>
+    <string name="settings_security_body">A rejtett elemek kimaradnak a könyvtárból, a gyűjteményekből és a keresésből, a „Rejtett” megnyitásához pedig ujjlenyomat, arc vagy képernyőzár kell. Maguk a fájlok nincsenek titkosítva, és a telefon szokásos tárhelyén maradnak, ahol a fotókhoz hozzáférő más alkalmazások még láthatják őket.</string>
+
+    <!-- Search -->
+    <string name="search_placeholder">Dátum, hely, szöveg, fájlnév</string>
+    <string name="search_clear">Keresés törlése</string>
+    <string name="search_no_results">Egyetlen fotó sem felel meg</string>
+    <string name="search_hint_title">Keress a könyvtáradban</string>
+    <string name="search_hint_body">Próbálj egy dátumot („August 2025”, „yesterday”), egy helyet („Rome”, „Tuscany”), egy szót, amely szerepel egy fotón vagy a fájlnevében, vagy egy fajtát („videos”, „screenshots”, „favorites”).\n\nA dátumokat és fajtákat angolul és olaszul érti. A helyek, a fotókon lévő szöveg és az, hogy mit ábrázolnak, az elemzés lefutása után találhatók meg (Beállítások, Elemzés).</string>
+    <string name="search_analysis_off">A hely, a fotókon lévő szöveg és az ábrázolt tartalom szerinti keresés ki van kapcsolva. A Beállítások, Elemzés alatt bekapcsolhatod.</string>
+    <string name="search_analysis_note">A fotók elemzése a háttérben még folyik (%1$d %%). Egyes találatok hiányozhatnak.</string>
+
+    <!-- Settings: analysis -->
+    <string name="settings_analysis">Elemzés</string>
+    <string name="analysis_places_progress">Helyek: %1$,d / %2$,d</string>
+    <string name="analysis_semantic_progress">Mit ábrázolnak a fotók: %1$,d / %2$,d</string>
+    <string name="analysis_semantic_unavailable">Az a modell, amely felismeri, mit ábrázolnak a fotók, nem tölthető be, ezért ez a lépés nem fut.</string>
+    <string name="search_semantic_unavailable">Az ábrázolt tartalom szerinti keresés jelenleg nem érhető el (a modellt nem sikerült betölteni). A többi találat továbbra is működik.</string>
+    <string name="analysis_people_progress">Személyek: %1$,d / %2$,d</string>
+    <string name="analysis_people_unavailable">Az arcokat kereső modellek nem tölthetők be, ezért ez a lépés nem fut.</string>
+    <string name="analysis_duplicates_progress">Duplikátumok: %1$,d / %2$,d</string>
+    <string name="analysis_text_progress">Szöveg a fotókon: %1$,d / %2$,d</string>
+    <string name="analysis_running">Elemzés folyamatban…</string>
+    <string name="analysis_idle">Várakozás a megfelelő pillanatra (az akkumulátor nem gyenge, az Akkumulátorkímélő mód ki van kapcsolva, és ha így választottad, töltés közben)</string>
+    <string name="analysis_up_to_date">Minden elemezve van</string>
+    <string name="setting_pause_analysis">Elemzés szüneteltetése</string>
+    <string name="setting_only_charging">Csak töltés közben</string>
+    <string name="setting_analyze_places">Fotók keresése hely szerint</string>
+    <string name="setting_analyze_semantic">Fotók keresése az ábrázolt tartalom szerint</string>
+    <string name="setting_analyze_people">Személyek keresése a fotókon</string>
+    <string name="setting_analyze_people_note">Az arcokat csak ezen a telefonon keresi és hasonlítja össze. Egy arcról semmi sem hagyja el soha, és az eikon soha nem próbál senkit sem felismerni: csak csoportosítja az egymáshoz hasonló arcokat, a csoportokat pedig te nevezed el.</string>
+    <string name="setting_analyze_duplicates">Ismétlődő fotók keresése</string>
+    <string name="setting_analyze_text">Szöveg keresése a fotókon</string>
+    <string name="analysis_location_permission">Az Android elrejti az alkalmazások elől, hol készültek a fotók, amíg nem engedélyezed.</string>
+    <string name="analysis_allow_locations">Hozzáférés engedélyezése a fotók helyéhez</string>
+    <string name="analyze_now">Elemzés most</string>
+    <string name="settings_analysis_body">Az elemzés csak a telefonodon fut, a háttérben, és szünetel, ha az akkumulátor gyenge, az Akkumulátorkímélő mód be van kapcsolva, vagy a telefon felmelegszik (az „Elemzés most” az Akkumulátorkímélő módban is folytatódik). Eltárolja minden fotó helyét (kapcsolat nélkül meghatározva, semmilyen hely nem kerül sehová elküldésre), egy számszerű leírást arról, mit ábráz a fotó (hogy kereshess például „kutyá”-ra vagy „naplemente”-re; ez nem felirat, és nem olvasható vissza képként), és minden szöveget, amelyet a fotón beolvas, hogy a Keresés megtalálhassa őket. Ha bekapcsolod a személyeket, azt is eltárolja, hol van az egyes arc a fotón, és egy számszerű leírást róla, kizárólag az egymáshoz hasonló arcok csoportosításához. Ha bekapcsolod a duplikátumokat, eltárol egy rövid ujjlenyomatot minden fotóról és az azonos méretű fájlokról, kizárólag a másolatok megtalálásához. Annak felismerése, mit ábrázolnak a fotók, és a szöveg olvasása lassú, és erősen terheli a processzort, ezért az elemzés alapértelmezés szerint a töltésre vár.</string>
+
+    <!-- Info panel: derived data -->
+    <string name="info_place">Legközelebbi hely</string>
+    <string name="info_text_found">Szöveg ezen a fotón</string>
+    <string name="info_text_copy">Szöveg másolása</string>
+
+    <!-- People -->
+    <string name="collection_people">Személyek</string>
+    <string name="people_title">Személyek</string>
+    <string name="person_unnamed">Névtelen személy</string>
+    <string name="person_add_name">Név hozzáadása</string>
+    <string name="person_rename">A személy elnevezése</string>
+    <string name="person_name_hint">Név</string>
+    <string name="person_same_name_note">Az azonos nevű személyeket egyesítjük.</string>
+    <string name="person_favorite">Megjelölés kedvencként</string>
+    <string name="person_unfavorite">Eltávolítás a kedvencekből</string>
+    <string name="person_hide">A személy elrejtése</string>
+    <string name="person_unhide">A személy megjelenítése</string>
+    <string name="person_merge">Egyesítés másik személlyel…</string>
+    <string name="person_merge_title">Egyesítés ezzel:</string>
+    <string name="person_merge_empty">Nincs senki más, akivel egyesíteni lehetne.</string>
+    <string name="person_not_this">Nem ez a személy</string>
+    <string name="person_remove_from_people">Nem arc</string>
+    <string name="people_show_hidden">Rejtett személyek megjelenítése (%1$d)</string>
+    <string name="people_hide_hidden">Rejtett személyek elrejtése</string>
+    <string name="people_empty_off">A Személyek ki van kapcsolva. Kapcsold be a „Személyek keresése a fotókon” lehetőséget a Beállítások, Elemzés alatt, és az eikon csoportosítja a talált arcokat. Minden ezen a telefonon marad.</string>
+    <string name="people_empty_working">Még nem találtunk arcokat (a fotóid %1$d %%-a elemezve). Az elemzés a háttérben fut, amíg a telefon tölt.</string>
+    <string name="people_empty_done">A fotóidon nem találtunk arcokat.</string>
+    <string name="people_go_settings">Beállítások megnyitása</string>
+    <string name="person_photos_empty">Nincsenek fotók.</string>
+    <plurals name="moved_to_new_person">
+        <item quantity="one">%d fotó áthelyezve egy új személyhez</item>
+        <item quantity="other">%d fotó áthelyezve egy új személyhez</item>
+    </plurals>
+    <plurals name="removed_from_people">
+        <item quantity="one">%d fotó eltávolítva a Személyek közül</item>
+        <item quantity="other">%d fotó eltávolítva a Személyek közül</item>
+    </plurals>
+    <string name="info_people">Személyek</string>
+    <plurals name="info_people_unnamed_count">
+        <item quantity="one">%d névtelen</item>
+        <item quantity="other">%d névtelen</item>
+    </plurals>
+
+    <string name="section_memories">Emlékek</string>
+    <string name="section_pets">Háziállatok</string>
+    <string name="collection_dogs">Kutyák</string>
+    <string name="collection_cats">Macskák</string>
+    <string name="empty_pets">Még nem találtunk kutyákat vagy macskákat. A háziállatokat az alapján ismeri fel, mit ábrázolnak a fotók: kapcsold be a „Fotók keresése az ábrázolt tartalom szerint” lehetőséget a Beállítások, Elemzés alatt, és várd meg, amíg befejeződik.</string>
+
+    <!-- Places -->
+    <string name="places_title">Helyek</string>
+    <string name="places_tab_list">Lista</string>
+    <string name="places_tab_map">Térkép</string>
+    <string name="place_unknown">Egyéb helyek</string>
+    <string name="place_near">%1$s közelében</string>
+    <string name="places_expand">Megjelenítés</string>
+    <string name="places_collapse">Elrejtés</string>
+    <string name="collection_places">Helyek</string>
+    <string name="places_map_note">Csak az országok körvonalai és a nagyobb városok nevei: nem töltődnek le térképképek, és semmilyen pozíció nem hagyja el a telefont. Nagyításhoz csippentsd össze az ujjaidat vagy koppints duplán, egy jelölőre koppintva megnézheted a fotóit.</string>
+    <string name="places_map_description">Térkép arról, hol készültek a fotóid, fotócsoportokat jelölő pontokkal</string>
+    <string name="places_empty_off">A Helyek ki van kapcsolva. Kapcsold be a „Fotók keresése hely szerint” lehetőséget a Beállítások, Elemzés alatt, és az eikon kapcsolat nélkül meghatározza a GPS-adataik alapján, hol készültek a fotóid.</string>
+    <string name="places_empty_working">Még nem találtunk helyeket (a fotóid %1$d %%-a elemezve). Az elemzés a háttérben fut, amíg a telefon tölt.</string>
+    <string name="places_empty_done">Egyik fotódhoz sem tartozik pozíció, vagy az eikonnak nincs engedélye a fotók helyének olvasására (Beállítások, Elemzés).</string>
+    <string name="section_places">Helyek és utazások</string>
+
+    <!-- Trips -->
+    <string name="collection_trips">Utazások</string>
+    <string name="trips_title">Utazások</string>
+    <string name="trip_untitled">Utazás</string>
+    <string name="trip_reason">Nagyjából %1$d km-re attól a helytől, ahol a fotóid többsége készül (%2$s közelében)</string>
+    <string name="trip_home_unknown">egy ismeretlen hely</string>
+    <plurals name="trip_summary_days">
+        <item quantity="one">%d nap</item>
+        <item quantity="other">%d nap</item>
+    </plurals>
+    <string name="trips_empty">Nincs utazás. Az utazás olyan napok sorozata, legalább 10 fotóval, amelyeket legalább 100 km-re töltöttél attól a helytől, ahol a fotóid többsége készül. Ehhez az eikonnak szüksége van a fotók pozíciójára: kapcsold be a „Fotók keresése hely szerint” lehetőséget a Beállítások, Elemzés alatt.</string>
+
+    <!-- Duplicates and similar shots -->
+    <string name="section_cleanup">Takarítás</string>
+    <string name="collection_duplicates">Duplikátumok</string>
+    <string name="collection_similar">Hasonló felvételek</string>
+    <string name="duplicates_title">Duplikátumok</string>
+    <string name="similar_title">Hasonló felvételek</string>
+    <string name="duplicates_note">Az eikon csak megtalálja őket. Semmi sem törlődik, amíg meg nem erősíted magának az Androidnak a párbeszédpanelén, és a törölt fotók a „Nemrég törölt” mappába kerülnek, ahonnan visszaállíthatod őket. Az albumokhoz hozzáadott fotó másolatainál: a megtartott másolat belekerül ezekbe az albumokba.</string>
+    <plurals name="duplicate_exact">
+        <item quantity="one">%d azonos fájl</item>
+        <item quantity="other">%d azonos fájl</item>
+    </plurals>
+    <plurals name="duplicate_visual">
+        <item quantity="one">%d másolat ugyanarról a képről</item>
+        <item quantity="other">%d másolat ugyanarról a képről</item>
+    </plurals>
+    <plurals name="similar_group">
+        <item quantity="one">%d felvétel</item>
+        <item quantity="other">%d hasonló felvétel</item>
+    </plurals>
+    <plurals name="duplicate_keep_best">
+        <item quantity="one">A legjobb megtartása, %d áthelyezése a „Nemrég törölt” közé</item>
+        <item quantity="other">A legjobb megtartása, %d áthelyezése a „Nemrég törölt” közé</item>
+    </plurals>
+    <plurals name="similar_trash_marked">
+        <item quantity="one">%d áthelyezése a „Nemrég törölt” közé</item>
+        <item quantity="other">%d áthelyezése a „Nemrég törölt” közé</item>
+    </plurals>
+    <string name="duplicate_best">Legjobb</string>
+    <string name="duplicate_kept">Megtartva</string>
+    <string name="duplicate_marked">Áthelyezésre kijelölve</string>
+    <string name="duplicate_dismiss">Ezek nem duplikátumok</string>
+    <string name="similar_dismiss">Ezek nem hasonlók</string>
+    <string name="duplicates_empty_off">A Duplikátumok ki van kapcsolva. Kapcsold be az „Ismétlődő fotók keresése” lehetőséget a Beállítások, Elemzés alatt. Az eikon a fotóid ujjlenyomatát csak ezen a telefonon készíti el, modell nélkül.</string>
+    <string name="similar_empty_off">A Hasonló felvételekhez a „Fotók keresése az ábrázolt tartalom szerint” szükséges a Beállítások, Elemzés alatt: összehasonlítja, mit ábrázol az egyes fotó, a két percen belül készült fotóknál.</string>
+    <string name="duplicates_empty_working">Még nem találtunk semmit (%1$d %% elemezve). Az elemzés a háttérben fut, amíg a telefon tölt.</string>
+    <string name="duplicates_empty_done">Nincsenek duplikátumok.</string>
+    <string name="similar_empty_done">Nincsenek hasonló felvételek.</string>
+
+    <!-- Memories -->
+    <string name="collection_memories">Emlékek</string>
+    <string name="memories_title">Emlékek</string>
+    <string name="memory_on_this_day">Ezen a napon</string>
+    <string name="memory_year_ago">Egy évvel ezelőtt</string>
+    <string name="memory_weekend_in">Hétvége: %1$s</string>
+    <string name="memory_weekend">Hétvége otthonról távol</string>
+    <string name="memory_day_trip_to">Egynapos kirándulás: %1$s</string>
+    <string name="memory_day_trip">Egynapos kirándulás</string>
+    <string name="memory_season">%1$s %2$d</string>
+    <string name="memory_person">%1$s, %2$d</string>
+    <string name="season_winter">Tél</string>
+    <string name="season_spring">Tavasz</string>
+    <string name="season_summer">Nyár</string>
+    <string name="season_autumn">Ősz</string>
+    <string name="memory_hide">Az emlék elrejtése</string>
+    <string name="memory_show_fewer">Kevesebb ilyen megjelenítése</string>
+    <string name="memory_show_less_of">Kevesebb megjelenítése ebből: %1$s</string>
+    <string name="memory_exclude_date">Ez a dátum kimarad</string>
+    <string name="memory_all_photos">Az összes fotó</string>
+    <string name="memory_replay">Lejátszás újra</string>
+    <string name="memory_reset">A választásaim visszavonása</string>
+    <string name="memory_done">Kész. A választásaidat az Emlékek menüjében vonhatod vissza.</string>
+    <string name="memories_empty">Még nincsenek emlékek. Az eikon dátumokból, utazásokból, évszakokból és az általad elnevezett személyekből készíti őket: „Ezen a napon”, „Egy évvel ezelőtt”, utazások és hétvégék otthonról távol, egy évszak, valaki egy évben. Az utazásokhoz és hétvégékhez a Helyek, a személyekhez a Személyek kell (Beállítások, Elemzés). Semmi sem hagyja el a telefont.</string>
+    <string name="memories_note">Dátumokból, helyekből és elnevezett személyekből készül egyszerű szabályokkal; nincs zene, és a fotókat a kedvencek, a méret és az arcok alapján választja ki, nem aszerint, hogy mennyire jól néznek ki.</string>
+    <string name="memory_no_photos">Ennek az emléknek már nincsenek megjeleníthető fotói.</string>
+
+    <!-- Editing -->
+    <string name="action_edit">Szerkesztés</string>
+    <string name="edit_title">Szerkesztés</string>
+    <string name="edit_done">Kész</string>
+    <string name="edit_original">Eredeti</string>
+    <string name="edit_revert">Visszaállítás</string>
+    <string name="edit_revert_title">Visszaállítod az eredetit?</string>
+    <string name="edit_revert_message">Ez törli a szerkesztés összes beállítását, szűrőjét és vágását. Az eredeti fotó soha nem változott. Nyomd meg a Kész gombot a visszaállított fotó megtartásához.</string>
+    <string name="edit_discard_title">Elveted a módosításokat?</string>
+    <string name="edit_discard_message">A szerkesztőben végzett módosítások elvesznek. A fotó úgy marad, ahogy volt.</string>
+    <string name="edit_discard">Elvetés</string>
+    <string name="edit_copy_edits">Szerkesztések másolása</string>
+    <string name="edit_paste_edits">Szerkesztések beillesztése</string>
+    <string name="edit_save_copy">Másolat mentése</string>
+    <string name="edit_copy_saved">A másolat az eredeti mellé lett mentve, az eredeti nem változott.</string>
+    <string name="edit_copy_saved_no_details">A másolat az eredeti mellé lett mentve, az eredeti nem változott. A kamera adatait nem sikerült átmásolni.</string>
+    <string name="edit_failed">A szerkesztést nem sikerült befejezni. A fotó nem változott.</string>
+    <string name="edited_badge">Szerkesztve</string>
+    <string name="viewer_show_original">Az eredeti megjelenítése</string>
+    <string name="viewer_show_edited">A szerkesztett fotó megjelenítése</string>
+    <string name="tool_auto">Auto</string>
+    <string name="tool_light">Fény</string>
+    <string name="tool_color">Szín</string>
+    <string name="tool_detail">Részlet</string>
+    <string name="tool_filters">Szűrők</string>
+    <string name="tool_crop">Vágás</string>
+    <string name="adj_exposure">Expozíció</string>
+    <string name="adj_brightness">Fényerő</string>
+    <string name="adj_contrast">Kontraszt</string>
+    <string name="adj_highlights">Világos részek</string>
+    <string name="adj_shadows">Árnyékok</string>
+    <string name="adj_black_point">Feketepont</string>
+    <string name="adj_saturation">Telítettség</string>
+    <string name="adj_vibrance">Élénkség</string>
+    <string name="adj_temperature">Melegség</string>
+    <string name="adj_tint">Árnyalat</string>
+    <string name="adj_sharpness">Élesség</string>
+    <string name="adj_vignette">Vignettálás</string>
+    <string name="geo_straighten">Kiegyenesítés</string>
+    <string name="geo_perspective_vertical">Függőleges perspektíva</string>
+    <string name="geo_perspective_horizontal">Vízszintes perspektíva</string>
+    <string name="filter_amount">Erősség</string>
+    <string name="filter_name_none">Eredeti</string>
+    <string name="filter_name_vivid">Élénk</string>
+    <string name="filter_name_warm">Meleg</string>
+    <string name="filter_name_cool">Hűvös</string>
+    <string name="filter_name_mono">Mono</string>
+    <string name="filter_name_noir">Noir</string>
+    <string name="filter_name_fade">Kifakult</string>
+    <string name="filter_name_chrome">Króm</string>
+    <string name="filter_name_sepia">Szépia</string>
+    <string name="crop_rotate">Forgatás</string>
+    <string name="crop_flip">Tükrözés</string>
+    <string name="shape_free">Szabad</string>
+    <string name="shape_original">Eredeti</string>
+    <string name="shape_square">1:1</string>
+    <string name="shape_4_3">4:3</string>
+    <string name="shape_3_2">3:2</string>
+    <string name="shape_16_9">16:9</string>
+    <string name="action_paste_edits">Szerkesztések beillesztése</string>
+    <string name="action_revert_edits">Szerkesztések eltávolítása</string>
+    <plurals name="edits_pasted">
+        <item quantity="one">A szerkesztések alkalmazva %d fotón</item>
+        <item quantity="other">A szerkesztések alkalmazva %d fotón</item>
+    </plurals>
+    <plurals name="edits_reverted">
+        <item quantity="one">A szerkesztés eltávolítva %d fotóról; az eredeti olyan, mint mindig volt</item>
+        <item quantity="other">A szerkesztések eltávolítva %d fotóról; az eredetik olyanok, mint mindig voltak</item>
+    </plurals>
+
+    <!-- Accessibility -->
+    <string name="slider_reset">Visszaállítás semlegesre</string>
+    <string name="crop_area">Vágási terület, vízszintesen %1$d %% és %2$d %% között, függőlegesen %3$d %% és %4$d %% között</string>
+    <string name="crop_action_smaller">A vágás kisebbre állítása</string>
+    <string name="crop_action_larger">A vágás nagyobbra állítása</string>
+    <string name="crop_action_left">A vágás mozgatása balra</string>
+    <string name="crop_action_right">A vágás mozgatása jobbra</string>
+    <string name="crop_action_up">A vágás mozgatása felfelé</string>
+    <string name="crop_action_down">A vágás mozgatása lefelé</string>
+    <string name="viewer_zoom_in">Nagyítás</string>
+    <string name="viewer_zoom_out">Kicsinyítés</string>
+    <string name="external_photo">Fotó</string>
+    <string name="viewer_cannot_display">Ez a fotó nem jeleníthető meg.</string>
+
+    <!-- Info: caption, editing the date and location, what the photo shows -->
+    <string name="info_caption">Felirat</string>
+    <string name="caption_add">Felirat hozzáadása</string>
+    <string name="caption_edit">Felirat szerkesztése</string>
+    <string name="caption_title">Felirat</string>
+    <string name="caption_hint">Néhány szó erről a fotóról</string>
+    <string name="caption_note">Csak az eikonban tárolódik; a fotó fájlja nem változik. A Keresés megtalálja.</string>
+    <string name="date_change">Dátum és idő módosítása</string>
+    <string name="date_revert">Az eredeti dátum visszaállítása</string>
+    <string name="date_time_title">Napszak</string>
+    <string name="action_next">Tovább</string>
+    <string name="location_title">Hol készült</string>
+    <string name="location_coordinates">Koordináták</string>
+    <string name="location_coordinates_note">Tizedes fokok, először a szélesség: 41.9028, 12.4964</string>
+    <string name="location_invalid">Nem pozíció: két szám, a szélesség -90 és 90 között, a hosszúság -180 és 180 között</string>
+    <string name="location_city">Vagy keress egy várost (kapcsolat nélkül is működik)</string>
+    <string name="location_remove">A hely eltávolítása</string>
+    <string name="location_change">A hely módosítása</string>
+    <string name="location_revert">Az eredeti hely visszaállítása</string>
+    <string name="info_map_description">Egy kis térkép, amely megmutatja, hol készült a fotó</string>
+    <string name="metadata_done">Kész. A fotó mostantól ezt mondja; az eredeti megmarad, hogy visszaállíthasd.</string>
+    <string name="metadata_not_writable">Az ilyen típusú fájl nem módosítható.</string>
+    <string name="metadata_needs_permission">Egy fotó dátumának vagy helyének módosításához az eikonnak olvasnia kell tudnia, hol készültek a fotók: enélkül az Android hely nélküli másolatot mutat neki, és a mentés törölné azt.</string>
+    <string name="metadata_nothing_to_revert">Nincs mit visszaállítani.</string>
+    <string name="metadata_interrupted">A fotó egy korábbi módosítása nem fejeződött be. Az eredeti megmarad: állítsd vissza, mielőtt bármi mást módosítanál.</string>
+    <string name="metadata_failed">A módosítás nem sikerült. A fotó pontosan úgy lett visszaállítva, ahogy volt.</string>
+    <string name="metadata_restore_file">Az eredeti fájl visszaállítása</string>
+    <string name="info_albums">Albumokban</string>
+    <string name="info_pets">Háziállatok</string>
+    <string name="info_shows">Talán ezt ábrázolja</string>
+    <string name="pet_dog">Kutya</string>
+    <string name="pet_cat">Macska</string>
+    <string name="info_album">Az eszköz albuma</string>
+    <string name="label_landscape">Egy tájat</string>
+    <string name="label_beach">Egy strandot</string>
+    <string name="label_sea">A tengert</string>
+    <string name="label_mountain">Egy hegyet</string>
+    <string name="label_sunset">Egy naplementét</string>
+    <string name="label_snow">Havat</string>
+    <string name="label_city">Egy várost</string>
+    <string name="label_building">Egy épületet</string>
+    <string name="label_street">Egy utcát</string>
+    <string name="label_woods">Erdőt</string>
+    <string name="label_flower">Egy virágot</string>
+    <string name="label_sky">Az eget</string>
+    <string name="label_person">Egy személyt</string>
+    <string name="label_group">Emberek egy csoportját</string>
+    <string name="label_food">Ételt</string>
+    <string name="label_dessert">Egy desszertet</string>
+    <string name="label_drink">Egy italt</string>
+    <string name="label_car">Egy autót</string>
+    <string name="label_bicycle">Egy kerékpárt</string>
+    <string name="label_airplane">Egy repülőgépet</string>
+    <string name="label_boat">Egy hajót</string>
+    <string name="label_bird">Egy madarat</string>
+    <string name="label_horse">Egy lovat</string>
+    <string name="label_interior">Egy szobát</string>
+    <string name="label_night">Éjszakát</string>
+    <string name="label_party">Egy bulit</string>
+    <string name="label_sport">Egy sporteseményt</string>
+    <string name="label_animal">Egy állatot</string>
+
+    <!-- Backup to your own server -->
+    <string name="backup_title">Biztonsági mentés a saját szervereden</string>
+    <string name="backup_intro">Titkosított kapcsolaton át másolja a fotóidat és videóidat egy általad üzemeltetett szerverre. Semmi sem hagyja el ezt a telefont, amíg be nem kapcsolod a biztonsági mentést, minden csak az alább megadott szerverre kerül, és az eikon soha nem töröl és nem módosít rajta semmit. A jelszót vagy kulcsot titkosítva őrzi az Android Keystore.</string>
+    <string name="backup_kind_immich">Immich (az is, amit az Umbrel telepít)</string>
+    <string name="backup_kind_nextcloud">Nextcloud vagy bármely WebDAV-szerver</string>
+    <string name="backup_address">A szerver címe (https://…)</string>
+    <string name="backup_username">Bejelentkezési név</string>
+    <string name="backup_folder">Mappa a szerveren</string>
+    <string name="backup_api_key">API-kulcs</string>
+    <string name="backup_app_password">Alkalmazásjelszó</string>
+    <string name="backup_secret_saved">Mentve. Hagyd üresen a megtartásához</string>
+    <string name="backup_help_immich">Immichben: Fiókbeállítások, API-kulcsok, Új API-kulcs. A szükséges jogosultság az asset.upload.</string>
+    <string name="backup_help_nextcloud">Nextcloudban: Személyes beállítások, Biztonság, Eszközök és munkamenetek, hozz létre egy új alkalmazásjelszót. Azt használd, ne a bejelentkezési jelszavadat.</string>
+    <string name="backup_save_test">Mentés és a kapcsolat tesztelése</string>
+    <string name="backup_connected">Kapcsolódva: %1$s.</string>
+    <string name="backup_failed">Nem sikerült kapcsolódni: %1$s</string>
+    <string name="backup_certificate_declined">A tanúsítványban nem bíztál meg, ezért semmi sem lett elküldve, és nem is lesz.</string>
+    <string name="backup_certificate_title">Ennek a szervernek a tanúsítványa nem olyan hitelesítésszolgáltatótól származik, amelyben a telefonod megbízik</string>
+    <string name="backup_certificate_body">A(z) %1$s az alábbi tanúsítványt mutatta be. Hasonlítsd össze az ujjlenyomatát azzal, amelyet a szervered megjelenít (például ezzel: openssl x509 -noout -fingerprint -sha256). Csak akkor bízz meg benne, ha megegyeznek: ettől kezdve ehhez a szerverhez ez az egy tanúsítvány fogadható el, más nem.</string>
+    <string name="backup_certificate_subject">Kiállítva: %1$s</string>
+    <string name="backup_certificate_expires">Érvényes eddig: %1$s</string>
+    <string name="backup_certificate_self_signed">Saját maga írta alá, ahogy az otthoni szerverek tanúsítványa általában.</string>
+    <string name="backup_certificate_trust">Megbízom ebben a tanúsítványban</string>
+    <string name="backup_enable">A fotóim és videóim biztonsági mentése</string>
+    <string name="backup_test_first">Először mentsd és teszteld a kapcsolatot.</string>
+    <string name="backup_wifi_only">Csak Wi-Fin</string>
+    <string name="backup_only_charging">Csak töltés közben</string>
+    <string name="backup_videos">Videók is</string>
+    <string name="backup_hidden">Rejtett fotók is</string>
+    <string name="backup_hidden_note">A rejtett fotók is elküldésre kerülnek a szerveredre, ahol ugyanolyan láthatók, mint minden más ott.</string>
+    <string name="backup_confirm_title">Elindítod a biztonsági mentést?</string>
+    <plurals name="backup_confirm_body">
+        <item quantity="one">%1$d fotó vagy videó lesz átmásolva ide: %2$s, apránként, amikor a telefon az engedélyezett hálózaton van. A telefonon és a szerveren semmi sem törlődik.</item>
+        <item quantity="other">%1$d fotó és videó lesz átmásolva ide: %2$s, apránként, amikor a telefon az engedélyezett hálózaton van. A telefonon és a szerveren semmi sem törlődik.</item>
+    </plurals>
+    <string name="backup_confirm_start">Indítás</string>
+    <string name="backup_location_note">Az Android elrejti a fotók készítési helyét azok elől az alkalmazások elől, amelyeknek nincs meg a fotók helyéhez való jogosultságuk, így a szervereden lévő másolatoknak nem lenne helyük.</string>
+    <string name="backup_progress">Mentve: %1$,d / %2$,d</string>
+    <plurals name="backup_refused">
+        <item quantity="one">%1$d fotót elutasított a szerver, és nem próbálkozik vele újra, amíg nem kéred.</item>
+        <item quantity="other">%1$d fotót elutasított a szerver, és nem próbálkozik velük újra, amíg nem kéred.</item>
+    </plurals>
+    <string name="backup_running">Biztonsági mentés folyamatban…</string>
+    <string name="backup_idle">Várakozás a megfelelő pillanatra (az engedélyezett hálózat, az akkumulátor nem gyenge).</string>
+    <string name="backup_last_run">Utolsó futtatás: %1$s. Elküldve: %2$d. Már ott volt: %3$d. Elutasítva: %4$d.</string>
+    <string name="backup_stopped">Leállt, mert %1$s</string>
+    <string name="backup_stop_power_save">be van kapcsolva az Akkumulátorkímélő mód.</string>
+    <string name="backup_stop_thermal">a telefon túl meleg volt.</string>
+    <string name="backup_stop_unreachable">a szerver nem volt elérhető vagy foglalt volt. Újra próbálkozik.</string>
+    <string name="backup_stop_unauthorized">a szerver nem fogadta el a kulcsot vagy a jelszót.</string>
+    <string name="backup_stop_untrusted">a szerver tanúsítványa nem egyike azoknak, amelyekben megbíztál.</string>
+    <string name="backup_stop_misconfigured">a cím nem megfelelő ehhez a szervertípushoz.</string>
+    <string name="backup_stop_refusals">a szerver sok fájlt utasított el egymás után, ami a szerver korlátjára utal, nem a fotókra.</string>
+    <string name="backup_now">Mentés most</string>
+    <string name="backup_retry_refused">Az elutasítottak újrapróbálása</string>
+
+    <!-- Network consent -->
+    <string name="network_allow">Az eikon használhassa az internetet</string>
+    <string name="network_allow_note">Ki van kapcsolva, amíg be nem kapcsolod. Az eikon a hálózatot csak arra használja, hogy a fotóidat az alábbi szerverre másolja, és csak azután, hogy beállítottál egyet és bekapcsoltad a biztonsági mentést. Ha ez ki van kapcsolva, semmi sem tud sehova csatlakozni.</string>
+    <string name="settings_privacy_network">Az eikon csak egy dolog miatt mehet online: a fotóid opcionális biztonsági mentéséhez egy általad üzemeltetett szerverre. Ez ki van kapcsolva, amíg nem engedélyezed (Beállítások, Biztonsági mentés), és nem állítod be a szervert. Nincs használati elemzés, nincs hirdetés, nincs fiók, nincsenek Google-szolgáltatások, és nincs saját felhőnk: nincs ilyen.</string>
+
+    <!-- First-run screens -->
+    <string name="onboarding_intro_title">A fotóid, a telefonodon</string>
+    <string name="onboarding_intro_body">Az eikon egy fotó- és videógaléria Androidra. Megjeleníti azokat a képeket, amelyeket a telefonod már tárol, megtalálja őket dátum, hely, személyek vagy az ábrázolt tartalom szerint, és úgy szerkeszti őket, hogy az eredetihez soha nem nyúl.</string>
+    <string name="onboarding_point_local">Minden ezen az eszközön marad. Nincs fiók, nincs használati elemzés, nincs hirdetés.</string>
+    <string name="onboarding_point_independent">Nem támaszkodik semmire a telefonodon kívül: nincsenek Google-szolgáltatások, nincs felhő, nincsenek harmadik felek szerverei.</string>
+    <string name="onboarding_point_yours">Ha biztonsági mentést szeretnél, az csak egy általad üzemeltetett szerverre kerül, és csak akkor, ha beállítod.</string>
+    <string name="onboarding_next">Tovább</string>
+    <string name="onboarding_start">Kezdés</string>
+    <string name="onboarding_page">%1$d. oldal / %2$d</string>
+    <string name="onboarding_permissions_title">Mit kér az eikon, és miért</string>
+    <string name="onboarding_permissions_intro">Csak az első szükséges. Bármelyiket megváltoztathatod később a Beállításokban vagy a telefon beállításaiban.</string>
+    <string name="onboarding_perm_media_title">Fotók és videók</string>
+    <string name="onboarding_perm_media_body">Hogy az eikon megjeleníthesse a könyvtáradat. Ott olvassa a fájlokat, ahol az Android már tárolja őket, és sehová sem másolja. Ha szeretnéd, csak néhány fotót is engedélyezhetsz.</string>
+    <string name="onboarding_perm_location_title">A fotók helye (opcionális)</string>
+    <string name="onboarding_perm_location_body">Az Android elrejti az alkalmazások elől, hol készült egy fotó, hacsak nem engedélyezed. Az eikon ezt arra használja, hogy egy fotó helyét megmutassa egy offline térképen, és hogy hely szerint lehessen keresni. A helyeket a telefon számolja ki: semmilyen pozíció nem kerül sehová elküldésre.</string>
+    <string name="onboarding_perm_network_title">Internet (opcionális)</string>
+    <string name="onboarding_perm_network_body">Egyetlen dologra használatos: a fotóid átmásolására egy általad üzemeltetett szerverre (Immich, Nextcloud), ha valaha beállítod. Egyébként az eikon soha nem csatlakozik semmihez. Ki van kapcsolva, amíg itt be nem kapcsolod, és bármikor újra kikapcsolhatod a Beállításokban.</string>
+    <string name="onboarding_allow">Engedélyezés</string>
+    <string name="onboarding_allowed">Engedélyezve</string>
+    <string name="onboarding_promise">Itt semmi sem függ semmitől a telefonodon kívül: nincsenek Google-szolgáltatások, nincsenek fiókok, nincs használati elemzés. A fotóid ezen az eszközön maradnak, vagy ha úgy döntesz, a saját szerveredre kerülnek.</string>
+
+    <!-- Support -->
+    <string name="support_title">Támogatás</string>
+    <string name="support_body">Az eikon ingyenes, nincs benne hirdetés, és nem követ. Ha tetszik, küldhetsz néhány satoshit a Lightning hálózaton.</string>
+    <string name="support_button">Adományozás Lightninggel</string>
+    <string name="support_copied">Nem található Lightning-tárca — a cím a vágólapra került: %1$s</string>
+
+    <!-- Analyze now -->
+    <string name="analyze_now_running">Elemzés…</string>
+    <string name="analyze_now_hint">Azonnal indul, csak ezen a telefonon, az Akkumulátorkímélő módban is.</string>
+    <string name="analyze_now_hint_off">Először kapcsolj be legalább egy lépést fent.</string>
+    <string name="analyze_now_hint_paused">Az elemzés szünetel: kapcsold ki a szünetet, hogy most elemezhess.</string>
+
+    <!-- Pictures from other apps -->
+    <string name="viewer_open_in_library">Megnyitás a könyvtárban</string>
+</resources>

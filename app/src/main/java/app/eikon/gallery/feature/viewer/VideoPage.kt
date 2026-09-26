@@ -4,7 +4,6 @@ import android.content.Context
 import androidx.annotation.OptIn
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -18,10 +17,12 @@ import androidx.compose.material3.SliderDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -39,9 +40,11 @@ import androidx.lifecycle.compose.LifecycleEventEffect
 import androidx.media3.common.AudioAttributes
 import androidx.media3.common.C
 import androidx.media3.common.Player
+import androidx.media3.common.VideoSize
 import androidx.media3.common.util.UnstableApi
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.ui.compose.ContentFrame
+import androidx.media3.ui.compose.SURFACE_TYPE_TEXTURE_VIEW
 import androidx.media3.ui.compose.state.rememberMuteButtonState
 import androidx.media3.ui.compose.state.rememberPlayPauseButtonState
 import androidx.media3.ui.compose.state.rememberProgressStateWithTickInterval
@@ -56,7 +59,8 @@ private const val PROGRESS_TICK_MS = 250L
 /**
  * A video page. Only the page on screen owns a player (created on arrival, released on leaving), so
  * swiping through a run of videos never holds more than one decoder. The neighbours show their
- * thumbnail. Playback starts automatically and pauses when the app goes to the background.
+ * thumbnail. Playback starts automatically and pauses when the app goes to the background. The picture
+ * zooms like a photo does (pinch, double tap, drag); the controls stay where they are.
  */
 @Composable
 fun VideoPage(
@@ -65,33 +69,66 @@ fun VideoPage(
     controlsVisible: Boolean,
     controlsBottomPadding: Dp,
     onTap: () -> Unit,
+    onZoomedChange: (Boolean) -> Unit,
     modifier: Modifier = Modifier,
 ) {
+    if (isCurrent) {
+        PlayingVideo(item, controlsVisible, controlsBottomPadding, onTap, onZoomedChange, modifier)
+        return
+    }
     Box(modifier.fillMaxSize().pointerInput(Unit) { detectTapGestures(onTap = { onTap() }) }) {
-        if (isCurrent) {
-            PlayingVideo(item, controlsVisible, controlsBottomPadding)
-        } else {
-            MediaThumbnail(item, Modifier.fillMaxSize(), ContentScale.Fit)
-        }
+        MediaThumbnail(item, Modifier.fillMaxSize(), ContentScale.Fit)
     }
 }
 
 @OptIn(UnstableApi::class)
 @Composable
-private fun BoxScope.PlayingVideo(item: MediaItem, controlsVisible: Boolean, controlsBottomPadding: Dp) {
+private fun PlayingVideo(
+    item: MediaItem,
+    controlsVisible: Boolean,
+    controlsBottomPadding: Dp,
+    onTap: () -> Unit,
+    onZoomedChange: (Boolean) -> Unit,
+    modifier: Modifier,
+) {
     val context = LocalContext.current
     val player = remember(item.id) { createPlayer(context, item) }
     DisposableEffect(player) { onDispose { player.release() } }
     LifecycleEventEffect(Lifecycle.Event.ON_STOP) { player.pause() }
 
-    ContentFrame(
-        player = player,
-        modifier = Modifier.fillMaxSize(),
-        contentScale = ContentScale.Fit,
-        shutter = { MediaThumbnail(item, Modifier.fillMaxSize(), ContentScale.Fit) },
-    )
-    if (controlsVisible) {
-        VideoControls(player, Modifier.align(Alignment.BottomCenter).padding(bottom = controlsBottomPadding))
+    val zoom = remember(item.id) { ZoomState() }
+    LaunchedEffect(zoom) { snapshotFlow { zoom.isZoomed }.collect(onZoomedChange) }
+    TrackVideoShape(player, zoom)
+
+    Box(modifier.fillMaxSize()) {
+        ZoomableBox(zoom, onTap) {
+            // A texture, not the default surface: a surface is not clipped to the zoomed picture's window and would spill over the controls and the next page.
+            ContentFrame(
+                player = player,
+                modifier = Modifier.fillMaxSize(),
+                surfaceType = SURFACE_TYPE_TEXTURE_VIEW,
+                contentScale = ContentScale.Fit,
+                shutter = { MediaThumbnail(item, Modifier.fillMaxSize(), ContentScale.Fit) },
+            )
+        }
+        if (controlsVisible) {
+            VideoControls(player, Modifier.align(Alignment.BottomCenter).padding(bottom = controlsBottomPadding))
+        }
+    }
+}
+
+/** Tells [zoom] how wide the picture is once the player knows, so a zoomed video cannot be dragged off its edges. */
+@Composable
+private fun TrackVideoShape(player: Player, zoom: ZoomState) {
+    DisposableEffect(player, zoom) {
+        val listener = object : Player.Listener {
+            override fun onVideoSizeChanged(videoSize: VideoSize) {
+                zoom.imageAspect = VideoAspect.of(videoSize.width, videoSize.height, videoSize.pixelWidthHeightRatio)
+            }
+        }
+        player.addListener(listener)
+        listener.onVideoSizeChanged(player.videoSize)
+        onDispose { player.removeListener(listener) }
     }
 }
 
@@ -112,13 +149,29 @@ private fun createPlayer(context: Context, item: MediaItem): ExoPlayer {
         }
 }
 
+/** The player as [Scrubber] drives it: through its scrubbing mode, which answers seeks as fast as it can (and shows frames on the way) instead of one at a time. */
+@OptIn(UnstableApi::class)
+private class PlayerScrubTarget(private val player: ExoPlayer) : ScrubTarget {
+    override var playWhenReady: Boolean
+        get() = player.playWhenReady
+        set(value) {
+            player.playWhenReady = value
+        }
+
+    override fun setScrubbing(enabled: Boolean) = player.setScrubbingModeEnabled(enabled)
+
+    override fun seekTo(positionMs: Long) = player.seekTo(positionMs)
+}
+
 /** Play/pause, seek bar with times, and mute; all state comes from the player through Media3's Compose state holders. */
 @OptIn(UnstableApi::class)
 @Composable
-private fun VideoControls(player: Player, modifier: Modifier = Modifier) {
+private fun VideoControls(player: ExoPlayer, modifier: Modifier = Modifier) {
     val playPause = rememberPlayPauseButtonState(player)
     val mute = rememberMuteButtonState(player)
     val progress = rememberProgressStateWithTickInterval(player, PROGRESS_TICK_MS)
+    val scrubber = remember(player) { Scrubber(PlayerScrubTarget(player)) }
+    DisposableEffect(scrubber) { onDispose { scrubber.cancel() } }
     var scrubbing by remember { mutableStateOf<Float?>(null) }
     val duration = progress.durationMs.takeIf { it > 0 } ?: 0L
     val fraction = scrubbing ?: if (duration > 0) progress.currentPositionMs.toFloat() / duration else 0f
@@ -136,9 +189,12 @@ private fun VideoControls(player: Player, modifier: Modifier = Modifier) {
         SeekBar(
             fraction = fraction,
             enabled = duration > 0,
-            onScrub = { scrubbing = it },
+            onScrub = {
+                scrubbing = it
+                scrubber.move((it * duration).toLong())
+            },
             onScrubFinished = {
-                scrubbing?.let { player.seekTo((it * duration).toLong()) }
+                scrubbing?.let { scrubber.finish((it * duration).toLong()) }
                 scrubbing = null
             },
             modifier = Modifier.weight(1f),

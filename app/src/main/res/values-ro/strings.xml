@@ -1,0 +1,682 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Library -->
+    <string name="library_title">Bibliotecă</string>
+    <string name="today">Astăzi</string>
+    <string name="yesterday">Ieri</string>
+    <string name="empty_library">Încă nu există fotografii sau videoclipuri</string>
+    <string name="empty_filter">Nimic nu corespunde acestui filtru</string>
+    <string name="empty_filter_clear">Afișează tot</string>
+    <string name="sync_progress">Se încarcă biblioteca: %1$,d / %2$,d</string>
+    <string name="sync_failed">Biblioteca nu a putut fi reîmprospătată</string>
+    <string name="sync_retry">Reîncearcă</string>
+    <string name="scrubber_description">Derulează biblioteca după dată</string>
+
+    <!-- Permissions -->
+    <string name="permission_title">Fotografiile tale rămân pe dispozitivul tău</string>
+    <string name="permission_body">eikon are nevoie de acces la fotografiile și videoclipurile tale ca să le afișeze. Ele rămân pe dispozitivul tău: nimic nu este încărcat, decât dacă configurezi o copie de rezervă pe un server propriu.</string>
+    <string name="permission_grant">Permite accesul</string>
+    <string name="permission_denied">Accesul a fost refuzat. Îl poți permite din setările sistemului.</string>
+    <string name="permission_open_settings">Deschide setările</string>
+    <string name="limited_banner">Sunt afișate doar fotografiile selectate de tine</string>
+    <string name="limited_select_more">Selectează mai multe</string>
+    <string name="limited_allow_all">Permite toate</string>
+
+    <!-- Menus and filters -->
+    <string name="menu_filter">Filtrează</string>
+    <string name="menu_sort">Sortează</string>
+    <string name="menu_settings">Setări</string>
+    <string name="menu_more">Mai multe opțiuni</string>
+    <string name="filter_all">Toate</string>
+    <string name="filter_photos">Fotografii</string>
+    <string name="filter_videos">Videoclipuri</string>
+    <string name="filter_favorites">Favorite</string>
+    <string name="filter_screenshots">Capturi de ecran</string>
+    <string name="filter_screen_recordings">Înregistrări de ecran</string>
+    <string name="filter_panoramas">Panorame</string>
+    <string name="filter_raw">RAW</string>
+    <string name="filter_clear">Șterge filtrul</string>
+    <string name="sort_by_date_taken">Data realizării</string>
+    <string name="sort_by_date_added">Data adăugării</string>
+    <string name="sort_newest_first">Cele mai noi primele</string>
+    <string name="sort_oldest_first">Cele mai vechi primele</string>
+
+    <!-- Selection and actions -->
+    <plurals name="selected_count">
+        <item quantity="one">%d selectat</item>
+        <item quantity="few">%d selectate</item>
+        <item quantity="other">%d de selectate</item>
+    </plurals>
+    <string name="action_share">Trimite</string>
+    <string name="action_favorite">Adaugă la favorite</string>
+    <string name="action_unfavorite">Elimină din favorite</string>
+    <string name="action_delete">Șterge</string>
+    <string name="action_info">Informații</string>
+    <string name="action_back">Înapoi</string>
+    <string name="action_clear_selection">Anulează selecția</string>
+    <string name="action_select">Selectează</string>
+    <string name="action_failed">Ceva nu a mers bine</string>
+    <plurals name="moved_to_trash">
+        <item quantity="one">%d element a fost mutat în coșul de gunoi. Android îl păstrează 30 de zile.</item>
+        <item quantity="few">%d elemente au fost mutate în coșul de gunoi. Android le păstrează 30 de zile.</item>
+        <item quantity="other">%d de elemente au fost mutate în coșul de gunoi. Android le păstrează 30 de zile.</item>
+    </plurals>
+
+    <!-- Accessibility -->
+    <string name="cd_photo">Fotografie, %1$s</string>
+    <string name="cd_video">Videoclip, %1$s, %2$s</string>
+    <string name="cd_edited_badge">Editată</string>
+    <string name="cd_favorite_badge">Favorită</string>
+    <string name="viewer_position">%1$d din %2$d</string>
+
+    <!-- Video -->
+    <string name="video_play">Redă</string>
+    <string name="video_pause">Pauză</string>
+    <string name="video_mute">Dezactivează sunetul</string>
+    <string name="video_unmute">Activează sunetul</string>
+    <string name="video_seek">Derulează</string>
+
+    <!-- Info panel -->
+    <string name="info_title">Informații</string>
+    <string name="info_loading">Se citesc detaliile…</string>
+    <string name="info_error">Detaliile acestui fișier nu au putut fi citite</string>
+    <string name="info_section_file">Fișier</string>
+    <string name="info_section_camera">Cameră</string>
+    <string name="info_section_video">Videoclip</string>
+    <string name="info_name">Nume</string>
+    <string name="info_type">Tip</string>
+    <string name="info_folder">Dosar</string>
+    <string name="info_resolution">Rezoluție</string>
+    <string name="info_megapixels">Megapixeli</string>
+    <string name="info_size">Dimensiune</string>
+    <string name="info_date">Data</string>
+    <string name="info_modified">Modificat</string>
+    <string name="info_color_profile">Profil de culoare</string>
+    <string name="info_location">Locație</string>
+    <string name="info_location_none">Niciun fel de locație nu este salvată în acest fișier</string>
+    <string name="info_location_hidden">Android ascunde locațiile fotografiilor față de aplicații până când permiți acest lucru</string>
+    <string name="info_location_allow">Permite</string>
+    <string name="info_location_open">Deschide într-o aplicație de hărți</string>
+    <string name="info_camera">Dispozitiv</string>
+    <string name="info_lens">Obiectiv</string>
+    <string name="info_focal_length">Distanță focală</string>
+    <string name="info_aperture">Diafragmă</string>
+    <string name="info_shutter">Timp de expunere</string>
+    <string name="info_iso">Sensibilitate</string>
+    <string name="info_exposure_bias">Compensare a expunerii</string>
+    <string name="info_flash">Bliț</string>
+    <string name="info_flash_fired">Declanșat</string>
+    <string name="info_flash_off">Nedeclanșat</string>
+    <string name="info_orientation">Orientare</string>
+    <string name="info_software">Software</string>
+    <string name="info_duration">Durată</string>
+    <string name="info_frame_rate">Rată de cadre</string>
+    <string name="info_video_codec">Codec video</string>
+    <string name="info_audio_codec">Codec audio</string>
+    <string name="info_bitrate">Rată de biți</string>
+    <string name="info_dynamic_range">Interval dinamic</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Setări</string>
+    <string name="settings_appearance">Aspect</string>
+    <string name="theme_system">Urmează sistemul</string>
+    <string name="theme_light">Luminos</string>
+    <string name="theme_dark">Întunecat</string>
+    <string name="settings_privacy">Confidențialitate</string>
+    <string name="settings_privacy_body">eikon funcționează pe dispozitivul tău. Nu are cont și nici analiză de utilizare, iar datele sale sunt excluse din copiile de rezervă Android.\n\nFotografiile tale nu sunt niciodată copiate: eikon păstrează un index local cu detaliile fișierelor (nume, dată, dimensiune, dosar), astfel încât biblioteca să se deschidă instantaneu. Ștergerea aplicației șterge și indexul.</string>
+    <string name="settings_storage_encrypted">Baza de date a bibliotecii (indexul, albumele, editările, descrierile și ceea ce a găsit analiza) este criptată pe acest telefon cu AES-256. Cheia ei este păstrată de Android Keystore.</string>
+    <string name="settings_storage_not_encrypted">Baza de date a bibliotecii nu a putut fi criptată (%1$s), așa că este în continuare stocată necriptat. eikon încearcă din nou la fiecare pornire.</string>
+    <string name="settings_storage_reset_title">Baza de date a bibliotecii a fost refăcută</string>
+    <string name="settings_storage_reset">Cheia care proteja baza de date a bibliotecii s-a pierdut, așa că eikon a trebuit să creeze una nouă. Albumele, editările, descrierile și numele pe care le adăugaseși au dispărut. Fotografiile tale sunt neatinse, iar analiza va rula din nou.</string>
+    <string name="settings_storage_reset_ok">Am înțeles</string>
+    <string name="settings_about">Despre</string>
+    <string name="settings_licenses">Licențe open-source</string>
+    <string name="licenses_title">Licențe open-source</string>
+    <string name="settings_version">Versiunea %1$s</string>
+
+    <!-- Navigation and collections -->
+    <string name="nav_library">Bibliotecă</string>
+    <string name="nav_search">Căutare</string>
+    <string name="nav_collections">Colecții</string>
+    <string name="collections_title">Colecții</string>
+    <string name="section_people">Persoane</string>
+    <string name="section_albums">Albume</string>
+    <string name="section_personal">Personal</string>
+    <string name="section_folders">Dosarele dispozitivului</string>
+    <string name="collection_favorites">Favorite</string>
+    <string name="collection_recent">Adăugate recent</string>
+    <string name="collection_videos">Videoclipuri</string>
+    <string name="collection_screenshots">Capturi de ecran</string>
+    <string name="collection_screen_recordings">Înregistrări de ecran</string>
+    <string name="collection_panoramas">Panorame</string>
+    <string name="collection_raw">RAW</string>
+    <string name="collection_trash">Șterse recent</string>
+    <string name="collection_hidden">Ascunse</string>
+    <plurals name="items_count">
+        <item quantity="one">%d element</item>
+        <item quantity="few">%d elemente</item>
+        <item quantity="other">%d de elemente</item>
+    </plurals>
+    <string name="empty_album">Acest album este gol. Selectează fotografii în bibliotecă și alege „Adaugă la album”.</string>
+    <string name="empty_hidden">Nimic nu este ascuns</string>
+    <string name="empty_collection">Încă nu este nimic aici</string>
+
+    <!-- Albums -->
+    <string name="album_new">Album nou</string>
+    <string name="album_name_hint">Numele albumului</string>
+    <string name="album_create">Creează</string>
+    <string name="album_rename">Redenumește</string>
+    <string name="album_delete">Șterge albumul</string>
+    <string name="album_delete_title">Ștergi acest album?</string>
+    <string name="album_delete_message">Se șterge doar albumul. Fotografiile și videoclipurile din el rămân unde sunt.</string>
+    <string name="album_move_earlier">Mută mai devreme</string>
+    <string name="album_move_later">Mută mai târziu</string>
+    <string name="action_add_to_album">Adaugă la album</string>
+    <string name="action_remove_from_album">Elimină din album</string>
+    <string name="action_hide">Ascunde</string>
+    <string name="action_unhide">Afișează</string>
+    <string name="action_cancel">Anulează</string>
+    <string name="action_save">Salvează</string>
+    <plurals name="added_to_album">
+        <item quantity="one">%1$d element a fost adăugat la „%2$s”</item>
+        <item quantity="few">%1$d elemente au fost adăugate la „%2$s”</item>
+        <item quantity="other">%1$d de elemente au fost adăugate la „%2$s”</item>
+    </plurals>
+    <plurals name="removed_from_album">
+        <item quantity="one">%d element a fost eliminat din album</item>
+        <item quantity="few">%d elemente au fost eliminate din album</item>
+        <item quantity="other">%d de elemente au fost eliminate din album</item>
+    </plurals>
+    <plurals name="moved_to_hidden">
+        <item quantity="one">%d element a fost ascuns. Îl găsești în Colecții, Ascunse.</item>
+        <item quantity="few">%d elemente au fost ascunse. Le găsești în Colecții, Ascunse.</item>
+        <item quantity="other">%d de elemente au fost ascunse. Le găsești în Colecții, Ascunse.</item>
+    </plurals>
+    <plurals name="unhidden">
+        <item quantity="one">%d element este din nou vizibil</item>
+        <item quantity="few">%d elemente sunt din nou vizibile</item>
+        <item quantity="other">%d de elemente sunt din nou vizibile</item>
+    </plurals>
+
+    <!-- Filters -->
+    <string name="filter_type_title">Tip</string>
+    <string name="filter_kind_title">Gen</string>
+    <string name="filter_any">Oricare</string>
+    <string name="filter_favorites_only">Doar favorite</string>
+    <string name="filter_edited">Editate</string>
+    <string name="share_preparing">Se pregătesc fotografiile editate pentru trimitere</string>
+    <string name="filter_edited_only">Doar cele editate</string>
+    <string name="filter_clear_all">Șterge filtrele</string>
+
+    <!-- Locks -->
+    <string name="locked_title">Blocat</string>
+    <string name="locked_body">Folosește amprenta, fața sau blocarea ecranului pentru a deschide această secțiune.</string>
+    <string name="locked_unlock">Deblochează</string>
+    <string name="auth_subtitle">Confirmă că ești tu</string>
+    <string name="auth_title_hidden">Deblochează „Ascunse”</string>
+    <string name="auth_title_trash">Deblochează „Șterse recent”</string>
+    <string name="auth_unavailable">Autentificarea nu este disponibilă acum. Încearcă din nou peste puțin timp.</string>
+    <string name="no_device_lock_notice">Acest telefon nu are blocare a ecranului, așa că „Ascunse” nu este protejat. Configurează una în setările sistemului.</string>
+
+    <!-- Recently deleted -->
+    <string name="trash_info">Elementele sunt șterse definitiv după aproximativ 30 de zile.</string>
+    <string name="trash_empty">Nimic nu a fost șters recent</string>
+    <string name="trash_restore">Restaurează</string>
+    <string name="trash_delete_forever">Șterge definitiv</string>
+    <plurals name="days_left_short">
+        <item quantity="one">%d z</item>
+        <item quantity="few">%d z</item>
+        <item quantity="other">%d z</item>
+    </plurals>
+    <plurals name="trash_restored">
+        <item quantity="one">%d element a fost restaurat</item>
+        <item quantity="few">%d elemente au fost restaurate</item>
+        <item quantity="other">%d de elemente au fost restaurate</item>
+    </plurals>
+    <plurals name="trash_deleted">
+        <item quantity="one">%d element a fost șters definitiv</item>
+        <item quantity="few">%d elemente au fost șterse definitiv</item>
+        <item quantity="other">%d de elemente au fost șterse definitiv</item>
+    </plurals>
+
+    <!-- Settings: security -->
+    <string name="settings_security">Securitate</string>
+    <string name="setting_lock_hidden">Cere autentificare pentru „Ascunse”</string>
+    <string name="setting_lock_trash">Cere autentificare pentru „Șterse recent”</string>
+    <string name="setting_show_hidden">Afișează „Ascunse” în Colecții</string>
+    <string name="setting_secure_screens">Ascunde eikon în aplicațiile recente și blochează capturile de ecran</string>
+    <string name="settings_security_body">Elementele ascunse sunt lăsate în afara bibliotecii, a colecțiilor și a căutării, iar deschiderea „Ascunse” cere amprenta, fața sau blocarea ecranului. Fișierele în sine nu sunt criptate și rămân în stocarea obișnuită a telefonului, unde alte aplicații cu acces la fotografii le pot vedea în continuare.</string>
+
+    <!-- Search -->
+    <string name="search_placeholder">Dată, loc, text, nume de fișier</string>
+    <string name="search_clear">Șterge căutarea</string>
+    <string name="search_no_results">Nicio fotografie nu se potrivește</string>
+    <string name="search_hint_title">Caută în biblioteca ta</string>
+    <string name="search_hint_body">Încearcă o dată („August 2025”, „yesterday”), un loc („Rome”, „Tuscany”), un cuvânt care apare într-o fotografie sau în numele fișierului, ori un gen („videos”, „screenshots”, „favorites”).\n\nDatele și genurile sunt înțelese în engleză și în italiană. Locurile, textul din fotografii și ceea ce arată acestea sunt găsite după ce a rulat analiza (Setări, Analiză).</string>
+    <string name="search_analysis_off">Căutarea după loc, după textul din fotografii și după ceea ce arată acestea este dezactivată. O poți activa în Setări, Analiză.</string>
+    <string name="search_analysis_note">Fotografiile sunt încă analizate în fundal (%1$d %%). Este posibil să lipsească unele rezultate.</string>
+
+    <!-- Settings: analysis -->
+    <string name="settings_analysis">Analiză</string>
+    <string name="analysis_places_progress">Locuri: %1$,d din %2$,d</string>
+    <string name="analysis_semantic_progress">Ce arată fotografiile: %1$,d din %2$,d</string>
+    <string name="analysis_semantic_unavailable">Modelul care recunoaște ce arată fotografiile nu a putut fi încărcat, așa că acest pas nu rulează.</string>
+    <string name="search_semantic_unavailable">Căutarea după ce arată fotografiile nu este disponibilă acum (modelul nu a putut fi încărcat). Celelalte rezultate funcționează în continuare.</string>
+    <string name="analysis_people_progress">Persoane: %1$,d din %2$,d</string>
+    <string name="analysis_people_unavailable">Modelele care găsesc fețe nu au putut fi încărcate, așa că acest pas nu rulează.</string>
+    <string name="analysis_duplicates_progress">Duplicate: %1$,d din %2$,d</string>
+    <string name="analysis_text_progress">Text în fotografii: %1$,d din %2$,d</string>
+    <string name="analysis_running">Se analizează acum…</string>
+    <string name="analysis_idle">Se așteaptă momentul potrivit (bateria nu este descărcată, Economisirea bateriei este dezactivată și, dacă ai ales asta, telefonul se încarcă)</string>
+    <string name="analysis_up_to_date">Totul este analizat</string>
+    <string name="setting_pause_analysis">Pune analiza pe pauză</string>
+    <string name="setting_only_charging">Doar în timpul încărcării</string>
+    <string name="setting_analyze_places">Găsește fotografii după loc</string>
+    <string name="setting_analyze_semantic">Găsește fotografii după ce arată</string>
+    <string name="setting_analyze_people">Găsește persoane în fotografii</string>
+    <string name="setting_analyze_people_note">Fețele sunt găsite și comparate numai pe acest telefon. Nimic despre o față nu îl părăsește vreodată, iar eikon nu încearcă niciodată să recunoască pe cineva: doar grupează fețele care seamănă între ele, iar grupurilor le dai tu nume.</string>
+    <string name="setting_analyze_duplicates">Găsește fotografii duplicate</string>
+    <string name="setting_analyze_text">Găsește text în fotografii</string>
+    <string name="analysis_location_permission">Android ascunde față de aplicații unde au fost făcute fotografiile până când permiți acest lucru.</string>
+    <string name="analysis_allow_locations">Permite accesul la locațiile fotografiilor</string>
+    <string name="analyze_now">Analizează acum</string>
+    <string name="settings_analysis_body">Analiza rulează numai pe telefonul tău, în fundal, și se oprește temporar când bateria este descărcată, Economisirea bateriei este activă sau telefonul se încălzește („Analizează acum” continuă și cu Economisirea bateriei). Ea stochează locul fiecărei fotografii (determinat offline; nicio locație nu este trimisă vreodată nicăieri), o descriere numerică a ceea ce arată fotografia (ca să poți căuta „câine” sau „apus”; nu este o descriere în cuvinte și nu poate fi transformată înapoi într-o imagine) și orice text pe care îl citește în fotografie, pentru ca Căutarea să le poată găsi. Dacă activezi persoanele, stochează și unde se află fiecare față într-o fotografie și o descriere numerică a ei, doar pentru a grupa fețele care seamănă între ele. Dacă activezi duplicatele, stochează o amprentă scurtă a fiecărei fotografii și a fișierelor cu aceeași dimensiune, doar pentru a găsi copii. Recunoașterea a ceea ce arată fotografiile și citirea textului sunt lente și solicită intens procesorul, motiv pentru care analiza așteaptă implicit încărcarea.</string>
+
+    <!-- Info panel: derived data -->
+    <string name="info_place">Cel mai apropiat loc</string>
+    <string name="info_text_found">Text în această fotografie</string>
+    <string name="info_text_copy">Copiază textul</string>
+
+    <!-- People -->
+    <string name="collection_people">Persoane</string>
+    <string name="people_title">Persoane</string>
+    <string name="person_unnamed">Persoană fără nume</string>
+    <string name="person_add_name">Adaugă un nume</string>
+    <string name="person_rename">Dă un nume acestei persoane</string>
+    <string name="person_name_hint">Nume</string>
+    <string name="person_same_name_note">Persoanele cu același nume sunt reunite într-una singură.</string>
+    <string name="person_favorite">Marchează ca favorită</string>
+    <string name="person_unfavorite">Elimină din favorite</string>
+    <string name="person_hide">Ascunde această persoană</string>
+    <string name="person_unhide">Afișează această persoană</string>
+    <string name="person_merge">Îmbină cu altă persoană…</string>
+    <string name="person_merge_title">Îmbină cu</string>
+    <string name="person_merge_empty">Nu există altcineva cu care să se poată îmbina.</string>
+    <string name="person_not_this">Nu este această persoană</string>
+    <string name="person_remove_from_people">Nu este o față</string>
+    <string name="people_show_hidden">Afișează persoanele ascunse (%1$d)</string>
+    <string name="people_hide_hidden">Ascunde persoanele ascunse</string>
+    <string name="people_empty_off">„Persoane” este dezactivat. Activează „Găsește persoane în fotografii” în Setări, Analiză, iar eikon va grupa fețele pe care le găsește. Totul rămâne pe acest telefon.</string>
+    <string name="people_empty_working">Încă nu au fost găsite fețe (%1$d %% din fotografiile tale au fost analizate). Analiza rulează în fundal în timp ce telefonul se încarcă.</string>
+    <string name="people_empty_done">Nu au fost găsite fețe în fotografiile tale.</string>
+    <string name="people_go_settings">Deschide setările</string>
+    <string name="person_photos_empty">Nicio fotografie.</string>
+    <plurals name="moved_to_new_person">
+        <item quantity="one">%d fotografie a fost mutată la o persoană nouă</item>
+        <item quantity="few">%d fotografii au fost mutate la o persoană nouă</item>
+        <item quantity="other">%d de fotografii au fost mutate la o persoană nouă</item>
+    </plurals>
+    <plurals name="removed_from_people">
+        <item quantity="one">%d fotografie a fost eliminată din Persoane</item>
+        <item quantity="few">%d fotografii au fost eliminate din Persoane</item>
+        <item quantity="other">%d de fotografii au fost eliminate din Persoane</item>
+    </plurals>
+    <string name="info_people">Persoane</string>
+    <plurals name="info_people_unnamed_count">
+        <item quantity="one">%d fără nume</item>
+        <item quantity="few">%d fără nume</item>
+        <item quantity="other">%d fără nume</item>
+    </plurals>
+
+    <string name="section_memories">Amintiri</string>
+    <string name="section_pets">Animale de companie</string>
+    <string name="collection_dogs">Câini</string>
+    <string name="collection_cats">Pisici</string>
+    <string name="empty_pets">Încă nu au fost găsiți câini sau pisici. Animalele de companie sunt recunoscute după ce arată fotografiile: activează „Găsește fotografii după ce arată” în Setări, Analiză și așteaptă să se termine.</string>
+
+    <!-- Places -->
+    <string name="places_title">Locuri</string>
+    <string name="places_tab_list">Listă</string>
+    <string name="places_tab_map">Hartă</string>
+    <string name="place_unknown">Alte locuri</string>
+    <string name="place_near">Lângă %1$s</string>
+    <string name="places_expand">Afișează</string>
+    <string name="places_collapse">Ascunde</string>
+    <string name="collection_places">Locuri</string>
+    <string name="places_map_note">Doar contururile țărilor și numele orașelor mai mari: nu se descarcă nicio imagine de hartă, iar nicio poziție nu părăsește vreodată telefonul. Ciupește sau atinge de două ori pentru a mări; atinge un marcaj ca să vezi fotografiile lui.</string>
+    <string name="places_map_description">Harta locurilor unde au fost făcute fotografiile tale, cu marcaje pentru grupuri de fotografii</string>
+    <string name="places_empty_off">„Locuri” este dezactivat. Activează „Găsește fotografii după loc” în Setări, Analiză, iar eikon va determina offline unde au fost făcute fotografiile tale, pe baza datelor GPS.</string>
+    <string name="places_empty_working">Încă nu au fost găsite locuri (%1$d %% din fotografiile tale au fost analizate). Analiza rulează în fundal în timp ce telefonul se încarcă.</string>
+    <string name="places_empty_done">Nicio fotografie de-a ta nu are o poziție sau este posibil ca eikon să nu aibă voie să citească locațiile fotografiilor (Setări, Analiză).</string>
+    <string name="section_places">Locuri și călătorii</string>
+
+    <!-- Trips -->
+    <string name="collection_trips">Călătorii</string>
+    <string name="trips_title">Călătorii</string>
+    <string name="trip_untitled">Călătorie</string>
+    <string name="trip_reason">La aproximativ %1$d km de locul unde sunt făcute majoritatea fotografiilor tale (lângă %2$s)</string>
+    <string name="trip_home_unknown">un loc necunoscut</string>
+    <plurals name="trip_summary_days">
+        <item quantity="one">%d zi</item>
+        <item quantity="few">%d zile</item>
+        <item quantity="other">%d de zile</item>
+    </plurals>
+    <string name="trips_empty">Nu au fost găsite călătorii. O călătorie este o succesiune de zile, cu cel puțin 10 fotografii, petrecute la cel puțin 100 km de locul unde sunt făcute majoritatea fotografiilor tale. Pentru asta, eikon are nevoie de pozițiile fotografiilor: activează „Găsește fotografii după loc” în Setări, Analiză.</string>
+
+    <!-- Duplicates and similar shots -->
+    <string name="section_cleanup">Curățare</string>
+    <string name="collection_duplicates">Duplicate</string>
+    <string name="collection_similar">Fotografii similare</string>
+    <string name="duplicates_title">Duplicate</string>
+    <string name="similar_title">Fotografii similare</string>
+    <string name="duplicates_note">eikon doar le găsește. Nimic nu este eliminat până nu confirmi în dialogul propriu al Android, iar fotografiile eliminate merg la „Șterse recent”, de unde le poți restaura. Pentru copiile unei fotografii pe care ai adăugat-o în albume: copia pe care o păstrezi intră în acele albume.</string>
+    <plurals name="duplicate_exact">
+        <item quantity="one">%d fișier identic</item>
+        <item quantity="few">%d fișiere identice</item>
+        <item quantity="other">%d de fișiere identice</item>
+    </plurals>
+    <plurals name="duplicate_visual">
+        <item quantity="one">%d copie a aceleiași imagini</item>
+        <item quantity="few">%d copii ale aceleiași imagini</item>
+        <item quantity="other">%d de copii ale aceleiași imagini</item>
+    </plurals>
+    <plurals name="similar_group">
+        <item quantity="one">%d cadru</item>
+        <item quantity="few">%d cadre similare</item>
+        <item quantity="other">%d de cadre similare</item>
+    </plurals>
+    <plurals name="duplicate_keep_best">
+        <item quantity="one">Păstrează cea mai bună, mută %d la „Șterse recent”</item>
+        <item quantity="few">Păstrează cea mai bună, mută %d la „Șterse recent”</item>
+        <item quantity="other">Păstrează cea mai bună, mută %d la „Șterse recent”</item>
+    </plurals>
+    <plurals name="similar_trash_marked">
+        <item quantity="one">Mută %d la „Șterse recent”</item>
+        <item quantity="few">Mută %d la „Șterse recent”</item>
+        <item quantity="other">Mută %d la „Șterse recent”</item>
+    </plurals>
+    <string name="duplicate_best">Cea mai bună</string>
+    <string name="duplicate_kept">Păstrată</string>
+    <string name="duplicate_marked">De mutat</string>
+    <string name="duplicate_dismiss">Acestea nu sunt duplicate</string>
+    <string name="similar_dismiss">Acestea nu sunt similare</string>
+    <string name="duplicates_empty_off">„Duplicate” este dezactivat. Activează „Găsește fotografii duplicate” în Setări, Analiză. eikon calculează amprenta fotografiilor tale numai pe acest telefon, fără niciun model.</string>
+    <string name="similar_empty_off">„Fotografii similare” are nevoie de „Găsește fotografii după ce arată” în Setări, Analiză: compară ce arată fiecare fotografie, pentru fotografiile făcute la mai puțin de două minute una de alta.</string>
+    <string name="duplicates_empty_working">Încă nu s-a găsit nimic (%1$d %% analizat). Analiza rulează în fundal în timp ce telefonul se încarcă.</string>
+    <string name="duplicates_empty_done">Nu au fost găsite duplicate.</string>
+    <string name="similar_empty_done">Nu au fost găsite fotografii similare.</string>
+
+    <!-- Memories -->
+    <string name="collection_memories">Amintiri</string>
+    <string name="memories_title">Amintiri</string>
+    <string name="memory_on_this_day">În această zi</string>
+    <string name="memory_year_ago">Acum un an</string>
+    <string name="memory_weekend_in">Weekend în %1$s</string>
+    <string name="memory_weekend">Weekend în afara orașului</string>
+    <string name="memory_day_trip_to">Excursie de o zi la %1$s</string>
+    <string name="memory_day_trip">Excursie de o zi</string>
+    <string name="memory_season">%1$s %2$d</string>
+    <string name="memory_person">%1$s, %2$d</string>
+    <string name="season_winter">Iarna</string>
+    <string name="season_spring">Primăvara</string>
+    <string name="season_summer">Vara</string>
+    <string name="season_autumn">Toamna</string>
+    <string name="memory_hide">Ascunde această amintire</string>
+    <string name="memory_show_fewer">Arată mai puține ca aceasta</string>
+    <string name="memory_show_less_of">Arată mai puține cu %1$s</string>
+    <string name="memory_exclude_date">Exclude această dată</string>
+    <string name="memory_all_photos">Toate fotografiile</string>
+    <string name="memory_replay">Redă din nou</string>
+    <string name="memory_reset">Anulează alegerile mele</string>
+    <string name="memory_done">Gata. Îți poți anula alegerile din meniul Amintirilor.</string>
+    <string name="memories_empty">Încă nu există amintiri. eikon le creează din date, călătorii, anotimpuri și persoanele cărora le-ai dat nume: „În această zi”, „Acum un an”, călătorii și weekenduri în afara orașului, un anotimp, cineva într-un an. Călătoriile și weekendurile au nevoie de Locuri, persoanele au nevoie de Persoane (Setări, Analiză). Nimic nu părăsește telefonul.</string>
+    <string name="memories_note">Create din date, locuri și persoane numite, cu reguli simple; nu există muzică, iar fotografiile sunt alese după favorite, dimensiune și fețe, nu după cât de bine arată.</string>
+    <string name="memory_no_photos">Această amintire nu mai are fotografii de afișat.</string>
+
+    <!-- Editing -->
+    <string name="action_edit">Editează</string>
+    <string name="edit_title">Editare</string>
+    <string name="edit_done">Gata</string>
+    <string name="edit_original">Original</string>
+    <string name="edit_revert">Revino</string>
+    <string name="edit_revert_title">Revii la original?</string>
+    <string name="edit_revert_message">Aceasta șterge toate ajustările, filtrul și decuparea din această editare. Fotografia originală nu a fost niciodată modificată. Apasă Gata pentru a păstra fotografia readusă la starea inițială.</string>
+    <string name="edit_discard_title">Renunți la modificări?</string>
+    <string name="edit_discard_message">Modificările făcute în acest editor se vor pierde. Fotografia rămâne așa cum era.</string>
+    <string name="edit_discard">Renunță</string>
+    <string name="edit_copy_edits">Copiază editările</string>
+    <string name="edit_paste_edits">Lipește editările</string>
+    <string name="edit_save_copy">Salvează o copie</string>
+    <string name="edit_copy_saved">O copie a fost salvată lângă original, care nu a fost modificat.</string>
+    <string name="edit_copy_saved_no_details">O copie a fost salvată lângă original, care nu a fost modificat. Detaliile camerei nu au putut fi copiate.</string>
+    <string name="edit_failed">Editarea nu a putut fi finalizată. Fotografia nu a fost modificată.</string>
+    <string name="edited_badge">Editată</string>
+    <string name="viewer_show_original">Arată originalul</string>
+    <string name="viewer_show_edited">Arată fotografia editată</string>
+    <string name="tool_auto">Auto</string>
+    <string name="tool_light">Lumină</string>
+    <string name="tool_color">Culoare</string>
+    <string name="tool_detail">Detalii</string>
+    <string name="tool_filters">Filtre</string>
+    <string name="tool_crop">Decupează</string>
+    <string name="adj_exposure">Expunere</string>
+    <string name="adj_brightness">Luminozitate</string>
+    <string name="adj_contrast">Contrast</string>
+    <string name="adj_highlights">Lumini</string>
+    <string name="adj_shadows">Umbre</string>
+    <string name="adj_black_point">Punct de negru</string>
+    <string name="adj_saturation">Saturație</string>
+    <string name="adj_vibrance">Vibranță</string>
+    <string name="adj_temperature">Căldură</string>
+    <string name="adj_tint">Nuanță</string>
+    <string name="adj_sharpness">Claritate</string>
+    <string name="adj_vignette">Vinietă</string>
+    <string name="geo_straighten">Îndreaptă</string>
+    <string name="geo_perspective_vertical">Perspectivă verticală</string>
+    <string name="geo_perspective_horizontal">Perspectivă orizontală</string>
+    <string name="filter_amount">Intensitate</string>
+    <string name="filter_name_none">Original</string>
+    <string name="filter_name_vivid">Viu</string>
+    <string name="filter_name_warm">Cald</string>
+    <string name="filter_name_cool">Rece</string>
+    <string name="filter_name_mono">Mono</string>
+    <string name="filter_name_noir">Noir</string>
+    <string name="filter_name_fade">Estompat</string>
+    <string name="filter_name_chrome">Cromat</string>
+    <string name="filter_name_sepia">Sepia</string>
+    <string name="crop_rotate">Rotește</string>
+    <string name="crop_flip">Oglindește</string>
+    <string name="shape_free">Liber</string>
+    <string name="shape_original">Original</string>
+    <string name="shape_square">1:1</string>
+    <string name="shape_4_3">4:3</string>
+    <string name="shape_3_2">3:2</string>
+    <string name="shape_16_9">16:9</string>
+    <string name="action_paste_edits">Lipește editările</string>
+    <string name="action_revert_edits">Elimină editările</string>
+    <plurals name="edits_pasted">
+        <item quantity="one">Editările au fost aplicate la %d fotografie</item>
+        <item quantity="few">Editările au fost aplicate la %d fotografii</item>
+        <item quantity="other">Editările au fost aplicate la %d de fotografii</item>
+    </plurals>
+    <plurals name="edits_reverted">
+        <item quantity="one">Editarea a fost eliminată de la %d fotografie; originalul este așa cum a fost mereu</item>
+        <item quantity="few">Editările au fost eliminate de la %d fotografii; originalele sunt așa cum au fost mereu</item>
+        <item quantity="other">Editările au fost eliminate de la %d de fotografii; originalele sunt așa cum au fost mereu</item>
+    </plurals>
+
+    <!-- Accessibility -->
+    <string name="slider_reset">Revino la valoarea neutră</string>
+    <string name="crop_area">Zona de decupare, de la %1$d %% la %2$d %% pe orizontală și de la %3$d %% la %4$d %% pe verticală</string>
+    <string name="crop_action_smaller">Micșorează decuparea</string>
+    <string name="crop_action_larger">Mărește decuparea</string>
+    <string name="crop_action_left">Mută decuparea la stânga</string>
+    <string name="crop_action_right">Mută decuparea la dreapta</string>
+    <string name="crop_action_up">Mută decuparea în sus</string>
+    <string name="crop_action_down">Mută decuparea în jos</string>
+    <string name="viewer_zoom_in">Mărește</string>
+    <string name="viewer_zoom_out">Micșorează</string>
+    <string name="external_photo">Fotografie</string>
+    <string name="viewer_cannot_display">Această fotografie nu poate fi afișată.</string>
+
+    <!-- Info: caption, editing the date and location, what the photo shows -->
+    <string name="info_caption">Descriere</string>
+    <string name="caption_add">Adaugă o descriere</string>
+    <string name="caption_edit">Editează descrierea</string>
+    <string name="caption_title">Descriere</string>
+    <string name="caption_hint">Câteva cuvinte despre această fotografie</string>
+    <string name="caption_note">Păstrată doar în eikon; fișierul fotografiei nu este modificat. Căutarea o găsește.</string>
+    <string name="date_change">Schimbă data și ora</string>
+    <string name="date_revert">Restaurează data originală</string>
+    <string name="date_time_title">Ora din zi</string>
+    <string name="action_next">Înainte</string>
+    <string name="location_title">Unde a fost făcută</string>
+    <string name="location_coordinates">Coordonate</string>
+    <string name="location_coordinates_note">Grade zecimale, mai întâi latitudinea: 41.9028, 12.4964</string>
+    <string name="location_invalid">Nu este o poziție: două numere, latitudine între -90 și 90 și longitudine între -180 și 180</string>
+    <string name="location_city">Sau caută un oraș (funcționează offline)</string>
+    <string name="location_remove">Elimină locația</string>
+    <string name="location_change">Schimbă locația</string>
+    <string name="location_revert">Restaurează locația originală</string>
+    <string name="info_map_description">O hartă mică ce arată unde a fost făcută fotografia</string>
+    <string name="metadata_done">Gata. Fotografia spune acum acest lucru; originalul este păstrat ca să îl poți restaura.</string>
+    <string name="metadata_not_writable">Acest tip de fișier nu poate fi modificat.</string>
+    <string name="metadata_needs_permission">Pentru a schimba data sau locația unei fotografii, eikon trebuie să poată citi unde au fost făcute fotografiile: altfel, Android îi arată o copie fără locație, iar salvarea ar șterge-o.</string>
+    <string name="metadata_nothing_to_revert">Nu există nimic de restaurat.</string>
+    <string name="metadata_interrupted">O modificare anterioară a acestei fotografii nu s-a încheiat. Originalul ei este păstrat: restaurează-l înainte de a schimba altceva.</string>
+    <string name="metadata_failed">Modificarea nu a funcționat. Fotografia a fost pusă înapoi exact așa cum era.</string>
+    <string name="metadata_restore_file">Restaurează fișierul original</string>
+    <string name="info_albums">În albume</string>
+    <string name="info_pets">Animale de companie</string>
+    <string name="info_shows">Poate arăta</string>
+    <string name="pet_dog">Câine</string>
+    <string name="pet_cat">Pisică</string>
+    <string name="info_album">Albumul dispozitivului</string>
+    <string name="label_landscape">Un peisaj</string>
+    <string name="label_beach">O plajă</string>
+    <string name="label_sea">Marea</string>
+    <string name="label_mountain">Un munte</string>
+    <string name="label_sunset">Un apus</string>
+    <string name="label_snow">Zăpadă</string>
+    <string name="label_city">Un oraș</string>
+    <string name="label_building">O clădire</string>
+    <string name="label_street">O stradă</string>
+    <string name="label_woods">O pădure</string>
+    <string name="label_flower">O floare</string>
+    <string name="label_sky">Cerul</string>
+    <string name="label_person">O persoană</string>
+    <string name="label_group">Un grup de oameni</string>
+    <string name="label_food">Mâncare</string>
+    <string name="label_dessert">Un desert</string>
+    <string name="label_drink">O băutură</string>
+    <string name="label_car">O mașină</string>
+    <string name="label_bicycle">O bicicletă</string>
+    <string name="label_airplane">Un avion</string>
+    <string name="label_boat">O barcă</string>
+    <string name="label_bird">O pasăre</string>
+    <string name="label_horse">Un cal</string>
+    <string name="label_interior">O cameră</string>
+    <string name="label_night">Noaptea</string>
+    <string name="label_party">O petrecere</string>
+    <string name="label_sport">Un eveniment sportiv</string>
+    <string name="label_animal">Un animal</string>
+
+    <!-- Backup to your own server -->
+    <string name="backup_title">Copie de rezervă pe propriul server</string>
+    <string name="backup_intro">Copiază fotografiile și videoclipurile tale pe un server pe care îl administrezi tu, printr-o conexiune criptată. Nimic nu părăsește acest telefon până nu activezi copia de rezervă, totul merge numai pe serverul de mai jos, iar eikon nu șterge și nu modifică niciodată nimic pe el. Parola sau cheia este păstrată criptată, în Android Keystore.</string>
+    <string name="backup_kind_immich">Immich (și ceea ce instalează Umbrel)</string>
+    <string name="backup_kind_nextcloud">Nextcloud sau orice server WebDAV</string>
+    <string name="backup_address">Adresa serverului (https://…)</string>
+    <string name="backup_username">Nume de utilizator</string>
+    <string name="backup_folder">Dosar pe server</string>
+    <string name="backup_api_key">Cheie API</string>
+    <string name="backup_app_password">Parolă de aplicație</string>
+    <string name="backup_secret_saved">Salvată. Lasă gol pentru a o păstra</string>
+    <string name="backup_help_immich">În Immich: Setările contului, Chei API, Cheie API nouă. Permisiunea de care are nevoie este asset.upload.</string>
+    <string name="backup_help_nextcloud">În Nextcloud: Setări personale, Securitate, Dispozitive și sesiuni, creează o parolă de aplicație nouă. Folosește-o pe aceea, nu parola ta de autentificare.</string>
+    <string name="backup_save_test">Salvează și testează conexiunea</string>
+    <string name="backup_connected">Conectat la %1$s.</string>
+    <string name="backup_failed">Nu s-a putut conecta: %1$s</string>
+    <string name="backup_certificate_declined">Certificatul nu a primit încredere, așa că nimic nu a fost trimis și nimic nu va fi trimis.</string>
+    <string name="backup_certificate_title">Certificatul acestui server nu provine de la o autoritate în care are încredere telefonul tău</string>
+    <string name="backup_certificate_body">%1$s a prezentat certificatul de mai jos. Compară amprenta lui cu cea afișată de serverul tău (de exemplu cu: openssl x509 -noout -fingerprint -sha256). Acordă-i încredere numai dacă sunt identice: de atunci înainte, acest certificat, și niciun altul, este acceptat pentru acest server.</string>
+    <string name="backup_certificate_subject">Emis pentru: %1$s</string>
+    <string name="backup_certificate_expires">Valabil până la %1$s</string>
+    <string name="backup_certificate_self_signed">Este semnat de el însuși, așa cum este de obicei certificatul unui server de acasă.</string>
+    <string name="backup_certificate_trust">Acordă încredere acestui certificat</string>
+    <string name="backup_enable">Fă copie de rezervă fotografiilor și videoclipurilor mele</string>
+    <string name="backup_test_first">Mai întâi salvează și testează conexiunea.</string>
+    <string name="backup_wifi_only">Doar pe Wi-Fi</string>
+    <string name="backup_only_charging">Doar în timpul încărcării</string>
+    <string name="backup_videos">Include videoclipurile</string>
+    <string name="backup_hidden">Include fotografiile ascunse</string>
+    <string name="backup_hidden_note">Fotografiile ascunse vor fi trimise și pe serverul tău, unde sunt la fel de vizibile ca orice altceva de acolo.</string>
+    <string name="backup_confirm_title">Pornești copierea de rezervă?</string>
+    <plurals name="backup_confirm_body">
+        <item quantity="one">%1$d fotografie sau videoclip va fi copiat pe %2$s, puțin câte puțin, când telefonul este în rețeaua pe care ai permis-o. Nimic nu este șters pe telefon sau pe server.</item>
+        <item quantity="few">%1$d fotografii și videoclipuri vor fi copiate pe %2$s, puțin câte puțin, când telefonul este în rețeaua pe care ai permis-o. Nimic nu este șters pe telefon sau pe server.</item>
+        <item quantity="other">%1$d de fotografii și videoclipuri vor fi copiate pe %2$s, puțin câte puțin, când telefonul este în rețeaua pe care ai permis-o. Nimic nu este șters pe telefon sau pe server.</item>
+    </plurals>
+    <string name="backup_confirm_start">Pornește</string>
+    <string name="backup_location_note">Android ascunde unde au fost făcute fotografiile față de aplicațiile fără permisiunea pentru locațiile fotografiilor, așa că copiile de pe serverul tău nu ar avea locație.</string>
+    <string name="backup_progress">Copiate: %1$,d din %2$,d</string>
+    <plurals name="backup_refused">
+        <item quantity="one">%1$d fotografie a fost refuzată de server și nu va fi reîncercată până nu ceri tu.</item>
+        <item quantity="few">%1$d fotografii au fost refuzate de server și nu vor fi reîncercate până nu ceri tu.</item>
+        <item quantity="other">%1$d de fotografii au fost refuzate de server și nu vor fi reîncercate până nu ceri tu.</item>
+    </plurals>
+    <string name="backup_running">Se face copia de rezervă…</string>
+    <string name="backup_idle">Se așteaptă momentul potrivit (rețeaua pe care ai permis-o, bateria nu este descărcată).</string>
+    <string name="backup_last_run">Ultima rulare %1$s. Trimise: %2$d. Existau deja: %3$d. Refuzate: %4$d.</string>
+    <string name="backup_stopped">S-a oprit deoarece %1$s</string>
+    <string name="backup_stop_power_save">Economisirea bateriei este activă.</string>
+    <string name="backup_stop_thermal">telefonul era prea cald.</string>
+    <string name="backup_stop_unreachable">serverul nu a putut fi contactat sau era ocupat. Va încerca din nou.</string>
+    <string name="backup_stop_unauthorized">serverul nu a acceptat cheia sau parola.</string>
+    <string name="backup_stop_untrusted">certificatul serverului nu este unul în care ai avut încredere.</string>
+    <string name="backup_stop_misconfigured">adresa nu este potrivită pentru acest tip de server.</string>
+    <string name="backup_stop_refusals">serverul a refuzat multe fișiere la rând, ceea ce indică o limită a serverului, nu o problemă a fotografiilor.</string>
+    <string name="backup_now">Fă copia acum</string>
+    <string name="backup_retry_refused">Reîncearcă cele refuzate</string>
+
+    <!-- Network consent -->
+    <string name="network_allow">Permite ca eikon să folosească internetul</string>
+    <string name="network_allow_note">Dezactivat până când îl activezi. eikon folosește rețeaua doar pentru a copia fotografiile tale pe serverul de mai jos, și numai după ce ai configurat unul și ai activat copia de rezervă. Cu aceasta dezactivată, nimic nu se poate conecta nicăieri.</string>
+    <string name="settings_privacy_network">eikon se poate conecta la internet pentru un singur lucru: copia de rezervă opțională a fotografiilor tale pe un server pe care îl administrezi tu. Este dezactivată până o permiți (Setări, Copie de rezervă) și configurezi serverul. Fără analiză de utilizare, fără reclame, fără conturi, fără servicii Google și fără un cloud al nostru: nu există niciunul.</string>
+
+    <!-- First-run screens -->
+    <string name="onboarding_intro_title">Fotografiile tale, pe telefonul tău</string>
+    <string name="onboarding_intro_body">eikon este o galerie de fotografii și videoclipuri pentru Android. Afișează imaginile pe care telefonul le păstrează deja, le găsește după dată, loc, persoane sau ceea ce arată și le editează fără să atingă vreodată originalele.</string>
+    <string name="onboarding_point_local">Totul rămâne pe acest dispozitiv. Fără cont, fără analiză de utilizare, fără reclame.</string>
+    <string name="onboarding_point_independent">Nu se bazează pe nimic din afara telefonului tău: fără servicii Google, fără cloud, fără servere ale unor terți.</string>
+    <string name="onboarding_point_yours">Dacă dorești o copie de rezervă, ea merge numai pe un server pe care îl administrezi tu și numai dacă o configurezi.</string>
+    <string name="onboarding_next">Înainte</string>
+    <string name="onboarding_start">Începe</string>
+    <string name="onboarding_page">Pagina %1$d din %2$d</string>
+    <string name="onboarding_permissions_title">Ce cere eikon și de ce</string>
+    <string name="onboarding_permissions_intro">Doar prima este necesară. Poți schimba oricare dintre ele mai târziu, în Setări sau în setările telefonului.</string>
+    <string name="onboarding_perm_media_title">Fotografii și videoclipuri</string>
+    <string name="onboarding_perm_media_body">Pentru ca eikon să poată afișa biblioteca ta. Citește fișierele acolo unde Android le păstrează deja și nu le copiază nicăieri. Dacă preferi, poți permite doar unele fotografii.</string>
+    <string name="onboarding_perm_location_title">Locațiile fotografiilor (opțional)</string>
+    <string name="onboarding_perm_location_body">Android ascunde față de aplicații unde a fost făcută o fotografie, dacă nu permiți acest lucru. eikon îl folosește pentru a arăta locul unei fotografii pe o hartă offline și pentru a căuta după loc. Locurile sunt determinate pe telefon: nicio poziție nu este trimisă vreodată nicăieri.</string>
+    <string name="onboarding_perm_network_title">Internet (opțional)</string>
+    <string name="onboarding_perm_network_body">Folosit pentru un singur lucru: copierea fotografiilor tale pe un server pe care îl administrezi tu (Immich, Nextcloud), dacă îl vei configura vreodată. Altfel, eikon nu se conectează la nimic. Este dezactivat până îl activezi aici și îl poți dezactiva din nou oricând în Setări.</string>
+    <string name="onboarding_allow">Permite</string>
+    <string name="onboarding_allowed">Permis</string>
+    <string name="onboarding_promise">Nimic de aici nu depinde de ceva din afara telefonului tău: fără servicii Google, fără conturi, fără analiză de utilizare. Fotografiile tale rămân pe acest dispozitiv sau, dacă alegi, merg pe propriul tău server.</string>
+
+    <!-- Support -->
+    <string name="support_title">Sprijin</string>
+    <string name="support_body">eikon este gratuit, nu are reclame și nu te urmărește. Dacă îți place, poți trimite câțiva sats prin rețeaua Lightning.</string>
+    <string name="support_button">Donează prin Lightning</string>
+    <string name="support_copied">Nu s-a găsit niciun portofel Lightning — adresa a fost copiată: %1$s</string>
+
+    <!-- Analyze now -->
+    <string name="analyze_now_running">Se analizează…</string>
+    <string name="analyze_now_hint">Pornește imediat, numai pe acest telefon, chiar și cu Economisirea bateriei.</string>
+    <string name="analyze_now_hint_off">Mai întâi activează cel puțin un pas de mai sus.</string>
+    <string name="analyze_now_hint_paused">Analiza este pusă pe pauză: dezactivează pauza pentru a analiza acum.</string>
+
+    <!-- Pictures from other apps -->
+    <string name="viewer_open_in_library">Deschide în bibliotecă</string>
+</resources>

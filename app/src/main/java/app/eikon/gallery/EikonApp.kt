@@ -37,6 +37,7 @@ import app.eikon.gallery.feature.duplicates.DuplicatesViewModel
 import app.eikon.gallery.feature.memories.MemoriesScreen
 import app.eikon.gallery.feature.memories.MemoryPlayerScreen
 import app.eikon.gallery.feature.memories.MemoryPlayerViewModel
+import app.eikon.gallery.feature.onboarding.OnboardingScreen
 import app.eikon.gallery.feature.people.PeopleScreen
 import app.eikon.gallery.feature.places.PlacesScreen
 import app.eikon.gallery.feature.trips.TripsScreen
@@ -67,10 +68,20 @@ private object Routes {
 }
 
 @Composable
-fun EikonApp(settings: AppSettings, externalImage: Uri? = null, onCloseExternal: () -> Unit = {}) {
+fun EikonApp(settings: AppSettings, externalImage: Uri? = null, onCloseExternal: () -> Unit = {}, onOpenInLibrary: ((mediaId: Long) -> Unit)? = null) {
     EikonTheme(settings.themeMode) {
-        if (externalImage != null) ExternalImageViewer(externalImage, onClose = onCloseExternal) else LibraryApp(settings)
+        when {
+            externalImage != null -> ExternalImageViewer(externalImage, onClose = onCloseExternal, onOpenInLibrary = onOpenInLibrary)
+            !settings.onboardingCompleted -> OnboardingApp()
+            else -> LibraryApp(settings)
+        }
     }
+}
+
+/** The first-run screens, on the app's own background. They end by recording that they were seen, which turns this into the library. */
+@Composable
+private fun OnboardingApp() {
+    Surface(Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background, contentColor = MaterialTheme.colorScheme.onBackground) { OnboardingScreen() }
 }
 
 @Composable

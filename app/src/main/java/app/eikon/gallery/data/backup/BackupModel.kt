@@ -16,6 +16,11 @@ enum class ServerKind {
  * Everything is **off** until the user turns the backup on, and nothing is sent anywhere before that.
  */
 data class BackupSettings(
+    /**
+     * The one consent that lets eikon use the network at all, given (or refused) in the first-run screens and changeable in Settings. **Off until the user says yes.** While it is
+     * off, nothing connects anywhere whatever else is configured: the schedule is cancelled, a run in progress stops, and no connection can be opened.
+     */
+    val networkAllowed: Boolean = false,
     val enabled: Boolean = false,
     val kind: ServerKind = ServerKind.NEXTCLOUD,
     /** `https://…` only. */
@@ -32,6 +37,9 @@ data class BackupSettings(
     /** SHA-256 (hex) of the one certificate the user agreed to trust for this server, when it is not signed by an authority the phone knows. */
     val pinnedCertificate: String? = null,
 ) {
+    /** The backup may run: the user allowed the network **and** turned the backup on. Every place that would go online asks this, not [enabled]. */
+    val active: Boolean get() = networkAllowed && enabled
+
     /** The address, the login and the way of trusting it: changing any of them means a different destination, so what was sent before says nothing about it. */
     val destination: String get() = listOf(kind.name, normalizedUrl(serverUrl), username.trim(), folder.trim()).joinToString("|")
 
@@ -96,6 +104,9 @@ sealed class BackupException(message: String, cause: Throwable? = null) : Except
 
     /** The server refused this one file (too large, a type it does not take). */
     class Rejected(message: String) : BackupException(message)
+
+    /** The user has not allowed eikon to use the network (or took the permission back), so nothing was opened. */
+    class NetworkOff : BackupException("The network is off for eikon: allow it in Settings before connecting to a server.")
 }
 
 /** Where a backup goes. One implementation per [ServerKind]; the same runner drives both. */
@@ -108,13 +119,4 @@ interface BackupTarget {
 
     /** Sends [file], reading its bytes from [open] (called once per attempt, and closed by the target). Throws [BackupException]. */
     suspend fun upload(file: BackupFile, open: () -> InputStream): UploadResult
-}
-
-/** What the rest of the app knows about backup. In the `standard` build it says it is not there; in the `backup` build it is the real thing. */
-interface BackupService {
-    /** False in the build that has no network access. */
-    val isAvailable: Boolean
-
-    /** Applies the schedule for the settings as they are; called once when the app starts. */
-    fun start()
 }

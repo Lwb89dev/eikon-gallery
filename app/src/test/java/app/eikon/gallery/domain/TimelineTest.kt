@@ -11,6 +11,14 @@ class TimelineLayoutTest {
     private val layout = TimelineLayout.fromCounts(listOf("2025-08-14" to 3, "2025-08-13" to 1, "2025-08-12" to 2))
 
     @Test
+    fun aLayoutRemembersTheGroupingItsSectionsWereCutBy() {
+        assertEquals(TimelineGrouping.DAY, layout.grouping)
+        val months = TimelineLayout.fromCounts(listOf("2025-08" to 3, "2025-07" to 2), TimelineGrouping.MONTH)
+        assertEquals(TimelineGrouping.MONTH, months.grouping)
+        assertEquals(TimelineGrouping.DAY, TimelineLayout.Empty.grouping)
+    }
+
+    @Test
     fun totalsIncludeOneHeaderPerSection() {
         assertEquals(6, layout.mediaCount)
         assertEquals(9, layout.gridItemCount)

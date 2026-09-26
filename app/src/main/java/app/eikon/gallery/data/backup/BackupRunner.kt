@@ -45,7 +45,7 @@ enum class BackupStop {
     /** The time slice is used up; the next run continues. */
     TIME_UP,
 
-    /** The user turned the backup off, or the settings no longer name a server, while it ran. */
+    /** The user turned the backup off or took the network permission back (or the settings no longer name a server) while it ran. */
     DISABLED,
 
     /** Battery Saver is on and the run was not asked for by the user. */
@@ -171,7 +171,7 @@ class BackupRunner(
         currentCoroutineContext().ensureActive()
         val settings = environment.settings()
         val reason = when {
-            !settings.enabled -> BackupStop.DISABLED
+            !settings.active -> BackupStop.DISABLED
             !manual && environment.isPowerSaveMode() -> BackupStop.POWER_SAVE
             ThermalPolicy.decide(environment.thermalStatus()) == ThermalAction.STOP -> BackupStop.THERMAL
             environment.nowMillis() >= deadline -> BackupStop.TIME_UP

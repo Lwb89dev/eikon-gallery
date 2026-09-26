@@ -20,7 +20,7 @@ now does and what was fixed after reading it, not a test result. Whoever tries i
 - **Colour.** White text and icons sit on a dark scrim over photos. Light and dark themes come from Material 3.
 - **Progress and failure are said in words**: "Preparing the edited photos to share" (with a moving bar), "This photo can't be displayed", "The edit could not be completed. The photo was not changed."
 
-- **The backup's settings** (in the `backup` build) use ordinary labelled fields, radio buttons and switches; the credential field is a password field and says when one is saved. The certificate to be trusted is shown as text (its fingerprint, in fixed-width type), with the two buttons after it. Progress is a bar and a sentence.
+- **The backup's settings** use ordinary labelled fields, radio buttons and switches; the credential field is a password field and says when one is saved. The certificate to be trusted is shown as text (its fingerprint, in fixed-width type), with the two buttons after it. Progress is a bar and a sentence.
 
 ## Known gaps
 

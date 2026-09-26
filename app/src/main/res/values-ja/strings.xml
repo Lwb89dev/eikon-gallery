@@ -1,0 +1,636 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Library -->
+    <string name="library_title">ライブラリ</string>
+    <string name="today">今日</string>
+    <string name="yesterday">昨日</string>
+    <string name="empty_library">写真や動画はまだありません</string>
+    <string name="empty_filter">このフィルタに一致するものはありません</string>
+    <string name="empty_filter_clear">すべて表示</string>
+    <string name="sync_progress">ライブラリを読み込み中: %1$,d / %2$,d</string>
+    <string name="sync_failed">ライブラリを更新できませんでした</string>
+    <string name="sync_retry">再試行</string>
+    <string name="scrubber_description">日付でライブラリをスクロール</string>
+
+    <!-- Permissions -->
+    <string name="permission_title">写真はお使いの端末に残ります</string>
+    <string name="permission_body">eikon が写真や動画を表示するには、それらへのアクセスが必要です。写真や動画は端末に残り、ご自身のサーバーへのバックアップを設定しない限り、何もアップロードされません。</string>
+    <string name="permission_grant">アクセスを許可</string>
+    <string name="permission_denied">アクセスが拒否されました。システム設定で許可できます。</string>
+    <string name="permission_open_settings">設定を開く</string>
+    <string name="limited_banner">選択した写真のみが表示されています</string>
+    <string name="limited_select_more">さらに選択</string>
+    <string name="limited_allow_all">すべて許可</string>
+
+    <!-- Menus and filters -->
+    <string name="menu_filter">フィルタ</string>
+    <string name="menu_sort">並べ替え</string>
+    <string name="menu_settings">設定</string>
+    <string name="menu_more">その他のオプション</string>
+    <string name="filter_all">すべて</string>
+    <string name="filter_photos">写真</string>
+    <string name="filter_videos">動画</string>
+    <string name="filter_favorites">お気に入り</string>
+    <string name="filter_screenshots">スクリーンショット</string>
+    <string name="filter_screen_recordings">画面録画</string>
+    <string name="filter_panoramas">パノラマ</string>
+    <string name="filter_raw">RAW</string>
+    <string name="filter_clear">フィルタを解除</string>
+    <string name="sort_by_date_taken">撮影日</string>
+    <string name="sort_by_date_added">追加日</string>
+    <string name="sort_newest_first">新しい順</string>
+    <string name="sort_oldest_first">古い順</string>
+
+    <!-- Selection and actions -->
+    <plurals name="selected_count">
+        <item quantity="other">%d 件を選択中</item>
+    </plurals>
+    <string name="action_share">共有</string>
+    <string name="action_favorite">お気に入りに追加</string>
+    <string name="action_unfavorite">お気に入りから削除</string>
+    <string name="action_delete">削除</string>
+    <string name="action_info">情報</string>
+    <string name="action_back">戻る</string>
+    <string name="action_clear_selection">選択を解除</string>
+    <string name="action_select">選択</string>
+    <string name="action_failed">問題が発生しました</string>
+    <plurals name="moved_to_trash">
+        <item quantity="other">%d 件をゴミ箱に移動しました。Android は 30 日間保管します。</item>
+    </plurals>
+
+    <!-- Accessibility -->
+    <string name="cd_photo">写真、%1$s</string>
+    <string name="cd_video">動画、%1$s、%2$s</string>
+    <string name="cd_edited_badge">編集済み</string>
+    <string name="cd_favorite_badge">お気に入り</string>
+    <string name="viewer_position">%2$d 件中 %1$d 件目</string>
+
+    <!-- Video -->
+    <string name="video_play">再生</string>
+    <string name="video_pause">一時停止</string>
+    <string name="video_mute">ミュート</string>
+    <string name="video_unmute">ミュート解除</string>
+    <string name="video_seek">シーク</string>
+
+    <!-- Info panel -->
+    <string name="info_title">情報</string>
+    <string name="info_loading">詳細を読み込んでいます…</string>
+    <string name="info_error">このファイルの詳細を読み取れませんでした</string>
+    <string name="info_section_file">ファイル</string>
+    <string name="info_section_camera">カメラ</string>
+    <string name="info_section_video">動画</string>
+    <string name="info_name">名前</string>
+    <string name="info_type">種類</string>
+    <string name="info_folder">フォルダ</string>
+    <string name="info_resolution">解像度</string>
+    <string name="info_megapixels">メガピクセル</string>
+    <string name="info_size">サイズ</string>
+    <string name="info_date">日付</string>
+    <string name="info_modified">更新日</string>
+    <string name="info_color_profile">カラープロファイル</string>
+    <string name="info_location">位置情報</string>
+    <string name="info_location_none">このファイルには位置情報が保存されていません</string>
+    <string name="info_location_hidden">許可するまで、Android は写真の位置情報をアプリから隠します</string>
+    <string name="info_location_allow">許可</string>
+    <string name="info_location_open">地図アプリで開く</string>
+    <string name="info_camera">機器</string>
+    <string name="info_lens">レンズ</string>
+    <string name="info_focal_length">焦点距離</string>
+    <string name="info_aperture">絞り</string>
+    <string name="info_shutter">シャッタースピード</string>
+    <string name="info_iso">感度</string>
+    <string name="info_exposure_bias">露出補正</string>
+    <string name="info_flash">フラッシュ</string>
+    <string name="info_flash_fired">発光</string>
+    <string name="info_flash_off">発光なし</string>
+    <string name="info_orientation">向き</string>
+    <string name="info_software">ソフトウェア</string>
+    <string name="info_duration">長さ</string>
+    <string name="info_frame_rate">フレームレート</string>
+    <string name="info_video_codec">動画コーデック</string>
+    <string name="info_audio_codec">音声コーデック</string>
+    <string name="info_bitrate">ビットレート</string>
+    <string name="info_dynamic_range">ダイナミックレンジ</string>
+
+    <!-- Settings -->
+    <string name="settings_title">設定</string>
+    <string name="settings_appearance">外観</string>
+    <string name="theme_system">システムに合わせる</string>
+    <string name="theme_light">ライト</string>
+    <string name="theme_dark">ダーク</string>
+    <string name="settings_privacy">プライバシー</string>
+    <string name="settings_privacy_body">eikon は端末上で動作します。アカウントも利用状況の分析もなく、データは Android のバックアップの対象外です。\n\n写真がコピーされることはありません。eikon はライブラリをすぐに開けるよう、ファイルの情報(名前、日付、サイズ、フォルダ)のローカルなインデックスだけを保持します。アプリを削除すると、インデックスも削除されます。</string>
+    <string name="settings_storage_encrypted">ライブラリのデータベース(インデックス、アルバム、編集内容、キャプション、分析結果)は、この端末上で AES-256 により暗号化されています。鍵は Android Keystore が保管します。</string>
+    <string name="settings_storage_not_encrypted">ライブラリのデータベースを暗号化できなかったため(%1$s)、暗号化されないまま保存されています。eikon は起動のたびに再試行します。</string>
+    <string name="settings_storage_reset_title">ライブラリのデータベースを作り直しました</string>
+    <string name="settings_storage_reset">ライブラリのデータベースを保護していた鍵が失われたため、eikon は新しいデータベースを作成する必要がありました。追加したアルバム、編集内容、キャプション、名前は失われました。写真自体には影響はなく、分析は再度実行されます。</string>
+    <string name="settings_storage_reset_ok">了解</string>
+    <string name="settings_about">このアプリについて</string>
+    <string name="settings_licenses">オープンソースライセンス</string>
+    <string name="licenses_title">オープンソースライセンス</string>
+    <string name="settings_version">バージョン %1$s</string>
+
+    <!-- Navigation and collections -->
+    <string name="nav_library">ライブラリ</string>
+    <string name="nav_search">検索</string>
+    <string name="nav_collections">コレクション</string>
+    <string name="collections_title">コレクション</string>
+    <string name="section_people">人物</string>
+    <string name="section_albums">アルバム</string>
+    <string name="section_personal">パーソナル</string>
+    <string name="section_folders">端末のフォルダ</string>
+    <string name="collection_favorites">お気に入り</string>
+    <string name="collection_recent">最近追加した項目</string>
+    <string name="collection_videos">動画</string>
+    <string name="collection_screenshots">スクリーンショット</string>
+    <string name="collection_screen_recordings">画面録画</string>
+    <string name="collection_panoramas">パノラマ</string>
+    <string name="collection_raw">RAW</string>
+    <string name="collection_trash">最近削除した項目</string>
+    <string name="collection_hidden">非表示</string>
+    <plurals name="items_count">
+        <item quantity="other">%d 件</item>
+    </plurals>
+    <string name="empty_album">このアルバムは空です。ライブラリで写真を選択し、「アルバムに追加」を選んでください。</string>
+    <string name="empty_hidden">非表示の項目はありません</string>
+    <string name="empty_collection">まだ何もありません</string>
+
+    <!-- Albums -->
+    <string name="album_new">新しいアルバム</string>
+    <string name="album_name_hint">アルバム名</string>
+    <string name="album_create">作成</string>
+    <string name="album_rename">名前を変更</string>
+    <string name="album_delete">アルバムを削除</string>
+    <string name="album_delete_title">このアルバムを削除しますか?</string>
+    <string name="album_delete_message">削除されるのはアルバムだけです。中の写真や動画はそのまま残ります。</string>
+    <string name="album_move_earlier">前へ移動</string>
+    <string name="album_move_later">後ろへ移動</string>
+    <string name="action_add_to_album">アルバムに追加</string>
+    <string name="action_remove_from_album">アルバムから削除</string>
+    <string name="action_hide">非表示にする</string>
+    <string name="action_unhide">表示する</string>
+    <string name="action_cancel">キャンセル</string>
+    <string name="action_save">保存</string>
+    <plurals name="added_to_album">
+        <item quantity="other">%1$d 件を「%2$s」に追加しました</item>
+    </plurals>
+    <plurals name="removed_from_album">
+        <item quantity="other">%d 件をアルバムから削除しました</item>
+    </plurals>
+    <plurals name="moved_to_hidden">
+        <item quantity="other">%d 件を非表示にしました。「コレクション」の「非表示」で見つかります。</item>
+    </plurals>
+    <plurals name="unhidden">
+        <item quantity="other">%d 件を再び表示しました</item>
+    </plurals>
+
+    <!-- Filters -->
+    <string name="filter_type_title">種類</string>
+    <string name="filter_kind_title">カテゴリ</string>
+    <string name="filter_any">指定なし</string>
+    <string name="filter_favorites_only">お気に入りのみ</string>
+    <string name="filter_edited">編集済み</string>
+    <string name="share_preparing">共有する編集済みの写真を準備しています</string>
+    <string name="filter_edited_only">編集済みのみ</string>
+    <string name="filter_clear_all">フィルタをすべて解除</string>
+
+    <!-- Locks -->
+    <string name="locked_title">ロック中</string>
+    <string name="locked_body">開くには、指紋、顔、または画面ロックを使ってください。</string>
+    <string name="locked_unlock">ロック解除</string>
+    <string name="auth_subtitle">ご本人であることを確認してください</string>
+    <string name="auth_title_hidden">「非表示」のロックを解除</string>
+    <string name="auth_title_trash">「最近削除した項目」のロックを解除</string>
+    <string name="auth_unavailable">現在、認証を利用できません。しばらくしてからもう一度お試しください。</string>
+    <string name="no_device_lock_notice">この端末には画面ロックが設定されていないため、「非表示」は保護されていません。システム設定で画面ロックを設定してください。</string>
+
+    <!-- Recently deleted -->
+    <string name="trash_info">項目は約 30 日後に完全に削除されます。</string>
+    <string name="trash_empty">最近削除した項目はありません</string>
+    <string name="trash_restore">復元</string>
+    <string name="trash_delete_forever">完全に削除</string>
+    <plurals name="days_left_short">
+        <item quantity="other">%d 日</item>
+    </plurals>
+    <plurals name="trash_restored">
+        <item quantity="other">%d 件を復元しました</item>
+    </plurals>
+    <plurals name="trash_deleted">
+        <item quantity="other">%d 件を完全に削除しました</item>
+    </plurals>
+
+    <!-- Settings: security -->
+    <string name="settings_security">セキュリティ</string>
+    <string name="setting_lock_hidden">「非表示」を開くときに認証を要求</string>
+    <string name="setting_lock_trash">「最近削除した項目」を開くときに認証を要求</string>
+    <string name="setting_show_hidden">「コレクション」に「非表示」を表示</string>
+    <string name="setting_secure_screens">最近使ったアプリで eikon を隠し、スクリーンショットを禁止</string>
+    <string name="settings_security_body">非表示の項目は、ライブラリ、コレクション、検索に表示されず、「非表示」を開くには指紋、顔、または画面ロックが必要です。ファイル自体は暗号化されず、端末の通常のストレージに残るため、写真へのアクセス権を持つ他のアプリからは引き続き見えます。</string>
+
+    <!-- Search -->
+    <string name="search_placeholder">日付、場所、テキスト、ファイル名</string>
+    <string name="search_clear">検索をクリア</string>
+    <string name="search_no_results">一致する写真はありません</string>
+    <string name="search_hint_title">ライブラリを検索</string>
+    <string name="search_hint_body">日付(「August 2025」「yesterday」)、場所(「Rome」「Tuscany」)、写真やそのファイル名に含まれる単語、またはカテゴリ(「videos」「screenshots」「favorites」)を試してみてください。\n\n日付とカテゴリは英語とイタリア語で認識されます。場所、写真内のテキスト、写っているものは、分析が実行された後に見つかります(設定、分析)。</string>
+    <string name="search_analysis_off">場所、写真内のテキスト、写っているものによる検索はオフになっています。「設定」の「分析」でオンにできます。</string>
+    <string name="search_analysis_note">写真はまだバックグラウンドで分析中です(%1$d%%)。一部の結果が表示されない場合があります。</string>
+
+    <!-- Settings: analysis -->
+    <string name="settings_analysis">分析</string>
+    <string name="analysis_places_progress">場所: %1$,d / %2$,d</string>
+    <string name="analysis_semantic_progress">写っているもの: %1$,d / %2$,d</string>
+    <string name="analysis_semantic_unavailable">写真に写っているものを認識するモデルを読み込めなかったため、この手順は実行されていません。</string>
+    <string name="search_semantic_unavailable">写っているものによる検索は現在利用できません(モデルを読み込めませんでした)。その他の結果は引き続き利用できます。</string>
+    <string name="analysis_people_progress">人物: %1$,d / %2$,d</string>
+    <string name="analysis_people_unavailable">顔を見つけるモデルを読み込めなかったため、この手順は実行されていません。</string>
+    <string name="analysis_duplicates_progress">重複: %1$,d / %2$,d</string>
+    <string name="analysis_text_progress">写真内のテキスト: %1$,d / %2$,d</string>
+    <string name="analysis_running">分析中…</string>
+    <string name="analysis_idle">適切なタイミングを待機中(バッテリー残量が十分、バッテリーセーバーがオフ、選択した場合は充電中)</string>
+    <string name="analysis_up_to_date">すべて分析済みです</string>
+    <string name="setting_pause_analysis">分析を一時停止</string>
+    <string name="setting_only_charging">充電中のみ</string>
+    <string name="setting_analyze_places">場所で写真を探す</string>
+    <string name="setting_analyze_semantic">写っているもので写真を探す</string>
+    <string name="setting_analyze_people">写真から人物を探す</string>
+    <string name="setting_analyze_people_note">顔の検出と比較は、この端末上だけで行われます。顔に関する情報が端末の外に出ることはなく、eikon が誰かを特定しようとすることもありません。似た顔をグループにまとめるだけで、グループの名前はご自身で付けます。</string>
+    <string name="setting_analyze_duplicates">重複した写真を探す</string>
+    <string name="setting_analyze_text">写真内のテキストを探す</string>
+    <string name="analysis_location_permission">許可するまで、Android は写真の撮影場所をアプリから隠します。</string>
+    <string name="analysis_allow_locations">写真の位置情報へのアクセスを許可</string>
+    <string name="analyze_now">今すぐ分析</string>
+    <string name="settings_analysis_body">分析はお使いの端末上だけでバックグラウンド実行され、バッテリー残量が少ないとき、バッテリーセーバーがオンのとき、端末が熱くなったときは一時停止します(「今すぐ分析」はバッテリーセーバー中でも続行します)。保存するのは、各写真の場所(オフラインで判定され、位置情報がどこかに送信されることはありません)、写っているものの数値的な説明(「犬」や「夕焼け」で検索できるようにするためのもので、キャプションではなく、画像として復元することはできません)、写真から読み取ったテキスト(検索で見つけられるようにするため)です。「人物」をオンにすると、写真内の各顔の位置とその数値的な説明も保存されますが、これは似た顔をグループにまとめるためだけです。「重複」をオンにすると、各写真とサイズが同じファイルの短いフィンガープリントを保存しますが、これはコピーを見つけるためだけです。写っているものの認識とテキストの読み取りは時間がかかり、プロセッサに大きな負荷をかけるため、分析は初期設定では充電を待ちます。</string>
+
+    <!-- Info panel: derived data -->
+    <string name="info_place">最寄りの場所</string>
+    <string name="info_text_found">この写真内のテキスト</string>
+    <string name="info_text_copy">テキストをコピー</string>
+
+    <!-- People -->
+    <string name="collection_people">人物</string>
+    <string name="people_title">人物</string>
+    <string name="person_unnamed">名前のない人物</string>
+    <string name="person_add_name">名前を追加</string>
+    <string name="person_rename">この人物に名前を付ける</string>
+    <string name="person_name_hint">名前</string>
+    <string name="person_same_name_note">同じ名前の人物は1人にまとめられます。</string>
+    <string name="person_favorite">お気に入りにする</string>
+    <string name="person_unfavorite">お気に入りから削除</string>
+    <string name="person_hide">この人物を非表示にする</string>
+    <string name="person_unhide">この人物を表示する</string>
+    <string name="person_merge">別の人物と統合…</string>
+    <string name="person_merge_title">統合先</string>
+    <string name="person_merge_empty">統合できる他の人物がいません。</string>
+    <string name="person_not_this">この人物ではない</string>
+    <string name="person_remove_from_people">顔ではない</string>
+    <string name="people_show_hidden">非表示の人物を表示(%1$d)</string>
+    <string name="people_hide_hidden">非表示の人物を隠す</string>
+    <string name="people_empty_off">「人物」はオフです。「設定」の「分析」で「写真から人物を探す」をオンにすると、eikon が見つけた顔をグループにまとめます。すべてこの端末の中に留まります。</string>
+    <string name="people_empty_working">顔はまだ見つかっていません(写真の %1$d%% を分析済み)。分析は充電中にバックグラウンドで実行されます。</string>
+    <string name="people_empty_done">写真から顔は見つかりませんでした。</string>
+    <string name="people_go_settings">設定を開く</string>
+    <string name="person_photos_empty">写真はありません。</string>
+    <plurals name="moved_to_new_person">
+        <item quantity="other">%d 枚の写真を新しい人物に移動しました</item>
+    </plurals>
+    <plurals name="removed_from_people">
+        <item quantity="other">%d 枚の写真を「人物」から削除しました</item>
+    </plurals>
+    <string name="info_people">人物</string>
+    <plurals name="info_people_unnamed_count">
+        <item quantity="other">名前なし %d 人</item>
+    </plurals>
+
+    <string name="section_memories">メモリー</string>
+    <string name="section_pets">ペット</string>
+    <string name="collection_dogs">犬</string>
+    <string name="collection_cats">猫</string>
+    <string name="empty_pets">犬や猫はまだ見つかっていません。ペットは写真に写っているものから認識されます。「設定」の「分析」で「写っているもので写真を探す」をオンにして、完了するまでお待ちください。</string>
+
+    <!-- Places -->
+    <string name="places_title">場所</string>
+    <string name="places_tab_list">リスト</string>
+    <string name="places_tab_map">地図</string>
+    <string name="place_unknown">その他の場所</string>
+    <string name="place_near">%1$s の近く</string>
+    <string name="places_expand">表示</string>
+    <string name="places_collapse">隠す</string>
+    <string name="collection_places">場所</string>
+    <string name="places_map_note">国の輪郭と大きな都市の名前だけを使用します。地図画像はダウンロードされず、位置情報が端末の外に出ることもありません。ピンチまたはダブルタップで拡大でき、マーカーをタップすると写真が表示されます。</string>
+    <string name="places_map_description">写真の撮影場所の地図。写真のグループごとにマーカーが付いています</string>
+    <string name="places_empty_off">「場所」はオフです。「設定」の「分析」で「場所で写真を探す」をオンにすると、eikon が写真の GPS データから撮影場所をオフラインで割り出します。</string>
+    <string name="places_empty_working">場所はまだ見つかっていません(写真の %1$d%% を分析済み)。分析は充電中にバックグラウンドで実行されます。</string>
+    <string name="places_empty_done">位置情報を持つ写真がないか、eikon に写真の位置情報を読み取る権限がない可能性があります(設定、分析)。</string>
+    <string name="section_places">場所と旅行</string>
+
+    <!-- Trips -->
+    <string name="collection_trips">旅行</string>
+    <string name="trips_title">旅行</string>
+    <string name="trip_untitled">旅行</string>
+    <string name="trip_reason">写真の大半を撮影している場所から約 %1$d km(%2$s の近く)</string>
+    <string name="trip_home_unknown">不明な場所</string>
+    <plurals name="trip_summary_days">
+        <item quantity="other">%d 日間</item>
+    </plurals>
+    <string name="trips_empty">旅行は見つかりませんでした。旅行とは、写真の大半を撮影している場所から 100 km 以上離れて過ごし、10 枚以上の写真がある連続した日々のことです。そのため eikon には写真の位置情報が必要です。「設定」の「分析」で「場所で写真を探す」をオンにしてください。</string>
+
+    <!-- Duplicates and similar shots -->
+    <string name="section_cleanup">整理</string>
+    <string name="collection_duplicates">重複</string>
+    <string name="collection_similar">類似ショット</string>
+    <string name="duplicates_title">重複</string>
+    <string name="similar_title">類似ショット</string>
+    <string name="duplicates_note">eikon は見つけるだけです。Android 自身のダイアログで確認するまで何も削除されず、削除した写真は「最近削除した項目」に移動し、そこから復元できます。アルバムに追加した写真のコピーの場合、残したコピーがそれらのアルバムに追加されます。</string>
+    <plurals name="duplicate_exact">
+        <item quantity="other">同一のファイル %d 件</item>
+    </plurals>
+    <plurals name="duplicate_visual">
+        <item quantity="other">同じ画像のコピー %d 件</item>
+    </plurals>
+    <plurals name="similar_group">
+        <item quantity="other">類似ショット %d 枚</item>
+    </plurals>
+    <plurals name="duplicate_keep_best">
+        <item quantity="other">最良のものを残し、%d 件を「最近削除した項目」に移動</item>
+    </plurals>
+    <plurals name="similar_trash_marked">
+        <item quantity="other">%d 件を「最近削除した項目」に移動</item>
+    </plurals>
+    <string name="duplicate_best">ベスト</string>
+    <string name="duplicate_kept">残す</string>
+    <string name="duplicate_marked">移動予定</string>
+    <string name="duplicate_dismiss">これらは重複ではありません</string>
+    <string name="similar_dismiss">これらは似ていません</string>
+    <string name="duplicates_empty_off">「重複」はオフです。「設定」の「分析」で「重複した写真を探す」をオンにしてください。eikon はモデルを使わず、この端末上だけで写真のフィンガープリントを作成します。</string>
+    <string name="similar_empty_off">「類似ショット」には、「設定」の「分析」で「写っているもので写真を探す」が必要です。2 分以内に撮影された写真について、それぞれに写っているものを比較します。</string>
+    <string name="duplicates_empty_working">まだ何も見つかっていません(%1$d%% を分析済み)。分析は充電中にバックグラウンドで実行されます。</string>
+    <string name="duplicates_empty_done">重複は見つかりませんでした。</string>
+    <string name="similar_empty_done">類似ショットは見つかりませんでした。</string>
+
+    <!-- Memories -->
+    <string name="collection_memories">メモリー</string>
+    <string name="memories_title">メモリー</string>
+    <string name="memory_on_this_day">この日</string>
+    <string name="memory_year_ago">1 年前</string>
+    <string name="memory_weekend_in">%1$s での週末</string>
+    <string name="memory_weekend">週末のおでかけ</string>
+    <string name="memory_day_trip_to">%1$s への日帰り旅行</string>
+    <string name="memory_day_trip">日帰り旅行</string>
+    <string name="memory_season">%2$d 年の%1$s</string>
+    <string name="memory_person">%1$s、%2$d</string>
+    <string name="season_winter">冬</string>
+    <string name="season_spring">春</string>
+    <string name="season_summer">夏</string>
+    <string name="season_autumn">秋</string>
+    <string name="memory_hide">このメモリーを非表示にする</string>
+    <string name="memory_show_fewer">このようなメモリーを減らす</string>
+    <string name="memory_show_less_of">%1$s の表示を減らす</string>
+    <string name="memory_exclude_date">この日付を除外する</string>
+    <string name="memory_all_photos">すべての写真</string>
+    <string name="memory_replay">もう一度再生</string>
+    <string name="memory_reset">選択を元に戻す</string>
+    <string name="memory_done">完了しました。選択は「メモリー」のメニューから元に戻せます。</string>
+    <string name="memories_empty">メモリーはまだありません。eikon は、日付、旅行、季節、名前を付けた人物から、「この日」「1 年前」、旅行や週末のおでかけ、季節、ある年の誰か、といったメモリーを作ります。旅行と週末には「場所」、人物には「人物」が必要です(設定、分析)。何も端末の外には出ません。</string>
+    <string name="memories_note">日付、場所、名前を付けた人物から単純なルールで作られます。音楽はなく、写真はお気に入り、サイズ、顔をもとに選ばれ、写りの良さでは選ばれません。</string>
+    <string name="memory_no_photos">このメモリーには、表示できる写真がもうありません。</string>
+
+    <!-- Editing -->
+    <string name="action_edit">編集</string>
+    <string name="edit_title">編集</string>
+    <string name="edit_done">完了</string>
+    <string name="edit_original">オリジナル</string>
+    <string name="edit_revert">元に戻す</string>
+    <string name="edit_revert_title">オリジナルに戻しますか?</string>
+    <string name="edit_revert_message">この編集のすべての調整、フィルタ、切り抜きが消去されます。元の写真は一度も変更されていません。元に戻した写真を保存するには「完了」を押してください。</string>
+    <string name="edit_discard_title">変更を破棄しますか?</string>
+    <string name="edit_discard_message">このエディタで行った変更は失われます。写真は元のままです。</string>
+    <string name="edit_discard">破棄</string>
+    <string name="edit_copy_edits">編集内容をコピー</string>
+    <string name="edit_paste_edits">編集内容をペースト</string>
+    <string name="edit_save_copy">コピーを保存</string>
+    <string name="edit_copy_saved">オリジナルの隣にコピーを保存しました。オリジナルは変更されていません。</string>
+    <string name="edit_copy_saved_no_details">オリジナルの隣にコピーを保存しました。オリジナルは変更されていません。カメラの情報はコピーできませんでした。</string>
+    <string name="edit_failed">編集を完了できませんでした。写真は変更されていません。</string>
+    <string name="edited_badge">編集済み</string>
+    <string name="viewer_show_original">オリジナルを表示</string>
+    <string name="viewer_show_edited">編集済みの写真を表示</string>
+    <string name="tool_auto">オート</string>
+    <string name="tool_light">ライト</string>
+    <string name="tool_color">カラー</string>
+    <string name="tool_detail">ディテール</string>
+    <string name="tool_filters">フィルタ</string>
+    <string name="tool_crop">切り抜き</string>
+    <string name="adj_exposure">露出</string>
+    <string name="adj_brightness">明るさ</string>
+    <string name="adj_contrast">コントラスト</string>
+    <string name="adj_highlights">ハイライト</string>
+    <string name="adj_shadows">シャドウ</string>
+    <string name="adj_black_point">ブラックポイント</string>
+    <string name="adj_saturation">彩度</string>
+    <string name="adj_vibrance">自然な彩度</string>
+    <string name="adj_temperature">暖かさ</string>
+    <string name="adj_tint">色合い</string>
+    <string name="adj_sharpness">シャープネス</string>
+    <string name="adj_vignette">ビネット</string>
+    <string name="geo_straighten">傾き補正</string>
+    <string name="geo_perspective_vertical">垂直方向の遠近補正</string>
+    <string name="geo_perspective_horizontal">水平方向の遠近補正</string>
+    <string name="filter_amount">強さ</string>
+    <string name="filter_name_none">オリジナル</string>
+    <string name="filter_name_vivid">ビビッド</string>
+    <string name="filter_name_warm">ウォーム</string>
+    <string name="filter_name_cool">クール</string>
+    <string name="filter_name_mono">モノ</string>
+    <string name="filter_name_noir">ノワール</string>
+    <string name="filter_name_fade">フェード</string>
+    <string name="filter_name_chrome">クローム</string>
+    <string name="filter_name_sepia">セピア</string>
+    <string name="crop_rotate">回転</string>
+    <string name="crop_flip">反転</string>
+    <string name="shape_free">フリー</string>
+    <string name="shape_original">オリジナル</string>
+    <string name="shape_square">1:1</string>
+    <string name="shape_4_3">4:3</string>
+    <string name="shape_3_2">3:2</string>
+    <string name="shape_16_9">16:9</string>
+    <string name="action_paste_edits">編集内容をペースト</string>
+    <string name="action_revert_edits">編集内容を削除</string>
+    <plurals name="edits_pasted">
+        <item quantity="other">%d 枚の写真に編集内容を適用しました</item>
+    </plurals>
+    <plurals name="edits_reverted">
+        <item quantity="other">%d 枚の写真から編集内容を削除しました。オリジナルは元のままです</item>
+    </plurals>
+
+    <!-- Accessibility -->
+    <string name="slider_reset">ニュートラルにリセット</string>
+    <string name="crop_area">切り抜き範囲、横 %1$d%% から %2$d%%、縦 %3$d%% から %4$d%%</string>
+    <string name="crop_action_smaller">切り抜きを小さくする</string>
+    <string name="crop_action_larger">切り抜きを大きくする</string>
+    <string name="crop_action_left">切り抜きを左へ移動</string>
+    <string name="crop_action_right">切り抜きを右へ移動</string>
+    <string name="crop_action_up">切り抜きを上へ移動</string>
+    <string name="crop_action_down">切り抜きを下へ移動</string>
+    <string name="viewer_zoom_in">拡大</string>
+    <string name="viewer_zoom_out">縮小</string>
+    <string name="external_photo">写真</string>
+    <string name="viewer_cannot_display">この写真は表示できません。</string>
+
+    <!-- Info: caption, editing the date and location, what the photo shows -->
+    <string name="info_caption">キャプション</string>
+    <string name="caption_add">キャプションを追加</string>
+    <string name="caption_edit">キャプションを編集</string>
+    <string name="caption_title">キャプション</string>
+    <string name="caption_hint">この写真についての一言</string>
+    <string name="caption_note">eikon の中にだけ保存され、写真のファイルは変更されません。検索で見つけられます。</string>
+    <string name="date_change">日付と時刻を変更</string>
+    <string name="date_revert">元の日付に戻す</string>
+    <string name="date_time_title">時刻</string>
+    <string name="action_next">次へ</string>
+    <string name="location_title">撮影場所</string>
+    <string name="location_coordinates">座標</string>
+    <string name="location_coordinates_note">10 進法の度、緯度が先: 41.9028, 12.4964</string>
+    <string name="location_invalid">位置として正しくありません。2 つの数値で、緯度は -90 から 90、経度は -180 から 180 の範囲で指定してください</string>
+    <string name="location_city">または都市を検索(オフラインで動作します)</string>
+    <string name="location_remove">位置情報を削除</string>
+    <string name="location_change">位置情報を変更</string>
+    <string name="location_revert">元の位置情報に戻す</string>
+    <string name="info_map_description">写真の撮影場所を示す小さな地図</string>
+    <string name="metadata_done">完了しました。写真にはこの内容が反映されました。元のファイルは保持されているので、復元できます。</string>
+    <string name="metadata_not_writable">この種類のファイルは変更できません。</string>
+    <string name="metadata_needs_permission">写真の日付や位置情報を変更するには、eikon が写真の撮影場所を読み取れる必要があります。そうでないと、Android は位置情報を取り除いたコピーを渡し、保存すると位置情報が消えてしまいます。</string>
+    <string name="metadata_nothing_to_revert">復元するものはありません。</string>
+    <string name="metadata_interrupted">この写真に対する以前の変更が完了していません。元のファイルは保持されています。他の変更をする前に復元してください。</string>
+    <string name="metadata_failed">変更に失敗しました。写真は元のとおりに戻されました。</string>
+    <string name="metadata_restore_file">元のファイルを復元</string>
+    <string name="info_albums">所属アルバム</string>
+    <string name="info_pets">ペット</string>
+    <string name="info_shows">写っている可能性のあるもの</string>
+    <string name="pet_dog">犬</string>
+    <string name="pet_cat">猫</string>
+    <string name="info_album">端末のアルバム</string>
+    <string name="label_landscape">風景</string>
+    <string name="label_beach">ビーチ</string>
+    <string name="label_sea">海</string>
+    <string name="label_mountain">山</string>
+    <string name="label_sunset">夕焼け</string>
+    <string name="label_snow">雪</string>
+    <string name="label_city">街</string>
+    <string name="label_building">建物</string>
+    <string name="label_street">通り</string>
+    <string name="label_woods">森</string>
+    <string name="label_flower">花</string>
+    <string name="label_sky">空</string>
+    <string name="label_person">人</string>
+    <string name="label_group">人々のグループ</string>
+    <string name="label_food">食べ物</string>
+    <string name="label_dessert">デザート</string>
+    <string name="label_drink">飲み物</string>
+    <string name="label_car">車</string>
+    <string name="label_bicycle">自転車</string>
+    <string name="label_airplane">飛行機</string>
+    <string name="label_boat">船</string>
+    <string name="label_bird">鳥</string>
+    <string name="label_horse">馬</string>
+    <string name="label_interior">部屋</string>
+    <string name="label_night">夜</string>
+    <string name="label_party">パーティー</string>
+    <string name="label_sport">スポーツイベント</string>
+    <string name="label_animal">動物</string>
+
+    <!-- Backup to your own server -->
+    <string name="backup_title">ご自身のサーバーへのバックアップ</string>
+    <string name="backup_intro">写真と動画を、ご自身で運用しているサーバーへ暗号化された接続でコピーします。バックアップをオンにするまで、何もこの端末の外には出ません。送信先は下記のサーバーだけで、eikon がサーバー上のものを削除したり変更したりすることは一切ありません。パスワードまたはキーは、Android Keystore に暗号化して保管されます。</string>
+    <string name="backup_kind_immich">Immich(Umbrel がインストールするものも同じ)</string>
+    <string name="backup_kind_nextcloud">Nextcloud、または任意の WebDAV サーバー</string>
+    <string name="backup_address">サーバーのアドレス(https://…)</string>
+    <string name="backup_username">ログイン名</string>
+    <string name="backup_folder">サーバー上のフォルダ</string>
+    <string name="backup_api_key">API キー</string>
+    <string name="backup_app_password">アプリパスワード</string>
+    <string name="backup_secret_saved">保存済みです。そのままにするには空欄のままにしてください</string>
+    <string name="backup_help_immich">Immich では、アカウント設定、API キー、新しい API キーの順に進みます。必要な権限は asset.upload です。</string>
+    <string name="backup_help_nextcloud">Nextcloud では、個人設定、セキュリティ、デバイスとセッションで、新しいアプリパスワードを作成します。ログインパスワードではなく、それを使ってください。</string>
+    <string name="backup_save_test">保存して接続をテスト</string>
+    <string name="backup_connected">%1$s に接続しました。</string>
+    <string name="backup_failed">接続できませんでした: %1$s</string>
+    <string name="backup_certificate_declined">証明書は信頼されなかったため、何も送信されておらず、今後も送信されません。</string>
+    <string name="backup_certificate_title">このサーバーの証明書は、お使いの端末が信頼する認証局が発行したものではありません</string>
+    <string name="backup_certificate_body">%1$s が下の証明書を提示しました。そのフィンガープリントを、ご自身のサーバーが表示するものと比較してください(例: openssl x509 -noout -fingerprint -sha256)。まったく同じ場合にのみ信頼してください。以後、このサーバーではこの 1 つの証明書だけが受け入れられ、他の証明書は受け入れられません。</string>
+    <string name="backup_certificate_subject">発行先: %1$s</string>
+    <string name="backup_certificate_expires">有効期限: %1$s</string>
+    <string name="backup_certificate_self_signed">自己署名されています。これは自宅サーバーの証明書では一般的です。</string>
+    <string name="backup_certificate_trust">この証明書を信頼する</string>
+    <string name="backup_enable">写真と動画をバックアップ</string>
+    <string name="backup_test_first">まず接続を保存してテストしてください。</string>
+    <string name="backup_wifi_only">Wi-Fi 接続時のみ</string>
+    <string name="backup_only_charging">充電中のみ</string>
+    <string name="backup_videos">動画を含める</string>
+    <string name="backup_hidden">非表示の写真を含める</string>
+    <string name="backup_hidden_note">非表示の写真もサーバーに送信され、サーバー上では他のものと同じように見えます。</string>
+    <string name="backup_confirm_title">バックアップを開始しますか?</string>
+    <plurals name="backup_confirm_body">
+        <item quantity="other">端末が許可したネットワークに接続されているときに、%1$d 件の写真と動画を少しずつ %2$s にコピーします。端末上でもサーバー上でも何も削除されません。</item>
+    </plurals>
+    <string name="backup_confirm_start">開始</string>
+    <string name="backup_location_note">写真の位置情報の権限がないアプリには、Android が写真の撮影場所を隠します。そのため、サーバー上のコピーには位置情報が含まれません。</string>
+    <string name="backup_progress">バックアップ済み: %1$,d / %2$,d</string>
+    <plurals name="backup_refused">
+        <item quantity="other">サーバーが %1$d 枚の写真を拒否しました。ご要望があるまで再試行しません。</item>
+    </plurals>
+    <string name="backup_running">バックアップ中…</string>
+    <string name="backup_idle">適切なタイミングを待機中(許可したネットワーク、バッテリー残量が十分)。</string>
+    <string name="backup_last_run">前回の実行: %1$s。送信: %2$d。すでにあった: %3$d。拒否: %4$d。</string>
+    <string name="backup_stopped">次の理由で停止しました: %1$s</string>
+    <string name="backup_stop_power_save">バッテリーセーバーがオンです。</string>
+    <string name="backup_stop_thermal">端末が熱くなりすぎました。</string>
+    <string name="backup_stop_unreachable">サーバーに接続できないか、混み合っていました。再試行します。</string>
+    <string name="backup_stop_unauthorized">サーバーがキーまたはパスワードを受け付けませんでした。</string>
+    <string name="backup_stop_untrusted">サーバーの証明書が、信頼したものではありません。</string>
+    <string name="backup_stop_misconfigured">この種類のサーバーにはアドレスが正しくありません。</string>
+    <string name="backup_stop_refusals">サーバーが多くのファイルを続けて拒否しました。写真ではなく、サーバー側の制限が原因と考えられます。</string>
+    <string name="backup_now">今すぐバックアップ</string>
+    <string name="backup_retry_refused">拒否されたものを再試行</string>
+
+    <!-- Network consent -->
+    <string name="network_allow">eikon にインターネットの使用を許可</string>
+    <string name="network_allow_note">オンにするまでオフです。eikon がネットワークを使うのは、写真を下のサーバーにコピーするときだけで、サーバーを設定しバックアップをオンにした後に限ります。これをオフにすると、何もどこにも接続できません。</string>
+    <string name="settings_privacy_network">eikon がオンラインになるのは、ひとつの目的のためだけです。それは、ご自身で運用しているサーバーへの、任意の写真のバックアップです。これは、許可(設定、バックアップ)してサーバーを設定するまでオフのままです。利用状況の分析、広告、アカウント、Google のサービス、そして私たち独自のクラウドは、一切ありません。</string>
+
+    <!-- First-run screens -->
+    <string name="onboarding_intro_title">あなたの写真は、あなたの端末に</string>
+    <string name="onboarding_intro_body">eikon は Android 向けの写真・動画ギャラリーです。端末がすでに保存している画像を表示し、日付、場所、人物、写っているものから見つけ、オリジナルには一切触れずに編集します。</string>
+    <string name="onboarding_point_local">すべてこの端末の中に留まります。アカウントも、利用状況の分析も、広告もありません。</string>
+    <string name="onboarding_point_independent">端末の外にあるものには一切頼りません。Google のサービスも、クラウドも、第三者のサーバーもありません。</string>
+    <string name="onboarding_point_yours">バックアップは、ご自身で運用しているサーバーにだけ送られ、設定した場合に限ります。</string>
+    <string name="onboarding_next">次へ</string>
+    <string name="onboarding_start">はじめる</string>
+    <string name="onboarding_page">%2$d ページ中 %1$d ページ目</string>
+    <string name="onboarding_permissions_title">eikon が求めるものと、その理由</string>
+    <string name="onboarding_permissions_intro">必要なのは最初の 1 つだけです。どれも、あとで「設定」や端末の設定から変更できます。</string>
+    <string name="onboarding_perm_media_title">写真と動画</string>
+    <string name="onboarding_perm_media_body">eikon がライブラリを表示するために必要です。Android がすでに保存している場所のファイルを読み取るだけで、どこにもコピーしません。ご希望であれば、一部の写真だけを許可することもできます。</string>
+    <string name="onboarding_perm_location_title">写真の位置情報(任意)</string>
+    <string name="onboarding_perm_location_body">許可しない限り、Android は写真の撮影場所をアプリから隠します。eikon は、オフライン地図に写真の場所を表示したり、場所で検索したりするためにこれを使います。場所は端末上で割り出され、位置情報がどこかに送信されることはありません。</string>
+    <string name="onboarding_perm_network_title">インターネット(任意)</string>
+    <string name="onboarding_perm_network_body">使うのはひとつの目的だけです。将来設定した場合に、ご自身で運用しているサーバー(Immich、Nextcloud)に写真をコピーすることです。それ以外では、eikon は何にも接続しません。ここでオンにするまでオフで、「設定」でいつでもオフに戻せます。</string>
+    <string name="onboarding_allow">許可</string>
+    <string name="onboarding_allowed">許可済み</string>
+    <string name="onboarding_promise">ここでは、端末の外にあるものには何も依存しません。Google のサービスも、アカウントも、利用状況の分析もありません。写真はこの端末に留まるか、選択した場合に限り、ご自身のサーバーに送られます。</string>
+
+    <!-- Support -->
+    <string name="support_title">サポート</string>
+    <string name="support_body">eikon は無料で、広告もなく、あなたを追跡しません。気に入っていただけたら、Lightning Network で少額の sats を送ることができます。</string>
+    <string name="support_button">Lightning で寄付</string>
+    <string name="support_copied">Lightning ウォレットが見つかりません — アドレスをコピーしました: %1$s</string>
+
+    <!-- Analyze now -->
+    <string name="analyze_now_running">分析中…</string>
+    <string name="analyze_now_hint">すぐに開始します。この端末上だけで、バッテリーセーバー中でも実行されます。</string>
+    <string name="analyze_now_hint_off">まず上で、少なくとも 1 つの手順をオンにしてください。</string>
+    <string name="analyze_now_hint_paused">分析は一時停止中です。今すぐ分析するには、一時停止をオフにしてください。</string>
+
+    <!-- Pictures from other apps -->
+    <string name="viewer_open_in_library">ライブラリで開く</string>
+</resources>

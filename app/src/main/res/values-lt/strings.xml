@@ -1,0 +1,705 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Library -->
+    <string name="library_title">Biblioteka</string>
+    <string name="today">Šiandien</string>
+    <string name="yesterday">Vakar</string>
+    <string name="empty_library">Dar nėra nuotraukų ar vaizdo įrašų</string>
+    <string name="empty_filter">Nieko neatitinka šio filtro</string>
+    <string name="empty_filter_clear">Rodyti viską</string>
+    <string name="sync_progress">Įkeliama biblioteka: %1$,d / %2$,d</string>
+    <string name="sync_failed">Nepavyko atnaujinti bibliotekos</string>
+    <string name="sync_retry">Bandyti dar kartą</string>
+    <string name="scrubber_description">Slinkti bibliotekoje pagal datą</string>
+
+    <!-- Permissions -->
+    <string name="permission_title">Tavo nuotraukos lieka tavo įrenginyje</string>
+    <string name="permission_body">eikon reikia prieigos prie tavo nuotraukų ir vaizdo įrašų, kad galėtų juos rodyti. Jie lieka tavo įrenginyje: nieko neįkeliama, nebent nustatysi atsarginį kopijavimą į savo serverį.</string>
+    <string name="permission_grant">Leisti prieigą</string>
+    <string name="permission_denied">Prieiga buvo atmesta. Gali ją leisti sistemos nustatymuose.</string>
+    <string name="permission_open_settings">Atverti nustatymus</string>
+    <string name="limited_banner">Rodomos tik tavo pasirinktos nuotraukos</string>
+    <string name="limited_select_more">Pasirinkti daugiau</string>
+    <string name="limited_allow_all">Leisti visas</string>
+
+    <!-- Menus and filters -->
+    <string name="menu_filter">Filtras</string>
+    <string name="menu_sort">Rikiuoti</string>
+    <string name="menu_settings">Nustatymai</string>
+    <string name="menu_more">Daugiau parinkčių</string>
+    <string name="filter_all">Visi</string>
+    <string name="filter_photos">Nuotraukos</string>
+    <string name="filter_videos">Vaizdo įrašai</string>
+    <string name="filter_favorites">Mėgstamiausi</string>
+    <string name="filter_screenshots">Ekrano nuotraukos</string>
+    <string name="filter_screen_recordings">Ekrano įrašai</string>
+    <string name="filter_panoramas">Panoramos</string>
+    <string name="filter_raw">RAW</string>
+    <string name="filter_clear">Išvalyti filtrą</string>
+    <string name="sort_by_date_taken">Nufotografavimo data</string>
+    <string name="sort_by_date_added">Pridėjimo data</string>
+    <string name="sort_newest_first">Naujausi pirmiausia</string>
+    <string name="sort_oldest_first">Seniausi pirmiausia</string>
+
+    <!-- Selection and actions -->
+    <plurals name="selected_count">
+        <item quantity="one">Pasirinktas %d</item>
+        <item quantity="few">Pasirinkti %d</item>
+        <item quantity="many">Pasirinkta %d</item>
+        <item quantity="other">Pasirinkta %d</item>
+    </plurals>
+    <string name="action_share">Bendrinti</string>
+    <string name="action_favorite">Pridėti prie mėgstamiausių</string>
+    <string name="action_unfavorite">Pašalinti iš mėgstamiausių</string>
+    <string name="action_delete">Ištrinti</string>
+    <string name="action_info">Informacija</string>
+    <string name="action_back">Atgal</string>
+    <string name="action_clear_selection">Išvalyti pasirinkimą</string>
+    <string name="action_select">Pasirinkti</string>
+    <string name="action_failed">Kažkas nepavyko</string>
+    <plurals name="moved_to_trash">
+        <item quantity="one">%d elementas perkeltas į šiukšlinę. „Android“ jį laiko 30 dienų.</item>
+        <item quantity="few">%d elementai perkelti į šiukšlinę. „Android“ juos laiko 30 dienų.</item>
+        <item quantity="many">%d elemento perkelta į šiukšlinę. „Android“ juos laiko 30 dienų.</item>
+        <item quantity="other">%d elementų perkelta į šiukšlinę. „Android“ juos laiko 30 dienų.</item>
+    </plurals>
+
+    <!-- Accessibility -->
+    <string name="cd_photo">Nuotrauka, %1$s</string>
+    <string name="cd_video">Vaizdo įrašas, %1$s, %2$s</string>
+    <string name="cd_edited_badge">Redaguota</string>
+    <string name="cd_favorite_badge">Mėgstama</string>
+    <string name="viewer_position">%1$d iš %2$d</string>
+
+    <!-- Video -->
+    <string name="video_play">Leisti</string>
+    <string name="video_pause">Pristabdyti</string>
+    <string name="video_mute">Išjungti garsą</string>
+    <string name="video_unmute">Įjungti garsą</string>
+    <string name="video_seek">Prasukti</string>
+
+    <!-- Info panel -->
+    <string name="info_title">Informacija</string>
+    <string name="info_loading">Skaitomos detalės…</string>
+    <string name="info_error">Nepavyko nuskaityti šio failo detalių</string>
+    <string name="info_section_file">Failas</string>
+    <string name="info_section_camera">Kamera</string>
+    <string name="info_section_video">Vaizdo įrašas</string>
+    <string name="info_name">Pavadinimas</string>
+    <string name="info_type">Tipas</string>
+    <string name="info_folder">Aplankas</string>
+    <string name="info_resolution">Skiriamoji geba</string>
+    <string name="info_megapixels">Megapikseliai</string>
+    <string name="info_size">Dydis</string>
+    <string name="info_date">Data</string>
+    <string name="info_modified">Pakeista</string>
+    <string name="info_color_profile">Spalvų profilis</string>
+    <string name="info_location">Vieta</string>
+    <string name="info_location_none">Šiame faile nėra išsaugotos vietos</string>
+    <string name="info_location_hidden">„Android“ slepia nuotraukų vietas nuo programų, kol to neleisi</string>
+    <string name="info_location_allow">Leisti</string>
+    <string name="info_location_open">Atverti žemėlapių programoje</string>
+    <string name="info_camera">Įrenginys</string>
+    <string name="info_lens">Objektyvas</string>
+    <string name="info_focal_length">Židinio nuotolis</string>
+    <string name="info_aperture">Diafragma</string>
+    <string name="info_shutter">Išlaikymas</string>
+    <string name="info_iso">Jautrumas</string>
+    <string name="info_exposure_bias">Ekspozicijos korekcija</string>
+    <string name="info_flash">Blykstė</string>
+    <string name="info_flash_fired">Blykstelėjo</string>
+    <string name="info_flash_off">Nesublykstelėjo</string>
+    <string name="info_orientation">Orientacija</string>
+    <string name="info_software">Programinė įranga</string>
+    <string name="info_duration">Trukmė</string>
+    <string name="info_frame_rate">Kadrų dažnis</string>
+    <string name="info_video_codec">Vaizdo kodekas</string>
+    <string name="info_audio_codec">Garso kodekas</string>
+    <string name="info_bitrate">Sparta bitais</string>
+    <string name="info_dynamic_range">Dinaminis diapazonas</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Nustatymai</string>
+    <string name="settings_appearance">Išvaizda</string>
+    <string name="theme_system">Sekti sistemą</string>
+    <string name="theme_light">Šviesi</string>
+    <string name="theme_dark">Tamsi</string>
+    <string name="settings_privacy">Privatumas</string>
+    <string name="settings_privacy_body">eikon veikia tavo įrenginyje. Jis neturi paskyros ir naudojimo analitikos, o jo duomenys neįtraukiami į „Android“ atsargines kopijas.\n\nTavo nuotraukos niekada nekopijuojamos: eikon saugo vietinį indeksą su failų duomenimis (pavadinimas, data, dydis, aplankas), kad biblioteka atsidarytų iš karto. Ištrynus programą, ištrinamas ir indeksas.</string>
+    <string name="settings_storage_encrypted">Bibliotekos duomenų bazė (indeksas, albumai, redagavimai, parašai ir tai, ką rado analizė) šiame telefone užšifruota AES-256. Jos raktą saugo „Android Keystore“.</string>
+    <string name="settings_storage_not_encrypted">Bibliotekos duomenų bazės nepavyko užšifruoti (%1$s), todėl ji vis dar saugoma neužšifruota. eikon bando dar kartą kiekvieną kartą paleidžiant.</string>
+    <string name="settings_storage_reset_title">Bibliotekos duomenų bazė pradėta iš naujo</string>
+    <string name="settings_storage_reset">Raktas, saugojęs bibliotekos duomenų bazę, buvo prarastas, todėl eikon turėjo sukurti naują. Tavo pridėti albumai, redagavimai, parašai ir vardai dingo. Tavo nuotraukos nepaliestos, o analizė bus paleista iš naujo.</string>
+    <string name="settings_storage_reset_ok">Supratau</string>
+    <string name="settings_about">Apie</string>
+    <string name="settings_licenses">Atvirojo kodo licencijos</string>
+    <string name="licenses_title">Atvirojo kodo licencijos</string>
+    <string name="settings_version">Versija %1$s</string>
+
+    <!-- Navigation and collections -->
+    <string name="nav_library">Biblioteka</string>
+    <string name="nav_search">Paieška</string>
+    <string name="nav_collections">Kolekcijos</string>
+    <string name="collections_title">Kolekcijos</string>
+    <string name="section_people">Žmonės</string>
+    <string name="section_albums">Albumai</string>
+    <string name="section_personal">Asmeniniai</string>
+    <string name="section_folders">Įrenginio aplankai</string>
+    <string name="collection_favorites">Mėgstamiausi</string>
+    <string name="collection_recent">Neseniai pridėti</string>
+    <string name="collection_videos">Vaizdo įrašai</string>
+    <string name="collection_screenshots">Ekrano nuotraukos</string>
+    <string name="collection_screen_recordings">Ekrano įrašai</string>
+    <string name="collection_panoramas">Panoramos</string>
+    <string name="collection_raw">RAW</string>
+    <string name="collection_trash">Neseniai ištrinti</string>
+    <string name="collection_hidden">Paslėpti</string>
+    <plurals name="items_count">
+        <item quantity="one">%d elementas</item>
+        <item quantity="few">%d elementai</item>
+        <item quantity="many">%d elemento</item>
+        <item quantity="other">%d elementų</item>
+    </plurals>
+    <string name="empty_album">Šis albumas tuščias. Pasirink nuotraukų bibliotekoje ir pasirink „Pridėti prie albumo“.</string>
+    <string name="empty_hidden">Nieko nėra paslėpta</string>
+    <string name="empty_collection">Čia dar nieko nėra</string>
+
+    <!-- Albums -->
+    <string name="album_new">Naujas albumas</string>
+    <string name="album_name_hint">Albumo pavadinimas</string>
+    <string name="album_create">Sukurti</string>
+    <string name="album_rename">Pervadinti</string>
+    <string name="album_delete">Ištrinti albumą</string>
+    <string name="album_delete_title">Ištrinti šį albumą?</string>
+    <string name="album_delete_message">Ištrinamas tik albumas. Jame esančios nuotraukos ir vaizdo įrašai lieka ten, kur yra.</string>
+    <string name="album_move_earlier">Perkelti anksčiau</string>
+    <string name="album_move_later">Perkelti vėliau</string>
+    <string name="action_add_to_album">Pridėti prie albumo</string>
+    <string name="action_remove_from_album">Pašalinti iš albumo</string>
+    <string name="action_hide">Paslėpti</string>
+    <string name="action_unhide">Rodyti</string>
+    <string name="action_cancel">Atšaukti</string>
+    <string name="action_save">Išsaugoti</string>
+    <plurals name="added_to_album">
+        <item quantity="one">%1$d elementas pridėtas prie „%2$s“</item>
+        <item quantity="few">%1$d elementai pridėti prie „%2$s“</item>
+        <item quantity="many">%1$d elemento pridėta prie „%2$s“</item>
+        <item quantity="other">%1$d elementų pridėta prie „%2$s“</item>
+    </plurals>
+    <plurals name="removed_from_album">
+        <item quantity="one">%d elementas pašalintas iš albumo</item>
+        <item quantity="few">%d elementai pašalinti iš albumo</item>
+        <item quantity="many">%d elemento pašalinta iš albumo</item>
+        <item quantity="other">%d elementų pašalinta iš albumo</item>
+    </plurals>
+    <plurals name="moved_to_hidden">
+        <item quantity="one">%d elementas paslėptas. Rasi jį skiltyje Kolekcijos, Paslėpti.</item>
+        <item quantity="few">%d elementai paslėpti. Rasi juos skiltyje Kolekcijos, Paslėpti.</item>
+        <item quantity="many">%d elemento paslėpta. Rasi juos skiltyje Kolekcijos, Paslėpti.</item>
+        <item quantity="other">%d elementų paslėpta. Rasi juos skiltyje Kolekcijos, Paslėpti.</item>
+    </plurals>
+    <plurals name="unhidden">
+        <item quantity="one">%d elementas vėl matomas</item>
+        <item quantity="few">%d elementai vėl matomi</item>
+        <item quantity="many">%d elemento vėl matoma</item>
+        <item quantity="other">%d elementų vėl matoma</item>
+    </plurals>
+
+    <!-- Filters -->
+    <string name="filter_type_title">Tipas</string>
+    <string name="filter_kind_title">Rūšis</string>
+    <string name="filter_any">Bet kuris</string>
+    <string name="filter_favorites_only">Tik mėgstamiausi</string>
+    <string name="filter_edited">Redaguoti</string>
+    <string name="share_preparing">Ruošiamos redaguotos nuotraukos bendrinimui</string>
+    <string name="filter_edited_only">Tik redaguoti</string>
+    <string name="filter_clear_all">Išvalyti filtrus</string>
+
+    <!-- Locks -->
+    <string name="locked_title">Užrakinta</string>
+    <string name="locked_body">Norėdamas tai atverti, naudok piršto atspaudą, veidą arba ekrano užraktą.</string>
+    <string name="locked_unlock">Atrakinti</string>
+    <string name="auth_subtitle">Patvirtink, kad tai tu</string>
+    <string name="auth_title_hidden">Atrakinti „Paslėpti“</string>
+    <string name="auth_title_trash">Atrakinti „Neseniai ištrinti“</string>
+    <string name="auth_unavailable">Autentifikavimas šiuo metu nepasiekiamas. Pabandyk dar kartą po akimirkos.</string>
+    <string name="no_device_lock_notice">Šis telefonas neturi ekrano užrakto, todėl „Paslėpti“ neapsaugoti. Nustatyk jį sistemos nustatymuose.</string>
+
+    <!-- Recently deleted -->
+    <string name="trash_info">Elementai visam laikui ištrinami po maždaug 30 dienų.</string>
+    <string name="trash_empty">Neseniai nieko neištrinta</string>
+    <string name="trash_restore">Atkurti</string>
+    <string name="trash_delete_forever">Ištrinti visam laikui</string>
+    <plurals name="days_left_short">
+        <item quantity="one">%d d.</item>
+        <item quantity="few">%d d.</item>
+        <item quantity="many">%d d.</item>
+        <item quantity="other">%d d.</item>
+    </plurals>
+    <plurals name="trash_restored">
+        <item quantity="one">%d elementas atkurtas</item>
+        <item quantity="few">%d elementai atkurti</item>
+        <item quantity="many">%d elemento atkurta</item>
+        <item quantity="other">%d elementų atkurta</item>
+    </plurals>
+    <plurals name="trash_deleted">
+        <item quantity="one">%d elementas ištrintas visam laikui</item>
+        <item quantity="few">%d elementai ištrinti visam laikui</item>
+        <item quantity="many">%d elemento ištrinta visam laikui</item>
+        <item quantity="other">%d elementų ištrinta visam laikui</item>
+    </plurals>
+
+    <!-- Settings: security -->
+    <string name="settings_security">Sauga</string>
+    <string name="setting_lock_hidden">Reikalauti autentifikavimo „Paslėpti“</string>
+    <string name="setting_lock_trash">Reikalauti autentifikavimo „Neseniai ištrinti“</string>
+    <string name="setting_show_hidden">Rodyti „Paslėpti“ kolekcijose</string>
+    <string name="setting_secure_screens">Slėpti eikon naujausių programų sąraše ir blokuoti ekrano nuotraukas</string>
+    <string name="settings_security_body">Paslėpti elementai neįtraukiami į biblioteką, kolekcijas ir paiešką, o norint atverti „Paslėpti“ reikalingas piršto atspaudas, veidas arba ekrano užraktas. Patys failai neužšifruoti ir lieka įprastoje telefono saugykloje, kur kitos programos su prieiga prie nuotraukų vis dar gali juos matyti.</string>
+
+    <!-- Search -->
+    <string name="search_placeholder">Data, vieta, tekstas, failo pavadinimas</string>
+    <string name="search_clear">Išvalyti paiešką</string>
+    <string name="search_no_results">Nėra atitinkančių nuotraukų</string>
+    <string name="search_hint_title">Ieškok savo bibliotekoje</string>
+    <string name="search_hint_body">Išbandyk datą („August 2025“, „yesterday“), vietą („Rome“, „Tuscany“), žodį, esantį nuotraukoje ar jos failo pavadinime, arba rūšį („videos“, „screenshots“, „favorites“).\n\nDatos ir rūšys suprantamos anglų ir italų kalbomis. Vietos, nuotraukose esantis tekstas ir tai, ką jos rodo, randami, kai analizė paleista (Nustatymai, Analizė).</string>
+    <string name="search_analysis_off">Paieška pagal vietą, nuotraukose esantį tekstą ir tai, ką jos rodo, išjungta. Gali ją įjungti skiltyje Nustatymai, Analizė.</string>
+    <string name="search_analysis_note">Nuotraukos vis dar analizuojamos fone (%1$d %%). Kai kurių rezultatų gali trūkti.</string>
+
+    <!-- Settings: analysis -->
+    <string name="settings_analysis">Analizė</string>
+    <string name="analysis_places_progress">Vietos: %1$,d iš %2$,d</string>
+    <string name="analysis_semantic_progress">Ką rodo nuotraukos: %1$,d iš %2$,d</string>
+    <string name="analysis_semantic_unavailable">Nepavyko įkelti modelio, atpažįstančio, ką rodo nuotraukos, todėl šis žingsnis nevykdomas.</string>
+    <string name="search_semantic_unavailable">Paieška pagal tai, ką rodo nuotraukos, šiuo metu nepasiekiama (nepavyko įkelti modelio). Kiti rezultatai vis dar veikia.</string>
+    <string name="analysis_people_progress">Žmonės: %1$,d iš %2$,d</string>
+    <string name="analysis_people_unavailable">Nepavyko įkelti veidus randančių modelių, todėl šis žingsnis nevykdomas.</string>
+    <string name="analysis_duplicates_progress">Dublikatai: %1$,d iš %2$,d</string>
+    <string name="analysis_text_progress">Tekstas nuotraukose: %1$,d iš %2$,d</string>
+    <string name="analysis_running">Analizuojama…</string>
+    <string name="analysis_idle">Laukiama tinkamo momento (akumuliatorius nėra išsekęs, akumuliatoriaus taupymo režimas išjungtas ir, jei taip pasirinkai, vyksta įkrovimas)</string>
+    <string name="analysis_up_to_date">Viskas išanalizuota</string>
+    <string name="setting_pause_analysis">Pristabdyti analizę</string>
+    <string name="setting_only_charging">Tik kraunant</string>
+    <string name="setting_analyze_places">Rasti nuotraukas pagal vietą</string>
+    <string name="setting_analyze_semantic">Rasti nuotraukas pagal tai, ką jos rodo</string>
+    <string name="setting_analyze_people">Rasti žmones nuotraukose</string>
+    <string name="setting_analyze_people_note">Veidai randami ir lyginami tik šiame telefone. Niekas apie veidą jo niekada nepalieka, o eikon niekada nebando nieko atpažinti: jis tik grupuoja vienas kitą primenančius veidus, o grupėms vardus suteiki tu.</string>
+    <string name="setting_analyze_duplicates">Rasti pasikartojančias nuotraukas</string>
+    <string name="setting_analyze_text">Rasti tekstą nuotraukose</string>
+    <string name="analysis_location_permission">„Android“ slepia nuo programų, kur nuotraukos padarytos, kol to neleisi.</string>
+    <string name="analysis_allow_locations">Leisti prieigą prie nuotraukų vietų</string>
+    <string name="analyze_now">Analizuoti dabar</string>
+    <string name="settings_analysis_body">Analizė vykdoma tik tavo telefone, fone, ir sustoja, kai akumuliatorius išsekęs, įjungtas akumuliatoriaus taupymo režimas arba telefonas įkaista („Analizuoti dabar“ tęsiasi ir taupymo režimu). Ji išsaugo kiekvienos nuotraukos vietą (nustatytą neprisijungus, jokia vieta niekada niekur nesiunčiama), skaitinį aprašą to, ką nuotrauka rodo (kad galėtum ieškoti, pavyzdžiui, „šuo“ ar „saulėlydis“; tai nėra parašas ir jo negalima nuskaityti atgal kaip vaizdo) ir bet kokį joje perskaitytą tekstą, kad Paieška galėtų juos rasti. Jei įjungsi žmones, ji taip pat išsaugo, kur nuotraukoje yra kiekvienas veidas, ir jo skaitinį aprašą, tik tam, kad sugrupuotų vienas kitą primenančius veidus. Jei įjungsi dublikatus, ji išsaugo trumpą kiekvienos nuotraukos ir vienodo dydžio failų atspaudą, tik tam, kad rastų kopijas. Atpažinti, ką rodo nuotraukos, ir skaityti tekstą lėta, tai smarkiai apkrauna procesorių, todėl analizė pagal numatytuosius nustatymus laukia įkrovimo.</string>
+
+    <!-- Info panel: derived data -->
+    <string name="info_place">Artimiausia vieta</string>
+    <string name="info_text_found">Tekstas šioje nuotraukoje</string>
+    <string name="info_text_copy">Kopijuoti tekstą</string>
+
+    <!-- People -->
+    <string name="collection_people">Žmonės</string>
+    <string name="people_title">Žmonės</string>
+    <string name="person_unnamed">Asmuo be vardo</string>
+    <string name="person_add_name">Pridėti vardą</string>
+    <string name="person_rename">Suteikti šiam asmeniui vardą</string>
+    <string name="person_name_hint">Vardas</string>
+    <string name="person_same_name_note">Vienodai pavadinti žmonės sujungiami į vieną.</string>
+    <string name="person_favorite">Pažymėti kaip mėgstamą</string>
+    <string name="person_unfavorite">Pašalinti iš mėgstamiausių</string>
+    <string name="person_hide">Paslėpti šį asmenį</string>
+    <string name="person_unhide">Rodyti šį asmenį</string>
+    <string name="person_merge">Sujungti su kitu asmeniu…</string>
+    <string name="person_merge_title">Sujungti su</string>
+    <string name="person_merge_empty">Nėra kito asmens, su kuriuo būtų galima sujungti.</string>
+    <string name="person_not_this">Ne šis asmuo</string>
+    <string name="person_remove_from_people">Ne veidas</string>
+    <string name="people_show_hidden">Rodyti paslėptus žmones (%1$d)</string>
+    <string name="people_hide_hidden">Slėpti paslėptus žmones</string>
+    <string name="people_empty_off">Žmonės išjungti. Įjunk „Rasti žmones nuotraukose“ skiltyje Nustatymai, Analizė, ir eikon sugrupuos rastus veidus. Viskas lieka šiame telefone.</string>
+    <string name="people_empty_working">Veidų dar nerasta (išanalizuota %1$d %% tavo nuotraukų). Analizė vykdoma fone kraunant.</string>
+    <string name="people_empty_done">Tavo nuotraukose veidų nerasta.</string>
+    <string name="people_go_settings">Atverti nustatymus</string>
+    <string name="person_photos_empty">Nuotraukų nėra.</string>
+    <plurals name="moved_to_new_person">
+        <item quantity="one">%d nuotrauka perkelta naujam asmeniui</item>
+        <item quantity="few">%d nuotraukos perkeltos naujam asmeniui</item>
+        <item quantity="many">%d nuotraukos perkelta naujam asmeniui</item>
+        <item quantity="other">%d nuotraukų perkelta naujam asmeniui</item>
+    </plurals>
+    <plurals name="removed_from_people">
+        <item quantity="one">%d nuotrauka pašalinta iš Žmonių</item>
+        <item quantity="few">%d nuotraukos pašalintos iš Žmonių</item>
+        <item quantity="many">%d nuotraukos pašalinta iš Žmonių</item>
+        <item quantity="other">%d nuotraukų pašalinta iš Žmonių</item>
+    </plurals>
+    <string name="info_people">Žmonės</string>
+    <plurals name="info_people_unnamed_count">
+        <item quantity="one">%d be vardo</item>
+        <item quantity="few">%d be vardo</item>
+        <item quantity="many">%d be vardo</item>
+        <item quantity="other">%d be vardo</item>
+    </plurals>
+
+    <string name="section_memories">Prisiminimai</string>
+    <string name="section_pets">Augintiniai</string>
+    <string name="collection_dogs">Šunys</string>
+    <string name="collection_cats">Katės</string>
+    <string name="empty_pets">Šunų ar kačių dar nerasta. Augintiniai atpažįstami pagal tai, ką rodo nuotraukos: įjunk „Rasti nuotraukas pagal tai, ką jos rodo“ skiltyje Nustatymai, Analizė, ir palauk, kol baigsis.</string>
+
+    <!-- Places -->
+    <string name="places_title">Vietos</string>
+    <string name="places_tab_list">Sąrašas</string>
+    <string name="places_tab_map">Žemėlapis</string>
+    <string name="place_unknown">Kitos vietos</string>
+    <string name="place_near">Netoli: %1$s</string>
+    <string name="places_expand">Rodyti</string>
+    <string name="places_collapse">Slėpti</string>
+    <string name="collection_places">Vietos</string>
+    <string name="places_map_note">Tik šalių kontūrai ir didesnių miestų pavadinimai: neatsisiunčiami jokie žemėlapio vaizdai ir jokia pozicija niekada nepalieka telefono. Norėdamas priartinti, suspausk pirštais arba dukart bakstelėk, bakstelėk žymeklį, kad pamatytum jo nuotraukas.</string>
+    <string name="places_map_description">Žemėlapis, kur padarytos tavo nuotraukos, su nuotraukų grupių žymekliais</string>
+    <string name="places_empty_off">Vietos išjungtos. Įjunk „Rasti nuotraukas pagal vietą“ skiltyje Nustatymai, Analizė, ir eikon neprisijungęs nustatys, kur padarytos tavo nuotraukos, pagal jų GPS duomenis.</string>
+    <string name="places_empty_working">Vietų dar nerasta (išanalizuota %1$d %% tavo nuotraukų). Analizė vykdoma fone kraunant.</string>
+    <string name="places_empty_done">Nė viena tavo nuotrauka neturi pozicijos arba eikon gali neturėti leidimo skaityti nuotraukų vietų (Nustatymai, Analizė).</string>
+    <string name="section_places">Vietos ir kelionės</string>
+
+    <!-- Trips -->
+    <string name="collection_trips">Kelionės</string>
+    <string name="trips_title">Kelionės</string>
+    <string name="trip_untitled">Kelionė</string>
+    <string name="trip_reason">Maždaug %1$d km nuo vietos, kur daroma dauguma tavo nuotraukų (netoli: %2$s)</string>
+    <string name="trip_home_unknown">nežinoma vieta</string>
+    <plurals name="trip_summary_days">
+        <item quantity="one">%d diena</item>
+        <item quantity="few">%d dienos</item>
+        <item quantity="many">%d dienos</item>
+        <item quantity="other">%d dienų</item>
+    </plurals>
+    <string name="trips_empty">Kelionių nerasta. Kelionė yra dienų seka su bent 10 nuotraukų, praleista bent 100 km nuo vietos, kur daroma dauguma tavo nuotraukų. Tam eikon reikia nuotraukų pozicijų: įjunk „Rasti nuotraukas pagal vietą“ skiltyje Nustatymai, Analizė.</string>
+
+    <!-- Duplicates and similar shots -->
+    <string name="section_cleanup">Tvarkymas</string>
+    <string name="collection_duplicates">Dublikatai</string>
+    <string name="collection_similar">Panašios nuotraukos</string>
+    <string name="duplicates_title">Dublikatai</string>
+    <string name="similar_title">Panašios nuotraukos</string>
+    <string name="duplicates_note">eikon tik jas suranda. Niekas nepašalinama, kol nepatvirtini paties „Android“ dialogo lange, o pašalintos nuotraukos patenka į „Neseniai ištrinti“, kur gali jas atkurti. Jei nuotrauka pridėta prie albumų ir turi kopijų: kopija, kurią pasiliksi, prisijungs prie tų albumų.</string>
+    <plurals name="duplicate_exact">
+        <item quantity="one">%d identiškas failas</item>
+        <item quantity="few">%d identiški failai</item>
+        <item quantity="many">%d identiško failo</item>
+        <item quantity="other">%d identiškų failų</item>
+    </plurals>
+    <plurals name="duplicate_visual">
+        <item quantity="one">%d to paties vaizdo kopija</item>
+        <item quantity="few">%d to paties vaizdo kopijos</item>
+        <item quantity="many">%d to paties vaizdo kopijos</item>
+        <item quantity="other">%d to paties vaizdo kopijų</item>
+    </plurals>
+    <plurals name="similar_group">
+        <item quantity="one">%d kadras</item>
+        <item quantity="few">%d panašūs kadrai</item>
+        <item quantity="many">%d panašaus kadro</item>
+        <item quantity="other">%d panašių kadrų</item>
+    </plurals>
+    <plurals name="duplicate_keep_best">
+        <item quantity="one">Palikti geriausią, perkelti %d į „Neseniai ištrinti“</item>
+        <item quantity="few">Palikti geriausią, perkelti %d į „Neseniai ištrinti“</item>
+        <item quantity="many">Palikti geriausią, perkelti %d į „Neseniai ištrinti“</item>
+        <item quantity="other">Palikti geriausią, perkelti %d į „Neseniai ištrinti“</item>
+    </plurals>
+    <plurals name="similar_trash_marked">
+        <item quantity="one">Perkelti %d į „Neseniai ištrinti“</item>
+        <item quantity="few">Perkelti %d į „Neseniai ištrinti“</item>
+        <item quantity="many">Perkelti %d į „Neseniai ištrinti“</item>
+        <item quantity="other">Perkelti %d į „Neseniai ištrinti“</item>
+    </plurals>
+    <string name="duplicate_best">Geriausia</string>
+    <string name="duplicate_kept">Palikta</string>
+    <string name="duplicate_marked">Bus perkelta</string>
+    <string name="duplicate_dismiss">Tai ne dublikatai</string>
+    <string name="similar_dismiss">Tai ne panašūs</string>
+    <string name="duplicates_empty_off">Dublikatai išjungti. Įjunk „Rasti pasikartojančias nuotraukas“ skiltyje Nustatymai, Analizė. eikon kuria tavo nuotraukų atspaudus tik šiame telefone, be jokio modelio.</string>
+    <string name="similar_empty_off">Panašioms nuotraukoms reikia „Rasti nuotraukas pagal tai, ką jos rodo“ skiltyje Nustatymai, Analizė: jis lygina, ką rodo kiekviena nuotrauka, nuotraukoms, padarytoms per dvi minutes viena nuo kitos.</string>
+    <string name="duplicates_empty_working">Dar nieko nerasta (išanalizuota %1$d %%). Analizė vykdoma fone kraunant.</string>
+    <string name="duplicates_empty_done">Dublikatų nerasta.</string>
+    <string name="similar_empty_done">Panašių nuotraukų nerasta.</string>
+
+    <!-- Memories -->
+    <string name="collection_memories">Prisiminimai</string>
+    <string name="memories_title">Prisiminimai</string>
+    <string name="memory_on_this_day">Šią dieną</string>
+    <string name="memory_year_ago">Prieš metus</string>
+    <string name="memory_weekend_in">Savaitgalis: %1$s</string>
+    <string name="memory_weekend">Savaitgalis toli nuo namų</string>
+    <string name="memory_day_trip_to">Vienos dienos išvyka: %1$s</string>
+    <string name="memory_day_trip">Vienos dienos išvyka</string>
+    <string name="memory_season">%1$s %2$d</string>
+    <string name="memory_person">%1$s, %2$d</string>
+    <string name="season_winter">Žiema</string>
+    <string name="season_spring">Pavasaris</string>
+    <string name="season_summer">Vasara</string>
+    <string name="season_autumn">Ruduo</string>
+    <string name="memory_hide">Paslėpti šį prisiminimą</string>
+    <string name="memory_show_fewer">Rodyti mažiau tokių</string>
+    <string name="memory_show_less_of">Rodyti mažiau: %1$s</string>
+    <string name="memory_exclude_date">Praleisti šią datą</string>
+    <string name="memory_all_photos">Visos nuotraukos</string>
+    <string name="memory_replay">Paleisti dar kartą</string>
+    <string name="memory_reset">Atšaukti mano pasirinkimus</string>
+    <string name="memory_done">Atlikta. Savo pasirinkimus gali atšaukti Prisiminimų meniu.</string>
+    <string name="memories_empty">Prisiminimų dar nėra. eikon juos kuria iš datų, kelionių, metų laikų ir tavo pavadintų žmonių: „Šią dieną“, „Prieš metus“, kelionės ir savaitgaliai toli nuo namų, metų laikas, kažkas per metus. Kelionėms ir savaitgaliams reikia Vietų, žmonėms reikia Žmonių (Nustatymai, Analizė). Niekas nepalieka telefono.</string>
+    <string name="memories_note">Sukurta iš datų, vietų ir pavadintų žmonių pagal paprastas taisykles; muzikos nėra, o nuotraukos parenkamos pagal mėgstamiausias, dydį ir veidus, o ne pagal tai, kaip gerai jos atrodo.</string>
+    <string name="memory_no_photos">Šis prisiminimas nebeturi nuotraukų, kurias būtų galima parodyti.</string>
+
+    <!-- Editing -->
+    <string name="action_edit">Redaguoti</string>
+    <string name="edit_title">Redagavimas</string>
+    <string name="edit_done">Baigta</string>
+    <string name="edit_original">Originalas</string>
+    <string name="edit_revert">Grąžinti</string>
+    <string name="edit_revert_title">Grąžinti originalą?</string>
+    <string name="edit_revert_message">Tai išvalo visus šio redagavimo koregavimus, filtrą ir apkarpymą. Originali nuotrauka niekada nebuvo pakeista. Paspausk Baigta, kad pasiliktum grąžintą nuotrauką.</string>
+    <string name="edit_discard_title">Atmesti pakeitimus?</string>
+    <string name="edit_discard_message">Šiame redaktoriuje padaryti pakeitimai bus prarasti. Nuotrauka liks tokia, kokia buvo.</string>
+    <string name="edit_discard">Atmesti</string>
+    <string name="edit_copy_edits">Kopijuoti redagavimus</string>
+    <string name="edit_paste_edits">Įklijuoti redagavimus</string>
+    <string name="edit_save_copy">Išsaugoti kopiją</string>
+    <string name="edit_copy_saved">Kopija išsaugota šalia originalo, kuris nebuvo pakeistas.</string>
+    <string name="edit_copy_saved_no_details">Kopija išsaugota šalia originalo, kuris nebuvo pakeistas. Nepavyko nukopijuoti kameros duomenų.</string>
+    <string name="edit_failed">Redagavimo nepavyko užbaigti. Nuotrauka nebuvo pakeista.</string>
+    <string name="edited_badge">Redaguota</string>
+    <string name="viewer_show_original">Rodyti originalą</string>
+    <string name="viewer_show_edited">Rodyti redaguotą nuotrauką</string>
+    <string name="tool_auto">Auto</string>
+    <string name="tool_light">Šviesa</string>
+    <string name="tool_color">Spalva</string>
+    <string name="tool_detail">Detalės</string>
+    <string name="tool_filters">Filtrai</string>
+    <string name="tool_crop">Apkarpyti</string>
+    <string name="adj_exposure">Ekspozicija</string>
+    <string name="adj_brightness">Ryškumas</string>
+    <string name="adj_contrast">Kontrastas</string>
+    <string name="adj_highlights">Šviesūs plotai</string>
+    <string name="adj_shadows">Šešėliai</string>
+    <string name="adj_black_point">Juodasis taškas</string>
+    <string name="adj_saturation">Sodrumas</string>
+    <string name="adj_vibrance">Gyvumas</string>
+    <string name="adj_temperature">Šiluma</string>
+    <string name="adj_tint">Atspalvis</string>
+    <string name="adj_sharpness">Ryškumas</string>
+    <string name="adj_vignette">Vinjetė</string>
+    <string name="geo_straighten">Ištiesinti</string>
+    <string name="geo_perspective_vertical">Vertikali perspektyva</string>
+    <string name="geo_perspective_horizontal">Horizontali perspektyva</string>
+    <string name="filter_amount">Stiprumas</string>
+    <string name="filter_name_none">Originalas</string>
+    <string name="filter_name_vivid">Ryškus</string>
+    <string name="filter_name_warm">Šiltas</string>
+    <string name="filter_name_cool">Vėsus</string>
+    <string name="filter_name_mono">Mono</string>
+    <string name="filter_name_noir">Noir</string>
+    <string name="filter_name_fade">Išblukęs</string>
+    <string name="filter_name_chrome">Chromas</string>
+    <string name="filter_name_sepia">Sepija</string>
+    <string name="crop_rotate">Pasukti</string>
+    <string name="crop_flip">Apversti</string>
+    <string name="shape_free">Laisva</string>
+    <string name="shape_original">Originalas</string>
+    <string name="shape_square">1:1</string>
+    <string name="shape_4_3">4:3</string>
+    <string name="shape_3_2">3:2</string>
+    <string name="shape_16_9">16:9</string>
+    <string name="action_paste_edits">Įklijuoti redagavimus</string>
+    <string name="action_revert_edits">Pašalinti redagavimus</string>
+    <plurals name="edits_pasted">
+        <item quantity="one">Redagavimai pritaikyti %d nuotraukai</item>
+        <item quantity="few">Redagavimai pritaikyti %d nuotraukoms</item>
+        <item quantity="many">Redagavimai pritaikyti %d nuotraukos</item>
+        <item quantity="other">Redagavimai pritaikyti %d nuotraukų</item>
+    </plurals>
+    <plurals name="edits_reverted">
+        <item quantity="one">Redagavimas pašalintas iš %d nuotraukos; originalas yra toks, koks visada buvo</item>
+        <item quantity="few">Redagavimai pašalinti iš %d nuotraukų; originalai yra tokie, kokie visada buvo</item>
+        <item quantity="many">Redagavimai pašalinti iš %d nuotraukos; originalai yra tokie, kokie visada buvo</item>
+        <item quantity="other">Redagavimai pašalinti iš %d nuotraukų; originalai yra tokie, kokie visada buvo</item>
+    </plurals>
+
+    <!-- Accessibility -->
+    <string name="slider_reset">Atstatyti neutralią reikšmę</string>
+    <string name="crop_area">Apkarpymo sritis, nuo %1$d %% iki %2$d %% skersai ir nuo %3$d %% iki %4$d %% žemyn</string>
+    <string name="crop_action_smaller">Sumažinti apkarpymą</string>
+    <string name="crop_action_larger">Padidinti apkarpymą</string>
+    <string name="crop_action_left">Perkelti apkarpymą į kairę</string>
+    <string name="crop_action_right">Perkelti apkarpymą į dešinę</string>
+    <string name="crop_action_up">Perkelti apkarpymą aukštyn</string>
+    <string name="crop_action_down">Perkelti apkarpymą žemyn</string>
+    <string name="viewer_zoom_in">Priartinti</string>
+    <string name="viewer_zoom_out">Atitolinti</string>
+    <string name="external_photo">Nuotrauka</string>
+    <string name="viewer_cannot_display">Šios nuotraukos parodyti negalima.</string>
+
+    <!-- Info: caption, editing the date and location, what the photo shows -->
+    <string name="info_caption">Parašas</string>
+    <string name="caption_add">Pridėti parašą</string>
+    <string name="caption_edit">Redaguoti parašą</string>
+    <string name="caption_title">Parašas</string>
+    <string name="caption_hint">Keli žodžiai apie šią nuotrauką</string>
+    <string name="caption_note">Saugoma tik eikon; nuotraukos failas nekeičiamas. Paieška jį randa.</string>
+    <string name="date_change">Keisti datą ir laiką</string>
+    <string name="date_revert">Atkurti pirminę datą</string>
+    <string name="date_time_title">Paros laikas</string>
+    <string name="action_next">Toliau</string>
+    <string name="location_title">Kur nufotografuota</string>
+    <string name="location_coordinates">Koordinatės</string>
+    <string name="location_coordinates_note">Dešimtainiai laipsniai, pirmiausia platuma: 41.9028, 12.4964</string>
+    <string name="location_invalid">Tai ne pozicija: du skaičiai, platuma nuo -90 iki 90 ir ilguma nuo -180 iki 180</string>
+    <string name="location_city">Arba suraskite miestą (veikia neprisijungus)</string>
+    <string name="location_remove">Pašalinti vietą</string>
+    <string name="location_change">Keisti vietą</string>
+    <string name="location_revert">Atkurti pirminę vietą</string>
+    <string name="info_map_description">Mažas žemėlapis, rodantis, kur nuotrauka padaryta</string>
+    <string name="metadata_done">Atlikta. Nuotrauka dabar rodo tai; originalas išsaugotas, kad galėtum jį atkurti.</string>
+    <string name="metadata_not_writable">Šio tipo failo pakeisti negalima.</string>
+    <string name="metadata_needs_permission">Norint pakeisti nuotraukos datą ar vietą, eikon turi galėti skaityti, kur nuotraukos padarytos: kitaip „Android“ rodo jam kopiją be vietos, o išsaugojimas ją ištrintų.</string>
+    <string name="metadata_nothing_to_revert">Nėra ką atkurti.</string>
+    <string name="metadata_interrupted">Ankstesnis šios nuotraukos pakeitimas nebuvo baigtas. Jos originalas išsaugotas: atkurk jį prieš keisdamas ką nors kita.</string>
+    <string name="metadata_failed">Pakeitimas nepavyko. Nuotrauka grąžinta tiksliai tokia, kokia buvo.</string>
+    <string name="metadata_restore_file">Atkurti originalų failą</string>
+    <string name="info_albums">Albumuose</string>
+    <string name="info_pets">Augintiniai</string>
+    <string name="info_shows">Gali rodyti</string>
+    <string name="pet_dog">Šuo</string>
+    <string name="pet_cat">Katė</string>
+    <string name="info_album">Įrenginio albumas</string>
+    <string name="label_landscape">Kraštovaizdį</string>
+    <string name="label_beach">Paplūdimį</string>
+    <string name="label_sea">Jūrą</string>
+    <string name="label_mountain">Kalną</string>
+    <string name="label_sunset">Saulėlydį</string>
+    <string name="label_snow">Sniegą</string>
+    <string name="label_city">Miestą</string>
+    <string name="label_building">Pastatą</string>
+    <string name="label_street">Gatvę</string>
+    <string name="label_woods">Mišką</string>
+    <string name="label_flower">Gėlę</string>
+    <string name="label_sky">Dangų</string>
+    <string name="label_person">Žmogų</string>
+    <string name="label_group">Žmonių grupę</string>
+    <string name="label_food">Maistą</string>
+    <string name="label_dessert">Desertą</string>
+    <string name="label_drink">Gėrimą</string>
+    <string name="label_car">Automobilį</string>
+    <string name="label_bicycle">Dviratį</string>
+    <string name="label_airplane">Lėktuvą</string>
+    <string name="label_boat">Laivą</string>
+    <string name="label_bird">Paukštį</string>
+    <string name="label_horse">Arklį</string>
+    <string name="label_interior">Kambarį</string>
+    <string name="label_night">Naktį</string>
+    <string name="label_party">Vakarėlį</string>
+    <string name="label_sport">Sporto renginį</string>
+    <string name="label_animal">Gyvūną</string>
+
+    <!-- Backup to your own server -->
+    <string name="backup_title">Atsarginė kopija į savo serverį</string>
+    <string name="backup_intro">Kopijuoja tavo nuotraukas ir vaizdo įrašus į serverį, kurį valdai pats, per užšifruotą ryšį. Niekas nepalieka šio telefono, kol neįjungsi atsarginio kopijavimo, viskas eina tik į žemiau nurodytą serverį, o eikon niekada jame nieko neištrina ir nekeičia. Slaptažodis ar raktas saugomas užšifruotas „Android Keystore“.</string>
+    <string name="backup_kind_immich">Immich (taip pat tai, ką įdiegia Umbrel)</string>
+    <string name="backup_kind_nextcloud">Nextcloud arba bet koks WebDAV serveris</string>
+    <string name="backup_address">Serverio adresas (https://…)</string>
+    <string name="backup_username">Prisijungimo vardas</string>
+    <string name="backup_folder">Aplankas serveryje</string>
+    <string name="backup_api_key">API raktas</string>
+    <string name="backup_app_password">Programos slaptažodis</string>
+    <string name="backup_secret_saved">Išsaugota. Palik tuščią, kad pasiliktum</string>
+    <string name="backup_help_immich">„Immich“: Paskyros nustatymai, API raktai, Naujas API raktas. Reikalingas leidimas yra asset.upload.</string>
+    <string name="backup_help_nextcloud">„Nextcloud“: Asmeniniai nustatymai, Sauga, Įrenginiai ir seansai, sukurk naują programos slaptažodį. Naudok jį, o ne prisijungimo slaptažodį.</string>
+    <string name="backup_save_test">Išsaugoti ir išbandyti ryšį</string>
+    <string name="backup_connected">Prisijungta prie %1$s.</string>
+    <string name="backup_failed">Nepavyko prisijungti: %1$s</string>
+    <string name="backup_certificate_declined">Sertifikatu nebuvo pasitikėta, todėl nieko neišsiųsta ir nebus.</string>
+    <string name="backup_certificate_title">Šio serverio sertifikatas nėra išduotas institucijos, kuria pasitiki tavo telefonas</string>
+    <string name="backup_certificate_body">%1$s pateikė žemiau esantį sertifikatą. Palygink jo atspaudą su tuo, kurį rodo tavo serveris (pavyzdžiui, su: openssl x509 -noout -fingerprint -sha256). Pasitikėk juo tik jei jie sutampa: nuo tada šiam serveriui priimamas būtent šis sertifikatas ir jokio kito.</string>
+    <string name="backup_certificate_subject">Išduota: %1$s</string>
+    <string name="backup_certificate_expires">Galioja iki %1$s</string>
+    <string name="backup_certificate_self_signed">Jis pasirašytas paties savęs, kaip paprastai būna namų serverio sertifikatas.</string>
+    <string name="backup_certificate_trust">Pasitikėti šiuo sertifikatu</string>
+    <string name="backup_enable">Kurti mano nuotraukų ir vaizdo įrašų atsarginę kopiją</string>
+    <string name="backup_test_first">Pirmiausia išsaugok ir išbandyk ryšį.</string>
+    <string name="backup_wifi_only">Tik per „Wi-Fi“</string>
+    <string name="backup_only_charging">Tik kraunant</string>
+    <string name="backup_videos">Įtraukti vaizdo įrašus</string>
+    <string name="backup_hidden">Įtraukti paslėptas nuotraukas</string>
+    <string name="backup_hidden_note">Paslėptos nuotraukos taip pat bus išsiųstos į tavo serverį, kur jos matomos taip pat, kaip ir visa kita.</string>
+    <string name="backup_confirm_title">Pradėti atsarginį kopijavimą?</string>
+    <plurals name="backup_confirm_body">
+        <item quantity="one">%1$d nuotrauka ar vaizdo įrašas bus kopijuojamas į %2$s po truputį, kai telefonas bus tavo leistame tinkle. Telefone ir serveryje nieko netrinama.</item>
+        <item quantity="few">%1$d nuotraukos ir vaizdo įrašai bus kopijuojami į %2$s po truputį, kai telefonas bus tavo leistame tinkle. Telefone ir serveryje nieko netrinama.</item>
+        <item quantity="many">%1$d nuotraukos ir vaizdo įrašo bus kopijuojama į %2$s po truputį, kai telefonas bus tavo leistame tinkle. Telefone ir serveryje nieko netrinama.</item>
+        <item quantity="other">%1$d nuotraukų ir vaizdo įrašų bus kopijuojama į %2$s po truputį, kai telefonas bus tavo leistame tinkle. Telefone ir serveryje nieko netrinama.</item>
+    </plurals>
+    <string name="backup_confirm_start">Pradėti</string>
+    <string name="backup_location_note">„Android“ slepia, kur nuotraukos padarytos, nuo programų, neturinčių nuotraukų vietų leidimo, todėl kopijos tavo serveryje neturėtų vietos.</string>
+    <string name="backup_progress">Nukopijuota: %1$,d iš %2$,d</string>
+    <plurals name="backup_refused">
+        <item quantity="one">Serveris atmetė %1$d nuotrauką ir ji nebus bandoma dar kartą, kol to neparašysi.</item>
+        <item quantity="few">Serveris atmetė %1$d nuotraukas ir jos nebus bandomos dar kartą, kol to neparašysi.</item>
+        <item quantity="many">Serveris atmetė %1$d nuotraukos ir jos nebus bandomos dar kartą, kol to neparašysi.</item>
+        <item quantity="other">Serveris atmetė %1$d nuotraukų ir jos nebus bandomos dar kartą, kol to neparašysi.</item>
+    </plurals>
+    <string name="backup_running">Kuriama atsarginė kopija…</string>
+    <string name="backup_idle">Laukiama tinkamo momento (tavo leistas tinklas, akumuliatorius nėra išsekęs).</string>
+    <string name="backup_last_run">Paskutinis paleidimas %1$s. Išsiųsta: %2$d. Jau buvo: %3$d. Atmesta: %4$d.</string>
+    <string name="backup_stopped">Sustojo, nes %1$s</string>
+    <string name="backup_stop_power_save">įjungtas akumuliatoriaus taupymo režimas.</string>
+    <string name="backup_stop_thermal">telefonas buvo per karštas.</string>
+    <string name="backup_stop_unreachable">serveris buvo nepasiekiamas arba užimtas. Bus bandoma dar kartą.</string>
+    <string name="backup_stop_unauthorized">serveris nepriėmė rakto ar slaptažodžio.</string>
+    <string name="backup_stop_untrusted">serverio sertifikatas nėra vienas iš tų, kuriais pasitikėjai.</string>
+    <string name="backup_stop_misconfigured">adresas netinka šio tipo serveriui.</string>
+    <string name="backup_stop_refusals">serveris atmetė daug failų iš eilės, o tai rodo serverio apribojimą, o ne nuotraukų problemą.</string>
+    <string name="backup_now">Kurti kopiją dabar</string>
+    <string name="backup_retry_refused">Bandyti dar kartą atmestas</string>
+
+    <!-- Network consent -->
+    <string name="network_allow">Leisti eikon naudoti internetą</string>
+    <string name="network_allow_note">Išjungta, kol neįjungsi. eikon naudoja tinklą tik tavo nuotraukoms nukopijuoti į žemiau esantį serverį, ir tik po to, kai nustatysi serverį ir įjungsi atsarginį kopijavimą. Kai tai išjungta, niekas negali niekur prisijungti.</string>
+    <string name="settings_privacy_network">eikon gali prisijungti prie interneto tik vienam dalykui: pasirenkamam tavo nuotraukų atsarginiam kopijavimui į serverį, kurį valdai pats. Jis išjungtas, kol jo neleisi (Nustatymai, Atsarginis kopijavimas) ir nenustatysi serverio. Jokios naudojimo analitikos, jokių reklamų, jokių paskyrų, jokių „Google“ paslaugų ir jokio mūsų debesies: jo nėra.</string>
+
+    <!-- First-run screens -->
+    <string name="onboarding_intro_title">Tavo nuotraukos, tavo telefone</string>
+    <string name="onboarding_intro_body">eikon yra nuotraukų ir vaizdo įrašų galerija, skirta „Android“. Ji rodo vaizdus, kuriuos telefonas jau saugo, randa juos pagal datą, vietą, žmones ar tai, ką jie rodo, ir redaguoja juos niekada nelies originalų.</string>
+    <string name="onboarding_point_local">Viskas lieka šiame įrenginyje. Jokios paskyros, jokios naudojimo analitikos, jokių reklamų.</string>
+    <string name="onboarding_point_independent">Ji nesiremia niekuo už tavo telefono ribų: jokių „Google“ paslaugų, jokio debesies, jokių trečiųjų šalių serverių.</string>
+    <string name="onboarding_point_yours">Jei nori atsarginės kopijos, ji eina tik į serverį, kurį valdai pats, ir tik jei ją nustatysi.</string>
+    <string name="onboarding_next">Toliau</string>
+    <string name="onboarding_start">Pradėti</string>
+    <string name="onboarding_page">%1$d puslapis iš %2$d</string>
+    <string name="onboarding_permissions_title">Ko eikon prašo ir kodėl</string>
+    <string name="onboarding_permissions_intro">Reikalingas tik pirmasis. Bet kurį iš jų gali pakeisti vėliau Nustatymuose arba telefono nustatymuose.</string>
+    <string name="onboarding_perm_media_title">Nuotraukos ir vaizdo įrašai</string>
+    <string name="onboarding_perm_media_body">Kad eikon galėtų rodyti tavo biblioteką. Jis skaito failus ten, kur „Android“ juos jau saugo, ir niekur jų nekopijuoja. Jei nori, gali leisti tik kai kurias nuotraukas.</string>
+    <string name="onboarding_perm_location_title">Nuotraukų vietos (neprivaloma)</string>
+    <string name="onboarding_perm_location_body">„Android“ slepia nuo programų, kur nuotrauka padaryta, nebent tai leisi. eikon tai naudoja, kad parodytų nuotraukos vietą neprisijungus veikiančiame žemėlapyje ir kad galėtų ieškoti pagal vietą. Vietos apskaičiuojamos telefone: jokia pozicija niekada niekur nesiunčiama.</string>
+    <string name="onboarding_perm_network_title">Internetas (neprivaloma)</string>
+    <string name="onboarding_perm_network_body">Naudojamas tik vienam dalykui: tavo nuotraukoms nukopijuoti į serverį, kurį valdai pats („Immich“, „Nextcloud“), jei kada tai nustatysi. Kitu atveju eikon niekada niekur neprisijungia. Jis išjungtas, kol jo čia neįjungsi, ir bet kada gali vėl išjungti Nustatymuose.</string>
+    <string name="onboarding_allow">Leisti</string>
+    <string name="onboarding_allowed">Leidžiama</string>
+    <string name="onboarding_promise">Niekas čia nepriklauso nuo nieko už tavo telefono ribų: jokių „Google“ paslaugų, jokių paskyrų, jokios naudojimo analitikos. Tavo nuotraukos lieka šiame įrenginyje arba, jei taip pasirinksi, eina į tavo paties serverį.</string>
+
+    <!-- Support -->
+    <string name="support_title">Parama</string>
+    <string name="support_body">eikon yra nemokamas, be reklamų ir tavęs neseka. Jei jis tau patinka, gali išsiųsti kelis satus per „Lightning“ tinklą.</string>
+    <string name="support_button">Paaukoti per „Lightning“</string>
+    <string name="support_copied">„Lightning“ piniginė nerasta — adresas nukopijuotas: %1$s</string>
+
+    <!-- Analyze now -->
+    <string name="analyze_now_running">Analizuojama…</string>
+    <string name="analyze_now_hint">Prasideda iš karto, tik šiame telefone, net esant akumuliatoriaus taupymo režimui.</string>
+    <string name="analyze_now_hint_off">Pirmiausia aukščiau įjunk bent vieną žingsnį.</string>
+    <string name="analyze_now_hint_paused">Analizė pristabdyta: išjunk pauzę, kad analizuotum dabar.</string>
+
+    <!-- Pictures from other apps -->
+    <string name="viewer_open_in_library">Atverti bibliotekoje</string>
+</resources>

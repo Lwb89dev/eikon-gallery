@@ -25,7 +25,7 @@ All runtime libraries are Apache License 2.0 unless noted:
 - [ONNX Runtime](https://github.com/microsoft/onnxruntime) 1.28.0 (MIT License), Copyright (c) Microsoft Corporation. Runs the models above.
 - Dagger / Hilt
 - [SQLCipher for Android](https://www.zetetic.net/sqlcipher/) 4.19.0, Community Edition (BSD-style license, full text below), Copyright (c) 2025 ZETETIC LLC. Encrypts the library's database on the phone. Its native library contains SQLite 3.53 (public domain) and LibTomCrypt (public domain).
-- [OkHttp](https://square.github.io/okhttp/) 5.5.0 and Okio (Apache License 2.0), Copyright Square, Inc. **Only in the `backup` build**: the HTTP client of the backup to your own server. The `standard` build does not contain it.
+- [OkHttp](https://square.github.io/okhttp/) 5.5.0 and Okio (Apache License 2.0), Copyright Square, Inc. The HTTP client of the backup to your own server (used only after you allow it; in 1.0.0 it was only in the separate `backup` build).
 - kotlinx.coroutines
 - [Tesseract4Android](https://github.com/adaptech-cz/Tesseract4Android) 4.9.0 (Apache License 2.0), which bundles
   native builds of Tesseract 5.5.1 (Apache License 2.0), Leptonica 1.85.0 (BSD-style), libjpeg v9f (IJG

@@ -1,0 +1,659 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Library -->
+    <string name="library_title">Βιβλιοθήκη</string>
+    <string name="today">Σήμερα</string>
+    <string name="yesterday">Χθες</string>
+    <string name="empty_library">Δεν υπάρχουν ακόμα φωτογραφίες ή βίντεο</string>
+    <string name="empty_filter">Τίποτα δεν ταιριάζει με αυτό το φίλτρο</string>
+    <string name="empty_filter_clear">Εμφάνιση όλων</string>
+    <string name="sync_progress">Φόρτωση βιβλιοθήκης: %1$,d / %2$,d</string>
+    <string name="sync_failed">Δεν ήταν δυνατή η ανανέωση της βιβλιοθήκης</string>
+    <string name="sync_retry">Επανάληψη</string>
+    <string name="scrubber_description">Κύλιση στη βιβλιοθήκη ανά ημερομηνία</string>
+
+    <!-- Permissions -->
+    <string name="permission_title">Οι φωτογραφίες σας μένουν στη συσκευή σας</string>
+    <string name="permission_body">Το eikon χρειάζεται πρόσβαση στις φωτογραφίες και τα βίντεό σας για να τα εμφανίζει. Μένουν στη συσκευή σας: τίποτα δεν ανεβαίνει, εκτός αν ρυθμίσετε αντίγραφο ασφαλείας σε δικό σας διακομιστή.</string>
+    <string name="permission_grant">Να επιτραπεί η πρόσβαση</string>
+    <string name="permission_denied">Η πρόσβαση απορρίφθηκε. Μπορείτε να την επιτρέψετε στις ρυθμίσεις του συστήματος.</string>
+    <string name="permission_open_settings">Άνοιγμα ρυθμίσεων</string>
+    <string name="limited_banner">Εμφανίζονται μόνο οι φωτογραφίες που επιλέξατε</string>
+    <string name="limited_select_more">Επιλογή περισσότερων</string>
+    <string name="limited_allow_all">Να επιτραπούν όλες</string>
+
+    <!-- Menus and filters -->
+    <string name="menu_filter">Φίλτρο</string>
+    <string name="menu_sort">Ταξινόμηση</string>
+    <string name="menu_settings">Ρυθμίσεις</string>
+    <string name="menu_more">Περισσότερες επιλογές</string>
+    <string name="filter_all">Όλα</string>
+    <string name="filter_photos">Φωτογραφίες</string>
+    <string name="filter_videos">Βίντεο</string>
+    <string name="filter_favorites">Αγαπημένα</string>
+    <string name="filter_screenshots">Στιγμιότυπα οθόνης</string>
+    <string name="filter_screen_recordings">Εγγραφές οθόνης</string>
+    <string name="filter_panoramas">Πανοράματα</string>
+    <string name="filter_raw">RAW</string>
+    <string name="filter_clear">Εκκαθάριση φίλτρου</string>
+    <string name="sort_by_date_taken">Ημερομηνία λήψης</string>
+    <string name="sort_by_date_added">Ημερομηνία προσθήκης</string>
+    <string name="sort_newest_first">Πρώτα τα νεότερα</string>
+    <string name="sort_oldest_first">Πρώτα τα παλαιότερα</string>
+
+    <!-- Selection and actions -->
+    <plurals name="selected_count">
+        <item quantity="one">%d επιλεγμένο</item>
+        <item quantity="other">%d επιλεγμένα</item>
+    </plurals>
+    <string name="action_share">Κοινοποίηση</string>
+    <string name="action_favorite">Προσθήκη στα αγαπημένα</string>
+    <string name="action_unfavorite">Αφαίρεση από τα αγαπημένα</string>
+    <string name="action_delete">Διαγραφή</string>
+    <string name="action_info">Πληροφορίες</string>
+    <string name="action_back">Πίσω</string>
+    <string name="action_clear_selection">Εκκαθάριση επιλογής</string>
+    <string name="action_select">Επιλογή</string>
+    <string name="action_failed">Κάτι πήγε στραβά</string>
+    <plurals name="moved_to_trash">
+        <item quantity="one">%d στοιχείο μετακινήθηκε στον κάδο. Το Android το κρατά για 30 ημέρες.</item>
+        <item quantity="other">%d στοιχεία μετακινήθηκαν στον κάδο. Το Android τα κρατά για 30 ημέρες.</item>
+    </plurals>
+
+    <!-- Accessibility -->
+    <string name="cd_photo">Φωτογραφία, %1$s</string>
+    <string name="cd_video">Βίντεο, %1$s, %2$s</string>
+    <string name="cd_edited_badge">Επεξεργασμένη</string>
+    <string name="cd_favorite_badge">Αγαπημένη</string>
+    <string name="viewer_position">%1$d από %2$d</string>
+
+    <!-- Video -->
+    <string name="video_play">Αναπαραγωγή</string>
+    <string name="video_pause">Παύση</string>
+    <string name="video_mute">Σίγαση</string>
+    <string name="video_unmute">Κατάργηση σίγασης</string>
+    <string name="video_seek">Μετάβαση</string>
+
+    <!-- Info panel -->
+    <string name="info_title">Πληροφορίες</string>
+    <string name="info_loading">Ανάγνωση λεπτομερειών…</string>
+    <string name="info_error">Δεν ήταν δυνατή η ανάγνωση των λεπτομερειών αυτού του αρχείου</string>
+    <string name="info_section_file">Αρχείο</string>
+    <string name="info_section_camera">Κάμερα</string>
+    <string name="info_section_video">Βίντεο</string>
+    <string name="info_name">Όνομα</string>
+    <string name="info_type">Τύπος</string>
+    <string name="info_folder">Φάκελος</string>
+    <string name="info_resolution">Ανάλυση</string>
+    <string name="info_megapixels">Megapixel</string>
+    <string name="info_size">Μέγεθος</string>
+    <string name="info_date">Ημερομηνία</string>
+    <string name="info_modified">Τροποποιήθηκε</string>
+    <string name="info_color_profile">Προφίλ χρώματος</string>
+    <string name="info_location">Τοποθεσία</string>
+    <string name="info_location_none">Δεν υπάρχει αποθηκευμένη τοποθεσία σε αυτό το αρχείο</string>
+    <string name="info_location_hidden">Το Android κρύβει τις τοποθεσίες των φωτογραφιών από τις εφαρμογές μέχρι να το επιτρέψετε</string>
+    <string name="info_location_allow">Να επιτραπεί</string>
+    <string name="info_location_open">Άνοιγμα σε εφαρμογή χαρτών</string>
+    <string name="info_camera">Συσκευή</string>
+    <string name="info_lens">Φακός</string>
+    <string name="info_focal_length">Εστιακή απόσταση</string>
+    <string name="info_aperture">Διάφραγμα</string>
+    <string name="info_shutter">Ταχύτητα κλείστρου</string>
+    <string name="info_iso">Ευαισθησία</string>
+    <string name="info_exposure_bias">Αντιστάθμιση έκθεσης</string>
+    <string name="info_flash">Φλας</string>
+    <string name="info_flash_fired">Εκτοξεύθηκε</string>
+    <string name="info_flash_off">Δεν εκτοξεύθηκε</string>
+    <string name="info_orientation">Προσανατολισμός</string>
+    <string name="info_software">Λογισμικό</string>
+    <string name="info_duration">Διάρκεια</string>
+    <string name="info_frame_rate">Ρυθμός καρέ</string>
+    <string name="info_video_codec">Κωδικοποιητής βίντεο</string>
+    <string name="info_audio_codec">Κωδικοποιητής ήχου</string>
+    <string name="info_bitrate">Ρυθμός bit</string>
+    <string name="info_dynamic_range">Δυναμική περιοχή</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Ρυθμίσεις</string>
+    <string name="settings_appearance">Εμφάνιση</string>
+    <string name="theme_system">Ακολούθηση συστήματος</string>
+    <string name="theme_light">Φωτεινό</string>
+    <string name="theme_dark">Σκούρο</string>
+    <string name="settings_privacy">Απόρρητο</string>
+    <string name="settings_privacy_body">Το eikon λειτουργεί στη συσκευή σας. Δεν έχει λογαριασμό ούτε αναλύσεις χρήσης, και τα δεδομένα του εξαιρούνται από τα αντίγραφα ασφαλείας του Android.\n\nΟι φωτογραφίες σας δεν αντιγράφονται ποτέ: το eikon κρατά ένα τοπικό ευρετήριο με λεπτομέρειες των αρχείων (όνομα, ημερομηνία, μέγεθος, φάκελος), ώστε η βιβλιοθήκη να ανοίγει αμέσως. Η διαγραφή της εφαρμογής διαγράφει και το ευρετήριο.</string>
+    <string name="settings_storage_encrypted">Η βάση δεδομένων της βιβλιοθήκης (το ευρετήριο, τα άλμπουμ, οι επεξεργασίες, οι λεζάντες και ό,τι βρήκε η ανάλυση) είναι κρυπτογραφημένη σε αυτό το τηλέφωνο με AES-256. Το κλειδί της φυλάσσεται από το Android Keystore.</string>
+    <string name="settings_storage_not_encrypted">Η βάση δεδομένων της βιβλιοθήκης δεν μπόρεσε να κρυπτογραφηθεί (%1$s), οπότε εξακολουθεί να αποθηκεύεται χωρίς κρυπτογράφηση. Το eikon δοκιμάζει ξανά σε κάθε εκκίνηση.</string>
+    <string name="settings_storage_reset_title">Η βάση δεδομένων της βιβλιοθήκης δημιουργήθηκε από την αρχή</string>
+    <string name="settings_storage_reset">Το κλειδί που προστάτευε τη βάση δεδομένων της βιβλιοθήκης χάθηκε, οπότε το eikon χρειάστηκε να δημιουργήσει νέα. Τα άλμπουμ, οι επεξεργασίες, οι λεζάντες και τα ονόματα που είχατε προσθέσει χάθηκαν. Οι φωτογραφίες σας δεν άλλαξαν και η ανάλυση θα εκτελεστεί ξανά.</string>
+    <string name="settings_storage_reset_ok">Το κατάλαβα</string>
+    <string name="settings_about">Σχετικά</string>
+    <string name="settings_licenses">Άδειες ανοικτού κώδικα</string>
+    <string name="licenses_title">Άδειες ανοικτού κώδικα</string>
+    <string name="settings_version">Έκδοση %1$s</string>
+
+    <!-- Navigation and collections -->
+    <string name="nav_library">Βιβλιοθήκη</string>
+    <string name="nav_search">Αναζήτηση</string>
+    <string name="nav_collections">Συλλογές</string>
+    <string name="collections_title">Συλλογές</string>
+    <string name="section_people">Άτομα</string>
+    <string name="section_albums">Άλμπουμ</string>
+    <string name="section_personal">Προσωπικά</string>
+    <string name="section_folders">Φάκελοι συσκευής</string>
+    <string name="collection_favorites">Αγαπημένα</string>
+    <string name="collection_recent">Προστέθηκαν πρόσφατα</string>
+    <string name="collection_videos">Βίντεο</string>
+    <string name="collection_screenshots">Στιγμιότυπα οθόνης</string>
+    <string name="collection_screen_recordings">Εγγραφές οθόνης</string>
+    <string name="collection_panoramas">Πανοράματα</string>
+    <string name="collection_raw">RAW</string>
+    <string name="collection_trash">Διαγράφηκαν πρόσφατα</string>
+    <string name="collection_hidden">Κρυφά</string>
+    <plurals name="items_count">
+        <item quantity="one">%d στοιχείο</item>
+        <item quantity="other">%d στοιχεία</item>
+    </plurals>
+    <string name="empty_album">Αυτό το άλμπουμ είναι άδειο. Επιλέξτε φωτογραφίες στη βιβλιοθήκη και πατήστε «Προσθήκη σε άλμπουμ».</string>
+    <string name="empty_hidden">Τίποτα δεν είναι κρυμμένο</string>
+    <string name="empty_collection">Δεν υπάρχει τίποτα εδώ ακόμα</string>
+
+    <!-- Albums -->
+    <string name="album_new">Νέο άλμπουμ</string>
+    <string name="album_name_hint">Όνομα άλμπουμ</string>
+    <string name="album_create">Δημιουργία</string>
+    <string name="album_rename">Μετονομασία</string>
+    <string name="album_delete">Διαγραφή άλμπουμ</string>
+    <string name="album_delete_title">Διαγραφή αυτού του άλμπουμ;</string>
+    <string name="album_delete_message">Διαγράφεται μόνο το άλμπουμ. Οι φωτογραφίες και τα βίντεο που περιέχει μένουν εκεί που είναι.</string>
+    <string name="album_move_earlier">Μετακίνηση νωρίτερα</string>
+    <string name="album_move_later">Μετακίνηση αργότερα</string>
+    <string name="action_add_to_album">Προσθήκη σε άλμπουμ</string>
+    <string name="action_remove_from_album">Αφαίρεση από το άλμπουμ</string>
+    <string name="action_hide">Απόκρυψη</string>
+    <string name="action_unhide">Εμφάνιση</string>
+    <string name="action_cancel">Ακύρωση</string>
+    <string name="action_save">Αποθήκευση</string>
+    <plurals name="added_to_album">
+        <item quantity="one">%1$d στοιχείο προστέθηκε στο «%2$s»</item>
+        <item quantity="other">%1$d στοιχεία προστέθηκαν στο «%2$s»</item>
+    </plurals>
+    <plurals name="removed_from_album">
+        <item quantity="one">%d στοιχείο αφαιρέθηκε από το άλμπουμ</item>
+        <item quantity="other">%d στοιχεία αφαιρέθηκαν από το άλμπουμ</item>
+    </plurals>
+    <plurals name="moved_to_hidden">
+        <item quantity="one">%d στοιχείο αποκρύφθηκε. Θα το βρείτε στις Συλλογές, Κρυφά.</item>
+        <item quantity="other">%d στοιχεία αποκρύφθηκαν. Θα τα βρείτε στις Συλλογές, Κρυφά.</item>
+    </plurals>
+    <plurals name="unhidden">
+        <item quantity="one">%d στοιχείο είναι ξανά ορατό</item>
+        <item quantity="other">%d στοιχεία είναι ξανά ορατά</item>
+    </plurals>
+
+    <!-- Filters -->
+    <string name="filter_type_title">Τύπος</string>
+    <string name="filter_kind_title">Είδος</string>
+    <string name="filter_any">Οποιοδήποτε</string>
+    <string name="filter_favorites_only">Μόνο αγαπημένα</string>
+    <string name="filter_edited">Επεξεργασμένες</string>
+    <string name="share_preparing">Προετοιμασία των επεξεργασμένων φωτογραφιών για κοινοποίηση</string>
+    <string name="filter_edited_only">Μόνο επεξεργασμένες</string>
+    <string name="filter_clear_all">Εκκαθάριση φίλτρων</string>
+
+    <!-- Locks -->
+    <string name="locked_title">Κλειδωμένο</string>
+    <string name="locked_body">Χρησιμοποιήστε το δακτυλικό σας αποτύπωμα, το πρόσωπό σας ή το κλείδωμα οθόνης για να το ανοίξετε.</string>
+    <string name="locked_unlock">Ξεκλείδωμα</string>
+    <string name="auth_subtitle">Επιβεβαιώστε ότι είστε εσείς</string>
+    <string name="auth_title_hidden">Ξεκλείδωμα των «Κρυφά»</string>
+    <string name="auth_title_trash">Ξεκλείδωμα των «Διαγράφηκαν πρόσφατα»</string>
+    <string name="auth_unavailable">Ο έλεγχος ταυτότητας δεν είναι διαθέσιμος αυτή τη στιγμή. Δοκιμάστε ξανά σε λίγο.</string>
+    <string name="no_device_lock_notice">Αυτό το τηλέφωνο δεν έχει κλείδωμα οθόνης, οπότε τα «Κρυφά» δεν προστατεύονται. Ρυθμίστε ένα στις ρυθμίσεις του συστήματος.</string>
+
+    <!-- Recently deleted -->
+    <string name="trash_info">Τα στοιχεία διαγράφονται οριστικά μετά από περίπου 30 ημέρες.</string>
+    <string name="trash_empty">Δεν διαγράφηκε τίποτα πρόσφατα</string>
+    <string name="trash_restore">Επαναφορά</string>
+    <string name="trash_delete_forever">Οριστική διαγραφή</string>
+    <plurals name="days_left_short">
+        <item quantity="one">%d ημ.</item>
+        <item quantity="other">%d ημ.</item>
+    </plurals>
+    <plurals name="trash_restored">
+        <item quantity="one">%d στοιχείο επαναφέρθηκε</item>
+        <item quantity="other">%d στοιχεία επαναφέρθηκαν</item>
+    </plurals>
+    <plurals name="trash_deleted">
+        <item quantity="one">%d στοιχείο διαγράφηκε οριστικά</item>
+        <item quantity="other">%d στοιχεία διαγράφηκαν οριστικά</item>
+    </plurals>
+
+    <!-- Settings: security -->
+    <string name="settings_security">Ασφάλεια</string>
+    <string name="setting_lock_hidden">Απαίτηση ταυτοποίησης για τα «Κρυφά»</string>
+    <string name="setting_lock_trash">Απαίτηση ταυτοποίησης για τα «Διαγράφηκαν πρόσφατα»</string>
+    <string name="setting_show_hidden">Εμφάνιση των «Κρυφά» στις Συλλογές</string>
+    <string name="setting_secure_screens">Απόκρυψη του eikon στις πρόσφατες εφαρμογές και αποκλεισμός στιγμιοτύπων οθόνης</string>
+    <string name="settings_security_body">Τα κρυφά στοιχεία μένουν εκτός της βιβλιοθήκης, των συλλογών και της αναζήτησης, και το άνοιγμα των «Κρυφά» ζητά το δακτυλικό σας αποτύπωμα, το πρόσωπό σας ή το κλείδωμα οθόνης. Τα ίδια τα αρχεία δεν είναι κρυπτογραφημένα και παραμένουν στον κανονικό χώρο αποθήκευσης του τηλεφώνου σας, όπου άλλες εφαρμογές με πρόσβαση στις φωτογραφίες μπορούν ακόμα να τα δουν.</string>
+
+    <!-- Search -->
+    <string name="search_placeholder">Ημερομηνία, τοποθεσία, κείμενο, όνομα αρχείου</string>
+    <string name="search_clear">Εκκαθάριση αναζήτησης</string>
+    <string name="search_no_results">Καμία φωτογραφία δεν ταιριάζει</string>
+    <string name="search_hint_title">Αναζητήστε στη βιβλιοθήκη σας</string>
+    <string name="search_hint_body">Δοκιμάστε μια ημερομηνία («August 2025», «yesterday»), μια τοποθεσία («Rome», «Tuscany»), μια λέξη που εμφανίζεται σε μια φωτογραφία ή στο όνομα του αρχείου της, ή ένα είδος («videos», «screenshots», «favorites»).\n\nΟι ημερομηνίες και τα είδη γίνονται κατανοητά στα αγγλικά και στα ιταλικά. Οι τοποθεσίες, το κείμενο μέσα στις φωτογραφίες και ό,τι εμφανίζουν βρίσκονται αφού εκτελεστεί η ανάλυση (Ρυθμίσεις, Ανάλυση).</string>
+    <string name="search_analysis_off">Η αναζήτηση ανά τοποθεσία, ανά κείμενο μέσα στις φωτογραφίες και ανά το τι εμφανίζουν είναι απενεργοποιημένη. Μπορείτε να την ενεργοποιήσετε στις Ρυθμίσεις, Ανάλυση.</string>
+    <string name="search_analysis_note">Οι φωτογραφίες αναλύονται ακόμα στο παρασκήνιο (%1$d %%). Ορισμένα αποτελέσματα μπορεί να λείπουν.</string>
+
+    <!-- Settings: analysis -->
+    <string name="settings_analysis">Ανάλυση</string>
+    <string name="analysis_places_progress">Τοποθεσίες: %1$,d από %2$,d</string>
+    <string name="analysis_semantic_progress">Τι εμφανίζουν οι φωτογραφίες: %1$,d από %2$,d</string>
+    <string name="analysis_semantic_unavailable">Το μοντέλο που αναγνωρίζει τι εμφανίζουν οι φωτογραφίες δεν μπόρεσε να φορτωθεί, οπότε αυτό το βήμα δεν εκτελείται.</string>
+    <string name="search_semantic_unavailable">Η αναζήτηση ανά το τι εμφανίζουν οι φωτογραφίες δεν είναι διαθέσιμη αυτή τη στιγμή (το μοντέλο δεν μπόρεσε να φορτωθεί). Τα υπόλοιπα αποτελέσματα εξακολουθούν να λειτουργούν.</string>
+    <string name="analysis_people_progress">Άτομα: %1$,d από %2$,d</string>
+    <string name="analysis_people_unavailable">Τα μοντέλα που εντοπίζουν πρόσωπα δεν μπόρεσαν να φορτωθούν, οπότε αυτό το βήμα δεν εκτελείται.</string>
+    <string name="analysis_duplicates_progress">Διπλότυπα: %1$,d από %2$,d</string>
+    <string name="analysis_text_progress">Κείμενο στις φωτογραφίες: %1$,d από %2$,d</string>
+    <string name="analysis_running">Ανάλυση σε εξέλιξη…</string>
+    <string name="analysis_idle">Αναμονή για την κατάλληλη στιγμή (μπαταρία όχι χαμηλή, Εξοικονόμηση μπαταρίας απενεργοποιημένη και, αν το επιλέξατε, φόρτιση)</string>
+    <string name="analysis_up_to_date">Όλα έχουν αναλυθεί</string>
+    <string name="setting_pause_analysis">Παύση ανάλυσης</string>
+    <string name="setting_only_charging">Μόνο κατά τη φόρτιση</string>
+    <string name="setting_analyze_places">Εύρεση φωτογραφιών ανά τοποθεσία</string>
+    <string name="setting_analyze_semantic">Εύρεση φωτογραφιών ανά το τι εμφανίζουν</string>
+    <string name="setting_analyze_people">Εύρεση ατόμων στις φωτογραφίες</string>
+    <string name="setting_analyze_people_note">Τα πρόσωπα εντοπίζονται και συγκρίνονται μόνο σε αυτό το τηλέφωνο. Τίποτα σχετικά με ένα πρόσωπο δεν το εγκαταλείπει ποτέ, και το eikon δεν προσπαθεί ποτέ να αναγνωρίσει κανέναν: απλώς ομαδοποιεί πρόσωπα που μοιάζουν μεταξύ τους, και τις ομάδες τις ονομάζετε εσείς.</string>
+    <string name="setting_analyze_duplicates">Εύρεση διπλότυπων φωτογραφιών</string>
+    <string name="setting_analyze_text">Εύρεση κειμένου στις φωτογραφίες</string>
+    <string name="analysis_location_permission">Το Android κρύβει από τις εφαρμογές πού τραβήχτηκαν οι φωτογραφίες μέχρι να το επιτρέψετε.</string>
+    <string name="analysis_allow_locations">Να επιτραπεί η πρόσβαση στις τοποθεσίες των φωτογραφιών</string>
+    <string name="analyze_now">Ανάλυση τώρα</string>
+    <string name="settings_analysis_body">Η ανάλυση εκτελείται μόνο στο τηλέφωνό σας, στο παρασκήνιο, και κάνει παύση όταν η μπαταρία είναι χαμηλή, η Εξοικονόμηση μπαταρίας είναι ενεργή ή το τηλέφωνο ζεσταίνεται (η «Ανάλυση τώρα» συνεχίζει και με Εξοικονόμηση μπαταρίας). Αποθηκεύει την τοποθεσία κάθε φωτογραφίας (προσδιορίζεται χωρίς σύνδεση, καμία τοποθεσία δεν στέλνεται ποτέ πουθενά), μια αριθμητική περιγραφή του τι δείχνει η φωτογραφία (ώστε να μπορείτε να αναζητήσετε «σκύλος» ή «ηλιοβασίλεμα»· δεν είναι λεζάντα και δεν μπορεί να διαβαστεί ξανά ως εικόνα) και οποιοδήποτε κείμενο διαβάζει στη φωτογραφία, ώστε η Αναζήτηση να τα βρίσκει. Αν ενεργοποιήσετε τα άτομα, αποθηκεύει επίσης πού βρίσκεται κάθε πρόσωπο σε μια φωτογραφία και μια αριθμητική περιγραφή του, μόνο για να ομαδοποιεί πρόσωπα που μοιάζουν. Αν ενεργοποιήσετε τα διπλότυπα, αποθηκεύει ένα σύντομο αποτύπωμα κάθε φωτογραφίας και των αρχείων με ίδιο μέγεθος, μόνο για να βρίσκει αντίγραφα. Η αναγνώριση του τι δείχνουν οι φωτογραφίες και η ανάγνωση κειμένου είναι αργές και επιβαρύνουν έντονα τον επεξεργαστή, γι’ αυτό η ανάλυση περιμένει από προεπιλογή τη φόρτιση.</string>
+
+    <!-- Info panel: derived data -->
+    <string name="info_place">Πλησιέστερη τοποθεσία</string>
+    <string name="info_text_found">Κείμενο σε αυτή τη φωτογραφία</string>
+    <string name="info_text_copy">Αντιγραφή κειμένου</string>
+
+    <!-- People -->
+    <string name="collection_people">Άτομα</string>
+    <string name="people_title">Άτομα</string>
+    <string name="person_unnamed">Άτομο χωρίς όνομα</string>
+    <string name="person_add_name">Προσθήκη ονόματος</string>
+    <string name="person_rename">Ονομασία αυτού του ατόμου</string>
+    <string name="person_name_hint">Όνομα</string>
+    <string name="person_same_name_note">Τα άτομα με το ίδιο όνομα συγχωνεύονται σε ένα.</string>
+    <string name="person_favorite">Σήμανση ως αγαπημένου</string>
+    <string name="person_unfavorite">Αφαίρεση από τα αγαπημένα</string>
+    <string name="person_hide">Απόκρυψη αυτού του ατόμου</string>
+    <string name="person_unhide">Εμφάνιση αυτού του ατόμου</string>
+    <string name="person_merge">Συγχώνευση με άλλο άτομο…</string>
+    <string name="person_merge_title">Συγχώνευση με</string>
+    <string name="person_merge_empty">Δεν υπάρχει κανείς άλλος για συγχώνευση.</string>
+    <string name="person_not_this">Δεν είναι αυτό το άτομο</string>
+    <string name="person_remove_from_people">Δεν είναι πρόσωπο</string>
+    <string name="people_show_hidden">Εμφάνιση κρυφών ατόμων (%1$d)</string>
+    <string name="people_hide_hidden">Απόκρυψη κρυφών ατόμων</string>
+    <string name="people_empty_off">Τα Άτομα είναι απενεργοποιημένα. Ενεργοποιήστε την «Εύρεση ατόμων στις φωτογραφίες» στις Ρυθμίσεις, Ανάλυση, και το eikon θα ομαδοποιήσει τα πρόσωπα που βρίσκει. Όλα μένουν σε αυτό το τηλέφωνο.</string>
+    <string name="people_empty_working">Δεν έχουν βρεθεί ακόμα πρόσωπα (αναλύθηκε το %1$d %% των φωτογραφιών σας). Η ανάλυση εκτελείται στο παρασκήνιο κατά τη φόρτιση.</string>
+    <string name="people_empty_done">Δεν βρέθηκαν πρόσωπα στις φωτογραφίες σας.</string>
+    <string name="people_go_settings">Άνοιγμα ρυθμίσεων</string>
+    <string name="person_photos_empty">Καμία φωτογραφία.</string>
+    <plurals name="moved_to_new_person">
+        <item quantity="one">%d φωτογραφία μετακινήθηκε σε νέο άτομο</item>
+        <item quantity="other">%d φωτογραφίες μετακινήθηκαν σε νέο άτομο</item>
+    </plurals>
+    <plurals name="removed_from_people">
+        <item quantity="one">%d φωτογραφία αφαιρέθηκε από τα Άτομα</item>
+        <item quantity="other">%d φωτογραφίες αφαιρέθηκαν από τα Άτομα</item>
+    </plurals>
+    <string name="info_people">Άτομα</string>
+    <plurals name="info_people_unnamed_count">
+        <item quantity="one">%d χωρίς όνομα</item>
+        <item quantity="other">%d χωρίς όνομα</item>
+    </plurals>
+
+    <string name="section_memories">Αναμνήσεις</string>
+    <string name="section_pets">Κατοικίδια</string>
+    <string name="collection_dogs">Σκύλοι</string>
+    <string name="collection_cats">Γάτες</string>
+    <string name="empty_pets">Δεν έχουν βρεθεί ακόμα σκύλοι ή γάτες. Τα κατοικίδια αναγνωρίζονται από το τι εμφανίζουν οι φωτογραφίες: ενεργοποιήστε την «Εύρεση φωτογραφιών ανά το τι εμφανίζουν» στις Ρυθμίσεις, Ανάλυση, και περιμένετε να ολοκληρωθεί.</string>
+
+    <!-- Places -->
+    <string name="places_title">Τοποθεσίες</string>
+    <string name="places_tab_list">Λίστα</string>
+    <string name="places_tab_map">Χάρτης</string>
+    <string name="place_unknown">Άλλες τοποθεσίες</string>
+    <string name="place_near">Κοντά σε %1$s</string>
+    <string name="places_expand">Εμφάνιση</string>
+    <string name="places_collapse">Απόκρυψη</string>
+    <string name="collection_places">Τοποθεσίες</string>
+    <string name="places_map_note">Μόνο περιγράμματα χωρών και ονόματα μεγαλύτερων πόλεων: δεν κατεβαίνουν εικόνες χάρτη και καμία θέση δεν φεύγει ποτέ από το τηλέφωνο. Τσιμπήστε ή πατήστε δύο φορές για ζουμ, πατήστε έναν δείκτη για να δείτε τις φωτογραφίες του.</string>
+    <string name="places_map_description">Χάρτης με τα μέρη όπου τραβήχτηκαν οι φωτογραφίες σας, με δείκτες για ομάδες φωτογραφιών</string>
+    <string name="places_empty_off">Οι Τοποθεσίες είναι απενεργοποιημένες. Ενεργοποιήστε την «Εύρεση φωτογραφιών ανά τοποθεσία» στις Ρυθμίσεις, Ανάλυση, και το eikon θα προσδιορίσει χωρίς σύνδεση πού τραβήχτηκαν οι φωτογραφίες σας από τα δεδομένα GPS τους.</string>
+    <string name="places_empty_working">Δεν έχουν βρεθεί ακόμα τοποθεσίες (αναλύθηκε το %1$d %% των φωτογραφιών σας). Η ανάλυση εκτελείται στο παρασκήνιο κατά τη φόρτιση.</string>
+    <string name="places_empty_done">Καμία από τις φωτογραφίες σας δεν έχει θέση, ή το eikon ίσως δεν επιτρέπεται να διαβάζει τις τοποθεσίες των φωτογραφιών (Ρυθμίσεις, Ανάλυση).</string>
+    <string name="section_places">Τοποθεσίες και ταξίδια</string>
+
+    <!-- Trips -->
+    <string name="collection_trips">Ταξίδια</string>
+    <string name="trips_title">Ταξίδια</string>
+    <string name="trip_untitled">Ταξίδι</string>
+    <string name="trip_reason">Περίπου %1$d χλμ. από το σημείο όπου τραβάτε τις περισσότερες φωτογραφίες σας (κοντά σε %2$s)</string>
+    <string name="trip_home_unknown">άγνωστο μέρος</string>
+    <plurals name="trip_summary_days">
+        <item quantity="one">%d ημέρα</item>
+        <item quantity="other">%d ημέρες</item>
+    </plurals>
+    <string name="trips_empty">Δεν βρέθηκαν ταξίδια. Ένα ταξίδι είναι μια σειρά ημερών, με τουλάχιστον 10 φωτογραφίες, που περάστηκαν τουλάχιστον 100 χλμ. μακριά από το σημείο όπου τραβάτε τις περισσότερες φωτογραφίες σας. Γι’ αυτό το eikon χρειάζεται τις θέσεις των φωτογραφιών: ενεργοποιήστε την «Εύρεση φωτογραφιών ανά τοποθεσία» στις Ρυθμίσεις, Ανάλυση.</string>
+
+    <!-- Duplicates and similar shots -->
+    <string name="section_cleanup">Καθαρισμός</string>
+    <string name="collection_duplicates">Διπλότυπα</string>
+    <string name="collection_similar">Παρόμοιες λήψεις</string>
+    <string name="duplicates_title">Διπλότυπα</string>
+    <string name="similar_title">Παρόμοιες λήψεις</string>
+    <string name="duplicates_note">Το eikon απλώς τα βρίσκει. Τίποτα δεν αφαιρείται μέχρι να επιβεβαιώσετε στο δικό του παράθυρο διαλόγου του Android, και οι φωτογραφίες που αφαιρούνται πηγαίνουν στα «Διαγράφηκαν πρόσφατα», όπου μπορείτε να τις επαναφέρετε. Για αντίγραφα φωτογραφίας που έχετε προσθέσει σε άλμπουμ: το αντίγραφο που κρατάτε μπαίνει σε αυτά τα άλμπουμ.</string>
+    <plurals name="duplicate_exact">
+        <item quantity="one">%d πανομοιότυπο αρχείο</item>
+        <item quantity="other">%d πανομοιότυπα αρχεία</item>
+    </plurals>
+    <plurals name="duplicate_visual">
+        <item quantity="one">%d αντίγραφο της ίδιας εικόνας</item>
+        <item quantity="other">%d αντίγραφα της ίδιας εικόνας</item>
+    </plurals>
+    <plurals name="similar_group">
+        <item quantity="one">%d λήψη</item>
+        <item quantity="other">%d παρόμοιες λήψεις</item>
+    </plurals>
+    <plurals name="duplicate_keep_best">
+        <item quantity="one">Διατήρηση της καλύτερης, μετακίνηση %d στα «Διαγράφηκαν πρόσφατα»</item>
+        <item quantity="other">Διατήρηση της καλύτερης, μετακίνηση %d στα «Διαγράφηκαν πρόσφατα»</item>
+    </plurals>
+    <plurals name="similar_trash_marked">
+        <item quantity="one">Μετακίνηση %d στα «Διαγράφηκαν πρόσφατα»</item>
+        <item quantity="other">Μετακίνηση %d στα «Διαγράφηκαν πρόσφατα»</item>
+    </plurals>
+    <string name="duplicate_best">Καλύτερη</string>
+    <string name="duplicate_kept">Διατηρήθηκε</string>
+    <string name="duplicate_marked">Θα μετακινηθεί</string>
+    <string name="duplicate_dismiss">Αυτά δεν είναι διπλότυπα</string>
+    <string name="similar_dismiss">Αυτές δεν είναι παρόμοιες</string>
+    <string name="duplicates_empty_off">Τα Διπλότυπα είναι απενεργοποιημένα. Ενεργοποιήστε την «Εύρεση διπλότυπων φωτογραφιών» στις Ρυθμίσεις, Ανάλυση. Το eikon δημιουργεί αποτυπώματα των φωτογραφιών σας μόνο σε αυτό το τηλέφωνο, χωρίς κανένα μοντέλο.</string>
+    <string name="similar_empty_off">Οι Παρόμοιες λήψεις χρειάζονται την «Εύρεση φωτογραφιών ανά το τι εμφανίζουν» στις Ρυθμίσεις, Ανάλυση: συγκρίνει τι δείχνει κάθε φωτογραφία, για φωτογραφίες που τραβήχτηκαν μέσα σε δύο λεπτά η μία από την άλλη.</string>
+    <string name="duplicates_empty_working">Δεν έχει βρεθεί τίποτα ακόμα (αναλύθηκε το %1$d %%). Η ανάλυση εκτελείται στο παρασκήνιο κατά τη φόρτιση.</string>
+    <string name="duplicates_empty_done">Δεν βρέθηκαν διπλότυπα.</string>
+    <string name="similar_empty_done">Δεν βρέθηκαν παρόμοιες λήψεις.</string>
+
+    <!-- Memories -->
+    <string name="collection_memories">Αναμνήσεις</string>
+    <string name="memories_title">Αναμνήσεις</string>
+    <string name="memory_on_this_day">Σαν σήμερα</string>
+    <string name="memory_year_ago">Πριν από ένα χρόνο</string>
+    <string name="memory_weekend_in">Σαββατοκύριακο σε %1$s</string>
+    <string name="memory_weekend">Σαββατοκύριακο εκτός σπιτιού</string>
+    <string name="memory_day_trip_to">Ημερήσια εκδρομή σε %1$s</string>
+    <string name="memory_day_trip">Ημερήσια εκδρομή</string>
+    <string name="memory_season">%1$s %2$d</string>
+    <string name="memory_person">%1$s, %2$d</string>
+    <string name="season_winter">Χειμώνας</string>
+    <string name="season_spring">Άνοιξη</string>
+    <string name="season_summer">Καλοκαίρι</string>
+    <string name="season_autumn">Φθινόπωρο</string>
+    <string name="memory_hide">Απόκρυψη αυτής της ανάμνησης</string>
+    <string name="memory_show_fewer">Εμφάνιση λιγότερων σαν αυτή</string>
+    <string name="memory_show_less_of">Εμφάνιση λιγότερων για %1$s</string>
+    <string name="memory_exclude_date">Παράλειψη αυτής της ημερομηνίας</string>
+    <string name="memory_all_photos">Όλες οι φωτογραφίες</string>
+    <string name="memory_replay">Αναπαραγωγή ξανά</string>
+    <string name="memory_reset">Αναίρεση των επιλογών μου</string>
+    <string name="memory_done">Έγινε. Μπορείτε να αναιρέσετε τις επιλογές σας από το μενού των Αναμνήσεων.</string>
+    <string name="memories_empty">Δεν υπάρχουν ακόμα αναμνήσεις. Το eikon τις δημιουργεί από ημερομηνίες, ταξίδια, εποχές και τα άτομα που έχετε ονομάσει: «Σαν σήμερα», «Πριν από ένα χρόνο», ταξίδια και Σαββατοκύριακα εκτός σπιτιού, μια εποχή, κάποιος σε ένα έτος. Τα ταξίδια και τα Σαββατοκύριακα χρειάζονται τις Τοποθεσίες, τα άτομα χρειάζονται τα Άτομα (Ρυθμίσεις, Ανάλυση). Τίποτα δεν φεύγει από το τηλέφωνο.</string>
+    <string name="memories_note">Δημιουργούνται από ημερομηνίες, τοποθεσίες και ονομασμένα άτομα με απλούς κανόνες· δεν υπάρχει μουσική, και οι φωτογραφίες επιλέγονται με βάση τα αγαπημένα, το μέγεθος και τα πρόσωπα, όχι με βάση το πόσο καλές φαίνονται.</string>
+    <string name="memory_no_photos">Αυτή η ανάμνηση δεν έχει πια φωτογραφίες για εμφάνιση.</string>
+
+    <!-- Editing -->
+    <string name="action_edit">Επεξεργασία</string>
+    <string name="edit_title">Επεξεργασία</string>
+    <string name="edit_done">Τέλος</string>
+    <string name="edit_original">Πρωτότυπο</string>
+    <string name="edit_revert">Επαναφορά</string>
+    <string name="edit_revert_title">Επαναφορά στο πρωτότυπο;</string>
+    <string name="edit_revert_message">Αυτό καθαρίζει όλες τις προσαρμογές, το φίλτρο και το κόψιμο από αυτή την επεξεργασία. Η αρχική φωτογραφία δεν άλλαξε ποτέ. Πατήστε Τέλος για να κρατήσετε την επαναφερμένη φωτογραφία.</string>
+    <string name="edit_discard_title">Απόρριψη των αλλαγών σας;</string>
+    <string name="edit_discard_message">Οι αλλαγές που κάνατε σε αυτό τον επεξεργαστή θα χαθούν. Η φωτογραφία μένει όπως ήταν.</string>
+    <string name="edit_discard">Απόρριψη</string>
+    <string name="edit_copy_edits">Αντιγραφή επεξεργασιών</string>
+    <string name="edit_paste_edits">Επικόλληση επεξεργασιών</string>
+    <string name="edit_save_copy">Αποθήκευση αντιγράφου</string>
+    <string name="edit_copy_saved">Ένα αντίγραφο αποθηκεύτηκε δίπλα στο πρωτότυπο, το οποίο δεν άλλαξε.</string>
+    <string name="edit_copy_saved_no_details">Ένα αντίγραφο αποθηκεύτηκε δίπλα στο πρωτότυπο, το οποίο δεν άλλαξε. Οι λεπτομέρειες της κάμερας δεν μπόρεσαν να αντιγραφούν.</string>
+    <string name="edit_failed">Η επεξεργασία δεν μπόρεσε να ολοκληρωθεί. Η φωτογραφία δεν άλλαξε.</string>
+    <string name="edited_badge">Επεξεργασμένη</string>
+    <string name="viewer_show_original">Εμφάνιση του πρωτοτύπου</string>
+    <string name="viewer_show_edited">Εμφάνιση της επεξεργασμένης φωτογραφίας</string>
+    <string name="tool_auto">Αυτόματα</string>
+    <string name="tool_light">Φως</string>
+    <string name="tool_color">Χρώμα</string>
+    <string name="tool_detail">Λεπτομέρεια</string>
+    <string name="tool_filters">Φίλτρα</string>
+    <string name="tool_crop">Κόψιμο</string>
+    <string name="adj_exposure">Έκθεση</string>
+    <string name="adj_brightness">Φωτεινότητα</string>
+    <string name="adj_contrast">Αντίθεση</string>
+    <string name="adj_highlights">Φωτεινά σημεία</string>
+    <string name="adj_shadows">Σκιές</string>
+    <string name="adj_black_point">Σημείο μαύρου</string>
+    <string name="adj_saturation">Κορεσμός</string>
+    <string name="adj_vibrance">Ζωντάνια</string>
+    <string name="adj_temperature">Θερμότητα</string>
+    <string name="adj_tint">Απόχρωση</string>
+    <string name="adj_sharpness">Οξύτητα</string>
+    <string name="adj_vignette">Βινιέτα</string>
+    <string name="geo_straighten">Ισιωμα</string>
+    <string name="geo_perspective_vertical">Κατακόρυφη προοπτική</string>
+    <string name="geo_perspective_horizontal">Οριζόντια προοπτική</string>
+    <string name="filter_amount">Ένταση</string>
+    <string name="filter_name_none">Πρωτότυπο</string>
+    <string name="filter_name_vivid">Ζωηρό</string>
+    <string name="filter_name_warm">Ζεστό</string>
+    <string name="filter_name_cool">Ψυχρό</string>
+    <string name="filter_name_mono">Μονόχρωμο</string>
+    <string name="filter_name_noir">Νουάρ</string>
+    <string name="filter_name_fade">Ξεθωριασμένο</string>
+    <string name="filter_name_chrome">Χρωμιωμένο</string>
+    <string name="filter_name_sepia">Σέπια</string>
+    <string name="crop_rotate">Περιστροφή</string>
+    <string name="crop_flip">Αναστροφή</string>
+    <string name="shape_free">Ελεύθερο</string>
+    <string name="shape_original">Πρωτότυπο</string>
+    <string name="shape_square">1:1</string>
+    <string name="shape_4_3">4:3</string>
+    <string name="shape_3_2">3:2</string>
+    <string name="shape_16_9">16:9</string>
+    <string name="action_paste_edits">Επικόλληση επεξεργασιών</string>
+    <string name="action_revert_edits">Αφαίρεση επεξεργασιών</string>
+    <plurals name="edits_pasted">
+        <item quantity="one">Οι επεξεργασίες εφαρμόστηκαν σε %d φωτογραφία</item>
+        <item quantity="other">Οι επεξεργασίες εφαρμόστηκαν σε %d φωτογραφίες</item>
+    </plurals>
+    <plurals name="edits_reverted">
+        <item quantity="one">Η επεξεργασία αφαιρέθηκε από %d φωτογραφία· το πρωτότυπο είναι όπως ήταν πάντα</item>
+        <item quantity="other">Οι επεξεργασίες αφαιρέθηκαν από %d φωτογραφίες· τα πρωτότυπα είναι όπως ήταν πάντα</item>
+    </plurals>
+
+    <!-- Accessibility -->
+    <string name="slider_reset">Επαναφορά στην ουδέτερη τιμή</string>
+    <string name="crop_area">Περιοχή κοπής, από %1$d %% έως %2$d %% κατά πλάτος και από %3$d %% έως %4$d %% κατά ύψος</string>
+    <string name="crop_action_smaller">Μείωση της κοπής</string>
+    <string name="crop_action_larger">Αύξηση της κοπής</string>
+    <string name="crop_action_left">Μετακίνηση της κοπής αριστερά</string>
+    <string name="crop_action_right">Μετακίνηση της κοπής δεξιά</string>
+    <string name="crop_action_up">Μετακίνηση της κοπής προς τα πάνω</string>
+    <string name="crop_action_down">Μετακίνηση της κοπής προς τα κάτω</string>
+    <string name="viewer_zoom_in">Μεγέθυνση</string>
+    <string name="viewer_zoom_out">Σμίκρυνση</string>
+    <string name="external_photo">Φωτογραφία</string>
+    <string name="viewer_cannot_display">Αυτή η φωτογραφία δεν μπορεί να εμφανιστεί.</string>
+
+    <!-- Info: caption, editing the date and location, what the photo shows -->
+    <string name="info_caption">Λεζάντα</string>
+    <string name="caption_add">Προσθήκη λεζάντας</string>
+    <string name="caption_edit">Επεξεργασία λεζάντας</string>
+    <string name="caption_title">Λεζάντα</string>
+    <string name="caption_hint">Λίγα λόγια για αυτή τη φωτογραφία</string>
+    <string name="caption_note">Φυλάσσεται μόνο στο eikon· το αρχείο της φωτογραφίας δεν αλλάζει. Η Αναζήτηση τη βρίσκει.</string>
+    <string name="date_change">Αλλαγή ημερομηνίας και ώρας</string>
+    <string name="date_revert">Επαναφορά της αρχικής ημερομηνίας</string>
+    <string name="date_time_title">Ώρα της ημέρας</string>
+    <string name="action_next">Επόμενο</string>
+    <string name="location_title">Πού τραβήχτηκε</string>
+    <string name="location_coordinates">Συντεταγμένες</string>
+    <string name="location_coordinates_note">Δεκαδικές μοίρες, πρώτα το γεωγραφικό πλάτος: 41.9028, 12.4964</string>
+    <string name="location_invalid">Δεν είναι θέση: δύο αριθμοί, γεωγραφικό πλάτος από -90 έως 90 και γεωγραφικό μήκος από -180 έως 180</string>
+    <string name="location_city">Ή αναζητήστε μια πόλη (λειτουργεί χωρίς σύνδεση)</string>
+    <string name="location_remove">Αφαίρεση της τοποθεσίας</string>
+    <string name="location_change">Αλλαγή της τοποθεσίας</string>
+    <string name="location_revert">Επαναφορά της αρχικής τοποθεσίας</string>
+    <string name="info_map_description">Ένας μικρός χάρτης που δείχνει πού τραβήχτηκε η φωτογραφία</string>
+    <string name="metadata_done">Έγινε. Η φωτογραφία λέει τώρα αυτό· το πρωτότυπο διατηρείται για να μπορείτε να το επαναφέρετε.</string>
+    <string name="metadata_not_writable">Αυτό το είδος αρχείου δεν μπορεί να αλλάξει.</string>
+    <string name="metadata_needs_permission">Για να αλλάξει την ημερομηνία ή την τοποθεσία μιας φωτογραφίας, το eikon πρέπει να μπορεί να διαβάζει πού τραβήχτηκαν οι φωτογραφίες: χωρίς αυτό, το Android του δείχνει ένα αντίγραφο χωρίς την τοποθεσία, και η αποθήκευση θα την έσβηνε.</string>
+    <string name="metadata_nothing_to_revert">Δεν υπάρχει τίποτα για επαναφορά.</string>
+    <string name="metadata_interrupted">Μια προηγούμενη αλλαγή σε αυτή τη φωτογραφία δεν ολοκληρώθηκε. Το πρωτότυπό της διατηρείται: επαναφέρετέ το πριν αλλάξετε οτιδήποτε άλλο.</string>
+    <string name="metadata_failed">Η αλλαγή δεν λειτούργησε. Η φωτογραφία επανήλθε ακριβώς όπως ήταν.</string>
+    <string name="metadata_restore_file">Επαναφορά του αρχικού αρχείου</string>
+    <string name="info_albums">Σε άλμπουμ</string>
+    <string name="info_pets">Κατοικίδια</string>
+    <string name="info_shows">Μπορεί να δείχνει</string>
+    <string name="pet_dog">Σκύλος</string>
+    <string name="pet_cat">Γάτα</string>
+    <string name="info_album">Άλμπουμ συσκευής</string>
+    <string name="label_landscape">Ένα τοπίο</string>
+    <string name="label_beach">Μια παραλία</string>
+    <string name="label_sea">Τη θάλασσα</string>
+    <string name="label_mountain">Ένα βουνό</string>
+    <string name="label_sunset">Ένα ηλιοβασίλεμα</string>
+    <string name="label_snow">Χιόνι</string>
+    <string name="label_city">Μια πόλη</string>
+    <string name="label_building">Ένα κτίριο</string>
+    <string name="label_street">Έναν δρόμο</string>
+    <string name="label_woods">Δάσος</string>
+    <string name="label_flower">Ένα λουλούδι</string>
+    <string name="label_sky">Τον ουρανό</string>
+    <string name="label_person">Ένα άτομο</string>
+    <string name="label_group">Μια ομάδα ανθρώπων</string>
+    <string name="label_food">Φαγητό</string>
+    <string name="label_dessert">Ένα γλυκό</string>
+    <string name="label_drink">Ένα ποτό</string>
+    <string name="label_car">Ένα αυτοκίνητο</string>
+    <string name="label_bicycle">Ένα ποδήλατο</string>
+    <string name="label_airplane">Ένα αεροπλάνο</string>
+    <string name="label_boat">Ένα σκάφος</string>
+    <string name="label_bird">Ένα πουλί</string>
+    <string name="label_horse">Ένα άλογο</string>
+    <string name="label_interior">Ένα δωμάτιο</string>
+    <string name="label_night">Νύχτα</string>
+    <string name="label_party">Ένα πάρτι</string>
+    <string name="label_sport">Ένα αθλητικό γεγονός</string>
+    <string name="label_animal">Ένα ζώο</string>
+
+    <!-- Backup to your own server -->
+    <string name="backup_title">Αντίγραφο ασφαλείας στον δικό σας διακομιστή</string>
+    <string name="backup_intro">Αντιγράφει τις φωτογραφίες και τα βίντεό σας σε έναν διακομιστή που διαχειρίζεστε εσείς, μέσω κρυπτογραφημένης σύνδεσης. Τίποτα δεν φεύγει από αυτό το τηλέφωνο μέχρι να ενεργοποιήσετε το αντίγραφο ασφαλείας, πηγαίνει μόνο στον διακομιστή που αναγράφεται παρακάτω, και το eikon δεν διαγράφει ούτε αλλάζει ποτέ τίποτα σε αυτόν. Ο κωδικός ή το κλειδί φυλάσσεται κρυπτογραφημένο στο Android Keystore.</string>
+    <string name="backup_kind_immich">Immich (ό,τι εγκαθιστά και το Umbrel)</string>
+    <string name="backup_kind_nextcloud">Nextcloud ή οποιοσδήποτε διακομιστής WebDAV</string>
+    <string name="backup_address">Διεύθυνση διακομιστή (https://…)</string>
+    <string name="backup_username">Όνομα σύνδεσης</string>
+    <string name="backup_folder">Φάκελος στον διακομιστή</string>
+    <string name="backup_api_key">Κλειδί API</string>
+    <string name="backup_app_password">Κωδικός εφαρμογής</string>
+    <string name="backup_secret_saved">Αποθηκεύτηκε. Αφήστε το κενό για να το κρατήσετε</string>
+    <string name="backup_help_immich">Στο Immich: Ρυθμίσεις λογαριασμού, Κλειδιά API, Νέο κλειδί API. Η άδεια που χρειάζεται είναι asset.upload.</string>
+    <string name="backup_help_nextcloud">Στο Nextcloud: Προσωπικές ρυθμίσεις, Ασφάλεια, Συσκευές και συνεδρίες, δημιουργήστε έναν νέο κωδικό εφαρμογής. Χρησιμοποιήστε αυτόν, όχι τον κωδικό σύνδεσής σας.</string>
+    <string name="backup_save_test">Αποθήκευση και δοκιμή της σύνδεσης</string>
+    <string name="backup_connected">Συνδέθηκε με %1$s.</string>
+    <string name="backup_failed">Δεν ήταν δυνατή η σύνδεση: %1$s</string>
+    <string name="backup_certificate_declined">Το πιστοποιητικό δεν έγινε αποδεκτό, οπότε τίποτα δεν στάλθηκε και τίποτα δεν θα σταλεί.</string>
+    <string name="backup_certificate_title">Το πιστοποιητικό αυτού του διακομιστή δεν προέρχεται από αρχή που εμπιστεύεται το τηλέφωνό σας</string>
+    <string name="backup_certificate_body">Ο %1$s παρουσίασε το παρακάτω πιστοποιητικό. Συγκρίνετε το αποτύπωμά του με αυτό που εμφανίζει ο διακομιστής σας (για παράδειγμα με: openssl x509 -noout -fingerprint -sha256). Εμπιστευτείτε το μόνο αν είναι ίδια: από τότε αυτό το ένα πιστοποιητικό, και κανένα άλλο, γίνεται αποδεκτό για αυτόν τον διακομιστή.</string>
+    <string name="backup_certificate_subject">Εκδόθηκε για: %1$s</string>
+    <string name="backup_certificate_expires">Ισχύει έως %1$s</string>
+    <string name="backup_certificate_self_signed">Είναι υπογεγραμμένο από τον ίδιο του τον εαυτό, όπως συνήθως το πιστοποιητικό ενός οικιακού διακομιστή.</string>
+    <string name="backup_certificate_trust">Εμπιστοσύνη σε αυτό το πιστοποιητικό</string>
+    <string name="backup_enable">Δημιουργία αντιγράφου ασφαλείας των φωτογραφιών και των βίντεό μου</string>
+    <string name="backup_test_first">Αποθηκεύστε και δοκιμάστε πρώτα τη σύνδεση.</string>
+    <string name="backup_wifi_only">Μόνο μέσω Wi-Fi</string>
+    <string name="backup_only_charging">Μόνο κατά τη φόρτιση</string>
+    <string name="backup_videos">Συμπερίληψη βίντεο</string>
+    <string name="backup_hidden">Συμπερίληψη κρυφών φωτογραφιών</string>
+    <string name="backup_hidden_note">Οι κρυφές φωτογραφίες θα σταλούν επίσης στον διακομιστή σας, όπου είναι τόσο ορατές όσο και όλα τα άλλα εκεί.</string>
+    <string name="backup_confirm_title">Έναρξη του αντιγράφου ασφαλείας;</string>
+    <plurals name="backup_confirm_body">
+        <item quantity="one">%1$d φωτογραφία ή βίντεο θα αντιγραφεί στον %2$s, λίγο λίγο, όταν το τηλέφωνο βρίσκεται στο δίκτυο που επιτρέψατε. Τίποτα δεν διαγράφεται στο τηλέφωνο ή στον διακομιστή.</item>
+        <item quantity="other">%1$d φωτογραφίες και βίντεο θα αντιγραφούν στον %2$s, λίγο λίγο, όταν το τηλέφωνο βρίσκεται στο δίκτυο που επιτρέψατε. Τίποτα δεν διαγράφεται στο τηλέφωνο ή στον διακομιστή.</item>
+    </plurals>
+    <string name="backup_confirm_start">Έναρξη</string>
+    <string name="backup_location_note">Το Android κρύβει πού τραβήχτηκαν οι φωτογραφίες από εφαρμογές που δεν έχουν την άδεια τοποθεσίας φωτογραφιών, οπότε τα αντίγραφα στον διακομιστή σας δεν θα είχαν τοποθεσία.</string>
+    <string name="backup_progress">Αντιγράφηκαν: %1$,d από %2$,d</string>
+    <plurals name="backup_refused">
+        <item quantity="one">%1$d φωτογραφία απορρίφθηκε από τον διακομιστή και δεν θα ξαναδοκιμαστεί μέχρι να το ζητήσετε.</item>
+        <item quantity="other">%1$d φωτογραφίες απορρίφθηκαν από τον διακομιστή και δεν θα ξαναδοκιμαστούν μέχρι να το ζητήσετε.</item>
+    </plurals>
+    <string name="backup_running">Δημιουργία αντιγράφου ασφαλείας…</string>
+    <string name="backup_idle">Αναμονή για την κατάλληλη στιγμή (το δίκτυο που επιτρέψατε, μπαταρία όχι χαμηλή).</string>
+    <string name="backup_last_run">Τελευταία εκτέλεση %1$s. Στάλθηκαν: %2$d. Υπήρχαν ήδη: %3$d. Απορρίφθηκαν: %4$d.</string>
+    <string name="backup_stopped">Σταμάτησε επειδή %1$s</string>
+    <string name="backup_stop_power_save">η Εξοικονόμηση μπαταρίας είναι ενεργή.</string>
+    <string name="backup_stop_thermal">το τηλέφωνο ήταν πολύ ζεστό.</string>
+    <string name="backup_stop_unreachable">ο διακομιστής δεν ήταν προσβάσιμος ή ήταν απασχολημένος. Θα ξαναδοκιμάσει.</string>
+    <string name="backup_stop_unauthorized">ο διακομιστής δεν αποδέχτηκε το κλειδί ή τον κωδικό.</string>
+    <string name="backup_stop_untrusted">το πιστοποιητικό του διακομιστή δεν είναι ένα από αυτά που εμπιστευτήκατε.</string>
+    <string name="backup_stop_misconfigured">η διεύθυνση δεν είναι σωστή για αυτό το είδος διακομιστή.</string>
+    <string name="backup_stop_refusals">ο διακομιστής απέρριψε πολλά αρχεία στη σειρά, κάτι που δείχνει όριο του διακομιστή και όχι πρόβλημα με τις φωτογραφίες.</string>
+    <string name="backup_now">Δημιουργία αντιγράφου τώρα</string>
+    <string name="backup_retry_refused">Επανάληψη των απορριφθέντων</string>
+
+    <!-- Network consent -->
+    <string name="network_allow">Να επιτρέπεται στο eikon η χρήση του διαδικτύου</string>
+    <string name="network_allow_note">Απενεργοποιημένο μέχρι να το ενεργοποιήσετε. Το eikon χρησιμοποιεί το δίκτυο μόνο για να αντιγράψει τις φωτογραφίες σας στον διακομιστή παρακάτω, και μόνο αφού ρυθμίσετε έναν και ενεργοποιήσετε το αντίγραφο ασφαλείας. Με αυτό απενεργοποιημένο, τίποτα δεν μπορεί να συνδεθεί πουθενά.</string>
+    <string name="settings_privacy_network">Το eikon μπορεί να συνδεθεί στο διαδίκτυο για ένα μόνο πράγμα: το προαιρετικό αντίγραφο ασφαλείας των φωτογραφιών σας σε έναν διακομιστή που διαχειρίζεστε εσείς. Είναι απενεργοποιημένο μέχρι να το επιτρέψετε (Ρυθμίσεις, Αντίγραφο ασφαλείας) και να ρυθμίσετε τον διακομιστή. Χωρίς αναλύσεις χρήσης, χωρίς διαφημίσεις, χωρίς λογαριασμούς, χωρίς υπηρεσίες της Google και χωρίς δικό μας cloud: δεν υπάρχει κανένα.</string>
+
+    <!-- First-run screens -->
+    <string name="onboarding_intro_title">Οι φωτογραφίες σας, στο τηλέφωνό σας</string>
+    <string name="onboarding_intro_body">Το eikon είναι μια συλλογή φωτογραφιών και βίντεο για Android. Εμφανίζει τις εικόνες που το τηλέφωνό σας ήδη διατηρεί, τις βρίσκει ανά ημερομηνία, τοποθεσία, άτομα ή αυτό που δείχνουν, και τις επεξεργάζεται χωρίς να αγγίξει ποτέ τα πρωτότυπα.</string>
+    <string name="onboarding_point_local">Όλα μένουν σε αυτή τη συσκευή. Χωρίς λογαριασμό, χωρίς αναλύσεις χρήσης, χωρίς διαφημίσεις.</string>
+    <string name="onboarding_point_independent">Δεν βασίζεται σε τίποτα έξω από το τηλέφωνό σας: χωρίς υπηρεσίες της Google, χωρίς cloud, χωρίς διακομιστές τρίτων.</string>
+    <string name="onboarding_point_yours">Αν θέλετε αντίγραφο ασφαλείας, πηγαίνει μόνο σε διακομιστή που διαχειρίζεστε εσείς, και μόνο αν το ρυθμίσετε.</string>
+    <string name="onboarding_next">Επόμενο</string>
+    <string name="onboarding_start">Ας ξεκινήσουμε</string>
+    <string name="onboarding_page">Σελίδα %1$d από %2$d</string>
+    <string name="onboarding_permissions_title">Τι ζητά το eikon και γιατί</string>
+    <string name="onboarding_permissions_intro">Χρειάζεται μόνο το πρώτο. Μπορείτε να αλλάξετε οποιοδήποτε από αυτά αργότερα, στις Ρυθμίσεις ή στις ρυθμίσεις του τηλεφώνου σας.</string>
+    <string name="onboarding_perm_media_title">Φωτογραφίες και βίντεο</string>
+    <string name="onboarding_perm_media_body">Για να μπορεί το eikon να εμφανίζει τη βιβλιοθήκη σας. Διαβάζει τα αρχεία εκεί όπου το Android ήδη τα διατηρεί και δεν τα αντιγράφει πουθενά. Αν προτιμάτε, μπορείτε να επιτρέψετε μόνο ορισμένες φωτογραφίες.</string>
+    <string name="onboarding_perm_location_title">Τοποθεσίες φωτογραφιών (προαιρετικό)</string>
+    <string name="onboarding_perm_location_body">Το Android κρύβει από τις εφαρμογές πού τραβήχτηκε μια φωτογραφία, εκτός αν το επιτρέψετε. Το eikon το χρησιμοποιεί για να δείχνει την τοποθεσία μιας φωτογραφίας σε χάρτη χωρίς σύνδεση και για αναζήτηση ανά τοποθεσία. Οι τοποθεσίες προσδιορίζονται στο τηλέφωνο: καμία θέση δεν στέλνεται ποτέ πουθενά.</string>
+    <string name="onboarding_perm_network_title">Διαδίκτυο (προαιρετικό)</string>
+    <string name="onboarding_perm_network_body">Χρησιμοποιείται για ένα μόνο πράγμα: την αντιγραφή των φωτογραφιών σας σε διακομιστή που διαχειρίζεστε εσείς (Immich, Nextcloud), αν ποτέ το ρυθμίσετε. Διαφορετικά, το eikon δεν συνδέεται ποτέ σε τίποτα. Είναι απενεργοποιημένο μέχρι να το ενεργοποιήσετε εδώ, και μπορείτε να το απενεργοποιήσετε ξανά οποιαδήποτε στιγμή στις Ρυθμίσεις.</string>
+    <string name="onboarding_allow">Να επιτραπεί</string>
+    <string name="onboarding_allowed">Επιτρέπεται</string>
+    <string name="onboarding_promise">Τίποτα εδώ δεν εξαρτάται από κάτι έξω από το τηλέφωνό σας: χωρίς υπηρεσίες της Google, χωρίς λογαριασμούς, χωρίς αναλύσεις χρήσης. Οι φωτογραφίες σας μένουν σε αυτή τη συσκευή ή, αν το επιλέξετε, πηγαίνουν στον δικό σας διακομιστή.</string>
+
+    <!-- Support -->
+    <string name="support_title">Υποστήριξη</string>
+    <string name="support_body">Το eikon είναι δωρεάν, δεν έχει διαφημίσεις και δεν σας παρακολουθεί. Αν σας αρέσει, μπορείτε να στείλετε λίγα sats μέσω του δικτύου Lightning.</string>
+    <string name="support_button">Δωρεά μέσω Lightning</string>
+    <string name="support_copied">Δεν βρέθηκε πορτοφόλι Lightning — η διεύθυνση αντιγράφηκε: %1$s</string>
+
+    <!-- Analyze now -->
+    <string name="analyze_now_running">Ανάλυση…</string>
+    <string name="analyze_now_hint">Ξεκινά αμέσως, μόνο σε αυτό το τηλέφωνο, ακόμα και με Εξοικονόμηση μπαταρίας.</string>
+    <string name="analyze_now_hint_off">Πρώτα ενεργοποιήστε τουλάχιστον ένα βήμα παραπάνω.</string>
+    <string name="analyze_now_hint_paused">Η ανάλυση είναι σε παύση: απενεργοποιήστε την παύση για να αναλύσετε τώρα.</string>
+
+    <!-- Pictures from other apps -->
+    <string name="viewer_open_in_library">Άνοιγμα στη βιβλιοθήκη</string>
+</resources>

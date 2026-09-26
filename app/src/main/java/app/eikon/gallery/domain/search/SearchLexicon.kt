@@ -94,10 +94,21 @@ internal object SearchLexicon {
         listOf("raw") to TypeWord.OfKind(CategoryFilter.RAW),
     )
 
-    /** Glue words that carry no meaning of their own in a query. */
+    /**
+     * Glue words that carry no meaning of their own in a query. Every word left in is a word a photo's text has to contain (or, for the image search, part of the phrase the model is
+     * asked about), so a missing one ("sulla" in "cane sulla neve") made a search find nothing by text. The elisions ("dell", "all", "nell"...) are what is left of "dell'anno" once
+     * the apostrophe is taken out.
+     */
     val stopWords: Set<String> = setOf(
-        "di", "del", "della", "dei", "delle", "degli", "dello", "da", "a", "al", "alla", "alle", "ai", "in",
-        "nel", "nella", "nei", "con", "su", "sul", "per", "il", "lo", "la", "i", "gli", "le", "un", "una", "e", "ed",
-        "the", "of", "at", "on", "with", "from", "to", "and", "a", "an", "my", "in",
+        // Italian: prepositions, the articulated ones, articles, elisions, and the words around a photo ("le mie foto di questa estate")
+        "di", "a", "da", "in", "con", "su", "per", "tra", "fra",
+        "del", "dello", "della", "dei", "degli", "delle", "al", "allo", "alla", "ai", "agli", "alle",
+        "dal", "dallo", "dalla", "dai", "dagli", "dalle", "nel", "nello", "nella", "nei", "negli", "nelle",
+        "sul", "sullo", "sulla", "sui", "sugli", "sulle", "col", "coi",
+        "il", "lo", "la", "i", "gli", "le", "un", "uno", "una", "e", "ed", "o", "che",
+        "dell", "all", "nell", "sull", "dall", "coll", "quell", "mio", "mia", "miei", "mie",
+        "questa", "questo", "questi", "queste", "quel", "quello", "quella", "quei", "quegli", "quelle",
+        // English
+        "the", "of", "at", "on", "with", "from", "to", "and", "a", "an", "my", "in", "for", "by", "near", "this", "that", "these", "those",
     )
 }

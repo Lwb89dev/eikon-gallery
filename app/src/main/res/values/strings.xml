@@ -16,7 +16,7 @@
 
     <!-- Permissions -->
     <string name="permission_title">Your photos stay on your device</string>
-    <string name="permission_body">eikon needs access to your photos and videos to show them. Nothing is uploaded: the app has no internet permission at all.</string>
+    <string name="permission_body">eikon needs access to your photos and videos to show them. They stay on your device: nothing is uploaded unless you set up a backup to a server of your own.</string>
     <string name="permission_grant">Allow access</string>
     <string name="permission_denied">Access was denied. You can allow it in the system settings.</string>
     <string name="permission_open_settings">Open settings</string>
@@ -244,7 +244,7 @@
     <string name="search_clear">Clear search</string>
     <string name="search_no_results">No photos match</string>
     <string name="search_hint_title">Search your library</string>
-    <string name="search_hint_body">Try a date (\"August 2025\", \"yesterday\"), a place (\"Rome\", \"Tuscany\"), a word that appears in a photo or in its file name, or a kind (\"videos\", \"screenshots\", \"favorites\").\n\nSearch does not recognize what a picture shows yet, only what is written in it.</string>
+    <string name="search_hint_body">Try a date (\"August 2025\", \"yesterday\"), a place (\"Rome\", \"Tuscany\"), a word that appears in a photo or in its file name, or a kind (\"videos\", \"screenshots\", \"favorites\").\n\nDates and kinds are understood in English and Italian. Places, the text inside photos and what they show are found once the analysis has run (Settings, Analysis).</string>
     <string name="search_analysis_off">Searching by place, by text inside photos and by what they show is off. You can turn it on in Settings, Analysis.</string>
     <string name="search_analysis_note">Still analyzing photos in the background (%1$d%%). Some results may be missing.</string>
 
@@ -272,7 +272,7 @@
     <string name="analysis_location_permission">Android hides where photos were taken from apps until you allow it.</string>
     <string name="analysis_allow_locations">Allow access to photo locations</string>
     <string name="analyze_now">Analyze now</string>
-    <string name="settings_analysis_body">Analysis runs on your phone only, in the background, and pauses when the battery is low, Battery Saver is on or the phone gets warm (Analyze now goes ahead in Battery Saver). It stores the place of each photo (resolved offline, no location is ever sent anywhere), a numeric description of what the photo shows (so you can search "dog" or "sunset"; it is not a caption and cannot be read back as an image) and any text it reads in the photo, so Search can find them. If you turn on people, it also stores where each face is in a photo and a numeric description of it, only to group faces that look alike. If you turn on duplicates, it stores a short fingerprint of each photo and of files that share a size, only to find copies. Recognizing what photos show and reading text are slow and use the processor heavily, which is why analysis waits for charging by default.</string>
+    <string name="settings_analysis_body">Analysis runs on your phone only, in the background, and pauses when the battery is low, Battery Saver is on or the phone gets warm (Analyze now goes ahead in Battery Saver). It stores the place of each photo (resolved offline, no location is ever sent anywhere), a numeric description of what the photo shows (so you can search \"dog\" or \"sunset\"; it is not a caption and cannot be read back as an image) and any text it reads in the photo, so Search can find them. If you turn on people, it also stores where each face is in a photo and a numeric description of it, only to group faces that look alike. If you turn on duplicates, it stores a short fingerprint of each photo and of files that share a size, only to find copies. Recognizing what photos show and reading text are slow and use the processor heavily, which is why analysis waits for charging by default.</string>
 
     <!-- Info panel: derived data -->
     <string name="info_place">Nearest place</string>
@@ -286,6 +286,7 @@
     <string name="person_add_name">Add a name</string>
     <string name="person_rename">Name this person</string>
     <string name="person_name_hint">Name</string>
+    <string name="person_same_name_note">People with the same name are joined into one.</string>
     <string name="person_favorite">Mark as favorite</string>
     <string name="person_unfavorite">Remove from favorites</string>
     <string name="person_hide">Hide this person</string>
@@ -560,4 +561,101 @@
     <string name="label_party">A party</string>
     <string name="label_sport">A sports event</string>
     <string name="label_animal">An animal</string>
+
+    <!-- Backup to your own server -->
+    <string name="backup_title">Backup to your own server</string>
+    <string name="backup_intro">Copies your photos and videos to a server you run yourself, over an encrypted connection. Nothing leaves this phone until you turn the backup on, it goes only to the server below, and eikon never deletes or changes anything on it. The password or key is kept encrypted, in the Android Keystore.</string>
+    <string name="backup_kind_immich">Immich (also what Umbrel installs)</string>
+    <string name="backup_kind_nextcloud">Nextcloud, or any WebDAV server</string>
+    <string name="backup_address">Server address (https://…)</string>
+    <string name="backup_username">Login name</string>
+    <string name="backup_folder">Folder on the server</string>
+    <string name="backup_api_key">API key</string>
+    <string name="backup_app_password">App password</string>
+    <string name="backup_secret_saved">Saved. Leave empty to keep it</string>
+    <string name="backup_help_immich">In Immich: Account settings, API keys, New API key. The permission it needs is asset.upload.</string>
+    <string name="backup_help_nextcloud">In Nextcloud: Personal settings, Security, Devices and sessions, create a new app password. Use that, not your login password.</string>
+    <string name="backup_save_test">Save and test the connection</string>
+    <string name="backup_connected">Connected to %1$s.</string>
+    <string name="backup_failed">Could not connect: %1$s</string>
+    <string name="backup_certificate_declined">The certificate was not trusted, so nothing was sent and nothing will be.</string>
+    <string name="backup_certificate_title">This server\'s certificate is not from an authority your phone trusts</string>
+    <string name="backup_certificate_body">%1$s presented the certificate below. Compare its fingerprint with the one your server shows (for example with: openssl x509 -noout -fingerprint -sha256). Trust it only if they are identical: from then on this one certificate is accepted for this server, and no other.</string>
+    <string name="backup_certificate_subject">Issued to: %1$s</string>
+    <string name="backup_certificate_expires">Valid until %1$s</string>
+    <string name="backup_certificate_self_signed">It is signed by itself, as the certificate of a home server usually is.</string>
+    <string name="backup_certificate_trust">Trust this certificate</string>
+    <string name="backup_enable">Back up my photos and videos</string>
+    <string name="backup_test_first">Save and test the connection first.</string>
+    <string name="backup_wifi_only">Only on Wi-Fi</string>
+    <string name="backup_only_charging">Only while charging</string>
+    <string name="backup_videos">Include videos</string>
+    <string name="backup_hidden">Include hidden photos</string>
+    <string name="backup_hidden_note">Hidden photos will be sent to your server too, where they are as visible as anything else there.</string>
+    <string name="backup_confirm_title">Start the backup?</string>
+    <plurals name="backup_confirm_body">
+        <item quantity="one">%1$d photo or video will be copied to %2$s, a little at a time, when the phone is on the network you allowed. Nothing on the phone or on the server is deleted.</item>
+        <item quantity="other">%1$d photos and videos will be copied to %2$s, a little at a time, when the phone is on the network you allowed. Nothing on the phone or on the server is deleted.</item>
+    </plurals>
+    <string name="backup_confirm_start">Start</string>
+    <string name="backup_location_note">Android hides where photos were taken from apps that do not have the photo-location permission, so the copies on your server would have no location.</string>
+    <string name="backup_progress">Backed up: %1$,d of %2$,d</string>
+    <plurals name="backup_refused">
+        <item quantity="one">%1$d photo was refused by the server and will not be tried again until you ask.</item>
+        <item quantity="other">%1$d photos were refused by the server and will not be tried again until you ask.</item>
+    </plurals>
+    <string name="backup_running">Backing up now…</string>
+    <string name="backup_idle">Waiting for the right moment (the network you allowed, battery not low).</string>
+    <string name="backup_last_run">Last run %1$s. Sent: %2$d. Already there: %3$d. Refused: %4$d.</string>
+    <string name="backup_stopped">It stopped because %1$s</string>
+    <string name="backup_stop_power_save">Battery Saver is on.</string>
+    <string name="backup_stop_thermal">the phone was too warm.</string>
+    <string name="backup_stop_unreachable">the server could not be reached or was busy. It will try again.</string>
+    <string name="backup_stop_unauthorized">the server did not accept the key or password.</string>
+    <string name="backup_stop_untrusted">the server\'s certificate is not one you trusted.</string>
+    <string name="backup_stop_misconfigured">the address is not right for this kind of server.</string>
+    <string name="backup_stop_refusals">the server refused many files in a row, which points to a limit on the server, not to the photos.</string>
+    <string name="backup_now">Back up now</string>
+    <string name="backup_retry_refused">Try the refused ones again</string>
+
+    <!-- Network consent -->
+    <string name="network_allow">Allow eikon to use the internet</string>
+    <string name="network_allow_note">Off unless you turn it on. eikon uses the network only to copy your photos to the server below, and only after you set one up and switch the backup on. With this off, nothing can connect anywhere.</string>
+    <string name="settings_privacy_network">eikon can go online for one thing only: the optional backup of your photos to a server you run yourself. That is off until you allow it (Settings, Backup) and set the server up. No analytics, no ads, no accounts, no Google services, and no cloud of ours: there is none.</string>
+
+    <!-- First-run screens -->
+    <string name="onboarding_intro_title">Your photos, on your phone</string>
+    <string name="onboarding_intro_body">eikon is a photo and video gallery for Android. It shows the pictures your phone already keeps, finds them by date, place, people or what they show, and edits them without ever touching the originals.</string>
+    <string name="onboarding_point_local">Everything stays on this device. No account, no analytics, no ads.</string>
+    <string name="onboarding_point_independent">It relies on nothing outside your phone: no Google services, no cloud, no third-party servers.</string>
+    <string name="onboarding_point_yours">If you want a backup, it goes only to a server you run yourself, and only if you set it up.</string>
+    <string name="onboarding_next">Next</string>
+    <string name="onboarding_start">Get started</string>
+    <string name="onboarding_page">Page %1$d of %2$d</string>
+    <string name="onboarding_permissions_title">What eikon asks for, and why</string>
+    <string name="onboarding_permissions_intro">Only the first is needed. You can change any of them later, in Settings or in your phone\'s settings.</string>
+    <string name="onboarding_perm_media_title">Photos and videos</string>
+    <string name="onboarding_perm_media_body">So eikon can show your library. It reads the files where Android already keeps them and never copies them anywhere. You can allow just some photos if you prefer.</string>
+    <string name="onboarding_perm_location_title">Photo locations (optional)</string>
+    <string name="onboarding_perm_location_body">Android hides where a photo was taken from apps unless you allow this. eikon uses it to show a photo\'s place on an offline map and to search by place. Places are worked out on the phone: no position is ever sent anywhere.</string>
+    <string name="onboarding_perm_network_title">Internet (optional)</string>
+    <string name="onboarding_perm_network_body">Used for one thing only: copying your photos to a server you run yourself (Immich, Nextcloud), if you ever set that up. Otherwise eikon never connects to anything. It is off unless you turn it on here, and you can turn it off again at any time in Settings.</string>
+    <string name="onboarding_allow">Allow</string>
+    <string name="onboarding_allowed">Allowed</string>
+    <string name="onboarding_promise">Nothing here depends on anything outside your phone: no Google services, no accounts, no analytics. Your photos stay on this device or, if you choose, go to your own server.</string>
+
+    <!-- Support -->
+    <string name="support_title">Support</string>
+    <string name="support_body">eikon is free, has no ads and does not track you. If you like it, you can send a few sats over the Lightning Network.</string>
+    <string name="support_button">Donate with Lightning</string>
+    <string name="support_copied">No Lightning wallet found — address copied: %1$s</string>
+
+    <!-- Analyze now -->
+    <string name="analyze_now_running">Analyzing…</string>
+    <string name="analyze_now_hint">Starts right away, on this phone only, even in Battery Saver.</string>
+    <string name="analyze_now_hint_off">Turn on at least one step above first.</string>
+    <string name="analyze_now_hint_paused">Analysis is paused: turn the pause off to analyze now.</string>
+
+    <!-- Pictures from other apps -->
+    <string name="viewer_open_in_library">Open in library</string>
 </resources>

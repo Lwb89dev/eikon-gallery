@@ -8,6 +8,7 @@ import app.eikon.gallery.data.db.PersonEntity
 import app.eikon.gallery.data.db.PersonName
 import app.eikon.gallery.data.db.PersonSummary
 import app.eikon.gallery.data.db.Transactor
+import app.eikon.gallery.domain.search.TextNormalizer
 import javax.inject.Inject
 import javax.inject.Singleton
 import kotlinx.coroutines.flow.Flow
@@ -61,8 +62,42 @@ class PeopleRepository @Inject constructor(
 
     // --- Editing ---------------------------------------------------------------------------------------
 
-    /** A blank name clears it. */
-    suspend fun rename(personId: Long, name: String) = dao.rename(personId, name.trim().ifEmpty { null })
+    /**
+     * A blank name clears it. Giving someone the name another visible person already has says they are the same person, so the two groups become one (see
+     * [joinSameName]). Returns how many groups were joined into [personId].
+     */
+    suspend fun rename(personId: Long, name: String): Int {
+        val clean = name.trim().ifEmpty { null }
+        dao.rename(personId, clean)
+        return if (clean == null) 0 else joinSameName(personId, clean)
+    }
+
+    /**
+     * Two people the user named alike are one person: the photos of every other visible person with [name] (ignoring case, accents and spacing) move to
+     * [personId], who keeps their own name. A hidden person joins nobody, so that naming someone does not hide somebody else's photos.
+     */
+    private suspend fun joinSameName(personId: Long, name: String): Int {
+        val key = TextNormalizer.name(name)
+        val person = dao.personOrNull(personId) ?: return 0
+        if (key.isEmpty() || person.isHidden) return 0
+        val twins = dao.namedPeople().filter { it.id != personId && TextNormalizer.name(it.name) == key }
+        twins.forEach { merge(it.id, personId) }
+        return twins.size
+    }
+
+    /**
+     * Joins the people who already share a name (from before naming a person did it): in each set of them the oldest stays. Returns how many groups were joined.
+     */
+    suspend fun mergeSameNames(): Int {
+        val byName = dao.namedPeople().groupBy { TextNormalizer.name(it.name) }.filterKeys { it.isNotEmpty() }
+        var joined = 0
+        for (same in byName.values) {
+            val keep = same.minOf { it.id }
+            same.filter { it.id != keep }.forEach { merge(it.id, keep) }
+            joined += same.size - 1
+        }
+        return joined
+    }
 
     suspend fun setFavorite(personId: Long, favorite: Boolean) = dao.setFavorite(personId, favorite)
 

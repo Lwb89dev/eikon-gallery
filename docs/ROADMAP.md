@@ -12,7 +12,7 @@ Legend: [x] done and covered by build/tests, [~] done but only checkable on a de
 - [x] Video playback: play/pause, seek, mute
 - [x] Info panel with real EXIF / container metadata; location on request
 - [x] Light / dark / system theme, English and Italian, persisted settings
-- [x] Privacy baseline: no INTERNET, backups disabled, index wiped when access is revoked
+- [x] Privacy baseline: no INTERNET (until 1.0.0; from 1.1.0 the permission is there but unused until the user allows it, see Phase 10), backups disabled, index wiped when access is revoked
 - [~] Everything above confirmed on a real device (**not done yet**)
 
 Known gaps inside Phase 1, in priority order:
@@ -130,7 +130,7 @@ device); no thumbnail scrubber for video; very large albums sort their members f
 
 ## Phase 8 — Backup to a home server
 
-- [x] A separate `backup` build (same app id, so it installs over the standard one); the `standard` build keeps having no network permission, checked by the build, and contains no network code ([BACKUP.md](BACKUP.md))
+- [x] A separate `backup` build (same app id, so it installs over the standard one); the `standard` build keeps having no network permission, checked by the build, and contains no network code ([BACKUP.md](BACKUP.md)). *Merged into one APK in 1.1.0, see Phase 10.*
 - [x] Two servers behind one interface: **Immich** (what Umbrel installs for Android; upload with an API key, duplicates recognised by SHA-1) and **Nextcloud / WebDAV** (app password; files named by content so nothing is ever overwritten)
 - [x] TLS only, the phone's own authorities; a certificate outside them can be **pinned** after comparing its fingerprint; redirects never followed; the credential encrypted under an Android Keystore key and thrown away when the server changes
 - [x] Opt-in with a confirmation; only on Wi-Fi by default; battery not low; not in Battery Saver; heat checked; hidden photos left out by default; never deletes or overwrites
@@ -155,3 +155,13 @@ Known gaps: no restore; a file that cannot be sent within one 8-minute run is ne
 
 Not done, and why: a video thumbnail scrubber; a "selfies" filter (no signal); music in memories; animated GIF and WebP; merging the metadata of duplicates; the Media3 `ACCESS_NETWORK_STATE` permission; chunked or resumable upload and a foreground service for the backup. Each needs a device to check, or a product decision, or has no reliable source of truth.
 
+## Phase 10 — 1.1.0: one APK, first-run screens, more languages
+
+- [x] **One APK**: the `standard` and `backup` flavors are merged. The network is behind a consent switch that is off by default and checked at every place that could connect; the build checks the merged manifest against a reviewed list of permissions ([BACKUP.md](BACKUP.md), [PRIVACY.md](PRIVACY.md))
+- [x] **First-run screens**: what eikon is, what each permission is for (photos, optional locations, optional network) with Allow buttons, and the promise that nothing depends on anything outside the phone; no Google services, Firebase or ML Kit anywhere (checked in the dependency tree and the APK), and the emoji font initializer that could ask Google removed
+- [x] **Grid pinch zoom** follows the fingers continuously and settles on the nearest column count; thumbnails are asked for at a few fixed sizes so pinching does not decode a new picture at every step
+- [x] **"Analyze now"** is a clear button with an icon and progress; **the "Original" chip** in the editor is a visible, labelled toggle
+- [x] **27 languages**: English plus 26 translations: the other 23 official languages of the EU (Irish and Maltese included), Chinese (Simplified), Russian and Japanese; `locales_config.xml` and `localeFilters` list them, and `TranslationsTest` checks that every string, plural form and placeholder is present and well-formed in each ([TRANSLATING.md](TRANSLATING.md))
+- [x] **Squircle launcher icon** and a Support section (Lightning address) at the bottom of Settings
+- [x] **Open from the camera**: `VIEW` and the camera's review actions; a photo in the library opens in its viewer at its place, one that is not is shown alone with a button to open it in the library
+- [~] **Not run on a device**: the first-run screens, the pinch, the icon on real launchers (whether a squircle or another shape shows depends on the launcher and its settings), the camera hand-over, and the translations on screen (they were written without a native review). JVM tests cover the maths, the queries and the resource checks.

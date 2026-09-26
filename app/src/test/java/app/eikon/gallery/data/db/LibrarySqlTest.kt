@@ -390,7 +390,42 @@ class LibrarySqlTest {
         assertEquals(expected.first(), cover)
     }
 
+    @Test
+    fun positionIsTheIndexInTheMediaQueryForEveryScopeFilterAndSort() {
+        val queries = buildList {
+            for (direction in SortDirection.entries) for (field in SortField.entries) {
+                add(LibraryQuery(sortField = field, direction = direction))
+                add(LibraryQuery(LibraryScope.Hidden, sortField = field, direction = direction))
+                add(LibraryQuery(LibraryScope.Album(1), sortField = field, direction = direction))
+                add(LibraryQuery(LibraryScope.Folder("DCIM/Camera/"), sortField = field, direction = direction))
+                add(LibraryQuery(filters = LibraryFilters(TypeFilter.PHOTOS, favoritesOnly = true), sortField = field, direction = direction))
+            }
+        }
+        for (query in queries) {
+            val listed = ids(query)
+            for (id in 1L..8L) assertEquals("$query id=$id", listed.indexOf(id).takeIf { it >= 0 }, positionOf(query, id))
+        }
+    }
+
+    @Test
+    fun positionOfAPictureThatIsNotThereYetIsNull() {
+        assertEquals(null, positionOf(LibraryQuery(), 99L))
+        // Hidden items are not in the library, so a picture that was hidden cannot be opened there.
+        assertEquals(null, positionOf(LibraryQuery(), 3L))
+    }
+
     // --- helpers -------------------------------------------------------------------------------
+
+    private fun positionOf(query: LibraryQuery, id: Long): Int? {
+        val sql = LibraryQueryBuilder.position(query, id, NOW)
+        return db.prepareStatement(sql.sql).use { st ->
+            sql.args.forEachIndexed { i, arg -> st.setObject(i + 1, arg) }
+            st.executeQuery().use { rs ->
+                rs.next()
+                rs.getInt(1).takeUnless { rs.wasNull() }
+            }
+        }
+    }
 
     /** Every item must sit in the section (day) its own timestamp belongs to. */
     private fun assertSectionsMatchMedia(query: LibraryQuery) {

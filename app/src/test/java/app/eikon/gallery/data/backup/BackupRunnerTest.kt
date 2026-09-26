@@ -129,6 +129,15 @@ class BackupRunnerTest {
     }
 
     @Test
+    fun takingTheNetworkPermissionBackStopsTheRunEvenWithTheBackupStillOn() = runTest {
+        target.onUpload = { environment.settings = environment.settings.copy(networkAllowed = false) }
+        val report = runner().run(60_000)
+
+        assertEquals(BackupStop.DISABLED, report.stoppedBy)
+        assertEquals(1, report.sent)
+    }
+
+    @Test
     fun batterySaverStopsABackgroundRunButNotOneTheUserAskedFor() = runTest {
         environment.powerSave = true
         val background = runner().run(60_000)
@@ -224,7 +233,7 @@ class BackupRunnerTest {
     }
 
     private class FakeEnvironment : BackupEnvironment {
-        var settings = BackupSettings(enabled = true, serverUrl = "https://home.example")
+        var settings = BackupSettings(networkAllowed = true, enabled = true, serverUrl = "https://home.example")
         var thermal = 0
         var powerSave = false
         var now = 1_000L

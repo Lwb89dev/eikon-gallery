@@ -12,7 +12,7 @@ This document says what eikon does with your data today, and where its guarantee
 | Captions and what a file said before | same database | the captions you wrote (searchable; never written into the photo's file) and, if you changed a photo's date or location from the info panel, what the file said before, so the change can be undone. Kept when the library index is cleared |
 | Edits | same database | for each edited photo, a few lines of text: the values of the sliders, the filter and the crop (see [EDITING.md](EDITING.md)). No pixels; the photo's file is never changed. Kept when the library index is cleared, because it cannot be rebuilt |
 | Settings | app-private DataStore | theme, grid density, filter, sort, the screen-privacy switch, and the look last copied with "Copy edits" (a few lines of text) |
-| Backup settings (`backup` build) | app-private DataStore | the switches of the backup, and, **sealed under the Android Keystore**, the server address, the login name, the pinned certificate and the last message of a run |
+| Backup settings | app-private DataStore | the switches of the backup, and, **sealed under the Android Keystore**, the server address, the login name, the pinned certificate and the last message of a run |
 | Keys | app-private preferences, sealed by the Android Keystore | the key of the library's database, and the backup's password or API key. The Keystore keys cannot be read out of the phone, not even by eikon |
 | Sync bookkeeping | app-private DataStore | last MediaStore generation and version, access level |
 | Memory cache | RAM only | decoded thumbnails; nothing is written to a disk cache |
@@ -40,9 +40,12 @@ MediaStore after a restore.
 
 ## What eikon never does
 
-- The `standard` build declares **no `INTERNET` permission**. Without it Android refuses every network connection
-  from the app, so this is enforced by the OS, not by promise, and the build fails if the permission ever appears. Only the separate `backup` build has it, and uses it only
-  for the backup you set up (see [BACKUP.md](BACKUP.md)).
+- Connect to anything you have not allowed. eikon holds the `INTERNET` permission (Android grants it at install; there is no prompt to refuse), so what stops it is **its own switch**: "Allow eikon to use the internet"
+  is **off by default**, offered in the first-run screens and in Settings, and checked at every place that could open a connection (scheduling, the worker, the runner and creating a connection), each covered by a test.
+  With it off nothing is contacted. With it on, the only thing that connects is the backup to the server you configured (see [BACKUP.md](BACKUP.md)), over TLS. Version 1.0.0 also came as a second APK without the permission at all; from 1.1.0 there is one APK, so the operating
+  system no longer enforces this by itself, and the guarantee is the switch plus a build check: the build fails if the merged manifest has a permission that is not on a reviewed list or allows unencrypted traffic.
+- Depend on Google or anyone else's services. There is no Google Play services, Firebase or ML Kit in the app; the language, the models and the maps are all inside it. (The string `com.google.android.gms.org.conscrypt` appears once in the code: it is OkHttp's name for a TLS library it may find on the phone, not a dependency.) The emoji font
+  is not fetched from Google either: its start-up initializer is removed from the manifest.
 - No account, no analytics, no crash reporting, no advertising identifiers. eikon writes almost nothing to the system log, and never a file name, a place, a word or a key (a failure is logged as the kind of error only).
 - No map tiles: the info panel shows coordinates and hands them to *your* maps app only when you tap
   "Open in a maps app".
@@ -56,8 +59,8 @@ MediaStore after a restore.
 | `READ_MEDIA_IMAGES`, `READ_MEDIA_VIDEO` (Android 13+), `READ_EXTERNAL_STORAGE` (up to 12L) | show your photos and videos |
 | `READ_MEDIA_VISUAL_USER_SELECTED` (Android 14+) | lets you share only some photos; eikon then works with that subset |
 | `ACCESS_MEDIA_LOCATION` | Android hides GPS from apps without it. Requested only when you tap "Allow" (in the info panel, or in Settings to search by place); declining changes nothing else except that place search has nothing to work with |
-| `INTERNET` (**`backup` build only**) | copy your photos to the server you configured, over TLS, and for nothing else. Unencrypted traffic is forbidden by the build, which also fails if any permission appears that is not on the reviewed list |
-| `WAKE_LOCK`, `ACCESS_NETWORK_STATE`, `FOREGROUND_SERVICE`, `RECEIVE_BOOT_COMPLETED` | **not requested by eikon itself**: added to the merged manifest by WorkManager (background analysis, resumed after a reboot) and Media3. None of them can send or receive data; only `INTERNET` could, and it is absent from the `standard` build |
+| `INTERNET` | copy your photos to the server you configured, over TLS, and for nothing else; not used until you switch on "Allow eikon to use the internet". Unencrypted traffic is forbidden by the build, which also fails if any permission appears that is not on the reviewed list |
+| `WAKE_LOCK`, `ACCESS_NETWORK_STATE`, `FOREGROUND_SERVICE`, `RECEIVE_BOOT_COMPLETED` | **not requested by eikon itself**: added to the merged manifest by WorkManager (background analysis and backup, resumed after a reboot) and Media3. None of them can send or receive data; only `INTERNET` could, and eikon does not use it unless you allow it |
 
 ## Location and text found in photos
 
@@ -83,7 +86,7 @@ Two more analysis steps are **off by default** and each has its own switch:
 - **People.** Each face becomes a box and 128 numbers, and faces that look alike are grouped. **This is biometric data**
   in the sense of the word: a face description can be used to tell whether two photos show the same person. So:
   it is computed on the phone by models bundled in the app, stored only in the app's private database, excluded from
-  backups, never sent anywhere (there is no network permission to send it with), and deleted when you revoke photo access or
+  backups, never sent anywhere (the only thing eikon connects to is the backup server you configure, and the backup does not send what eikon learned about your photos), and deleted when you revoke photo access or
   uninstall. eikon only groups faces **within your own library**; it never compares them with anything else, has no list
   of known people, and a group only has a name if you typed one. Hiding a person removes them from the People list and from name
   searches, but their photos stay in the Library; hide the photos to take them out of the Library.
@@ -95,7 +98,7 @@ photos. All of it is in the encrypted database (see "Encryption at rest"); it is
 
 - **Places and trips reveal where you go.** A list of countries and cities, a map with a marker per group of photos, and trips (stretches away from where most of your photos are taken)
   are a picture of your movements. They are drawn from the positions the Places analysis stored (off by default, needs `ACCESS_MEDIA_LOCATION`). The map is
-  drawn on the phone from country outlines bundled in the app, with no map tiles, no map service and no network permission: nothing about where you have been is ever sent.
+  drawn on the phone from country outlines bundled in the app, with no map tiles and no map service: nothing about where you have been is ever sent.
   "Home" is not a stored place or an address: it is worked out each time from where most photos were taken.
 - **Memories** are made from dates, trips and the people you named, on the phone. Photos you hid never appear in them, in trips, in places or in duplicate lists.
   What you tell Memories (hide one, show fewer of a kind, show less of a person, leave out a date) is stored on the phone and can be undone from the menu of Memories.
@@ -157,11 +160,11 @@ optionally be gated the same way (off by default).
 - Media files themselves stay in shared storage under Android's normal protections.
 - A phone with root access *and a running, unlocked* eikon can be made to read the database through the app: the encryption protects files at rest, not a live process.
 
-## Backup to a home server (the `backup` build only)
+## Backup to a home server
 
 Full details, including what was and was not checked, are in [BACKUP.md](BACKUP.md). The rules it keeps:
 
-- **Off until you turn it on**, and it asks first, saying how many photos go to which server. Nothing leaves the phone before that.
+- **Off until you turn it on**: first "Allow eikon to use the internet" (off by default; it is what every connection checks), then the backup itself, which asks first, saying how many photos go to which server. Nothing leaves the phone before that.
 - **Your server only**, software you run (Immich or Nextcloud/WebDAV): no third-party service, no account of ours, no analytics.
 - **TLS only**; the phone's own certificate authorities (not ones you installed), or the one certificate you pinned after comparing its fingerprint. Redirects are never followed.
 - **The credential**, and the server address, the login and the pinned certificate, are encrypted under an Android Keystore key, excluded from backups, never logged, and thrown away with everything else when the server changes.

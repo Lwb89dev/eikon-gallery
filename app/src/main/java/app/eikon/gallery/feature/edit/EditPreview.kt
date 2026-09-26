@@ -5,10 +5,17 @@ import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.foundation.gestures.detectTapGestures
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.FilterChip
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.selection.selectable
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -18,6 +25,7 @@ import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.geometry.Size
@@ -27,8 +35,10 @@ import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.onSizeChanged
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.CustomAccessibilityAction
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.customActions
 import androidx.compose.ui.semantics.semantics
@@ -54,13 +64,30 @@ fun EditPreview(state: EditUiState, viewModel: EditViewModel, modifier: Modifier
         if (shown != null) PreviewPicture(shown, state, viewModel, cropping)
         if (!cropping && !state.recipe.isIdentity) {
             // Holding the picture does the same; this is for whoever cannot hold (a screen reader, a shaky hand) or has not found that yet.
-            FilterChip(
-                selected = comparing,
-                onClick = { comparing = !comparing },
-                label = { Text(stringResource(R.string.edit_original)) },
-                modifier = Modifier.align(Alignment.TopEnd).padding(8.dp),
-            )
+            OriginalToggle(comparing, onToggle = { comparing = !comparing }, modifier = Modifier.align(Alignment.TopEnd).padding(12.dp))
         }
+    }
+}
+
+/**
+ * The "Original" button over the photo. It sits on the picture itself, which can be any colour, so it carries its own background: dark and nearly opaque with white text and a
+ * thin light outline, and white with dark text while the original is being shown. (A standard chip took its colours from the theme and vanished on light photos.)
+ */
+@Composable
+private fun OriginalToggle(showing: Boolean, onToggle: () -> Unit, modifier: Modifier = Modifier) {
+    val background = if (showing) Color.White else Color.Black.copy(alpha = 0.72f)
+    val content = if (showing) Color.Black else Color.White
+    Row(
+        modifier = modifier
+            .clip(RoundedCornerShape(50))
+            .background(background)
+            .border(1.dp, Color.White.copy(alpha = 0.7f), RoundedCornerShape(50))
+            .selectable(selected = showing, role = Role.Button, onClick = onToggle)
+            .padding(horizontal = 14.dp, vertical = 8.dp),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        Icon(painterResource(R.drawable.ic_photo), contentDescription = null, tint = content, modifier = Modifier.size(18.dp))
+        Text(stringResource(R.string.edit_original), color = content, style = MaterialTheme.typography.labelLarge, modifier = Modifier.padding(start = 6.dp))
     }
 }
 

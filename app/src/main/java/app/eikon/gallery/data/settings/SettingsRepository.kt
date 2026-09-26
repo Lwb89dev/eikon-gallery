@@ -74,6 +74,8 @@ data class AppSettings(
     /** Block screenshots and show a blank card in the recent-apps list, everywhere. Hidden and Recently deleted do it whatever this says. */
     val secureScreens: Boolean = false,
     val analysis: AnalysisSettings = AnalysisSettings(),
+    /** The first-run screens (what eikon is, what it asks for and why) have been seen. Until then they are what opens. */
+    val onboardingCompleted: Boolean = false,
 ) {
     /** The main library: everything not hidden, with the saved filters and order. */
     val libraryQuery: LibraryQuery
@@ -132,6 +134,10 @@ class SettingsRepository @Inject constructor(
         store.edit { it[SECURE_SCREENS] = enabled }
     }
 
+    suspend fun setOnboardingCompleted(completed: Boolean) {
+        store.edit { it[ONBOARDING_COMPLETED] = completed }
+    }
+
     suspend fun setAnalysis(transform: (AnalysisSettings) -> AnalysisSettings) {
         val current = state.value?.analysis ?: AnalysisSettings()
         val next = transform(current)
@@ -169,6 +175,7 @@ class SettingsRepository @Inject constructor(
         lockTrash = prefs[LOCK_TRASH] ?: false,
         showHidden = prefs[SHOW_HIDDEN] ?: true,
         secureScreens = prefs[SECURE_SCREENS] ?: false,
+        onboardingCompleted = prefs[ONBOARDING_COMPLETED] ?: false,
         analysis = AnalysisSettings(
             paused = prefs[ANALYSIS_PAUSED] ?: false,
             onlyWhileCharging = prefs[ANALYSIS_CHARGING] ?: true,
@@ -194,6 +201,7 @@ class SettingsRepository @Inject constructor(
         val LOCK_TRASH = booleanPreferencesKey("lock_trash")
         val SHOW_HIDDEN = booleanPreferencesKey("show_hidden")
         val SECURE_SCREENS = booleanPreferencesKey("secure_screens")
+        val ONBOARDING_COMPLETED = booleanPreferencesKey("onboarding_completed")
         val ANALYSIS_PAUSED = booleanPreferencesKey("analysis_paused")
         val ANALYSIS_CHARGING = booleanPreferencesKey("analysis_only_charging")
         val ANALYSIS_PLACES = booleanPreferencesKey("analysis_places")

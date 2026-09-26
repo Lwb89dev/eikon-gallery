@@ -16,9 +16,12 @@ data class TimelineSection(val bucket: String, val count: Int, val startIndex: I
  * the *media index* (position in the ordered media list, what the pager and paging source use) and
  * the *grid position* (media plus one header cell per section). With 100k items only the sections
  * (a few thousand at most) are held in memory.
+ *
+ * [grouping] is what the sections are (a day each, or a month each). It travels with them so that a header is always worded for the grouping its section was cut by, even during the
+ * moment when the density setting has already changed and the sections for the new one are still being counted.
  */
 @Immutable
-class TimelineLayout(val sections: List<TimelineSection>) {
+class TimelineLayout(val sections: List<TimelineSection>, val grouping: TimelineGrouping = TimelineGrouping.DAY) {
     val mediaCount: Int = sections.lastOrNull()?.let { it.startIndex + it.count } ?: 0
     val gridItemCount: Int = mediaCount + sections.size
 
@@ -67,12 +70,12 @@ class TimelineLayout(val sections: List<TimelineSection>) {
         val Empty = TimelineLayout(emptyList())
 
         /** Builds sections from ordered (bucket, count) pairs, computing each section's start index. */
-        fun fromCounts(counts: List<Pair<String, Int>>): TimelineLayout {
+        fun fromCounts(counts: List<Pair<String, Int>>, grouping: TimelineGrouping = TimelineGrouping.DAY): TimelineLayout {
             var start = 0
             val sections = counts.map { (bucket, count) ->
                 TimelineSection(bucket, count, start).also { start += count }
             }
-            return TimelineLayout(sections)
+            return TimelineLayout(sections, grouping)
         }
     }
 }

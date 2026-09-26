@@ -51,6 +51,8 @@ fun AlbumNameDialog(
     onConfirm: (String) -> Unit,
     onDismiss: () -> Unit,
     @StringRes hint: Int = R.string.album_name_hint,
+    /** A line under the field, for what the name will do besides naming. */
+    @StringRes note: Int? = null,
 ) {
     var name by rememberSaveable { mutableStateOf(initialName) }
     AlertDialog(
@@ -62,6 +64,7 @@ fun AlbumNameDialog(
                 onValueChange = { name = it.take(AlbumNames.MAX_LENGTH) },
                 singleLine = true,
                 label = { Text(stringResource(hint)) },
+                supportingText = note?.let { { Text(stringResource(it)) } },
                 keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Sentences, imeAction = ImeAction.Done),
             )
         },

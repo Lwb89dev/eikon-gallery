@@ -135,7 +135,7 @@ private fun PersonCell(person: PersonSummary, viewModel: PeopleViewModel, onClic
         AlbumNameDialog(R.string.person_rename, R.string.action_save, person.name.orEmpty(), {
             renaming = false
             viewModel.rename(person.id, it)
-        }, { renaming = false }, hint = R.string.person_name_hint)
+        }, { renaming = false }, hint = R.string.person_name_hint, note = R.string.person_same_name_note)
     }
 }
 

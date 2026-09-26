@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="settings_privacy_network">Questa versione non ha il permesso internet: è Android stesso a impedire a eikon di connettersi ovunque.</string>
-    <string name="backup_title">Backup sul tuo server</string>
-    <string name="backup_not_in_this_build">Questa versione di eikon non ha alcun accesso alla rete: è Android stesso a impedirle di collegarsi ovunque. Il backup su un server che gestisci tu (Immich, Nextcloud) è nella versione \"backup\" della stessa app, che chiede il permesso di rete e lo usa solo per quello. Si installa sopra a questa e conserva libreria, modifiche e album. Vedi docs/BACKUP.md.</string>
-</resources>

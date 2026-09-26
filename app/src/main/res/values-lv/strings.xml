@@ -1,0 +1,682 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Library -->
+    <string name="library_title">Bibliotēka</string>
+    <string name="today">Šodien</string>
+    <string name="yesterday">Vakar</string>
+    <string name="empty_library">Fotoattēlu vai video vēl nav</string>
+    <string name="empty_filter">Nekas neatbilst šim filtram</string>
+    <string name="empty_filter_clear">Rādīt visu</string>
+    <string name="sync_progress">Ielādē bibliotēku: %1$,d / %2$,d</string>
+    <string name="sync_failed">Neizdevās atsvaidzināt bibliotēku</string>
+    <string name="sync_retry">Mēģināt vēlreiz</string>
+    <string name="scrubber_description">Ritināt bibliotēku pēc datuma</string>
+
+    <!-- Permissions -->
+    <string name="permission_title">Tavi fotoattēli paliek tavā ierīcē</string>
+    <string name="permission_body">eikon ir nepieciešama piekļuve taviem fotoattēliem un video, lai tos rādītu. Tie paliek tavā ierīcē: nekas netiek augšupielādēts, ja vien tu neiestatīsi dublēšanu uz savu serveri.</string>
+    <string name="permission_grant">Atļaut piekļuvi</string>
+    <string name="permission_denied">Piekļuve tika liegta. Tu vari to atļaut sistēmas iestatījumos.</string>
+    <string name="permission_open_settings">Atvērt iestatījumus</string>
+    <string name="limited_banner">Tiek rādīti tikai tevis atlasītie fotoattēli</string>
+    <string name="limited_select_more">Atlasīt vairāk</string>
+    <string name="limited_allow_all">Atļaut visus</string>
+
+    <!-- Menus and filters -->
+    <string name="menu_filter">Filtrs</string>
+    <string name="menu_sort">Kārtot</string>
+    <string name="menu_settings">Iestatījumi</string>
+    <string name="menu_more">Citas iespējas</string>
+    <string name="filter_all">Visi</string>
+    <string name="filter_photos">Fotoattēli</string>
+    <string name="filter_videos">Video</string>
+    <string name="filter_favorites">Izlase</string>
+    <string name="filter_screenshots">Ekrānuzņēmumi</string>
+    <string name="filter_screen_recordings">Ekrāna ieraksti</string>
+    <string name="filter_panoramas">Panorāmas</string>
+    <string name="filter_raw">RAW</string>
+    <string name="filter_clear">Notīrīt filtru</string>
+    <string name="sort_by_date_taken">Uzņemšanas datums</string>
+    <string name="sort_by_date_added">Pievienošanas datums</string>
+    <string name="sort_newest_first">Jaunākie vispirms</string>
+    <string name="sort_oldest_first">Vecākie vispirms</string>
+
+    <!-- Selection and actions -->
+    <plurals name="selected_count">
+        <item quantity="zero">Atlasīti %d</item>
+        <item quantity="one">Atlasīts %d</item>
+        <item quantity="other">Atlasīti %d</item>
+    </plurals>
+    <string name="action_share">Kopīgot</string>
+    <string name="action_favorite">Pievienot izlasei</string>
+    <string name="action_unfavorite">Noņemt no izlases</string>
+    <string name="action_delete">Dzēst</string>
+    <string name="action_info">Informācija</string>
+    <string name="action_back">Atpakaļ</string>
+    <string name="action_clear_selection">Notīrīt atlasi</string>
+    <string name="action_select">Atlasīt</string>
+    <string name="action_failed">Kaut kas nogāja greizi</string>
+    <plurals name="moved_to_trash">
+        <item quantity="zero">%d vienumu pārvietoti uz miskasti. Android tos glabā 30 dienas.</item>
+        <item quantity="one">%d vienums pārvietots uz miskasti. Android to glabā 30 dienas.</item>
+        <item quantity="other">%d vienumi pārvietoti uz miskasti. Android tos glabā 30 dienas.</item>
+    </plurals>
+
+    <!-- Accessibility -->
+    <string name="cd_photo">Fotoattēls, %1$s</string>
+    <string name="cd_video">Video, %1$s, %2$s</string>
+    <string name="cd_edited_badge">Rediģēts</string>
+    <string name="cd_favorite_badge">Izlasē</string>
+    <string name="viewer_position">%1$d no %2$d</string>
+
+    <!-- Video -->
+    <string name="video_play">Atskaņot</string>
+    <string name="video_pause">Pauzēt</string>
+    <string name="video_mute">Izslēgt skaņu</string>
+    <string name="video_unmute">Ieslēgt skaņu</string>
+    <string name="video_seek">Tīt</string>
+
+    <!-- Info panel -->
+    <string name="info_title">Informācija</string>
+    <string name="info_loading">Lasa detaļas…</string>
+    <string name="info_error">Neizdevās nolasīt šī faila detaļas</string>
+    <string name="info_section_file">Fails</string>
+    <string name="info_section_camera">Kamera</string>
+    <string name="info_section_video">Video</string>
+    <string name="info_name">Nosaukums</string>
+    <string name="info_type">Veids</string>
+    <string name="info_folder">Mape</string>
+    <string name="info_resolution">Izšķirtspēja</string>
+    <string name="info_megapixels">Megapikseļi</string>
+    <string name="info_size">Izmērs</string>
+    <string name="info_date">Datums</string>
+    <string name="info_modified">Mainīts</string>
+    <string name="info_color_profile">Krāsu profils</string>
+    <string name="info_location">Atrašanās vieta</string>
+    <string name="info_location_none">Šajā failā nav saglabāta atrašanās vieta</string>
+    <string name="info_location_hidden">Android slēpj fotoattēlu atrašanās vietas no lietotnēm, līdz tu to atļauj</string>
+    <string name="info_location_allow">Atļaut</string>
+    <string name="info_location_open">Atvērt kartes lietotnē</string>
+    <string name="info_camera">Ierīce</string>
+    <string name="info_lens">Objektīvs</string>
+    <string name="info_focal_length">Fokusa attālums</string>
+    <string name="info_aperture">Diafragma</string>
+    <string name="info_shutter">Aizvara ātrums</string>
+    <string name="info_iso">Jutība</string>
+    <string name="info_exposure_bias">Ekspozīcijas korekcija</string>
+    <string name="info_flash">Zibspuldze</string>
+    <string name="info_flash_fired">Iedarbojās</string>
+    <string name="info_flash_off">Neiedarbojās</string>
+    <string name="info_orientation">Orientācija</string>
+    <string name="info_software">Programmatūra</string>
+    <string name="info_duration">Ilgums</string>
+    <string name="info_frame_rate">Kadru ātrums</string>
+    <string name="info_video_codec">Video kodeks</string>
+    <string name="info_audio_codec">Audio kodeks</string>
+    <string name="info_bitrate">Bitu pārraides ātrums</string>
+    <string name="info_dynamic_range">Dinamiskais diapazons</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Iestatījumi</string>
+    <string name="settings_appearance">Izskats</string>
+    <string name="theme_system">Sekot sistēmai</string>
+    <string name="theme_light">Gaišs</string>
+    <string name="theme_dark">Tumšs</string>
+    <string name="settings_privacy">Privātums</string>
+    <string name="settings_privacy_body">eikon darbojas tavā ierīcē. Tam nav konta un nav lietojuma analītikas, un tā dati ir izslēgti no Android dublējumkopijām.\n\nTavi fotoattēli nekad netiek kopēti: eikon uztur lokālu indeksu ar failu datiem (nosaukums, datums, izmērs, mape), lai bibliotēka atvērtos uzreiz. Izdzēšot lietotni, tiek izdzēsts arī indekss.</string>
+    <string name="settings_storage_encrypted">Bibliotēkas datubāze (indekss, albumi, labojumi, parakstu teksti un analīzes atradumi) šajā tālrunī ir šifrēta ar AES-256. Tās atslēgu glabā Android Keystore.</string>
+    <string name="settings_storage_not_encrypted">Neizdevās šifrēt bibliotēkas datubāzi (%1$s), tāpēc tā joprojām ir glabāta nešifrēta. eikon mēģina vēlreiz katrā palaišanas reizē.</string>
+    <string name="settings_storage_reset_title">Bibliotēkas datubāze sākta no jauna</string>
+    <string name="settings_storage_reset">Atslēga, kas aizsargāja bibliotēkas datubāzi, tika zaudēta, tāpēc eikon bija jāizveido jauna. Tevis pievienotie albumi, labojumi, parakstu teksti un vārdi ir pazuduši. Tavi fotoattēli ir neskarti, un analīze tiks palaista vēlreiz.</string>
+    <string name="settings_storage_reset_ok">Sapratu</string>
+    <string name="settings_about">Par lietotni</string>
+    <string name="settings_licenses">Atvērtā koda licences</string>
+    <string name="licenses_title">Atvērtā koda licences</string>
+    <string name="settings_version">Versija %1$s</string>
+
+    <!-- Navigation and collections -->
+    <string name="nav_library">Bibliotēka</string>
+    <string name="nav_search">Meklēt</string>
+    <string name="nav_collections">Kolekcijas</string>
+    <string name="collections_title">Kolekcijas</string>
+    <string name="section_people">Cilvēki</string>
+    <string name="section_albums">Albumi</string>
+    <string name="section_personal">Personiski</string>
+    <string name="section_folders">Ierīces mapes</string>
+    <string name="collection_favorites">Izlase</string>
+    <string name="collection_recent">Nesen pievienotie</string>
+    <string name="collection_videos">Video</string>
+    <string name="collection_screenshots">Ekrānuzņēmumi</string>
+    <string name="collection_screen_recordings">Ekrāna ieraksti</string>
+    <string name="collection_panoramas">Panorāmas</string>
+    <string name="collection_raw">RAW</string>
+    <string name="collection_trash">Nesen dzēstie</string>
+    <string name="collection_hidden">Paslēptie</string>
+    <plurals name="items_count">
+        <item quantity="zero">%d vienumu</item>
+        <item quantity="one">%d vienums</item>
+        <item quantity="other">%d vienumi</item>
+    </plurals>
+    <string name="empty_album">Šis albums ir tukšs. Atlasi fotoattēlus bibliotēkā un izvēlies „Pievienot albumam”.</string>
+    <string name="empty_hidden">Nekas nav paslēpts</string>
+    <string name="empty_collection">Šeit vēl nekā nav</string>
+
+    <!-- Albums -->
+    <string name="album_new">Jauns albums</string>
+    <string name="album_name_hint">Albuma nosaukums</string>
+    <string name="album_create">Izveidot</string>
+    <string name="album_rename">Pārsaukt</string>
+    <string name="album_delete">Dzēst albumu</string>
+    <string name="album_delete_title">Vai dzēst šo albumu?</string>
+    <string name="album_delete_message">Tiek dzēsts tikai albums. Tajā esošie fotoattēli un video paliek tur, kur ir.</string>
+    <string name="album_move_earlier">Pārvietot agrāk</string>
+    <string name="album_move_later">Pārvietot vēlāk</string>
+    <string name="action_add_to_album">Pievienot albumam</string>
+    <string name="action_remove_from_album">Noņemt no albuma</string>
+    <string name="action_hide">Paslēpt</string>
+    <string name="action_unhide">Parādīt</string>
+    <string name="action_cancel">Atcelt</string>
+    <string name="action_save">Saglabāt</string>
+    <plurals name="added_to_album">
+        <item quantity="zero">%1$d vienumu pievienoti albumam „%2$s”</item>
+        <item quantity="one">%1$d vienums pievienots albumam „%2$s”</item>
+        <item quantity="other">%1$d vienumi pievienoti albumam „%2$s”</item>
+    </plurals>
+    <plurals name="removed_from_album">
+        <item quantity="zero">%d vienumu noņemti no albuma</item>
+        <item quantity="one">%d vienums noņemts no albuma</item>
+        <item quantity="other">%d vienumi noņemti no albuma</item>
+    </plurals>
+    <plurals name="moved_to_hidden">
+        <item quantity="zero">%d vienumu paslēpti. Tu tos atradīsi sadaļā Kolekcijas, Paslēptie.</item>
+        <item quantity="one">%d vienums paslēpts. Tu to atradīsi sadaļā Kolekcijas, Paslēptie.</item>
+        <item quantity="other">%d vienumi paslēpti. Tu tos atradīsi sadaļā Kolekcijas, Paslēptie.</item>
+    </plurals>
+    <plurals name="unhidden">
+        <item quantity="zero">%d vienumu atkal ir redzami</item>
+        <item quantity="one">%d vienums atkal ir redzams</item>
+        <item quantity="other">%d vienumi atkal ir redzami</item>
+    </plurals>
+
+    <!-- Filters -->
+    <string name="filter_type_title">Veids</string>
+    <string name="filter_kind_title">Žanrs</string>
+    <string name="filter_any">Jebkurš</string>
+    <string name="filter_favorites_only">Tikai izlase</string>
+    <string name="filter_edited">Rediģētie</string>
+    <string name="share_preparing">Sagatavo rediģētos fotoattēlus kopīgošanai</string>
+    <string name="filter_edited_only">Tikai rediģētie</string>
+    <string name="filter_clear_all">Notīrīt filtrus</string>
+
+    <!-- Locks -->
+    <string name="locked_title">Bloķēts</string>
+    <string name="locked_body">Lai to atvērtu, izmanto pirksta nospiedumu, seju vai ekrāna bloķēšanu.</string>
+    <string name="locked_unlock">Atbloķēt</string>
+    <string name="auth_subtitle">Apstiprini, ka tas esi tu</string>
+    <string name="auth_title_hidden">Atbloķēt sadaļu „Paslēptie”</string>
+    <string name="auth_title_trash">Atbloķēt sadaļu „Nesen dzēstie”</string>
+    <string name="auth_unavailable">Autentifikācija šobrīd nav pieejama. Mēģini vēlreiz pēc brīža.</string>
+    <string name="no_device_lock_notice">Šim tālrunim nav ekrāna bloķēšanas, tāpēc „Paslēptie” nav aizsargāti. Iestati to sistēmas iestatījumos.</string>
+
+    <!-- Recently deleted -->
+    <string name="trash_info">Vienumi tiek neatgriezeniski dzēsti pēc apmēram 30 dienām.</string>
+    <string name="trash_empty">Nesen nekas nav dzēsts</string>
+    <string name="trash_restore">Atjaunot</string>
+    <string name="trash_delete_forever">Dzēst neatgriezeniski</string>
+    <plurals name="days_left_short">
+        <item quantity="zero">%d d.</item>
+        <item quantity="one">%d d.</item>
+        <item quantity="other">%d d.</item>
+    </plurals>
+    <plurals name="trash_restored">
+        <item quantity="zero">%d vienumu atjaunoti</item>
+        <item quantity="one">%d vienums atjaunots</item>
+        <item quantity="other">%d vienumi atjaunoti</item>
+    </plurals>
+    <plurals name="trash_deleted">
+        <item quantity="zero">%d vienumu neatgriezeniski dzēsti</item>
+        <item quantity="one">%d vienums neatgriezeniski dzēsts</item>
+        <item quantity="other">%d vienumi neatgriezeniski dzēsti</item>
+    </plurals>
+
+    <!-- Settings: security -->
+    <string name="settings_security">Drošība</string>
+    <string name="setting_lock_hidden">Pieprasīt autentifikāciju sadaļai „Paslēptie”</string>
+    <string name="setting_lock_trash">Pieprasīt autentifikāciju sadaļai „Nesen dzēstie”</string>
+    <string name="setting_show_hidden">Rādīt „Paslēptie” kolekcijās</string>
+    <string name="setting_secure_screens">Slēpt eikon nesenajās lietotnēs un bloķēt ekrānuzņēmumus</string>
+    <string name="settings_security_body">Paslēptie vienumi netiek iekļauti bibliotēkā, kolekcijās un meklēšanā, un „Paslēpto” atvēršanai tiek prasīts tavs pirksta nospiedums, seja vai ekrāna bloķēšana. Paši faili nav šifrēti un paliek tālruņa parastajā krātuvē, kur citas lietotnes ar piekļuvi fotoattēliem tos joprojām var redzēt.</string>
+
+    <!-- Search -->
+    <string name="search_placeholder">Datums, vieta, teksts, faila nosaukums</string>
+    <string name="search_clear">Notīrīt meklēšanu</string>
+    <string name="search_no_results">Neviens fotoattēls neatbilst</string>
+    <string name="search_hint_title">Meklē savā bibliotēkā</string>
+    <string name="search_hint_body">Izmēģini datumu („August 2025”, „yesterday”), vietu („Rome”, „Tuscany”), vārdu, kas parādās fotoattēlā vai tā faila nosaukumā, vai žanru („videos”, „screenshots”, „favorites”).\n\nDatumi un žanri tiek saprasti angļu un itāļu valodā. Vietas, teksts fotoattēlos un tas, ko tie rāda, tiek atrasti pēc analīzes palaišanas (Iestatījumi, Analīze).</string>
+    <string name="search_analysis_off">Meklēšana pēc vietas, pēc teksta fotoattēlos un pēc tā, ko tie rāda, ir izslēgta. Tu vari to ieslēgt sadaļā Iestatījumi, Analīze.</string>
+    <string name="search_analysis_note">Fotoattēli vēl tiek analizēti fonā (%1$d %%). Daži rezultāti var trūkt.</string>
+
+    <!-- Settings: analysis -->
+    <string name="settings_analysis">Analīze</string>
+    <string name="analysis_places_progress">Vietas: %1$,d no %2$,d</string>
+    <string name="analysis_semantic_progress">Ko fotoattēli rāda: %1$,d no %2$,d</string>
+    <string name="analysis_semantic_unavailable">Neizdevās ielādēt modeli, kas atpazīst, ko fotoattēli rāda, tāpēc šis solis netiek izpildīts.</string>
+    <string name="search_semantic_unavailable">Meklēšana pēc tā, ko fotoattēli rāda, šobrīd nav pieejama (modeli neizdevās ielādēt). Pārējie rezultāti joprojām darbojas.</string>
+    <string name="analysis_people_progress">Cilvēki: %1$,d no %2$,d</string>
+    <string name="analysis_people_unavailable">Neizdevās ielādēt modeļus, kas atrod sejas, tāpēc šis solis netiek izpildīts.</string>
+    <string name="analysis_duplicates_progress">Dublikāti: %1$,d no %2$,d</string>
+    <string name="analysis_text_progress">Teksts fotoattēlos: %1$,d no %2$,d</string>
+    <string name="analysis_running">Notiek analīze…</string>
+    <string name="analysis_idle">Gaida īsto brīdi (akumulators nav gandrīz tukšs, akumulatora taupīšanas režīms ir izslēgts un, ja tu tā izvēlējies, notiek uzlāde)</string>
+    <string name="analysis_up_to_date">Viss ir analizēts</string>
+    <string name="setting_pause_analysis">Pauzēt analīzi</string>
+    <string name="setting_only_charging">Tikai uzlādes laikā</string>
+    <string name="setting_analyze_places">Atrast fotoattēlus pēc vietas</string>
+    <string name="setting_analyze_semantic">Atrast fotoattēlus pēc tā, ko tie rāda</string>
+    <string name="setting_analyze_people">Atrast cilvēkus fotoattēlos</string>
+    <string name="setting_analyze_people_note">Sejas tiek atrastas un salīdzinātas tikai šajā tālrunī. Nekas par seju to nekad neatstāj, un eikon nekad nemēģina nevienu atpazīt: tas tikai grupē sejas, kas ir līdzīgas, un grupām vārdus dod tu.</string>
+    <string name="setting_analyze_duplicates">Atrast dublētus fotoattēlus</string>
+    <string name="setting_analyze_text">Atrast tekstu fotoattēlos</string>
+    <string name="analysis_location_permission">Android slēpj no lietotnēm, kur fotoattēli uzņemti, līdz tu to atļauj.</string>
+    <string name="analysis_allow_locations">Atļaut piekļuvi fotoattēlu atrašanās vietām</string>
+    <string name="analyze_now">Analizēt tūlīt</string>
+    <string name="settings_analysis_body">Analīze darbojas tikai tavā tālrunī, fonā, un tiek pauzēta, kad akumulators ir gandrīz tukšs, ir ieslēgts akumulatora taupīšanas režīms vai tālrunis sakarst („Analizēt tūlīt” turpinās arī akumulatora taupīšanas režīmā). Tā saglabā katra fotoattēla vietu (noteikta bezsaistē, neviena atrašanās vieta netiek sūtīta nekur), skaitlisku aprakstu tam, ko fotoattēls rāda (lai tu varētu meklēt, piemēram, „suns” vai „saulriets”; tas nav paraksta teksts, un to nevar nolasīt atpakaļ kā attēlu) un jebkuru tekstu, ko tā fotoattēlā nolasa, lai Meklēšana tos varētu atrast. Ja ieslēdz cilvēkus, tā saglabā arī to, kur fotoattēlā atrodas katra seja, un tās skaitlisku aprakstu, tikai lai grupētu sejas, kas ir līdzīgas. Ja ieslēdz dublikātus, tā saglabā īsu katra fotoattēla un vienāda izmēra failu pirkstu nospiedumu, tikai lai atrastu kopijas. Tā, ko fotoattēli rāda, atpazīšana un teksta lasīšana ir lēna un smagi noslogo procesoru, tāpēc analīze pēc noklusējuma gaida uzlādi.</string>
+
+    <!-- Info panel: derived data -->
+    <string name="info_place">Tuvākā vieta</string>
+    <string name="info_text_found">Teksts šajā fotoattēlā</string>
+    <string name="info_text_copy">Kopēt tekstu</string>
+
+    <!-- People -->
+    <string name="collection_people">Cilvēki</string>
+    <string name="people_title">Cilvēki</string>
+    <string name="person_unnamed">Cilvēks bez vārda</string>
+    <string name="person_add_name">Pievienot vārdu</string>
+    <string name="person_rename">Nosaukt šo cilvēku</string>
+    <string name="person_name_hint">Vārds</string>
+    <string name="person_same_name_note">Cilvēki ar vienādu vārdu tiek apvienoti vienā.</string>
+    <string name="person_favorite">Atzīmēt kā izlasē</string>
+    <string name="person_unfavorite">Noņemt no izlases</string>
+    <string name="person_hide">Paslēpt šo cilvēku</string>
+    <string name="person_unhide">Parādīt šo cilvēku</string>
+    <string name="person_merge">Apvienot ar citu cilvēku…</string>
+    <string name="person_merge_title">Apvienot ar</string>
+    <string name="person_merge_empty">Nav neviena cita, ar ko apvienot.</string>
+    <string name="person_not_this">Nav šis cilvēks</string>
+    <string name="person_remove_from_people">Nav seja</string>
+    <string name="people_show_hidden">Rādīt paslēptos cilvēkus (%1$d)</string>
+    <string name="people_hide_hidden">Slēpt paslēptos cilvēkus</string>
+    <string name="people_empty_off">Cilvēki ir izslēgti. Ieslēdz „Atrast cilvēkus fotoattēlos” sadaļā Iestatījumi, Analīze, un eikon sagrupēs atrastās sejas. Viss paliek šajā tālrunī.</string>
+    <string name="people_empty_working">Sejas vēl nav atrastas (analizēti %1$d %% tavu fotoattēlu). Analīze darbojas fonā uzlādes laikā.</string>
+    <string name="people_empty_done">Tavos fotoattēlos sejas netika atrastas.</string>
+    <string name="people_go_settings">Atvērt iestatījumus</string>
+    <string name="person_photos_empty">Nav fotoattēlu.</string>
+    <plurals name="moved_to_new_person">
+        <item quantity="zero">%d fotoattēlu pārvietoti jaunam cilvēkam</item>
+        <item quantity="one">%d fotoattēls pārvietots jaunam cilvēkam</item>
+        <item quantity="other">%d fotoattēli pārvietoti jaunam cilvēkam</item>
+    </plurals>
+    <plurals name="removed_from_people">
+        <item quantity="zero">%d fotoattēlu noņemti no Cilvēkiem</item>
+        <item quantity="one">%d fotoattēls noņemts no Cilvēkiem</item>
+        <item quantity="other">%d fotoattēli noņemti no Cilvēkiem</item>
+    </plurals>
+    <string name="info_people">Cilvēki</string>
+    <plurals name="info_people_unnamed_count">
+        <item quantity="zero">%d bez vārda</item>
+        <item quantity="one">%d bez vārda</item>
+        <item quantity="other">%d bez vārda</item>
+    </plurals>
+
+    <string name="section_memories">Atmiņas</string>
+    <string name="section_pets">Mājdzīvnieki</string>
+    <string name="collection_dogs">Suņi</string>
+    <string name="collection_cats">Kaķi</string>
+    <string name="empty_pets">Suņi vai kaķi vēl nav atrasti. Mājdzīvnieki tiek atpazīti pēc tā, ko fotoattēli rāda: ieslēdz „Atrast fotoattēlus pēc tā, ko tie rāda” sadaļā Iestatījumi, Analīze, un gaidi, līdz tas pabeigts.</string>
+
+    <!-- Places -->
+    <string name="places_title">Vietas</string>
+    <string name="places_tab_list">Saraksts</string>
+    <string name="places_tab_map">Karte</string>
+    <string name="place_unknown">Citas vietas</string>
+    <string name="place_near">Pie %1$s</string>
+    <string name="places_expand">Rādīt</string>
+    <string name="places_collapse">Slēpt</string>
+    <string name="collection_places">Vietas</string>
+    <string name="places_map_note">Tikai valstu kontūras un lielāko pilsētu nosaukumi: kartes attēli netiek lejupielādēti, un neviena pozīcija nekad neatstāj tālruni. Lai tuvinātu, savelc pirkstus vai veic dubultskārienu, pieskaries marķierim, lai redzētu tā fotoattēlus.</string>
+    <string name="places_map_description">Karte ar vietām, kur uzņemti tavi fotoattēli, ar marķieriem fotoattēlu grupām</string>
+    <string name="places_empty_off">Vietas ir izslēgtas. Ieslēdz „Atrast fotoattēlus pēc vietas” sadaļā Iestatījumi, Analīze, un eikon bezsaistē noteiks, kur uzņemti tavi fotoattēli, pēc to GPS datiem.</string>
+    <string name="places_empty_working">Vietas vēl nav atrastas (analizēti %1$d %% tavu fotoattēlu). Analīze darbojas fonā uzlādes laikā.</string>
+    <string name="places_empty_done">Nevienam no taviem fotoattēliem nav pozīcijas, vai arī eikon var nebūt atļaujas lasīt fotoattēlu atrašanās vietas (Iestatījumi, Analīze).</string>
+    <string name="section_places">Vietas un ceļojumi</string>
+
+    <!-- Trips -->
+    <string name="collection_trips">Ceļojumi</string>
+    <string name="trips_title">Ceļojumi</string>
+    <string name="trip_untitled">Ceļojums</string>
+    <string name="trip_reason">Apmēram %1$d km no vietas, kur uzņem lielāko daļu tavu fotoattēlu (pie %2$s)</string>
+    <string name="trip_home_unknown">nezināma vieta</string>
+    <plurals name="trip_summary_days">
+        <item quantity="zero">%d dienu</item>
+        <item quantity="one">%d diena</item>
+        <item quantity="other">%d dienas</item>
+    </plurals>
+    <string name="trips_empty">Ceļojumi netika atrasti. Ceļojums ir dienu virkne ar vismaz 10 fotoattēliem, kas pavadīta vismaz 100 km attālumā no vietas, kur uzņem lielāko daļu tavu fotoattēlu. Tam eikon ir vajadzīgas fotoattēlu pozīcijas: ieslēdz „Atrast fotoattēlus pēc vietas” sadaļā Iestatījumi, Analīze.</string>
+
+    <!-- Duplicates and similar shots -->
+    <string name="section_cleanup">Sakārtošana</string>
+    <string name="collection_duplicates">Dublikāti</string>
+    <string name="collection_similar">Līdzīgi kadri</string>
+    <string name="duplicates_title">Dublikāti</string>
+    <string name="similar_title">Līdzīgi kadri</string>
+    <string name="duplicates_note">eikon tos tikai atrod. Nekas netiek noņemts, kamēr tu neapstiprini paša Android dialoglodziņā, un noņemtie fotoattēli nonāk sadaļā „Nesen dzēstie”, kur tu vari tos atjaunot. Ja fotoattēls, ko esi pievienojis albumiem, ir kopēts: kopija, ko paturi, pievienojas šiem albumiem.</string>
+    <plurals name="duplicate_exact">
+        <item quantity="zero">%d identisku failu</item>
+        <item quantity="one">%d identisks fails</item>
+        <item quantity="other">%d identiski faili</item>
+    </plurals>
+    <plurals name="duplicate_visual">
+        <item quantity="zero">%d viena attēla kopiju</item>
+        <item quantity="one">%d viena attēla kopija</item>
+        <item quantity="other">%d viena attēla kopijas</item>
+    </plurals>
+    <plurals name="similar_group">
+        <item quantity="zero">%d līdzīgu kadru</item>
+        <item quantity="one">%d kadrs</item>
+        <item quantity="other">%d līdzīgi kadri</item>
+    </plurals>
+    <plurals name="duplicate_keep_best">
+        <item quantity="zero">Paturēt labāko, pārvietot %d uz „Nesen dzēstie”</item>
+        <item quantity="one">Paturēt labāko, pārvietot %d uz „Nesen dzēstie”</item>
+        <item quantity="other">Paturēt labāko, pārvietot %d uz „Nesen dzēstie”</item>
+    </plurals>
+    <plurals name="similar_trash_marked">
+        <item quantity="zero">Pārvietot %d uz „Nesen dzēstie”</item>
+        <item quantity="one">Pārvietot %d uz „Nesen dzēstie”</item>
+        <item quantity="other">Pārvietot %d uz „Nesen dzēstie”</item>
+    </plurals>
+    <string name="duplicate_best">Labākais</string>
+    <string name="duplicate_kept">Paturēts</string>
+    <string name="duplicate_marked">Tiks pārvietots</string>
+    <string name="duplicate_dismiss">Tie nav dublikāti</string>
+    <string name="similar_dismiss">Tie nav līdzīgi</string>
+    <string name="duplicates_empty_off">Dublikāti ir izslēgti. Ieslēdz „Atrast dublētus fotoattēlus” sadaļā Iestatījumi, Analīze. eikon veido tavu fotoattēlu pirkstu nospiedumus tikai šajā tālrunī, bez jebkāda modeļa.</string>
+    <string name="similar_empty_off">Līdzīgiem kadriem nepieciešams „Atrast fotoattēlus pēc tā, ko tie rāda” sadaļā Iestatījumi, Analīze: tas salīdzina, ko rāda katrs fotoattēls, fotoattēliem, kas uzņemti divu minūšu laikā viens no otra.</string>
+    <string name="duplicates_empty_working">Vēl nekas nav atrasts (analizēti %1$d %%). Analīze darbojas fonā uzlādes laikā.</string>
+    <string name="duplicates_empty_done">Dublikāti netika atrasti.</string>
+    <string name="similar_empty_done">Līdzīgi kadri netika atrasti.</string>
+
+    <!-- Memories -->
+    <string name="collection_memories">Atmiņas</string>
+    <string name="memories_title">Atmiņas</string>
+    <string name="memory_on_this_day">Šajā dienā</string>
+    <string name="memory_year_ago">Pirms gada</string>
+    <string name="memory_weekend_in">Nedēļas nogale: %1$s</string>
+    <string name="memory_weekend">Nedēļas nogale prom no mājām</string>
+    <string name="memory_day_trip_to">Vienas dienas brauciens: %1$s</string>
+    <string name="memory_day_trip">Vienas dienas brauciens</string>
+    <string name="memory_season">%1$s %2$d</string>
+    <string name="memory_person">%1$s, %2$d</string>
+    <string name="season_winter">Ziema</string>
+    <string name="season_spring">Pavasaris</string>
+    <string name="season_summer">Vasara</string>
+    <string name="season_autumn">Rudens</string>
+    <string name="memory_hide">Paslēpt šo atmiņu</string>
+    <string name="memory_show_fewer">Rādīt mazāk tādu</string>
+    <string name="memory_show_less_of">Rādīt mazāk: %1$s</string>
+    <string name="memory_exclude_date">Izlaist šo datumu</string>
+    <string name="memory_all_photos">Visi fotoattēli</string>
+    <string name="memory_replay">Atskaņot vēlreiz</string>
+    <string name="memory_reset">Atsaukt manas izvēles</string>
+    <string name="memory_done">Gatavs. Savas izvēles tu vari atsaukt Atmiņu izvēlnē.</string>
+    <string name="memories_empty">Atmiņu vēl nav. eikon tās veido no datumiem, ceļojumiem, gadalaikiem un tevis nosauktajiem cilvēkiem: „Šajā dienā”, „Pirms gada”, ceļojumi un nedēļas nogales prom no mājām, gadalaiks, kāds noteiktā gadā. Ceļojumiem un nedēļas nogalēm vajadzīgas Vietas, cilvēkiem vajadzīgi Cilvēki (Iestatījumi, Analīze). Nekas neatstāj tālruni.</string>
+    <string name="memories_note">Veidotas no datumiem, vietām un nosauktiem cilvēkiem pēc vienkāršiem noteikumiem; mūzikas nav, un fotoattēli tiek izvēlēti pēc izlases, izmēra un sejām, nevis pēc tā, cik labi tie izskatās.</string>
+    <string name="memory_no_photos">Šai atmiņai vairs nav fotoattēlu, ko rādīt.</string>
+
+    <!-- Editing -->
+    <string name="action_edit">Rediģēt</string>
+    <string name="edit_title">Rediģēšana</string>
+    <string name="edit_done">Gatavs</string>
+    <string name="edit_original">Oriģināls</string>
+    <string name="edit_revert">Atgriezt</string>
+    <string name="edit_revert_title">Vai atgriezties pie oriģināla?</string>
+    <string name="edit_revert_message">Tas notīra visus šī labojuma pielāgojumus, filtru un apgriešanu. Oriģinālais fotoattēls nekad nav mainīts. Nospied Gatavs, lai paturētu atgriezto fotoattēlu.</string>
+    <string name="edit_discard_title">Vai atmest izmaiņas?</string>
+    <string name="edit_discard_message">Šajā redaktorā veiktās izmaiņas tiks zaudētas. Fotoattēls paliek tāds, kāds bija.</string>
+    <string name="edit_discard">Atmest</string>
+    <string name="edit_copy_edits">Kopēt labojumus</string>
+    <string name="edit_paste_edits">Ielīmēt labojumus</string>
+    <string name="edit_save_copy">Saglabāt kopiju</string>
+    <string name="edit_copy_saved">Kopija tika saglabāta blakus oriģinālam, kas netika mainīts.</string>
+    <string name="edit_copy_saved_no_details">Kopija tika saglabāta blakus oriģinālam, kas netika mainīts. Kameras datus neizdevās nokopēt.</string>
+    <string name="edit_failed">Labojumu neizdevās pabeigt. Fotoattēls netika mainīts.</string>
+    <string name="edited_badge">Rediģēts</string>
+    <string name="viewer_show_original">Rādīt oriģinālu</string>
+    <string name="viewer_show_edited">Rādīt rediģēto fotoattēlu</string>
+    <string name="tool_auto">Auto</string>
+    <string name="tool_light">Gaisma</string>
+    <string name="tool_color">Krāsa</string>
+    <string name="tool_detail">Detaļas</string>
+    <string name="tool_filters">Filtri</string>
+    <string name="tool_crop">Apgriezt</string>
+    <string name="adj_exposure">Ekspozīcija</string>
+    <string name="adj_brightness">Spilgtums</string>
+    <string name="adj_contrast">Kontrasts</string>
+    <string name="adj_highlights">Gaišie apgabali</string>
+    <string name="adj_shadows">Ēnas</string>
+    <string name="adj_black_point">Melnais punkts</string>
+    <string name="adj_saturation">Piesātinājums</string>
+    <string name="adj_vibrance">Dzīvīgums</string>
+    <string name="adj_temperature">Siltums</string>
+    <string name="adj_tint">Nokrāsa</string>
+    <string name="adj_sharpness">Asums</string>
+    <string name="adj_vignette">Vinjete</string>
+    <string name="geo_straighten">Iztaisnot</string>
+    <string name="geo_perspective_vertical">Vertikālā perspektīva</string>
+    <string name="geo_perspective_horizontal">Horizontālā perspektīva</string>
+    <string name="filter_amount">Stiprums</string>
+    <string name="filter_name_none">Oriģināls</string>
+    <string name="filter_name_vivid">Spilgts</string>
+    <string name="filter_name_warm">Silts</string>
+    <string name="filter_name_cool">Vēss</string>
+    <string name="filter_name_mono">Mono</string>
+    <string name="filter_name_noir">Noir</string>
+    <string name="filter_name_fade">Izbalējis</string>
+    <string name="filter_name_chrome">Hroms</string>
+    <string name="filter_name_sepia">Sēpija</string>
+    <string name="crop_rotate">Pagriezt</string>
+    <string name="crop_flip">Apvērst</string>
+    <string name="shape_free">Brīvi</string>
+    <string name="shape_original">Oriģināls</string>
+    <string name="shape_square">1:1</string>
+    <string name="shape_4_3">4:3</string>
+    <string name="shape_3_2">3:2</string>
+    <string name="shape_16_9">16:9</string>
+    <string name="action_paste_edits">Ielīmēt labojumus</string>
+    <string name="action_revert_edits">Noņemt labojumus</string>
+    <plurals name="edits_pasted">
+        <item quantity="zero">Labojumi lietoti %d fotoattēliem</item>
+        <item quantity="one">Labojumi lietoti %d fotoattēlam</item>
+        <item quantity="other">Labojumi lietoti %d fotoattēliem</item>
+    </plurals>
+    <plurals name="edits_reverted">
+        <item quantity="zero">Labojumi noņemti %d fotoattēliem; oriģināli ir tādi, kādi tie vienmēr bijuši</item>
+        <item quantity="one">Labojums noņemts %d fotoattēlam; oriģināls ir tāds, kāds tas vienmēr bijis</item>
+        <item quantity="other">Labojumi noņemti %d fotoattēliem; oriģināli ir tādi, kādi tie vienmēr bijuši</item>
+    </plurals>
+
+    <!-- Accessibility -->
+    <string name="slider_reset">Atiestatīt uz neitrālu</string>
+    <string name="crop_area">Apgriešanas apgabals, no %1$d %% līdz %2$d %% horizontāli un no %3$d %% līdz %4$d %% vertikāli</string>
+    <string name="crop_action_smaller">Samazināt apgriezumu</string>
+    <string name="crop_action_larger">Palielināt apgriezumu</string>
+    <string name="crop_action_left">Pārvietot apgriezumu pa kreisi</string>
+    <string name="crop_action_right">Pārvietot apgriezumu pa labi</string>
+    <string name="crop_action_up">Pārvietot apgriezumu uz augšu</string>
+    <string name="crop_action_down">Pārvietot apgriezumu uz leju</string>
+    <string name="viewer_zoom_in">Tuvināt</string>
+    <string name="viewer_zoom_out">Tālināt</string>
+    <string name="external_photo">Fotoattēls</string>
+    <string name="viewer_cannot_display">Šo fotoattēlu nevar parādīt.</string>
+
+    <!-- Info: caption, editing the date and location, what the photo shows -->
+    <string name="info_caption">Paraksts</string>
+    <string name="caption_add">Pievienot parakstu</string>
+    <string name="caption_edit">Rediģēt parakstu</string>
+    <string name="caption_title">Paraksts</string>
+    <string name="caption_hint">Daži vārdi par šo fotoattēlu</string>
+    <string name="caption_note">Tiek glabāts tikai eikon; fotoattēla fails netiek mainīts. Meklēšana to atrod.</string>
+    <string name="date_change">Mainīt datumu un laiku</string>
+    <string name="date_revert">Atjaunot sākotnējo datumu</string>
+    <string name="date_time_title">Diennakts laiks</string>
+    <string name="action_next">Tālāk</string>
+    <string name="location_title">Kur tas uzņemts</string>
+    <string name="location_coordinates">Koordinātas</string>
+    <string name="location_coordinates_note">Decimālgrādi, vispirms platums: 41.9028, 12.4964</string>
+    <string name="location_invalid">Nav pozīcija: divi skaitļi, platums no -90 līdz 90 un garums no -180 līdz 180</string>
+    <string name="location_city">Vai atrodi pilsētu (darbojas bezsaistē)</string>
+    <string name="location_remove">Noņemt atrašanās vietu</string>
+    <string name="location_change">Mainīt atrašanās vietu</string>
+    <string name="location_revert">Atjaunot sākotnējo atrašanās vietu</string>
+    <string name="info_map_description">Neliela karte, kas rāda, kur fotoattēls uzņemts</string>
+    <string name="metadata_done">Gatavs. Fotoattēls tagad norāda šo; oriģināls ir saglabāts, lai tu varētu to atjaunot.</string>
+    <string name="metadata_not_writable">Šāda veida failu nevar mainīt.</string>
+    <string name="metadata_needs_permission">Lai mainītu fotoattēla datumu vai atrašanās vietu, eikon ir jāspēj nolasīt, kur fotoattēli uzņemti: citādi Android tam rāda kopiju bez atrašanās vietas, un saglabāšana to izdzēstu.</string>
+    <string name="metadata_nothing_to_revert">Nav ko atjaunot.</string>
+    <string name="metadata_interrupted">Iepriekšēja šī fotoattēla maiņa netika pabeigta. Tā oriģināls ir saglabāts: atjauno to, pirms maini ko citu.</string>
+    <string name="metadata_failed">Izmaiņa nesanāca. Fotoattēls tika atgriezts tieši tāds, kāds tas bija.</string>
+    <string name="metadata_restore_file">Atjaunot oriģinālo failu</string>
+    <string name="info_albums">Albumos</string>
+    <string name="info_pets">Mājdzīvnieki</string>
+    <string name="info_shows">Tas var rādīt</string>
+    <string name="pet_dog">Suns</string>
+    <string name="pet_cat">Kaķis</string>
+    <string name="info_album">Ierīces albums</string>
+    <string name="label_landscape">Ainavu</string>
+    <string name="label_beach">Pludmali</string>
+    <string name="label_sea">Jūru</string>
+    <string name="label_mountain">Kalnu</string>
+    <string name="label_sunset">Saulrietu</string>
+    <string name="label_snow">Sniegu</string>
+    <string name="label_city">Pilsētu</string>
+    <string name="label_building">Ēku</string>
+    <string name="label_street">Ielu</string>
+    <string name="label_woods">Mežu</string>
+    <string name="label_flower">Ziedu</string>
+    <string name="label_sky">Debesis</string>
+    <string name="label_person">Cilvēku</string>
+    <string name="label_group">Cilvēku grupu</string>
+    <string name="label_food">Ēdienu</string>
+    <string name="label_dessert">Desertu</string>
+    <string name="label_drink">Dzērienu</string>
+    <string name="label_car">Automašīnu</string>
+    <string name="label_bicycle">Velosipēdu</string>
+    <string name="label_airplane">Lidmašīnu</string>
+    <string name="label_boat">Laivu</string>
+    <string name="label_bird">Putnu</string>
+    <string name="label_horse">Zirgu</string>
+    <string name="label_interior">Istabu</string>
+    <string name="label_night">Nakti</string>
+    <string name="label_party">Ballīti</string>
+    <string name="label_sport">Sporta pasākumu</string>
+    <string name="label_animal">Dzīvnieku</string>
+
+    <!-- Backup to your own server -->
+    <string name="backup_title">Dublēšana uz savu serveri</string>
+    <string name="backup_intro">Kopē tavus fotoattēlus un video uz serveri, ko tu uztur pats, izmantojot šifrētu savienojumu. Nekas neatstāj šo tālruni, kamēr tu neieslēdz dublēšanu, viss iet tikai uz zemāk norādīto serveri, un eikon nekad neizdzēš un nemaina neko tajā. Parole vai atslēga tiek glabāta šifrēta Android Keystore.</string>
+    <string name="backup_kind_immich">Immich (arī tas, ko instalē Umbrel)</string>
+    <string name="backup_kind_nextcloud">Nextcloud vai jebkurš WebDAV serveris</string>
+    <string name="backup_address">Servera adrese (https://…)</string>
+    <string name="backup_username">Lietotājvārds</string>
+    <string name="backup_folder">Mape serverī</string>
+    <string name="backup_api_key">API atslēga</string>
+    <string name="backup_app_password">Lietotnes parole</string>
+    <string name="backup_secret_saved">Saglabāta. Atstāj tukšu, lai paturētu</string>
+    <string name="backup_help_immich">Immich: Konta iestatījumi, API atslēgas, Jauna API atslēga. Nepieciešamā atļauja ir asset.upload.</string>
+    <string name="backup_help_nextcloud">Nextcloud: Personiskie iestatījumi, Drošība, Ierīces un sesijas, izveido jaunu lietotnes paroli. Izmanto to, nevis savu pieteikšanās paroli.</string>
+    <string name="backup_save_test">Saglabāt un pārbaudīt savienojumu</string>
+    <string name="backup_connected">Savienots ar %1$s.</string>
+    <string name="backup_failed">Neizdevās izveidot savienojumu: %1$s</string>
+    <string name="backup_certificate_declined">Sertifikātam netika uzticēts, tāpēc nekas netika nosūtīts un netiks.</string>
+    <string name="backup_certificate_title">Šī servera sertifikāts nav no iestādes, kurai tavs tālrunis uzticas</string>
+    <string name="backup_certificate_body">%1$s uzrādīja zemāk redzamo sertifikātu. Salīdzini tā pirksta nospiedumu ar to, ko rāda tavs serveris (piemēram, ar: openssl x509 -noout -fingerprint -sha256). Uzticies tam tikai tad, ja tie ir identiski: no šī brīža šim serverim tiek pieņemts tieši šis sertifikāts un neviens cits.</string>
+    <string name="backup_certificate_subject">Izsniegts: %1$s</string>
+    <string name="backup_certificate_expires">Derīgs līdz %1$s</string>
+    <string name="backup_certificate_self_signed">Tas ir pašparakstīts, kā parasti ir mājas servera sertifikāts.</string>
+    <string name="backup_certificate_trust">Uzticēties šim sertifikātam</string>
+    <string name="backup_enable">Dublēt manus fotoattēlus un video</string>
+    <string name="backup_test_first">Vispirms saglabā un pārbaudi savienojumu.</string>
+    <string name="backup_wifi_only">Tikai Wi-Fi tīklā</string>
+    <string name="backup_only_charging">Tikai uzlādes laikā</string>
+    <string name="backup_videos">Iekļaut video</string>
+    <string name="backup_hidden">Iekļaut paslēptos fotoattēlus</string>
+    <string name="backup_hidden_note">Paslēptie fotoattēli tiks nosūtīti arī uz tavu serveri, kur tie ir tikpat redzami kā viss pārējais.</string>
+    <string name="backup_confirm_title">Vai sākt dublēšanu?</string>
+    <plurals name="backup_confirm_body">
+        <item quantity="zero">%1$d fotoattēlu un video tiks kopēti uz %2$s pamazām, kad tālrunis ir tevis atļautajā tīklā. Nekas netiek dzēsts ne tālrunī, ne serverī.</item>
+        <item quantity="one">%1$d fotoattēls vai video tiks kopēts uz %2$s pamazām, kad tālrunis ir tevis atļautajā tīklā. Nekas netiek dzēsts ne tālrunī, ne serverī.</item>
+        <item quantity="other">%1$d fotoattēli un video tiks kopēti uz %2$s pamazām, kad tālrunis ir tevis atļautajā tīklā. Nekas netiek dzēsts ne tālrunī, ne serverī.</item>
+    </plurals>
+    <string name="backup_confirm_start">Sākt</string>
+    <string name="backup_location_note">Android slēpj fotoattēlu uzņemšanas vietu no lietotnēm, kurām nav atļaujas fotoattēlu atrašanās vietām, tāpēc kopijām tavā serverī nebūtu atrašanās vietas.</string>
+    <string name="backup_progress">Dublēti: %1$,d no %2$,d</string>
+    <plurals name="backup_refused">
+        <item quantity="zero">Serveris noraidīja %1$d fotoattēlu, un tie netiks mēģināti vēlreiz, kamēr tu to neprasīsi.</item>
+        <item quantity="one">Serveris noraidīja %1$d fotoattēlu, un tas netiks mēģināts vēlreiz, kamēr tu to neprasīsi.</item>
+        <item quantity="other">Serveris noraidīja %1$d fotoattēlus, un tie netiks mēģināti vēlreiz, kamēr tu to neprasīsi.</item>
+    </plurals>
+    <string name="backup_running">Notiek dublēšana…</string>
+    <string name="backup_idle">Gaida īsto brīdi (tevis atļautais tīkls, akumulators nav gandrīz tukšs).</string>
+    <string name="backup_last_run">Pēdējā palaišana %1$s. Nosūtīti: %2$d. Jau bija: %3$d. Noraidīti: %4$d.</string>
+    <string name="backup_stopped">Tā apstājās, jo %1$s</string>
+    <string name="backup_stop_power_save">ir ieslēgts akumulatora taupīšanas režīms.</string>
+    <string name="backup_stop_thermal">tālrunis bija pārāk karsts.</string>
+    <string name="backup_stop_unreachable">serveris nebija sasniedzams vai bija aizņemts. Tā mēģinās vēlreiz.</string>
+    <string name="backup_stop_unauthorized">serveris nepieņēma atslēgu vai paroli.</string>
+    <string name="backup_stop_untrusted">servera sertifikāts nav viens no tiem, kuriem tu uzticējies.</string>
+    <string name="backup_stop_misconfigured">adrese nav piemērota šāda veida serverim.</string>
+    <string name="backup_stop_refusals">serveris noraidīja daudzus failus pēc kārtas, kas norāda uz servera ierobežojumu, nevis uz fotoattēliem.</string>
+    <string name="backup_now">Dublēt tūlīt</string>
+    <string name="backup_retry_refused">Mēģināt vēlreiz noraidītos</string>
+
+    <!-- Network consent -->
+    <string name="network_allow">Atļaut eikon izmantot internetu</string>
+    <string name="network_allow_note">Izslēgts, kamēr tu neieslēdz. eikon izmanto tīklu tikai, lai kopētu tavus fotoattēlus uz zemāk norādīto serveri, un tikai pēc tam, kad esi iestatījis serveri un ieslēdzis dublēšanu. Kad tas ir izslēgts, nekas nevar nekur savienoties.</string>
+    <string name="settings_privacy_network">eikon var iet tiešsaistē tikai vienam nolūkam: neobligātai tavu fotoattēlu dublēšanai uz serveri, ko tu uztur pats. Tā ir izslēgta, līdz tu to atļauj (Iestatījumi, Dublēšana) un iestati serveri. Nav lietojuma analītikas, nav reklāmu, nav kontu, nav Google pakalpojumu un nav mūsu mākoņa: tāda nav.</string>
+
+    <!-- First-run screens -->
+    <string name="onboarding_intro_title">Tavi fotoattēli, tavā tālrunī</string>
+    <string name="onboarding_intro_body">eikon ir fotoattēlu un video galerija operētājsistēmai Android. Tā rāda attēlus, ko tavs tālrunis jau glabā, atrod tos pēc datuma, vietas, cilvēkiem vai tā, ko tie rāda, un rediģē tos, nekad neskarot oriģinālus.</string>
+    <string name="onboarding_point_local">Viss paliek šajā ierīcē. Nav konta, nav lietojuma analītikas, nav reklāmu.</string>
+    <string name="onboarding_point_independent">Tā nepaļaujas uz neko ārpus tava tālruņa: nav Google pakalpojumu, nav mākoņa, nav trešo pušu serveru.</string>
+    <string name="onboarding_point_yours">Ja vēlies dublējumkopiju, tā iet tikai uz serveri, ko tu uztur pats, un tikai tad, ja to iestati.</string>
+    <string name="onboarding_next">Tālāk</string>
+    <string name="onboarding_start">Sākt</string>
+    <string name="onboarding_page">%1$d. lappuse no %2$d</string>
+    <string name="onboarding_permissions_title">Ko eikon lūdz un kāpēc</string>
+    <string name="onboarding_permissions_intro">Nepieciešama ir tikai pirmā. Jebkuru no tām vari mainīt vēlāk Iestatījumos vai tālruņa iestatījumos.</string>
+    <string name="onboarding_perm_media_title">Fotoattēli un video</string>
+    <string name="onboarding_perm_media_body">Lai eikon varētu rādīt tavu bibliotēku. Tā lasa failus tur, kur Android tos jau glabā, un nekopē tos nekur. Ja vēlies, vari atļaut tikai dažus fotoattēlus.</string>
+    <string name="onboarding_perm_location_title">Fotoattēlu atrašanās vietas (neobligāti)</string>
+    <string name="onboarding_perm_location_body">Android slēpj no lietotnēm, kur fotoattēls uzņemts, ja vien tu to neatļauj. eikon to izmanto, lai rādītu fotoattēla vietu bezsaistes kartē un meklētu pēc vietas. Vietas tiek aprēķinātas tālrunī: neviena pozīcija netiek sūtīta nekur.</string>
+    <string name="onboarding_perm_network_title">Internets (neobligāti)</string>
+    <string name="onboarding_perm_network_body">Tiek izmantots vienam nolūkam: tavu fotoattēlu kopēšanai uz serveri, ko tu uztur pats (Immich, Nextcloud), ja to kādreiz iestatīsi. Citādi eikon nekad nesavienojas ne ar ko. Tas ir izslēgts, līdz tu to ieslēdz šeit, un vari to jebkurā laikā atkal izslēgt Iestatījumos.</string>
+    <string name="onboarding_allow">Atļaut</string>
+    <string name="onboarding_allowed">Atļauts</string>
+    <string name="onboarding_promise">Nekas šeit nav atkarīgs no kaut kā ārpus tava tālruņa: nav Google pakalpojumu, nav kontu, nav lietojuma analītikas. Tavi fotoattēli paliek šajā ierīcē vai, ja tu tā izvēlies, iet uz tavu paša serveri.</string>
+
+    <!-- Support -->
+    <string name="support_title">Atbalsts</string>
+    <string name="support_body">eikon ir bezmaksas, tam nav reklāmu un tas tevi neizseko. Ja tas tev patīk, vari nosūtīt dažus sat, izmantojot Lightning tīklu.</string>
+    <string name="support_button">Ziedot ar Lightning</string>
+    <string name="support_copied">Lightning maks nav atrasts — adrese nokopēta: %1$s</string>
+
+    <!-- Analyze now -->
+    <string name="analyze_now_running">Analizē…</string>
+    <string name="analyze_now_hint">Sākas nekavējoties, tikai šajā tālrunī, arī akumulatora taupīšanas režīmā.</string>
+    <string name="analyze_now_hint_off">Vispirms augstāk ieslēdz vismaz vienu soli.</string>
+    <string name="analyze_now_hint_paused">Analīze ir pauzēta: izslēdz pauzi, lai analizētu tūlīt.</string>
+
+    <!-- Pictures from other apps -->
+    <string name="viewer_open_in_library">Atvērt bibliotēkā</string>
+</resources>

@@ -8,6 +8,11 @@ import app.eikon.gallery.domain.SortDirection
 import app.eikon.gallery.domain.SortField
 import app.eikon.gallery.domain.TimelineGrouping
 import app.eikon.gallery.domain.TypeFilter
+import app.eikon.gallery.domain.search.PersonMatch
+import app.eikon.gallery.domain.search.PlaceMatch
+import app.eikon.gallery.domain.search.SearchSpec
+import app.eikon.gallery.domain.search.SearchTerm
+import app.eikon.gallery.domain.search.TimeRange
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
@@ -145,5 +150,48 @@ class LibraryQueryBuilderTest {
         assertTrue(sql.sql, "WHERE 0 AND $notHidden" in sql.sql)
         assertFalse("()" in sql.sql)
         assertTrue(sql.args.isEmpty())
+    }
+
+    // --- which lists the analysis changes -----------------------------------------------------------
+
+    private val analysisTables = listOf("media_geo", "face", "media_search", "media_caption")
+
+    private fun readsAnalysisTable(sql: String) = analysisTables.any { Regex("\\b$it\\b").containsMatchIn(sql) }
+
+    private val everySortOfList = listOf(
+        LibraryScope.Everything, LibraryScope.Hidden, LibraryScope.Album(1), LibraryScope.Folder("DCIM/Camera/"), LibraryScope.RecentlyAdded(),
+        LibraryScope.Between(1, 2), LibraryScope.Semantic(9), LibraryScope.Periods(listOf(TimeRange(1, 2))), LibraryScope.Periods(listOf(TimeRange(1, 2)), personId = 5),
+        LibraryScope.Person(3), LibraryScope.Place(city = 4), LibraryScope.Place(region = "IT.07"), LibraryScope.Place(country = "IT"), LibraryScope.Place(unknown = true),
+        LibraryScope.Area(1.0, 2.0, 3.0, 4.0),
+        LibraryScope.Search(SearchSpec(listOf(SearchTerm("roma", place = PlaceMatch(cityIds = setOf(1L)), person = PersonMatch(setOf(2L))), SearchTerm("cane")), semanticQuery = 7L)),
+    )
+
+    private val everySortOfFilter = listOf(
+        LibraryFilters.NONE, LibraryFilters(favoritesOnly = true), LibraryFilters(editedOnly = true), LibraryFilters(TypeFilter.VIDEOS),
+        LibraryFilters(category = CategoryFilter.RAW),
+    )
+
+    @Test
+    fun aListIsSaidToReadWhatTheAnalysisStoresExactlyWhenItsSqlDoes() {
+        // This is what lets every other list ignore the analysis's writes: if a query ever starts to read one of these tables, its list must follow it too.
+        for (scope in everySortOfList) for (filters in everySortOfFilter) {
+            val query = LibraryQuery(scope, filters)
+            val reads = readsAnalysisTable(media(query).sql)
+            assertEquals("$scope $filters: ${media(query).sql}", reads, LibraryQueryBuilder.readsAnalysis(query))
+            // the same slice is read by the count, the cover, the sections and the position
+            assertEquals(reads, readsAnalysisTable(LibraryQueryBuilder.count(query, now).sql))
+            assertEquals(reads, readsAnalysisTable(LibraryQueryBuilder.sections(query, TimelineGrouping.DAY, now).sql))
+            assertEquals(reads, readsAnalysisTable(LibraryQueryBuilder.position(query, 1, now).sql))
+        }
+    }
+
+    @Test
+    fun aSearchWithNothingTypedYetStillCountsAsReadingTheAnalysis() {
+        assertTrue(LibraryQueryBuilder.readsAnalysis(LibraryQuery(LibraryScope.Search(SearchSpec()))))
+    }
+
+    @Test
+    fun theLibraryAndItsFiltersAreNotTouchedByTheAnalysis() {
+        for (filters in everySortOfFilter) assertFalse(LibraryQueryBuilder.readsAnalysis(LibraryQuery(LibraryScope.Everything, filters)))
     }
 }

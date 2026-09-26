@@ -34,6 +34,26 @@ indexes to keep up to date when the library syncs and a little more space.
 Known and left alone: the members of an **album, Hidden, a person or the edited photos** are found from their own list and then sorted, so the cost of a page follows the size of that list. *Desktop*, an album of 25,000
 of 50,000 photos: 10 ms for the first page and 18 ms deep in the list. On a phone that is probably several times more; it is not measured, and an album that large is unusual.
 
+## Lists and the analysis (1.1.0)
+
+Every list of photos (the library, a folder, an album, a collection, a search) is a Room query that is run again when a table it reads changes. They all used to watch the tables the analysis writes to (places, faces, text in photos) as well, so **each photo the analysis
+finished redid every open list**, including the date sections of the whole library, which read the entire index (*desktop*, 100,000 photos: 190 ms for the sections against 0.1 ms for a page). While an analysis was running, the database was never idle. Now:
+
+- A list watches only what it reads. `LibraryQueryBuilder.readsAnalysis` says whether it reads what the analysis stores (a place, an area, a person, a search do; the library, folders, albums, presets, Hidden, periods and hit lists do not), and the DAO has a "steady" variant of each query that
+  watches the media, album, hidden and edit tables only. A test compares the answer with the SQL itself (whether it names `media_geo`, `face`, `media_search` or `media_caption`), so a query that starts to read one of them cannot stay "steady" by accident. (The *Edited* filter now follows edits too, which it did not before.)
+- A **search** is redone when the analysis has stored something it reads, but at most every 8 seconds and **only when the results are not being scrolled** (`RefreshSearchWhenStill`); before, it was redone after every photo, shifting under the finger. **Not seen on a device**: that this is what made scrolling the results stall was the leading suspicion, not something measured.
+- **The vectors** that image search reads (50 MB for 100,000 photos) were read from the database again in full at each search made while the analysis was running, because the analysis had stored more since. `MatrixKeeper` now reads only the vectors saved since and puts them into the copy it holds; if the database says something else changed (a photo was removed), it reads everything again, as before.
+  A builder that is exactly full now hands its arrays over instead of copying them, which saves 50 MB of transient memory on each full read.
+- *Desktop*, 100,000 photos with 10% carrying text: a text search is 3-5 ms for a page and 25 ms for a place, so the queries themselves are not slow; the cost was in how often they ran.
+
+## The viewer: first zoom, closing, video
+
+- **The first zoom of a photo** used to start decoding its large version (up to 4096 px, drawn with the edit for an edited photo) at the first pinch, which stopped the picture for a moment mid-gesture. Once a photo has been on screen for 600 ms (`HIGH_RES_DWELL_MS`) its large version is now prepared, out of sight (drawn with zero alpha), so the first
+  pinch finds it ready. A photo only swiped past costs nothing. `ZoomState.isZoomed` is a derived state, so the picture's layers are composed when it turns true or false and not at every step of a pinch. **Not measured on a device**: the diagnosis (the decode, and the upload of a large bitmap) is the likely one, not a profiled one.
+- **Closing** a photo that has flown back into its cell used to bring the viewer's picture and its black backdrop back for the length of the viewer's own fade-out, which is the "photo you just closed" flashing over the grid. The viewer now leaves at once once the photo has landed (`HeroController.landedInGrid`).
+- **Videos** zoom like photos (`ZoomableBox` around the picture, with the controls outside it) and use a texture rather than a surface, because a surface is not clipped to the zoomed picture's window. The seek bar drives the player's **scrubbing mode** (`Scrubber`): the video is paused while the thumb moves, every position is sought as fast as the player can and shows frames on the way, and
+  the last one is sought exactly when the finger lifts, after which playback goes on if it was playing. A texture costs a little more power than a surface. **Not seen on a device.**
+
 ## Grid to viewer: a flight, not a shared element
 
 Opening a photo now flies its thumbnail from its cell to its place in the viewer, and back when the viewer closes (`HeroFlight`). The picture is drawn once at its size in the viewer and shown through a window that
@@ -55,7 +75,7 @@ If a flight cannot be made (the cell is not on screen, the photo is not loaded y
   2-megapixel picture takes about 54 ms. Sharing edited photos draws each at full size (up to 24 megapixels) into the cache folder; a bar across the top says so while it works.
 - Nothing runs when the app is not visible except the scheduled analysis. The library sync runs only while the app is visible.
 
-## The backup (the `backup` build)
+## The backup
 
 - It runs as background work behind WorkManager: every 30 minutes at most, on the network the user allowed (Wi-Fi by default), battery not low, charging if chosen, **not in Battery Saver** (a run started with *Back up now* goes ahead there), 8-minute slices, and it stops
   between photos when the phone is too hot ([BACKUP.md](BACKUP.md)).
@@ -69,5 +89,5 @@ If a flight cannot be made (the cell is not on screen, the photo is not loaded y
 - Scrolling was measured on a phone in Phase 1 only. Nothing added since has been scrolled on a device: the edited badge, the per-photo edit lookup for thumbnails and the new folder indexes.
 - Analysis speed, battery cost and heat on a phone are unmeasured (see [ML.md](ML.md) for the desktop numbers of the models).
 - On-screen photos are analysed first (`AnalysisPriority`: the screens report the ids on screen once scrolling settles, at most 200, in memory only); this has been tested against a real SQLite but not on a phone.
-- The vectors that search, pets, labels and similar shots read are kept in memory once (about 0.5 KB per photo, 50 MB for 100,000 photos) and shared; the copy is a *soft* reference, so Android may take it back under memory pressure, and it is read again only when a vector was added, replaced or removed.
+- The vectors that search, pets, labels and similar shots read are kept in memory once (about 0.5 KB per photo, 50 MB for 100,000 photos) and shared; the copy is a *soft* reference, so Android may take it back under memory pressure, and it is read again in full only when a vector was removed or the database no longer agrees with it (a vector that was added or replaced is read in on its own, see above).
 - The encrypted database costs a little on every read and write (AES on each page). It has not been measured on a phone; the queries and their plans are unchanged.

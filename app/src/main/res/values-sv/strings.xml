@@ -1,0 +1,659 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Library -->
+    <string name="library_title">Bibliotek</string>
+    <string name="today">Idag</string>
+    <string name="yesterday">Igår</string>
+    <string name="empty_library">Inga bilder eller videor ännu</string>
+    <string name="empty_filter">Ingenting matchar det här filtret</string>
+    <string name="empty_filter_clear">Visa allt</string>
+    <string name="sync_progress">Läser in biblioteket: %1$,d / %2$,d</string>
+    <string name="sync_failed">Det gick inte att uppdatera biblioteket</string>
+    <string name="sync_retry">Försök igen</string>
+    <string name="scrubber_description">Bläddra i biblioteket efter datum</string>
+
+    <!-- Permissions -->
+    <string name="permission_title">Dina bilder stannar på din enhet</string>
+    <string name="permission_body">eikon behöver tillgång till dina bilder och videor för att visa dem. De stannar på din enhet: ingenting laddas upp om du inte ställer in säkerhetskopiering till en egen server.</string>
+    <string name="permission_grant">Tillåt åtkomst</string>
+    <string name="permission_denied">Åtkomsten nekades. Du kan tillåta den i systeminställningarna.</string>
+    <string name="permission_open_settings">Öppna inställningar</string>
+    <string name="limited_banner">Bara de bilder du valt visas</string>
+    <string name="limited_select_more">Välj fler</string>
+    <string name="limited_allow_all">Tillåt alla</string>
+
+    <!-- Menus and filters -->
+    <string name="menu_filter">Filter</string>
+    <string name="menu_sort">Sortera</string>
+    <string name="menu_settings">Inställningar</string>
+    <string name="menu_more">Fler alternativ</string>
+    <string name="filter_all">Alla</string>
+    <string name="filter_photos">Bilder</string>
+    <string name="filter_videos">Videor</string>
+    <string name="filter_favorites">Favoriter</string>
+    <string name="filter_screenshots">Skärmdumpar</string>
+    <string name="filter_screen_recordings">Skärminspelningar</string>
+    <string name="filter_panoramas">Panoramabilder</string>
+    <string name="filter_raw">RAW</string>
+    <string name="filter_clear">Rensa filter</string>
+    <string name="sort_by_date_taken">Datum då bilden togs</string>
+    <string name="sort_by_date_added">Datum då den lades till</string>
+    <string name="sort_newest_first">Nyaste först</string>
+    <string name="sort_oldest_first">Äldsta först</string>
+
+    <!-- Selection and actions -->
+    <plurals name="selected_count">
+        <item quantity="one">%d vald</item>
+        <item quantity="other">%d valda</item>
+    </plurals>
+    <string name="action_share">Dela</string>
+    <string name="action_favorite">Lägg till i favoriter</string>
+    <string name="action_unfavorite">Ta bort från favoriter</string>
+    <string name="action_delete">Ta bort</string>
+    <string name="action_info">Info</string>
+    <string name="action_back">Tillbaka</string>
+    <string name="action_clear_selection">Rensa markering</string>
+    <string name="action_select">Markera</string>
+    <string name="action_failed">Något gick fel</string>
+    <plurals name="moved_to_trash">
+        <item quantity="one">%d objekt flyttades till papperskorgen. Android sparar det i 30 dagar.</item>
+        <item quantity="other">%d objekt flyttades till papperskorgen. Android sparar dem i 30 dagar.</item>
+    </plurals>
+
+    <!-- Accessibility -->
+    <string name="cd_photo">Bild, %1$s</string>
+    <string name="cd_video">Video, %1$s, %2$s</string>
+    <string name="cd_edited_badge">Redigerad</string>
+    <string name="cd_favorite_badge">Favorit</string>
+    <string name="viewer_position">%1$d av %2$d</string>
+
+    <!-- Video -->
+    <string name="video_play">Spela</string>
+    <string name="video_pause">Pausa</string>
+    <string name="video_mute">Stäng av ljudet</string>
+    <string name="video_unmute">Slå på ljudet</string>
+    <string name="video_seek">Spola</string>
+
+    <!-- Info panel -->
+    <string name="info_title">Info</string>
+    <string name="info_loading">Läser detaljer…</string>
+    <string name="info_error">Det gick inte att läsa den här filens detaljer</string>
+    <string name="info_section_file">Fil</string>
+    <string name="info_section_camera">Kamera</string>
+    <string name="info_section_video">Video</string>
+    <string name="info_name">Namn</string>
+    <string name="info_type">Typ</string>
+    <string name="info_folder">Mapp</string>
+    <string name="info_resolution">Upplösning</string>
+    <string name="info_megapixels">Megapixlar</string>
+    <string name="info_size">Storlek</string>
+    <string name="info_date">Datum</string>
+    <string name="info_modified">Ändrad</string>
+    <string name="info_color_profile">Färgprofil</string>
+    <string name="info_location">Plats</string>
+    <string name="info_location_none">Ingen plats är sparad i den här filen</string>
+    <string name="info_location_hidden">Android döljer bildernas platser för appar tills du tillåter det</string>
+    <string name="info_location_allow">Tillåt</string>
+    <string name="info_location_open">Öppna i en kartapp</string>
+    <string name="info_camera">Enhet</string>
+    <string name="info_lens">Objektiv</string>
+    <string name="info_focal_length">Brännvidd</string>
+    <string name="info_aperture">Bländare</string>
+    <string name="info_shutter">Slutartid</string>
+    <string name="info_iso">Känslighet</string>
+    <string name="info_exposure_bias">Exponeringskompensation</string>
+    <string name="info_flash">Blixt</string>
+    <string name="info_flash_fired">Utlöstes</string>
+    <string name="info_flash_off">Utlöstes inte</string>
+    <string name="info_orientation">Orientering</string>
+    <string name="info_software">Programvara</string>
+    <string name="info_duration">Längd</string>
+    <string name="info_frame_rate">Bildfrekvens</string>
+    <string name="info_video_codec">Videokodek</string>
+    <string name="info_audio_codec">Ljudkodek</string>
+    <string name="info_bitrate">Bithastighet</string>
+    <string name="info_dynamic_range">Dynamiskt omfång</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Inställningar</string>
+    <string name="settings_appearance">Utseende</string>
+    <string name="theme_system">Följ systemet</string>
+    <string name="theme_light">Ljust</string>
+    <string name="theme_dark">Mörkt</string>
+    <string name="settings_privacy">Integritet</string>
+    <string name="settings_privacy_body">eikon fungerar på din enhet. Det har inget konto och ingen analys av användningen, och dess data är undantagna från Androids säkerhetskopior.\n\nDina bilder kopieras aldrig: eikon för ett lokalt index med filuppgifter (namn, datum, storlek, mapp) så att biblioteket öppnas direkt. Om du tar bort appen tas indexet bort.</string>
+    <string name="settings_storage_encrypted">Bibliotekets databas (indexet, album, redigeringar, bildtexter och det analysen hittat) är krypterad på den här telefonen med AES-256. Nyckeln förvaras av Android Keystore.</string>
+    <string name="settings_storage_not_encrypted">Det gick inte att kryptera bibliotekets databas (%1$s), så den är fortfarande lagrad okrypterad. eikon försöker igen vid varje start.</string>
+    <string name="settings_storage_reset_title">Bibliotekets databas har startats om</string>
+    <string name="settings_storage_reset">Nyckeln som skyddade bibliotekets databas gick förlorad, så eikon fick skapa en ny. Album, redigeringar, bildtexter och namn som du lagt till är borta. Dina bilder är orörda och analysen körs igen.</string>
+    <string name="settings_storage_reset_ok">Uppfattat</string>
+    <string name="settings_about">Om</string>
+    <string name="settings_licenses">Öppen källkod-licenser</string>
+    <string name="licenses_title">Öppen källkod-licenser</string>
+    <string name="settings_version">Version %1$s</string>
+
+    <!-- Navigation and collections -->
+    <string name="nav_library">Bibliotek</string>
+    <string name="nav_search">Sök</string>
+    <string name="nav_collections">Samlingar</string>
+    <string name="collections_title">Samlingar</string>
+    <string name="section_people">Personer</string>
+    <string name="section_albums">Album</string>
+    <string name="section_personal">Personligt</string>
+    <string name="section_folders">Enhetens mappar</string>
+    <string name="collection_favorites">Favoriter</string>
+    <string name="collection_recent">Nyligen tillagda</string>
+    <string name="collection_videos">Videor</string>
+    <string name="collection_screenshots">Skärmdumpar</string>
+    <string name="collection_screen_recordings">Skärminspelningar</string>
+    <string name="collection_panoramas">Panoramabilder</string>
+    <string name="collection_raw">RAW</string>
+    <string name="collection_trash">Nyligen borttagna</string>
+    <string name="collection_hidden">Dolda</string>
+    <plurals name="items_count">
+        <item quantity="one">%d objekt</item>
+        <item quantity="other">%d objekt</item>
+    </plurals>
+    <string name="empty_album">Albumet är tomt. Markera bilder i biblioteket och välj ”Lägg till i album”.</string>
+    <string name="empty_hidden">Inget är dolt</string>
+    <string name="empty_collection">Inget här ännu</string>
+
+    <!-- Albums -->
+    <string name="album_new">Nytt album</string>
+    <string name="album_name_hint">Albumnamn</string>
+    <string name="album_create">Skapa</string>
+    <string name="album_rename">Byt namn</string>
+    <string name="album_delete">Ta bort album</string>
+    <string name="album_delete_title">Ta bort det här albumet?</string>
+    <string name="album_delete_message">Bara albumet tas bort. Bilderna och videorna i det stannar där de är.</string>
+    <string name="album_move_earlier">Flytta tidigare</string>
+    <string name="album_move_later">Flytta senare</string>
+    <string name="action_add_to_album">Lägg till i album</string>
+    <string name="action_remove_from_album">Ta bort från album</string>
+    <string name="action_hide">Dölj</string>
+    <string name="action_unhide">Visa</string>
+    <string name="action_cancel">Avbryt</string>
+    <string name="action_save">Spara</string>
+    <plurals name="added_to_album">
+        <item quantity="one">%1$d objekt lades till i ”%2$s”</item>
+        <item quantity="other">%1$d objekt lades till i ”%2$s”</item>
+    </plurals>
+    <plurals name="removed_from_album">
+        <item quantity="one">%d objekt togs bort från albumet</item>
+        <item quantity="other">%d objekt togs bort från albumet</item>
+    </plurals>
+    <plurals name="moved_to_hidden">
+        <item quantity="one">%d objekt dolt. Du hittar det under Samlingar, Dolda.</item>
+        <item quantity="other">%d objekt dolda. Du hittar dem under Samlingar, Dolda.</item>
+    </plurals>
+    <plurals name="unhidden">
+        <item quantity="one">%d objekt är synligt igen</item>
+        <item quantity="other">%d objekt är synliga igen</item>
+    </plurals>
+
+    <!-- Filters -->
+    <string name="filter_type_title">Typ</string>
+    <string name="filter_kind_title">Slag</string>
+    <string name="filter_any">Alla</string>
+    <string name="filter_favorites_only">Endast favoriter</string>
+    <string name="filter_edited">Redigerade</string>
+    <string name="share_preparing">Förbereder de redigerade bilderna för delning</string>
+    <string name="filter_edited_only">Endast redigerade</string>
+    <string name="filter_clear_all">Rensa filter</string>
+
+    <!-- Locks -->
+    <string name="locked_title">Låst</string>
+    <string name="locked_body">Använd fingeravtryck, ansikte eller skärmlås för att öppna det här.</string>
+    <string name="locked_unlock">Lås upp</string>
+    <string name="auth_subtitle">Bekräfta att det är du</string>
+    <string name="auth_title_hidden">Lås upp Dolda</string>
+    <string name="auth_title_trash">Lås upp Nyligen borttagna</string>
+    <string name="auth_unavailable">Autentisering är inte tillgänglig just nu. Försök igen om en stund.</string>
+    <string name="no_device_lock_notice">Den här telefonen har inget skärmlås, så Dolda är inte skyddat. Ställ in ett i systeminställningarna.</string>
+
+    <!-- Recently deleted -->
+    <string name="trash_info">Objekt raderas permanent efter cirka 30 dagar.</string>
+    <string name="trash_empty">Inget har tagits bort nyligen</string>
+    <string name="trash_restore">Återställ</string>
+    <string name="trash_delete_forever">Radera permanent</string>
+    <plurals name="days_left_short">
+        <item quantity="one">%d d</item>
+        <item quantity="other">%d d</item>
+    </plurals>
+    <plurals name="trash_restored">
+        <item quantity="one">%d objekt återställdes</item>
+        <item quantity="other">%d objekt återställdes</item>
+    </plurals>
+    <plurals name="trash_deleted">
+        <item quantity="one">%d objekt raderades permanent</item>
+        <item quantity="other">%d objekt raderades permanent</item>
+    </plurals>
+
+    <!-- Settings: security -->
+    <string name="settings_security">Säkerhet</string>
+    <string name="setting_lock_hidden">Kräv autentisering för Dolda</string>
+    <string name="setting_lock_trash">Kräv autentisering för Nyligen borttagna</string>
+    <string name="setting_show_hidden">Visa Dolda i Samlingar</string>
+    <string name="setting_secure_screens">Dölj eikon bland senaste appar och blockera skärmdumpar</string>
+    <string name="settings_security_body">Dolda objekt lämnas utanför biblioteket, samlingarna och sökningen, och för att öppna Dolda krävs fingeravtryck, ansikte eller skärmlås. Själva filerna är inte krypterade och ligger kvar i telefonens vanliga lagring, där andra appar med tillgång till bilder fortfarande kan se dem.</string>
+
+    <!-- Search -->
+    <string name="search_placeholder">Datum, plats, text, filnamn</string>
+    <string name="search_clear">Rensa sökningen</string>
+    <string name="search_no_results">Inga bilder matchar</string>
+    <string name="search_hint_title">Sök i ditt bibliotek</string>
+    <string name="search_hint_body">Prova ett datum (”August 2025”, ”yesterday”), en plats (”Rome”, ”Tuscany”), ett ord som finns i en bild eller i dess filnamn, eller ett slag (”videos”, ”screenshots”, ”favorites”).\n\nDatum och slag förstås på engelska och italienska. Platser, text i bilder och vad de visar hittas när analysen har körts (Inställningar, Analys).</string>
+    <string name="search_analysis_off">Sökning efter plats, efter text i bilder och efter vad de visar är avstängd. Du kan slå på den under Inställningar, Analys.</string>
+    <string name="search_analysis_note">Bilderna analyseras fortfarande i bakgrunden (%1$d %%). Vissa resultat kan saknas.</string>
+
+    <!-- Settings: analysis -->
+    <string name="settings_analysis">Analys</string>
+    <string name="analysis_places_progress">Platser: %1$,d av %2$,d</string>
+    <string name="analysis_semantic_progress">Vad bilderna visar: %1$,d av %2$,d</string>
+    <string name="analysis_semantic_unavailable">Modellen som känner igen vad bilderna visar kunde inte läsas in, så det här steget körs inte.</string>
+    <string name="search_semantic_unavailable">Sökning efter vad bilderna visar är inte tillgänglig just nu (modellen kunde inte läsas in). Övriga resultat fungerar fortfarande.</string>
+    <string name="analysis_people_progress">Personer: %1$,d av %2$,d</string>
+    <string name="analysis_people_unavailable">Modellerna som hittar ansikten kunde inte läsas in, så det här steget körs inte.</string>
+    <string name="analysis_duplicates_progress">Dubbletter: %1$,d av %2$,d</string>
+    <string name="analysis_text_progress">Text i bilder: %1$,d av %2$,d</string>
+    <string name="analysis_running">Analyserar nu…</string>
+    <string name="analysis_idle">Väntar på rätt tillfälle (batteriet är inte lågt, batterisparläget är av och, om du valt det, laddning pågår)</string>
+    <string name="analysis_up_to_date">Allt är analyserat</string>
+    <string name="setting_pause_analysis">Pausa analysen</string>
+    <string name="setting_only_charging">Bara under laddning</string>
+    <string name="setting_analyze_places">Hitta bilder efter plats</string>
+    <string name="setting_analyze_semantic">Hitta bilder efter vad de visar</string>
+    <string name="setting_analyze_people">Hitta personer i bilder</string>
+    <string name="setting_analyze_people_note">Ansikten hittas och jämförs bara på den här telefonen. Ingenting om ett ansikte lämnar den någonsin, och eikon försöker aldrig identifiera någon: det grupperar bara ansikten som liknar varandra, och du namnger grupperna.</string>
+    <string name="setting_analyze_duplicates">Hitta dubbletter av bilder</string>
+    <string name="setting_analyze_text">Hitta text i bilder</string>
+    <string name="analysis_location_permission">Android döljer var bilderna togs för appar tills du tillåter det.</string>
+    <string name="analysis_allow_locations">Tillåt åtkomst till bildernas platser</string>
+    <string name="analyze_now">Analysera nu</string>
+    <string name="settings_analysis_body">Analysen körs bara på din telefon, i bakgrunden, och pausar när batteriet är lågt, batterisparläget är på eller telefonen blir varm (Analysera nu fortsätter även i batterisparläge). Den lagrar platsen för varje bild (fastställd offline, ingen plats skickas någonsin någonstans), en numerisk beskrivning av vad bilden visar (så att du kan söka på ”hund” eller ”solnedgång”; den är ingen bildtext och kan inte läsas tillbaka som en bild) och all text den läser i bilden, så att Sök kan hitta dem. Om du slår på personer lagrar den också var varje ansikte finns i en bild och en numerisk beskrivning av det, bara för att gruppera ansikten som liknar varandra. Om du slår på dubbletter lagrar den ett kort fingeravtryck av varje bild och av filer med samma storlek, bara för att hitta kopior. Att känna igen vad bilder visar och att läsa text är långsamt och belastar processorn hårt, vilket är varför analysen som standard väntar på laddning.</string>
+
+    <!-- Info panel: derived data -->
+    <string name="info_place">Närmaste plats</string>
+    <string name="info_text_found">Text i den här bilden</string>
+    <string name="info_text_copy">Kopiera text</string>
+
+    <!-- People -->
+    <string name="collection_people">Personer</string>
+    <string name="people_title">Personer</string>
+    <string name="person_unnamed">Person utan namn</string>
+    <string name="person_add_name">Lägg till ett namn</string>
+    <string name="person_rename">Namnge den här personen</string>
+    <string name="person_name_hint">Namn</string>
+    <string name="person_same_name_note">Personer med samma namn slås ihop till en.</string>
+    <string name="person_favorite">Markera som favorit</string>
+    <string name="person_unfavorite">Ta bort från favoriter</string>
+    <string name="person_hide">Dölj den här personen</string>
+    <string name="person_unhide">Visa den här personen</string>
+    <string name="person_merge">Slå ihop med en annan person…</string>
+    <string name="person_merge_title">Slå ihop med</string>
+    <string name="person_merge_empty">Det finns ingen annan att slå ihop med.</string>
+    <string name="person_not_this">Inte den här personen</string>
+    <string name="person_remove_from_people">Inte ett ansikte</string>
+    <string name="people_show_hidden">Visa dolda personer (%1$d)</string>
+    <string name="people_hide_hidden">Dölj dolda personer</string>
+    <string name="people_empty_off">Personer är avstängt. Slå på ”Hitta personer i bilder” under Inställningar, Analys, så grupperar eikon de ansikten det hittar. Allt stannar på den här telefonen.</string>
+    <string name="people_empty_working">Inga ansikten har hittats ännu (%1$d %% av dina bilder analyserade). Analysen körs i bakgrunden under laddning.</string>
+    <string name="people_empty_done">Inga ansikten hittades i dina bilder.</string>
+    <string name="people_go_settings">Öppna inställningar</string>
+    <string name="person_photos_empty">Inga bilder.</string>
+    <plurals name="moved_to_new_person">
+        <item quantity="one">%d bild flyttades till en ny person</item>
+        <item quantity="other">%d bilder flyttades till en ny person</item>
+    </plurals>
+    <plurals name="removed_from_people">
+        <item quantity="one">%d bild togs bort från Personer</item>
+        <item quantity="other">%d bilder togs bort från Personer</item>
+    </plurals>
+    <string name="info_people">Personer</string>
+    <plurals name="info_people_unnamed_count">
+        <item quantity="one">%d utan namn</item>
+        <item quantity="other">%d utan namn</item>
+    </plurals>
+
+    <string name="section_memories">Minnen</string>
+    <string name="section_pets">Husdjur</string>
+    <string name="collection_dogs">Hundar</string>
+    <string name="collection_cats">Katter</string>
+    <string name="empty_pets">Inga hundar eller katter har hittats ännu. Husdjur känns igen på vad bilderna visar: slå på ”Hitta bilder efter vad de visar” under Inställningar, Analys, och vänta tills det är klart.</string>
+
+    <!-- Places -->
+    <string name="places_title">Platser</string>
+    <string name="places_tab_list">Lista</string>
+    <string name="places_tab_map">Karta</string>
+    <string name="place_unknown">Andra platser</string>
+    <string name="place_near">Nära %1$s</string>
+    <string name="places_expand">Visa</string>
+    <string name="places_collapse">Dölj</string>
+    <string name="collection_places">Platser</string>
+    <string name="places_map_note">Bara konturer av länder och namnen på större städer: inga kartbilder laddas ned och ingen position lämnar någonsin telefonen. Zooma genom att nypa eller dubbeltrycka, tryck på en markör för att se dess bilder.</string>
+    <string name="places_map_description">Karta över var dina bilder togs, med markörer för grupper av bilder</string>
+    <string name="places_empty_off">Platser är avstängt. Slå på ”Hitta bilder efter plats” under Inställningar, Analys, så räknar eikon ut offline var dina bilder togs utifrån deras GPS-data.</string>
+    <string name="places_empty_working">Inga platser har hittats ännu (%1$d %% av dina bilder analyserade). Analysen körs i bakgrunden under laddning.</string>
+    <string name="places_empty_done">Ingen av dina bilder har en position, eller så får eikon kanske inte läsa bildernas platser (Inställningar, Analys).</string>
+    <string name="section_places">Platser och resor</string>
+
+    <!-- Trips -->
+    <string name="collection_trips">Resor</string>
+    <string name="trips_title">Resor</string>
+    <string name="trip_untitled">Resa</string>
+    <string name="trip_reason">Cirka %1$d km från där de flesta av dina bilder tas (nära %2$s)</string>
+    <string name="trip_home_unknown">en okänd plats</string>
+    <plurals name="trip_summary_days">
+        <item quantity="one">%d dag</item>
+        <item quantity="other">%d dagar</item>
+    </plurals>
+    <string name="trips_empty">Inga resor hittades. En resa är en följd av dagar, med minst 10 bilder, tillbringade minst 100 km från där de flesta av dina bilder tas. För det behöver eikon bildernas positioner: slå på ”Hitta bilder efter plats” under Inställningar, Analys.</string>
+
+    <!-- Duplicates and similar shots -->
+    <string name="section_cleanup">Rensa upp</string>
+    <string name="collection_duplicates">Dubbletter</string>
+    <string name="collection_similar">Liknande bilder</string>
+    <string name="duplicates_title">Dubbletter</string>
+    <string name="similar_title">Liknande bilder</string>
+    <string name="duplicates_note">eikon hittar dem bara. Ingenting tas bort förrän du bekräftar i Androids egen dialogruta, och borttagna bilder hamnar i Nyligen borttagna, där du kan återställa dem. För kopior av en bild som du lagt till i album: kopian du behåller hamnar i de albumen.</string>
+    <plurals name="duplicate_exact">
+        <item quantity="one">%d identisk fil</item>
+        <item quantity="other">%d identiska filer</item>
+    </plurals>
+    <plurals name="duplicate_visual">
+        <item quantity="one">%d kopia av samma bild</item>
+        <item quantity="other">%d kopior av samma bild</item>
+    </plurals>
+    <plurals name="similar_group">
+        <item quantity="one">%d bild</item>
+        <item quantity="other">%d liknande bilder</item>
+    </plurals>
+    <plurals name="duplicate_keep_best">
+        <item quantity="one">Behåll den bästa, flytta %d till Nyligen borttagna</item>
+        <item quantity="other">Behåll den bästa, flytta %d till Nyligen borttagna</item>
+    </plurals>
+    <plurals name="similar_trash_marked">
+        <item quantity="one">Flytta %d till Nyligen borttagna</item>
+        <item quantity="other">Flytta %d till Nyligen borttagna</item>
+    </plurals>
+    <string name="duplicate_best">Bäst</string>
+    <string name="duplicate_kept">Behållen</string>
+    <string name="duplicate_marked">Ska flyttas</string>
+    <string name="duplicate_dismiss">Det här är inte dubbletter</string>
+    <string name="similar_dismiss">Dessa liknar inte varandra</string>
+    <string name="duplicates_empty_off">Dubbletter är avstängt. Slå på ”Hitta dubbletter av bilder” under Inställningar, Analys. eikon tar fram fingeravtryck av dina bilder bara på den här telefonen, utan någon modell.</string>
+    <string name="similar_empty_off">Liknande bilder kräver ”Hitta bilder efter vad de visar” under Inställningar, Analys: det jämför vad varje bild visar, för bilder som tagits inom två minuter från varandra.</string>
+    <string name="duplicates_empty_working">Inget har hittats ännu (%1$d %% analyserat). Analysen körs i bakgrunden under laddning.</string>
+    <string name="duplicates_empty_done">Inga dubbletter hittades.</string>
+    <string name="similar_empty_done">Inga liknande bilder hittades.</string>
+
+    <!-- Memories -->
+    <string name="collection_memories">Minnen</string>
+    <string name="memories_title">Minnen</string>
+    <string name="memory_on_this_day">Den här dagen</string>
+    <string name="memory_year_ago">För ett år sedan</string>
+    <string name="memory_weekend_in">Helg i %1$s</string>
+    <string name="memory_weekend">Helg borta</string>
+    <string name="memory_day_trip_to">Dagsutflykt till %1$s</string>
+    <string name="memory_day_trip">Dagsutflykt</string>
+    <string name="memory_season">%1$s %2$d</string>
+    <string name="memory_person">%1$s, %2$d</string>
+    <string name="season_winter">Vinter</string>
+    <string name="season_spring">Vår</string>
+    <string name="season_summer">Sommar</string>
+    <string name="season_autumn">Höst</string>
+    <string name="memory_hide">Dölj det här minnet</string>
+    <string name="memory_show_fewer">Visa färre sådana</string>
+    <string name="memory_show_less_of">Visa mindre av %1$s</string>
+    <string name="memory_exclude_date">Lämna utanför det här datumet</string>
+    <string name="memory_all_photos">Alla bilder</string>
+    <string name="memory_replay">Spela igen</string>
+    <string name="memory_reset">Ångra mina val</string>
+    <string name="memory_done">Klart. Du kan ångra dina val från menyn i Minnen.</string>
+    <string name="memories_empty">Inga minnen ännu. eikon skapar dem utifrån datum, resor, årstider och personer du har namngett: ”Den här dagen”, ”För ett år sedan”, resor och helger borta, en årstid, någon under ett år. Resor och helger kräver Platser, personer kräver Personer (Inställningar, Analys). Ingenting lämnar telefonen.</string>
+    <string name="memories_note">Skapade utifrån datum, platser och namngivna personer med enkla regler; det finns ingen musik, och bilderna väljs efter favoriter, storlek och ansikten, inte efter hur bra de ser ut.</string>
+    <string name="memory_no_photos">Det här minnet har inga bilder kvar att visa.</string>
+
+    <!-- Editing -->
+    <string name="action_edit">Redigera</string>
+    <string name="edit_title">Redigera</string>
+    <string name="edit_done">Klart</string>
+    <string name="edit_original">Original</string>
+    <string name="edit_revert">Återställ</string>
+    <string name="edit_revert_title">Återgå till originalet?</string>
+    <string name="edit_revert_message">Det här rensar alla justeringar, filtret och beskärningen från den här redigeringen. Originalbilden har aldrig ändrats. Tryck på Klart för att behålla den återställda bilden.</string>
+    <string name="edit_discard_title">Kassera dina ändringar?</string>
+    <string name="edit_discard_message">Ändringarna du gjort i den här redigeraren går förlorade. Bilden förblir som den var.</string>
+    <string name="edit_discard">Kassera</string>
+    <string name="edit_copy_edits">Kopiera redigeringar</string>
+    <string name="edit_paste_edits">Klistra in redigeringar</string>
+    <string name="edit_save_copy">Spara en kopia</string>
+    <string name="edit_copy_saved">En kopia sparades bredvid originalet, som inte ändrades.</string>
+    <string name="edit_copy_saved_no_details">En kopia sparades bredvid originalet, som inte ändrades. Kamerauppgifterna kunde inte kopieras.</string>
+    <string name="edit_failed">Redigeringen kunde inte slutföras. Bilden ändrades inte.</string>
+    <string name="edited_badge">Redigerad</string>
+    <string name="viewer_show_original">Visa originalet</string>
+    <string name="viewer_show_edited">Visa den redigerade bilden</string>
+    <string name="tool_auto">Auto</string>
+    <string name="tool_light">Ljus</string>
+    <string name="tool_color">Färg</string>
+    <string name="tool_detail">Detaljer</string>
+    <string name="tool_filters">Filter</string>
+    <string name="tool_crop">Beskär</string>
+    <string name="adj_exposure">Exponering</string>
+    <string name="adj_brightness">Ljusstyrka</string>
+    <string name="adj_contrast">Kontrast</string>
+    <string name="adj_highlights">Högdagrar</string>
+    <string name="adj_shadows">Skuggor</string>
+    <string name="adj_black_point">Svartpunkt</string>
+    <string name="adj_saturation">Mättnad</string>
+    <string name="adj_vibrance">Livfullhet</string>
+    <string name="adj_temperature">Värme</string>
+    <string name="adj_tint">Nyans</string>
+    <string name="adj_sharpness">Skärpa</string>
+    <string name="adj_vignette">Vinjettering</string>
+    <string name="geo_straighten">Räta upp</string>
+    <string name="geo_perspective_vertical">Vertikalt perspektiv</string>
+    <string name="geo_perspective_horizontal">Horisontellt perspektiv</string>
+    <string name="filter_amount">Styrka</string>
+    <string name="filter_name_none">Original</string>
+    <string name="filter_name_vivid">Levande</string>
+    <string name="filter_name_warm">Varm</string>
+    <string name="filter_name_cool">Sval</string>
+    <string name="filter_name_mono">Mono</string>
+    <string name="filter_name_noir">Noir</string>
+    <string name="filter_name_fade">Bleknad</string>
+    <string name="filter_name_chrome">Krom</string>
+    <string name="filter_name_sepia">Sepia</string>
+    <string name="crop_rotate">Rotera</string>
+    <string name="crop_flip">Vänd</string>
+    <string name="shape_free">Fri</string>
+    <string name="shape_original">Original</string>
+    <string name="shape_square">1:1</string>
+    <string name="shape_4_3">4:3</string>
+    <string name="shape_3_2">3:2</string>
+    <string name="shape_16_9">16:9</string>
+    <string name="action_paste_edits">Klistra in redigeringar</string>
+    <string name="action_revert_edits">Ta bort redigeringar</string>
+    <plurals name="edits_pasted">
+        <item quantity="one">Redigeringar tillämpade på %d bild</item>
+        <item quantity="other">Redigeringar tillämpade på %d bilder</item>
+    </plurals>
+    <plurals name="edits_reverted">
+        <item quantity="one">Redigeringen togs bort från %d bild; originalet är som det alltid varit</item>
+        <item quantity="other">Redigeringarna togs bort från %d bilder; originalen är som de alltid varit</item>
+    </plurals>
+
+    <!-- Accessibility -->
+    <string name="slider_reset">Återställ till neutral</string>
+    <string name="crop_area">Beskärningsområde, från %1$d %% till %2$d %% i bredd och från %3$d %% till %4$d %% i höjd</string>
+    <string name="crop_action_smaller">Gör beskärningen mindre</string>
+    <string name="crop_action_larger">Gör beskärningen större</string>
+    <string name="crop_action_left">Flytta beskärningen åt vänster</string>
+    <string name="crop_action_right">Flytta beskärningen åt höger</string>
+    <string name="crop_action_up">Flytta beskärningen uppåt</string>
+    <string name="crop_action_down">Flytta beskärningen nedåt</string>
+    <string name="viewer_zoom_in">Zooma in</string>
+    <string name="viewer_zoom_out">Zooma ut</string>
+    <string name="external_photo">Bild</string>
+    <string name="viewer_cannot_display">Den här bilden kan inte visas.</string>
+
+    <!-- Info: caption, editing the date and location, what the photo shows -->
+    <string name="info_caption">Bildtext</string>
+    <string name="caption_add">Lägg till en bildtext</string>
+    <string name="caption_edit">Redigera bildtexten</string>
+    <string name="caption_title">Bildtext</string>
+    <string name="caption_hint">Några ord om den här bilden</string>
+    <string name="caption_note">Sparas bara i eikon; bildens fil ändras inte. Sök hittar den.</string>
+    <string name="date_change">Ändra datum och tid</string>
+    <string name="date_revert">Återställ det ursprungliga datumet</string>
+    <string name="date_time_title">Tid på dagen</string>
+    <string name="action_next">Nästa</string>
+    <string name="location_title">Var den togs</string>
+    <string name="location_coordinates">Koordinater</string>
+    <string name="location_coordinates_note">Decimalgrader, latitud först: 41.9028, 12.4964</string>
+    <string name="location_invalid">Ingen position: två tal, latitud mellan -90 och 90 och longitud mellan -180 och 180</string>
+    <string name="location_city">Eller sök efter en stad (fungerar offline)</string>
+    <string name="location_remove">Ta bort platsen</string>
+    <string name="location_change">Ändra platsen</string>
+    <string name="location_revert">Återställ den ursprungliga platsen</string>
+    <string name="info_map_description">En liten karta som visar var bilden togs</string>
+    <string name="metadata_done">Klart. Bilden säger nu detta; originalet finns kvar så att du kan återställa det.</string>
+    <string name="metadata_not_writable">Den här sortens fil kan inte ändras.</string>
+    <string name="metadata_needs_permission">För att ändra en bilds datum eller plats måste eikon kunna läsa var bilderna togs: annars visar Android en kopia utan platsen för det, och att spara skulle radera den.</string>
+    <string name="metadata_nothing_to_revert">Det finns inget att återställa.</string>
+    <string name="metadata_interrupted">En tidigare ändring av den här bilden slutfördes inte. Dess original finns kvar: återställ det innan du ändrar något annat.</string>
+    <string name="metadata_failed">Ändringen fungerade inte. Bilden sattes tillbaka precis som den var.</string>
+    <string name="metadata_restore_file">Återställ originalfilen</string>
+    <string name="info_albums">I album</string>
+    <string name="info_pets">Husdjur</string>
+    <string name="info_shows">Den kan visa</string>
+    <string name="pet_dog">Hund</string>
+    <string name="pet_cat">Katt</string>
+    <string name="info_album">Enhetsalbum</string>
+    <string name="label_landscape">Ett landskap</string>
+    <string name="label_beach">En strand</string>
+    <string name="label_sea">Havet</string>
+    <string name="label_mountain">Ett berg</string>
+    <string name="label_sunset">En solnedgång</string>
+    <string name="label_snow">Snö</string>
+    <string name="label_city">En stad</string>
+    <string name="label_building">En byggnad</string>
+    <string name="label_street">En gata</string>
+    <string name="label_woods">Skog</string>
+    <string name="label_flower">En blomma</string>
+    <string name="label_sky">Himlen</string>
+    <string name="label_person">En person</string>
+    <string name="label_group">En grupp människor</string>
+    <string name="label_food">Mat</string>
+    <string name="label_dessert">En dessert</string>
+    <string name="label_drink">En dryck</string>
+    <string name="label_car">En bil</string>
+    <string name="label_bicycle">En cykel</string>
+    <string name="label_airplane">Ett flygplan</string>
+    <string name="label_boat">En båt</string>
+    <string name="label_bird">En fågel</string>
+    <string name="label_horse">En häst</string>
+    <string name="label_interior">Ett rum</string>
+    <string name="label_night">Natt</string>
+    <string name="label_party">En fest</string>
+    <string name="label_sport">Ett sportevenemang</string>
+    <string name="label_animal">Ett djur</string>
+
+    <!-- Backup to your own server -->
+    <string name="backup_title">Säkerhetskopiering till din egen server</string>
+    <string name="backup_intro">Kopierar dina bilder och videor till en server som du driver själv, över en krypterad anslutning. Ingenting lämnar den här telefonen förrän du slår på säkerhetskopieringen, allt går bara till servern nedan, och eikon tar aldrig bort eller ändrar något på den. Lösenordet eller nyckeln förvaras krypterad i Android Keystore.</string>
+    <string name="backup_kind_immich">Immich (också det Umbrel installerar)</string>
+    <string name="backup_kind_nextcloud">Nextcloud eller valfri WebDAV-server</string>
+    <string name="backup_address">Serveradress (https://…)</string>
+    <string name="backup_username">Inloggningsnamn</string>
+    <string name="backup_folder">Mapp på servern</string>
+    <string name="backup_api_key">API-nyckel</string>
+    <string name="backup_app_password">Applösenord</string>
+    <string name="backup_secret_saved">Sparat. Lämna tomt för att behålla det</string>
+    <string name="backup_help_immich">I Immich: Kontoinställningar, API-nycklar, Ny API-nyckel. Behörigheten som behövs är asset.upload.</string>
+    <string name="backup_help_nextcloud">I Nextcloud: Personliga inställningar, Säkerhet, Enheter och sessioner, skapa ett nytt applösenord. Använd det, inte ditt inloggningslösenord.</string>
+    <string name="backup_save_test">Spara och testa anslutningen</string>
+    <string name="backup_connected">Ansluten till %1$s.</string>
+    <string name="backup_failed">Det gick inte att ansluta: %1$s</string>
+    <string name="backup_certificate_declined">Certifikatet godkändes inte, så ingenting skickades och ingenting kommer att skickas.</string>
+    <string name="backup_certificate_title">Den här serverns certifikat kommer inte från en utfärdare som din telefon litar på</string>
+    <string name="backup_certificate_body">%1$s visade certifikatet nedan. Jämför dess fingeravtryck med det som din server visar (till exempel med: openssl x509 -noout -fingerprint -sha256). Lita på det bara om de är identiska: från och med då accepteras just det här certifikatet, och inget annat, för den här servern.</string>
+    <string name="backup_certificate_subject">Utfärdat till: %1$s</string>
+    <string name="backup_certificate_expires">Giltigt till %1$s</string>
+    <string name="backup_certificate_self_signed">Det är signerat av sig självt, som certifikatet för en hemmaserver oftast är.</string>
+    <string name="backup_certificate_trust">Lita på det här certifikatet</string>
+    <string name="backup_enable">Säkerhetskopiera mina bilder och videor</string>
+    <string name="backup_test_first">Spara och testa anslutningen först.</string>
+    <string name="backup_wifi_only">Bara på Wi-Fi</string>
+    <string name="backup_only_charging">Bara under laddning</string>
+    <string name="backup_videos">Ta med videor</string>
+    <string name="backup_hidden">Ta med dolda bilder</string>
+    <string name="backup_hidden_note">Dolda bilder skickas också till din server, där de är lika synliga som allt annat där.</string>
+    <string name="backup_confirm_title">Starta säkerhetskopieringen?</string>
+    <plurals name="backup_confirm_body">
+        <item quantity="one">%1$d bild eller video kopieras till %2$s, lite i taget, när telefonen är på det nätverk du tillåtit. Ingenting tas bort på telefonen eller på servern.</item>
+        <item quantity="other">%1$d bilder och videor kopieras till %2$s, lite i taget, när telefonen är på det nätverk du tillåtit. Ingenting tas bort på telefonen eller på servern.</item>
+    </plurals>
+    <string name="backup_confirm_start">Starta</string>
+    <string name="backup_location_note">Android döljer var bilderna togs för appar som inte har behörighet till bildernas platser, så kopiorna på din server skulle sakna plats.</string>
+    <string name="backup_progress">Säkerhetskopierat: %1$,d av %2$,d</string>
+    <plurals name="backup_refused">
+        <item quantity="one">%1$d bild nekades av servern och försöks inte igen förrän du ber om det.</item>
+        <item quantity="other">%1$d bilder nekades av servern och försöks inte igen förrän du ber om det.</item>
+    </plurals>
+    <string name="backup_running">Säkerhetskopierar nu…</string>
+    <string name="backup_idle">Väntar på rätt tillfälle (nätverket du tillåtit, batteriet inte lågt).</string>
+    <string name="backup_last_run">Senaste körning %1$s. Skickade: %2$d. Fanns redan: %3$d. Nekade: %4$d.</string>
+    <string name="backup_stopped">Den stannade eftersom %1$s</string>
+    <string name="backup_stop_power_save">batterisparläget är på.</string>
+    <string name="backup_stop_thermal">telefonen var för varm.</string>
+    <string name="backup_stop_unreachable">servern inte kunde nås eller var upptagen. Den försöker igen.</string>
+    <string name="backup_stop_unauthorized">servern inte godtog nyckeln eller lösenordet.</string>
+    <string name="backup_stop_untrusted">serverns certifikat inte är ett av dem du litat på.</string>
+    <string name="backup_stop_misconfigured">adressen inte är rätt för den här sortens server.</string>
+    <string name="backup_stop_refusals">servern nekade många filer i rad, vilket tyder på en gräns hos servern, inte på bilderna.</string>
+    <string name="backup_now">Säkerhetskopiera nu</string>
+    <string name="backup_retry_refused">Försök igen med de nekade</string>
+
+    <!-- Network consent -->
+    <string name="network_allow">Låt eikon använda internet</string>
+    <string name="network_allow_note">Av tills du slår på det. eikon använder nätverket bara för att kopiera dina bilder till servern nedan, och bara efter att du ställt in en och slagit på säkerhetskopieringen. När det här är av kan ingenting ansluta någonstans.</string>
+    <string name="settings_privacy_network">eikon kan gå online för en enda sak: den valfria säkerhetskopieringen av dina bilder till en server som du driver själv. Den är av tills du tillåter den (Inställningar, Säkerhetskopiering) och ställer in servern. Ingen analys av användningen, inga annonser, inga konton, inga Google-tjänster och inget eget moln: det finns inget.</string>
+
+    <!-- First-run screens -->
+    <string name="onboarding_intro_title">Dina bilder, på din telefon</string>
+    <string name="onboarding_intro_body">eikon är ett bild- och videogalleri för Android. Det visar de bilder som din telefon redan har, hittar dem efter datum, plats, personer eller vad de visar, och redigerar dem utan att någonsin röra originalen.</string>
+    <string name="onboarding_point_local">Allt stannar på den här enheten. Inget konto, ingen analys av användningen, inga annonser.</string>
+    <string name="onboarding_point_independent">Det förlitar sig inte på något utanför din telefon: inga Google-tjänster, inget moln, inga tredjepartsservrar.</string>
+    <string name="onboarding_point_yours">Om du vill ha en säkerhetskopia går den bara till en server som du driver själv, och bara om du ställer in den.</string>
+    <string name="onboarding_next">Nästa</string>
+    <string name="onboarding_start">Kom igång</string>
+    <string name="onboarding_page">Sida %1$d av %2$d</string>
+    <string name="onboarding_permissions_title">Vad eikon ber om, och varför</string>
+    <string name="onboarding_permissions_intro">Bara den första behövs. Du kan ändra vilken som helst av dem senare, i Inställningar eller i telefonens inställningar.</string>
+    <string name="onboarding_perm_media_title">Bilder och videor</string>
+    <string name="onboarding_perm_media_body">Så att eikon kan visa ditt bibliotek. Det läser filerna där Android redan har dem och kopierar dem ingenstans. Om du föredrar det kan du tillåta bara vissa bilder.</string>
+    <string name="onboarding_perm_location_title">Bildernas platser (valfritt)</string>
+    <string name="onboarding_perm_location_body">Android döljer var en bild togs för appar om du inte tillåter det. eikon använder det för att visa en bilds plats på en offlinekarta och för att söka efter plats. Platser räknas ut på telefonen: ingen position skickas någonsin någonstans.</string>
+    <string name="onboarding_perm_network_title">Internet (valfritt)</string>
+    <string name="onboarding_perm_network_body">Används för en enda sak: att kopiera dina bilder till en server som du driver själv (Immich, Nextcloud), om du någon gång ställer in det. Annars ansluter eikon aldrig till något. Det är av tills du slår på det här, och du kan stänga av det igen när som helst i Inställningar.</string>
+    <string name="onboarding_allow">Tillåt</string>
+    <string name="onboarding_allowed">Tillåtet</string>
+    <string name="onboarding_promise">Ingenting här är beroende av något utanför din telefon: inga Google-tjänster, inga konton, ingen analys av användningen. Dina bilder stannar på den här enheten eller, om du väljer det, går till din egen server.</string>
+
+    <!-- Support -->
+    <string name="support_title">Stöd</string>
+    <string name="support_body">eikon är gratis, har inga annonser och spårar dig inte. Om du gillar det kan du skicka några sats över Lightning-nätverket.</string>
+    <string name="support_button">Donera med Lightning</string>
+    <string name="support_copied">Ingen Lightning-plånbok hittades — adressen kopierades: %1$s</string>
+
+    <!-- Analyze now -->
+    <string name="analyze_now_running">Analyserar…</string>
+    <string name="analyze_now_hint">Startar direkt, bara på den här telefonen, även i batterisparläge.</string>
+    <string name="analyze_now_hint_off">Slå först på minst ett steg ovan.</string>
+    <string name="analyze_now_hint_paused">Analysen är pausad: stäng av pausen för att analysera nu.</string>
+
+    <!-- Pictures from other apps -->
+    <string name="viewer_open_in_library">Öppna i biblioteket</string>
+</resources>

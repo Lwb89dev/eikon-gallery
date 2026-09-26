@@ -97,6 +97,10 @@ interface IndexDao {
     @Query("SELECT mediaId, vector FROM media_embedding WHERE model = :model AND mediaId > :after ORDER BY mediaId LIMIT :limit")
     suspend fun embeddingRows(model: String, after: Long, limit: Int): List<EmbeddingRow>
 
+    /** The vectors of some photos, to bring a copy of them up to date without reading them all. */
+    @Query("SELECT mediaId, vector FROM media_embedding WHERE model = :model AND mediaId IN (:ids)")
+    suspend fun embeddingRowsOf(model: String, ids: List<Long>): List<EmbeddingRow>
+
     @Query("DELETE FROM search_hit WHERE queryId < :oldest")
     suspend fun clearHitsBefore(oldest: Long)
 

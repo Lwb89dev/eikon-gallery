@@ -66,35 +66,20 @@ abstract class FetchModelsTask : DefaultTask() {
     }
 }
 
-/** Fails the build if a merged manifest asks for the INTERNET permission (see docs/PRIVACY.md). Run on every variant of the `standard` build. */
-abstract class VerifyNoInternetTask : DefaultTask() {
-    @get:InputFile
-    abstract val mergedManifest: RegularFileProperty
-
-    @TaskAction
-    fun verify() {
-        val text = mergedManifest.get().asFile.readText()
-        check("android.permission.INTERNET" !in text) {
-            "The merged manifest requests INTERNET. eikon must not have network access; find the library that " +
-                "adds it (./gradlew :app:dependencies, or the merged manifest report) and remove or replace it."
-        }
-    }
-}
-
 /**
- * The other side of the same promise, for the `backup` build: the network is there only for the backup, so the merged manifest must ask for INTERNET
- * (a build that silently lost it would fail at the first upload), must forbid unencrypted traffic, and must not have gained any other permission that
- * touches the network or the phone's identity than the ones listed here (see docs/BACKUP.md).
+ * The promise about the network, checked on every build: the only thing that goes online is the optional backup to a server of the user's own, so the merged manifest must ask
+ * for INTERNET (a build that silently lost it would fail at the first upload), must forbid unencrypted traffic, and must not have gained any other permission that touches the
+ * network or the phone's identity than the ones listed here (see docs/PRIVACY.md and docs/BACKUP.md). A library that starts adding one fails the build.
  */
-abstract class VerifyBackupNetworkTask : DefaultTask() {
+abstract class VerifyNetworkPermissionsTask : DefaultTask() {
     @get:InputFile
     abstract val mergedManifest: RegularFileProperty
 
     @TaskAction
     fun verify() {
         val text = mergedManifest.get().asFile.readText()
-        check("android.permission.INTERNET" in text) { "The backup build's merged manifest does not request INTERNET." }
-        check("android:usesCleartextTraffic=\"false\"" in text) { "The backup build must forbid unencrypted traffic (android:usesCleartextTraffic=\"false\")." }
+        check("android.permission.INTERNET" in text) { "The merged manifest does not request INTERNET, which the backup to the user's own server needs." }
+        check("android:usesCleartextTraffic=\"false\"" in text) { "The app must forbid unencrypted traffic (android:usesCleartextTraffic=\"false\")." }
         val allowed = setOf(
             "android.permission.INTERNET", "android.permission.ACCESS_NETWORK_STATE", "android.permission.WAKE_LOCK",
             "android.permission.RECEIVE_BOOT_COMPLETED", "android.permission.FOREGROUND_SERVICE", "android.permission.READ_EXTERNAL_STORAGE", "android.permission.READ_MEDIA_IMAGES",
@@ -103,7 +88,7 @@ abstract class VerifyBackupNetworkTask : DefaultTask() {
         )
         val requested = Regex("<uses-permission[^>]*android:name=\"([^\"]+)\"").findAll(text).map { it.groupValues[1] }.toSet()
         val unexpected = requested.filterNot { it in allowed || it.endsWith(".DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION") }
-        check(unexpected.isEmpty()) { "The backup build requests permissions nobody reviewed: $unexpected. Add them to docs/BACKUP.md and this task, or remove what brings them." }
+        check(unexpected.isEmpty()) { "The merged manifest requests permissions nobody reviewed: $unexpected. Add them to docs/PRIVACY.md and this task, or remove what brings them." }
     }
 }
 
@@ -149,26 +134,19 @@ android {
         applicationId = "app.eikon.gallery"
         minSdk = 30
         targetSdk = 36
-        // 1.0.0 is 10000 (major * 10000 + minor * 100 + patch), so later releases always sort higher.
-        versionCode = 10000
-        versionName = "1.0.0"
+        // 1.1.0 is 10100 (major * 10000 + minor * 100 + patch), so later releases always sort higher.
+        versionCode = 10100
+        versionName = "1.1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    // Two builds of the same app (see docs/BACKUP.md). `standard` has no network permission at all and the build fails if one ever appears; `backup` is the
-    // same app plus the backup to a server of your own. Same application id, so installing one over the other keeps everything.
-    flavorDimensions += "network"
-    productFlavors {
-        create("standard") { dimension = "network" }
-        create("backup") {
-            dimension = "network"
-            versionNameSuffix = "-backup"
-        }
-    }
-
     androidResources {
-        localeFilters += listOf("en", "it")
+        // The languages the app is translated into (see docs/TRANSLATING.md): the 24 official languages of the EU, Simplified Chinese, Russian and Japanese.
+        localeFilters += listOf(
+            "en", "bg", "cs", "da", "de", "el", "es", "et", "fi", "fr", "ga", "hr", "hu", "it", "lt", "lv", "mt", "nl", "pl", "pt", "ro", "sk", "sl", "sv",
+            "zh-rCN", "ru", "ja",
+        )
         // Models are read straight out of the APK (memory-mapped), which needs them stored uncompressed.
         noCompress += "onnx"
     }
@@ -229,17 +207,9 @@ androidComponents {
         variant.sources.assets?.addGeneratedSourceDirectory(fetchModels, FetchModelsTask::outputDir)
         variant.sources.assets?.addGeneratedSourceDirectory(bundleNotice, BundleNoticeTask::outputDir)
 
-        val taskSuffix = variant.name.replaceFirstChar { it.uppercase() }
-        val verify = if (variant.flavorName == "backup") {
-            tasks.register<VerifyBackupNetworkTask>("verifyBackupNetwork$taskSuffix") {
-                group = "verification"
-                mergedManifest.set(variant.artifacts.get(SingleArtifact.MERGED_MANIFEST))
-            }
-        } else {
-            tasks.register<VerifyNoInternetTask>("verifyNoInternet$taskSuffix") {
-                group = "verification"
-                mergedManifest.set(variant.artifacts.get(SingleArtifact.MERGED_MANIFEST))
-            }
+        val verify = tasks.register<VerifyNetworkPermissionsTask>("verifyNetworkPermissions${variant.name.replaceFirstChar { it.uppercase() }}") {
+            group = "verification"
+            mergedManifest.set(variant.artifacts.get(SingleArtifact.MERGED_MANIFEST))
         }
         tasks.matching { it.name == "assemble${variant.name.replaceFirstChar { c -> c.uppercase() }}" }
             .configureEach { dependsOn(verify) }
@@ -292,10 +262,10 @@ dependencies {
 
     implementation(libs.coil.compose)
 
-    // The HTTP client of the backup, in the backup build only: the standard build contains no network code at all.
-    "backupImplementation"(libs.okhttp)
-    "testBackupImplementation"(libs.okhttp.mockwebserver)
-    "testBackupImplementation"(libs.okhttp.tls)
+    // The HTTP client of the backup to a server of the user's own: the only network code in the app, and inert until the user allows the network and sets a server up.
+    implementation(libs.okhttp)
+    testImplementation(libs.okhttp.mockwebserver)
+    testImplementation(libs.okhttp.tls)
 
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)

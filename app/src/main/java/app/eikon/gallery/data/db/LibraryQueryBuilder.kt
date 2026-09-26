@@ -46,6 +46,33 @@ object LibraryQueryBuilder {
         return SqlQuery("SELECT COUNT(*) ${parts.from} WHERE ${parts.where}", parts.args)
     }
 
+    /**
+     * Where [mediaId] stands in [media]'s list (0 is the first row), or NULL if it is not in the slice at all: the number of rows that sort before it, under the same order
+     * (date, then id, in the direction of the query). It is what lets a picture handed over by another app open in the library at its place among its neighbours.
+     */
+    fun position(query: LibraryQuery, mediaId: Long, nowMillis: Long = System.currentTimeMillis()): SqlQuery {
+        val parts = Parts(query, nowMillis)
+        val column = sortColumn(query.sortField)
+        val plain = column.removePrefix("m.")
+        val before = if (query.direction == SortDirection.NEWEST_FIRST) ">" else "<"
+        val sql = "SELECT CASE WHEN EXISTS (SELECT 1 ${parts.from} WHERE ${parts.where} AND m.id = ?) " +
+            "THEN (SELECT COUNT(*) ${parts.from} WHERE ${parts.where} AND " +
+            "($column $before (SELECT $plain FROM media WHERE id = ?) OR ($column = (SELECT $plain FROM media WHERE id = ?) AND m.id $before ?))) END"
+        return SqlQuery(sql, parts.args + mediaId + parts.args + mediaId + mediaId + mediaId)
+    }
+
+    /**
+     * Whether the list of [query] is made from what the analysis finds (places, faces, text in photos), so that it changes as the analysis stores more. Every other list
+     * (the library, a folder, an album, a preset, Hidden, a period, a hit list) reads only the media, albums, hidden and edit tables, and is left alone by the analysis.
+     */
+    fun readsAnalysis(query: LibraryQuery): Boolean = when (val scope = query.scope) {
+        is LibraryScope.Search, is LibraryScope.Place, is LibraryScope.Area, is LibraryScope.Person -> true
+        is LibraryScope.Periods -> scope.personId != null
+        LibraryScope.Everything, LibraryScope.Hidden, is LibraryScope.Album, is LibraryScope.Folder, is LibraryScope.RecentlyAdded,
+        is LibraryScope.Between, is LibraryScope.Semantic,
+        -> false
+    }
+
     /** The newest item of the slice, used as the cover of a collection tile. */
     fun cover(query: LibraryQuery, nowMillis: Long = System.currentTimeMillis()): SqlQuery {
         val parts = Parts(query, nowMillis)

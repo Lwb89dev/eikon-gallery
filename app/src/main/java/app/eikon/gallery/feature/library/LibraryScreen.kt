@@ -11,6 +11,7 @@ import androidx.activity.result.IntentSenderRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.StringRes
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.ExitTransition
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
@@ -38,6 +39,7 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableIntStateOf
@@ -75,7 +77,6 @@ import app.eikon.gallery.domain.GridSource
 import app.eikon.gallery.domain.LibraryFilters
 import app.eikon.gallery.domain.MediaAccess
 import app.eikon.gallery.domain.MediaItem
-import app.eikon.gallery.domain.TimelineGrouping
 import app.eikon.gallery.domain.TimelineLabelFormatter
 import app.eikon.gallery.domain.TimelineLayout
 import app.eikon.gallery.feature.info.InfoSheet
@@ -85,6 +86,7 @@ import app.eikon.gallery.feature.viewer.MediaViewer
 import app.eikon.gallery.feature.viewer.PagingViewerItems
 import app.eikon.gallery.feature.viewer.ViewerAction
 import java.time.LocalDate
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
@@ -153,6 +155,14 @@ private fun LibraryContent(
     var viewerOpen by rememberSaveable { mutableStateOf(false) }
     var viewerIndex by rememberSaveable { mutableIntStateOf(0) }
 
+    // A picture handed over by another app and sent here with "Open in library": its viewer opens as soon as the index has it.
+    LaunchedEffect(viewModel) {
+        viewModel.requestedPositions.collect { position ->
+            viewerIndex = position
+            viewerOpen = true
+        }
+    }
+
     val systemRequest = rememberLauncherForActivityResult(ActivityResultContracts.StartIntentSenderForResult()) {
         viewModel.onSystemRequestFinished(it.resultCode == Activity.RESULT_OK)
     }
@@ -163,6 +173,7 @@ private fun LibraryContent(
     if (albumState == AlbumState.Gone || personState == PersonState.Gone) LaunchedEffect(Unit) { screen.onBack?.invoke() }
 
     ReportVisiblePhotos(gridState, layout, items, viewModel)
+    if (viewModel.source == GridSource.Search) RefreshSearchWhenStill(gridState, items, viewModel)
     val flights = remember(scope) { ViewerFlights(scope) }
     val openViewer = { index: Int ->
         viewerIndex = index
@@ -209,6 +220,21 @@ private fun LibraryContent(
         HeroLayer(flights.hero)
         val preparingShare by viewModel.isPreparingShare.collectAsStateWithLifecycle()
         if (preparingShare) PreparingShare(Modifier.align(Alignment.TopCenter))
+    }
+}
+
+/**
+ * A search is redone when the analysis has stored something it reads, but not while the results are being scrolled: it waits until the grid is still. (Redoing it after every photo analysed made
+ * scrolling stall, and shifted the results under the finger.)
+ */
+@Composable
+private fun RefreshSearchWhenStill(gridState: LazyGridState, items: LazyPagingItems<MediaItem>, viewModel: LibraryViewModel) {
+    LaunchedEffect(viewModel, items) {
+        viewModel.searchIndexChanges.collect {
+            snapshotFlow { gridState.isScrollInProgress }.first { scrolling -> !scrolling }
+            viewModel.refreshSearchResults()
+            items.refresh()
+        }
     }
 }
 
@@ -340,6 +366,7 @@ private fun PersonDialogs(
             },
             onDismiss = onCloseRename,
             hint = R.string.person_name_hint,
+            note = R.string.person_same_name_note,
         )
     }
     if (merging) {
@@ -432,21 +459,19 @@ private fun LibraryBody(
         EmptyBody(settings, syncStatus, viewModel)
         return
     }
-    val grouping = TimelineGrouping.forColumns(settings.gridColumns)
     val labels = rememberTimelineLabels()
     Box(modifier.fillMaxSize()) {
         LibraryGrid(
             layout = layout,
             items = items,
             columns = settings.gridColumns,
-            grouping = grouping,
             labels = labels,
             selection = selection,
             state = gridState,
             contentPadding = PaddingValues(bottom = bottomPadding + 8.dp),
             onOpen = onOpen,
             onToggleSelect = viewModel::toggleSelection,
-            onColumnsStep = { delta -> viewModel.setColumns(settings.gridColumns + delta) },
+            onColumnsChange = viewModel::setColumns,
             onBeginDragSelect = viewModel::beginDragSelection,
             onDragSelect = viewModel::dragSelection,
         )
@@ -516,10 +541,13 @@ private fun LibraryViewer(
     val trailing = remember(viewModel) {
         listOf(ViewerAction({ R.drawable.ic_delete }, { R.string.action_delete }) { viewModel.trash(listOf(it)) })
     }
+    // However the viewer came to be open, it is not "landed in the grid" any more.
+    LaunchedEffect(open) { if (open) hero.viewerReopened() }
     AnimatedVisibility(
         visible = open,
         enter = fadeIn(tween(VIEWER_IN_MS)),
-        exit = fadeOut(tween(VIEWER_OUT_MS)),
+        // A photo that has just flown back into its cell leaves at once: fading the viewer out would show it again over the grid.
+        exit = if (hero.landedInGrid) ExitTransition.None else fadeOut(tween(VIEWER_OUT_MS)),
     ) {
         MediaViewer(
             items = viewerItems,

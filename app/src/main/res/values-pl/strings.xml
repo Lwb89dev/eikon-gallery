@@ -1,0 +1,705 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Library -->
+    <string name="library_title">Biblioteka</string>
+    <string name="today">Dzisiaj</string>
+    <string name="yesterday">Wczoraj</string>
+    <string name="empty_library">Nie ma jeszcze zdjęć ani filmów</string>
+    <string name="empty_filter">Nic nie pasuje do tego filtra</string>
+    <string name="empty_filter_clear">Pokaż wszystko</string>
+    <string name="sync_progress">Wczytywanie biblioteki: %1$,d / %2$,d</string>
+    <string name="sync_failed">Nie udało się odświeżyć biblioteki</string>
+    <string name="sync_retry">Spróbuj ponownie</string>
+    <string name="scrubber_description">Przewijanie biblioteki według daty</string>
+
+    <!-- Permissions -->
+    <string name="permission_title">Twoje zdjęcia zostają na urządzeniu</string>
+    <string name="permission_body">eikon potrzebuje dostępu do Twoich zdjęć i filmów, aby je wyświetlać. Zostają one na urządzeniu: nic nie jest przesyłane, chyba że skonfigurujesz kopię zapasową na własnym serwerze.</string>
+    <string name="permission_grant">Zezwól na dostęp</string>
+    <string name="permission_denied">Odmówiono dostępu. Możesz na niego zezwolić w ustawieniach systemu.</string>
+    <string name="permission_open_settings">Otwórz ustawienia</string>
+    <string name="limited_banner">Pokazano tylko wybrane przez Ciebie zdjęcia</string>
+    <string name="limited_select_more">Wybierz więcej</string>
+    <string name="limited_allow_all">Zezwól na wszystkie</string>
+
+    <!-- Menus and filters -->
+    <string name="menu_filter">Filtr</string>
+    <string name="menu_sort">Sortuj</string>
+    <string name="menu_settings">Ustawienia</string>
+    <string name="menu_more">Więcej opcji</string>
+    <string name="filter_all">Wszystkie</string>
+    <string name="filter_photos">Zdjęcia</string>
+    <string name="filter_videos">Filmy</string>
+    <string name="filter_favorites">Ulubione</string>
+    <string name="filter_screenshots">Zrzuty ekranu</string>
+    <string name="filter_screen_recordings">Nagrania ekranu</string>
+    <string name="filter_panoramas">Panoramy</string>
+    <string name="filter_raw">RAW</string>
+    <string name="filter_clear">Wyczyść filtr</string>
+    <string name="sort_by_date_taken">Data wykonania</string>
+    <string name="sort_by_date_added">Data dodania</string>
+    <string name="sort_newest_first">Od najnowszych</string>
+    <string name="sort_oldest_first">Od najstarszych</string>
+
+    <!-- Selection and actions -->
+    <plurals name="selected_count">
+        <item quantity="one">Wybrano %d</item>
+        <item quantity="few">Wybrano %d</item>
+        <item quantity="many">Wybrano %d</item>
+        <item quantity="other">Wybrano %d</item>
+    </plurals>
+    <string name="action_share">Udostępnij</string>
+    <string name="action_favorite">Dodaj do ulubionych</string>
+    <string name="action_unfavorite">Usuń z ulubionych</string>
+    <string name="action_delete">Usuń</string>
+    <string name="action_info">Informacje</string>
+    <string name="action_back">Wstecz</string>
+    <string name="action_clear_selection">Wyczyść zaznaczenie</string>
+    <string name="action_select">Zaznacz</string>
+    <string name="action_failed">Coś poszło nie tak</string>
+    <plurals name="moved_to_trash">
+        <item quantity="one">Przeniesiono %d element do kosza. Android przechowuje go przez 30 dni.</item>
+        <item quantity="few">Przeniesiono %d elementy do kosza. Android przechowuje je przez 30 dni.</item>
+        <item quantity="many">Przeniesiono %d elementów do kosza. Android przechowuje je przez 30 dni.</item>
+        <item quantity="other">Przeniesiono %d elementu do kosza. Android przechowuje je przez 30 dni.</item>
+    </plurals>
+
+    <!-- Accessibility -->
+    <string name="cd_photo">Zdjęcie, %1$s</string>
+    <string name="cd_video">Film, %1$s, %2$s</string>
+    <string name="cd_edited_badge">Edytowane</string>
+    <string name="cd_favorite_badge">Ulubione</string>
+    <string name="viewer_position">%1$d z %2$d</string>
+
+    <!-- Video -->
+    <string name="video_play">Odtwórz</string>
+    <string name="video_pause">Wstrzymaj</string>
+    <string name="video_mute">Wycisz</string>
+    <string name="video_unmute">Włącz dźwięk</string>
+    <string name="video_seek">Przewiń</string>
+
+    <!-- Info panel -->
+    <string name="info_title">Informacje</string>
+    <string name="info_loading">Odczytywanie szczegółów…</string>
+    <string name="info_error">Nie udało się odczytać szczegółów tego pliku</string>
+    <string name="info_section_file">Plik</string>
+    <string name="info_section_camera">Aparat</string>
+    <string name="info_section_video">Film</string>
+    <string name="info_name">Nazwa</string>
+    <string name="info_type">Typ</string>
+    <string name="info_folder">Folder</string>
+    <string name="info_resolution">Rozdzielczość</string>
+    <string name="info_megapixels">Megapiksele</string>
+    <string name="info_size">Rozmiar</string>
+    <string name="info_date">Data</string>
+    <string name="info_modified">Zmodyfikowano</string>
+    <string name="info_color_profile">Profil kolorów</string>
+    <string name="info_location">Lokalizacja</string>
+    <string name="info_location_none">W tym pliku nie zapisano lokalizacji</string>
+    <string name="info_location_hidden">Android ukrywa lokalizację zdjęć przed aplikacjami, dopóki na to nie zezwolisz</string>
+    <string name="info_location_allow">Zezwól</string>
+    <string name="info_location_open">Otwórz w aplikacji z mapami</string>
+    <string name="info_camera">Urządzenie</string>
+    <string name="info_lens">Obiektyw</string>
+    <string name="info_focal_length">Ogniskowa</string>
+    <string name="info_aperture">Przysłona</string>
+    <string name="info_shutter">Czas naświetlania</string>
+    <string name="info_iso">Czułość</string>
+    <string name="info_exposure_bias">Korekta ekspozycji</string>
+    <string name="info_flash">Lampa błyskowa</string>
+    <string name="info_flash_fired">Błysnęła</string>
+    <string name="info_flash_off">Nie błysnęła</string>
+    <string name="info_orientation">Orientacja</string>
+    <string name="info_software">Oprogramowanie</string>
+    <string name="info_duration">Czas trwania</string>
+    <string name="info_frame_rate">Liczba klatek na sekundę</string>
+    <string name="info_video_codec">Kodek wideo</string>
+    <string name="info_audio_codec">Kodek audio</string>
+    <string name="info_bitrate">Przepływność</string>
+    <string name="info_dynamic_range">Zakres dynamiki</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Ustawienia</string>
+    <string name="settings_appearance">Wygląd</string>
+    <string name="theme_system">Zgodny z systemem</string>
+    <string name="theme_light">Jasny</string>
+    <string name="theme_dark">Ciemny</string>
+    <string name="settings_privacy">Prywatność</string>
+    <string name="settings_privacy_body">eikon działa na Twoim urządzeniu. Nie ma konta ani analityki, a jego dane są wyłączone z kopii zapasowych Androida.\n\nTwoje zdjęcia nigdy nie są kopiowane: eikon prowadzi lokalny indeks ze szczegółami plików (nazwa, data, rozmiar, folder), dzięki czemu biblioteka otwiera się natychmiast. Usunięcie aplikacji usuwa indeks.</string>
+    <string name="settings_storage_encrypted">Baza danych biblioteki (indeks, albumy, edycje, opisy i to, co znalazła analiza) jest zaszyfrowana na tym telefonie algorytmem AES-256. Jej klucz przechowuje Android Keystore.</string>
+    <string name="settings_storage_not_encrypted">Nie udało się zaszyfrować bazy danych biblioteki (%1$s), więc nadal jest przechowywana bez szyfrowania. eikon ponawia próbę przy każdym uruchomieniu.</string>
+    <string name="settings_storage_reset_title">Baza danych biblioteki utworzona od nowa</string>
+    <string name="settings_storage_reset">Klucz chroniący bazę danych biblioteki został utracony, więc eikon musiał utworzyć nową. Dodane przez Ciebie albumy, edycje, opisy i nazwy zniknęły. Twoje zdjęcia są nienaruszone, a analiza zostanie uruchomiona ponownie.</string>
+    <string name="settings_storage_reset_ok">Rozumiem</string>
+    <string name="settings_about">Informacje o aplikacji</string>
+    <string name="settings_licenses">Licencje open source</string>
+    <string name="licenses_title">Licencje open source</string>
+    <string name="settings_version">Wersja %1$s</string>
+
+    <!-- Navigation and collections -->
+    <string name="nav_library">Biblioteka</string>
+    <string name="nav_search">Szukaj</string>
+    <string name="nav_collections">Kolekcje</string>
+    <string name="collections_title">Kolekcje</string>
+    <string name="section_people">Osoby</string>
+    <string name="section_albums">Albumy</string>
+    <string name="section_personal">Osobiste</string>
+    <string name="section_folders">Foldery urządzenia</string>
+    <string name="collection_favorites">Ulubione</string>
+    <string name="collection_recent">Ostatnio dodane</string>
+    <string name="collection_videos">Filmy</string>
+    <string name="collection_screenshots">Zrzuty ekranu</string>
+    <string name="collection_screen_recordings">Nagrania ekranu</string>
+    <string name="collection_panoramas">Panoramy</string>
+    <string name="collection_raw">RAW</string>
+    <string name="collection_trash">Ostatnio usunięte</string>
+    <string name="collection_hidden">Ukryte</string>
+    <plurals name="items_count">
+        <item quantity="one">%d element</item>
+        <item quantity="few">%d elementy</item>
+        <item quantity="many">%d elementów</item>
+        <item quantity="other">%d elementu</item>
+    </plurals>
+    <string name="empty_album">Ten album jest pusty. Zaznacz zdjęcia w bibliotece i wybierz „Dodaj do albumu”.</string>
+    <string name="empty_hidden">Nic nie jest ukryte</string>
+    <string name="empty_collection">Nic tu jeszcze nie ma</string>
+
+    <!-- Albums -->
+    <string name="album_new">Nowy album</string>
+    <string name="album_name_hint">Nazwa albumu</string>
+    <string name="album_create">Utwórz</string>
+    <string name="album_rename">Zmień nazwę</string>
+    <string name="album_delete">Usuń album</string>
+    <string name="album_delete_title">Usunąć ten album?</string>
+    <string name="album_delete_message">Usuwany jest tylko album. Zdjęcia i filmy, które w nim są, zostają tam, gdzie były.</string>
+    <string name="album_move_earlier">Przesuń wcześniej</string>
+    <string name="album_move_later">Przesuń później</string>
+    <string name="action_add_to_album">Dodaj do albumu</string>
+    <string name="action_remove_from_album">Usuń z albumu</string>
+    <string name="action_hide">Ukryj</string>
+    <string name="action_unhide">Pokaż</string>
+    <string name="action_cancel">Anuluj</string>
+    <string name="action_save">Zapisz</string>
+    <plurals name="added_to_album">
+        <item quantity="one">Dodano %1$d element do „%2$s”</item>
+        <item quantity="few">Dodano %1$d elementy do „%2$s”</item>
+        <item quantity="many">Dodano %1$d elementów do „%2$s”</item>
+        <item quantity="other">Dodano %1$d elementu do „%2$s”</item>
+    </plurals>
+    <plurals name="removed_from_album">
+        <item quantity="one">Usunięto %d element z albumu</item>
+        <item quantity="few">Usunięto %d elementy z albumu</item>
+        <item quantity="many">Usunięto %d elementów z albumu</item>
+        <item quantity="other">Usunięto %d elementu z albumu</item>
+    </plurals>
+    <plurals name="moved_to_hidden">
+        <item quantity="one">Ukryto %d element. Znajdziesz go w Kolekcje, Ukryte.</item>
+        <item quantity="few">Ukryto %d elementy. Znajdziesz je w Kolekcje, Ukryte.</item>
+        <item quantity="many">Ukryto %d elementów. Znajdziesz je w Kolekcje, Ukryte.</item>
+        <item quantity="other">Ukryto %d elementu. Znajdziesz je w Kolekcje, Ukryte.</item>
+    </plurals>
+    <plurals name="unhidden">
+        <item quantity="one">%d element jest znów widoczny</item>
+        <item quantity="few">%d elementy są znów widoczne</item>
+        <item quantity="many">%d elementów jest znów widocznych</item>
+        <item quantity="other">%d elementu jest znów widocznych</item>
+    </plurals>
+
+    <!-- Filters -->
+    <string name="filter_type_title">Typ</string>
+    <string name="filter_kind_title">Rodzaj</string>
+    <string name="filter_any">Dowolny</string>
+    <string name="filter_favorites_only">Tylko ulubione</string>
+    <string name="filter_edited">Edytowane</string>
+    <string name="share_preparing">Przygotowywanie edytowanych zdjęć do udostępnienia</string>
+    <string name="filter_edited_only">Tylko edytowane</string>
+    <string name="filter_clear_all">Wyczyść filtry</string>
+
+    <!-- Locks -->
+    <string name="locked_title">Zablokowane</string>
+    <string name="locked_body">Aby to otworzyć, użyj odcisku palca, twarzy lub blokady ekranu.</string>
+    <string name="locked_unlock">Odblokuj</string>
+    <string name="auth_subtitle">Potwierdź, że to Ty</string>
+    <string name="auth_title_hidden">Odblokuj „Ukryte”</string>
+    <string name="auth_title_trash">Odblokuj „Ostatnio usunięte”</string>
+    <string name="auth_unavailable">Uwierzytelnianie jest teraz niedostępne. Spróbuj ponownie za chwilę.</string>
+    <string name="no_device_lock_notice">Ten telefon nie ma blokady ekranu, więc „Ukryte” nie jest chronione. Ustaw ją w ustawieniach systemu.</string>
+
+    <!-- Recently deleted -->
+    <string name="trash_info">Elementy są trwale usuwane po około 30 dniach.</string>
+    <string name="trash_empty">Niedawno nic nie usunięto</string>
+    <string name="trash_restore">Przywróć</string>
+    <string name="trash_delete_forever">Usuń trwale</string>
+    <plurals name="days_left_short">
+        <item quantity="one">%d dz.</item>
+        <item quantity="few">%d dz.</item>
+        <item quantity="many">%d dz.</item>
+        <item quantity="other">%d dz.</item>
+    </plurals>
+    <plurals name="trash_restored">
+        <item quantity="one">Przywrócono %d element</item>
+        <item quantity="few">Przywrócono %d elementy</item>
+        <item quantity="many">Przywrócono %d elementów</item>
+        <item quantity="other">Przywrócono %d elementu</item>
+    </plurals>
+    <plurals name="trash_deleted">
+        <item quantity="one">Trwale usunięto %d element</item>
+        <item quantity="few">Trwale usunięto %d elementy</item>
+        <item quantity="many">Trwale usunięto %d elementów</item>
+        <item quantity="other">Trwale usunięto %d elementu</item>
+    </plurals>
+
+    <!-- Settings: security -->
+    <string name="settings_security">Bezpieczeństwo</string>
+    <string name="setting_lock_hidden">Wymagaj uwierzytelnienia dla „Ukryte”</string>
+    <string name="setting_lock_trash">Wymagaj uwierzytelnienia dla „Ostatnio usunięte”</string>
+    <string name="setting_show_hidden">Pokazuj „Ukryte” w Kolekcjach</string>
+    <string name="setting_secure_screens">Ukryj eikon w ostatnich aplikacjach i blokuj zrzuty ekranu</string>
+    <string name="settings_security_body">Ukryte elementy nie pojawiają się w bibliotece, kolekcjach ani wyszukiwaniu, a otwarcie „Ukryte” wymaga odcisku palca, twarzy lub blokady ekranu. Same pliki nie są szyfrowane i pozostają w zwykłej pamięci telefonu, gdzie inne aplikacje z dostępem do zdjęć nadal mogą je widzieć.</string>
+
+    <!-- Search -->
+    <string name="search_placeholder">Data, miejsce, tekst, nazwa pliku</string>
+    <string name="search_clear">Wyczyść wyszukiwanie</string>
+    <string name="search_no_results">Żadne zdjęcia nie pasują</string>
+    <string name="search_hint_title">Przeszukaj swoją bibliotekę</string>
+    <string name="search_hint_body">Spróbuj podać datę („August 2025”, „yesterday”), miejsce („Rome”, „Tuscany”), słowo, które pojawia się na zdjęciu lub w nazwie pliku, albo rodzaj („videos”, „screenshots”, „favorites”).\n\nDaty i rodzaje są rozumiane po angielsku i po włosku. Miejsca, tekst na zdjęciach i to, co przedstawiają, są znajdowane po wykonaniu analizy (Ustawienia, Analiza).</string>
+    <string name="search_analysis_off">Wyszukiwanie według miejsca, tekstu na zdjęciach i tego, co przedstawiają, jest wyłączone. Możesz je włączyć w Ustawienia, Analiza.</string>
+    <string name="search_analysis_note">Zdjęcia są nadal analizowane w tle (%1$d %%). Niektórych wyników może brakować.</string>
+
+    <!-- Settings: analysis -->
+    <string name="settings_analysis">Analiza</string>
+    <string name="analysis_places_progress">Miejsca: %1$,d z %2$,d</string>
+    <string name="analysis_semantic_progress">Co przedstawiają zdjęcia: %1$,d z %2$,d</string>
+    <string name="analysis_semantic_unavailable">Nie udało się wczytać modelu rozpoznającego, co przedstawiają zdjęcia, więc ten krok nie działa.</string>
+    <string name="search_semantic_unavailable">Wyszukiwanie według tego, co przedstawiają zdjęcia, jest teraz niedostępne (nie udało się wczytać modelu). Pozostałe wyniki nadal działają.</string>
+    <string name="analysis_people_progress">Osoby: %1$,d z %2$,d</string>
+    <string name="analysis_people_unavailable">Nie udało się wczytać modeli znajdujących twarze, więc ten krok nie działa.</string>
+    <string name="analysis_duplicates_progress">Duplikaty: %1$,d z %2$,d</string>
+    <string name="analysis_text_progress">Tekst na zdjęciach: %1$,d z %2$,d</string>
+    <string name="analysis_running">Trwa analiza…</string>
+    <string name="analysis_idle">Czekam na odpowiedni moment (bateria nie jest słaba, Oszczędzanie baterii wyłączone i, jeśli tak wybrano, ładowanie)</string>
+    <string name="analysis_up_to_date">Wszystko jest przeanalizowane</string>
+    <string name="setting_pause_analysis">Wstrzymaj analizę</string>
+    <string name="setting_only_charging">Tylko podczas ładowania</string>
+    <string name="setting_analyze_places">Znajdowanie zdjęć według miejsca</string>
+    <string name="setting_analyze_semantic">Znajdowanie zdjęć według tego, co przedstawiają</string>
+    <string name="setting_analyze_people">Znajdowanie osób na zdjęciach</string>
+    <string name="setting_analyze_people_note">Twarze są znajdowane i porównywane tylko na tym telefonie. Nic o twarzy nigdy go nie opuszcza, a eikon nigdy nie próbuje nikogo rozpoznać: jedynie grupuje twarze, które są do siebie podobne, a grupom nazwy nadajesz Ty.</string>
+    <string name="setting_analyze_duplicates">Znajdowanie zduplikowanych zdjęć</string>
+    <string name="setting_analyze_text">Znajdowanie tekstu na zdjęciach</string>
+    <string name="analysis_location_permission">Android ukrywa przed aplikacjami, gdzie zrobiono zdjęcia, dopóki na to nie zezwolisz.</string>
+    <string name="analysis_allow_locations">Zezwól na dostęp do lokalizacji zdjęć</string>
+    <string name="analyze_now">Analizuj teraz</string>
+    <string name="settings_analysis_body">Analiza działa tylko na Twoim telefonie, w tle, i wstrzymuje się, gdy bateria jest słaba, włączone jest Oszczędzanie baterii lub telefon się nagrzewa („Analizuj teraz” działa mimo Oszczędzania baterii). Zapisuje miejsce każdego zdjęcia (ustalane offline, żadna lokalizacja nigdy nie jest nigdzie wysyłana), numeryczny opis tego, co przedstawia zdjęcie (abyś mógł wyszukiwać „pies” lub „zachód słońca”; to nie jest opis słowny i nie da się go odczytać z powrotem jako obraz) oraz każdy tekst odczytany ze zdjęcia, aby Wyszukiwanie mogło je znaleźć. Jeśli włączysz osoby, zapisuje także, gdzie na zdjęciu znajduje się każda twarz, i jej numeryczny opis, wyłącznie w celu grupowania podobnych twarzy. Jeśli włączysz duplikaty, zapisuje krótki odcisk każdego zdjęcia i plików o tym samym rozmiarze, wyłącznie w celu znajdowania kopii. Rozpoznawanie tego, co przedstawiają zdjęcia, i odczytywanie tekstu są powolne i mocno obciążają procesor, dlatego analiza domyślnie czeka na ładowanie.</string>
+
+    <!-- Info panel: derived data -->
+    <string name="info_place">Najbliższe miejsce</string>
+    <string name="info_text_found">Tekst na tym zdjęciu</string>
+    <string name="info_text_copy">Kopiuj tekst</string>
+
+    <!-- People -->
+    <string name="collection_people">Osoby</string>
+    <string name="people_title">Osoby</string>
+    <string name="person_unnamed">Osoba bez nazwy</string>
+    <string name="person_add_name">Dodaj nazwę</string>
+    <string name="person_rename">Nazwij tę osobę</string>
+    <string name="person_name_hint">Nazwa</string>
+    <string name="person_same_name_note">Osoby o tym samym imieniu są łączone w jedną.</string>
+    <string name="person_favorite">Oznacz jako ulubioną</string>
+    <string name="person_unfavorite">Usuń z ulubionych</string>
+    <string name="person_hide">Ukryj tę osobę</string>
+    <string name="person_unhide">Pokaż tę osobę</string>
+    <string name="person_merge">Połącz z inną osobą…</string>
+    <string name="person_merge_title">Połącz z</string>
+    <string name="person_merge_empty">Nie ma nikogo innego, z kim można połączyć.</string>
+    <string name="person_not_this">To nie ta osoba</string>
+    <string name="person_remove_from_people">To nie twarz</string>
+    <string name="people_show_hidden">Pokaż ukryte osoby (%1$d)</string>
+    <string name="people_hide_hidden">Ukryj ukryte osoby</string>
+    <string name="people_empty_off">Osoby są wyłączone. Włącz „Znajdowanie osób na zdjęciach” w Ustawienia, Analiza, a eikon zgrupuje znalezione twarze. Wszystko zostaje na tym telefonie.</string>
+    <string name="people_empty_working">Nie znaleziono jeszcze twarzy (przeanalizowano %1$d %% Twoich zdjęć). Analiza działa w tle podczas ładowania.</string>
+    <string name="people_empty_done">Na Twoich zdjęciach nie znaleziono twarzy.</string>
+    <string name="people_go_settings">Otwórz ustawienia</string>
+    <string name="person_photos_empty">Brak zdjęć.</string>
+    <plurals name="moved_to_new_person">
+        <item quantity="one">Przeniesiono %d zdjęcie do nowej osoby</item>
+        <item quantity="few">Przeniesiono %d zdjęcia do nowej osoby</item>
+        <item quantity="many">Przeniesiono %d zdjęć do nowej osoby</item>
+        <item quantity="other">Przeniesiono %d zdjęcia do nowej osoby</item>
+    </plurals>
+    <plurals name="removed_from_people">
+        <item quantity="one">Usunięto %d zdjęcie z Osób</item>
+        <item quantity="few">Usunięto %d zdjęcia z Osób</item>
+        <item quantity="many">Usunięto %d zdjęć z Osób</item>
+        <item quantity="other">Usunięto %d zdjęcia z Osób</item>
+    </plurals>
+    <string name="info_people">Osoby</string>
+    <plurals name="info_people_unnamed_count">
+        <item quantity="one">%d bez nazwy</item>
+        <item quantity="few">%d bez nazwy</item>
+        <item quantity="many">%d bez nazwy</item>
+        <item quantity="other">%d bez nazwy</item>
+    </plurals>
+
+    <string name="section_memories">Wspomnienia</string>
+    <string name="section_pets">Zwierzęta</string>
+    <string name="collection_dogs">Psy</string>
+    <string name="collection_cats">Koty</string>
+    <string name="empty_pets">Nie znaleziono jeszcze psów ani kotów. Zwierzęta są rozpoznawane po tym, co przedstawiają zdjęcia: włącz „Znajdowanie zdjęć według tego, co przedstawiają” w Ustawienia, Analiza i poczekaj na zakończenie.</string>
+
+    <!-- Places -->
+    <string name="places_title">Miejsca</string>
+    <string name="places_tab_list">Lista</string>
+    <string name="places_tab_map">Mapa</string>
+    <string name="place_unknown">Inne miejsca</string>
+    <string name="place_near">Niedaleko: %1$s</string>
+    <string name="places_expand">Pokaż</string>
+    <string name="places_collapse">Ukryj</string>
+    <string name="collection_places">Miejsca</string>
+    <string name="places_map_note">Tylko zarysy państw i nazwy większych miast: nie są pobierane żadne obrazy map, a żadna pozycja nigdy nie opuszcza telefonu. Aby powiększyć, ściągnij lub rozsuń palce albo dotknij dwukrotnie; dotknij znacznika, aby zobaczyć jego zdjęcia.</string>
+    <string name="places_map_description">Mapa miejsc, w których zrobiono Twoje zdjęcia, ze znacznikami grup zdjęć</string>
+    <string name="places_empty_off">Miejsca są wyłączone. Włącz „Znajdowanie zdjęć według miejsca” w Ustawienia, Analiza, a eikon ustali offline, gdzie zrobiono Twoje zdjęcia, na podstawie danych GPS.</string>
+    <string name="places_empty_working">Nie znaleziono jeszcze miejsc (przeanalizowano %1$d %% Twoich zdjęć). Analiza działa w tle podczas ładowania.</string>
+    <string name="places_empty_done">Żadne z Twoich zdjęć nie ma pozycji albo eikon może nie mieć zgody na odczyt lokalizacji zdjęć (Ustawienia, Analiza).</string>
+    <string name="section_places">Miejsca i podróże</string>
+
+    <!-- Trips -->
+    <string name="collection_trips">Podróże</string>
+    <string name="trips_title">Podróże</string>
+    <string name="trip_untitled">Podróż</string>
+    <string name="trip_reason">Około %1$d km od miejsca, w którym robisz większość zdjęć (niedaleko: %2$s)</string>
+    <string name="trip_home_unknown">nieznane miejsce</string>
+    <plurals name="trip_summary_days">
+        <item quantity="one">%d dzień</item>
+        <item quantity="few">%d dni</item>
+        <item quantity="many">%d dni</item>
+        <item quantity="other">%d dnia</item>
+    </plurals>
+    <string name="trips_empty">Nie znaleziono podróży. Podróż to ciąg dni, z co najmniej 10 zdjęciami, spędzonych co najmniej 100 km od miejsca, w którym robisz większość zdjęć. Do tego eikon potrzebuje pozycji zdjęć: włącz „Znajdowanie zdjęć według miejsca” w Ustawienia, Analiza.</string>
+
+    <!-- Duplicates and similar shots -->
+    <string name="section_cleanup">Porządkowanie</string>
+    <string name="collection_duplicates">Duplikaty</string>
+    <string name="collection_similar">Podobne zdjęcia</string>
+    <string name="duplicates_title">Duplikaty</string>
+    <string name="similar_title">Podobne zdjęcia</string>
+    <string name="duplicates_note">eikon tylko je znajduje. Nic nie jest usuwane, dopóki nie potwierdzisz w oknie dialogowym samego Androida, a usunięte zdjęcia trafiają do „Ostatnio usunięte”, skąd możesz je przywrócić. Kopie zdjęcia dodanego do albumów: kopia, którą zachowasz, dołącza do tych albumów.</string>
+    <plurals name="duplicate_exact">
+        <item quantity="one">%d identyczny plik</item>
+        <item quantity="few">%d identyczne pliki</item>
+        <item quantity="many">%d identycznych plików</item>
+        <item quantity="other">%d identycznego pliku</item>
+    </plurals>
+    <plurals name="duplicate_visual">
+        <item quantity="one">%d kopia tego samego obrazu</item>
+        <item quantity="few">%d kopie tego samego obrazu</item>
+        <item quantity="many">%d kopii tego samego obrazu</item>
+        <item quantity="other">%d kopii tego samego obrazu</item>
+    </plurals>
+    <plurals name="similar_group">
+        <item quantity="one">%d ujęcie</item>
+        <item quantity="few">%d podobne ujęcia</item>
+        <item quantity="many">%d podobnych ujęć</item>
+        <item quantity="other">%d podobnego ujęcia</item>
+    </plurals>
+    <plurals name="duplicate_keep_best">
+        <item quantity="one">Zachowaj najlepsze, przenieś %d do „Ostatnio usunięte”</item>
+        <item quantity="few">Zachowaj najlepsze, przenieś %d do „Ostatnio usunięte”</item>
+        <item quantity="many">Zachowaj najlepsze, przenieś %d do „Ostatnio usunięte”</item>
+        <item quantity="other">Zachowaj najlepsze, przenieś %d do „Ostatnio usunięte”</item>
+    </plurals>
+    <plurals name="similar_trash_marked">
+        <item quantity="one">Przenieś %d do „Ostatnio usunięte”</item>
+        <item quantity="few">Przenieś %d do „Ostatnio usunięte”</item>
+        <item quantity="many">Przenieś %d do „Ostatnio usunięte”</item>
+        <item quantity="other">Przenieś %d do „Ostatnio usunięte”</item>
+    </plurals>
+    <string name="duplicate_best">Najlepsze</string>
+    <string name="duplicate_kept">Zachowane</string>
+    <string name="duplicate_marked">Do przeniesienia</string>
+    <string name="duplicate_dismiss">To nie są duplikaty</string>
+    <string name="similar_dismiss">To nie są podobne zdjęcia</string>
+    <string name="duplicates_empty_off">Duplikaty są wyłączone. Włącz „Znajdowanie zduplikowanych zdjęć” w Ustawienia, Analiza. eikon tworzy odciski zdjęć tylko na tym telefonie, bez żadnego modelu.</string>
+    <string name="similar_empty_off">Podobne zdjęcia wymagają „Znajdowanie zdjęć według tego, co przedstawiają” w Ustawienia, Analiza: porównuje to, co przedstawia każde zdjęcie, dla zdjęć wykonanych w odstępie do dwóch minut.</string>
+    <string name="duplicates_empty_working">Nic jeszcze nie znaleziono (przeanalizowano %1$d %%). Analiza działa w tle podczas ładowania.</string>
+    <string name="duplicates_empty_done">Nie znaleziono duplikatów.</string>
+    <string name="similar_empty_done">Nie znaleziono podobnych zdjęć.</string>
+
+    <!-- Memories -->
+    <string name="collection_memories">Wspomnienia</string>
+    <string name="memories_title">Wspomnienia</string>
+    <string name="memory_on_this_day">Tego dnia</string>
+    <string name="memory_year_ago">Rok temu</string>
+    <string name="memory_weekend_in">Weekend: %1$s</string>
+    <string name="memory_weekend">Weekend poza domem</string>
+    <string name="memory_day_trip_to">Wycieczka jednodniowa: %1$s</string>
+    <string name="memory_day_trip">Wycieczka jednodniowa</string>
+    <string name="memory_season">%1$s %2$d</string>
+    <string name="memory_person">%1$s, %2$d</string>
+    <string name="season_winter">Zima</string>
+    <string name="season_spring">Wiosna</string>
+    <string name="season_summer">Lato</string>
+    <string name="season_autumn">Jesień</string>
+    <string name="memory_hide">Ukryj to wspomnienie</string>
+    <string name="memory_show_fewer">Pokazuj mniej takich</string>
+    <string name="memory_show_less_of">Pokazuj mniej: %1$s</string>
+    <string name="memory_exclude_date">Pomiń tę datę</string>
+    <string name="memory_all_photos">Wszystkie zdjęcia</string>
+    <string name="memory_replay">Odtwórz ponownie</string>
+    <string name="memory_reset">Cofnij moje wybory</string>
+    <string name="memory_done">Gotowe. Swoje wybory możesz cofnąć z menu Wspomnień.</string>
+    <string name="memories_empty">Nie ma jeszcze wspomnień. eikon tworzy je z dat, podróży, pór roku i osób, którym nadałeś nazwy: „Tego dnia”, „Rok temu”, podróże i weekendy poza domem, pora roku, ktoś w danym roku. Podróże i weekendy wymagają Miejsc, osoby wymagają Osób (Ustawienia, Analiza). Nic nie opuszcza telefonu.</string>
+    <string name="memories_note">Tworzone z dat, miejsc i nazwanych osób według prostych reguł; nie ma muzyki, a zdjęcia są wybierane według ulubionych, rozmiaru i twarzy, a nie według tego, jak dobrze wyglądają.</string>
+    <string name="memory_no_photos">To wspomnienie nie ma już zdjęć do pokazania.</string>
+
+    <!-- Editing -->
+    <string name="action_edit">Edytuj</string>
+    <string name="edit_title">Edycja</string>
+    <string name="edit_done">Gotowe</string>
+    <string name="edit_original">Oryginał</string>
+    <string name="edit_revert">Cofnij zmiany</string>
+    <string name="edit_revert_title">Wrócić do oryginału?</string>
+    <string name="edit_revert_message">To usuwa wszystkie korekty, filtr i kadrowanie z tej edycji. Oryginalne zdjęcie nigdy nie zostało zmienione. Naciśnij Gotowe, aby zachować cofnięte zdjęcie.</string>
+    <string name="edit_discard_title">Odrzucić zmiany?</string>
+    <string name="edit_discard_message">Zmiany wprowadzone w tym edytorze zostaną utracone. Zdjęcie pozostanie takie, jakie było.</string>
+    <string name="edit_discard">Odrzuć</string>
+    <string name="edit_copy_edits">Kopiuj edycje</string>
+    <string name="edit_paste_edits">Wklej edycje</string>
+    <string name="edit_save_copy">Zapisz kopię</string>
+    <string name="edit_copy_saved">Kopia została zapisana obok oryginału, który nie został zmieniony.</string>
+    <string name="edit_copy_saved_no_details">Kopia została zapisana obok oryginału, który nie został zmieniony. Nie udało się skopiować szczegółów aparatu.</string>
+    <string name="edit_failed">Nie udało się dokończyć edycji. Zdjęcie nie zostało zmienione.</string>
+    <string name="edited_badge">Edytowane</string>
+    <string name="viewer_show_original">Pokaż oryginał</string>
+    <string name="viewer_show_edited">Pokaż edytowane zdjęcie</string>
+    <string name="tool_auto">Auto</string>
+    <string name="tool_light">Światło</string>
+    <string name="tool_color">Kolor</string>
+    <string name="tool_detail">Szczegóły</string>
+    <string name="tool_filters">Filtry</string>
+    <string name="tool_crop">Kadruj</string>
+    <string name="adj_exposure">Ekspozycja</string>
+    <string name="adj_brightness">Jasność</string>
+    <string name="adj_contrast">Kontrast</string>
+    <string name="adj_highlights">Światła</string>
+    <string name="adj_shadows">Cienie</string>
+    <string name="adj_black_point">Punkt czerni</string>
+    <string name="adj_saturation">Nasycenie</string>
+    <string name="adj_vibrance">Jaskrawość</string>
+    <string name="adj_temperature">Ciepło</string>
+    <string name="adj_tint">Odcień</string>
+    <string name="adj_sharpness">Ostrość</string>
+    <string name="adj_vignette">Winietowanie</string>
+    <string name="geo_straighten">Wyprostuj</string>
+    <string name="geo_perspective_vertical">Perspektywa pionowa</string>
+    <string name="geo_perspective_horizontal">Perspektywa pozioma</string>
+    <string name="filter_amount">Siła</string>
+    <string name="filter_name_none">Oryginał</string>
+    <string name="filter_name_vivid">Żywy</string>
+    <string name="filter_name_warm">Ciepły</string>
+    <string name="filter_name_cool">Chłodny</string>
+    <string name="filter_name_mono">Mono</string>
+    <string name="filter_name_noir">Noir</string>
+    <string name="filter_name_fade">Wyblakły</string>
+    <string name="filter_name_chrome">Chrom</string>
+    <string name="filter_name_sepia">Sepia</string>
+    <string name="crop_rotate">Obróć</string>
+    <string name="crop_flip">Odbij</string>
+    <string name="shape_free">Dowolny</string>
+    <string name="shape_original">Oryginał</string>
+    <string name="shape_square">1:1</string>
+    <string name="shape_4_3">4:3</string>
+    <string name="shape_3_2">3:2</string>
+    <string name="shape_16_9">16:9</string>
+    <string name="action_paste_edits">Wklej edycje</string>
+    <string name="action_revert_edits">Usuń edycje</string>
+    <plurals name="edits_pasted">
+        <item quantity="one">Zastosowano edycje do %d zdjęcia</item>
+        <item quantity="few">Zastosowano edycje do %d zdjęć</item>
+        <item quantity="many">Zastosowano edycje do %d zdjęć</item>
+        <item quantity="other">Zastosowano edycje do %d zdjęcia</item>
+    </plurals>
+    <plurals name="edits_reverted">
+        <item quantity="one">Usunięto edycję z %d zdjęcia; oryginał jest taki, jak zawsze był</item>
+        <item quantity="few">Usunięto edycje z %d zdjęć; oryginały są takie, jakie zawsze były</item>
+        <item quantity="many">Usunięto edycje z %d zdjęć; oryginały są takie, jakie zawsze były</item>
+        <item quantity="other">Usunięto edycje z %d zdjęcia; oryginały są takie, jakie zawsze były</item>
+    </plurals>
+
+    <!-- Accessibility -->
+    <string name="slider_reset">Przywróć wartość neutralną</string>
+    <string name="crop_area">Obszar kadrowania, od %1$d %% do %2$d %% w poziomie i od %3$d %% do %4$d %% w pionie</string>
+    <string name="crop_action_smaller">Zmniejsz kadr</string>
+    <string name="crop_action_larger">Powiększ kadr</string>
+    <string name="crop_action_left">Przesuń kadr w lewo</string>
+    <string name="crop_action_right">Przesuń kadr w prawo</string>
+    <string name="crop_action_up">Przesuń kadr w górę</string>
+    <string name="crop_action_down">Przesuń kadr w dół</string>
+    <string name="viewer_zoom_in">Powiększ</string>
+    <string name="viewer_zoom_out">Pomniejsz</string>
+    <string name="external_photo">Zdjęcie</string>
+    <string name="viewer_cannot_display">Nie można wyświetlić tego zdjęcia.</string>
+
+    <!-- Info: caption, editing the date and location, what the photo shows -->
+    <string name="info_caption">Opis</string>
+    <string name="caption_add">Dodaj opis</string>
+    <string name="caption_edit">Edytuj opis</string>
+    <string name="caption_title">Opis</string>
+    <string name="caption_hint">Kilka słów o tym zdjęciu</string>
+    <string name="caption_note">Przechowywany tylko w eikon; plik zdjęcia nie jest zmieniany. Wyszukiwanie go znajduje.</string>
+    <string name="date_change">Zmień datę i godzinę</string>
+    <string name="date_revert">Przywróć oryginalną datę</string>
+    <string name="date_time_title">Pora dnia</string>
+    <string name="action_next">Dalej</string>
+    <string name="location_title">Gdzie zrobiono zdjęcie</string>
+    <string name="location_coordinates">Współrzędne</string>
+    <string name="location_coordinates_note">Stopnie dziesiętne, najpierw szerokość geograficzna: 41.9028, 12.4964</string>
+    <string name="location_invalid">To nie jest pozycja: dwie liczby, szerokość geograficzna od -90 do 90 i długość geograficzna od -180 do 180</string>
+    <string name="location_city">Albo znajdź miasto (działa offline)</string>
+    <string name="location_remove">Usuń lokalizację</string>
+    <string name="location_change">Zmień lokalizację</string>
+    <string name="location_revert">Przywróć oryginalną lokalizację</string>
+    <string name="info_map_description">Mała mapa pokazująca, gdzie zrobiono zdjęcie</string>
+    <string name="metadata_done">Gotowe. Zdjęcie mówi teraz to; oryginał jest zachowany, abyś mógł go przywrócić.</string>
+    <string name="metadata_not_writable">Tego rodzaju pliku nie można zmienić.</string>
+    <string name="metadata_needs_permission">Aby zmienić datę lub lokalizację zdjęcia, eikon musi mieć możliwość odczytu, gdzie zrobiono zdjęcia: bez tego Android pokazuje mu kopię bez lokalizacji, a zapis by ją wymazał.</string>
+    <string name="metadata_nothing_to_revert">Nie ma nic do przywrócenia.</string>
+    <string name="metadata_interrupted">Wcześniejsza zmiana tego zdjęcia nie została dokończona. Jego oryginał jest zachowany: przywróć go, zanim zmienisz cokolwiek innego.</string>
+    <string name="metadata_failed">Zmiana się nie powiodła. Zdjęcie przywrócono dokładnie do stanu sprzed zmiany.</string>
+    <string name="metadata_restore_file">Przywróć oryginalny plik</string>
+    <string name="info_albums">W albumach</string>
+    <string name="info_pets">Zwierzęta</string>
+    <string name="info_shows">Może przedstawiać</string>
+    <string name="pet_dog">Pies</string>
+    <string name="pet_cat">Kot</string>
+    <string name="info_album">Album urządzenia</string>
+    <string name="label_landscape">Krajobraz</string>
+    <string name="label_beach">Plażę</string>
+    <string name="label_sea">Morze</string>
+    <string name="label_mountain">Górę</string>
+    <string name="label_sunset">Zachód słońca</string>
+    <string name="label_snow">Śnieg</string>
+    <string name="label_city">Miasto</string>
+    <string name="label_building">Budynek</string>
+    <string name="label_street">Ulicę</string>
+    <string name="label_woods">Las</string>
+    <string name="label_flower">Kwiat</string>
+    <string name="label_sky">Niebo</string>
+    <string name="label_person">Osobę</string>
+    <string name="label_group">Grupę osób</string>
+    <string name="label_food">Jedzenie</string>
+    <string name="label_dessert">Deser</string>
+    <string name="label_drink">Napój</string>
+    <string name="label_car">Samochód</string>
+    <string name="label_bicycle">Rower</string>
+    <string name="label_airplane">Samolot</string>
+    <string name="label_boat">Łódź</string>
+    <string name="label_bird">Ptaka</string>
+    <string name="label_horse">Konia</string>
+    <string name="label_interior">Pomieszczenie</string>
+    <string name="label_night">Noc</string>
+    <string name="label_party">Przyjęcie</string>
+    <string name="label_sport">Wydarzenie sportowe</string>
+    <string name="label_animal">Zwierzę</string>
+
+    <!-- Backup to your own server -->
+    <string name="backup_title">Kopia zapasowa na własnym serwerze</string>
+    <string name="backup_intro">Kopiuje Twoje zdjęcia i filmy na serwer, który sam prowadzisz, przez szyfrowane połączenie. Nic nie opuszcza tego telefonu, dopóki nie włączysz kopii zapasowej, dane trafiają tylko na serwer podany poniżej, a eikon nigdy niczego na nim nie usuwa ani nie zmienia. Hasło lub klucz jest przechowywane w formie zaszyfrowanej w Android Keystore.</string>
+    <string name="backup_kind_immich">Immich (to także to, co instaluje Umbrel)</string>
+    <string name="backup_kind_nextcloud">Nextcloud lub dowolny serwer WebDAV</string>
+    <string name="backup_address">Adres serwera (https://…)</string>
+    <string name="backup_username">Nazwa użytkownika</string>
+    <string name="backup_folder">Folder na serwerze</string>
+    <string name="backup_api_key">Klucz API</string>
+    <string name="backup_app_password">Hasło aplikacji</string>
+    <string name="backup_secret_saved">Zapisano. Zostaw puste, aby je zachować</string>
+    <string name="backup_help_immich">W Immich: Ustawienia konta, Klucze API, Nowy klucz API. Wymagane uprawnienie to asset.upload.</string>
+    <string name="backup_help_nextcloud">W Nextcloud: Ustawienia osobiste, Bezpieczeństwo, Urządzenia i sesje, utwórz nowe hasło aplikacji. Użyj go zamiast hasła logowania.</string>
+    <string name="backup_save_test">Zapisz i przetestuj połączenie</string>
+    <string name="backup_connected">Połączono z %1$s.</string>
+    <string name="backup_failed">Nie udało się połączyć: %1$s</string>
+    <string name="backup_certificate_declined">Certyfikatowi nie zaufano, więc nic nie zostało wysłane i nic nie zostanie.</string>
+    <string name="backup_certificate_title">Certyfikat tego serwera nie pochodzi od urzędu, któremu ufa Twój telefon</string>
+    <string name="backup_certificate_body">%1$s przedstawił poniższy certyfikat. Porównaj jego odcisk z tym, który pokazuje Twój serwer (na przykład poleceniem: openssl x509 -noout -fingerprint -sha256). Zaufaj mu tylko wtedy, gdy są identyczne: od tej chwili ten jeden certyfikat, i żaden inny, jest akceptowany dla tego serwera.</string>
+    <string name="backup_certificate_subject">Wystawiony dla: %1$s</string>
+    <string name="backup_certificate_expires">Ważny do %1$s</string>
+    <string name="backup_certificate_self_signed">Jest podpisany przez siebie samego, jak zwykle certyfikat serwera domowego.</string>
+    <string name="backup_certificate_trust">Zaufaj temu certyfikatowi</string>
+    <string name="backup_enable">Twórz kopię zapasową moich zdjęć i filmów</string>
+    <string name="backup_test_first">Najpierw zapisz i przetestuj połączenie.</string>
+    <string name="backup_wifi_only">Tylko przez Wi-Fi</string>
+    <string name="backup_only_charging">Tylko podczas ładowania</string>
+    <string name="backup_videos">Uwzględnij filmy</string>
+    <string name="backup_hidden">Uwzględnij ukryte zdjęcia</string>
+    <string name="backup_hidden_note">Ukryte zdjęcia również zostaną wysłane na Twój serwer, gdzie są tak samo widoczne jak wszystko inne.</string>
+    <string name="backup_confirm_title">Rozpocząć kopię zapasową?</string>
+    <plurals name="backup_confirm_body">
+        <item quantity="one">%1$d zdjęcie lub film zostanie skopiowany na %2$s, po trochu, gdy telefon będzie w sieci, na którą zezwoliłeś. Na telefonie ani na serwerze nic nie jest usuwane.</item>
+        <item quantity="few">%1$d zdjęcia i filmy zostaną skopiowane na %2$s, po trochu, gdy telefon będzie w sieci, na którą zezwoliłeś. Na telefonie ani na serwerze nic nie jest usuwane.</item>
+        <item quantity="many">%1$d zdjęć i filmów zostanie skopiowanych na %2$s, po trochu, gdy telefon będzie w sieci, na którą zezwoliłeś. Na telefonie ani na serwerze nic nie jest usuwane.</item>
+        <item quantity="other">%1$d zdjęcia i filmu zostanie skopiowanych na %2$s, po trochu, gdy telefon będzie w sieci, na którą zezwoliłeś. Na telefonie ani na serwerze nic nie jest usuwane.</item>
+    </plurals>
+    <string name="backup_confirm_start">Rozpocznij</string>
+    <string name="backup_location_note">Android ukrywa, gdzie zrobiono zdjęcia, przed aplikacjami bez uprawnienia do lokalizacji zdjęć, więc kopie na Twoim serwerze nie miałyby lokalizacji.</string>
+    <string name="backup_progress">Skopiowano: %1$,d z %2$,d</string>
+    <plurals name="backup_refused">
+        <item quantity="one">Serwer odrzucił %1$d zdjęcie i nie będzie ono ponawiane, dopóki o to nie poprosisz.</item>
+        <item quantity="few">Serwer odrzucił %1$d zdjęcia i nie będą one ponawiane, dopóki o to nie poprosisz.</item>
+        <item quantity="many">Serwer odrzucił %1$d zdjęć i nie będą one ponawiane, dopóki o to nie poprosisz.</item>
+        <item quantity="other">Serwer odrzucił %1$d zdjęcia i nie będą one ponawiane, dopóki o to nie poprosisz.</item>
+    </plurals>
+    <string name="backup_running">Trwa tworzenie kopii zapasowej…</string>
+    <string name="backup_idle">Czekam na odpowiedni moment (sieć, na którą zezwoliłeś, bateria nie jest słaba).</string>
+    <string name="backup_last_run">Ostatnie uruchomienie %1$s. Wysłano: %2$d. Już były: %3$d. Odrzucono: %4$d.</string>
+    <string name="backup_stopped">Zatrzymano, ponieważ %1$s</string>
+    <string name="backup_stop_power_save">włączone jest Oszczędzanie baterii.</string>
+    <string name="backup_stop_thermal">telefon był zbyt gorący.</string>
+    <string name="backup_stop_unreachable">serwer był nieosiągalny lub zajęty. Spróbuje ponownie.</string>
+    <string name="backup_stop_unauthorized">serwer nie zaakceptował klucza ani hasła.</string>
+    <string name="backup_stop_untrusted">certyfikat serwera nie jest jednym z tych, którym zaufałeś.</string>
+    <string name="backup_stop_misconfigured">adres nie pasuje do tego rodzaju serwera.</string>
+    <string name="backup_stop_refusals">serwer odrzucił wiele plików z rzędu, co wskazuje na limit serwera, a nie na problem ze zdjęciami.</string>
+    <string name="backup_now">Utwórz kopię teraz</string>
+    <string name="backup_retry_refused">Spróbuj ponownie odrzucone</string>
+
+    <!-- Network consent -->
+    <string name="network_allow">Zezwól eikon na korzystanie z internetu</string>
+    <string name="network_allow_note">Wyłączone, dopóki tego nie włączysz. eikon używa sieci tylko do kopiowania Twoich zdjęć na serwer poniżej i tylko po tym, jak skonfigurujesz serwer i włączysz kopię zapasową. Gdy to jest wyłączone, nic nie może się nigdzie połączyć.</string>
+    <string name="settings_privacy_network">eikon może łączyć się z internetem tylko w jednym celu: opcjonalnej kopii zapasowej Twoich zdjęć na serwerze, który sam prowadzisz. Jest ona wyłączona, dopóki na nią nie zezwolisz (Ustawienia, Kopia zapasowa) i nie skonfigurujesz serwera. Bez analityki, bez reklam, bez kont, bez usług Google i bez naszej chmury: żadnej nie ma.</string>
+
+    <!-- First-run screens -->
+    <string name="onboarding_intro_title">Twoje zdjęcia, na Twoim telefonie</string>
+    <string name="onboarding_intro_body">eikon to galeria zdjęć i filmów na Androida. Pokazuje obrazy, które telefon już przechowuje, znajduje je według daty, miejsca, osób lub tego, co przedstawiają, i edytuje je bez dotykania oryginałów.</string>
+    <string name="onboarding_point_local">Wszystko zostaje na tym urządzeniu. Bez konta, bez analityki, bez reklam.</string>
+    <string name="onboarding_point_independent">Nie polega na niczym spoza telefonu: bez usług Google, bez chmury, bez serwerów osób trzecich.</string>
+    <string name="onboarding_point_yours">Jeśli chcesz kopię zapasową, trafia ona tylko na serwer, który sam prowadzisz, i tylko wtedy, gdy ją skonfigurujesz.</string>
+    <string name="onboarding_next">Dalej</string>
+    <string name="onboarding_start">Zaczynamy</string>
+    <string name="onboarding_page">Strona %1$d z %2$d</string>
+    <string name="onboarding_permissions_title">O co prosi eikon i dlaczego</string>
+    <string name="onboarding_permissions_intro">Potrzebne jest tylko pierwsze. Każde z nich możesz później zmienić w Ustawieniach lub w ustawieniach telefonu.</string>
+    <string name="onboarding_perm_media_title">Zdjęcia i filmy</string>
+    <string name="onboarding_perm_media_body">Aby eikon mógł pokazywać Twoją bibliotekę. Odczytuje pliki tam, gdzie Android już je przechowuje, i nigdzie ich nie kopiuje. Jeśli wolisz, możesz zezwolić tylko na niektóre zdjęcia.</string>
+    <string name="onboarding_perm_location_title">Lokalizacja zdjęć (opcjonalnie)</string>
+    <string name="onboarding_perm_location_body">Android ukrywa przed aplikacjami, gdzie zrobiono zdjęcie, chyba że na to zezwolisz. eikon używa tego do pokazania miejsca zdjęcia na mapie offline i do wyszukiwania według miejsca. Miejsca są ustalane na telefonie: żadna pozycja nigdy nie jest nigdzie wysyłana.</string>
+    <string name="onboarding_perm_network_title">Internet (opcjonalnie)</string>
+    <string name="onboarding_perm_network_body">Używany do jednej rzeczy: kopiowania Twoich zdjęć na serwer, który sam prowadzisz (Immich, Nextcloud), jeśli kiedyś go skonfigurujesz. W przeciwnym razie eikon nigdy z niczym się nie łączy. Jest wyłączony, dopóki nie włączysz go tutaj, a w każdej chwili możesz go ponownie wyłączyć w Ustawieniach.</string>
+    <string name="onboarding_allow">Zezwól</string>
+    <string name="onboarding_allowed">Dozwolone</string>
+    <string name="onboarding_promise">Nic tutaj nie zależy od niczego spoza Twojego telefonu: bez usług Google, bez kont, bez analityki. Twoje zdjęcia zostają na tym urządzeniu lub, jeśli tak wybierzesz, trafiają na Twój własny serwer.</string>
+
+    <!-- Support -->
+    <string name="support_title">Wsparcie</string>
+    <string name="support_body">eikon jest darmowy, nie ma reklam i Cię nie śledzi. Jeśli Ci się podoba, możesz wysłać kilka satoshi przez sieć Lightning.</string>
+    <string name="support_button">Wesprzyj przez Lightning</string>
+    <string name="support_copied">Nie znaleziono portfela Lightning — skopiowano adres: %1$s</string>
+
+    <!-- Analyze now -->
+    <string name="analyze_now_running">Analizuję…</string>
+    <string name="analyze_now_hint">Rusza od razu, tylko na tym telefonie, nawet przy Oszczędzaniu baterii.</string>
+    <string name="analyze_now_hint_off">Najpierw włącz powyżej co najmniej jeden krok.</string>
+    <string name="analyze_now_hint_paused">Analiza jest wstrzymana: wyłącz wstrzymanie, aby analizować teraz.</string>
+
+    <!-- Pictures from other apps -->
+    <string name="viewer_open_in_library">Otwórz w bibliotece</string>
+</resources>

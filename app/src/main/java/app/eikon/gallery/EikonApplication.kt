@@ -4,7 +4,7 @@ import android.app.Application
 import androidx.hilt.work.HiltWorkerFactory
 import androidx.work.Configuration
 import app.eikon.gallery.core.di.ApplicationScope
-import app.eikon.gallery.data.backup.BackupService
+import app.eikon.gallery.data.backup.HomeServerBackup
 import app.eikon.gallery.data.edit.SharedFiles
 import app.eikon.gallery.data.indexing.IndexingScheduler
 import app.eikon.gallery.core.image.MediaThumbnailFetcher
@@ -30,7 +30,7 @@ class EikonApplication : Application(), SingletonImageLoader.Factory, Configurat
     lateinit var indexingScheduler: IndexingScheduler
 
     @Inject
-    lateinit var backup: BackupService
+    lateinit var backup: HomeServerBackup
 
     @Inject
     @ApplicationScope

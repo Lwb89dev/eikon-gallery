@@ -1,0 +1,728 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Library -->
+    <string name="library_title">Librerija</string>
+    <string name="today">Illum</string>
+    <string name="yesterday">Il-bieraħ</string>
+    <string name="empty_library">Għad m’hemm l-ebda ritratt jew vidjo</string>
+    <string name="empty_filter">L-ebda ħaġa ma taqbel ma’ dan il-filtru</string>
+    <string name="empty_filter_clear">Uri kollox</string>
+    <string name="sync_progress">Qed titgħabba l-librerija: %1$,d / %2$,d</string>
+    <string name="sync_failed">Ma setgħetx tiġi aġġornata l-librerija</string>
+    <string name="sync_retry">Erġa’ pprova</string>
+    <string name="scrubber_description">Skrollja fil-librerija skont id-data</string>
+
+    <!-- Permissions -->
+    <string name="permission_title">Ir-ritratti tiegħek jibqgħu fuq l-apparat tiegħek</string>
+    <string name="permission_body">eikon jeħtieġ aċċess għar-ritratti u l-vidjows tiegħek biex juri. Jibqgħu fuq l-apparat tiegħek: xejn ma jittella’, sakemm ma tissettjax backup fuq server tiegħek.</string>
+    <string name="permission_grant">Ippermetti l-aċċess</string>
+    <string name="permission_denied">L-aċċess ġie rrifjutat. Tista’ tippermettih fis-settings tas-sistema.</string>
+    <string name="permission_open_settings">Iftaħ is-settings</string>
+    <string name="limited_banner">Qed jintwerew biss ir-ritratti li għażilt</string>
+    <string name="limited_select_more">Agħżel aktar</string>
+    <string name="limited_allow_all">Ippermetti kollha</string>
+
+    <!-- Menus and filters -->
+    <string name="menu_filter">Iffiltra</string>
+    <string name="menu_sort">Irranġa</string>
+    <string name="menu_settings">Settings</string>
+    <string name="menu_more">Aktar għażliet</string>
+    <string name="filter_all">Kollha</string>
+    <string name="filter_photos">Ritratti</string>
+    <string name="filter_videos">Vidjows</string>
+    <string name="filter_favorites">Favoriti</string>
+    <string name="filter_screenshots">Screenshots</string>
+    <string name="filter_screen_recordings">Reġistrazzjonijiet tal-iskrin</string>
+    <string name="filter_panoramas">Panorami</string>
+    <string name="filter_raw">RAW</string>
+    <string name="filter_clear">Neħħi l-filtru</string>
+    <string name="sort_by_date_taken">Data tal-ġbir</string>
+    <string name="sort_by_date_added">Data tal-żieda</string>
+    <string name="sort_newest_first">L-aktar ġodda l-ewwel</string>
+    <string name="sort_oldest_first">L-aktar qodma l-ewwel</string>
+
+    <!-- Selection and actions -->
+    <plurals name="selected_count">
+        <item quantity="one">%d magħżul</item>
+        <item quantity="two">%d magħżulin</item>
+        <item quantity="few">%d magħżulin</item>
+        <item quantity="many">%d magħżul</item>
+        <item quantity="other">%d magħżul</item>
+    </plurals>
+    <string name="action_share">Aqsam</string>
+    <string name="action_favorite">Żid mal-favoriti</string>
+    <string name="action_unfavorite">Neħħi mill-favoriti</string>
+    <string name="action_delete">Ħassar</string>
+    <string name="action_info">Informazzjoni</string>
+    <string name="action_back">Lura</string>
+    <string name="action_clear_selection">Neħħi l-għażla</string>
+    <string name="action_select">Agħżel</string>
+    <string name="action_failed">Xi ħaġa marret ħażin</string>
+    <plurals name="moved_to_trash">
+        <item quantity="one">%d element tqiegħed fiż-żibel. Android iżommu għal 30 jum.</item>
+        <item quantity="two">%d elementi tqiegħdu fiż-żibel. Android iżommhom għal 30 jum.</item>
+        <item quantity="few">%d elementi tqiegħdu fiż-żibel. Android iżommhom għal 30 jum.</item>
+        <item quantity="many">%d element tqiegħdu fiż-żibel. Android iżommhom għal 30 jum.</item>
+        <item quantity="other">%d element tqiegħdu fiż-żibel. Android iżommhom għal 30 jum.</item>
+    </plurals>
+
+    <!-- Accessibility -->
+    <string name="cd_photo">Ritratt, %1$s</string>
+    <string name="cd_video">Vidjo, %1$s, %2$s</string>
+    <string name="cd_edited_badge">Editjat</string>
+    <string name="cd_favorite_badge">Favorit</string>
+    <string name="viewer_position">%1$d minn %2$d</string>
+
+    <!-- Video -->
+    <string name="video_play">Ħaddem</string>
+    <string name="video_pause">Waqqaf</string>
+    <string name="video_mute">Skiet</string>
+    <string name="video_unmute">Ħalli l-ħoss</string>
+    <string name="video_seek">Mexxi</string>
+
+    <!-- Info panel -->
+    <string name="info_title">Informazzjoni</string>
+    <string name="info_loading">Qed jinqraw id-dettalji…</string>
+    <string name="info_error">Ma setgħux jinqraw id-dettalji ta’ dan il-fajl</string>
+    <string name="info_section_file">Fajl</string>
+    <string name="info_section_camera">Kamera</string>
+    <string name="info_section_video">Vidjo</string>
+    <string name="info_name">Isem</string>
+    <string name="info_type">Tip</string>
+    <string name="info_folder">Folder</string>
+    <string name="info_resolution">Riżoluzzjoni</string>
+    <string name="info_megapixels">Megapixels</string>
+    <string name="info_size">Daqs</string>
+    <string name="info_date">Data</string>
+    <string name="info_modified">Modifikat</string>
+    <string name="info_color_profile">Profil tal-kulur</string>
+    <string name="info_location">Post</string>
+    <string name="info_location_none">M’hemm l-ebda post salvat f’dan il-fajl</string>
+    <string name="info_location_hidden">Android jaħbi l-postijiet tar-ritratti mill-applikazzjonijiet sakemm ma tippermettix</string>
+    <string name="info_location_allow">Ippermetti</string>
+    <string name="info_location_open">Iftaħ f’applikazzjoni tal-mapep</string>
+    <string name="info_camera">Apparat</string>
+    <string name="info_lens">Lenti</string>
+    <string name="info_focal_length">Tul fokali</string>
+    <string name="info_aperture">Apertura</string>
+    <string name="info_shutter">Veloċità tax-shutter</string>
+    <string name="info_iso">Sensittività</string>
+    <string name="info_exposure_bias">Korrezzjoni tal-espożizzjoni</string>
+    <string name="info_flash">Flash</string>
+    <string name="info_flash_fired">Ħareġ</string>
+    <string name="info_flash_off">Ma ħarġux</string>
+    <string name="info_orientation">Orjentazzjoni</string>
+    <string name="info_software">Software</string>
+    <string name="info_duration">Tul</string>
+    <string name="info_frame_rate">Rata tal-frejms</string>
+    <string name="info_video_codec">Kodek tal-vidjo</string>
+    <string name="info_audio_codec">Kodek tal-awdjo</string>
+    <string name="info_bitrate">Bitrate</string>
+    <string name="info_dynamic_range">Firxa dinamika</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Settings</string>
+    <string name="settings_appearance">Dehra</string>
+    <string name="theme_system">Segwi s-sistema</string>
+    <string name="theme_light">Ċar</string>
+    <string name="theme_dark">Skur</string>
+    <string name="settings_privacy">Privatezza</string>
+    <string name="settings_privacy_body">eikon jaħdem fuq l-apparat tiegħek. M’għandux kont u l-ebda analitika tal-użu, u d-data tiegħu hija esklużà mill-backups ta’ Android.\n\nIr-ritratti tiegħek qatt ma jiġu kkupjati: eikon iżomm indiċi lokali bid-dettalji tal-fajls (isem, data, daqs, folder) biex il-librerija tinfetaħ immedjatament. Meta tħassar l-applikazzjoni, jitħassar ukoll l-indiċi.</string>
+    <string name="settings_storage_encrypted">Id-database tal-librerija (l-indiċi, l-albums, l-editjar, id-deskrizzjonijiet u dak li sabet l-analiżi) hija kriptata fuq dan it-telefon b’AES-256. Iċ-ċavetta tagħha tinżamm minn Android Keystore.</string>
+    <string name="settings_storage_not_encrypted">Id-database tal-librerija ma setgħetx tiġi kriptata (%1$s), għalhekk għadha maħżuna mhux kriptata. eikon jerġa’ jipprova kull darba li jibda.</string>
+    <string name="settings_storage_reset_title">Id-database tal-librerija nbdiet mill-ġdid</string>
+    <string name="settings_storage_reset">Iċ-ċavetta li kienet tipproteġi d-database tal-librerija ntilfet, għalhekk eikon kellu joħloq waħda ġdida. L-albums, l-editjar, id-deskrizzjonijiet u l-ismijiet li kont żidt intilfu. Ir-ritratti tiegħek mhumiex mittiefsa u l-analiżi terġa’ tibda.</string>
+    <string name="settings_storage_reset_ok">Fhimt</string>
+    <string name="settings_about">Dwar</string>
+    <string name="settings_licenses">Liċenzji open-source</string>
+    <string name="licenses_title">Liċenzji open-source</string>
+    <string name="settings_version">Verżjoni %1$s</string>
+
+    <!-- Navigation and collections -->
+    <string name="nav_library">Librerija</string>
+    <string name="nav_search">Fittex</string>
+    <string name="nav_collections">Kollezzjonijiet</string>
+    <string name="collections_title">Kollezzjonijiet</string>
+    <string name="section_people">Nies</string>
+    <string name="section_albums">Albums</string>
+    <string name="section_personal">Personali</string>
+    <string name="section_folders">Folders tal-apparat</string>
+    <string name="collection_favorites">Favoriti</string>
+    <string name="collection_recent">Miżjuda reċentement</string>
+    <string name="collection_videos">Vidjows</string>
+    <string name="collection_screenshots">Screenshots</string>
+    <string name="collection_screen_recordings">Reġistrazzjonijiet tal-iskrin</string>
+    <string name="collection_panoramas">Panorami</string>
+    <string name="collection_raw">RAW</string>
+    <string name="collection_trash">Imħassra reċentement</string>
+    <string name="collection_hidden">Moħbija</string>
+    <plurals name="items_count">
+        <item quantity="one">%d element</item>
+        <item quantity="two">%d elementi</item>
+        <item quantity="few">%d elementi</item>
+        <item quantity="many">%d element</item>
+        <item quantity="other">%d element</item>
+    </plurals>
+    <string name="empty_album">Dan l-album huwa vojt. Agħżel ritratti fil-librerija u agħżel “Żid mal-album”.</string>
+    <string name="empty_hidden">Xejn mhu moħbi</string>
+    <string name="empty_collection">Għad m’hemm xejn hawn</string>
+
+    <!-- Albums -->
+    <string name="album_new">Album ġdid</string>
+    <string name="album_name_hint">Isem l-album</string>
+    <string name="album_create">Oħloq</string>
+    <string name="album_rename">Biddel l-isem</string>
+    <string name="album_delete">Ħassar l-album</string>
+    <string name="album_delete_title">Tħassar dan l-album?</string>
+    <string name="album_delete_message">Jitħassar l-album biss. Ir-ritratti u l-vidjows fih jibqgħu fejn huma.</string>
+    <string name="album_move_earlier">Mexxi qabel</string>
+    <string name="album_move_later">Mexxi wara</string>
+    <string name="action_add_to_album">Żid mal-album</string>
+    <string name="action_remove_from_album">Neħħi mill-album</string>
+    <string name="action_hide">Aħbi</string>
+    <string name="action_unhide">Uri</string>
+    <string name="action_cancel">Ikkanċella</string>
+    <string name="action_save">Salva</string>
+    <plurals name="added_to_album">
+        <item quantity="one">%1$d element żdied ma’ “%2$s”</item>
+        <item quantity="two">%1$d elementi żdiedu ma’ “%2$s”</item>
+        <item quantity="few">%1$d elementi żdiedu ma’ “%2$s”</item>
+        <item quantity="many">%1$d element żdiedu ma’ “%2$s”</item>
+        <item quantity="other">%1$d element żdiedu ma’ “%2$s”</item>
+    </plurals>
+    <plurals name="removed_from_album">
+        <item quantity="one">%d element tneħħa mill-album</item>
+        <item quantity="two">%d elementi tneħħew mill-album</item>
+        <item quantity="few">%d elementi tneħħew mill-album</item>
+        <item quantity="many">%d element tneħħew mill-album</item>
+        <item quantity="other">%d element tneħħew mill-album</item>
+    </plurals>
+    <plurals name="moved_to_hidden">
+        <item quantity="one">%d element inħbi. Sibu f’Kollezzjonijiet, Moħbija.</item>
+        <item quantity="two">%d elementi nħbew. Sibhom f’Kollezzjonijiet, Moħbija.</item>
+        <item quantity="few">%d elementi nħbew. Sibhom f’Kollezzjonijiet, Moħbija.</item>
+        <item quantity="many">%d element inħbew. Sibhom f’Kollezzjonijiet, Moħbija.</item>
+        <item quantity="other">%d element inħbew. Sibhom f’Kollezzjonijiet, Moħbija.</item>
+    </plurals>
+    <plurals name="unhidden">
+        <item quantity="one">%d element jidher mill-ġdid</item>
+        <item quantity="two">%d elementi jidhru mill-ġdid</item>
+        <item quantity="few">%d elementi jidhru mill-ġdid</item>
+        <item quantity="many">%d element jidhru mill-ġdid</item>
+        <item quantity="other">%d element jidhru mill-ġdid</item>
+    </plurals>
+
+    <!-- Filters -->
+    <string name="filter_type_title">Tip</string>
+    <string name="filter_kind_title">Ġeneru</string>
+    <string name="filter_any">Kwalunkwe</string>
+    <string name="filter_favorites_only">Favoriti biss</string>
+    <string name="filter_edited">Editjati</string>
+    <string name="share_preparing">Qed jitħejjew ir-ritratti editjati biex jinqasmu</string>
+    <string name="filter_edited_only">Editjati biss</string>
+    <string name="filter_clear_all">Neħħi l-filtri</string>
+
+    <!-- Locks -->
+    <string name="locked_title">Imsakkar</string>
+    <string name="locked_body">Uża d-marka tas-swaba’, wiċċek jew is-sakra tal-iskrin biex tiftaħ dan.</string>
+    <string name="locked_unlock">Iftaħ is-sakra</string>
+    <string name="auth_subtitle">Ikkonferma li int int</string>
+    <string name="auth_title_hidden">Iftaħ “Moħbija”</string>
+    <string name="auth_title_trash">Iftaħ “Imħassra reċentement”</string>
+    <string name="auth_unavailable">L-awtentikazzjoni mhix disponibbli issa. Erġa’ pprova wara ftit.</string>
+    <string name="no_device_lock_notice">Dan it-telefon m’għandux sakra tal-iskrin, għalhekk “Moħbija” mhix protetta. Issettja waħda fis-settings tas-sistema.</string>
+
+    <!-- Recently deleted -->
+    <string name="trash_info">L-elementi jitħassru għal dejjem wara madwar 30 jum.</string>
+    <string name="trash_empty">Xejn ma tħassar reċentement</string>
+    <string name="trash_restore">Irkupra</string>
+    <string name="trash_delete_forever">Ħassar għal dejjem</string>
+    <plurals name="days_left_short">
+        <item quantity="one">%d j</item>
+        <item quantity="two">%d j</item>
+        <item quantity="few">%d j</item>
+        <item quantity="many">%d j</item>
+        <item quantity="other">%d j</item>
+    </plurals>
+    <plurals name="trash_restored">
+        <item quantity="one">%d element ġie rkuprat</item>
+        <item quantity="two">%d elementi ġew rkuprati</item>
+        <item quantity="few">%d elementi ġew rkuprati</item>
+        <item quantity="many">%d element ġew rkuprati</item>
+        <item quantity="other">%d element ġew rkuprati</item>
+    </plurals>
+    <plurals name="trash_deleted">
+        <item quantity="one">%d element tħassar għal dejjem</item>
+        <item quantity="two">%d elementi tħassru għal dejjem</item>
+        <item quantity="few">%d elementi tħassru għal dejjem</item>
+        <item quantity="many">%d element tħassru għal dejjem</item>
+        <item quantity="other">%d element tħassru għal dejjem</item>
+    </plurals>
+
+    <!-- Settings: security -->
+    <string name="settings_security">Sigurtà</string>
+    <string name="setting_lock_hidden">Itlob awtentikazzjoni għal “Moħbija”</string>
+    <string name="setting_lock_trash">Itlob awtentikazzjoni għal “Imħassra reċentement”</string>
+    <string name="setting_show_hidden">Uri “Moħbija” fil-Kollezzjonijiet</string>
+    <string name="setting_secure_screens">Aħbi eikon fl-applikazzjonijiet reċenti u imblokka s-screenshots</string>
+    <string name="settings_security_body">L-elementi moħbija jitħallew barra mil-librerija, mill-kollezzjonijiet u mill-fittxa, u biex tiftaħ “Moħbija” jintalbu d-marka tas-swaba’, wiċċek jew is-sakra tal-iskrin. Il-fajls infushom mhumiex kriptati u jibqgħu fl-ħażna normali tat-telefon tiegħek, fejn applikazzjonijiet oħra b’aċċess għar-ritratti xorta jistgħu jarawhom.</string>
+
+    <!-- Search -->
+    <string name="search_placeholder">Data, post, test, isem tal-fajl</string>
+    <string name="search_clear">Neħħi l-fittxa</string>
+    <string name="search_no_results">L-ebda ritratt ma jaqbel</string>
+    <string name="search_hint_title">Fittex fil-librerija tiegħek</string>
+    <string name="search_hint_body">Ipprova data (“August 2025”, “yesterday”), post (“Rome”, “Tuscany”), kelma li tidher f’ritratt jew fl-isem tal-fajl tiegħu, jew ġeneru (“videos”, “screenshots”, “favorites”).\n\nId-dati u l-ġeneri jinftiehmu bl-Ingliż u bit-Taljan. Il-postijiet, it-test fir-ritratti u dak li juru jinstabu wara li tkun ġiet imħaddma l-analiżi (Settings, Analiżi).</string>
+    <string name="search_analysis_off">Il-fittxa skont il-post, it-test fir-ritratti u dak li juru hija mitfija. Tista’ ddawwalha f’Settings, Analiżi.</string>
+    <string name="search_analysis_note">Ir-ritratti għadhom qed jiġu analizzati fl-isfond (%1$d %%). Xi riżultati jistgħu jonqsu.</string>
+
+    <!-- Settings: analysis -->
+    <string name="settings_analysis">Analiżi</string>
+    <string name="analysis_places_progress">Postijiet: %1$,d minn %2$,d</string>
+    <string name="analysis_semantic_progress">Dak li juru r-ritratti: %1$,d minn %2$,d</string>
+    <string name="analysis_semantic_unavailable">Il-mudell li jagħraf dak li juru r-ritratti ma setgħax jitgħabba, għalhekk dan il-pass mhux qed jaħdem.</string>
+    <string name="search_semantic_unavailable">Il-fittxa skont dak li juru r-ritratti mhix disponibbli issa (il-mudell ma setgħax jitgħabba). Ir-riżultati l-oħra għadhom jaħdmu.</string>
+    <string name="analysis_people_progress">Nies: %1$,d minn %2$,d</string>
+    <string name="analysis_people_unavailable">Il-mudelli li jsibu wċuħ ma setgħux jitgħabbew, għalhekk dan il-pass mhux qed jaħdem.</string>
+    <string name="analysis_duplicates_progress">Duplikati: %1$,d minn %2$,d</string>
+    <string name="analysis_text_progress">Test fir-ritratti: %1$,d minn %2$,d</string>
+    <string name="analysis_running">Qed janalizza issa…</string>
+    <string name="analysis_idle">Qed jistenna l-mument it-tajjeb (il-batterija mhix baxxa, l-iffrankar tal-batterija mitfi u, jekk għażilt hekk, qed jitgħabba)</string>
+    <string name="analysis_up_to_date">Kollox huwa analizzat</string>
+    <string name="setting_pause_analysis">Waqqaf l-analiżi</string>
+    <string name="setting_only_charging">Waqt it-tagħbija biss</string>
+    <string name="setting_analyze_places">Sib ritratti skont il-post</string>
+    <string name="setting_analyze_semantic">Sib ritratti skont dak li juru</string>
+    <string name="setting_analyze_people">Sib nies fir-ritratti</string>
+    <string name="setting_analyze_people_note">Il-wċuħ jinstabu u jitqabblu fuq dan it-telefon biss. Xejn dwar wiċċ qatt ma jħalli t-telefon, u eikon qatt ma jipprova jagħraf lil ħadd: jiġbor biss wċuħ li jixbhu lil xulxin, u int tagħti l-ismijiet lill-gruppi.</string>
+    <string name="setting_analyze_duplicates">Sib ritratti duplikati</string>
+    <string name="setting_analyze_text">Sib test fir-ritratti</string>
+    <string name="analysis_location_permission">Android jaħbi mill-applikazzjonijiet fejn ittieħdu r-ritratti sakemm ma tippermettix.</string>
+    <string name="analysis_allow_locations">Ippermetti l-aċċess għall-postijiet tar-ritratti</string>
+    <string name="analyze_now">Analizza issa</string>
+    <string name="settings_analysis_body">L-analiżi taħdem fuq it-telefon tiegħek biss, fl-isfond, u tieqaf meta l-batterija tkun baxxa, l-iffrankar tal-batterija jkun mixgħul jew it-telefon jisħon (“Analizza issa” tkompli anke bl-iffrankar tal-batterija). Tiżżen il-post ta’ kull ritratt (determinat mingħajr konnessjoni, l-ebda post qatt ma jintbagħat imkien), deskrizzjoni numerika ta’ dak li juri r-ritratt (biex tkun tista’ tfittex, pereżempju, “kelb” jew “nżul ix-xemx”; mhix deskrizzjoni bil-kliem u ma tistax tinqara lura bħala immaġni) u kwalunkwe test li taqra fir-ritratt, biex il-Fittxa tkun tista’ ssibhom. Jekk iddawwal in-nies, tiżżen ukoll fejn hu kull wiċċ f’ritratt u deskrizzjoni numerika tiegħu, biss biex tiġbor wċuħ li jixbhu lil xulxin. Jekk iddawwal id-duplikati, tiżżen marka qasira ta’ kull ritratt u ta’ fajls bl-istess daqs, biss biex issib kopji. Li tagħraf dak li juru r-ritratti u taqra t-test huma proċessi bil-mod li jgħabbu ħafna l-proċessur, u għalhekk l-analiżi tistenna b’mod awtomatiku t-tagħbija.</string>
+
+    <!-- Info panel: derived data -->
+    <string name="info_place">L-eqreb post</string>
+    <string name="info_text_found">Test f’dan ir-ritratt</string>
+    <string name="info_text_copy">Ikkopja t-test</string>
+
+    <!-- People -->
+    <string name="collection_people">Nies</string>
+    <string name="people_title">Nies</string>
+    <string name="person_unnamed">Persuna mingħajr isem</string>
+    <string name="person_add_name">Żid isem</string>
+    <string name="person_rename">Agħti isem lil din il-persuna</string>
+    <string name="person_name_hint">Isem</string>
+    <string name="person_same_name_note">In-nies bl-istess isem jinġabru f’wieħed.</string>
+    <string name="person_favorite">Immarka bħala favorita</string>
+    <string name="person_unfavorite">Neħħi mill-favoriti</string>
+    <string name="person_hide">Aħbi din il-persuna</string>
+    <string name="person_unhide">Uri din il-persuna</string>
+    <string name="person_merge">Għaqqad ma’ persuna oħra…</string>
+    <string name="person_merge_title">Għaqqad ma’</string>
+    <string name="person_merge_empty">M’hemm ħadd ieħor biex tgħaqqad miegħu.</string>
+    <string name="person_not_this">Mhix din il-persuna</string>
+    <string name="person_remove_from_people">Mhuwiex wiċċ</string>
+    <string name="people_show_hidden">Uri n-nies moħbija (%1$d)</string>
+    <string name="people_hide_hidden">Aħbi n-nies moħbija</string>
+    <string name="people_empty_off">In-Nies huma mitfija. Dawwal “Sib nies fir-ritratti” f’Settings, Analiżi, u eikon jiġbor il-wċuħ li jsib. Kollox jibqa’ fuq dan it-telefon.</string>
+    <string name="people_empty_working">Għad ma nstabu l-ebda wċuħ (%1$d %% mir-ritratti tiegħek analizzati). L-analiżi taħdem fl-isfond waqt it-tagħbija.</string>
+    <string name="people_empty_done">Ma nstabu l-ebda wċuħ fir-ritratti tiegħek.</string>
+    <string name="people_go_settings">Iftaħ is-settings</string>
+    <string name="person_photos_empty">L-ebda ritratt.</string>
+    <plurals name="moved_to_new_person">
+        <item quantity="one">%d ritratt tmexxa lil persuna ġdida</item>
+        <item quantity="two">%d ritratti tmexxew lil persuna ġdida</item>
+        <item quantity="few">%d ritratti tmexxew lil persuna ġdida</item>
+        <item quantity="many">%d ritratt tmexxew lil persuna ġdida</item>
+        <item quantity="other">%d ritratt tmexxew lil persuna ġdida</item>
+    </plurals>
+    <plurals name="removed_from_people">
+        <item quantity="one">%d ritratt tneħħa min-Nies</item>
+        <item quantity="two">%d ritratti tneħħew min-Nies</item>
+        <item quantity="few">%d ritratti tneħħew min-Nies</item>
+        <item quantity="many">%d ritratt tneħħew min-Nies</item>
+        <item quantity="other">%d ritratt tneħħew min-Nies</item>
+    </plurals>
+    <string name="info_people">Nies</string>
+    <plurals name="info_people_unnamed_count">
+        <item quantity="one">%d mingħajr isem</item>
+        <item quantity="two">%d mingħajr isem</item>
+        <item quantity="few">%d mingħajr isem</item>
+        <item quantity="many">%d mingħajr isem</item>
+        <item quantity="other">%d mingħajr isem</item>
+    </plurals>
+
+    <string name="section_memories">Tifkiriet</string>
+    <string name="section_pets">Annimali domestiċi</string>
+    <string name="collection_dogs">Klieb</string>
+    <string name="collection_cats">Qtates</string>
+    <string name="empty_pets">Għad ma nstabu la klieb u lanqas qtates. L-annimali domestiċi jinstabu minn dak li juru r-ritratti: dawwal “Sib ritratti skont dak li juru” f’Settings, Analiżi, u stenna li jispiċċa.</string>
+
+    <!-- Places -->
+    <string name="places_title">Postijiet</string>
+    <string name="places_tab_list">Lista</string>
+    <string name="places_tab_map">Mappa</string>
+    <string name="place_unknown">Postijiet oħra</string>
+    <string name="place_near">Qrib %1$s</string>
+    <string name="places_expand">Uri</string>
+    <string name="places_collapse">Aħbi</string>
+    <string name="collection_places">Postijiet</string>
+    <string name="places_map_note">Kontorni tal-pajjiżi biss u ismijiet tal-bliet akbar: ma titniżżel l-ebda immaġni tal-mappa u l-ebda pożizzjoni ma tħalli qatt it-telefon. Agħfas b’żewġ swaba’ jew tafa darbtejn biex tiżżoomja, tafa marker biex tara r-ritratti tiegħu.</string>
+    <string name="places_map_description">Mappa ta’ fejn ittieħdu r-ritratti tiegħek, b’markers għal gruppi ta’ ritratti</string>
+    <string name="places_empty_off">Il-Postijiet huma mitfija. Dawwal “Sib ritratti skont il-post” f’Settings, Analiżi, u eikon jistabbilixxi mingħajr konnessjoni fejn ittieħdu r-ritratti tiegħek mid-data tal-GPS tagħhom.</string>
+    <string name="places_empty_working">Għad ma nstabu l-ebda postijiet (%1$d %% mir-ritratti tiegħek analizzati). L-analiżi taħdem fl-isfond waqt it-tagħbija.</string>
+    <string name="places_empty_done">L-ebda wieħed mir-ritratti tiegħek m’għandu pożizzjoni, jew eikon jista’ ma jkollux permess jaqra l-postijiet tar-ritratti (Settings, Analiżi).</string>
+    <string name="section_places">Postijiet u vjaġġi</string>
+
+    <!-- Trips -->
+    <string name="collection_trips">Vjaġġi</string>
+    <string name="trips_title">Vjaġġi</string>
+    <string name="trip_untitled">Vjaġġ</string>
+    <string name="trip_reason">Madwar %1$d km minn fejn jittieħdu l-biċċa l-kbira tar-ritratti tiegħek (qrib %2$s)</string>
+    <string name="trip_home_unknown">post mhux magħruf</string>
+    <plurals name="trip_summary_days">
+        <item quantity="one">%d jum</item>
+        <item quantity="two">%d jumejn</item>
+        <item quantity="few">%d jiem</item>
+        <item quantity="many">%d jum</item>
+        <item quantity="other">%d jum</item>
+    </plurals>
+    <string name="trips_empty">Ma nstab l-ebda vjaġġ. Vjaġġ huwa sensiela ta’ jiem, b’mill-inqas 10 ritratti, li tqattgħu mill-inqas 100 km ’il bogħod minn fejn jittieħdu l-biċċa l-kbira tar-ritratti tiegħek. Għal dan, eikon jeħtieġ il-pożizzjonijiet tar-ritratti: dawwal “Sib ritratti skont il-post” f’Settings, Analiżi.</string>
+
+    <!-- Duplicates and similar shots -->
+    <string name="section_cleanup">Tindif</string>
+    <string name="collection_duplicates">Duplikati</string>
+    <string name="collection_similar">Ritratti simili</string>
+    <string name="duplicates_title">Duplikati</string>
+    <string name="similar_title">Ritratti simili</string>
+    <string name="duplicates_note">eikon isibhom biss. Xejn ma jitneħħa sakemm ma tikkonfermax fid-dijalogu ta’ Android stess, u r-ritratti mneħħija jmorru f’“Imħassra reċentement”, fejn tista’ tirkuprahom. Għal kopji ta’ ritratt li żidt ma’ albums: il-kopja li żżomm tingħaqad ma’ dawk l-albums.</string>
+    <plurals name="duplicate_exact">
+        <item quantity="one">%d fajl identiku</item>
+        <item quantity="two">%d fajls identiċi</item>
+        <item quantity="few">%d fajls identiċi</item>
+        <item quantity="many">%d fajl identiku</item>
+        <item quantity="other">%d fajl identiku</item>
+    </plurals>
+    <plurals name="duplicate_visual">
+        <item quantity="one">%d kopja tal-istess immaġni</item>
+        <item quantity="two">%d kopji tal-istess immaġni</item>
+        <item quantity="few">%d kopji tal-istess immaġni</item>
+        <item quantity="many">%d kopja tal-istess immaġni</item>
+        <item quantity="other">%d kopja tal-istess immaġni</item>
+    </plurals>
+    <plurals name="similar_group">
+        <item quantity="one">%d ritratt</item>
+        <item quantity="two">%d ritratti simili</item>
+        <item quantity="few">%d ritratti simili</item>
+        <item quantity="many">%d ritratt simili</item>
+        <item quantity="other">%d ritratt simili</item>
+    </plurals>
+    <plurals name="duplicate_keep_best">
+        <item quantity="one">Żomm l-aħjar, mexxi %d għal “Imħassra reċentement”</item>
+        <item quantity="two">Żomm l-aħjar, mexxi %d għal “Imħassra reċentement”</item>
+        <item quantity="few">Żomm l-aħjar, mexxi %d għal “Imħassra reċentement”</item>
+        <item quantity="many">Żomm l-aħjar, mexxi %d għal “Imħassra reċentement”</item>
+        <item quantity="other">Żomm l-aħjar, mexxi %d għal “Imħassra reċentement”</item>
+    </plurals>
+    <plurals name="similar_trash_marked">
+        <item quantity="one">Mexxi %d għal “Imħassra reċentement”</item>
+        <item quantity="two">Mexxi %d għal “Imħassra reċentement”</item>
+        <item quantity="few">Mexxi %d għal “Imħassra reċentement”</item>
+        <item quantity="many">Mexxi %d għal “Imħassra reċentement”</item>
+        <item quantity="other">Mexxi %d għal “Imħassra reċentement”</item>
+    </plurals>
+    <string name="duplicate_best">L-aħjar</string>
+    <string name="duplicate_kept">Miżmum</string>
+    <string name="duplicate_marked">Se jitmexxa</string>
+    <string name="duplicate_dismiss">Dawn mhumiex duplikati</string>
+    <string name="similar_dismiss">Dawn mhumiex simili</string>
+    <string name="duplicates_empty_off">Id-Duplikati huma mitfija. Dawwal “Sib ritratti duplikati” f’Settings, Analiżi. eikon joħloq marki tar-ritratti tiegħek fuq dan it-telefon biss, mingħajr l-ebda mudell.</string>
+    <string name="similar_empty_off">Ir-Ritratti simili jeħtieġu “Sib ritratti skont dak li juru” f’Settings, Analiżi: jqabbel dak li juri kull ritratt, għal ritratti li ttieħdu fi żmien ġewwa żewġ minuti minn xulxin.</string>
+    <string name="duplicates_empty_working">Għad ma nstab xejn (%1$d %% analizzat). L-analiżi taħdem fl-isfond waqt it-tagħbija.</string>
+    <string name="duplicates_empty_done">Ma nstab l-ebda duplikat.</string>
+    <string name="similar_empty_done">Ma nstab l-ebda ritratt simili.</string>
+
+    <!-- Memories -->
+    <string name="collection_memories">Tifkiriet</string>
+    <string name="memories_title">Tifkiriet</string>
+    <string name="memory_on_this_day">F’dan il-jum</string>
+    <string name="memory_year_ago">Sena ilu</string>
+    <string name="memory_weekend_in">Tmiem il-ġimgħa f’%1$s</string>
+    <string name="memory_weekend">Tmiem il-ġimgħa barra</string>
+    <string name="memory_day_trip_to">Ġita ta’ jum f’%1$s</string>
+    <string name="memory_day_trip">Ġita ta’ jum</string>
+    <string name="memory_season">%1$s %2$d</string>
+    <string name="memory_person">%1$s, %2$d</string>
+    <string name="season_winter">Xitwa</string>
+    <string name="season_spring">Rebbiegħa</string>
+    <string name="season_summer">Sajf</string>
+    <string name="season_autumn">Ħarifa</string>
+    <string name="memory_hide">Aħbi din it-tifkira</string>
+    <string name="memory_show_fewer">Uri anqas bħal din</string>
+    <string name="memory_show_less_of">Uri anqas minn %1$s</string>
+    <string name="memory_exclude_date">Ħalli barra din id-data</string>
+    <string name="memory_all_photos">Ir-ritratti kollha</string>
+    <string name="memory_replay">Erġa’ ħaddem</string>
+    <string name="memory_reset">Ikkanċella l-għażliet tiegħi</string>
+    <string name="memory_done">Lest. Tista’ tikkanċella l-għażliet tiegħek mill-menu tat-Tifkiriet.</string>
+    <string name="memories_empty">Għad m’hemm l-ebda tifkiriet. eikon joħloqhom minn dati, vjaġġi, staġuni u n-nies li tajt isem: “F’dan il-jum”, “Sena ilu”, vjaġġi u tmiem il-ġimgħa barra, staġun, xi ħadd f’sena. Il-vjaġġi u t-tmiem il-ġimgħa jeħtieġu Postijiet, in-nies jeħtieġu Nies (Settings, Analiżi). Xejn ma jħalli t-telefon.</string>
+    <string name="memories_note">Maħluqa minn dati, postijiet u nies bl-isem b’regoli sempliċi; m’hemmx mużika, u r-ritratti jintgħażlu skont il-favoriti, id-daqs u l-wċuħ, mhux skont kemm jidhru sbieħ.</string>
+    <string name="memory_no_photos">Din it-tifkira m’għadha għandha l-ebda ritratt x’turi.</string>
+
+    <!-- Editing -->
+    <string name="action_edit">Editja</string>
+    <string name="edit_title">Editjar</string>
+    <string name="edit_done">Lest</string>
+    <string name="edit_original">Oriġinal</string>
+    <string name="edit_revert">Irritorna</string>
+    <string name="edit_revert_title">Terġa’ lura għall-oriġinal?</string>
+    <string name="edit_revert_message">Dan ineħħi l-aġġustamenti kollha, il-filtru u l-qtugħ minn dan l-editjar. Ir-ritratt oriġinali qatt ma nbidel. Agħfas Lest biex iżżomm ir-ritratt irritornat.</string>
+    <string name="edit_discard_title">Tarmi l-bidliet?</string>
+    <string name="edit_discard_message">Il-bidliet li għamilt f’dan l-editur jintilfu. Ir-ritratt jibqa’ kif kien.</string>
+    <string name="edit_discard">Armi</string>
+    <string name="edit_copy_edits">Ikkopja l-editjar</string>
+    <string name="edit_paste_edits">Waħħal l-editjar</string>
+    <string name="edit_save_copy">Salva kopja</string>
+    <string name="edit_copy_saved">Kopja ġiet salvata ħdejn l-oriġinal, li ma nbidilx.</string>
+    <string name="edit_copy_saved_no_details">Kopja ġiet salvata ħdejn l-oriġinal, li ma nbidilx. Id-dettalji tal-kamera ma setgħux jiġu kkupjati.</string>
+    <string name="edit_failed">L-editjar ma setgħax jiġi kkompletat. Ir-ritratt ma nbidilx.</string>
+    <string name="edited_badge">Editjat</string>
+    <string name="viewer_show_original">Uri l-oriġinal</string>
+    <string name="viewer_show_edited">Uri r-ritratt editjat</string>
+    <string name="tool_auto">Awto</string>
+    <string name="tool_light">Dawl</string>
+    <string name="tool_color">Kulur</string>
+    <string name="tool_detail">Dettall</string>
+    <string name="tool_filters">Filtri</string>
+    <string name="tool_crop">Aqta’</string>
+    <string name="adj_exposure">Espożizzjoni</string>
+    <string name="adj_brightness">Luminożità</string>
+    <string name="adj_contrast">Kuntrast</string>
+    <string name="adj_highlights">Partijiet ċari</string>
+    <string name="adj_shadows">Dellijiet</string>
+    <string name="adj_black_point">Punt iswed</string>
+    <string name="adj_saturation">Saturazzjoni</string>
+    <string name="adj_vibrance">Vivaċità</string>
+    <string name="adj_temperature">Sħana</string>
+    <string name="adj_tint">Tinta</string>
+    <string name="adj_sharpness">Ħruxija</string>
+    <string name="adj_vignette">Vinjett</string>
+    <string name="geo_straighten">Iddrittja</string>
+    <string name="geo_perspective_vertical">Perspettiva vertikali</string>
+    <string name="geo_perspective_horizontal">Perspettiva orizzontali</string>
+    <string name="filter_amount">Qawwa</string>
+    <string name="filter_name_none">Oriġinal</string>
+    <string name="filter_name_vivid">Ħajjaq</string>
+    <string name="filter_name_warm">Sħun</string>
+    <string name="filter_name_cool">Frisk</string>
+    <string name="filter_name_mono">Mono</string>
+    <string name="filter_name_noir">Noir</string>
+    <string name="filter_name_fade">Imċappas</string>
+    <string name="filter_name_chrome">Kromu</string>
+    <string name="filter_name_sepia">Seppja</string>
+    <string name="crop_rotate">Dawwar</string>
+    <string name="crop_flip">Aqleb</string>
+    <string name="shape_free">Ħieles</string>
+    <string name="shape_original">Oriġinal</string>
+    <string name="shape_square">1:1</string>
+    <string name="shape_4_3">4:3</string>
+    <string name="shape_3_2">3:2</string>
+    <string name="shape_16_9">16:9</string>
+    <string name="action_paste_edits">Waħħal l-editjar</string>
+    <string name="action_revert_edits">Neħħi l-editjar</string>
+    <plurals name="edits_pasted">
+        <item quantity="one">L-editjar applikat fuq %d ritratt</item>
+        <item quantity="two">L-editjar applikat fuq %d ritratti</item>
+        <item quantity="few">L-editjar applikat fuq %d ritratti</item>
+        <item quantity="many">L-editjar applikat fuq %d ritratt</item>
+        <item quantity="other">L-editjar applikat fuq %d ritratt</item>
+    </plurals>
+    <plurals name="edits_reverted">
+        <item quantity="one">L-editjar tneħħa minn %d ritratt; l-oriġinal huwa kif kien dejjem</item>
+        <item quantity="two">L-editjar tneħħa minn %d ritratti; l-oriġinali huma kif kienu dejjem</item>
+        <item quantity="few">L-editjar tneħħa minn %d ritratti; l-oriġinali huma kif kienu dejjem</item>
+        <item quantity="many">L-editjar tneħħa minn %d ritratt; l-oriġinali huma kif kienu dejjem</item>
+        <item quantity="other">L-editjar tneħħa minn %d ritratt; l-oriġinali huma kif kienu dejjem</item>
+    </plurals>
+
+    <!-- Accessibility -->
+    <string name="slider_reset">Irrisettja għan-newtrali</string>
+    <string name="crop_area">Żona tal-qtugħ, minn %1$d %% sa %2$d %% orizzontalment u minn %3$d %% sa %4$d %% vertikalment</string>
+    <string name="crop_action_smaller">Naqqas il-qtugħ</string>
+    <string name="crop_action_larger">Kabbar il-qtugħ</string>
+    <string name="crop_action_left">Mexxi l-qtugħ lejn ix-xellug</string>
+    <string name="crop_action_right">Mexxi l-qtugħ lejn il-lemin</string>
+    <string name="crop_action_up">Mexxi l-qtugħ ’il fuq</string>
+    <string name="crop_action_down">Mexxi l-qtugħ ’l isfel</string>
+    <string name="viewer_zoom_in">Kabbar iz-zoom</string>
+    <string name="viewer_zoom_out">Naqqas iz-zoom</string>
+    <string name="external_photo">Ritratt</string>
+    <string name="viewer_cannot_display">Dan ir-ritratt ma jistax jintwera.</string>
+
+    <!-- Info: caption, editing the date and location, what the photo shows -->
+    <string name="info_caption">Deskrizzjoni</string>
+    <string name="caption_add">Żid deskrizzjoni</string>
+    <string name="caption_edit">Editja d-deskrizzjoni</string>
+    <string name="caption_title">Deskrizzjoni</string>
+    <string name="caption_hint">Ftit kliem dwar dan ir-ritratt</string>
+    <string name="caption_note">Miżmuma f’eikon biss; il-fajl tar-ritratt ma jinbidilx. Il-Fittxa ssibha.</string>
+    <string name="date_change">Biddel id-data u l-ħin</string>
+    <string name="date_revert">Irkupra d-data oriġinali</string>
+    <string name="date_time_title">Ħin tal-jum</string>
+    <string name="action_next">Li jmiss</string>
+    <string name="location_title">Fejn ittieħed</string>
+    <string name="location_coordinates">Koordinati</string>
+    <string name="location_coordinates_note">Gradi deċimali, l-ewwel il-latitudni: 41.9028, 12.4964</string>
+    <string name="location_invalid">Mhix pożizzjoni: żewġ numri, latitudni bejn -90 u 90 u lonġitudni bejn -180 u 180</string>
+    <string name="location_city">Jew sib belt (taħdem mingħajr konnessjoni)</string>
+    <string name="location_remove">Neħħi l-post</string>
+    <string name="location_change">Biddel il-post</string>
+    <string name="location_revert">Irkupra l-post oriġinali</string>
+    <string name="info_map_description">Mappa żgħira li turi fejn ittieħed ir-ritratt</string>
+    <string name="metadata_done">Lest. Ir-ritratt issa jgħid dan; l-oriġinal inżamm biex tkun tista’ tirkuprah.</string>
+    <string name="metadata_not_writable">Dan it-tip ta’ fajl ma jistax jinbidel.</string>
+    <string name="metadata_needs_permission">Biex tibdel id-data jew il-post ta’ ritratt, eikon irid ikun jista’ jaqra fejn ittieħdu r-ritratti: mod ieħor Android juri kopja mingħajr il-post, u s-salvatur iħassarha.</string>
+    <string name="metadata_nothing_to_revert">M’hemm xejn x’tirkupra.</string>
+    <string name="metadata_interrupted">Bidla preċedenti f’dan ir-ritratt ma tlestitx. L-oriġinal tiegħu inżamm: irkuprah qabel ma tibdel xi ħaġa oħra.</string>
+    <string name="metadata_failed">Il-bidla ma ħadmitx. Ir-ritratt ġie rritornat eżattament kif kien.</string>
+    <string name="metadata_restore_file">Irkupra l-fajl oriġinali</string>
+    <string name="info_albums">Fl-albums</string>
+    <string name="info_pets">Annimali domestiċi</string>
+    <string name="info_shows">Jista’ juri</string>
+    <string name="pet_dog">Kelb</string>
+    <string name="pet_cat">Qattus</string>
+    <string name="info_album">Album tal-apparat</string>
+    <string name="label_landscape">Pajsaġġ</string>
+    <string name="label_beach">Bajja</string>
+    <string name="label_sea">Il-baħar</string>
+    <string name="label_mountain">Muntanja</string>
+    <string name="label_sunset">Nżul ix-xemx</string>
+    <string name="label_snow">Borra</string>
+    <string name="label_city">Belt</string>
+    <string name="label_building">Bini</string>
+    <string name="label_street">Triq</string>
+    <string name="label_woods">Foresta</string>
+    <string name="label_flower">Fjura</string>
+    <string name="label_sky">Is-sema</string>
+    <string name="label_person">Persuna</string>
+    <string name="label_group">Grupp ta’ nies</string>
+    <string name="label_food">Ikel</string>
+    <string name="label_dessert">Deżerta</string>
+    <string name="label_drink">Xarba</string>
+    <string name="label_car">Karozza</string>
+    <string name="label_bicycle">Rota</string>
+    <string name="label_airplane">Ajruplan</string>
+    <string name="label_boat">Dgħajsa</string>
+    <string name="label_bird">Għasfur</string>
+    <string name="label_horse">Żiemel</string>
+    <string name="label_interior">Kamra</string>
+    <string name="label_night">Lejl</string>
+    <string name="label_party">Festa</string>
+    <string name="label_sport">Avveniment sportiv</string>
+    <string name="label_animal">Annimal</string>
+
+    <!-- Backup to your own server -->
+    <string name="backup_title">Backup fuq is-server tiegħek</string>
+    <string name="backup_intro">Jikkopja r-ritratti u l-vidjows tiegħek fuq server li tmexxi int, permezz ta’ konnessjoni kriptata. Xejn ma jħalli dan it-telefon sakemm ma ddawwalx il-backup, kollox imur biss fuq is-server t’hawn taħt, u eikon qatt ma jħassar jew ibiddel xejn fuqu. Il-password jew iċ-ċavetta tinżamm kriptata f’Android Keystore.</string>
+    <string name="backup_kind_immich">Immich (ukoll dak li jinstalla Umbrel)</string>
+    <string name="backup_kind_nextcloud">Nextcloud, jew kwalunkwe server WebDAV</string>
+    <string name="backup_address">Indirizz tas-server (https://…)</string>
+    <string name="backup_username">Isem tal-login</string>
+    <string name="backup_folder">Folder fuq is-server</string>
+    <string name="backup_api_key">Ċavetta API</string>
+    <string name="backup_app_password">Password tal-applikazzjoni</string>
+    <string name="backup_secret_saved">Salvata. Ħalliha vojta biex iżżommha</string>
+    <string name="backup_help_immich">F’Immich: Settings tal-kont, Ċwievet API, Ċavetta API ġdida. Il-permess meħtieġ huwa asset.upload.</string>
+    <string name="backup_help_nextcloud">F’Nextcloud: Settings personali, Sigurtà, Apparati u sessjonijiet, oħloq password ġdida tal-applikazzjoni. Uża din, mhux il-password tal-login tiegħek.</string>
+    <string name="backup_save_test">Salva u ittestja l-konnessjoni</string>
+    <string name="backup_connected">Konness ma’ %1$s.</string>
+    <string name="backup_failed">Ma setgħetx issir konnessjoni: %1$s</string>
+    <string name="backup_certificate_declined">Iċ-ċertifikat ma ġiex fdat, għalhekk xejn ma ntbagħat u xejn ma se jintbagħat.</string>
+    <string name="backup_certificate_title">Iċ-ċertifikat ta’ dan is-server mhux minn awtorità li t-telefon tiegħek jafdaha</string>
+    <string name="backup_certificate_body">%1$s ippreżenta ċ-ċertifikat t’hawn taħt. Qabbel il-marka tiegħu ma’ dik li juri s-server tiegħek (pereżempju b’: openssl x509 -noout -fingerprint -sha256). Afdah biss jekk ikunu identiċi: minn dak il-mument, dan iċ-ċertifikat wieħed, u l-ebda ieħor, jiġi aċċettat għal dan is-server.</string>
+    <string name="backup_certificate_subject">Maħruġ lil: %1$s</string>
+    <string name="backup_certificate_expires">Validu sa %1$s</string>
+    <string name="backup_certificate_self_signed">Huwa ffirmat minnu nnifsu, kif normalment ikun iċ-ċertifikat ta’ server tad-dar.</string>
+    <string name="backup_certificate_trust">Afda dan iċ-ċertifikat</string>
+    <string name="backup_enable">Agħmel backup tar-ritratti u tal-vidjows tiegħi</string>
+    <string name="backup_test_first">L-ewwel salva u ittestja l-konnessjoni.</string>
+    <string name="backup_wifi_only">Fuq il-Wi-Fi biss</string>
+    <string name="backup_only_charging">Waqt it-tagħbija biss</string>
+    <string name="backup_videos">Inkludi l-vidjows</string>
+    <string name="backup_hidden">Inkludi r-ritratti moħbija</string>
+    <string name="backup_hidden_note">Ir-ritratti moħbija jintbagħtu wkoll fuq is-server tiegħek, fejn jidhru daqs kull ħaġa oħra hemm.</string>
+    <string name="backup_confirm_title">Tibda l-backup?</string>
+    <plurals name="backup_confirm_body">
+        <item quantity="one">%1$d ritratt jew vidjo se jiġi kkupjat fuq %2$s, ftit ftit, meta t-telefon ikun fuq in-netwerk li ppermettejt. Xejn ma jitħassar fuq it-telefon jew fuq is-server.</item>
+        <item quantity="two">%1$d ritratti u vidjows se jiġu kkupjati fuq %2$s, ftit ftit, meta t-telefon ikun fuq in-netwerk li ppermettejt. Xejn ma jitħassar fuq it-telefon jew fuq is-server.</item>
+        <item quantity="few">%1$d ritratti u vidjows se jiġu kkupjati fuq %2$s, ftit ftit, meta t-telefon ikun fuq in-netwerk li ppermettejt. Xejn ma jitħassar fuq it-telefon jew fuq is-server.</item>
+        <item quantity="many">%1$d ritratt u vidjo se jiġu kkupjati fuq %2$s, ftit ftit, meta t-telefon ikun fuq in-netwerk li ppermettejt. Xejn ma jitħassar fuq it-telefon jew fuq is-server.</item>
+        <item quantity="other">%1$d ritratt u vidjo se jiġu kkupjati fuq %2$s, ftit ftit, meta t-telefon ikun fuq in-netwerk li ppermettejt. Xejn ma jitħassar fuq it-telefon jew fuq is-server.</item>
+    </plurals>
+    <string name="backup_confirm_start">Ibda</string>
+    <string name="backup_location_note">Android jaħbi fejn ittieħdu r-ritratti mill-applikazzjonijiet li m’għandhomx il-permess tal-postijiet tar-ritratti, għalhekk il-kopji fuq is-server tiegħek ma jkollhomx post.</string>
+    <string name="backup_progress">Backup magħmul: %1$,d minn %2$,d</string>
+    <plurals name="backup_refused">
+        <item quantity="one">%1$d ritratt ġie rrifjutat mis-server u ma jiġix ipprovat mill-ġdid sakemm ma titlobx.</item>
+        <item quantity="two">%1$d ritratti ġew rrifjutati mis-server u ma jiġux ipprovati mill-ġdid sakemm ma titlobx.</item>
+        <item quantity="few">%1$d ritratti ġew rrifjutati mis-server u ma jiġux ipprovati mill-ġdid sakemm ma titlobx.</item>
+        <item quantity="many">%1$d ritratt ġew rrifjutati mis-server u ma jiġux ipprovati mill-ġdid sakemm ma titlobx.</item>
+        <item quantity="other">%1$d ritratt ġew rrifjutati mis-server u ma jiġux ipprovati mill-ġdid sakemm ma titlobx.</item>
+    </plurals>
+    <string name="backup_running">Qed isir il-backup…</string>
+    <string name="backup_idle">Qed jistenna l-mument it-tajjeb (in-netwerk li ppermettejt, il-batterija mhix baxxa).</string>
+    <string name="backup_last_run">L-aħħar tħaddim %1$s. Mibgħuta: %2$d. Kienu diġà hemm: %3$d. Rrifjutati: %4$d.</string>
+    <string name="backup_stopped">Waqaf għax %1$s</string>
+    <string name="backup_stop_power_save">l-iffrankar tal-batterija huwa mixgħul.</string>
+    <string name="backup_stop_thermal">it-telefon kien sħun wisq.</string>
+    <string name="backup_stop_unreachable">is-server ma setax jintlaħaq jew kien impenjat. Se jerġa’ jipprova.</string>
+    <string name="backup_stop_unauthorized">is-server ma aċċettax iċ-ċavetta jew il-password.</string>
+    <string name="backup_stop_untrusted">iċ-ċertifikat tas-server mhuwiex wieħed minn dawk li fdajt.</string>
+    <string name="backup_stop_misconfigured">l-indirizz mhuwiex tajjeb għal dan it-tip ta’ server.</string>
+    <string name="backup_stop_refusals">is-server irrifjuta ħafna fajls wara xulxin, li jindika limitu tas-server, mhux problema tar-ritratti.</string>
+    <string name="backup_now">Agħmel backup issa</string>
+    <string name="backup_retry_refused">Erġa’ pprova dawk irrifjutati</string>
+
+    <!-- Network consent -->
+    <string name="network_allow">Ippermetti lil eikon juża l-internet</string>
+    <string name="network_allow_note">Mitfi sakemm ma ddawwalx. eikon juża n-netwerk biss biex jikkopja r-ritratti tiegħek fuq is-server t’hawn taħt, u biss wara li tkun issettjajt wieħed u dawwalt il-backup. Meta dan ikun mitfi, xejn ma jista’ jikkonnettja mkien.</string>
+    <string name="settings_privacy_network">eikon jista’ jmur online għal ħaġa waħda biss: il-backup fakultattiv tar-ritratti tiegħek fuq server li tmexxi int. Dan huwa mitfi sakemm ma tippermettihx (Settings, Backup) u ma tissettjax is-server. L-ebda analitika tal-użu, l-ebda reklami, l-ebda kontijiet, l-ebda servizzi ta’ Google u l-ebda cloud tagħna: m’hemm l-ebda waħda.</string>
+
+    <!-- First-run screens -->
+    <string name="onboarding_intro_title">Ir-ritratti tiegħek, fuq it-telefon tiegħek</string>
+    <string name="onboarding_intro_body">eikon huwa gallerija tar-ritratti u tal-vidjows għal Android. Juri l-immaġini li t-telefon tiegħek diġà jżomm, isibhom skont id-data, il-post, in-nies jew dak li juru, u jeditjahom mingħajr ma jmiss qatt l-oriġinali.</string>
+    <string name="onboarding_point_local">Kollox jibqa’ fuq dan l-apparat. L-ebda kont, l-ebda analitika tal-użu, l-ebda reklami.</string>
+    <string name="onboarding_point_independent">Ma jiddependix fuq xejn barra mit-telefon tiegħek: l-ebda servizzi ta’ Google, l-ebda cloud, l-ebda servers ta’ terzi.</string>
+    <string name="onboarding_point_yours">Jekk trid backup, imur biss fuq server li tmexxi int, u biss jekk tissettjah.</string>
+    <string name="onboarding_next">Li jmiss</string>
+    <string name="onboarding_start">Ibda</string>
+    <string name="onboarding_page">Paġna %1$d minn %2$d</string>
+    <string name="onboarding_permissions_title">X’jitlob eikon, u għaliex</string>
+    <string name="onboarding_permissions_intro">L-ewwel wieħed biss huwa meħtieġ. Tista’ tibdel kwalunkwe minnhom aktar tard, fis-Settings jew fis-settings tat-telefon tiegħek.</string>
+    <string name="onboarding_perm_media_title">Ritratti u vidjows</string>
+    <string name="onboarding_perm_media_body">Biex eikon ikun jista’ juri l-librerija tiegħek. Jaqra l-fajls fejn Android diġà jżommhom u ma jikkupjahomx imkien. Jekk tippreferi, tista’ tippermetti xi ritratti biss.</string>
+    <string name="onboarding_perm_location_title">Postijiet tar-ritratti (fakultattiv)</string>
+    <string name="onboarding_perm_location_body">Android jaħbi mill-applikazzjonijiet fejn ittieħed ritratt, sakemm ma tippermettix. eikon juża dan biex juri l-post ta’ ritratt fuq mappa mingħajr konnessjoni u biex jittfittex skont il-post. Il-postijiet jiġu kkalkulati fuq it-telefon: l-ebda pożizzjoni qatt ma tintbagħat imkien.</string>
+    <string name="onboarding_perm_network_title">Internet (fakultattiv)</string>
+    <string name="onboarding_perm_network_body">Jintuża għal ħaġa waħda biss: biex jikkopja r-ritratti tiegħek fuq server li tmexxi int (Immich, Nextcloud), jekk qatt tissettjah. Inkella eikon qatt ma jikkonnettja ma’ xejn. Huwa mitfi sakemm ma ddawwalx hawn, u tista’ terġa’ titfih fi kwalunkwe ħin fis-Settings.</string>
+    <string name="onboarding_allow">Ippermetti</string>
+    <string name="onboarding_allowed">Permess</string>
+    <string name="onboarding_promise">Xejn hawn ma jiddependi minn xi ħaġa barra mit-telefon tiegħek: l-ebda servizzi ta’ Google, l-ebda kontijiet, l-ebda analitika tal-użu. Ir-ritratti tiegħek jibqgħu fuq dan l-apparat jew, jekk tagħżel hekk, imorru fuq is-server tiegħek stess.</string>
+
+    <!-- Support -->
+    <string name="support_title">Appoġġ</string>
+    <string name="support_body">eikon huwa b’xejn, m’għandux reklami u ma jsegwix. Jekk togħġbok, tista’ tibgħat ftit sats permezz tan-netwerk Lightning.</string>
+    <string name="support_button">Agħmel donazzjoni b’Lightning</string>
+    <string name="support_copied">Ma nstab l-ebda portafoll Lightning — l-indirizz ġie kkupjat: %1$s</string>
+
+    <!-- Analyze now -->
+    <string name="analyze_now_running">Qed janalizza…</string>
+    <string name="analyze_now_hint">Jibda immedjatament, fuq dan it-telefon biss, anke bl-iffrankar tal-batterija.</string>
+    <string name="analyze_now_hint_off">L-ewwel dawwal mill-inqas pass wieħed hawn fuq.</string>
+    <string name="analyze_now_hint_paused">L-analiżi hija fuq waqfa: itfi l-waqfa biex tanalizza issa.</string>
+
+    <!-- Pictures from other apps -->
+    <string name="viewer_open_in_library">Iftaħ fil-librerija</string>
+</resources>

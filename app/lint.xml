@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <lint>
     <!-- ONNX Runtime is deliberately held at 1.28.x: 1.29 and later add telemetry code and the INTERNET
-         permission to the Android artifact (see docs/ML.md). The build also fails if INTERNET ever appears. -->
+         permission to the Android artifact (see docs/ML.md). The build also checks the merged manifest against a reviewed list of permissions. -->
     <issue id="NewerVersionAvailable">
         <ignore regexp="onnxruntime"/>
     </issue>

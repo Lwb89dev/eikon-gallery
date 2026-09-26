@@ -1,0 +1,682 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Library -->
+    <string name="library_title">Biblioteka</string>
+    <string name="today">Danas</string>
+    <string name="yesterday">Jučer</string>
+    <string name="empty_library">Još nema fotografija ni videozapisa</string>
+    <string name="empty_filter">Ništa ne odgovara ovom filtru</string>
+    <string name="empty_filter_clear">Prikaži sve</string>
+    <string name="sync_progress">Učitavanje biblioteke: %1$,d / %2$,d</string>
+    <string name="sync_failed">Biblioteku nije bilo moguće osvježiti</string>
+    <string name="sync_retry">Pokušaj ponovno</string>
+    <string name="scrubber_description">Pomicanje kroz biblioteku po datumu</string>
+
+    <!-- Permissions -->
+    <string name="permission_title">Vaše fotografije ostaju na vašem uređaju</string>
+    <string name="permission_body">eikon treba pristup vašim fotografijama i videozapisima da bi ih prikazao. Ostaju na vašem uređaju: ništa se ne prenosi, osim ako postavite sigurnosnu kopiju na vlastiti poslužitelj.</string>
+    <string name="permission_grant">Dopusti pristup</string>
+    <string name="permission_denied">Pristup je odbijen. Možete ga dopustiti u postavkama sustava.</string>
+    <string name="permission_open_settings">Otvori postavke</string>
+    <string name="limited_banner">Prikazuju se samo fotografije koje ste odabrali</string>
+    <string name="limited_select_more">Odaberi još</string>
+    <string name="limited_allow_all">Dopusti sve</string>
+
+    <!-- Menus and filters -->
+    <string name="menu_filter">Filtar</string>
+    <string name="menu_sort">Poredaj</string>
+    <string name="menu_settings">Postavke</string>
+    <string name="menu_more">Više opcija</string>
+    <string name="filter_all">Sve</string>
+    <string name="filter_photos">Fotografije</string>
+    <string name="filter_videos">Videozapisi</string>
+    <string name="filter_favorites">Omiljeno</string>
+    <string name="filter_screenshots">Snimke zaslona</string>
+    <string name="filter_screen_recordings">Snimanja zaslona</string>
+    <string name="filter_panoramas">Panorame</string>
+    <string name="filter_raw">RAW</string>
+    <string name="filter_clear">Očisti filtar</string>
+    <string name="sort_by_date_taken">Datum snimanja</string>
+    <string name="sort_by_date_added">Datum dodavanja</string>
+    <string name="sort_newest_first">Najnovije prvo</string>
+    <string name="sort_oldest_first">Najstarije prvo</string>
+
+    <!-- Selection and actions -->
+    <plurals name="selected_count">
+        <item quantity="one">Odabrana je %d stavka</item>
+        <item quantity="few">Odabrane su %d stavke</item>
+        <item quantity="other">Odabrano je %d stavki</item>
+    </plurals>
+    <string name="action_share">Podijeli</string>
+    <string name="action_favorite">Dodaj u omiljeno</string>
+    <string name="action_unfavorite">Ukloni iz omiljenog</string>
+    <string name="action_delete">Izbriši</string>
+    <string name="action_info">Informacije</string>
+    <string name="action_back">Natrag</string>
+    <string name="action_clear_selection">Očisti odabir</string>
+    <string name="action_select">Odaberi</string>
+    <string name="action_failed">Nešto je pošlo po zlu</string>
+    <plurals name="moved_to_trash">
+        <item quantity="one">%d stavka premještena je u smeće. Android je čuva 30 dana.</item>
+        <item quantity="few">%d stavke premještene su u smeće. Android ih čuva 30 dana.</item>
+        <item quantity="other">%d stavki premješteno je u smeće. Android ih čuva 30 dana.</item>
+    </plurals>
+
+    <!-- Accessibility -->
+    <string name="cd_photo">Fotografija, %1$s</string>
+    <string name="cd_video">Videozapis, %1$s, %2$s</string>
+    <string name="cd_edited_badge">Uređeno</string>
+    <string name="cd_favorite_badge">Omiljeno</string>
+    <string name="viewer_position">%1$d od %2$d</string>
+
+    <!-- Video -->
+    <string name="video_play">Reproduciraj</string>
+    <string name="video_pause">Pauziraj</string>
+    <string name="video_mute">Isključi zvuk</string>
+    <string name="video_unmute">Uključi zvuk</string>
+    <string name="video_seek">Premotaj</string>
+
+    <!-- Info panel -->
+    <string name="info_title">Informacije</string>
+    <string name="info_loading">Čitanje detalja…</string>
+    <string name="info_error">Detalje ove datoteke nije bilo moguće pročitati</string>
+    <string name="info_section_file">Datoteka</string>
+    <string name="info_section_camera">Fotoaparat</string>
+    <string name="info_section_video">Videozapis</string>
+    <string name="info_name">Naziv</string>
+    <string name="info_type">Vrsta</string>
+    <string name="info_folder">Mapa</string>
+    <string name="info_resolution">Razlučivost</string>
+    <string name="info_megapixels">Megapikseli</string>
+    <string name="info_size">Veličina</string>
+    <string name="info_date">Datum</string>
+    <string name="info_modified">Izmijenjeno</string>
+    <string name="info_color_profile">Profil boja</string>
+    <string name="info_location">Lokacija</string>
+    <string name="info_location_none">U ovoj datoteci nije spremljena nijedna lokacija</string>
+    <string name="info_location_hidden">Android skriva lokacije fotografija od aplikacija dok to ne dopustite</string>
+    <string name="info_location_allow">Dopusti</string>
+    <string name="info_location_open">Otvori u aplikaciji za karte</string>
+    <string name="info_camera">Uređaj</string>
+    <string name="info_lens">Objektiv</string>
+    <string name="info_focal_length">Žarišna duljina</string>
+    <string name="info_aperture">Otvor blende</string>
+    <string name="info_shutter">Vrijeme zatvarača</string>
+    <string name="info_iso">Osjetljivost</string>
+    <string name="info_exposure_bias">Korekcija ekspozicije</string>
+    <string name="info_flash">Bljeskalica</string>
+    <string name="info_flash_fired">Aktivirala se</string>
+    <string name="info_flash_off">Nije se aktivirala</string>
+    <string name="info_orientation">Orijentacija</string>
+    <string name="info_software">Softver</string>
+    <string name="info_duration">Trajanje</string>
+    <string name="info_frame_rate">Brzina kadrova</string>
+    <string name="info_video_codec">Video kodek</string>
+    <string name="info_audio_codec">Audio kodek</string>
+    <string name="info_bitrate">Brzina prijenosa</string>
+    <string name="info_dynamic_range">Dinamički raspon</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Postavke</string>
+    <string name="settings_appearance">Izgled</string>
+    <string name="theme_system">Prati sustav</string>
+    <string name="theme_light">Svijetla</string>
+    <string name="theme_dark">Tamna</string>
+    <string name="settings_privacy">Privatnost</string>
+    <string name="settings_privacy_body">eikon radi na vašem uređaju. Nema račun ni analitiku, a njegovi su podaci isključeni iz Androidovih sigurnosnih kopija.\n\nVaše se fotografije nikada ne kopiraju: eikon vodi lokalni indeks s podacima o datotekama (naziv, datum, veličina, mapa) kako bi se biblioteka otvorila trenutačno. Brisanjem aplikacije briše se i indeks.</string>
+    <string name="settings_storage_encrypted">Baza podataka biblioteke (indeks, albumi, uređivanja, opisi i ono što je analiza pronašla) šifrirana je na ovom telefonu algoritmom AES-256. Njezin ključ čuva Android Keystore.</string>
+    <string name="settings_storage_not_encrypted">Bazu podataka biblioteke nije bilo moguće šifrirati (%1$s), pa je i dalje pohranjena nešifrirana. eikon pokušava ponovno pri svakom pokretanju.</string>
+    <string name="settings_storage_reset_title">Baza podataka biblioteke započeta je iznova</string>
+    <string name="settings_storage_reset">Ključ koji je štitio bazu podataka biblioteke izgubljen je, pa je eikon morao započeti novu. Albumi, uređivanja, opisi i imena koje ste dodali nestali su. Vaše su fotografije netaknute, a analiza će se ponovno izvršiti.</string>
+    <string name="settings_storage_reset_ok">Razumijem</string>
+    <string name="settings_about">O aplikaciji</string>
+    <string name="settings_licenses">Licencije otvorenog koda</string>
+    <string name="licenses_title">Licencije otvorenog koda</string>
+    <string name="settings_version">Inačica %1$s</string>
+
+    <!-- Navigation and collections -->
+    <string name="nav_library">Biblioteka</string>
+    <string name="nav_search">Traži</string>
+    <string name="nav_collections">Zbirke</string>
+    <string name="collections_title">Zbirke</string>
+    <string name="section_people">Osobe</string>
+    <string name="section_albums">Albumi</string>
+    <string name="section_personal">Osobno</string>
+    <string name="section_folders">Mape uređaja</string>
+    <string name="collection_favorites">Omiljeno</string>
+    <string name="collection_recent">Nedavno dodano</string>
+    <string name="collection_videos">Videozapisi</string>
+    <string name="collection_screenshots">Snimke zaslona</string>
+    <string name="collection_screen_recordings">Snimanja zaslona</string>
+    <string name="collection_panoramas">Panorame</string>
+    <string name="collection_raw">RAW</string>
+    <string name="collection_trash">Nedavno izbrisano</string>
+    <string name="collection_hidden">Skriveno</string>
+    <plurals name="items_count">
+        <item quantity="one">%d stavka</item>
+        <item quantity="few">%d stavke</item>
+        <item quantity="other">%d stavki</item>
+    </plurals>
+    <string name="empty_album">Ovaj je album prazan. Odaberite fotografije u biblioteci i odaberite „Dodaj u album”.</string>
+    <string name="empty_hidden">Ništa nije skriveno</string>
+    <string name="empty_collection">Ovdje još nema ničega</string>
+
+    <!-- Albums -->
+    <string name="album_new">Novi album</string>
+    <string name="album_name_hint">Naziv albuma</string>
+    <string name="album_create">Izradi</string>
+    <string name="album_rename">Preimenuj</string>
+    <string name="album_delete">Izbriši album</string>
+    <string name="album_delete_title">Izbrisati ovaj album?</string>
+    <string name="album_delete_message">Briše se samo album. Fotografije i videozapisi u njemu ostaju gdje jesu.</string>
+    <string name="album_move_earlier">Pomakni prema naprijed</string>
+    <string name="album_move_later">Pomakni prema natrag</string>
+    <string name="action_add_to_album">Dodaj u album</string>
+    <string name="action_remove_from_album">Ukloni iz albuma</string>
+    <string name="action_hide">Sakrij</string>
+    <string name="action_unhide">Prikaži</string>
+    <string name="action_cancel">Odustani</string>
+    <string name="action_save">Spremi</string>
+    <plurals name="added_to_album">
+        <item quantity="one">%1$d stavka dodana je u „%2$s”</item>
+        <item quantity="few">%1$d stavke dodane su u „%2$s”</item>
+        <item quantity="other">%1$d stavki dodano je u „%2$s”</item>
+    </plurals>
+    <plurals name="removed_from_album">
+        <item quantity="one">%d stavka uklonjena je iz albuma</item>
+        <item quantity="few">%d stavke uklonjene su iz albuma</item>
+        <item quantity="other">%d stavki uklonjeno je iz albuma</item>
+    </plurals>
+    <plurals name="moved_to_hidden">
+        <item quantity="one">%d stavka je skrivena. Pronađite je u Zbirke, Skriveno.</item>
+        <item quantity="few">%d stavke su skrivene. Pronađite ih u Zbirke, Skriveno.</item>
+        <item quantity="other">%d stavki je skriveno. Pronađite ih u Zbirke, Skriveno.</item>
+    </plurals>
+    <plurals name="unhidden">
+        <item quantity="one">%d stavka ponovno je vidljiva</item>
+        <item quantity="few">%d stavke ponovno su vidljive</item>
+        <item quantity="other">%d stavki ponovno je vidljivo</item>
+    </plurals>
+
+    <!-- Filters -->
+    <string name="filter_type_title">Vrsta</string>
+    <string name="filter_kind_title">Žanr</string>
+    <string name="filter_any">Bilo koja</string>
+    <string name="filter_favorites_only">Samo omiljeno</string>
+    <string name="filter_edited">Uređeno</string>
+    <string name="share_preparing">Priprema uređenih fotografija za dijeljenje</string>
+    <string name="filter_edited_only">Samo uređeno</string>
+    <string name="filter_clear_all">Očisti filtre</string>
+
+    <!-- Locks -->
+    <string name="locked_title">Zaključano</string>
+    <string name="locked_body">Za otvaranje upotrijebite otisak prsta, lice ili zaključavanje zaslona.</string>
+    <string name="locked_unlock">Otključaj</string>
+    <string name="auth_subtitle">Potvrdite da ste to vi</string>
+    <string name="auth_title_hidden">Otključaj „Skriveno”</string>
+    <string name="auth_title_trash">Otključaj „Nedavno izbrisano”</string>
+    <string name="auth_unavailable">Autentifikacija trenutačno nije dostupna. Pokušajte ponovno za trenutak.</string>
+    <string name="no_device_lock_notice">Ovaj telefon nema zaključavanje zaslona, pa „Skriveno” nije zaštićeno. Postavite ga u postavkama sustava.</string>
+
+    <!-- Recently deleted -->
+    <string name="trash_info">Stavke se trajno brišu nakon otprilike 30 dana.</string>
+    <string name="trash_empty">Nedavno nije ništa izbrisano</string>
+    <string name="trash_restore">Vrati</string>
+    <string name="trash_delete_forever">Izbriši trajno</string>
+    <plurals name="days_left_short">
+        <item quantity="one">%d d</item>
+        <item quantity="few">%d d</item>
+        <item quantity="other">%d d</item>
+    </plurals>
+    <plurals name="trash_restored">
+        <item quantity="one">%d stavka je vraćena</item>
+        <item quantity="few">%d stavke su vraćene</item>
+        <item quantity="other">%d stavki je vraćeno</item>
+    </plurals>
+    <plurals name="trash_deleted">
+        <item quantity="one">%d stavka trajno je izbrisana</item>
+        <item quantity="few">%d stavke trajno su izbrisane</item>
+        <item quantity="other">%d stavki trajno je izbrisano</item>
+    </plurals>
+
+    <!-- Settings: security -->
+    <string name="settings_security">Sigurnost</string>
+    <string name="setting_lock_hidden">Zahtijevaj autentifikaciju za „Skriveno”</string>
+    <string name="setting_lock_trash">Zahtijevaj autentifikaciju za „Nedavno izbrisano”</string>
+    <string name="setting_show_hidden">Prikaži „Skriveno” u Zbirkama</string>
+    <string name="setting_secure_screens">Sakrij eikon u nedavnim aplikacijama i blokiraj snimke zaslona</string>
+    <string name="settings_security_body">Skrivene stavke izostavljene su iz biblioteke, zbirki i pretraživanja, a za otvaranje „Skriveno” traži se otisak prsta, lice ili zaključavanje zaslona. Same datoteke nisu šifrirane i ostaju u uobičajenoj pohrani telefona, gdje ih druge aplikacije s pristupom fotografijama i dalje mogu vidjeti.</string>
+
+    <!-- Search -->
+    <string name="search_placeholder">Datum, mjesto, tekst, naziv datoteke</string>
+    <string name="search_clear">Očisti pretraživanje</string>
+    <string name="search_no_results">Nijedna fotografija ne odgovara</string>
+    <string name="search_hint_title">Pretražite svoju biblioteku</string>
+    <string name="search_hint_body">Pokušajte s datumom („August 2025”, „yesterday”), mjestom („Rome”, „Tuscany”), riječju koja se pojavljuje na fotografiji ili u nazivu datoteke ili vrstom („videos”, „screenshots”, „favorites”).\n\nDatumi i vrste razumiju se na engleskom i talijanskom. Mjesta, tekst na fotografijama i ono što prikazuju pronalaze se nakon što se izvrši analiza (Postavke, Analiza).</string>
+    <string name="search_analysis_off">Pretraživanje po mjestu, tekstu na fotografijama i onome što prikazuju isključeno je. Možete ga uključiti u Postavke, Analiza.</string>
+    <string name="search_analysis_note">Fotografije se još analiziraju u pozadini (%1$d %%). Neki rezultati mogu nedostajati.</string>
+
+    <!-- Settings: analysis -->
+    <string name="settings_analysis">Analiza</string>
+    <string name="analysis_places_progress">Mjesta: %1$,d od %2$,d</string>
+    <string name="analysis_semantic_progress">Što fotografije prikazuju: %1$,d od %2$,d</string>
+    <string name="analysis_semantic_unavailable">Model koji prepoznaje što fotografije prikazuju nije se mogao učitati, pa ovaj korak ne radi.</string>
+    <string name="search_semantic_unavailable">Pretraživanje po onome što fotografije prikazuju trenutačno nije dostupno (model se nije mogao učitati). Ostali rezultati i dalje rade.</string>
+    <string name="analysis_people_progress">Osobe: %1$,d od %2$,d</string>
+    <string name="analysis_people_unavailable">Modeli koji pronalaze lica nisu se mogli učitati, pa ovaj korak ne radi.</string>
+    <string name="analysis_duplicates_progress">Duplikati: %1$,d od %2$,d</string>
+    <string name="analysis_text_progress">Tekst na fotografijama: %1$,d od %2$,d</string>
+    <string name="analysis_running">Analiza je u tijeku…</string>
+    <string name="analysis_idle">Čeka se pravi trenutak (baterija nije slaba, Štednja baterije isključena i, ako ste tako odabrali, punjenje)</string>
+    <string name="analysis_up_to_date">Sve je analizirano</string>
+    <string name="setting_pause_analysis">Pauziraj analizu</string>
+    <string name="setting_only_charging">Samo tijekom punjenja</string>
+    <string name="setting_analyze_places">Pronađi fotografije po mjestu</string>
+    <string name="setting_analyze_semantic">Pronađi fotografije po onome što prikazuju</string>
+    <string name="setting_analyze_people">Pronađi osobe na fotografijama</string>
+    <string name="setting_analyze_people_note">Lica se pronalaze i uspoređuju samo na ovom telefonu. Ništa o licu nikada ga ne napušta, a eikon nikada ne pokušava nikoga prepoznati: samo grupira lica koja izgledaju slično, a skupine imenujete vi.</string>
+    <string name="setting_analyze_duplicates">Pronađi duplicirane fotografije</string>
+    <string name="setting_analyze_text">Pronađi tekst na fotografijama</string>
+    <string name="analysis_location_permission">Android skriva od aplikacija gdje su fotografije snimljene dok to ne dopustite.</string>
+    <string name="analysis_allow_locations">Dopusti pristup lokacijama fotografija</string>
+    <string name="analyze_now">Analiziraj odmah</string>
+    <string name="settings_analysis_body">Analiza radi samo na vašem telefonu, u pozadini, i pauzira se kad je baterija slaba, uključena je Štednja baterije ili se telefon zagrije („Analiziraj odmah” nastavlja i uz Štednju baterije). Sprema mjesto svake fotografije (određeno izvan mreže, nijedna se lokacija nikada nikamo ne šalje), brojčani opis onoga što fotografija prikazuje (da biste mogli tražiti „pas” ili „zalazak sunca”; to nije opis riječima i ne može se pročitati natrag kao slika) i svaki tekst koji pročita na fotografiji, kako bi ih Pretraživanje moglo pronaći. Ako uključite osobe, sprema i gdje se na fotografiji nalazi svako lice te njegov brojčani opis, samo radi grupiranja lica koja izgledaju slično. Ako uključite duplikate, sprema kratak otisak svake fotografije i datoteka iste veličine, samo radi pronalaženja kopija. Prepoznavanje onoga što fotografije prikazuju i čitanje teksta spori su i snažno opterećuju procesor, zbog čega analiza prema zadanim postavkama čeka punjenje.</string>
+
+    <!-- Info panel: derived data -->
+    <string name="info_place">Najbliže mjesto</string>
+    <string name="info_text_found">Tekst na ovoj fotografiji</string>
+    <string name="info_text_copy">Kopiraj tekst</string>
+
+    <!-- People -->
+    <string name="collection_people">Osobe</string>
+    <string name="people_title">Osobe</string>
+    <string name="person_unnamed">Osoba bez imena</string>
+    <string name="person_add_name">Dodaj ime</string>
+    <string name="person_rename">Imenuj ovu osobu</string>
+    <string name="person_name_hint">Ime</string>
+    <string name="person_same_name_note">Osobe s istim imenom spajaju se u jednu.</string>
+    <string name="person_favorite">Označi kao omiljenu</string>
+    <string name="person_unfavorite">Ukloni iz omiljenih</string>
+    <string name="person_hide">Sakrij ovu osobu</string>
+    <string name="person_unhide">Prikaži ovu osobu</string>
+    <string name="person_merge">Spoji s drugom osobom…</string>
+    <string name="person_merge_title">Spoji s</string>
+    <string name="person_merge_empty">Nema nikoga drugog s kim bi se moglo spojiti.</string>
+    <string name="person_not_this">Nije ova osoba</string>
+    <string name="person_remove_from_people">Nije lice</string>
+    <string name="people_show_hidden">Prikaži skrivene osobe (%1$d)</string>
+    <string name="people_hide_hidden">Sakrij skrivene osobe</string>
+    <string name="people_empty_off">Osobe su isključene. Uključite „Pronađi osobe na fotografijama” u Postavke, Analiza, i eikon će grupirati lica koja pronađe. Sve ostaje na ovom telefonu.</string>
+    <string name="people_empty_working">Još nema pronađenih lica (analizirano %1$d %% vaših fotografija). Analiza radi u pozadini tijekom punjenja.</string>
+    <string name="people_empty_done">Na vašim fotografijama nisu pronađena lica.</string>
+    <string name="people_go_settings">Otvori postavke</string>
+    <string name="person_photos_empty">Nema fotografija.</string>
+    <plurals name="moved_to_new_person">
+        <item quantity="one">%d fotografija premještena je novoj osobi</item>
+        <item quantity="few">%d fotografije premještene su novoj osobi</item>
+        <item quantity="other">%d fotografija premješteno je novoj osobi</item>
+    </plurals>
+    <plurals name="removed_from_people">
+        <item quantity="one">%d fotografija uklonjena je iz Osoba</item>
+        <item quantity="few">%d fotografije uklonjene su iz Osoba</item>
+        <item quantity="other">%d fotografija uklonjeno je iz Osoba</item>
+    </plurals>
+    <string name="info_people">Osobe</string>
+    <plurals name="info_people_unnamed_count">
+        <item quantity="one">%d bez imena</item>
+        <item quantity="few">%d bez imena</item>
+        <item quantity="other">%d bez imena</item>
+    </plurals>
+
+    <string name="section_memories">Uspomene</string>
+    <string name="section_pets">Kućni ljubimci</string>
+    <string name="collection_dogs">Psi</string>
+    <string name="collection_cats">Mačke</string>
+    <string name="empty_pets">Još nisu pronađeni psi ni mačke. Kućni se ljubimci prepoznaju po onome što fotografije prikazuju: uključite „Pronađi fotografije po onome što prikazuju” u Postavke, Analiza, i pričekajte da završi.</string>
+
+    <!-- Places -->
+    <string name="places_title">Mjesta</string>
+    <string name="places_tab_list">Popis</string>
+    <string name="places_tab_map">Karta</string>
+    <string name="place_unknown">Ostala mjesta</string>
+    <string name="place_near">Blizu: %1$s</string>
+    <string name="places_expand">Prikaži</string>
+    <string name="places_collapse">Sakrij</string>
+    <string name="collection_places">Mjesta</string>
+    <string name="places_map_note">Samo obrisi zemalja i nazivi većih gradova: ne preuzimaju se slike karata i nijedna pozicija nikada ne napušta telefon. Za zumiranje raširite prste ili dvaput dodirnite, dodirnite oznaku da vidite njezine fotografije.</string>
+    <string name="places_map_description">Karta mjesta gdje su snimljene vaše fotografije, s oznakama za skupine fotografija</string>
+    <string name="places_empty_off">Mjesta su isključena. Uključite „Pronađi fotografije po mjestu” u Postavke, Analiza, i eikon će izvan mreže odrediti gdje su vaše fotografije snimljene iz njihovih GPS podataka.</string>
+    <string name="places_empty_working">Još nema pronađenih mjesta (analizirano %1$d %% vaših fotografija). Analiza radi u pozadini tijekom punjenja.</string>
+    <string name="places_empty_done">Nijedna vaša fotografija nema poziciju ili eikon možda nema dopuštenje za čitanje lokacija fotografija (Postavke, Analiza).</string>
+    <string name="section_places">Mjesta i putovanja</string>
+
+    <!-- Trips -->
+    <string name="collection_trips">Putovanja</string>
+    <string name="trips_title">Putovanja</string>
+    <string name="trip_untitled">Putovanje</string>
+    <string name="trip_reason">Oko %1$d km od mjesta gdje snimate većinu fotografija (blizu: %2$s)</string>
+    <string name="trip_home_unknown">nepoznato mjesto</string>
+    <plurals name="trip_summary_days">
+        <item quantity="one">%d dan</item>
+        <item quantity="few">%d dana</item>
+        <item quantity="other">%d dana</item>
+    </plurals>
+    <string name="trips_empty">Nisu pronađena putovanja. Putovanje je niz dana, s najmanje 10 fotografija, provedenih najmanje 100 km od mjesta gdje snimate većinu fotografija. Za to eikonu trebaju pozicije fotografija: uključite „Pronađi fotografije po mjestu” u Postavke, Analiza.</string>
+
+    <!-- Duplicates and similar shots -->
+    <string name="section_cleanup">Čišćenje</string>
+    <string name="collection_duplicates">Duplikati</string>
+    <string name="collection_similar">Slični snimci</string>
+    <string name="duplicates_title">Duplikati</string>
+    <string name="similar_title">Slični snimci</string>
+    <string name="duplicates_note">eikon ih samo pronalazi. Ništa se ne uklanja dok ne potvrdite u dijaloškom okviru samog Androida, a uklonjene fotografije idu u „Nedavno izbrisano”, gdje ih možete vratiti. Kod kopija fotografije koju ste dodali u albume: kopija koju zadržite pridružuje se tim albumima.</string>
+    <plurals name="duplicate_exact">
+        <item quantity="one">%d identična datoteka</item>
+        <item quantity="few">%d identične datoteke</item>
+        <item quantity="other">%d identičnih datoteka</item>
+    </plurals>
+    <plurals name="duplicate_visual">
+        <item quantity="one">%d kopija iste slike</item>
+        <item quantity="few">%d kopije iste slike</item>
+        <item quantity="other">%d kopija iste slike</item>
+    </plurals>
+    <plurals name="similar_group">
+        <item quantity="one">%d snimak</item>
+        <item quantity="few">%d slična snimka</item>
+        <item quantity="other">%d sličnih snimaka</item>
+    </plurals>
+    <plurals name="duplicate_keep_best">
+        <item quantity="one">Zadrži najbolju, premjesti %d u „Nedavno izbrisano”</item>
+        <item quantity="few">Zadrži najbolju, premjesti %d u „Nedavno izbrisano”</item>
+        <item quantity="other">Zadrži najbolju, premjesti %d u „Nedavno izbrisano”</item>
+    </plurals>
+    <plurals name="similar_trash_marked">
+        <item quantity="one">Premjesti %d u „Nedavno izbrisano”</item>
+        <item quantity="few">Premjesti %d u „Nedavno izbrisano”</item>
+        <item quantity="other">Premjesti %d u „Nedavno izbrisano”</item>
+    </plurals>
+    <string name="duplicate_best">Najbolja</string>
+    <string name="duplicate_kept">Zadržano</string>
+    <string name="duplicate_marked">Za premještanje</string>
+    <string name="duplicate_dismiss">Ovo nisu duplikati</string>
+    <string name="similar_dismiss">Ovo nisu slični snimci</string>
+    <string name="duplicates_empty_off">Duplikati su isključeni. Uključite „Pronađi duplicirane fotografije” u Postavke, Analiza. eikon izrađuje otiske vaših fotografija samo na ovom telefonu, bez ikakvog modela.</string>
+    <string name="similar_empty_off">Slični snimci trebaju „Pronađi fotografije po onome što prikazuju” u Postavke, Analiza: uspoređuje što prikazuje svaka fotografija, za fotografije snimljene unutar dvije minute jedna od druge.</string>
+    <string name="duplicates_empty_working">Još ništa nije pronađeno (analizirano %1$d %%). Analiza radi u pozadini tijekom punjenja.</string>
+    <string name="duplicates_empty_done">Nisu pronađeni duplikati.</string>
+    <string name="similar_empty_done">Nisu pronađeni slični snimci.</string>
+
+    <!-- Memories -->
+    <string name="collection_memories">Uspomene</string>
+    <string name="memories_title">Uspomene</string>
+    <string name="memory_on_this_day">Na današnji dan</string>
+    <string name="memory_year_ago">Prije godinu dana</string>
+    <string name="memory_weekend_in">Vikend: %1$s</string>
+    <string name="memory_weekend">Vikend izvan kuće</string>
+    <string name="memory_day_trip_to">Jednodnevni izlet: %1$s</string>
+    <string name="memory_day_trip">Jednodnevni izlet</string>
+    <string name="memory_season">%1$s %2$d</string>
+    <string name="memory_person">%1$s, %2$d</string>
+    <string name="season_winter">Zima</string>
+    <string name="season_spring">Proljeće</string>
+    <string name="season_summer">Ljeto</string>
+    <string name="season_autumn">Jesen</string>
+    <string name="memory_hide">Sakrij ovu uspomenu</string>
+    <string name="memory_show_fewer">Prikaži manje sličnih</string>
+    <string name="memory_show_less_of">Prikaži manje: %1$s</string>
+    <string name="memory_exclude_date">Izostavi ovaj datum</string>
+    <string name="memory_all_photos">Sve fotografije</string>
+    <string name="memory_replay">Reproduciraj ponovno</string>
+    <string name="memory_reset">Poništi moje odabire</string>
+    <string name="memory_done">Gotovo. Svoje odabire možete poništiti u izborniku Uspomena.</string>
+    <string name="memories_empty">Još nema uspomena. eikon ih izrađuje iz datuma, putovanja, godišnjih doba i osoba koje ste imenovali: „Na današnji dan”, „Prije godinu dana”, putovanja i vikendi izvan kuće, godišnje doba, netko u određenoj godini. Putovanja i vikendi trebaju Mjesta, osobe trebaju Osobe (Postavke, Analiza). Ništa ne napušta telefon.</string>
+    <string name="memories_note">Izrađeno iz datuma, mjesta i imenovanih osoba jednostavnim pravilima; nema glazbe, a fotografije se biraju prema omiljenima, veličini i licima, a ne prema tome koliko dobro izgledaju.</string>
+    <string name="memory_no_photos">Ova uspomena više nema fotografija za prikaz.</string>
+
+    <!-- Editing -->
+    <string name="action_edit">Uredi</string>
+    <string name="edit_title">Uređivanje</string>
+    <string name="edit_done">Gotovo</string>
+    <string name="edit_original">Original</string>
+    <string name="edit_revert">Vrati</string>
+    <string name="edit_revert_title">Vratiti na original?</string>
+    <string name="edit_revert_message">Time se iz ovog uređivanja brišu sva podešavanja, filtar i obrezivanje. Originalna fotografija nikada nije promijenjena. Pritisnite Gotovo da zadržite vraćenu fotografiju.</string>
+    <string name="edit_discard_title">Odbaciti promjene?</string>
+    <string name="edit_discard_message">Promjene koje ste napravili u ovom uređivaču bit će izgubljene. Fotografija ostaje kakva je bila.</string>
+    <string name="edit_discard">Odbaci</string>
+    <string name="edit_copy_edits">Kopiraj uređivanja</string>
+    <string name="edit_paste_edits">Zalijepi uređivanja</string>
+    <string name="edit_save_copy">Spremi kopiju</string>
+    <string name="edit_copy_saved">Kopija je spremljena pokraj originala, koji nije promijenjen.</string>
+    <string name="edit_copy_saved_no_details">Kopija je spremljena pokraj originala, koji nije promijenjen. Podatke o fotoaparatu nije bilo moguće kopirati.</string>
+    <string name="edit_failed">Uređivanje nije bilo moguće dovršiti. Fotografija nije promijenjena.</string>
+    <string name="edited_badge">Uređeno</string>
+    <string name="viewer_show_original">Prikaži original</string>
+    <string name="viewer_show_edited">Prikaži uređenu fotografiju</string>
+    <string name="tool_auto">Auto</string>
+    <string name="tool_light">Svjetlo</string>
+    <string name="tool_color">Boja</string>
+    <string name="tool_detail">Detalji</string>
+    <string name="tool_filters">Filtri</string>
+    <string name="tool_crop">Obreži</string>
+    <string name="adj_exposure">Ekspozicija</string>
+    <string name="adj_brightness">Svjetlina</string>
+    <string name="adj_contrast">Kontrast</string>
+    <string name="adj_highlights">Svjetla</string>
+    <string name="adj_shadows">Sjene</string>
+    <string name="adj_black_point">Crna točka</string>
+    <string name="adj_saturation">Zasićenost</string>
+    <string name="adj_vibrance">Živost</string>
+    <string name="adj_temperature">Toplina</string>
+    <string name="adj_tint">Nijansa</string>
+    <string name="adj_sharpness">Oštrina</string>
+    <string name="adj_vignette">Vinjetiranje</string>
+    <string name="geo_straighten">Ispravi</string>
+    <string name="geo_perspective_vertical">Okomita perspektiva</string>
+    <string name="geo_perspective_horizontal">Vodoravna perspektiva</string>
+    <string name="filter_amount">Jačina</string>
+    <string name="filter_name_none">Original</string>
+    <string name="filter_name_vivid">Živo</string>
+    <string name="filter_name_warm">Toplo</string>
+    <string name="filter_name_cool">Hladno</string>
+    <string name="filter_name_mono">Mono</string>
+    <string name="filter_name_noir">Noir</string>
+    <string name="filter_name_fade">Izblijedjelo</string>
+    <string name="filter_name_chrome">Krom</string>
+    <string name="filter_name_sepia">Sepija</string>
+    <string name="crop_rotate">Zakreni</string>
+    <string name="crop_flip">Preokreni</string>
+    <string name="shape_free">Slobodno</string>
+    <string name="shape_original">Original</string>
+    <string name="shape_square">1:1</string>
+    <string name="shape_4_3">4:3</string>
+    <string name="shape_3_2">3:2</string>
+    <string name="shape_16_9">16:9</string>
+    <string name="action_paste_edits">Zalijepi uređivanja</string>
+    <string name="action_revert_edits">Ukloni uređivanja</string>
+    <plurals name="edits_pasted">
+        <item quantity="one">Uređivanja primijenjena na %d fotografiju</item>
+        <item quantity="few">Uređivanja primijenjena na %d fotografije</item>
+        <item quantity="other">Uređivanja primijenjena na %d fotografija</item>
+    </plurals>
+    <plurals name="edits_reverted">
+        <item quantity="one">Uređivanje uklonjeno s %d fotografije; original je onakav kakav je oduvijek bio</item>
+        <item quantity="few">Uređivanja uklonjena s %d fotografije; originali su onakvi kakvi su oduvijek bili</item>
+        <item quantity="other">Uređivanja uklonjena s %d fotografija; originali su onakvi kakvi su oduvijek bili</item>
+    </plurals>
+
+    <!-- Accessibility -->
+    <string name="slider_reset">Vrati na neutralno</string>
+    <string name="crop_area">Područje obrezivanja, od %1$d %% do %2$d %% po širini i od %3$d %% do %4$d %% po visini</string>
+    <string name="crop_action_smaller">Smanji obrezivanje</string>
+    <string name="crop_action_larger">Povećaj obrezivanje</string>
+    <string name="crop_action_left">Pomakni obrezivanje ulijevo</string>
+    <string name="crop_action_right">Pomakni obrezivanje udesno</string>
+    <string name="crop_action_up">Pomakni obrezivanje prema gore</string>
+    <string name="crop_action_down">Pomakni obrezivanje prema dolje</string>
+    <string name="viewer_zoom_in">Povećaj</string>
+    <string name="viewer_zoom_out">Smanji</string>
+    <string name="external_photo">Fotografija</string>
+    <string name="viewer_cannot_display">Ova se fotografija ne može prikazati.</string>
+
+    <!-- Info: caption, editing the date and location, what the photo shows -->
+    <string name="info_caption">Opis</string>
+    <string name="caption_add">Dodaj opis</string>
+    <string name="caption_edit">Uredi opis</string>
+    <string name="caption_title">Opis</string>
+    <string name="caption_hint">Nekoliko riječi o ovoj fotografiji</string>
+    <string name="caption_note">Čuva se samo u eikonu; datoteka fotografije ne mijenja se. Pretraživanje ga pronalazi.</string>
+    <string name="date_change">Promijeni datum i vrijeme</string>
+    <string name="date_revert">Vrati izvorni datum</string>
+    <string name="date_time_title">Doba dana</string>
+    <string name="action_next">Dalje</string>
+    <string name="location_title">Gdje je snimljena</string>
+    <string name="location_coordinates">Koordinate</string>
+    <string name="location_coordinates_note">Decimalni stupnjevi, prvo zemljopisna širina: 41.9028, 12.4964</string>
+    <string name="location_invalid">Nije pozicija: dva broja, zemljopisna širina između -90 i 90 i zemljopisna dužina između -180 i 180</string>
+    <string name="location_city">Ili pronađite grad (radi izvan mreže)</string>
+    <string name="location_remove">Ukloni lokaciju</string>
+    <string name="location_change">Promijeni lokaciju</string>
+    <string name="location_revert">Vrati izvornu lokaciju</string>
+    <string name="info_map_description">Mala karta koja prikazuje gdje je fotografija snimljena</string>
+    <string name="metadata_done">Gotovo. Fotografija sada navodi ovo; original je sačuvan kako biste ga mogli vratiti.</string>
+    <string name="metadata_not_writable">Ova se vrsta datoteke ne može mijenjati.</string>
+    <string name="metadata_needs_permission">Da bi promijenio datum ili lokaciju fotografije, eikon mora moći čitati gdje su fotografije snimljene: bez toga mu Android prikazuje kopiju bez lokacije, a spremanje bi je izbrisalo.</string>
+    <string name="metadata_nothing_to_revert">Nema što vratiti.</string>
+    <string name="metadata_interrupted">Prethodna promjena ove fotografije nije dovršena. Njezin je original sačuvan: vratite ga prije nego što promijenite bilo što drugo.</string>
+    <string name="metadata_failed">Promjena nije uspjela. Fotografija je vraćena točno onakva kakva je bila.</string>
+    <string name="metadata_restore_file">Vrati izvornu datoteku</string>
+    <string name="info_albums">U albumima</string>
+    <string name="info_pets">Kućni ljubimci</string>
+    <string name="info_shows">Možda prikazuje</string>
+    <string name="pet_dog">Pas</string>
+    <string name="pet_cat">Mačka</string>
+    <string name="info_album">Album uređaja</string>
+    <string name="label_landscape">Krajolik</string>
+    <string name="label_beach">Plažu</string>
+    <string name="label_sea">More</string>
+    <string name="label_mountain">Planinu</string>
+    <string name="label_sunset">Zalazak sunca</string>
+    <string name="label_snow">Snijeg</string>
+    <string name="label_city">Grad</string>
+    <string name="label_building">Zgradu</string>
+    <string name="label_street">Ulicu</string>
+    <string name="label_woods">Šumu</string>
+    <string name="label_flower">Cvijet</string>
+    <string name="label_sky">Nebo</string>
+    <string name="label_person">Osobu</string>
+    <string name="label_group">Skupinu ljudi</string>
+    <string name="label_food">Hranu</string>
+    <string name="label_dessert">Desert</string>
+    <string name="label_drink">Piće</string>
+    <string name="label_car">Automobil</string>
+    <string name="label_bicycle">Bicikl</string>
+    <string name="label_airplane">Zrakoplov</string>
+    <string name="label_boat">Brod</string>
+    <string name="label_bird">Pticu</string>
+    <string name="label_horse">Konja</string>
+    <string name="label_interior">Sobu</string>
+    <string name="label_night">Noć</string>
+    <string name="label_party">Zabavu</string>
+    <string name="label_sport">Sportski događaj</string>
+    <string name="label_animal">Životinju</string>
+
+    <!-- Backup to your own server -->
+    <string name="backup_title">Sigurnosna kopija na vlastiti poslužitelj</string>
+    <string name="backup_intro">Kopira vaše fotografije i videozapise na poslužitelj kojim upravljate sami, putem šifrirane veze. Ništa ne napušta ovaj telefon dok ne uključite sigurnosnu kopiju, sve ide samo na poslužitelj naveden u nastavku, a eikon na njemu nikada ništa ne briše niti mijenja. Zaporka ili ključ pohranjuje se šifrirano u Android Keystoreu.</string>
+    <string name="backup_kind_immich">Immich (i ono što instalira Umbrel)</string>
+    <string name="backup_kind_nextcloud">Nextcloud ili bilo koji WebDAV poslužitelj</string>
+    <string name="backup_address">Adresa poslužitelja (https://…)</string>
+    <string name="backup_username">Korisničko ime</string>
+    <string name="backup_folder">Mapa na poslužitelju</string>
+    <string name="backup_api_key">API ključ</string>
+    <string name="backup_app_password">Zaporka aplikacije</string>
+    <string name="backup_secret_saved">Spremljeno. Ostavite prazno da ga zadržite</string>
+    <string name="backup_help_immich">U Immichu: Postavke računa, API ključevi, Novi API ključ. Potrebno dopuštenje je asset.upload.</string>
+    <string name="backup_help_nextcloud">U Nextcloudu: Osobne postavke, Sigurnost, Uređaji i sesije, izradite novu zaporku aplikacije. Upotrijebite nju, a ne zaporku za prijavu.</string>
+    <string name="backup_save_test">Spremi i testiraj vezu</string>
+    <string name="backup_connected">Povezano s %1$s.</string>
+    <string name="backup_failed">Povezivanje nije uspjelo: %1$s</string>
+    <string name="backup_certificate_declined">Certifikatu se nije vjerovalo, pa ništa nije poslano i ništa se neće slati.</string>
+    <string name="backup_certificate_title">Certifikat ovog poslužitelja nije od tijela kojem vaš telefon vjeruje</string>
+    <string name="backup_certificate_body">%1$s je predočio certifikat u nastavku. Usporedite njegov otisak s onim koji prikazuje vaš poslužitelj (na primjer naredbom: openssl x509 -noout -fingerprint -sha256). Vjerujte mu samo ako su identični: od tada se za ovaj poslužitelj prihvaća taj jedan certifikat i nijedan drugi.</string>
+    <string name="backup_certificate_subject">Izdano za: %1$s</string>
+    <string name="backup_certificate_expires">Vrijedi do %1$s</string>
+    <string name="backup_certificate_self_signed">Potpisan je sam sobom, kao što je uobičajeno za certifikat kućnog poslužitelja.</string>
+    <string name="backup_certificate_trust">Vjeruj ovom certifikatu</string>
+    <string name="backup_enable">Izradi sigurnosnu kopiju mojih fotografija i videozapisa</string>
+    <string name="backup_test_first">Prvo spremite i testirajte vezu.</string>
+    <string name="backup_wifi_only">Samo putem Wi-Fija</string>
+    <string name="backup_only_charging">Samo tijekom punjenja</string>
+    <string name="backup_videos">Uključi videozapise</string>
+    <string name="backup_hidden">Uključi skrivene fotografije</string>
+    <string name="backup_hidden_note">Skrivene će se fotografije također poslati na vaš poslužitelj, gdje su vidljive kao i sve ostalo.</string>
+    <string name="backup_confirm_title">Pokrenuti sigurnosnu kopiju?</string>
+    <plurals name="backup_confirm_body">
+        <item quantity="one">%1$d fotografija ili videozapis kopirat će se na %2$s, malo po malo, kad je telefon na mreži koju ste dopustili. Ništa se ne briše na telefonu ni na poslužitelju.</item>
+        <item quantity="few">%1$d fotografije i videozapisa kopirat će se na %2$s, malo po malo, kad je telefon na mreži koju ste dopustili. Ništa se ne briše na telefonu ni na poslužitelju.</item>
+        <item quantity="other">%1$d fotografija i videozapisa kopirat će se na %2$s, malo po malo, kad je telefon na mreži koju ste dopustili. Ništa se ne briše na telefonu ni na poslužitelju.</item>
+    </plurals>
+    <string name="backup_confirm_start">Pokreni</string>
+    <string name="backup_location_note">Android skriva gdje su fotografije snimljene od aplikacija bez dopuštenja za lokacije fotografija, pa kopije na vašem poslužitelju ne bi imale lokaciju.</string>
+    <string name="backup_progress">Kopirano: %1$,d od %2$,d</string>
+    <plurals name="backup_refused">
+        <item quantity="one">Poslužitelj je odbio %1$d fotografiju i neće se ponovno pokušavati dok to ne zatražite.</item>
+        <item quantity="few">Poslužitelj je odbio %1$d fotografije i neće se ponovno pokušavati dok to ne zatražite.</item>
+        <item quantity="other">Poslužitelj je odbio %1$d fotografija i neće se ponovno pokušavati dok to ne zatražite.</item>
+    </plurals>
+    <string name="backup_running">Sigurnosno kopiranje u tijeku…</string>
+    <string name="backup_idle">Čeka se pravi trenutak (mreža koju ste dopustili, baterija nije slaba).</string>
+    <string name="backup_last_run">Posljednje pokretanje %1$s. Poslano: %2$d. Već postoje: %3$d. Odbijeno: %4$d.</string>
+    <string name="backup_stopped">Zaustavilo se jer %1$s</string>
+    <string name="backup_stop_power_save">je uključena Štednja baterije.</string>
+    <string name="backup_stop_thermal">je telefon bio pretopao.</string>
+    <string name="backup_stop_unreachable">poslužitelj nije bio dostupan ili je bio zauzet. Pokušat će ponovno.</string>
+    <string name="backup_stop_unauthorized">poslužitelj nije prihvatio ključ ili zaporku.</string>
+    <string name="backup_stop_untrusted">certifikat poslužitelja nije jedan od onih kojima ste vjerovali.</string>
+    <string name="backup_stop_misconfigured">adresa nije ispravna za ovu vrstu poslužitelja.</string>
+    <string name="backup_stop_refusals">je poslužitelj odbio mnogo datoteka zaredom, što upućuje na ograničenje poslužitelja, a ne na problem s fotografijama.</string>
+    <string name="backup_now">Izradi kopiju odmah</string>
+    <string name="backup_retry_refused">Pokušaj ponovno odbijene</string>
+
+    <!-- Network consent -->
+    <string name="network_allow">Dopusti eikonu upotrebu interneta</string>
+    <string name="network_allow_note">Isključeno dok to ne uključite. eikon koristi mrežu samo za kopiranje vaših fotografija na poslužitelj u nastavku, i to tek nakon što postavite poslužitelj i uključite sigurnosnu kopiju. Kad je ovo isključeno, ništa se ne može nigdje povezati.</string>
+    <string name="settings_privacy_network">eikon može ići na internet samo zbog jedne stvari: neobvezne sigurnosne kopije vaših fotografija na poslužitelj kojim upravljate sami. Ona je isključena dok je ne dopustite (Postavke, Sigurnosna kopija) i ne postavite poslužitelj. Bez analitike, bez oglasa, bez računa, bez Googleovih usluga i bez našeg oblaka: nema ga.</string>
+
+    <!-- First-run screens -->
+    <string name="onboarding_intro_title">Vaše fotografije, na vašem telefonu</string>
+    <string name="onboarding_intro_body">eikon je galerija fotografija i videozapisa za Android. Prikazuje slike koje vaš telefon već čuva, pronalazi ih po datumu, mjestu, osobama ili onome što prikazuju te ih uređuje bez dodirivanja originala.</string>
+    <string name="onboarding_point_local">Sve ostaje na ovom uređaju. Bez računa, bez analitike, bez oglasa.</string>
+    <string name="onboarding_point_independent">Ne oslanja se ni na što izvan vašeg telefona: bez Googleovih usluga, bez oblaka, bez poslužitelja trećih strana.</string>
+    <string name="onboarding_point_yours">Ako želite sigurnosnu kopiju, ona ide samo na poslužitelj kojim upravljate sami, i samo ako je postavite.</string>
+    <string name="onboarding_next">Dalje</string>
+    <string name="onboarding_start">Započni</string>
+    <string name="onboarding_page">Stranica %1$d od %2$d</string>
+    <string name="onboarding_permissions_title">Što eikon traži i zašto</string>
+    <string name="onboarding_permissions_intro">Potrebno je samo prvo. Bilo koje od njih možete kasnije promijeniti u Postavkama ili u postavkama telefona.</string>
+    <string name="onboarding_perm_media_title">Fotografije i videozapisi</string>
+    <string name="onboarding_perm_media_body">Da bi eikon mogao prikazati vašu biblioteku. Čita datoteke ondje gdje ih Android već čuva i ne kopira ih nikamo. Ako želite, možete dopustiti samo neke fotografije.</string>
+    <string name="onboarding_perm_location_title">Lokacije fotografija (neobvezno)</string>
+    <string name="onboarding_perm_location_body">Android skriva od aplikacija gdje je fotografija snimljena, osim ako to dopustite. eikon to koristi za prikaz mjesta fotografije na karti izvan mreže i za pretraživanje po mjestu. Mjesta se određuju na telefonu: nijedna se pozicija nikada nikamo ne šalje.</string>
+    <string name="onboarding_perm_network_title">Internet (neobvezno)</string>
+    <string name="onboarding_perm_network_body">Koristi se samo za jednu stvar: kopiranje vaših fotografija na poslužitelj kojim upravljate sami (Immich, Nextcloud), ako ga ikada postavite. Inače se eikon ni s čim ne povezuje. Isključeno je dok ovdje ne uključite, a možete ga bilo kada ponovno isključiti u Postavkama.</string>
+    <string name="onboarding_allow">Dopusti</string>
+    <string name="onboarding_allowed">Dopušteno</string>
+    <string name="onboarding_promise">Ovdje ništa ne ovisi o ničemu izvan vašeg telefona: bez Googleovih usluga, bez računa, bez analitike. Vaše fotografije ostaju na ovom uređaju ili, ako tako odaberete, idu na vaš vlastiti poslužitelj.</string>
+
+    <!-- Support -->
+    <string name="support_title">Podrška</string>
+    <string name="support_body">eikon je besplatan, nema oglasa i ne prati vas. Ako vam se sviđa, možete poslati nekoliko satoshija putem mreže Lightning.</string>
+    <string name="support_button">Doniraj putem Lightninga</string>
+    <string name="support_copied">Nije pronađen nijedan Lightning novčanik — adresa je kopirana: %1$s</string>
+
+    <!-- Analyze now -->
+    <string name="analyze_now_running">Analiza…</string>
+    <string name="analyze_now_hint">Počinje odmah, samo na ovom telefonu, čak i uz Štednju baterije.</string>
+    <string name="analyze_now_hint_off">Prvo gore uključite barem jedan korak.</string>
+    <string name="analyze_now_hint_paused">Analiza je pauzirana: isključite pauzu da biste analizirali odmah.</string>
+
+    <!-- Pictures from other apps -->
+    <string name="viewer_open_in_library">Otvori u biblioteci</string>
+</resources>

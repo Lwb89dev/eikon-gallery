@@ -1,0 +1,728 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Library -->
+    <string name="library_title">Leabharlann</string>
+    <string name="today">Inniu</string>
+    <string name="yesterday">Inné</string>
+    <string name="empty_library">Níl aon ghrianghraf ná físeán ann fós</string>
+    <string name="empty_filter">Ní hionann aon rud agus an scagaire seo</string>
+    <string name="empty_filter_clear">Taispeáin gach rud</string>
+    <string name="sync_progress">An leabharlann á luchtú: %1$,d / %2$,d</string>
+    <string name="sync_failed">Níorbh fhéidir an leabharlann a athnuachan</string>
+    <string name="sync_retry">Bain triail eile as</string>
+    <string name="scrubber_description">Scrollaigh tríd an leabharlann de réir dáta</string>
+
+    <!-- Permissions -->
+    <string name="permission_title">Fanann do ghrianghraif ar do ghléas</string>
+    <string name="permission_body">Teastaíonn rochtain ó eikon ar do ghrianghraif agus ar do fhíseáin chun iad a thaispeáint. Fanann siad ar do ghléas: ní uaslódáiltear tada mura socraíonn tú cúltaca chuig do fhreastalaí féin.</string>
+    <string name="permission_grant">Ceadaigh rochtain</string>
+    <string name="permission_denied">Diúltaíodh an rochtain. Is féidir leat í a cheadú i socruithe an chórais.</string>
+    <string name="permission_open_settings">Oscail na socruithe</string>
+    <string name="limited_banner">Ní thaispeántar ach na grianghraif a roghnaigh tú</string>
+    <string name="limited_select_more">Roghnaigh tuilleadh</string>
+    <string name="limited_allow_all">Ceadaigh gach ceann</string>
+
+    <!-- Menus and filters -->
+    <string name="menu_filter">Scagaire</string>
+    <string name="menu_sort">Sórtáil</string>
+    <string name="menu_settings">Socruithe</string>
+    <string name="menu_more">Tuilleadh roghanna</string>
+    <string name="filter_all">Gach rud</string>
+    <string name="filter_photos">Grianghraif</string>
+    <string name="filter_videos">Físeáin</string>
+    <string name="filter_favorites">Ceanáin</string>
+    <string name="filter_screenshots">Seatanna scáileáin</string>
+    <string name="filter_screen_recordings">Taifeadtaí scáileáin</string>
+    <string name="filter_panoramas">Painéaráim</string>
+    <string name="filter_raw">RAW</string>
+    <string name="filter_clear">Glan an scagaire</string>
+    <string name="sort_by_date_taken">Dáta a tógadh</string>
+    <string name="sort_by_date_added">Dáta a cuireadh leis</string>
+    <string name="sort_newest_first">An ceann is nuaí ar dtús</string>
+    <string name="sort_oldest_first">An ceann is sine ar dtús</string>
+
+    <!-- Selection and actions -->
+    <plurals name="selected_count">
+        <item quantity="one">%d roghnaithe</item>
+        <item quantity="two">%d roghnaithe</item>
+        <item quantity="few">%d roghnaithe</item>
+        <item quantity="many">%d roghnaithe</item>
+        <item quantity="other">%d roghnaithe</item>
+    </plurals>
+    <string name="action_share">Comhroinn</string>
+    <string name="action_favorite">Cuir leis na ceanáin</string>
+    <string name="action_unfavorite">Bain de na ceanáin</string>
+    <string name="action_delete">Scrios</string>
+    <string name="action_info">Eolas</string>
+    <string name="action_back">Ar ais</string>
+    <string name="action_clear_selection">Glan an roghnú</string>
+    <string name="action_select">Roghnaigh</string>
+    <string name="action_failed">Chuaigh rud éigin i gceart</string>
+    <plurals name="moved_to_trash">
+        <item quantity="one">Aistríodh %d mhír go dtí an bruscar. Coinníonn Android é ar feadh 30 lá.</item>
+        <item quantity="two">Aistríodh %d mhír go dtí an bruscar. Coinníonn Android iad ar feadh 30 lá.</item>
+        <item quantity="few">Aistríodh %d mhír go dtí an bruscar. Coinníonn Android iad ar feadh 30 lá.</item>
+        <item quantity="many">Aistríodh %d mír go dtí an bruscar. Coinníonn Android iad ar feadh 30 lá.</item>
+        <item quantity="other">Aistríodh %d mír go dtí an bruscar. Coinníonn Android iad ar feadh 30 lá.</item>
+    </plurals>
+
+    <!-- Accessibility -->
+    <string name="cd_photo">Grianghraf, %1$s</string>
+    <string name="cd_video">Físeán, %1$s, %2$s</string>
+    <string name="cd_edited_badge">Curtha in eagar</string>
+    <string name="cd_favorite_badge">Ceanán</string>
+    <string name="viewer_position">%1$d as %2$d</string>
+
+    <!-- Video -->
+    <string name="video_play">Seinn</string>
+    <string name="video_pause">Cuir ar sos</string>
+    <string name="video_mute">Balbhaigh</string>
+    <string name="video_unmute">Díbhalbhaigh</string>
+    <string name="video_seek">Cuardaigh</string>
+
+    <!-- Info panel -->
+    <string name="info_title">Eolas</string>
+    <string name="info_loading">Sonraí á léamh…</string>
+    <string name="info_error">Níorbh fhéidir sonraí an chomhaid seo a léamh</string>
+    <string name="info_section_file">Comhad</string>
+    <string name="info_section_camera">Ceamara</string>
+    <string name="info_section_video">Físeán</string>
+    <string name="info_name">Ainm</string>
+    <string name="info_type">Cineál</string>
+    <string name="info_folder">Fillteán</string>
+    <string name="info_resolution">Taifeach</string>
+    <string name="info_megapixels">Meigeapicteilín</string>
+    <string name="info_size">Méid</string>
+    <string name="info_date">Dáta</string>
+    <string name="info_modified">Athraithe</string>
+    <string name="info_color_profile">Próifíl dathanna</string>
+    <string name="info_location">Suíomh</string>
+    <string name="info_location_none">Níl aon suíomh sábháilte sa chomhad seo</string>
+    <string name="info_location_hidden">Folaíonn Android suímh na ngrianghraf ó aipeanna go dtí go gceadaíonn tú é</string>
+    <string name="info_location_allow">Ceadaigh</string>
+    <string name="info_location_open">Oscail in aip léarscáile</string>
+    <string name="info_camera">Gléas</string>
+    <string name="info_lens">Lionsa</string>
+    <string name="info_focal_length">Fad fócasach</string>
+    <string name="info_aperture">Cró</string>
+    <string name="info_shutter">Luas an dúnchla</string>
+    <string name="info_iso">Íogaireacht</string>
+    <string name="info_exposure_bias">Ceartú nochta</string>
+    <string name="info_flash">Splanc</string>
+    <string name="info_flash_fired">Las sé</string>
+    <string name="info_flash_off">Níor las sé</string>
+    <string name="info_orientation">Treoshuíomh</string>
+    <string name="info_software">Bogearraí</string>
+    <string name="info_duration">Fad</string>
+    <string name="info_frame_rate">Ráta fráma</string>
+    <string name="info_video_codec">Códach físe</string>
+    <string name="info_audio_codec">Códach fuaime</string>
+    <string name="info_bitrate">Ráta giotán</string>
+    <string name="info_dynamic_range">Raon dinimiciúil</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Socruithe</string>
+    <string name="settings_appearance">Cuma</string>
+    <string name="theme_system">Lean an córas</string>
+    <string name="theme_light">Éadrom</string>
+    <string name="theme_dark">Dorcha</string>
+    <string name="settings_privacy">Príobháideacht</string>
+    <string name="settings_privacy_body">Oibríonn eikon ar do ghléas. Níl cuntas ná anailísíocht úsáide ann, agus fágtar a shonraí lasmuigh de chúltacaí Android.\n\nNíl do ghrianghraif cóipeáilte riamh: coinníonn eikon innéacs áitiúil le sonraí na gcomhad (ainm, dáta, méid, fillteán) ionas go n-osclaíonn an leabharlann láithreach. Nuair a scriosann tú an aip, scriostar an t-innéacs freisin.</string>
+    <string name="settings_storage_encrypted">Tá bunachar sonraí na leabharlainne (an t-innéacs, albaim, eagarthóireacht, fotheidil agus an méid a fuair an anailís) criptithe ar an bhfón seo le AES-256. Coinníonn Android Keystore a eochair.</string>
+    <string name="settings_storage_not_encrypted">Níorbh fhéidir bunachar sonraí na leabharlainne a chriptiú (%1$s), mar sin tá sé stóráilte gan chriptiú i gcónaí. Déanann eikon iarracht arís gach uair a thosaíonn sé.</string>
+    <string name="settings_storage_reset_title">Cuireadh tús úr le bunachar sonraí na leabharlainne</string>
+    <string name="settings_storage_reset">Cailleadh an eochair a chosain bunachar sonraí na leabharlainne, agus b’éigean d’eikon ceann nua a chruthú. Tá na halbaim, an eagarthóireacht, na fotheidil agus na hainmneacha a chuir tú leis imithe. Níor baineadh le do ghrianghraif, agus rithfidh an anailís arís.</string>
+    <string name="settings_storage_reset_ok">Tuigim</string>
+    <string name="settings_about">Maidir leis</string>
+    <string name="settings_licenses">Ceadúnais foinse oscailte</string>
+    <string name="licenses_title">Ceadúnais foinse oscailte</string>
+    <string name="settings_version">Leagan %1$s</string>
+
+    <!-- Navigation and collections -->
+    <string name="nav_library">Leabharlann</string>
+    <string name="nav_search">Cuardaigh</string>
+    <string name="nav_collections">Bailiúcháin</string>
+    <string name="collections_title">Bailiúcháin</string>
+    <string name="section_people">Daoine</string>
+    <string name="section_albums">Albaim</string>
+    <string name="section_personal">Pearsanta</string>
+    <string name="section_folders">Fillteáin an ghléis</string>
+    <string name="collection_favorites">Ceanáin</string>
+    <string name="collection_recent">Curtha leis le déanaí</string>
+    <string name="collection_videos">Físeáin</string>
+    <string name="collection_screenshots">Seatanna scáileáin</string>
+    <string name="collection_screen_recordings">Taifeadtaí scáileáin</string>
+    <string name="collection_panoramas">Painéaráim</string>
+    <string name="collection_raw">RAW</string>
+    <string name="collection_trash">Scriosta le déanaí</string>
+    <string name="collection_hidden">Folaithe</string>
+    <plurals name="items_count">
+        <item quantity="one">%d mhír</item>
+        <item quantity="two">%d mhír</item>
+        <item quantity="few">%d mhír</item>
+        <item quantity="many">%d mír</item>
+        <item quantity="other">%d mír</item>
+    </plurals>
+    <string name="empty_album">Tá an t-albam seo folamh. Roghnaigh grianghraif sa leabharlann agus roghnaigh “Cuir le halbam”.</string>
+    <string name="empty_hidden">Níl aon rud folaithe</string>
+    <string name="empty_collection">Níl aon rud anseo fós</string>
+
+    <!-- Albums -->
+    <string name="album_new">Albam nua</string>
+    <string name="album_name_hint">Ainm an albaim</string>
+    <string name="album_create">Cruthaigh</string>
+    <string name="album_rename">Athainmnigh</string>
+    <string name="album_delete">Scrios an t-albam</string>
+    <string name="album_delete_title">An scriosfaidh tú an t-albam seo?</string>
+    <string name="album_delete_message">Ní scriostar ach an t-albam. Fanann na grianghraif agus na físeáin ann san áit a bhfuil siad.</string>
+    <string name="album_move_earlier">Bog níos luaithe</string>
+    <string name="album_move_later">Bog níos déanaí</string>
+    <string name="action_add_to_album">Cuir le halbam</string>
+    <string name="action_remove_from_album">Bain den albam</string>
+    <string name="action_hide">Folaigh</string>
+    <string name="action_unhide">Taispeáin</string>
+    <string name="action_cancel">Cealaigh</string>
+    <string name="action_save">Sábháil</string>
+    <plurals name="added_to_album">
+        <item quantity="one">Cuireadh %1$d mhír le “%2$s”</item>
+        <item quantity="two">Cuireadh %1$d mhír le “%2$s”</item>
+        <item quantity="few">Cuireadh %1$d mhír le “%2$s”</item>
+        <item quantity="many">Cuireadh %1$d mír le “%2$s”</item>
+        <item quantity="other">Cuireadh %1$d mír le “%2$s”</item>
+    </plurals>
+    <plurals name="removed_from_album">
+        <item quantity="one">Baineadh %d mhír den albam</item>
+        <item quantity="two">Baineadh %d mhír den albam</item>
+        <item quantity="few">Baineadh %d mhír den albam</item>
+        <item quantity="many">Baineadh %d mír den albam</item>
+        <item quantity="other">Baineadh %d mír den albam</item>
+    </plurals>
+    <plurals name="moved_to_hidden">
+        <item quantity="one">Folaíodh %d mhír. Gheobhaidh tú é in Bailiúcháin, Folaithe.</item>
+        <item quantity="two">Folaíodh %d mhír. Gheobhaidh tú iad in Bailiúcháin, Folaithe.</item>
+        <item quantity="few">Folaíodh %d mhír. Gheobhaidh tú iad in Bailiúcháin, Folaithe.</item>
+        <item quantity="many">Folaíodh %d mír. Gheobhaidh tú iad in Bailiúcháin, Folaithe.</item>
+        <item quantity="other">Folaíodh %d mír. Gheobhaidh tú iad in Bailiúcháin, Folaithe.</item>
+    </plurals>
+    <plurals name="unhidden">
+        <item quantity="one">Tá %d mhír le feiceáil arís</item>
+        <item quantity="two">Tá %d mhír le feiceáil arís</item>
+        <item quantity="few">Tá %d mhír le feiceáil arís</item>
+        <item quantity="many">Tá %d mír le feiceáil arís</item>
+        <item quantity="other">Tá %d mír le feiceáil arís</item>
+    </plurals>
+
+    <!-- Filters -->
+    <string name="filter_type_title">Cineál</string>
+    <string name="filter_kind_title">Saghas</string>
+    <string name="filter_any">Aon cheann</string>
+    <string name="filter_favorites_only">Ceanáin amháin</string>
+    <string name="filter_edited">Curtha in eagar</string>
+    <string name="share_preparing">Grianghraif curtha in eagar á n-ullmhú le comhroinnt</string>
+    <string name="filter_edited_only">Curtha in eagar amháin</string>
+    <string name="filter_clear_all">Glan na scagairí</string>
+
+    <!-- Locks -->
+    <string name="locked_title">Faoi ghlas</string>
+    <string name="locked_body">Úsáid do mhéarloirg, d’aghaidh nó glas an scáileáin chun é seo a oscailt.</string>
+    <string name="locked_unlock">Díghlasáil</string>
+    <string name="auth_subtitle">Deimhnigh gur tusa atá ann</string>
+    <string name="auth_title_hidden">Díghlasáil “Folaithe”</string>
+    <string name="auth_title_trash">Díghlasáil “Scriosta le déanaí”</string>
+    <string name="auth_unavailable">Níl fíordheimhniú ar fáil faoi láthair. Bain triail eile as i gceann tamaill.</string>
+    <string name="no_device_lock_notice">Níl glas scáileáin ar an bhfón seo, mar sin níl “Folaithe” cosanta. Socraigh ceann i socruithe an chórais.</string>
+
+    <!-- Recently deleted -->
+    <string name="trash_info">Scriostar míreanna go buan tar éis thart ar 30 lá.</string>
+    <string name="trash_empty">Níor scriosadh aon rud le déanaí</string>
+    <string name="trash_restore">Athchóirigh</string>
+    <string name="trash_delete_forever">Scrios go buan</string>
+    <plurals name="days_left_short">
+        <item quantity="one">%d l</item>
+        <item quantity="two">%d l</item>
+        <item quantity="few">%d l</item>
+        <item quantity="many">%d l</item>
+        <item quantity="other">%d l</item>
+    </plurals>
+    <plurals name="trash_restored">
+        <item quantity="one">Athchóiríodh %d mhír</item>
+        <item quantity="two">Athchóiríodh %d mhír</item>
+        <item quantity="few">Athchóiríodh %d mhír</item>
+        <item quantity="many">Athchóiríodh %d mír</item>
+        <item quantity="other">Athchóiríodh %d mír</item>
+    </plurals>
+    <plurals name="trash_deleted">
+        <item quantity="one">Scriosadh %d mhír go buan</item>
+        <item quantity="two">Scriosadh %d mhír go buan</item>
+        <item quantity="few">Scriosadh %d mhír go buan</item>
+        <item quantity="many">Scriosadh %d mír go buan</item>
+        <item quantity="other">Scriosadh %d mír go buan</item>
+    </plurals>
+
+    <!-- Settings: security -->
+    <string name="settings_security">Slándáil</string>
+    <string name="setting_lock_hidden">Iarr fíordheimhniú do “Folaithe”</string>
+    <string name="setting_lock_trash">Iarr fíordheimhniú do “Scriosta le déanaí”</string>
+    <string name="setting_show_hidden">Taispeáin “Folaithe” sna Bailiúcháin</string>
+    <string name="setting_secure_screens">Folaigh eikon in aipeanna le déanaí agus bac seatanna scáileáin</string>
+    <string name="settings_security_body">Fágtar míreanna folaithe lasmuigh den leabharlann, de na bailiúcháin agus den chuardach, agus iarrtar do mhéarloirg, d’aghaidh nó glas an scáileáin chun “Folaithe” a oscailt. Níl na comhaid féin criptithe agus fanann siad i ngnáthstóras d’fhóin, áit a bhfuil aipeanna eile a bhfuil rochtain acu ar ghrianghraif in ann iad a fheiceáil fós.</string>
+
+    <!-- Search -->
+    <string name="search_placeholder">Dáta, áit, téacs, ainm comhaid</string>
+    <string name="search_clear">Glan an cuardach</string>
+    <string name="search_no_results">Ní hionann aon ghrianghraf agus é</string>
+    <string name="search_hint_title">Cuardaigh do leabharlann</string>
+    <string name="search_hint_body">Bain triail as dáta (“August 2025”, “yesterday”), áit (“Rome”, “Tuscany”), focal a fheictear i ngrianghraf nó ina ainm comhaid, nó saghas (“videos”, “screenshots”, “favorites”).\n\nTuigtear dátaí agus saghsanna i mBéarla agus in Iodáilis. Faightear áiteanna, téacs i ngrianghraif agus an méid a thaispeánann siad tar éis an anailís a rith (Socruithe, Anailís).</string>
+    <string name="search_analysis_off">Tá cuardach de réir áite, de réir téacs i ngrianghraif agus de réir an méid a thaispeánann siad múchta. Is féidir leat é a chur ar siúl in Socruithe, Anailís.</string>
+    <string name="search_analysis_note">Tá na grianghraif á n-anailísiú sa chúlra fós (%1$d %%). D’fhéadfadh roinnt torthaí a bheith ar iarraidh.</string>
+
+    <!-- Settings: analysis -->
+    <string name="settings_analysis">Anailís</string>
+    <string name="analysis_places_progress">Áiteanna: %1$,d as %2$,d</string>
+    <string name="analysis_semantic_progress">An méid a thaispeánann grianghraif: %1$,d as %2$,d</string>
+    <string name="analysis_semantic_unavailable">Níorbh fhéidir an tsamhail a aithníonn an méid a thaispeánann grianghraif a luchtú, mar sin níl an chéim seo ag rith.</string>
+    <string name="search_semantic_unavailable">Níl cuardach de réir an méid a thaispeánann grianghraif ar fáil faoi láthair (níorbh fhéidir an tsamhail a luchtú). Oibríonn na torthaí eile fós.</string>
+    <string name="analysis_people_progress">Daoine: %1$,d as %2$,d</string>
+    <string name="analysis_people_unavailable">Níorbh fhéidir na samhlacha a aimsíonn aghaidheanna a luchtú, mar sin níl an chéim seo ag rith.</string>
+    <string name="analysis_duplicates_progress">Dúbláin: %1$,d as %2$,d</string>
+    <string name="analysis_text_progress">Téacs i ngrianghraif: %1$,d as %2$,d</string>
+    <string name="analysis_running">Anailís ar siúl anois…</string>
+    <string name="analysis_idle">Ag fanacht leis an nóiméad ceart (níl an ceallra íseal, tá Sábháil cadhnraí múchta agus, má roghnaigh tú é, é á luchtú)</string>
+    <string name="analysis_up_to_date">Tá gach rud anailísithe</string>
+    <string name="setting_pause_analysis">Cuir an anailís ar sos</string>
+    <string name="setting_only_charging">Le linn luchtaithe amháin</string>
+    <string name="setting_analyze_places">Aimsigh grianghraif de réir áite</string>
+    <string name="setting_analyze_semantic">Aimsigh grianghraif de réir an méid a thaispeánann siad</string>
+    <string name="setting_analyze_people">Aimsigh daoine i ngrianghraif</string>
+    <string name="setting_analyze_people_note">Aimsítear agus déantar comparáid idir aghaidheanna ar an bhfón seo amháin. Ní fhágann aon rud faoi aghaidh é riamh, agus ní dhéanann eikon iarracht riamh aon duine a aithint: ní dhéanann sé ach aghaidheanna atá cosúil lena chéile a ghrúpáil, agus tusa a ainmníonn na grúpaí.</string>
+    <string name="setting_analyze_duplicates">Aimsigh grianghraif dúbailte</string>
+    <string name="setting_analyze_text">Aimsigh téacs i ngrianghraif</string>
+    <string name="analysis_location_permission">Folaíonn Android ó aipeanna cá ndearnadh na grianghraif go dtí go gceadaíonn tú é.</string>
+    <string name="analysis_allow_locations">Ceadaigh rochtain ar shuímh na ngrianghraf</string>
+    <string name="analyze_now">Anailísigh anois</string>
+    <string name="settings_analysis_body">Ritheann an anailís ar d’fhón amháin, sa chúlra, agus téann sí ar sos nuair a bhíonn an ceallra íseal, nuair a bhíonn Sábháil cadhnraí ar siúl nó nuair a théann an fón te (leanann “Anailísigh anois” ar aghaidh le Sábháil cadhnraí freisin). Stórálann sí áit gach grianghraif (socraithe as líne, ní sheoltar aon suíomh áit ar bith riamh), tuairisc uimhriúil ar an méid a thaispeánann an grianghraf (ionas gur féidir leat “madra” nó “luí gréine” a chuardach; ní fotheideal é agus ní féidir é a léamh ar ais mar íomhá) agus aon téacs a léann sí sa ghrianghraf, ionas go bhfaighidh an Cuardach iad. Má chuireann tú daoine ar siúl, stórálann sí freisin cá bhfuil gach aghaidh i ngrianghraf agus tuairisc uimhriúil uirthi, chun aghaidheanna atá cosúil lena chéile a ghrúpáil amháin. Má chuireann tú dúbláin ar siúl, stórálann sí méarlorg ghearr de gach grianghraf agus de chomhaid den mhéid céanna, chun cóipeanna a aimsiú amháin. Tá aithint an mhéid a thaispeánann grianghraif agus téacs a léamh mall agus cuireann siad ualach mór ar an bpróiseálaí, agus is é sin an fáth go bhfanann an anailís le luchtú de réir réamhshocraithe.</string>
+
+    <!-- Info panel: derived data -->
+    <string name="info_place">An áit is gaire</string>
+    <string name="info_text_found">Téacs sa ghrianghraf seo</string>
+    <string name="info_text_copy">Cóipeáil an téacs</string>
+
+    <!-- People -->
+    <string name="collection_people">Daoine</string>
+    <string name="people_title">Daoine</string>
+    <string name="person_unnamed">Duine gan ainm</string>
+    <string name="person_add_name">Cuir ainm leis</string>
+    <string name="person_rename">Ainmnigh an duine seo</string>
+    <string name="person_name_hint">Ainm</string>
+    <string name="person_same_name_note">Cumasctar daoine a bhfuil an t-ainm céanna orthu ina nduine amháin.</string>
+    <string name="person_favorite">Marcáil mar cheanán</string>
+    <string name="person_unfavorite">Bain de na ceanáin</string>
+    <string name="person_hide">Folaigh an duine seo</string>
+    <string name="person_unhide">Taispeáin an duine seo</string>
+    <string name="person_merge">Cumaisc le duine eile…</string>
+    <string name="person_merge_title">Cumaisc le</string>
+    <string name="person_merge_empty">Níl aon duine eile ann le cumasc leis.</string>
+    <string name="person_not_this">Ní hé an duine seo é</string>
+    <string name="person_remove_from_people">Ní aghaidh é</string>
+    <string name="people_show_hidden">Taispeáin daoine folaithe (%1$d)</string>
+    <string name="people_hide_hidden">Folaigh daoine folaithe</string>
+    <string name="people_empty_off">Tá Daoine múchta. Cuir “Aimsigh daoine i ngrianghraif” ar siúl in Socruithe, Anailís, agus grúpálfaidh eikon na haghaidheanna a aimsíonn sé. Fanann gach rud ar an bhfón seo.</string>
+    <string name="people_empty_working">Níor aimsíodh aon aghaidh fós (%1$d %% de do ghrianghraif anailísithe). Ritheann an anailís sa chúlra le linn luchtaithe.</string>
+    <string name="people_empty_done">Níor aimsíodh aon aghaidh i do ghrianghraif.</string>
+    <string name="people_go_settings">Oscail na socruithe</string>
+    <string name="person_photos_empty">Gan grianghraif.</string>
+    <plurals name="moved_to_new_person">
+        <item quantity="one">Aistríodh %d ghrianghraf chuig duine nua</item>
+        <item quantity="two">Aistríodh %d ghrianghraf chuig duine nua</item>
+        <item quantity="few">Aistríodh %d ghrianghraf chuig duine nua</item>
+        <item quantity="many">Aistríodh %d ngrianghraf chuig duine nua</item>
+        <item quantity="other">Aistríodh %d grianghraf chuig duine nua</item>
+    </plurals>
+    <plurals name="removed_from_people">
+        <item quantity="one">Baineadh %d ghrianghraf de Daoine</item>
+        <item quantity="two">Baineadh %d ghrianghraf de Daoine</item>
+        <item quantity="few">Baineadh %d ghrianghraf de Daoine</item>
+        <item quantity="many">Baineadh %d ngrianghraf de Daoine</item>
+        <item quantity="other">Baineadh %d grianghraf de Daoine</item>
+    </plurals>
+    <string name="info_people">Daoine</string>
+    <plurals name="info_people_unnamed_count">
+        <item quantity="one">%d gan ainm</item>
+        <item quantity="two">%d gan ainm</item>
+        <item quantity="few">%d gan ainm</item>
+        <item quantity="many">%d gan ainm</item>
+        <item quantity="other">%d gan ainm</item>
+    </plurals>
+
+    <string name="section_memories">Cuimhní</string>
+    <string name="section_pets">Peataí</string>
+    <string name="collection_dogs">Madraí</string>
+    <string name="collection_cats">Cait</string>
+    <string name="empty_pets">Níor aimsíodh aon mhadra ná cat fós. Aithnítear peataí ar an méid a thaispeánann grianghraif: cuir “Aimsigh grianghraif de réir an méid a thaispeánann siad” ar siúl in Socruithe, Anailís, agus fan go gcríochnóidh sé.</string>
+
+    <!-- Places -->
+    <string name="places_title">Áiteanna</string>
+    <string name="places_tab_list">Liosta</string>
+    <string name="places_tab_map">Léarscáil</string>
+    <string name="place_unknown">Áiteanna eile</string>
+    <string name="place_near">In aice le %1$s</string>
+    <string name="places_expand">Taispeáin</string>
+    <string name="places_collapse">Folaigh</string>
+    <string name="collection_places">Áiteanna</string>
+    <string name="places_map_note">Imlínte tíortha agus ainmneacha cathracha móra amháin: ní íoslódáiltear aon íomhánna léarscáile agus ní fhágann aon suíomh an fón riamh. Tarraing le dhá mhéar nó tapáil faoi dhó chun súmáil, tapáil marcóir chun a ghrianghraif a fheiceáil.</string>
+    <string name="places_map_description">Léarscáil de na háiteanna inar tógadh do ghrianghraif, le marcóirí do ghrúpaí grianghraf</string>
+    <string name="places_empty_off">Tá Áiteanna múchta. Cuir “Aimsigh grianghraif de réir áite” ar siúl in Socruithe, Anailís, agus oibreoidh eikon amach as líne cá ndearnadh do ghrianghraif óna sonraí GPS.</string>
+    <string name="places_empty_working">Níor aimsíodh aon áit fós (%1$d %% de do ghrianghraif anailísithe). Ritheann an anailís sa chúlra le linn luchtaithe.</string>
+    <string name="places_empty_done">Níl suíomh ag aon cheann de do ghrianghraif, nó b’fhéidir nach bhfuil cead ag eikon suímh grianghraf a léamh (Socruithe, Anailís).</string>
+    <string name="section_places">Áiteanna agus turais</string>
+
+    <!-- Trips -->
+    <string name="collection_trips">Turais</string>
+    <string name="trips_title">Turais</string>
+    <string name="trip_untitled">Turas</string>
+    <string name="trip_reason">Thart ar %1$d km ón áit ina dtógtar an chuid is mó de do ghrianghraif (in aice le %2$s)</string>
+    <string name="trip_home_unknown">áit anaithnid</string>
+    <plurals name="trip_summary_days">
+        <item quantity="one">%d lá</item>
+        <item quantity="two">%d lá</item>
+        <item quantity="few">%d lá</item>
+        <item quantity="many">%d lá</item>
+        <item quantity="other">%d lá</item>
+    </plurals>
+    <string name="trips_empty">Níor aimsíodh aon turas. Is é turas ná sraith laethanta, le 10 ngrianghraf ar a laghad, a chaith tú 100 km ar a laghad ón áit ina dtógtar an chuid is mó de do ghrianghraif. Chuige sin, teastaíonn suímh na ngrianghraf ó eikon: cuir “Aimsigh grianghraif de réir áite” ar siúl in Socruithe, Anailís.</string>
+
+    <!-- Duplicates and similar shots -->
+    <string name="section_cleanup">Glanadh</string>
+    <string name="collection_duplicates">Dúbláin</string>
+    <string name="collection_similar">Grianghraif chosúla</string>
+    <string name="duplicates_title">Dúbláin</string>
+    <string name="similar_title">Grianghraif chosúla</string>
+    <string name="duplicates_note">Ní dhéanann eikon ach iad a aimsiú. Ní bhaintear aon rud go dtí go ndeimhníonn tú i mbosca dialóige Android féin, agus téann grianghraif a bhaintear go “Scriosta le déanaí”, áit ar féidir leat iad a athchóiriú. I gcás cóipeanna de ghrianghraf a chuir tú le halbaim: cuirtear an chóip a choinníonn tú leis na halbaim sin.</string>
+    <plurals name="duplicate_exact">
+        <item quantity="one">%d chomhad comhionann</item>
+        <item quantity="two">%d chomhad comhionann</item>
+        <item quantity="few">%d chomhad comhionann</item>
+        <item quantity="many">%d gcomhad comhionann</item>
+        <item quantity="other">%d comhad comhionann</item>
+    </plurals>
+    <plurals name="duplicate_visual">
+        <item quantity="one">%d chóip den íomhá chéanna</item>
+        <item quantity="two">%d chóip den íomhá chéanna</item>
+        <item quantity="few">%d chóip den íomhá chéanna</item>
+        <item quantity="many">%d gcóip den íomhá chéanna</item>
+        <item quantity="other">%d cóip den íomhá chéanna</item>
+    </plurals>
+    <plurals name="similar_group">
+        <item quantity="one">%d ghrianghraf</item>
+        <item quantity="two">%d ghrianghraf chosúil</item>
+        <item quantity="few">%d ghrianghraf chosúil</item>
+        <item quantity="many">%d ngrianghraf chosúil</item>
+        <item quantity="other">%d grianghraf chosúil</item>
+    </plurals>
+    <plurals name="duplicate_keep_best">
+        <item quantity="one">Coinnigh an ceann is fearr, bog %d go “Scriosta le déanaí”</item>
+        <item quantity="two">Coinnigh an ceann is fearr, bog %d go “Scriosta le déanaí”</item>
+        <item quantity="few">Coinnigh an ceann is fearr, bog %d go “Scriosta le déanaí”</item>
+        <item quantity="many">Coinnigh an ceann is fearr, bog %d go “Scriosta le déanaí”</item>
+        <item quantity="other">Coinnigh an ceann is fearr, bog %d go “Scriosta le déanaí”</item>
+    </plurals>
+    <plurals name="similar_trash_marked">
+        <item quantity="one">Bog %d go “Scriosta le déanaí”</item>
+        <item quantity="two">Bog %d go “Scriosta le déanaí”</item>
+        <item quantity="few">Bog %d go “Scriosta le déanaí”</item>
+        <item quantity="many">Bog %d go “Scriosta le déanaí”</item>
+        <item quantity="other">Bog %d go “Scriosta le déanaí”</item>
+    </plurals>
+    <string name="duplicate_best">Is fearr</string>
+    <string name="duplicate_kept">Coinnithe</string>
+    <string name="duplicate_marked">Le bogadh</string>
+    <string name="duplicate_dismiss">Ní dúbláin iad seo</string>
+    <string name="similar_dismiss">Níl siad seo cosúil lena chéile</string>
+    <string name="duplicates_empty_off">Tá Dúbláin múchta. Cuir “Aimsigh grianghraif dúbailte” ar siúl in Socruithe, Anailís. Cruthaíonn eikon méarloirg de do ghrianghraif ar an bhfón seo amháin, gan samhail ar bith.</string>
+    <string name="similar_empty_off">Teastaíonn “Aimsigh grianghraif de réir an méid a thaispeánann siad” ó Grianghraif chosúla in Socruithe, Anailís: déanann sé comparáid idir an méid a thaispeánann gach grianghraf, do ghrianghraif a tógadh laistigh de dhá nóiméad óna chéile.</string>
+    <string name="duplicates_empty_working">Níor aimsíodh aon rud fós (%1$d %% anailísithe). Ritheann an anailís sa chúlra le linn luchtaithe.</string>
+    <string name="duplicates_empty_done">Níor aimsíodh aon dúbláin.</string>
+    <string name="similar_empty_done">Níor aimsíodh aon ghrianghraif chosúla.</string>
+
+    <!-- Memories -->
+    <string name="collection_memories">Cuimhní</string>
+    <string name="memories_title">Cuimhní</string>
+    <string name="memory_on_this_day">Ar an lá seo</string>
+    <string name="memory_year_ago">Bliain ó shin</string>
+    <string name="memory_weekend_in">Deireadh seachtaine i %1$s</string>
+    <string name="memory_weekend">Deireadh seachtaine ar shiúl</string>
+    <string name="memory_day_trip_to">Turas lae go %1$s</string>
+    <string name="memory_day_trip">Turas lae</string>
+    <string name="memory_season">%1$s %2$d</string>
+    <string name="memory_person">%1$s, %2$d</string>
+    <string name="season_winter">Geimhreadh</string>
+    <string name="season_spring">Earrach</string>
+    <string name="season_summer">Samhradh</string>
+    <string name="season_autumn">Fómhar</string>
+    <string name="memory_hide">Folaigh an chuimhne seo</string>
+    <string name="memory_show_fewer">Taispeáin níos lú mar seo</string>
+    <string name="memory_show_less_of">Taispeáin níos lú de %1$s</string>
+    <string name="memory_exclude_date">Fág an dáta seo ar lár</string>
+    <string name="memory_all_photos">Gach grianghraf</string>
+    <string name="memory_replay">Seinn arís</string>
+    <string name="memory_reset">Cealaigh mo roghanna</string>
+    <string name="memory_done">Déanta. Is féidir leat do roghanna a chealú ó roghchlár na gCuimhní.</string>
+    <string name="memories_empty">Níl aon chuimhní ann fós. Cruthaíonn eikon iad ó dhátaí, turais, séasúir agus na daoine a d’ainmnigh tú: “Ar an lá seo”, “Bliain ó shin”, turais agus deireadh seachtainí ar shiúl, séasúr, duine éigin i mbliain. Teastaíonn Áiteanna ó thurais agus ó dheireadh seachtainí, teastaíonn Daoine ó dhaoine (Socruithe, Anailís). Ní fhágann aon rud an fón.</string>
+    <string name="memories_note">Cruthaithe ó dhátaí, áiteanna agus daoine ainmnithe le rialacha simplí; níl aon cheol ann, agus roghnaítear grianghraif de réir ceanán, méid agus aghaidheanna, ní de réir cé chomh maith agus a bhreathnaíonn siad.</string>
+    <string name="memory_no_photos">Níl aon ghrianghraif fágtha ag an gcuimhne seo le taispeáint.</string>
+
+    <!-- Editing -->
+    <string name="action_edit">Cuir in eagar</string>
+    <string name="edit_title">Eagarthóireacht</string>
+    <string name="edit_done">Críochnaithe</string>
+    <string name="edit_original">Bunleagan</string>
+    <string name="edit_revert">Fill</string>
+    <string name="edit_revert_title">An bhfillfidh tú ar an mbunleagan?</string>
+    <string name="edit_revert_message">Glanann sé seo gach coigeartú, an scagaire agus an gearradh ón eagarthóireacht seo. Níor athraíodh an bunghrianghraf riamh. Brúigh Críochnaithe chun an grianghraf fillte a choinneáil.</string>
+    <string name="edit_discard_title">An gcaithfidh tú do chuid athruithe amach?</string>
+    <string name="edit_discard_message">Caillfear na hathruithe a rinne tú san eagarthóir seo. Fanfaidh an grianghraf mar a bhí sé.</string>
+    <string name="edit_discard">Caith amach</string>
+    <string name="edit_copy_edits">Cóipeáil an eagarthóireacht</string>
+    <string name="edit_paste_edits">Greamaigh an eagarthóireacht</string>
+    <string name="edit_save_copy">Sábháil cóip</string>
+    <string name="edit_copy_saved">Sábháladh cóip in aice leis an mbunleagan, nár athraíodh.</string>
+    <string name="edit_copy_saved_no_details">Sábháladh cóip in aice leis an mbunleagan, nár athraíodh. Níorbh fhéidir sonraí an cheamara a chóipeáil.</string>
+    <string name="edit_failed">Níorbh fhéidir an eagarthóireacht a chur i gcrích. Níor athraíodh an grianghraf.</string>
+    <string name="edited_badge">Curtha in eagar</string>
+    <string name="viewer_show_original">Taispeáin an bunleagan</string>
+    <string name="viewer_show_edited">Taispeáin an grianghraf curtha in eagar</string>
+    <string name="tool_auto">Uath</string>
+    <string name="tool_light">Solas</string>
+    <string name="tool_color">Dath</string>
+    <string name="tool_detail">Mionsonraí</string>
+    <string name="tool_filters">Scagairí</string>
+    <string name="tool_crop">Bearr</string>
+    <string name="adj_exposure">Nochtadh</string>
+    <string name="adj_brightness">Gile</string>
+    <string name="adj_contrast">Codarsnacht</string>
+    <string name="adj_highlights">Buaicphointí</string>
+    <string name="adj_shadows">Scáileanna</string>
+    <string name="adj_black_point">Pointe dubh</string>
+    <string name="adj_saturation">Sáithiú</string>
+    <string name="adj_vibrance">Bríomhaire</string>
+    <string name="adj_temperature">Teas</string>
+    <string name="adj_tint">Claochló</string>
+    <string name="adj_sharpness">Géire</string>
+    <string name="adj_vignette">Vignette</string>
+    <string name="geo_straighten">Déan díreach</string>
+    <string name="geo_perspective_vertical">Peirspictíocht ingearach</string>
+    <string name="geo_perspective_horizontal">Peirspictíocht chothrománach</string>
+    <string name="filter_amount">Neart</string>
+    <string name="filter_name_none">Bunleagan</string>
+    <string name="filter_name_vivid">Beoga</string>
+    <string name="filter_name_warm">Te</string>
+    <string name="filter_name_cool">Fionnuar</string>
+    <string name="filter_name_mono">Mona</string>
+    <string name="filter_name_noir">Noir</string>
+    <string name="filter_name_fade">Ídithe</string>
+    <string name="filter_name_chrome">Cróm</string>
+    <string name="filter_name_sepia">Sepia</string>
+    <string name="crop_rotate">Rothlaigh</string>
+    <string name="crop_flip">Iompaigh</string>
+    <string name="shape_free">Saor</string>
+    <string name="shape_original">Bunleagan</string>
+    <string name="shape_square">1:1</string>
+    <string name="shape_4_3">4:3</string>
+    <string name="shape_3_2">3:2</string>
+    <string name="shape_16_9">16:9</string>
+    <string name="action_paste_edits">Greamaigh an eagarthóireacht</string>
+    <string name="action_revert_edits">Bain an eagarthóireacht</string>
+    <plurals name="edits_pasted">
+        <item quantity="one">Cuireadh an eagarthóireacht i bhfeidhm ar %d ghrianghraf</item>
+        <item quantity="two">Cuireadh an eagarthóireacht i bhfeidhm ar %d ghrianghraf</item>
+        <item quantity="few">Cuireadh an eagarthóireacht i bhfeidhm ar %d ghrianghraf</item>
+        <item quantity="many">Cuireadh an eagarthóireacht i bhfeidhm ar %d ngrianghraf</item>
+        <item quantity="other">Cuireadh an eagarthóireacht i bhfeidhm ar %d grianghraf</item>
+    </plurals>
+    <plurals name="edits_reverted">
+        <item quantity="one">Baineadh an eagarthóireacht de %d ghrianghraf; tá an bunleagan mar a bhí riamh</item>
+        <item quantity="two">Baineadh an eagarthóireacht de %d ghrianghraf; tá na bunleaganacha mar a bhí riamh</item>
+        <item quantity="few">Baineadh an eagarthóireacht de %d ghrianghraf; tá na bunleaganacha mar a bhí riamh</item>
+        <item quantity="many">Baineadh an eagarthóireacht de %d ngrianghraf; tá na bunleaganacha mar a bhí riamh</item>
+        <item quantity="other">Baineadh an eagarthóireacht de %d grianghraf; tá na bunleaganacha mar a bhí riamh</item>
+    </plurals>
+
+    <!-- Accessibility -->
+    <string name="slider_reset">Athshocraigh go neodrach</string>
+    <string name="crop_area">Limistéar bearrtha, ó %1$d %% go %2$d %% trasna agus ó %3$d %% go %4$d %% síos</string>
+    <string name="crop_action_smaller">Déan an bearradh níos lú</string>
+    <string name="crop_action_larger">Déan an bearradh níos mó</string>
+    <string name="crop_action_left">Bog an bearradh ar chlé</string>
+    <string name="crop_action_right">Bog an bearradh ar dheis</string>
+    <string name="crop_action_up">Bog an bearradh suas</string>
+    <string name="crop_action_down">Bog an bearradh síos</string>
+    <string name="viewer_zoom_in">Súmáil isteach</string>
+    <string name="viewer_zoom_out">Súmáil amach</string>
+    <string name="external_photo">Grianghraf</string>
+    <string name="viewer_cannot_display">Ní féidir an grianghraf seo a thaispeáint.</string>
+
+    <!-- Info: caption, editing the date and location, what the photo shows -->
+    <string name="info_caption">Fotheideal</string>
+    <string name="caption_add">Cuir fotheideal leis</string>
+    <string name="caption_edit">Cuir an fotheideal in eagar</string>
+    <string name="caption_title">Fotheideal</string>
+    <string name="caption_hint">Cúpla focal faoin ghrianghraf seo</string>
+    <string name="caption_note">Coinnítear in eikon amháin é; ní athraítear comhad an ghrianghraif. Aimsíonn an Cuardach é.</string>
+    <string name="date_change">Athraigh an dáta agus an t-am</string>
+    <string name="date_revert">Athchóirigh an bunáta</string>
+    <string name="date_time_title">Am den lá</string>
+    <string name="action_next">Ar aghaidh</string>
+    <string name="location_title">Cá ndearnadh é</string>
+    <string name="location_coordinates">Comhordanáidí</string>
+    <string name="location_coordinates_note">Céimeanna deachúlacha, domhanleithead ar dtús: 41.9028, 12.4964</string>
+    <string name="location_invalid">Ní suíomh é seo: dhá uimhir, domhanleithead idir -90 agus 90 agus domhanfhad idir -180 agus 180</string>
+    <string name="location_city">Nó aimsigh cathair (oibríonn as líne)</string>
+    <string name="location_remove">Bain an suíomh</string>
+    <string name="location_change">Athraigh an suíomh</string>
+    <string name="location_revert">Athchóirigh an bunsuíomh</string>
+    <string name="info_map_description">Léarscáil bheag a thaispeánann cá ndearnadh an grianghraf</string>
+    <string name="metadata_done">Déanta. Deir an grianghraf seo anois; coinníodh an bunleagan ionas gur féidir leat é a athchóiriú.</string>
+    <string name="metadata_not_writable">Ní féidir an cineál comhaid seo a athrú.</string>
+    <string name="metadata_needs_permission">Chun dáta nó suíomh grianghraif a athrú, caithfidh eikon a bheith in ann a léamh cá ndearnadh na grianghraif: gan é sin, taispeánann Android cóip dó gan an suíomh, agus scriosfadh an sábháil é.</string>
+    <string name="metadata_nothing_to_revert">Níl aon rud le hathchóiriú.</string>
+    <string name="metadata_interrupted">Níor críochnaíodh athrú roimhe seo ar an ngrianghraf seo. Coinníodh a bhunleagan: athchóirigh é sula n-athraíonn tú aon rud eile.</string>
+    <string name="metadata_failed">Níor oibrigh an t-athrú. Cuireadh an grianghraf ar ais díreach mar a bhí sé.</string>
+    <string name="metadata_restore_file">Athchóirigh an bunchomhad</string>
+    <string name="info_albums">In albaim</string>
+    <string name="info_pets">Peataí</string>
+    <string name="info_shows">D’fhéadfadh sé a thaispeáint</string>
+    <string name="pet_dog">Madra</string>
+    <string name="pet_cat">Cat</string>
+    <string name="info_album">Albam an ghléis</string>
+    <string name="label_landscape">Tírdhreach</string>
+    <string name="label_beach">Trá</string>
+    <string name="label_sea">An fharraige</string>
+    <string name="label_mountain">Sliabh</string>
+    <string name="label_sunset">Luí gréine</string>
+    <string name="label_snow">Sneachta</string>
+    <string name="label_city">Cathair</string>
+    <string name="label_building">Foirgneamh</string>
+    <string name="label_street">Sráid</string>
+    <string name="label_woods">Coill</string>
+    <string name="label_flower">Bláth</string>
+    <string name="label_sky">An spéir</string>
+    <string name="label_person">Duine</string>
+    <string name="label_group">Grúpa daoine</string>
+    <string name="label_food">Bia</string>
+    <string name="label_dessert">Milseog</string>
+    <string name="label_drink">Deoch</string>
+    <string name="label_car">Carr</string>
+    <string name="label_bicycle">Rothar</string>
+    <string name="label_airplane">Eitleán</string>
+    <string name="label_boat">Bád</string>
+    <string name="label_bird">Éan</string>
+    <string name="label_horse">Capall</string>
+    <string name="label_interior">Seomra</string>
+    <string name="label_night">Oíche</string>
+    <string name="label_party">Cóisir</string>
+    <string name="label_sport">Imeacht spóirt</string>
+    <string name="label_animal">Ainmhí</string>
+
+    <!-- Backup to your own server -->
+    <string name="backup_title">Cúltaca chuig do fhreastalaí féin</string>
+    <string name="backup_intro">Cóipeálann sé do ghrianghraif agus do fhíseáin chuig freastalaí a reáchtálann tú féin, thar nasc criptithe. Ní fhágann aon rud an fón seo go dtí go gcuireann tú an cúltaca ar siúl, téann gach rud chuig an bhfreastalaí thíos amháin, agus ní scriosann ná ní athraíonn eikon aon rud air riamh. Coinnítear an focal faire nó an eochair criptithe in Android Keystore.</string>
+    <string name="backup_kind_immich">Immich (an rud a shuiteálann Umbrel freisin)</string>
+    <string name="backup_kind_nextcloud">Nextcloud, nó aon fhreastalaí WebDAV</string>
+    <string name="backup_address">Seoladh an fhreastalaí (https://…)</string>
+    <string name="backup_username">Ainm logála isteach</string>
+    <string name="backup_folder">Fillteán ar an bhfreastalaí</string>
+    <string name="backup_api_key">Eochair API</string>
+    <string name="backup_app_password">Focal faire aipe</string>
+    <string name="backup_secret_saved">Sábháilte. Fág folamh chun é a choinneáil</string>
+    <string name="backup_help_immich">In Immich: Socruithe cuntais, Eochracha API, Eochair API nua. An cead a theastaíonn ná asset.upload.</string>
+    <string name="backup_help_nextcloud">In Nextcloud: Socruithe pearsanta, Slándáil, Gléasanna agus seisiúin, cruthaigh focal faire aipe nua. Úsáid é sin, ní do phasfhocal logála isteach.</string>
+    <string name="backup_save_test">Sábháil agus tástáil an nasc</string>
+    <string name="backup_connected">Ceangailte le %1$s.</string>
+    <string name="backup_failed">Níorbh fhéidir ceangal: %1$s</string>
+    <string name="backup_certificate_declined">Níor tugadh iontaoibh don deimhniú, mar sin níor seoladh aon rud agus ní sheolfar.</string>
+    <string name="backup_certificate_title">Ní ó údarás a bhfuil iontaoibh ag d’fhón as an deimhniú seo</string>
+    <string name="backup_certificate_body">Chuir %1$s an deimhniú thíos i láthair. Déan comparáid idir a mhéarlorg agus an ceann a thaispeánann do fhreastalaí (mar shampla le: openssl x509 -noout -fingerprint -sha256). Cuir iontaoibh ann ach amháin má tá siad comhionann: as sin amach glactar leis an deimhniú amháin seo, agus le haon cheann eile, don fhreastalaí seo.</string>
+    <string name="backup_certificate_subject">Eisithe do: %1$s</string>
+    <string name="backup_certificate_expires">Bailí go dtí %1$s</string>
+    <string name="backup_certificate_self_signed">Tá sé sínithe aige féin, mar a bhíonn deimhniú freastalaí baile de ghnáth.</string>
+    <string name="backup_certificate_trust">Cuir iontaoibh sa deimhniú seo</string>
+    <string name="backup_enable">Déan cúltaca de mo ghrianghraif agus de mo fhíseáin</string>
+    <string name="backup_test_first">Sábháil agus tástáil an nasc ar dtús.</string>
+    <string name="backup_wifi_only">Ar Wi-Fi amháin</string>
+    <string name="backup_only_charging">Le linn luchtaithe amháin</string>
+    <string name="backup_videos">Cuir físeáin san áireamh</string>
+    <string name="backup_hidden">Cuir grianghraif fholaithe san áireamh</string>
+    <string name="backup_hidden_note">Seolfar grianghraif fholaithe chuig do fhreastalaí freisin, áit a bhfuil siad chomh infheicthe le gach rud eile ansin.</string>
+    <string name="backup_confirm_title">An gcuirfidh tú tús leis an gcúltaca?</string>
+    <plurals name="backup_confirm_body">
+        <item quantity="one">Cóipeálfar %1$d ghrianghraf nó físeán chuig %2$s, beag ar bheag, nuair a bheidh an fón ar an líonra a cheadaigh tú. Ní scriostar aon rud ar an bhfón ná ar an bhfreastalaí.</item>
+        <item quantity="two">Cóipeálfar %1$d ghrianghraf agus físeán chuig %2$s, beag ar bheag, nuair a bheidh an fón ar an líonra a cheadaigh tú. Ní scriostar aon rud ar an bhfón ná ar an bhfreastalaí.</item>
+        <item quantity="few">Cóipeálfar %1$d ghrianghraf agus físeán chuig %2$s, beag ar bheag, nuair a bheidh an fón ar an líonra a cheadaigh tú. Ní scriostar aon rud ar an bhfón ná ar an bhfreastalaí.</item>
+        <item quantity="many">Cóipeálfar %1$d ngrianghraf agus físeán chuig %2$s, beag ar bheag, nuair a bheidh an fón ar an líonra a cheadaigh tú. Ní scriostar aon rud ar an bhfón ná ar an bhfreastalaí.</item>
+        <item quantity="other">Cóipeálfar %1$d grianghraf agus físeán chuig %2$s, beag ar bheag, nuair a bheidh an fón ar an líonra a cheadaigh tú. Ní scriostar aon rud ar an bhfón ná ar an bhfreastalaí.</item>
+    </plurals>
+    <string name="backup_confirm_start">Tosaigh</string>
+    <string name="backup_location_note">Folaíonn Android cá ndearnadh na grianghraif ó aipeanna gan cead do shuímh grianghraf, mar sin ní bheadh aon suíomh ag na cóipeanna ar do fhreastalaí.</string>
+    <string name="backup_progress">Cúltaca déanta: %1$,d as %2$,d</string>
+    <plurals name="backup_refused">
+        <item quantity="one">Dhiúltaigh an freastalaí do %1$d ghrianghraf agus ní dhéanfar iarracht air arís go dtí go n-iarrfaidh tú.</item>
+        <item quantity="two">Dhiúltaigh an freastalaí do %1$d ghrianghraf agus ní dhéanfar iarracht orthu arís go dtí go n-iarrfaidh tú.</item>
+        <item quantity="few">Dhiúltaigh an freastalaí do %1$d ghrianghraf agus ní dhéanfar iarracht orthu arís go dtí go n-iarrfaidh tú.</item>
+        <item quantity="many">Dhiúltaigh an freastalaí do %1$d ngrianghraf agus ní dhéanfar iarracht orthu arís go dtí go n-iarrfaidh tú.</item>
+        <item quantity="other">Dhiúltaigh an freastalaí do %1$d grianghraf agus ní dhéanfar iarracht orthu arís go dtí go n-iarrfaidh tú.</item>
+    </plurals>
+    <string name="backup_running">Cúltaca á dhéanamh…</string>
+    <string name="backup_idle">Ag fanacht leis an nóiméad ceart (an líonra a cheadaigh tú, ceallra nach bhfuil íseal).</string>
+    <string name="backup_last_run">Rith deireanach %1$s. Seolta: %2$d. Ann cheana: %3$d. Diúltaithe: %4$d.</string>
+    <string name="backup_stopped">Stop sé mar %1$s</string>
+    <string name="backup_stop_power_save">tá Sábháil cadhnraí ar siúl.</string>
+    <string name="backup_stop_thermal">bhí an fón róthe.</string>
+    <string name="backup_stop_unreachable">ní raibh an freastalaí inrochtana nó bhí sé gnóthach. Déanfaidh sé iarracht arís.</string>
+    <string name="backup_stop_unauthorized">níor ghlac an freastalaí leis an eochair ná leis an bhfocal faire.</string>
+    <string name="backup_stop_untrusted">níl deimhniú an fhreastalaí ar cheann díobh a chuir tú iontaoibh iontu.</string>
+    <string name="backup_stop_misconfigured">níl an seoladh ceart don chineál freastalaí seo.</string>
+    <string name="backup_stop_refusals">dhiúltaigh an freastalaí do go leor comhad as a chéile, rud a léiríonn teorainn ag an bhfreastalaí, ní fadhb leis na grianghraif.</string>
+    <string name="backup_now">Déan cúltaca anois</string>
+    <string name="backup_retry_refused">Bain triail eile as na cinn a diúltaíodh</string>
+
+    <!-- Network consent -->
+    <string name="network_allow">Ceadaigh d’eikon an t-idirlíon a úsáid</string>
+    <string name="network_allow_note">Múchta go dtí go gcuireann tú ar siúl é. Ní úsáideann eikon an líonra ach chun do ghrianghraif a chóipeáil chuig an bhfreastalaí thíos, agus ach amháin tar éis duit ceann a shocrú agus an cúltaca a chur ar siúl. Nuair atá sé seo múchta, ní féidir le haon rud ceangal áit ar bith.</string>
+    <string name="settings_privacy_network">Ní féidir le eikon dul ar líne ach le haghaidh rud amháin: cúltaca roghnach de do ghrianghraif chuig freastalaí a reáchtálann tú féin. Tá sé múchta go dtí go gceadaíonn tú é (Socruithe, Cúltaca) agus go socraíonn tú an freastalaí. Gan anailísíocht úsáide, gan fógraí, gan cuntais, gan seirbhísí Google agus gan scamall dár gcuid féin: níl a leithéid ann.</string>
+
+    <!-- First-run screens -->
+    <string name="onboarding_intro_title">Do ghrianghraif, ar d’fhón</string>
+    <string name="onboarding_intro_body">Is gailearaí grianghraf agus físeán é eikon d’Android. Taispeánann sé na híomhánna a choinníonn d’fhón cheana féin, aimsíonn sé iad de réir dáta, áite, daoine nó an méid a thaispeánann siad, agus cuireann sé in eagar iad gan teagmháil a dhéanamh leis na bunleaganacha riamh.</string>
+    <string name="onboarding_point_local">Fanann gach rud ar an ngléas seo. Gan cuntas, gan anailísíocht úsáide, gan fógraí.</string>
+    <string name="onboarding_point_independent">Ní bhíonn sé ag brath ar aon rud lasmuigh d’fhón: gan seirbhísí Google, gan scamall, gan freastalaithe tríú páirtí.</string>
+    <string name="onboarding_point_yours">Más mian leat cúltaca, téann sé chuig freastalaí a reáchtálann tú féin amháin, agus mura socraíonn tú é ní théann.</string>
+    <string name="onboarding_next">Ar aghaidh</string>
+    <string name="onboarding_start">Tosaigh</string>
+    <string name="onboarding_page">Leathanach %1$d as %2$d</string>
+    <string name="onboarding_permissions_title">Cad a iarrann eikon, agus cén fáth</string>
+    <string name="onboarding_permissions_intro">Ní theastaíonn ach an chéad cheann. Is féidir leat aon cheann acu a athrú níos déanaí, sna Socruithe nó i socruithe d’fhón.</string>
+    <string name="onboarding_perm_media_title">Grianghraif agus físeáin</string>
+    <string name="onboarding_perm_media_body">Ionas gur féidir le eikon do leabharlann a thaispeáint. Léann sé na comhaid san áit a gcoinníonn Android iad cheana agus ní chóipeálann sé áit ar bith iad. Más fearr leat, is féidir leat roinnt grianghraf amháin a cheadú.</string>
+    <string name="onboarding_perm_location_title">Suímh grianghraf (roghnach)</string>
+    <string name="onboarding_perm_location_body">Folaíonn Android ó aipeanna cá ndearnadh grianghraf, mura gceadaíonn tú é. Úsáideann eikon é chun áit grianghraif a thaispeáint ar léarscáil as líne agus chun cuardach de réir áite. Oibrítear áiteanna amach ar an bhfón: ní sheoltar aon suíomh áit ar bith riamh.</string>
+    <string name="onboarding_perm_network_title">Idirlíon (roghnach)</string>
+    <string name="onboarding_perm_network_body">Úsáidtear é le haghaidh rud amháin: do ghrianghraif a chóipeáil chuig freastalaí a reáchtálann tú féin (Immich, Nextcloud), má shocraíonn tú riamh é. Seachas sin ní cheanglaíonn eikon le haon rud. Tá sé múchta go dtí go gcuireann tú ar siúl anseo é, agus is féidir leat é a mhúchadh arís am ar bith sna Socruithe.</string>
+    <string name="onboarding_allow">Ceadaigh</string>
+    <string name="onboarding_allowed">Ceadaithe</string>
+    <string name="onboarding_promise">Ní bhíonn aon rud anseo ag brath ar aon rud lasmuigh d’fhón: gan seirbhísí Google, gan cuntais, gan anailísíocht úsáide. Fanann do ghrianghraif ar an ngléas seo nó, má roghnaíonn tú é, téann siad chuig do fhreastalaí féin.</string>
+
+    <!-- Support -->
+    <string name="support_title">Tacaíocht</string>
+    <string name="support_body">Tá eikon saor in aisce, níl fógraí ann agus ní dhéanann sé do rianú. Má thaitníonn sé leat, is féidir leat cúpla sat a sheoladh tríd an líonra Lightning.</string>
+    <string name="support_button">Bronn tríd Lightning</string>
+    <string name="support_copied">Níor aimsíodh aon sparán Lightning — cóipeáladh an seoladh: %1$s</string>
+
+    <!-- Analyze now -->
+    <string name="analyze_now_running">Anailís ar siúl…</string>
+    <string name="analyze_now_hint">Tosaíonn sé láithreach, ar an bhfón seo amháin, fiú le Sábháil cadhnraí.</string>
+    <string name="analyze_now_hint_off">Cuir ar a laghad céim amháin ar siúl thuas ar dtús.</string>
+    <string name="analyze_now_hint_paused">Tá an anailís ar sos: múch an sos chun anailísiú anois.</string>
+
+    <!-- Pictures from other apps -->
+    <string name="viewer_open_in_library">Oscail sa leabharlann</string>
+</resources>

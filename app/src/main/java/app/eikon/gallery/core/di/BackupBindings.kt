@@ -17,7 +17,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
-/** The parts of the backup that have no network code and are the same in both builds. The service itself is bound per build (see src/standard and src/backup). */
+/** What the backup is made of and the Android pieces it stands on. */
 @Module
 @InstallIn(SingletonComponent::class)
 abstract class BackupBindings {

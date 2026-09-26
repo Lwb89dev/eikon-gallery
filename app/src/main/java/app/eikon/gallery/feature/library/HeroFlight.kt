@@ -54,13 +54,26 @@ class HeroController {
         private set
     private val progress = Animatable(0f)
 
-    /** False while a photo is flying. */
-    val viewerShown: Boolean get() = flight == null
+    /**
+     * True from the moment a photo has flown back into the grid until the viewer is opened again. The viewer is then on its way out with nothing left to show:
+     * without this, the picture and the black behind it would come back for the length of the viewer's own fade-out and show the photo that was just closed.
+     */
+    var landedInGrid by mutableStateOf(false)
+        private set
+
+    /** False while a photo is flying, and after it has flown back into the grid. */
+    val viewerShown: Boolean get() = flight == null && !landedInGrid
 
     /** The black behind the viewer, 0..1, read while drawing. */
     fun backdrop(): Float {
+        if (landedInGrid) return 0f
         val current = flight ?: return 1f
         return if (current.opening) progress.value else 1f - progress.value
+    }
+
+    /** The viewer is open again (however it was opened): it shows itself as usual. */
+    fun viewerReopened() {
+        landedInGrid = false
     }
 
     /** Where the window through which the flying picture is seen is now. */
@@ -68,10 +81,12 @@ class HeroController {
 
     /** Takes off at once (before the caller's next line, so the viewer never shows itself for a frame first) and returns when it has landed or been cancelled. */
     suspend fun fly(next: HeroFlight) {
+        landedInGrid = false
         flight = next
         try {
             progress.snapTo(0f)
             progress.animateTo(1f, tween(DURATION_MS, easing = FastOutSlowInEasing))
+            if (!next.opening) landedInGrid = true
         } finally {
             if (flight === next) flight = null
         }
@@ -144,6 +159,7 @@ class ViewerFlights(private val scope: CoroutineScope) {
     /** Flies [item] from [cell] to its place in the viewer. */
     fun open(item: MediaItem?, cell: Frame?) {
         job?.cancel()
+        hero.viewerReopened()
         val flight = flightOf(item, cell, opening = true) ?: return
         job = scope.launch(start = CoroutineStart.UNDISPATCHED) { hero.fly(flight) }
     }

@@ -213,7 +213,7 @@ private fun ViewerPage(
     val label = "${item.displayName}, ${stringResource(R.string.viewer_position, position, count)}"
     Box(Modifier.fillMaxSize().semantics { contentDescription = label }) {
         if (item.isVideo) {
-            VideoPage(item, isCurrent, chromeVisible, controlsPadding, onTap)
+            VideoPage(item, isCurrent, chromeVisible, controlsPadding, onTap, onZoomedChange)
         } else {
             ImagePage(item, isCurrent, onTap, onZoomedChange, recipe = recipe)
         }

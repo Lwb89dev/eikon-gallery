@@ -83,6 +83,7 @@ class BackupSettingsRepository @Inject constructor(
     }
 
     private fun write(prefs: androidx.datastore.preferences.core.MutablePreferences, s: BackupSettings) {
+        prefs[NETWORK_ALLOWED] = s.networkAllowed
         prefs[ENABLED] = s.enabled
         prefs[KIND] = s.kind.name
         prefs[URL] = sealed("url", s.serverUrl)
@@ -106,6 +107,8 @@ class BackupSettingsRepository @Inject constructor(
     }
 
     private fun toSettings(p: Preferences) = BackupSettings(
+        // Version 1.0.0 had no such switch: whoever had already turned the backup on (after being told which server the photos would go to) has consented to the network for it.
+        networkAllowed = p[NETWORK_ALLOWED] ?: (p[ENABLED] ?: false),
         enabled = p[ENABLED] ?: false,
         kind = ServerKind.entries.firstOrNull { it.name == p[KIND] } ?: ServerKind.NEXTCLOUD,
         serverUrl = opened("url", p[URL]).orEmpty(),
@@ -130,6 +133,7 @@ class BackupSettingsRepository @Inject constructor(
         const val CREDENTIAL = "credential"
         private const val SEALED = "sealed:"
         private const val ID_CHARS = 8
+        private val NETWORK_ALLOWED = booleanPreferencesKey("network_allowed")
         private val ENABLED = booleanPreferencesKey("enabled")
         private val KIND = stringPreferencesKey("kind")
         private val URL = stringPreferencesKey("url")

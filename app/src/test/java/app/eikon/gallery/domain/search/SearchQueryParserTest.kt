@@ -153,6 +153,25 @@ class SearchQueryParserTest {
     }
 
     @Test
+    fun articulatedPrepositionsAndElisionsAreGlueToo() {
+        assertEquals(listOf("cane", "neve"), parse("cane sulla neve").terms.map { it.text })
+        assertEquals(listOf("aperto"), parse("foto all'aperto").terms.map { it.text })
+        assertEquals(listOf("cena", "amici"), parse("la cena con gli amici").terms.map { it.text })
+        assertEquals(listOf("tramonto", "mare"), parse("un tramonto sul mare").terms.map { it.text })
+        assertEquals(listOf("gatto", "giardino"), parse("le mie foto del gatto nel giardino").terms.map { it.text })
+        assertEquals(listOf("dog", "beach"), parse("photo of a dog near the beach").terms.map { it.text })
+    }
+
+    @Test
+    fun theWordsOfADatePhraseAreStillReadAsTheDateEvenThoughTheyAreGlueAlone() {
+        val spec = parse("foto di questa settimana")
+        assertEquals(TypeFilter.PHOTOS, spec.filters.type)
+        assertEquals(1, spec.dates.size)
+        assertTrue(spec.terms.isEmpty())
+        assertEquals("dell anno scorso is last year", 1, parse("le foto dell'anno scorso").dates.size)
+    }
+
+    @Test
     fun plainWordsStayTextTerms() {
         assertEquals(listOf("ricevuta", "ikea"), parse("ricevuta IKEA").terms.map { it.text })
     }
