@@ -4,6 +4,7 @@ import java.net.http.HttpClient
 import java.net.http.HttpRequest
 import java.net.http.HttpResponse
 import java.security.MessageDigest
+import java.util.Properties
 
 plugins {
     alias(libs.plugins.android.application)
@@ -124,6 +125,16 @@ val bundleNotice = tasks.register<BundleNoticeTask>("bundleNotice") {
     outputDir.set(layout.buildDirectory.dir("generated/notice"))
 }
 
+// Release signing material lives outside the repository. Keep both the keystore and its
+// properties file in ../eikon-gallery-release-keystore so they cannot be committed by accident.
+val releaseKeystorePropertiesFile = rootProject.file("../eikon-gallery-release-keystore/keystore.properties")
+check(releaseKeystorePropertiesFile.isFile) {
+    "Missing release signing properties: ${releaseKeystorePropertiesFile.absolutePath}"
+}
+val releaseKeystoreProperties = Properties().apply {
+    releaseKeystorePropertiesFile.inputStream().use(::load)
+}
+
 android {
     namespace = "app.eikon.gallery"
     // Recent AndroidX releases require compiling against API 37; targetSdk (runtime behaviour)
@@ -151,6 +162,15 @@ android {
         noCompress += "onnx"
     }
 
+    signingConfigs {
+        create("release") {
+            storeFile = file(releaseKeystoreProperties.getProperty("storeFile"))
+            storePassword = releaseKeystoreProperties.getProperty("storePassword")
+            keyAlias = releaseKeystoreProperties.getProperty("keyAlias")
+            keyPassword = releaseKeystoreProperties.getProperty("keyPassword")
+        }
+    }
+
     buildTypes {
         debug {
             applicationIdSuffix = ".debug"
@@ -167,11 +187,7 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro",
             )
-            // Local device testing only: `-Peikon.signReleaseWithDebugKey` signs the release build with
-            // the debug key so `installRelease` works. Never set it for a build that is distributed.
-            if (providers.gradleProperty("eikon.signReleaseWithDebugKey").isPresent) {
-                signingConfig = signingConfigs.getByName("debug")
-            }
+            signingConfig = signingConfigs.getByName("release")
         }
     }
 
