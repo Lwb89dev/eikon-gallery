@@ -16,6 +16,9 @@ build/
 # Machine-specific configuration (contains absolute paths)
 local.properties
 
+# Local environment flags (not meant to travel with the repo)
+.env
+
 # Signing material
 *.jks
 *.keystore

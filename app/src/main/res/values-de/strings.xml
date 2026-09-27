@@ -63,8 +63,10 @@
     <!-- Accessibility -->
     <string name="cd_photo">Foto, %1$s</string>
     <string name="cd_video">Video, %1$s, %2$s</string>
+    <string name="cd_motion_photo">Bewegtes Foto, %1$s</string>
     <string name="cd_edited_badge">Bearbeitet</string>
     <string name="cd_favorite_badge">Favorit</string>
+    <string name="cd_motion_photo_badge">Bewegtes Foto</string>
     <string name="viewer_position">%1$d von %2$d</string>
 
     <!-- Video -->
@@ -495,6 +497,7 @@
     <string name="crop_action_down">Zuschnitt nach unten verschieben</string>
     <string name="viewer_zoom_in">Vergrößern</string>
     <string name="viewer_zoom_out">Verkleinern</string>
+    <string name="viewer_motion_photo_replay">Bewegtes Foto erneut abspielen</string>
     <string name="external_photo">Foto</string>
     <string name="viewer_cannot_display">Dieses Foto kann nicht angezeigt werden.</string>
 

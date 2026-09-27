@@ -63,8 +63,10 @@
     <!-- Accessibility -->
     <string name="cd_photo">Billede, %1$s</string>
     <string name="cd_video">Video, %1$s, %2$s</string>
+    <string name="cd_motion_photo">Bevægelsesfoto, %1$s</string>
     <string name="cd_edited_badge">Redigeret</string>
     <string name="cd_favorite_badge">Favorit</string>
+    <string name="cd_motion_photo_badge">Bevægelsesfoto</string>
     <string name="viewer_position">%1$d af %2$d</string>
 
     <!-- Video -->
@@ -495,6 +497,7 @@
     <string name="crop_action_down">Flyt beskæringen ned</string>
     <string name="viewer_zoom_in">Zoom ind</string>
     <string name="viewer_zoom_out">Zoom ud</string>
+    <string name="viewer_motion_photo_replay">Afspil bevægelsesfotoet igen</string>
     <string name="external_photo">Billede</string>
     <string name="viewer_cannot_display">Dette billede kan ikke vises.</string>
 

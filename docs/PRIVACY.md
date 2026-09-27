@@ -42,7 +42,7 @@ MediaStore after a restore.
 
 - Connect to anything you have not allowed. eikon holds the `INTERNET` permission (Android grants it at install; there is no prompt to refuse), so what stops it is **its own switch**: "Allow eikon to use the internet"
   is **off by default**, offered in the first-run screens and in Settings, and checked at every place that could open a connection (scheduling, the worker, the runner and creating a connection), each covered by a test.
-  With it off nothing is contacted. With it on, the only thing that connects is the backup to the server you configured (see [BACKUP.md](BACKUP.md)), over TLS. Version 1.0.0 also came as a second APK without the permission at all; from 1.1.0 there is one APK, so the operating
+  With it off nothing is contacted. With it on, the only thing that connects is the backup to the server you configured (see [BACKUP.md](BACKUP.md)), over TLS. Version 1.0.0 also came as a second APK without the permission at all; from 1.2.0 there is one APK, so the operating
   system no longer enforces this by itself, and the guarantee is the switch plus a build check: the build fails if the merged manifest has a permission that is not on a reviewed list or allows unencrypted traffic.
 - Depend on Google or anyone else's services. There is no Google Play services, Firebase or ML Kit in the app; the language, the models and the maps are all inside it. (The string `com.google.android.gms.org.conscrypt` appears once in the code: it is OkHttp's name for a TLS library it may find on the phone, not a dependency.) The emoji font
   is not fetched from Google either: its start-up initializer is removed from the manifest.

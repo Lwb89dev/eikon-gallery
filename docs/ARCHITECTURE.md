@@ -65,7 +65,7 @@ Writes to media (trash, favorite) never go through the index first: they go thro
 ## One build, and the network behind a switch
 
 There is one APK. It holds the `INTERNET` permission for the backup to a server the user runs, and **`BackupSettings.networkAllowed` (off by default) gates every connection**: `active` (whether anything is scheduled), `BackupWorker`, `BackupRunner` and the creation of a target (`BackupException.NetworkOff`) all check it, each with a test. The
-manifest is checked at build time by `verifyNetworkPermissionsRelease` (INTERNET present, cleartext off, every permission on a reviewed list). Earlier versions had two flavors (`standard` without the permission, `backup` with it); they were merged in 1.1.0, so all backup code is in `app/src/main` and the tests are in one folder. See [BACKUP.md](BACKUP.md) and [PRIVACY.md](PRIVACY.md).
+manifest is checked at build time by `verifyNetworkPermissionsRelease` (INTERNET present, cleartext off, every permission on a reviewed list). Earlier versions had two flavors (`standard` without the permission, `backup` with it); they were merged in 1.2.0, so all backup code is in `app/src/main` and the tests are in one folder. See [BACKUP.md](BACKUP.md) and [PRIVACY.md](PRIVACY.md).
 
 ## First run, and opening from other apps
 
@@ -101,6 +101,7 @@ Schemas are exported to `app/schemas`. Two kinds of tables live in the database:
 | `relativePath`, `bucketName` | folder and MediaStore "album" |
 | `isFavorite` | MediaStore `is_favorite` |
 | `isScreenshot`, `isScreenRecording`, `isPanorama`, `isRaw` | heuristic categories, see below |
+| `motionVideoOffset` | byte offset of the clip inside the file, for a Motion Photo (`MotionPhotoDetector`); null otherwise (database version 10) |
 
 Indexes on `takenAt`, `addedAt`, and (`relativePath`, `takenAt`) and (`relativePath`, `addedAt`), the last two so that a device folder is read straight from the index in date order (see [PERFORMANCE.md](PERFORMANCE.md)), and on (`sizeBytes`, `isVideo`), for finding files of the same size. Because `id` is the rowid, `ORDER BY takenAt DESC, id DESC` is
 served straight from the index.

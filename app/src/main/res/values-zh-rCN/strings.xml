@@ -61,8 +61,10 @@
     <!-- Accessibility -->
     <string name="cd_photo">照片，%1$s</string>
     <string name="cd_video">视频，%1$s，%2$s</string>
+    <string name="cd_motion_photo">动态照片，%1$s</string>
     <string name="cd_edited_badge">已编辑</string>
     <string name="cd_favorite_badge">已收藏</string>
+    <string name="cd_motion_photo_badge">动态照片</string>
     <string name="viewer_position">第 %1$d 项，共 %2$d 项</string>
 
     <!-- Video -->
@@ -474,6 +476,7 @@
     <string name="crop_action_down">向下移动裁剪区域</string>
     <string name="viewer_zoom_in">放大</string>
     <string name="viewer_zoom_out">缩小</string>
+    <string name="viewer_motion_photo_replay">再次播放动态照片</string>
     <string name="external_photo">照片</string>
     <string name="viewer_cannot_display">无法显示这张照片。</string>
 

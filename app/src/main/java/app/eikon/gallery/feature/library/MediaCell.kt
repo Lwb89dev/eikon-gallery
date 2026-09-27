@@ -132,6 +132,7 @@ private fun BoxScope.CellContent(item: MediaItem, selected: Boolean, selectionMo
     if (item.isVideo) VideoBadge(item.durationMs, Modifier.align(Alignment.BottomEnd))
     if (item.isFavorite) FavoriteBadge(Modifier.align(Alignment.BottomStart))
     if (!item.isVideo && item.id in LocalEditRecipeTexts.current) EditedBadge(Modifier.align(Alignment.TopEnd))
+    if (!selectionMode && item.isMotionPhoto) MotionPhotoBadge(Modifier.align(Alignment.TopStart))
     if (selectionMode) SelectionIndicator(selected, Modifier.align(Alignment.TopStart))
 }
 
@@ -155,6 +156,18 @@ private fun FavoriteBadge(modifier: Modifier = Modifier) {
         Icon(
             painterResource(R.drawable.ic_favorite),
             contentDescription = stringResource(R.string.cd_favorite_badge),
+            tint = Color.White,
+            modifier = Modifier.size(12.dp),
+        )
+    }
+}
+
+@Composable
+private fun MotionPhotoBadge(modifier: Modifier = Modifier) {
+    Box(modifier.padding(4.dp).size(20.dp).background(BadgeBackground, CircleShape), contentAlignment = Alignment.Center) {
+        Icon(
+            painterResource(R.drawable.ic_motion_photo),
+            contentDescription = stringResource(R.string.cd_motion_photo_badge),
             tint = Color.White,
             modifier = Modifier.size(12.dp),
         )
@@ -192,9 +205,9 @@ private fun SelectionIndicator(selected: Boolean, modifier: Modifier = Modifier)
 
 private fun accessibilityLabel(context: Context, resources: Resources, item: MediaItem): String {
     val date = DateUtils.formatDateTime(context, item.takenAt, DateUtils.FORMAT_SHOW_DATE or DateUtils.FORMAT_SHOW_YEAR)
-    return if (item.isVideo) {
-        resources.getString(R.string.cd_video, date, ExifFormat.duration(item.durationMs))
-    } else {
-        resources.getString(R.string.cd_photo, date)
+    return when {
+        item.isVideo -> resources.getString(R.string.cd_video, date, ExifFormat.duration(item.durationMs))
+        item.isMotionPhoto -> resources.getString(R.string.cd_motion_photo, date)
+        else -> resources.getString(R.string.cd_photo, date)
     }
 }

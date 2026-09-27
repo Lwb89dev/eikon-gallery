@@ -1,14 +1,14 @@
 # Changelog
 
-## 1.1.0 — unreleased
+## 1.2.0 — 2026-09-27
 
 One APK instead of two, first-run screens, 27 languages, and a round of fixes to the grid, the viewer, People and Search. eikon is still local-first: no account, no analytics, no Google services, and it does not talk to the network unless you allow it, for the backup to a server of your own.
 
 ### One APK, and a switch for the network
-- The `standard` and `backup` builds are **merged into one APK** (`eikon-1.1.0-arm64-v8a.apk`, same application id and signing key, so it installs over 1.0.0 and keeps everything). It holds the `INTERNET` permission, but **"Allow eikon to use the internet" is off by default** and every place that could connect checks it; the first-run screens and Settings both offer it.
+- The `standard` and `backup` builds are **merged into one APK** (`eikon-1.2.0-arm64-v8a.apk`). It holds the `INTERNET` permission, but **"Allow eikon to use the internet" is off by default** and every place that could connect checks it; the first-run screens and Settings both offer it.
 - **What this changes, honestly:** 1.0.0's `standard` APK made connecting impossible at the operating-system level, because it had no permission. That guarantee is now the app's own switch plus a build check (the build fails if the manifest allows unencrypted traffic or asks for any permission that is not on a reviewed list). It can be read and verified, but the operating system no longer enforces it. If you need the stricter guarantee, keep 1.0.0's `standard` APK.
-- Anyone who had the backup switched on in 1.0.0's `backup` build keeps it on after updating.
 - No Google Play services, Firebase or ML Kit is in the app (checked in the dependency tree and the APK); the emoji-font initializer that would ask Google's font provider is removed.
+- **This release is signed with a new key** (the original was lost). **It does not install over 1.0.0**: Android refuses an update signed with a different key, so updating means uninstalling 1.0.0 first, which loses its local library index, albums, edits, hidden list and backup settings (your photos and videos do not move and are not touched). From this release on, updates install in place again as long as this key is kept.
 
 ### First run and other apps
 - **First-run screens**: what eikon is, what each permission is for (photos, optional photo locations, optional internet) with Allow buttons, and the promise that nothing depends on anything outside your phone.
@@ -25,10 +25,12 @@ One APK instead of two, first-run screens, 27 languages, and a round of fixes to
 - **Videos zoom** (pinch, double tap, drag) and **the seek bar shows the picture as you drag it**, instead of freezing until you let go.
 - **People**: two groups given the same name become one, and groups that already shared a name are joined when People opens. (A person hidden by you joins nobody.)
 - **Search**: results no longer redo themselves after every photo the analysis finishes, but when you are not scrolling; searching while the analysis runs no longer reads all image data from the database again; and the words that link a query ("cane sulla neve", "foto all'aperto", "le mie foto del gatto nel giardino") are ignored properly. Other lists no longer redo themselves for the analysis at all, and the *Edited* filter now follows edits.
+- **Grid thumbnails are now hardware bitmaps**, off the regular memory and without a copy on their first draw, on the reasoning that this is what a big library flung past quickly is most sensitive to; a measured before/after on a phone is still needed to say by how much.
+- **Motion Photos** (Pixel's and Samsung's few-seconds-of-video-inside-a-JPEG) are now recognised at sync time (`MotionPhotoDetector`, both known formats), marked with a small badge in the grid, and their clip plays once, muted, in the viewer, with a button to play it again; an edited photo shows its edit, not the raw clip. Detection opens and reads a little of every JPEG during sync, which is a cost paid once for everyone, whether or not they have any.
 
 ### What has and has not been checked
-- 845 automated tests, including new ones for the network switch at every place that connects, the pinch maths, the translations (every string, plural form and placeholder in every language), the camera hand-over, the viewer's landing, video scrubbing, the same-name merge and which lists read what the analysis writes. Lint is clean.
-- **Not run on a device yet**: the first-run screens, the grid pinch, the icon, the camera hand-over, the translations on screen, and every fix above. The diagnoses of the first-zoom stall and of the search scrolling stall are likely causes, **not profiled ones**: treat them as attempts until you have tried them. Search results are still listed by date, not by how well they match.
+- 859 automated tests, including new ones for the network switch at every place that connects, the pinch maths, the translations (every string, plural form and placeholder in every language), the camera hand-over, the viewer's landing, video scrubbing, the same-name merge, which lists read what the analysis writes, and the Motion Photo offset maths (both the finder and the migration that adds the column for it). Lint is clean.
+- **Not run on a device yet**: the first-run screens, the grid pinch, the icon, the camera hand-over, the translations on screen, and every fix above. The diagnoses of the first-zoom stall and of the search scrolling stall are likely causes, **not profiled ones**: treat them as attempts until you have tried them. The hardware-bitmap change follows well-known Android guidance for large scrolling image grids but is likewise unmeasured here. **Motion Photo detection was written from the two schemas' public specifications, without a real sample file to test against**, and playback (a custom Media3 data source that skips the JPEG bytes) has not been tried on a device either. Search results are still listed by date, not by how well they match.
 
 ## 1.0.0 — 2026-09-26
 

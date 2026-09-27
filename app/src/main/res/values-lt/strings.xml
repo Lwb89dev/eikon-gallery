@@ -67,8 +67,10 @@
     <!-- Accessibility -->
     <string name="cd_photo">Nuotrauka, %1$s</string>
     <string name="cd_video">Vaizdo įrašas, %1$s, %2$s</string>
+    <string name="cd_motion_photo">Judanti nuotrauka, %1$s</string>
     <string name="cd_edited_badge">Redaguota</string>
     <string name="cd_favorite_badge">Mėgstama</string>
+    <string name="cd_motion_photo_badge">Judanti nuotrauka</string>
     <string name="viewer_position">%1$d iš %2$d</string>
 
     <!-- Video -->
@@ -537,6 +539,7 @@
     <string name="crop_action_down">Perkelti apkarpymą žemyn</string>
     <string name="viewer_zoom_in">Priartinti</string>
     <string name="viewer_zoom_out">Atitolinti</string>
+    <string name="viewer_motion_photo_replay">Paleisti judančią nuotrauką iš naujo</string>
     <string name="external_photo">Nuotrauka</string>
     <string name="viewer_cannot_display">Šios nuotraukos parodyti negalima.</string>
 

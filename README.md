@@ -12,7 +12,7 @@ Repository: <https://github.com/Lwb89dev/eikon-gallery>
 
 ## Status
 
-Version 1.1.0 ([CHANGELOG.md](CHANGELOG.md)) builds on the first release, 1.0.0; it is feature-complete for the plan but **not field-tested**. Phases 1 (gallery foundation), 2 (albums and utilities), 3 (search foundation), 4
+Version 1.2.0 ([CHANGELOG.md](CHANGELOG.md)) builds on the first release, 1.0.0; it is feature-complete for the plan but **not field-tested**. Phases 1 (gallery foundation), 2 (albums and utilities), 3 (search foundation), 4
 (intelligent indexing: search by what photos show, people, pets), 5 (smart collections: places, trips,
 memories, duplicates), 6 (non-destructive editing), 7 (polish: transitions, baseline profile, query tuning, battery, accessibility) 8 (backup to your own server) and 9 (what the specification still asked for, and a review and hardening pass, including an encrypted database) are implemented. Phases 1 and 2 were checked on a real phone; **Phases 3 to 9 are covered
 by unit tests, including tests that run the real models, but have not been run on a device yet**, so how fast and how
@@ -34,6 +34,7 @@ Features that are not built yet are not shown in the app.
 **Viewer and details**
 - Full-screen viewer: swipe between items, pinch and double-tap zoom (photos **and videos**), immersive mode, drag down to
   close, drag up for details. Video playback with mute and a seek bar that shows the picture as you drag it.
+- **Motion Photos** (Pixel, Samsung): recognised in the grid with a small badge, the clip plays once, muted, when you open one, with a button to play it again.
 - Info panel with the real metadata of the file: resolution, size, dates, camera, lens, exposure,
   color profile, location (on request, with a small offline map), and for videos duration, frame rate, codecs and bitrate. If the photo has been analysed it also says, in a few words, what it shows (and any pet in it).
 - **Captions** you write for a photo (searchable, kept only in eikon's database) and **changing the date or the location** written in a JPEG, PNG or WebP file, with the system's own confirmation, a safety copy, a byte-for-byte check
@@ -102,7 +103,7 @@ nothing reliable to detect it; there is no thumbnail scrubber for video, no musi
 ## Privacy
 
 - eikon has the `INTERNET` permission for one feature only, the backup to a server you run, and **does not use it until you allow it**: the network switch is off by default, and it is checked at every place that could connect (scheduling, the worker, the runner, creating a connection). TLS only, your server only. There is no Google Play services, Firebase or ML Kit dependency; the build fails if the manifest allows unencrypted traffic or has any permission that is not on a reviewed list.
-- Earlier, 1.0.0 shipped a second APK with no network permission at all. 1.1.0 is a single APK: the operating system no longer stops a connection by itself, so the guarantee is now the app's own switch plus a build-checked permission list; if you want the stronger guarantee back, do not allow the network or use the [1.0.0](CHANGELOG.md) release.
+- Earlier, 1.0.0 shipped a second APK with no network permission at all. 1.2.0 is a single APK: the operating system no longer stops a connection by itself, so the guarantee is now the app's own switch plus a build-checked permission list; if you want the stronger guarantee back, do not allow the network or use the [1.0.0](CHANGELOG.md) release.
 - No account, no analytics, no crash reporting.
 - Android backups of the app's data are disabled.
 - **The library's database is encrypted** (SQLCipher, AES-256) with a key held by the Android Keystore; an older readable database is converted safely at the first start. Hidden and Recently deleted block screenshots and the recent-apps preview while open, and a setting does it everywhere. Details and limits in [docs/PRIVACY.md](docs/PRIVACY.md).

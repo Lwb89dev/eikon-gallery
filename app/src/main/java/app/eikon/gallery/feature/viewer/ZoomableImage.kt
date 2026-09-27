@@ -272,6 +272,9 @@ private fun LayeredImage(item: MediaItem, state: ZoomState, recipe: EditRecipe?,
     if (failed) Box(Modifier.fillMaxSize(), contentAlignment = Alignment.BottomCenter) { CannotDisplay(Modifier.padding(bottom = 96.dp)) }
     val hasMoreToShow = max(item.width, item.height) > max(container.width, container.height)
     if (state.isZoomed || (prepareLarge && hasMoreToShow)) HighResLayer(item, recipe, state)
+    // The clip is the photo as it was taken: shown edited, only the still (with the edit drawn on it) is shown, never the raw motion.
+    val motionOffset = item.motionVideoOffset
+    if (recipe == null && motionOffset != null) MotionPhotoLayer(item, motionOffset)
 }
 
 /** The screen-sized decode; for an edit with a crop the photo is decoded larger, so what is left after cropping still fills the screen. */

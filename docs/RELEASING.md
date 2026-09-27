@@ -1,6 +1,6 @@
 # Releasing
 
-A release is one APK, signed with the release key and attached to a GitHub release with the tag `vX.Y.Z`: `eikon-X.Y.Z-arm64-v8a.apk`. (1.0.0 came as two APKs, `standard` and `backup`; the two were merged in 1.1.0, see [BACKUP.md](BACKUP.md).)
+A release is one APK, signed with the release key and attached to a GitHub release with the tag `vX.Y.Z`: `eikon-X.Y.Z-arm64-v8a.apk`. (1.0.0 came as two APKs, `standard` and `backup`; the two were merged in 1.2.0, see [BACKUP.md](BACKUP.md).)
 
 Release builds contain the arm64-v8a native libraries only (`ndk { abiFilters += "arm64-v8a" }` for `release` in `app/build.gradle.kts`), which is what makes them "arm64-v8a" APKs.
 

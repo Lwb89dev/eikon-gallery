@@ -69,8 +69,10 @@
     <!-- Accessibility -->
     <string name="cd_photo">Ritratt, %1$s</string>
     <string name="cd_video">Vidjo, %1$s, %2$s</string>
+    <string name="cd_motion_photo">Ritratt li jiċċaqlaq, %1$s</string>
     <string name="cd_edited_badge">Editjat</string>
     <string name="cd_favorite_badge">Favorit</string>
+    <string name="cd_motion_photo_badge">Ritratt li jiċċaqlaq</string>
     <string name="viewer_position">%1$d minn %2$d</string>
 
     <!-- Video -->
@@ -558,6 +560,7 @@
     <string name="crop_action_down">Mexxi l-qtugħ ’l isfel</string>
     <string name="viewer_zoom_in">Kabbar iz-zoom</string>
     <string name="viewer_zoom_out">Naqqas iz-zoom</string>
+    <string name="viewer_motion_photo_replay">Erġa\' lagħab ir-ritratt li jiċċaqlaq</string>
     <string name="external_photo">Ritratt</string>
     <string name="viewer_cannot_display">Dan ir-ritratt ma jistax jintwera.</string>
 

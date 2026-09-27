@@ -6,13 +6,13 @@ deletes, overwrites or changes anything on the server or on the phone because of
 ## One APK, and a switch you own
 
 Version 1.0.0 was built twice: a `standard` APK with no `INTERNET` permission, so that Android itself stopped it from connecting anywhere, and a `backup` APK that had it. That kept a strong promise, but it made
-people choose between two downloads and made every install after a switch start again. **From 1.1.0 there is one APK.** It holds the `INTERNET` permission (granted at install, with no prompt to refuse) and keeps the promise itself:
+people choose between two downloads and made every install after a switch start again. **From 1.2.0 there is one APK.** It holds the `INTERNET` permission (granted at install, with no prompt to refuse) and keeps the promise itself:
 
 - **"Allow eikon to use the internet" is off by default.** The first-run screens explain what the network is for and offer it (Allow / not now); Settings, Backup has the same switch and turns everything below it on only when it is on.
 - The switch is checked at **every place that could connect**: `BackupSettings.active` (used to decide whether to schedule anything), the worker, the runner and the creation of a connection (`BackupException.NetworkOff`). Each has a test that fails if it connects without consent.
 - TLS only: `usesCleartextTraffic="false"` and a network-security config that forbids unencrypted traffic. Nothing but the server you configured is ever contacted.
 - The build checks the merged manifest (`verifyNetworkPermissionsRelease`, run by `assembleRelease`): `INTERNET` is present, cleartext is off, and **every permission is on a reviewed list**, so a library update cannot add one silently.
-- Someone who had 1.0.0's backup build with the backup on keeps it on after updating (the consent is inferred from it); anyone else starts with it off.
+- Someone updating from an earlier build that had the backup on keeps it on (the consent is inferred from it); anyone else starts with it off. (1.2.0 is signed with a different key from 1.0.0's, so that specific update cannot happen in place; this is what protects anyone who updates a *later* release over 1.2.0 or after.)
 
 What is lost, honestly: with 1.0.0's `standard` APK the operating system made connecting impossible; now the guarantee is the app's own switch and the build check, which a reader of the code can verify but the operating system does not enforce. If you want the stricter guarantee, keep 1.0.0's `standard` APK.
 

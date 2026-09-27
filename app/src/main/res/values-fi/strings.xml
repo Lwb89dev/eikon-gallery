@@ -63,8 +63,10 @@
     <!-- Accessibility -->
     <string name="cd_photo">Kuva, %1$s</string>
     <string name="cd_video">Video, %1$s, %2$s</string>
+    <string name="cd_motion_photo">Liikkuva valokuva, %1$s</string>
     <string name="cd_edited_badge">Muokattu</string>
     <string name="cd_favorite_badge">Suosikki</string>
+    <string name="cd_motion_photo_badge">Liikkuva valokuva</string>
     <string name="viewer_position">%1$d / %2$d</string>
 
     <!-- Video -->
@@ -495,6 +497,7 @@
     <string name="crop_action_down">Siirrä rajausta alas</string>
     <string name="viewer_zoom_in">Lähennä</string>
     <string name="viewer_zoom_out">Loitonna</string>
+    <string name="viewer_motion_photo_replay">Toista liikkuva valokuva uudelleen</string>
     <string name="external_photo">Kuva</string>
     <string name="viewer_cannot_display">Tätä kuvaa ei voi näyttää.</string>
 

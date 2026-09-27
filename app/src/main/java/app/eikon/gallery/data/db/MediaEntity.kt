@@ -40,6 +40,8 @@ data class MediaEntity(
     val isScreenRecording: Boolean,
     val isPanorama: Boolean,
     val isRaw: Boolean,
+    /** Byte offset of the clip inside the file, for a Motion Photo (Pixel, Samsung); null otherwise. See [app.eikon.gallery.domain.MotionPhotoDetector]. */
+    val motionVideoOffset: Long? = null,
 )
 
 fun MediaEntity.toDomain(): MediaItem = MediaItem(
@@ -57,4 +59,5 @@ fun MediaEntity.toDomain(): MediaItem = MediaItem(
     relativePath = relativePath,
     bucketName = bucketName,
     isFavorite = isFavorite,
+    motionVideoOffset = motionVideoOffset,
 )

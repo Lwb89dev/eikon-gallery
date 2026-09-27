@@ -67,8 +67,10 @@
     <!-- Accessibility -->
     <string name="cd_photo">Fotka, %1$s</string>
     <string name="cd_video">Video, %1$s, %2$s</string>
+    <string name="cd_motion_photo">Pohyblivá fotka, %1$s</string>
     <string name="cd_edited_badge">Upravené</string>
     <string name="cd_favorite_badge">Obľúbené</string>
+    <string name="cd_motion_photo_badge">Pohyblivá fotka</string>
     <string name="viewer_position">%1$d z %2$d</string>
 
     <!-- Video -->
@@ -537,6 +539,7 @@
     <string name="crop_action_down">Posunúť orezanie nadol</string>
     <string name="viewer_zoom_in">Priblížiť</string>
     <string name="viewer_zoom_out">Oddialiť</string>
+    <string name="viewer_motion_photo_replay">Znova prehrať pohyblivú fotku</string>
     <string name="external_photo">Fotka</string>
     <string name="viewer_cannot_display">Túto fotku nie je možné zobraziť.</string>
 

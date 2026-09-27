@@ -63,8 +63,10 @@
     <!-- Accessibility -->
     <string name="cd_photo">Bild, %1$s</string>
     <string name="cd_video">Video, %1$s, %2$s</string>
+    <string name="cd_motion_photo">Rörlig bild, %1$s</string>
     <string name="cd_edited_badge">Redigerad</string>
     <string name="cd_favorite_badge">Favorit</string>
+    <string name="cd_motion_photo_badge">Rörlig bild</string>
     <string name="viewer_position">%1$d av %2$d</string>
 
     <!-- Video -->
@@ -495,6 +497,7 @@
     <string name="crop_action_down">Flytta beskärningen nedåt</string>
     <string name="viewer_zoom_in">Zooma in</string>
     <string name="viewer_zoom_out">Zooma ut</string>
+    <string name="viewer_motion_photo_replay">Spela upp den rörliga bilden igen</string>
     <string name="external_photo">Bild</string>
     <string name="viewer_cannot_display">Den här bilden kan inte visas.</string>
 

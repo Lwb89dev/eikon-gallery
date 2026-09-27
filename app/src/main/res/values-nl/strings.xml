@@ -63,8 +63,10 @@
     <!-- Accessibility -->
     <string name="cd_photo">Foto, %1$s</string>
     <string name="cd_video">Video, %1$s, %2$s</string>
+    <string name="cd_motion_photo">Bewegende foto, %1$s</string>
     <string name="cd_edited_badge">Bewerkt</string>
     <string name="cd_favorite_badge">Favoriet</string>
+    <string name="cd_motion_photo_badge">Bewegende foto</string>
     <string name="viewer_position">%1$d van %2$d</string>
 
     <!-- Video -->
@@ -495,6 +497,7 @@
     <string name="crop_action_down">De uitsnede omlaag verplaatsen</string>
     <string name="viewer_zoom_in">Inzoomen</string>
     <string name="viewer_zoom_out">Uitzoomen</string>
+    <string name="viewer_motion_photo_replay">Bewegende foto opnieuw afspelen</string>
     <string name="external_photo">Foto</string>
     <string name="viewer_cannot_display">Deze foto kan niet worden getoond.</string>
 

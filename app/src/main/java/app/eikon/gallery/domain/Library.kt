@@ -127,8 +127,13 @@ data class MediaItem(
     val relativePath: String?,
     val bucketName: String?,
     val isFavorite: Boolean,
+    /** Byte offset of the clip inside the file, for a Motion Photo (Pixel, Samsung); null for everything else, including plain photos and videos. */
+    val motionVideoOffset: Long? = null,
 ) {
     val uri: Uri get() = mediaContentUri(id, isVideo)
+
+    /** True for a still photo that also carries a few seconds of video ([motionVideoOffset]). */
+    val isMotionPhoto: Boolean get() = !isVideo && motionVideoOffset != null
 }
 
 /** The MediaStore content URI of an image or video id on the merged external volume. */

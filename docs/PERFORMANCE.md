@@ -34,7 +34,13 @@ indexes to keep up to date when the library syncs and a little more space.
 Known and left alone: the members of an **album, Hidden, a person or the edited photos** are found from their own list and then sorted, so the cost of a page follows the size of that list. *Desktop*, an album of 25,000
 of 50,000 photos: 10 ms for the first page and 18 ms deep in the list. On a phone that is probably several times more; it is not measured, and an album that large is unusual.
 
-## Lists and the analysis (1.1.0)
+## Motion Photos: a cost paid once, for everyone
+
+Whether a JPEG is a Motion Photo cannot be told from the MediaStore row the sync already reads; it takes opening the file and reading its first 256 KB (`MediaRowReader.motionVideoOffset`, `MotionPhotoDetector`). This runs for every JPEG at sync time, whether or not it turns out to be one and whether or not anyone
+in the library owns a phone that makes them, because a lazy or opt-in check would either leave the grid unable to show the badge until each photo was opened, or hide a feature that costs nothing to a user who never touches its switch. *Not measured*: the added time on a large first sync (20,000 JPEGs at 256 KB each
+is about 5 GB of sequential reads, which should be seconds to at most a couple of minutes on flash storage, not tested on a phone); an incremental sync only pays this for new or changed photos.
+
+## Lists and the analysis (1.2.0)
 
 Every list of photos (the library, a folder, an album, a collection, a search) is a Room query that is run again when a table it reads changes. They all used to watch the tables the analysis writes to (places, faces, text in photos) as well, so **each photo the analysis
 finished redid every open list**, including the date sections of the whole library, which read the entire index (*desktop*, 100,000 photos: 190 ms for the sections against 0.1 ms for a page). While an analysis was running, the database was never idle. Now:

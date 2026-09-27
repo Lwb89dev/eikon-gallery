@@ -69,8 +69,10 @@
     <!-- Accessibility -->
     <string name="cd_photo">Grianghraf, %1$s</string>
     <string name="cd_video">Físeán, %1$s, %2$s</string>
+    <string name="cd_motion_photo">Grianghraf gluaisteach, %1$s</string>
     <string name="cd_edited_badge">Curtha in eagar</string>
     <string name="cd_favorite_badge">Ceanán</string>
+    <string name="cd_motion_photo_badge">Grianghraf gluaisteach</string>
     <string name="viewer_position">%1$d as %2$d</string>
 
     <!-- Video -->
@@ -558,6 +560,7 @@
     <string name="crop_action_down">Bog an bearradh síos</string>
     <string name="viewer_zoom_in">Súmáil isteach</string>
     <string name="viewer_zoom_out">Súmáil amach</string>
+    <string name="viewer_motion_photo_replay">Seinn an grianghraf gluaisteach arís</string>
     <string name="external_photo">Grianghraf</string>
     <string name="viewer_cannot_display">Ní féidir an grianghraf seo a thaispeáint.</string>
 

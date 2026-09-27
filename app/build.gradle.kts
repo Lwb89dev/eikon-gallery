@@ -145,9 +145,9 @@ android {
         applicationId = "app.eikon.gallery"
         minSdk = 30
         targetSdk = 36
-        // 1.1.0 is 10100 (major * 10000 + minor * 100 + patch), so later releases always sort higher.
-        versionCode = 10100
-        versionName = "1.1.0"
+        // 1.2.0 is 10200 (major * 10000 + minor * 100 + patch), so later releases always sort higher.
+        versionCode = 10200
+        versionName = "1.2.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -275,6 +275,7 @@ dependencies {
 
     implementation(libs.androidx.media3.exoplayer)
     implementation(libs.androidx.media3.ui.compose)
+    implementation(libs.androidx.media3.datasource)
 
     implementation(libs.coil.compose)
 

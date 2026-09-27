@@ -63,8 +63,10 @@
     <!-- Accessibility -->
     <string name="cd_photo">Снимка, %1$s</string>
     <string name="cd_video">Видеоклип, %1$s, %2$s</string>
+    <string name="cd_motion_photo">Снимка в движение, %1$s</string>
     <string name="cd_edited_badge">Редактирана</string>
     <string name="cd_favorite_badge">Любима</string>
+    <string name="cd_motion_photo_badge">Снимка в движение</string>
     <string name="viewer_position">%1$d от %2$d</string>
 
     <!-- Video -->
@@ -495,6 +497,7 @@
     <string name="crop_action_down">Премести изрязването надолу</string>
     <string name="viewer_zoom_in">Увеличи</string>
     <string name="viewer_zoom_out">Намали</string>
+    <string name="viewer_motion_photo_replay">Пусни отново снимката в движение</string>
     <string name="external_photo">Снимка</string>
     <string name="viewer_cannot_display">Тази снимка не може да бъде показана.</string>
 

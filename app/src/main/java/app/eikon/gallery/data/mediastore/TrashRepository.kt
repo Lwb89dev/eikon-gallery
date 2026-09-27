@@ -66,7 +66,7 @@ class TrashRepository @Inject constructor(
         val cursor = resolver.query(filesUri, projection, trashedOnly(), null)
             ?: return@withContext emptyList()
         cursor.use {
-            val reader = MediaRowReader(it)
+            val reader = MediaRowReader(it, resolver)
             val expires = it.getColumnIndexOrThrow(MediaColumns.DATE_EXPIRES)
             val result = ArrayList<TrashedMedia>(it.count)
             while (it.moveToNext()) {

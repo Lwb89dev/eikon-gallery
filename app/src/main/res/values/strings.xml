@@ -65,8 +65,10 @@
     <!-- Accessibility -->
     <string name="cd_photo">Photo, %1$s</string>
     <string name="cd_video">Video, %1$s, %2$s</string>
+    <string name="cd_motion_photo">Motion Photo, %1$s</string>
     <string name="cd_edited_badge">Edited</string>
     <string name="cd_favorite_badge">Favorite</string>
+    <string name="cd_motion_photo_badge">Motion Photo</string>
     <string name="viewer_position">%1$d of %2$d</string>
 
     <!-- Video -->
@@ -497,6 +499,7 @@
     <string name="crop_action_down">Move the crop down</string>
     <string name="viewer_zoom_in">Zoom in</string>
     <string name="viewer_zoom_out">Zoom out</string>
+    <string name="viewer_motion_photo_replay">Play the Motion Photo again</string>
     <string name="external_photo">Photo</string>
     <string name="viewer_cannot_display">This photo can\'t be displayed.</string>
 

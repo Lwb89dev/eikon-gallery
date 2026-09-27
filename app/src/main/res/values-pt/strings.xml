@@ -65,8 +65,10 @@
     <!-- Accessibility -->
     <string name="cd_photo">Fotografia, %1$s</string>
     <string name="cd_video">Vídeo, %1$s, %2$s</string>
+    <string name="cd_motion_photo">Fotografia em movimento, %1$s</string>
     <string name="cd_edited_badge">Editada</string>
     <string name="cd_favorite_badge">Favorita</string>
+    <string name="cd_motion_photo_badge">Fotografia em movimento</string>
     <string name="viewer_position">%1$d de %2$d</string>
 
     <!-- Video -->
@@ -516,6 +518,7 @@
     <string name="crop_action_down">Mover o corte para baixo</string>
     <string name="viewer_zoom_in">Aumentar o zoom</string>
     <string name="viewer_zoom_out">Diminuir o zoom</string>
+    <string name="viewer_motion_photo_replay">Reproduzir novamente a fotografia em movimento</string>
     <string name="external_photo">Fotografia</string>
     <string name="viewer_cannot_display">Esta fotografia não pode ser apresentada.</string>
 

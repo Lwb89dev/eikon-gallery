@@ -1,15 +1,23 @@
 package app.eikon.gallery.data.mediastore
 
+import android.content.ContentResolver
 import android.database.Cursor
 import android.provider.MediaStore.Files.FileColumns
 import android.provider.MediaStore.MediaColumns
 import app.eikon.gallery.data.db.MediaEntity
+import app.eikon.gallery.domain.MotionPhotoDetector
+import app.eikon.gallery.domain.mediaContentUri
+import java.io.IOException
 
 /**
  * Turns rows of the MediaStore `files` table (projection [PROJECTION]) into [MediaEntity]. Column
  * positions are resolved once per query instead of once per row.
+ *
+ * Unlike the rest of the row, whether a JPEG is a Motion Photo cannot be told from the cursor: [resolver] opens the file and reads the first
+ * [MOTION_HEADER_BYTES] of it (comfortably more than the XMP packet a real photo carries), which [MotionPhotoDetector] then reads for one of
+ * the two marker schemas it understands. A file that cannot be opened, or is not JPEG, is not even tried.
  */
-class MediaRowReader(cursor: Cursor) {
+class MediaRowReader(cursor: Cursor, private val resolver: ContentResolver) {
     private val id = cursor.getColumnIndexOrThrow(MediaColumns._ID)
     private val name = cursor.getColumnIndexOrThrow(MediaColumns.DISPLAY_NAME)
     private val mime = cursor.getColumnIndexOrThrow(MediaColumns.MIME_TYPE)
@@ -36,8 +44,10 @@ class MediaRowReader(cursor: Cursor) {
         val categories = MediaClassifier.classify(isVideo, mimeType, displayName, relativePath, bucketName, widthPx, heightPx)
         val addedMs = cursor.getLong(added) * MILLIS_PER_SECOND
         val modifiedMs = cursor.getLong(modified) * MILLIS_PER_SECOND
+        val idValue = cursor.getLong(id)
+        val sizeBytes = cursor.getLong(size)
         return MediaEntity(
-            id = cursor.getLong(id),
+            id = idValue,
             displayName = displayName,
             mimeType = mimeType,
             isVideo = isVideo,
@@ -47,7 +57,7 @@ class MediaRowReader(cursor: Cursor) {
             width = widthPx,
             height = heightPx,
             durationMs = cursor.getLong(duration),
-            sizeBytes = cursor.getLong(size),
+            sizeBytes = sizeBytes,
             relativePath = relativePath,
             bucketName = bucketName,
             isFavorite = cursor.getInt(favorite) == 1,
@@ -55,6 +65,7 @@ class MediaRowReader(cursor: Cursor) {
             isScreenRecording = categories.isScreenRecording,
             isPanorama = categories.isPanorama,
             isRaw = categories.isRaw,
+            motionVideoOffset = motionVideoOffset(idValue, isVideo, mimeType, sizeBytes),
         )
     }
 
@@ -65,8 +76,35 @@ class MediaRowReader(cursor: Cursor) {
         else -> added
     }
 
+    private fun motionVideoOffset(id: Long, isVideo: Boolean, mimeType: String, sizeBytes: Long): Long? {
+        if (isVideo || !mimeType.equals("image/jpeg", ignoreCase = true) || sizeBytes <= 0) return null
+        val header = try {
+            resolver.openInputStream(mediaContentUri(id, isVideo = false))?.use { it.readAtMost(MOTION_HEADER_BYTES) }
+        } catch (_: IOException) {
+            null
+        } catch (_: SecurityException) {
+            null
+        } ?: return null
+        return MotionPhotoDetector.findVideoOffset(header, sizeBytes)
+    }
+
+    /** [java.io.InputStream.read] can return short of what was asked; loops until [limit] bytes are in hand or the stream ends. */
+    private fun java.io.InputStream.readAtMost(limit: Int): ByteArray {
+        val buffer = ByteArray(limit)
+        var read = 0
+        while (read < limit) {
+            val n = read(buffer, read, limit - read)
+            if (n < 0) break
+            read += n
+        }
+        return if (read == limit) buffer else buffer.copyOf(read)
+    }
+
     companion object {
         private const val MILLIS_PER_SECOND = 1000L
+
+        /** More than enough for the XMP packet of a real photo (see [MotionPhotoDetector]); read once per JPEG at sync time. */
+        private const val MOTION_HEADER_BYTES = 262_144
 
         val PROJECTION = arrayOf(
             MediaColumns._ID,

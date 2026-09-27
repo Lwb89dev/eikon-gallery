@@ -65,8 +65,10 @@
     <!-- Accessibility -->
     <string name="cd_photo">Fotografija, %1$s</string>
     <string name="cd_video">Videozapis, %1$s, %2$s</string>
+    <string name="cd_motion_photo">Pokretna fotografija, %1$s</string>
     <string name="cd_edited_badge">Uređeno</string>
     <string name="cd_favorite_badge">Omiljeno</string>
+    <string name="cd_motion_photo_badge">Pokretna fotografija</string>
     <string name="viewer_position">%1$d od %2$d</string>
 
     <!-- Video -->
@@ -516,6 +518,7 @@
     <string name="crop_action_down">Pomakni obrezivanje prema dolje</string>
     <string name="viewer_zoom_in">Povećaj</string>
     <string name="viewer_zoom_out">Smanji</string>
+    <string name="viewer_motion_photo_replay">Ponovno reproduciraj pokretnu fotografiju</string>
     <string name="external_photo">Fotografija</string>
     <string name="viewer_cannot_display">Ova se fotografija ne može prikazati.</string>
 

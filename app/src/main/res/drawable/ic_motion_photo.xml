@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- A ring around a dot: what marks a Motion Photo apart from a plain photo or a video (see MediaCell's MotionPhotoBadge). -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <path
+        android:fillColor="#FF000000"
+        android:fillType="evenOdd"
+        android:pathData="M12,3 A9,9 0 1,0 12,21 A9,9 0 1,0 12,3 Z M12,5.5 A6.5,6.5 0 1,1 12,18.5 A6.5,6.5 0 1,1 12,5.5 Z M12,9 A3,3 0 1,0 12,15 A3,3 0 1,0 12,9 Z" />
+</vector>

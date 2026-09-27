@@ -63,8 +63,10 @@
     <!-- Accessibility -->
     <string name="cd_photo">Foto, %1$s</string>
     <string name="cd_video">Video, %1$s, %2$s</string>
+    <string name="cd_motion_photo">Liikuv foto, %1$s</string>
     <string name="cd_edited_badge">Muudetud</string>
     <string name="cd_favorite_badge">Lemmik</string>
+    <string name="cd_motion_photo_badge">Liikuv foto</string>
     <string name="viewer_position">%1$d / %2$d</string>
 
     <!-- Video -->
@@ -495,6 +497,7 @@
     <string name="crop_action_down">Liiguta kärpimist alla</string>
     <string name="viewer_zoom_in">Suumi sisse</string>
     <string name="viewer_zoom_out">Suumi välja</string>
+    <string name="viewer_motion_photo_replay">Esita liikuv foto uuesti</string>
     <string name="external_photo">Foto</string>
     <string name="viewer_cannot_display">Seda fotot ei saa kuvada.</string>
 

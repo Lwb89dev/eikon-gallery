@@ -65,8 +65,10 @@
     <!-- Accessibility -->
     <string name="cd_photo">Photo, %1$s</string>
     <string name="cd_video">Vidéo, %1$s, %2$s</string>
+    <string name="cd_motion_photo">Photo animée, %1$s</string>
     <string name="cd_edited_badge">Modifiée</string>
     <string name="cd_favorite_badge">Favori</string>
+    <string name="cd_motion_photo_badge">Photo animée</string>
     <string name="viewer_position">%1$d sur %2$d</string>
 
     <!-- Video -->
@@ -516,6 +518,7 @@
     <string name="crop_action_down">Déplacer le recadrage vers le bas</string>
     <string name="viewer_zoom_in">Zoom avant</string>
     <string name="viewer_zoom_out">Zoom arrière</string>
+    <string name="viewer_motion_photo_replay">Rejouer la photo animée</string>
     <string name="external_photo">Photo</string>
     <string name="viewer_cannot_display">Cette photo ne peut pas être affichée.</string>
 

@@ -62,10 +62,20 @@ class MediaThumbnailFetcher(
     override suspend fun fetch(): FetchResult {
         val width = options.size.width.pxOrElse { DEFAULT_EDGE_PX }
         val height = options.size.height.pxOrElse { DEFAULT_EDGE_PX }
-        val shown = edited(load(AndroidSize(width, height)))
+        val shown = edited(load(AndroidSize(width, height))).asHardwareIfPossible()
         ThumbnailAspects.Shared.remember(ContentUris.parseId(data.uri), shown.width, shown.height)
         return ImageFetchResult(image = shown.asImage(), isSampled = true, dataSource = DataSource.DISK)
     }
+
+    /**
+     * A cell's thumbnail is drawn once and never touched again until it scrolls away, so what matters for a smooth fling through a big
+     * library is how cheaply *new* cells appear as they scroll into view: a software bitmap costs a GPU upload on its first draw and sits on
+     * the regular heap until then, and a fast fling can put dozens of new thumbnails on screen a second. A hardware bitmap is already in
+     * GPU memory, decoded once, off the heap. `loadThumbnail` and the edit renderer both hand back a software bitmap, so this is a copy, done
+     * here (off the main thread); a config that cannot be copied to hardware (should not happen for a freshly decoded bitmap) is shown as is.
+     */
+    private fun Bitmap.asHardwareIfPossible(): Bitmap =
+        if (config == Bitmap.Config.HARDWARE) this else try { copy(Bitmap.Config.HARDWARE, false) } catch (_: Exception) { this }
 
     /** The thumbnail with the photo's edit drawn on it, so an edited photo looks edited everywhere it is listed. The file is never touched. */
     private fun edited(bitmap: Bitmap): Bitmap {

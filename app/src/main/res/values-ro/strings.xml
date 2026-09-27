@@ -65,8 +65,10 @@
     <!-- Accessibility -->
     <string name="cd_photo">Fotografie, %1$s</string>
     <string name="cd_video">Videoclip, %1$s, %2$s</string>
+    <string name="cd_motion_photo">Fotografie animată, %1$s</string>
     <string name="cd_edited_badge">Editată</string>
     <string name="cd_favorite_badge">Favorită</string>
+    <string name="cd_motion_photo_badge">Fotografie animată</string>
     <string name="viewer_position">%1$d din %2$d</string>
 
     <!-- Video -->
@@ -516,6 +518,7 @@
     <string name="crop_action_down">Mută decuparea în jos</string>
     <string name="viewer_zoom_in">Mărește</string>
     <string name="viewer_zoom_out">Micșorează</string>
+    <string name="viewer_motion_photo_replay">Redă din nou fotografia animată</string>
     <string name="external_photo">Fotografie</string>
     <string name="viewer_cannot_display">Această fotografie nu poate fi afișată.</string>
 

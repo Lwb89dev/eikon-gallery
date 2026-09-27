@@ -65,8 +65,10 @@
     <!-- Accessibility -->
     <string name="cd_photo">Fotoattēls, %1$s</string>
     <string name="cd_video">Video, %1$s, %2$s</string>
+    <string name="cd_motion_photo">Kustīgs foto, %1$s</string>
     <string name="cd_edited_badge">Rediģēts</string>
     <string name="cd_favorite_badge">Izlasē</string>
+    <string name="cd_motion_photo_badge">Kustīgs foto</string>
     <string name="viewer_position">%1$d no %2$d</string>
 
     <!-- Video -->
@@ -516,6 +518,7 @@
     <string name="crop_action_down">Pārvietot apgriezumu uz leju</string>
     <string name="viewer_zoom_in">Tuvināt</string>
     <string name="viewer_zoom_out">Tālināt</string>
+    <string name="viewer_motion_photo_replay">Atskaņot kustīgo foto atkārtoti</string>
     <string name="external_photo">Fotoattēls</string>
     <string name="viewer_cannot_display">Šo fotoattēlu nevar parādīt.</string>
 

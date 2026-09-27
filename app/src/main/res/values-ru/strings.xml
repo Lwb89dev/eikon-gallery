@@ -67,8 +67,10 @@
     <!-- Accessibility -->
     <string name="cd_photo">Фото, %1$s</string>
     <string name="cd_video">Видео, %1$s, %2$s</string>
+    <string name="cd_motion_photo">Живое фото, %1$s</string>
     <string name="cd_edited_badge">Изменено</string>
     <string name="cd_favorite_badge">В избранном</string>
+    <string name="cd_motion_photo_badge">Живое фото</string>
     <string name="viewer_position">%1$d из %2$d</string>
 
     <!-- Video -->
@@ -537,6 +539,7 @@
     <string name="crop_action_down">Сдвинуть область обрезки вниз</string>
     <string name="viewer_zoom_in">Увеличить</string>
     <string name="viewer_zoom_out">Уменьшить</string>
+    <string name="viewer_motion_photo_replay">Воспроизвести живое фото ещё раз</string>
     <string name="external_photo">Фото</string>
     <string name="viewer_cannot_display">Это фото не удаётся показать.</string>
 

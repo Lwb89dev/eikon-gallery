@@ -253,7 +253,39 @@ class MigrationSqlTest {
         v8.close()
     }
 
+    // --- 9 to 10 -----------------------------------------------------------------------------------
+
+    @Test
+    fun migration9To10KeepsEveryRowAndAddsExactlyTheColumnRoomExportsForVersion10() {
+        val v9 = DriverManager.getConnection("jdbc:sqlite::memory:")
+        statementsOf(9).forEach { v9.createStatement().use { s -> s.execute(it) } }
+        v9.createStatement().use { it.execute("INSERT INTO media VALUES (1, 'a.jpg', 'image/jpeg', 0, 5, 5, 5, 10, 10, 0, 7, 'DCIM/Camera/', 'Camera', 1, 0, 0, 0, 0)") }
+
+        DatabaseMigrations.STATEMENTS_9_10.forEach { v9.createStatement().use { s -> s.execute(it) } }
+
+        val fresh = DriverManager.getConnection("jdbc:sqlite::memory:")
+        statementsOf(10).forEach { fresh.createStatement().use { s -> s.execute(it) } }
+        // ALTER TABLE ADD COLUMN rewrites sqlite_master's own CREATE text for `media`, which can differ in quoting or whitespace from Room's
+        // export even when the table it describes is the same, so columns (name, type, order) are compared rather than the raw SQL text.
+        assertEquals(userObjects(fresh), userObjects(v9))
+        assertEquals(columnsOf(fresh, "media"), columnsOf(v9, "media"))
+        assertEquals(1, v9.createStatement().use { st -> st.executeQuery("SELECT COUNT(*) FROM media").use { rs -> rs.next(); rs.getInt(1) } })
+        v9.createStatement().use { it.execute("UPDATE media SET motionVideoOffset = 500000 WHERE id = 1") }
+        val offset = v9.createStatement().use { st -> st.executeQuery("SELECT motionVideoOffset FROM media WHERE id = 1").use { rs -> rs.next(); rs.getLong(1) } }
+        assertEquals(500_000L, offset)
+        fresh.close()
+        v9.close()
+    }
+
     // --- helpers -------------------------------------------------------------------------------
+
+    /** Column name, declared type and position, as `PRAGMA table_info` reports them — what Room itself checks a table against at open time. */
+    private fun columnsOf(connection: Connection, table: String): List<Triple<Int, String, String>> =
+        connection.createStatement().use { st ->
+            st.executeQuery("PRAGMA table_info(`$table`)").use { rs ->
+                generateSequence { if (rs.next()) Triple(rs.getInt("cid"), rs.getString("name"), rs.getString("type")) else null }.toList()
+            }
+        }
 
     private fun execute(sql: String) = db.createStatement().use { it.execute(sql) }
 

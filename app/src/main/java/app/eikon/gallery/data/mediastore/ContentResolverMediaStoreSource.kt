@@ -1,5 +1,6 @@
 package app.eikon.gallery.data.mediastore
 
+import android.content.ContentResolver
 import android.content.Context
 import android.database.Cursor
 import android.provider.MediaStore
@@ -48,7 +49,7 @@ class ContentResolverMediaStoreSource @Inject constructor(
             arrayOf(FileColumns.MEDIA_TYPE_IMAGE.toString(), FileColumns.MEDIA_TYPE_VIDEO.toString(), sinceGeneration.toString()),
             "${MediaColumns.DATE_ADDED} DESC",
         ) ?: throw IllegalStateException("MediaStore returned no cursor")
-        cursor.use { readBatches(it, batchSize, onBatch) }
+        cursor.use { readBatches(it, batchSize, context.contentResolver, onBatch) }
     }
 
     override suspend fun readAllIds(): List<Long> = withContext(Dispatchers.IO) {
@@ -69,9 +70,10 @@ class ContentResolverMediaStoreSource @Inject constructor(
     private suspend fun readBatches(
         cursor: Cursor,
         batchSize: Int,
+        resolver: ContentResolver,
         onBatch: suspend (List<MediaEntity>, Int) -> Unit,
     ) {
-        val columns = MediaRowReader(cursor)
+        val columns = MediaRowReader(cursor, resolver)
         val total = cursor.count
         var batch = ArrayList<MediaEntity>(batchSize)
         while (cursor.moveToNext()) {
