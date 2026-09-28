@@ -50,8 +50,10 @@ import androidx.media3.ui.compose.state.rememberPlayPauseButtonState
 import androidx.media3.ui.compose.state.rememberProgressStateWithTickInterval
 import app.eikon.gallery.R
 import app.eikon.gallery.core.image.MediaThumbnail
+import app.eikon.gallery.data.edit.VideoEditEffects
 import app.eikon.gallery.domain.ExifFormat
 import app.eikon.gallery.domain.MediaItem
+import app.eikon.gallery.domain.edit.EditRecipe
 import androidx.media3.common.MediaItem as PlayerMediaItem
 
 private const val PROGRESS_TICK_MS = 250L
@@ -60,7 +62,8 @@ private const val PROGRESS_TICK_MS = 250L
  * A video page. Only the page on screen owns a player (created on arrival, released on leaving), so
  * swiping through a run of videos never holds more than one decoder. The neighbours show their
  * thumbnail. Playback starts automatically and pauses when the app goes to the background. The picture
- * zooms like a photo does (pinch, double tap, drag); the controls stay where they are.
+ * zooms like a photo does (pinch, double tap, drag); the controls stay where they are. With a [recipe]
+ * the video is trimmed and shown edited, exactly like a photo with one; the file itself is never touched.
  */
 @Composable
 fun VideoPage(
@@ -71,12 +74,15 @@ fun VideoPage(
     onTap: () -> Unit,
     onZoomedChange: (Boolean) -> Unit,
     modifier: Modifier = Modifier,
+    recipe: EditRecipe? = null,
 ) {
     if (isCurrent) {
-        PlayingVideo(item, controlsVisible, controlsBottomPadding, onTap, onZoomedChange, modifier)
+        PlayingVideo(item, controlsVisible, controlsBottomPadding, onTap, onZoomedChange, recipe, modifier)
         return
     }
     Box(modifier.fillMaxSize().pointerInput(Unit) { detectTapGestures(onTap = { onTap() }) }) {
+        // The neighbours' thumbnail is the system's own, unedited: MediaThumbnail already draws a stored edit's color and geometry on it,
+        // but only for a photo (see MediaThumbnail.kt) until a video's own thumbnail can go through the same CPU renderer.
         MediaThumbnail(item, Modifier.fillMaxSize(), ContentScale.Fit)
     }
 }
@@ -89,10 +95,11 @@ private fun PlayingVideo(
     controlsBottomPadding: Dp,
     onTap: () -> Unit,
     onZoomedChange: (Boolean) -> Unit,
+    recipe: EditRecipe?,
     modifier: Modifier,
 ) {
     val context = LocalContext.current
-    val player = remember(item.id) { createPlayer(context, item) }
+    val player = remember(item.id, recipe) { createPlayer(context, item, recipe) }
     DisposableEffect(player) { onDispose { player.release() } }
     LifecycleEventEffect(Lifecycle.Event.ON_STOP) { player.pause() }
 
@@ -133,17 +140,20 @@ private fun TrackVideoShape(player: Player, zoom: ZoomState) {
 }
 
 @OptIn(UnstableApi::class)
-private fun createPlayer(context: Context, item: MediaItem): ExoPlayer {
+private fun createPlayer(context: Context, item: MediaItem, recipe: EditRecipe?): ExoPlayer {
     val audio = AudioAttributes.Builder()
         .setUsage(C.USAGE_MEDIA)
         .setContentType(C.AUDIO_CONTENT_TYPE_MOVIE)
         .build()
+    val clipping = recipe?.trim?.let(VideoEditEffects::clippingConfigOf) ?: PlayerMediaItem.ClippingConfiguration.UNSET
+    val mediaItem = PlayerMediaItem.Builder().setUri(item.uri).setClippingConfiguration(clipping).build()
     return ExoPlayer.Builder(context)
         .setAudioAttributes(audio, /* handleAudioFocus = */ true)
         .setHandleAudioBecomingNoisy(true)
         .build()
         .apply {
-            setMediaItem(PlayerMediaItem.fromUri(item.uri))
+            if (recipe != null) setVideoEffects(VideoEditEffects.forRecipe(recipe, item.width, item.height))
+            setMediaItem(mediaItem)
             prepare()
             playWhenReady = true
         }

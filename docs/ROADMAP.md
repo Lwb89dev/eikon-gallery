@@ -167,3 +167,10 @@ Not done, and why: a video thumbnail scrubber; a "selfies" filter (no signal); m
 - [x] **Motion Photos** (Pixel, Samsung): recognised at sync time by reading the start of every JPEG (`MotionPhotoDetector`, database version 10), marked in the grid, played once muted in the viewer with a button to play again; not shown for an edited photo, which shows its edit instead
 - [x] **Grid thumbnails as hardware bitmaps**: off the regular heap, no GPU-upload copy on their first draw, aimed at flinging through a big library smoothly
 - [~] **Not run on a device**: the first-run screens, the pinch, the icon on real launchers (whether a squircle or another shape shows depends on the launcher and its settings), the camera hand-over, the translations on screen (they were written without a native review), the hardware-bitmap change, and Motion Photo detection and playback (written from the two formats' public specifications, without a real sample file). JVM tests cover the maths, the queries and the resource checks.
+
+## Phase 11 — 1.2.1: video editing, and a dependency audit
+
+- [x] **Video editing**: trim, and the same adjustments, filters, crop, rotate, flip and straighten a photo has (`EditTools` shared by both editors); color is a 3D lookup table baked by the photo's own `ColorPipeline` and applied by Media3's `SingleColorLut`, geometry by Media3's `ScaleAndRotateTransformation` and `Crop` (see docs/EDITING.md for what this leaves out: perspective, sharpening, the vignette)
+- [x] **The first-zoom stall**: a second finger touching down now starts preparing the large layer immediately, instead of waiting for a timer that a pinch usually beats anyway
+- [x] **A full dependency audit**: every direct and transitive dependency is open source; NOTICE.md now names the ones with "google" in their Maven group id that are not Google Play Services or anything closed (Dagger, Guava, Accompanist, JSR-305)
+- [~] **Not run on a device**: all of video editing (the GPU effects, the trim, the export), and whether the pinch fix actually feels different.

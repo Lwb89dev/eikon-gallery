@@ -433,6 +433,11 @@
     <string name="edit_copy_saved">En kopi blev gemt ved siden af originalen, som ikke blev ændret.</string>
     <string name="edit_copy_saved_no_details">En kopi blev gemt ved siden af originalen, som ikke blev ændret. Kameraets oplysninger kunne ikke kopieres.</string>
     <string name="edit_failed">Redigeringen kunne ikke gennemføres. Billedet blev ikke ændret.</string>
+    <string name="edit_revert_message_video">Det rydder alle justeringer, filteret, beskæringen og trimningen fra denne redigering. Den originale video er aldrig blevet ændret. Tryk på Færdig for at beholde den gendannede video.</string>
+    <string name="edit_discard_message_video">De ændringer, du har lavet i denne editor, går tabt. Videoen forbliver, som den var.</string>
+    <string name="edit_copy_saved_video">En kopi blev gemt ved siden af originalen, som ikke blev ændret.</string>
+    <string name="edit_failed_video">Redigeringen kunne ikke gennemføres. Videoen blev ikke ændret.</string>
+    <string name="edit_trim">Trimning</string>
     <string name="edited_badge">Redigeret</string>
     <string name="viewer_show_original">Vis originalen</string>
     <string name="viewer_show_edited">Vis det redigerede billede</string>

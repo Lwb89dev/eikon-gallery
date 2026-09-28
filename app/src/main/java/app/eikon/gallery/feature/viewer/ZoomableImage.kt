@@ -69,8 +69,10 @@ private const val ZOOM_ANIMATION_MS = 260
 internal const val HIGH_RES_EDGE_PX = 4096
 
 /**
- * How long a photo has to be looked at, still, before its large version starts to be prepared. Decoding one (and, for an edited photo, drawing the edit on it)
- * takes a moment that, started by the first pinch, stops the picture mid-gesture; started here, it is ready by then. Photos that are only swiped past cost nothing.
+ * How long a photo has to be looked at, still, before its large version starts to be prepared, on the reasoning that a photo only swiped
+ * past should cost nothing. In practice a pinch usually starts well within this window, which is why [ZoomState.isPinching] gives it a much
+ * earlier, more direct head start (a second finger touching down, before the fingers have moved apart at all): this dwell is the fallback
+ * for someone who lingers on a photo without pinching yet.
  */
 internal const val HIGH_RES_DWELL_MS = 600L
 
@@ -93,6 +95,23 @@ class ZoomState {
     // Derived, so that what reads it (the picture's layers, the zoom action's label) is composed again when it turns true or false and not at every step of a pinch.
     private val zoomed = derivedStateOf { scale > ZOOMED_THRESHOLD }
     val isZoomed: Boolean get() = zoomed.value
+
+    /**
+     * True from the moment a second finger touches down. It turns true well before [isZoomed] does (which needs the fingers to have
+     * actually moved apart), which is exactly the head start [ImagePage] uses to have the large layer ready by the time zooming starts:
+     * without it, decoding a large bitmap began only once the pinch had already crossed the zoom threshold, and stalled the very gesture
+     * that triggered it for as long as the decode took.
+     */
+    var isPinching by mutableStateOf(false)
+        private set
+
+    fun beginPinch() {
+        isPinching = true
+    }
+
+    fun endPinch() {
+        isPinching = false
+    }
 
     fun reset() {
         scale = MIN_SCALE
@@ -198,15 +217,20 @@ private suspend fun PointerInputScope.detectPinchAndPan(state: ZoomState) {
     awaitEachGesture {
         awaitFirstDown(requireUnconsumed = false)
         val center = centerOf(size)
-        do {
-            val event = awaitPointerEvent()
-            applyGesture(event, state, center)
-        } while (event.changes.any { it.pressed })
+        try {
+            do {
+                val event = awaitPointerEvent()
+                applyGesture(event, state, center)
+            } while (event.changes.any { it.pressed })
+        } finally {
+            state.endPinch()
+        }
     }
 }
 
 private fun applyGesture(event: PointerEvent, state: ZoomState, center: Offset) {
     val multiTouch = event.changes.count { it.pressed } > 1
+    if (multiTouch) state.beginPinch()
     if (!multiTouch && !state.isZoomed) return
     val zoom = event.calculateZoom()
     val pan = event.calculatePan()
@@ -236,7 +260,9 @@ fun ImagePage(
     if (isCurrent) {
         LaunchedEffect(state) { snapshotFlow { state.isZoomed }.collect(onZoomedChange) }
     }
-    // Once the photo has been on screen a moment it is worth having its large version ready, out of sight, for the first zoom.
+    // Once the photo has been on screen a moment it is worth having its large version ready, out of sight, for the first zoom. A pinch
+    // starting is a stronger, earlier signal than the dwell: two fingers touch down well before they have moved far enough apart to
+    // actually cross the zoom threshold, which is exactly the head start that keeps the decode from stalling the gesture that needs it.
     var restedOn by remember(item.id, recipe) { mutableStateOf(false) }
     LaunchedEffect(isCurrent, item.id, recipe) {
         restedOn = false
@@ -244,7 +270,8 @@ fun ImagePage(
         delay(HIGH_RES_DWELL_MS)
         restedOn = true
     }
-    ZoomableBox(state, onTap, modifier) { LayeredImage(item, state, recipe, prepareLarge = restedOn) }
+    val prepareLarge = restedOn || (isCurrent && state.isPinching)
+    ZoomableBox(state, onTap, modifier) { LayeredImage(item, state, recipe, prepareLarge = prepareLarge) }
 }
 
 @Composable

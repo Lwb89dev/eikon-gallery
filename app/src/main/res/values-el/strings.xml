@@ -433,6 +433,11 @@
     <string name="edit_copy_saved">Ένα αντίγραφο αποθηκεύτηκε δίπλα στο πρωτότυπο, το οποίο δεν άλλαξε.</string>
     <string name="edit_copy_saved_no_details">Ένα αντίγραφο αποθηκεύτηκε δίπλα στο πρωτότυπο, το οποίο δεν άλλαξε. Οι λεπτομέρειες της κάμερας δεν μπόρεσαν να αντιγραφούν.</string>
     <string name="edit_failed">Η επεξεργασία δεν μπόρεσε να ολοκληρωθεί. Η φωτογραφία δεν άλλαξε.</string>
+    <string name="edit_revert_message_video">Αυτό καθαρίζει όλες τις προσαρμογές, το φίλτρο, το κόψιμο και την περικοπή διάρκειας από αυτή την επεξεργασία. Το αρχικό βίντεο δεν άλλαξε ποτέ. Πατήστε Τέλος για να κρατήσετε το επαναφερμένο βίντεο.</string>
+    <string name="edit_discard_message_video">Οι αλλαγές που κάνατε σε αυτό τον επεξεργαστή θα χαθούν. Το βίντεο μένει όπως ήταν.</string>
+    <string name="edit_copy_saved_video">Ένα αντίγραφο αποθηκεύτηκε δίπλα στο πρωτότυπο, το οποίο δεν άλλαξε.</string>
+    <string name="edit_failed_video">Η επεξεργασία δεν μπόρεσε να ολοκληρωθεί. Το βίντεο δεν άλλαξε.</string>
+    <string name="edit_trim">Περικοπή διάρκειας</string>
     <string name="edited_badge">Επεξεργασμένη</string>
     <string name="viewer_show_original">Εμφάνιση του πρωτοτύπου</string>
     <string name="viewer_show_edited">Εμφάνιση της επεξεργασμένης φωτογραφίας</string>

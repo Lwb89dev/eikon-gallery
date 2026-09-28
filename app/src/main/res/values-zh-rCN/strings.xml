@@ -414,6 +414,11 @@
     <string name="edit_copy_saved">已在原图旁保存了一份副本，原图未被更改。</string>
     <string name="edit_copy_saved_no_details">已在原图旁保存了一份副本，原图未被更改。无法复制相机信息。</string>
     <string name="edit_failed">无法完成编辑。照片未被更改。</string>
+    <string name="edit_revert_message_video">这会清除此次编辑中的所有调整、滤镜、裁剪和剪辑。原始视频从未被更改。点按“完成”即可保留还原后的视频。</string>
+    <string name="edit_discard_message_video">你在此编辑器中所做的更改将会丢失。视频保持原样。</string>
+    <string name="edit_copy_saved_video">已在原视频旁保存了一份副本，原视频未被更改。</string>
+    <string name="edit_failed_video">无法完成编辑。视频未被更改。</string>
+    <string name="edit_trim">剪辑</string>
     <string name="edited_badge">已编辑</string>
     <string name="viewer_show_original">显示原图</string>
     <string name="viewer_show_edited">显示已编辑的照片</string>

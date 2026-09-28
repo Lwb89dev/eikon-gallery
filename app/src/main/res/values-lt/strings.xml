@@ -471,6 +471,11 @@
     <string name="edit_copy_saved">Kopija išsaugota šalia originalo, kuris nebuvo pakeistas.</string>
     <string name="edit_copy_saved_no_details">Kopija išsaugota šalia originalo, kuris nebuvo pakeistas. Nepavyko nukopijuoti kameros duomenų.</string>
     <string name="edit_failed">Redagavimo nepavyko užbaigti. Nuotrauka nebuvo pakeista.</string>
+    <string name="edit_revert_message_video">Tai išvalo visus šio redagavimo koregavimus, filtrą, apkarpymą ir trumpinimą. Originalus vaizdo įrašas niekada nebuvo pakeistas. Paspausk Baigta, kad pasiliktum grąžintą vaizdo įrašą.</string>
+    <string name="edit_discard_message_video">Šiame redaktoriuje padaryti pakeitimai bus prarasti. Vaizdo įrašas liks toks, koks buvo.</string>
+    <string name="edit_copy_saved_video">Kopija išsaugota šalia originalo, kuris nebuvo pakeistas.</string>
+    <string name="edit_failed_video">Redagavimo nepavyko užbaigti. Vaizdo įrašas nebuvo pakeistas.</string>
+    <string name="edit_trim">Trumpinimas</string>
     <string name="edited_badge">Redaguota</string>
     <string name="viewer_show_original">Rodyti originalą</string>
     <string name="viewer_show_edited">Rodyti redaguotą nuotrauką</string>

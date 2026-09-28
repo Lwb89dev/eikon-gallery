@@ -4,11 +4,13 @@ import android.net.Uri
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.Box
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -28,8 +30,10 @@ import app.eikon.gallery.domain.GridSource
 import app.eikon.gallery.feature.collections.CollectionsScreen
 import app.eikon.gallery.feature.collections.collectionRoute
 import app.eikon.gallery.feature.edit.EditRecipesViewModel
+import app.eikon.gallery.feature.edit.EditRouterViewModel
 import app.eikon.gallery.feature.edit.EditScreen
 import app.eikon.gallery.feature.edit.EditViewModel
+import app.eikon.gallery.feature.edit.VideoEditScreen
 import app.eikon.gallery.feature.library.LibraryScreen
 import app.eikon.gallery.feature.library.LibraryViewModel
 import app.eikon.gallery.feature.duplicates.DuplicatesScreen
@@ -285,10 +289,18 @@ private fun MemoryDestination(navController: NavHostController) {
     }
 }
 
+/** One route for both kinds of file; which editor opens is decided once the media is looked up (see [EditRouterViewModel]). */
 @Composable
 private fun EditDestination(navController: NavHostController) {
     MediaAccessGate { _, _, _ ->
-        EditScreen(onClose = { navController.popBackStack() })
+        val router: EditRouterViewModel = hiltViewModel()
+        val isVideo by router.isVideo.collectAsStateWithLifecycle()
+        val close = { navController.popBackStack(); Unit }
+        when (isVideo) {
+            null -> Box(Modifier.fillMaxSize()) { CircularProgressIndicator(Modifier.align(Alignment.Center)) }
+            true -> VideoEditScreen(onClose = close)
+            false -> EditScreen(onClose = close)
+        }
     }
 }
 

@@ -81,4 +81,42 @@ class EditRecipeTest {
         assertEquals(busy, EditAdaptation.Same.adapt(busy, null, null))
         assertNotNull(EditAdaptation.Same)
     }
+
+    // --- video trim -----------------------------------------------------------------------------
+
+    @Test
+    fun aTrimSurvivesTheTripToTextAndBack() {
+        val trimmed = EditRecipe(trim = VideoTrim(1_500L, 9_000L))
+        assertEquals(trimmed, EditRecipeCodec.decode(EditRecipeCodec.encode(trimmed)))
+        assertEquals(listOf("eikon-edit 1", "trimStart=1500", "trimEnd=9000"), EditRecipeCodec.encode(trimmed).lines())
+    }
+
+    @Test
+    fun trimmingOnlyTheStartLeavesTheEndOpen() {
+        val trimmed = EditRecipe(trim = VideoTrim(startMs = 2_000L))
+        assertNull(trimmed.trim.endMs)
+        val decoded = EditRecipeCodec.decode(EditRecipeCodec.encode(trimmed))!!
+        assertEquals(2_000L, decoded.trim.startMs)
+        assertNull("open end is not turned into some fixed number", decoded.trim.endMs)
+    }
+
+    @Test
+    fun aRecipeWithOnlyATrimIsNotTheIdentity() {
+        assertFalse(EditRecipe(trim = VideoTrim(endMs = 5_000L)).isIdentity)
+        assertTrue(EditRecipe(trim = VideoTrim.NONE).isIdentity)
+    }
+
+    @Test
+    fun pastingDropsTheTrimTooItBelongsToOneVideosLength() {
+        val recipe = EditRecipe(adjustments = Adjustments(exposure = 0.2f), trim = VideoTrim(1_000L, 8_000L))
+        assertTrue(recipe.pasteable().trim.isNeutral)
+    }
+
+    @Test
+    fun aTrimCannotStartBeforeZeroOrLeaveLessThanTheMinimumDuration() {
+        assertEquals(0L, VideoTrim(-500L, 100L).clamped().startMs)
+        assertEquals(VideoTrim.MIN_DURATION_MS, VideoTrim(0L, 10L).clamped().endMs)
+        assertEquals(3_000L + VideoTrim.MIN_DURATION_MS, VideoTrim(3_000L, 3_010L).clamped().endMs)
+        assertNull("clamping never invents an end where there was none", VideoTrim(3_000L).clamped().endMs)
+    }
 }

@@ -64,4 +64,25 @@ class ZoomStateTest {
         val movedNow = state.transform(Offset.Zero, Offset(50f, 0f), 1f)
         assertFalse("already against the edge: the swipe goes on to the pager", movedNow)
     }
+
+    // --- isPinching: the head start for preparing the large layer before zooming actually starts -------------------
+
+    @Test
+    fun pinchingIsTrueOnlyBetweenBeginAndEnd() {
+        val state = state()
+        assertFalse(state.isPinching)
+        state.beginPinch()
+        assertTrue(state.isPinching)
+        state.endPinch()
+        assertFalse(state.isPinching)
+    }
+
+    @Test
+    fun pinchingTurnsTrueAsSoonAsASecondFingerIsDownWellBeforeAnyScaleChange() {
+        val state = state()
+        state.beginPinch() // what a second finger touching down does, before the fingers have moved apart at all
+
+        assertTrue("the large layer should already be preparing", state.isPinching)
+        assertFalse("no actual zoom has happened yet", state.isZoomed)
+    }
 }

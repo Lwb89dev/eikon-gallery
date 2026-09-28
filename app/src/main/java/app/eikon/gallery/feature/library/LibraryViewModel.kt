@@ -515,12 +515,11 @@ class LibraryViewModel @Inject constructor(
 
     /** The photos among [items] take the look that was copied in the editor; each keeps its own crop, turns and straightening. Videos are left alone. */
     fun pasteEdits(items: Collection<MediaItem>) {
-        val photos = items.filterNot { it.isVideo }
-        if (photos.isEmpty()) return
+        if (items.isEmpty()) return
         viewModelScope.launch {
             val recipe = editClipboard.recipe.first() ?: return@launch eventChannel.send(LibraryEvent.ActionFailed)
-            editRepository.paste(photos, recipe)
-            eventChannel.send(LibraryEvent.EditsPasted(photos.size))
+            editRepository.paste(items, recipe)
+            eventChannel.send(LibraryEvent.EditsPasted(items.size))
             clearSelection()
         }
     }

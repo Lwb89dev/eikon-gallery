@@ -9,6 +9,7 @@ import app.eikon.gallery.domain.edit.EditRecipe
 import app.eikon.gallery.domain.edit.EditRenderer
 import app.eikon.gallery.domain.edit.ImagePixelSource
 import app.eikon.gallery.domain.edit.PixelSource
+import app.eikon.gallery.domain.edit.VideoTrim
 import app.eikon.gallery.domain.mediaContentUri
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
@@ -40,9 +41,11 @@ fun RgbImage.toBitmap(): Bitmap = Bitmap.createBitmap(pixels, width, height, Bit
  * which are held in memory whole (a full-size export goes through [EditExporter], band by band).
  */
 fun Bitmap.withRecipe(recipe: EditRecipe): Bitmap {
-    if (recipe.isIdentity) return this
+    // A video's trim changes what plays, not what one frame looks like: a recipe that is only a trim leaves a still exactly as it was.
+    val visible = recipe.copy(trim = VideoTrim.NONE)
+    if (visible.isIdentity) return this
     val readable = if (config == Bitmap.Config.HARDWARE) copy(Bitmap.Config.ARGB_8888, false) else this
-    return EditRenderer.render(ImagePixelSource(readable.toRgbImage()), recipe, max(readable.width, readable.height)).toBitmap()
+    return EditRenderer.render(ImagePixelSource(readable.toRgbImage()), visible, max(readable.width, readable.height)).toBitmap()
 }
 
 /**

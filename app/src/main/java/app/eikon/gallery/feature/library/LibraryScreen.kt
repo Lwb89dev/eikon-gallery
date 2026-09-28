@@ -326,7 +326,7 @@ private fun GridTopBars(
                 onRemoveFromAlbum = if (source is GridSource.Album) ({ viewModel.removeFromAlbum(selected) }) else null,
                 onNotThisPerson = if (source is GridSource.Person) ({ viewModel.splitFromPerson(selected) }) else null,
                 onNotAFace = if (source is GridSource.Person) ({ viewModel.ignoreFacesOfPerson(selected) }) else null,
-                onPasteEdits = if (canPaste && selected.any { !it.isVideo }) ({ viewModel.pasteEdits(selected) }) else null,
+                onPasteEdits = if (canPaste) ({ viewModel.pasteEdits(selected) }) else null,
                 onRevertEdits = if (selected.any { it.id in edits }) ({ viewModel.revertEdits(selected) }) else null,
             ),
         )
@@ -531,7 +531,7 @@ private fun LibraryViewer(
     val leading = remember(viewModel) {
         listOf(
             ViewerAction({ R.drawable.ic_share }, { R.string.action_share }) { viewModel.share(listOf(it)) },
-            ViewerAction({ R.drawable.ic_edit }, { R.string.action_edit }, visible = { !it.isVideo }) { currentEdit(it.id) },
+            ViewerAction({ R.drawable.ic_edit }, { R.string.action_edit }) { currentEdit(it.id) },
             ViewerAction(
                 icon = { if (it.isFavorite) R.drawable.ic_favorite else R.drawable.ic_favorite_border },
                 label = { if (it.isFavorite) R.string.action_unfavorite else R.string.action_favorite },

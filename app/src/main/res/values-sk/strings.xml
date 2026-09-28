@@ -471,6 +471,11 @@
     <string name="edit_copy_saved">Kópia bola uložená vedľa originálu, ktorý nebol zmenený.</string>
     <string name="edit_copy_saved_no_details">Kópia bola uložená vedľa originálu, ktorý nebol zmenený. Údaje o fotoaparáte sa nepodarilo skopírovať.</string>
     <string name="edit_failed">Úpravu sa nepodarilo dokončiť. Fotka nebola zmenená.</string>
+    <string name="edit_revert_message_video">Týmto sa z tejto úpravy odstránia všetky nastavenia, filter, orezanie aj skrátenie. Pôvodné video nebolo nikdy zmenené. Stlačením Hotovo ponecháte vrátené video.</string>
+    <string name="edit_discard_message_video">Zmeny vykonané v tomto editore sa stratia. Video zostane také, aké bolo.</string>
+    <string name="edit_copy_saved_video">Kópia bola uložená vedľa originálu, ktorý nebol zmenený.</string>
+    <string name="edit_failed_video">Úpravu sa nepodarilo dokončiť. Video nebolo zmenené.</string>
+    <string name="edit_trim">Skrátenie</string>
     <string name="edited_badge">Upravené</string>
     <string name="viewer_show_original">Zobraziť originál</string>
     <string name="viewer_show_edited">Zobraziť upravenú fotku</string>

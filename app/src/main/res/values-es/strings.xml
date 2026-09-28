@@ -452,6 +452,11 @@
     <string name="edit_copy_saved">Se guardó una copia junto al original, que no se modificó.</string>
     <string name="edit_copy_saved_no_details">Se guardó una copia junto al original, que no se modificó. No se pudieron copiar los detalles de la cámara.</string>
     <string name="edit_failed">No se pudo completar la edición. La foto no se modificó.</string>
+    <string name="edit_revert_message_video">Esto borra todos los ajustes, el filtro, el recorte y el recorte de duración de esta edición. El vídeo original nunca se modificó. Pulsa «Listo» para conservar el vídeo revertido.</string>
+    <string name="edit_discard_message_video">Se perderán los cambios que hayas hecho en este editor. El vídeo se queda como estaba.</string>
+    <string name="edit_copy_saved_video">Se guardó una copia junto al original, que no se modificó.</string>
+    <string name="edit_failed_video">No se pudo completar la edición. El vídeo no se modificó.</string>
+    <string name="edit_trim">Recorte de duración</string>
     <string name="edited_badge">Editada</string>
     <string name="viewer_show_original">Mostrar el original</string>
     <string name="viewer_show_edited">Mostrar la foto editada</string>

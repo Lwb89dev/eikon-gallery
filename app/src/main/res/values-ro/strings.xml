@@ -452,6 +452,11 @@
     <string name="edit_copy_saved">O copie a fost salvată lângă original, care nu a fost modificat.</string>
     <string name="edit_copy_saved_no_details">O copie a fost salvată lângă original, care nu a fost modificat. Detaliile camerei nu au putut fi copiate.</string>
     <string name="edit_failed">Editarea nu a putut fi finalizată. Fotografia nu a fost modificată.</string>
+    <string name="edit_revert_message_video">Aceasta șterge toate ajustările, filtrul, decuparea și trunchierea din această editare. Videoclipul original nu a fost niciodată modificat. Apasă Gata pentru a păstra videoclipul readus la starea inițială.</string>
+    <string name="edit_discard_message_video">Modificările făcute în acest editor se vor pierde. Videoclipul rămâne așa cum era.</string>
+    <string name="edit_copy_saved_video">O copie a fost salvată lângă original, care nu a fost modificat.</string>
+    <string name="edit_failed_video">Editarea nu a putut fi finalizată. Videoclipul nu a fost modificat.</string>
+    <string name="edit_trim">Trunchiere</string>
     <string name="edited_badge">Editată</string>
     <string name="viewer_show_original">Arată originalul</string>
     <string name="viewer_show_edited">Arată fotografia editată</string>

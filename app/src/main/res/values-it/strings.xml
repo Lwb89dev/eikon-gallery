@@ -452,6 +452,11 @@
     <string name="edit_copy_saved">Una copia è stata salvata accanto all\'originale, che non è stato cambiato.</string>
     <string name="edit_copy_saved_no_details">Una copia è stata salvata accanto all\'originale, che non è stato cambiato. Non è stato possibile copiare i dati della fotocamera.</string>
     <string name="edit_failed">Non è stato possibile completare la modifica. La foto non è stata cambiata.</string>
+    <string name="edit_revert_message_video">Cancella da questa modifica ogni regolazione, il filtro, il ritaglio e il taglio della durata. Il video originale non è mai stato cambiato. Premi Fine per tenere il video ripristinato.</string>
+    <string name="edit_discard_message_video">Le modifiche fatte in questo editor andranno perse. Il video resta com\'era.</string>
+    <string name="edit_copy_saved_video">Una copia è stata salvata accanto all\'originale, che non è stato cambiato.</string>
+    <string name="edit_failed_video">Non è stato possibile completare la modifica. Il video non è stato cambiato.</string>
+    <string name="edit_trim">Taglio</string>
     <string name="edited_badge">Modificata</string>
     <string name="viewer_show_original">Mostra l\'originale</string>
     <string name="viewer_show_edited">Mostra la foto modificata</string>

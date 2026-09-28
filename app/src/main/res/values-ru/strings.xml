@@ -471,6 +471,11 @@
     <string name="edit_copy_saved">Копия сохранена рядом с оригиналом, который не изменён.</string>
     <string name="edit_copy_saved_no_details">Копия сохранена рядом с оригиналом, который не изменён. Сведения о камере скопировать не удалось.</string>
     <string name="edit_failed">Не удалось завершить редактирование. Фото не изменено.</string>
+    <string name="edit_revert_message_video">Это сбросит все настройки, фильтр, обрезку и укорачивание этой правки. Исходное видео никогда не менялось. Нажмите «Готово», чтобы сохранить возвращённое видео.</string>
+    <string name="edit_discard_message_video">Изменения, сделанные в этом редакторе, будут потеряны. Видео останется таким, каким было.</string>
+    <string name="edit_copy_saved_video">Копия сохранена рядом с оригиналом, который не изменён.</string>
+    <string name="edit_failed_video">Не удалось завершить редактирование. Видео не изменено.</string>
+    <string name="edit_trim">Укорачивание</string>
     <string name="edited_badge">Изменено</string>
     <string name="viewer_show_original">Показать оригинал</string>
     <string name="viewer_show_edited">Показать изменённое фото</string>

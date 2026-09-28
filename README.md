@@ -75,8 +75,9 @@ Features that are not built yet are not shown in the app.
 - **Non-destructive**: an edit is a small recipe kept in eikon's database and drawn over the photo; the file is never changed and there is no "replace the original". Revert removes the recipe.
 - Auto enhance, exposure, brightness, contrast, highlights, shadows, black point, saturation, vibrance, temperature, tint, sharpness, vignette, crop (free, 1:1, 4:3, 3:2, 16:9), rotate, flip,
   straighten, perspective, and eight filters with a strength. Edited photos look edited in the grid and the viewer, where a chip shows the original.
-- **Save a copy** writes a new JPEG next to the original, keeping its date and camera details. **Copy edits** and **Paste edits** apply one photo's look to many at once; each keeps its own crop.
-- Limits, stated up front: photos only; other apps see the original until you save a copy (Share sends the edit, without metadata); recipes are lost if the app's data is cleared. See [docs/EDITING.md](docs/EDITING.md).
+- **Videos, too**: trim, the same adjustments and filters (drawn live by Media3's GPU effects, not the photo's CPU renderer), rotate, flip, crop and straighten. Perspective, sharpening and the vignette are photo-only for now.
+- **Save a copy** writes a new file next to the original (a JPEG for a photo, an MP4 for a video), keeping a photo's date and camera details. **Copy edits** and **Paste edits** apply one photo's or video's look to many at once; each keeps its own crop and trim.
+- Limits, stated up front: other apps see the original until you save a copy (Share sends a photo's edit, without metadata); recipes are lost if the app's data is cleared. See [docs/EDITING.md](docs/EDITING.md).
 
 **Backup to a server of your own**
 - Copies photos and videos to **Immich** (what Umbrel installs for Android) or to **Nextcloud / any WebDAV server**, over TLS, only on the network you allow, and only after you turn it on and confirm. It **never deletes or overwrites** anything, on the server or the phone; files the server already has are recognised, not sent again.

@@ -90,6 +90,26 @@ If a flight cannot be made (the cell is not on screen, the photo is not loaded y
 - Hashing is cheap next to sending, but **neither has been measured on a phone**, nor has the battery cost of a first backup of a large library, which will take a long time on a real connection whatever the code does.
 - The queue is one indexed query (`backup_item` joined to `media`, newest first, `LIMIT`); its counts for the settings screen are three `COUNT(*)` queries that Room re-runs when either table changes.
 
+## The APK's size
+
+Over 90% of it is the three ONNX models (CLIP's two halves and the face recogniser, together about 260 MB) and the ONNX Runtime native library (28 MB), and both are already about as small as they get without a real
+quality or performance cost:
+
+- The models are **int8 quantised** already (see [ML.md](ML.md)); a further cut (the Multilingual CLIP text model's own vocabulary is far larger than the English/Italian words eikon's search
+  lexicon actually uses, an estimated 38 MB of it) needs re-exporting the model with a re-indexed embedding table, which needs the original training tooling and a fresh check against
+  `ClipModelsTest`'s reference vectors — not something to do without being able to verify the result.
+- The models and `libonnxruntime.so` are stored **uncompressed** (`noCompress += "onnx"`, `extractNativeLibs="false"`) and read by memory-mapping the APK directly (`AssetModelStore`, `libonnxruntime.so`
+  itself). Compressing them would shrink the *download*, but Android can only memory-map an uncompressed entry: a compressed one has to be decompressed to a second copy on the phone's storage before
+  it can be used, which is slower at first use and, for the 260 MB of models, **roughly doubles their footprint on the phone** rather than shrinking it. Measured: gzip -9 shrinks
+  `libonnxruntime.so` by about 63%, which is exactly the download saving traded for that cost; the `.so` is stored uncompressed for the same reason.
+- Every step above (int8, single ABI, `-keep` scoped to only what the native libraries call by name, `shrinkResources`) is already in the build. What is left, found by listing the APK's contents by
+  size: about 90 KB of duplicate AndroidX `LICENSE.txt` files (one per module, same text; excluded, since NOTICE.md already credits them) and 130 KB of OkHttp's public-suffix list, unused because
+  eikon's own HTTP code never calls `HttpUrl.topPrivateDomain()` or uses a public-suffix-based cookie policy (left in place: removing an *asset*, as opposed to a packaged Java resource, needs a
+  global `ignoreAssetsPattern` this project has not verified is safe to set without also silently changing what other, unrelated assets get ignored).
+- Two ways to genuinely shrink the models exist and were not done here, because both are product decisions, not tuning: a **smaller or distilled model** (a real drop in search/face quality), or
+  **fetching a model over the network the first time its analysis step is turned on**, instead of bundling it, which would need its own consent (analysis is opt-in already, but the models
+  are downloaded at *build* time today, never by the app itself) and would be the app's first network use outside the backup.
+
 ## What is not tuned
 
 - Scrolling was measured on a phone in Phase 1 only. Nothing added since has been scrolled on a device: the edited badge, the per-photo edit lookup for thumbnails and the new folder indexes.

@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.2.1 — 2026-09-28
+
+- **Video editing**: trim, and the same adjustments, filters, crop, rotate, flip and straighten a photo has, drawn live by Media3's GPU effects rather than the photo's CPU renderer (perspective, sharpening and the vignette are not offered for video yet, because nothing here draws them for one — see docs/EDITING.md). "Save a copy" renders a new MP4 with Media3's `Transformer`. **Not run on a device, and not tried against a real video file**; the rotation direction and the crop effect's exact numbers are this project's own best reading of Media3's public API.
+- **The first pinch on a photo** could still stall for a moment because the large version only started preparing after the photo had been on screen a while, and a pinch usually starts well before that. A second finger touching down now starts preparing it immediately, which is a much earlier and more direct signal than the timer alone.
+- **Checked eikon's own dependency tree for anything Google-proprietary or otherwise closed.** There is none: every dependency, direct and transitive, is open source (mostly Apache License 2.0). A few have "google" in their Maven group id (Dagger, Guava, Accompanist, JSR-305) without being Play Services, Firebase or anything closed — see NOTICE.md, which now lists them explicitly.
+- **Looked for APK fat to trim.** Over 90% of it is the ONNX models and their runtime, already int8-quantised, uncompressed and memory-mapped rather than copied to storage — genuinely as small as they get without a real quality or speed cost (see docs/PERFORMANCE.md for what was measured and why compressing them would do the opposite of shrinking the app). Removed about 90 KB of duplicate AndroidX license files that NOTICE.md already credits; nothing else was worth the risk for what it would save.
+
 ## 1.2.0 — 2026-09-27
 
 One APK instead of two, first-run screens, 27 languages, and a round of fixes to the grid, the viewer, People and Search. eikon is still local-first: no account, no analytics, no Google services, and it does not talk to the network unless you allow it, for the backup to a server of your own.

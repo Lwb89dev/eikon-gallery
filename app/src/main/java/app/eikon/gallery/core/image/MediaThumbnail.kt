@@ -134,7 +134,9 @@ fun MediaThumbnail(
     requestSize: IntSize? = null,
 ) {
     val context = LocalPlatformContext.current
-    val recipe = if (isVideo || !applyEdit) null else LocalEditRecipeTexts.current[id]
+    // A video's trim has nothing to show on one still frame, but its color and geometry do, drawn by the same CPU renderer a photo uses
+    // (see EditImages.withRecipe): the thumbnail is a bitmap either way, and nothing here needs the GPU effects the live preview does.
+    val recipe = if (!applyEdit) null else LocalEditRecipeTexts.current[id]
     val request = remember(id, modifiedAt, recipe, requestSize) {
         val data = MediaThumbnailData(mediaContentUri(id, isVideo), modifiedAt, recipe)
         val builder = ImageRequest.Builder(context).data(data)

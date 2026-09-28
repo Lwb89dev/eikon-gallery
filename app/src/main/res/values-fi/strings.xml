@@ -433,6 +433,11 @@
     <string name="edit_copy_saved">Kopio tallennettiin alkuperäisen viereen, jota ei muutettu.</string>
     <string name="edit_copy_saved_no_details">Kopio tallennettiin alkuperäisen viereen, jota ei muutettu. Kameran tietoja ei voitu kopioida.</string>
     <string name="edit_failed">Muokkausta ei voitu viimeistellä. Kuvaa ei muutettu.</string>
+    <string name="edit_revert_message_video">Tämä tyhjentää tämän muokkauksen kaikki säädöt, suodattimen, rajauksen ja leikkauksen. Alkuperäistä videota ei ole koskaan muutettu. Paina Valmis säilyttääksesi palautetun videon.</string>
+    <string name="edit_discard_message_video">Tässä muokkaimessa tekemäsi muutokset menetetään. Video pysyy sellaisena kuin se oli.</string>
+    <string name="edit_copy_saved_video">Kopio tallennettiin alkuperäisen viereen, jota ei muutettu.</string>
+    <string name="edit_failed_video">Muokkausta ei voitu viimeistellä. Videota ei muutettu.</string>
+    <string name="edit_trim">Leikkaus</string>
     <string name="edited_badge">Muokattu</string>
     <string name="viewer_show_original">Näytä alkuperäinen</string>
     <string name="viewer_show_edited">Näytä muokattu kuva</string>

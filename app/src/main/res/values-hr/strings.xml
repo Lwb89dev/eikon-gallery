@@ -452,6 +452,11 @@
     <string name="edit_copy_saved">Kopija je spremljena pokraj originala, koji nije promijenjen.</string>
     <string name="edit_copy_saved_no_details">Kopija je spremljena pokraj originala, koji nije promijenjen. Podatke o fotoaparatu nije bilo moguće kopirati.</string>
     <string name="edit_failed">Uređivanje nije bilo moguće dovršiti. Fotografija nije promijenjena.</string>
+    <string name="edit_revert_message_video">Time se iz ovog uređivanja brišu sva podešavanja, filtar, obrezivanje i skraćivanje. Originalni videozapis nikada nije promijenjen. Pritisnite Gotovo da zadržite vraćeni videozapis.</string>
+    <string name="edit_discard_message_video">Promjene koje ste napravili u ovom uređivaču bit će izgubljene. Videozapis ostaje kakav je bio.</string>
+    <string name="edit_copy_saved_video">Kopija je spremljena pokraj originala, koji nije promijenjen.</string>
+    <string name="edit_failed_video">Uređivanje nije bilo moguće dovršiti. Videozapis nije promijenjen.</string>
+    <string name="edit_trim">Skraćivanje</string>
     <string name="edited_badge">Uređeno</string>
     <string name="viewer_show_original">Prikaži original</string>
     <string name="viewer_show_edited">Prikaži uređenu fotografiju</string>

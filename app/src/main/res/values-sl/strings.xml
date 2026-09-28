@@ -471,6 +471,11 @@
     <string name="edit_copy_saved">Kopija je bila shranjena ob izvirniku, ki ni bil spremenjen.</string>
     <string name="edit_copy_saved_no_details">Kopija je bila shranjena ob izvirniku, ki ni bil spremenjen. Podatkov o fotoaparatu ni bilo mogoče kopirati.</string>
     <string name="edit_failed">Urejanja ni bilo mogoče dokončati. Fotografija ni bila spremenjena.</string>
+    <string name="edit_revert_message_video">S tem se iz tega urejanja odstranijo vse prilagoditve, filter, obrezovanje in rezanje dolžine. Izvirni videoposnetek ni bil nikoli spremenjen. Pritisnite Končano, da obdržite povrnjeni videoposnetek.</string>
+    <string name="edit_discard_message_video">Spremembe, ki ste jih naredili v tem urejevalniku, bodo izgubljene. Videoposnetek ostane tak, kot je bil.</string>
+    <string name="edit_copy_saved_video">Kopija je bila shranjena ob izvirniku, ki ni bil spremenjen.</string>
+    <string name="edit_failed_video">Urejanja ni bilo mogoče dokončati. Videoposnetek ni bil spremenjen.</string>
+    <string name="edit_trim">Rezanje dolžine</string>
     <string name="edited_badge">Urejeno</string>
     <string name="viewer_show_original">Pokaži izvirnik</string>
     <string name="viewer_show_edited">Pokaži urejeno fotografijo</string>

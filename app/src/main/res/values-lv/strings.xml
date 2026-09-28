@@ -452,6 +452,11 @@
     <string name="edit_copy_saved">Kopija tika saglabāta blakus oriģinālam, kas netika mainīts.</string>
     <string name="edit_copy_saved_no_details">Kopija tika saglabāta blakus oriģinālam, kas netika mainīts. Kameras datus neizdevās nokopēt.</string>
     <string name="edit_failed">Labojumu neizdevās pabeigt. Fotoattēls netika mainīts.</string>
+    <string name="edit_revert_message_video">Tas notīra visus šī labojuma pielāgojumus, filtru, apgriešanu un saīsināšanu. Oriģinālais video nekad nav mainīts. Nospied Gatavs, lai paturētu atgriezto video.</string>
+    <string name="edit_discard_message_video">Šajā redaktorā veiktās izmaiņas tiks zaudētas. Video paliek tāds, kāds bija.</string>
+    <string name="edit_copy_saved_video">Kopija tika saglabāta blakus oriģinālam, kas netika mainīts.</string>
+    <string name="edit_failed_video">Labojumu neizdevās pabeigt. Video netika mainīts.</string>
+    <string name="edit_trim">Saīsināšana</string>
     <string name="edited_badge">Rediģēts</string>
     <string name="viewer_show_original">Rādīt oriģinālu</string>
     <string name="viewer_show_edited">Rādīt rediģēto fotoattēlu</string>

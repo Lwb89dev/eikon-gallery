@@ -433,6 +433,11 @@
     <string name="edit_copy_saved">Eine Kopie wurde neben dem Original gesichert, das nicht verändert wurde.</string>
     <string name="edit_copy_saved_no_details">Eine Kopie wurde neben dem Original gesichert, das nicht verändert wurde. Die Kameradetails konnten nicht übernommen werden.</string>
     <string name="edit_failed">Die Bearbeitung konnte nicht abgeschlossen werden. Das Foto wurde nicht verändert.</string>
+    <string name="edit_revert_message_video">Dadurch werden alle Anpassungen, der Filter, der Zuschnitt und der Trimmbereich dieser Bearbeitung entfernt. Das Originalvideo wurde nie verändert. Tippe auf „Fertig“, um das zurückgesetzte Video zu behalten.</string>
+    <string name="edit_discard_message_video">Die Änderungen, die du in diesem Editor gemacht hast, gehen verloren. Das Video bleibt, wie es war.</string>
+    <string name="edit_copy_saved_video">Eine Kopie wurde neben dem Original gesichert, das nicht verändert wurde.</string>
+    <string name="edit_failed_video">Die Bearbeitung konnte nicht abgeschlossen werden. Das Video wurde nicht verändert.</string>
+    <string name="edit_trim">Kürzen</string>
     <string name="edited_badge">Bearbeitet</string>
     <string name="viewer_show_original">Das Original zeigen</string>
     <string name="viewer_show_edited">Das bearbeitete Foto zeigen</string>

@@ -433,6 +433,11 @@
     <string name="edit_copy_saved">Копие беше запазено до оригинала, който не е променян.</string>
     <string name="edit_copy_saved_no_details">Копие беше запазено до оригинала, който не е променян. Данните за камерата не можаха да бъдат копирани.</string>
     <string name="edit_failed">Редактирането не можа да бъде завършено. Снимката не е променена.</string>
+    <string name="edit_revert_message_video">Това изчиства всички корекции, филтъра, изрязването и подрязването от това редактиране. Оригиналното видео никога не е било променяно. Натиснете Готово, за да запазите върнатото видео.</string>
+    <string name="edit_discard_message_video">Промените, които сте направили в този редактор, ще бъдат загубени. Видеото остава такова, каквото е било.</string>
+    <string name="edit_copy_saved_video">Копие беше запазено до оригинала, който не е променян.</string>
+    <string name="edit_failed_video">Редактирането не можа да бъде завършено. Видеото не е променено.</string>
+    <string name="edit_trim">Подрязване</string>
     <string name="edited_badge">Редактирана</string>
     <string name="viewer_show_original">Покажи оригинала</string>
     <string name="viewer_show_edited">Покажи редактираната снимка</string>

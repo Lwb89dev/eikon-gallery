@@ -21,12 +21,12 @@ All runtime libraries are Apache License 2.0 unless noted:
 
 - AndroidX: Core, Activity, Lifecycle, Navigation, Compose (UI, Foundation, Material 3), Room, Paging,
   DataStore, ExifInterface, Biometric, Core SplashScreen, WorkManager, Hilt integration, Media3
-- Coil
+- Coil, and Google's [Accompanist](https://github.com/google/accompanist) (`accompanist-drawablepainter`, a Compose helper it pulls in)
 - [ONNX Runtime](https://github.com/microsoft/onnxruntime) 1.28.0 (MIT License), Copyright (c) Microsoft Corporation. Runs the models above.
-- Dagger / Hilt
+- Dagger / Hilt, and what they pull in: [Guava](https://github.com/google/guava) (`guava`, `failureaccess`, `listenablefuture`), JSR-305 (`com.google.code.findbugs:jsr305`, a BSD-style license), and the `javax.inject`/`jakarta.inject` dependency-injection annotations. None of this is Google Play Services, Firebase or any other proprietary Google API: eikon depends on no closed API from Google or anyone else, checked by reading the full dependency tree (`./gradlew :app:dependencies`) and the shipped code for a Play-Services-style class or string. `com.google.dagger` and `com.google.guava` are Maven *group ids*, not a sign of anything closed: both are Apache-2.0 open-source projects Google publishes on GitHub.
 - [SQLCipher for Android](https://www.zetetic.net/sqlcipher/) 4.19.0, Community Edition (BSD-style license, full text below), Copyright (c) 2025 ZETETIC LLC. Encrypts the library's database on the phone. Its native library contains SQLite 3.53 (public domain) and LibTomCrypt (public domain).
 - [OkHttp](https://square.github.io/okhttp/) 5.5.0 and Okio (Apache License 2.0), Copyright Square, Inc. The HTTP client of the backup to your own server (used only after you allow it; in 1.0.0 it was only in the separate `backup` build).
-- kotlinx.coroutines
+- kotlinx.coroutines and kotlinx.serialization (JetBrains, pulled in by Media3); JetBrains' own Compose Multiplatform artifacts (`org.jetbrains.compose.*`, `org.jetbrains.androidx.lifecycle`, `org.jetbrains.androidx.savedstate`) that some AndroidX libraries build on; the `org.jetbrains:annotations` and `org.jspecify:jspecify` nullness annotations. All Apache License 2.0.
 - [Tesseract4Android](https://github.com/adaptech-cz/Tesseract4Android) 4.9.0 (Apache License 2.0), which bundles
   native builds of Tesseract 5.5.1 (Apache License 2.0), Leptonica 1.85.0 (BSD-style), libjpeg v9f (IJG
   license) and libpng 1.6.48 (libpng license). Each keeps its own license and notices.

@@ -433,6 +433,11 @@
     <string name="edit_copy_saved">A másolat az eredeti mellé lett mentve, az eredeti nem változott.</string>
     <string name="edit_copy_saved_no_details">A másolat az eredeti mellé lett mentve, az eredeti nem változott. A kamera adatait nem sikerült átmásolni.</string>
     <string name="edit_failed">A szerkesztést nem sikerült befejezni. A fotó nem változott.</string>
+    <string name="edit_revert_message_video">Ez törli a szerkesztés összes beállítását, szűrőjét, vágását és rövidítését. Az eredeti videó soha nem változott. Nyomd meg a Kész gombot a visszaállított videó megtartásához.</string>
+    <string name="edit_discard_message_video">A szerkesztőben végzett módosítások elvesznek. A videó úgy marad, ahogy volt.</string>
+    <string name="edit_copy_saved_video">A másolat az eredeti mellé lett mentve, az eredeti nem változott.</string>
+    <string name="edit_failed_video">A szerkesztést nem sikerült befejezni. A videó nem változott.</string>
+    <string name="edit_trim">Rövidítés</string>
     <string name="edited_badge">Szerkesztve</string>
     <string name="viewer_show_original">Az eredeti megjelenítése</string>
     <string name="viewer_show_edited">A szerkesztett fotó megjelenítése</string>

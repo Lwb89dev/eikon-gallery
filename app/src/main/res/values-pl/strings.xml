@@ -471,6 +471,11 @@
     <string name="edit_copy_saved">Kopia została zapisana obok oryginału, który nie został zmieniony.</string>
     <string name="edit_copy_saved_no_details">Kopia została zapisana obok oryginału, który nie został zmieniony. Nie udało się skopiować szczegółów aparatu.</string>
     <string name="edit_failed">Nie udało się dokończyć edycji. Zdjęcie nie zostało zmienione.</string>
+    <string name="edit_revert_message_video">To usuwa wszystkie korekty, filtr, kadrowanie i przycinanie z tej edycji. Oryginalny film nigdy nie został zmieniony. Naciśnij Gotowe, aby zachować cofnięty film.</string>
+    <string name="edit_discard_message_video">Zmiany wprowadzone w tym edytorze zostaną utracone. Film pozostanie taki, jaki był.</string>
+    <string name="edit_copy_saved_video">Kopia została zapisana obok oryginału, który nie został zmieniony.</string>
+    <string name="edit_failed_video">Nie udało się dokończyć edycji. Film nie został zmieniony.</string>
+    <string name="edit_trim">Przycinanie</string>
     <string name="edited_badge">Edytowane</string>
     <string name="viewer_show_original">Pokaż oryginał</string>
     <string name="viewer_show_edited">Pokaż edytowane zdjęcie</string>

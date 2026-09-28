@@ -490,6 +490,11 @@
     <string name="edit_copy_saved">Kopja ġiet salvata ħdejn l-oriġinal, li ma nbidilx.</string>
     <string name="edit_copy_saved_no_details">Kopja ġiet salvata ħdejn l-oriġinal, li ma nbidilx. Id-dettalji tal-kamera ma setgħux jiġu kkupjati.</string>
     <string name="edit_failed">L-editjar ma setgħax jiġi kkompletat. Ir-ritratt ma nbidilx.</string>
+    <string name="edit_revert_message_video">Dan ineħħi l-aġġustamenti kollha, il-filtru, il-qtugħ u t-tqassir minn dan l-editjar. Il-vidjo oriġinali qatt ma nbidel. Agħfas Lest biex iżżomm il-vidjo rritornat.</string>
+    <string name="edit_discard_message_video">Il-bidliet li għamilt f\'dan l-editur jintilfu. Il-vidjo jibqa\' kif kien.</string>
+    <string name="edit_copy_saved_video">Kopja ġiet salvata ħdejn l-oriġinal, li ma nbidilx.</string>
+    <string name="edit_failed_video">L-editjar ma setgħax jiġi kkompletat. Il-vidjo ma nbidilx.</string>
+    <string name="edit_trim">Tqassir</string>
     <string name="edited_badge">Editjat</string>
     <string name="viewer_show_original">Uri l-oriġinal</string>
     <string name="viewer_show_edited">Uri r-ritratt editjat</string>

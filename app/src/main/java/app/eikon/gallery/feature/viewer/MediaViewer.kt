@@ -104,7 +104,7 @@ fun MediaViewer(
     val edits = LocalEditRecipeTexts.current
     // The photo being looked at without its edit; going to another photo puts the edits back.
     var originalShownFor by rememberSaveable { mutableStateOf<Long?>(null) }
-    val editOf = { item: MediaItem -> if (item.isVideo || item.id == originalShownFor) null else edits[item.id] }
+    val editOf = { item: MediaItem -> if (item.id == originalShownFor) null else edits[item.id] }
     val toggleOriginal = { item: MediaItem -> originalShownFor = if (item.id == originalShownFor) null else item.id }
     val editedChip = editedChipOf(currentItem, edits, originalShownFor, toggleOriginal)
 
@@ -149,9 +149,9 @@ fun MediaViewer(
     if (infoOpen && currentItem != null) infoSheet(currentItem) { infoOpen = false }
 }
 
-/** The chip that switches between the edited photo and its original, for a photo that has an edit; null for any other. */
+/** The chip that switches between the edited photo (or video) and its original, for one that has an edit; null for any other. */
 private fun editedChipOf(item: MediaItem?, edits: Map<Long, String>, originalShownFor: Long?, toggle: (MediaItem) -> Unit): (@Composable () -> Unit)? {
-    if (item == null || item.isVideo || item.id !in edits) return null
+    if (item == null || item.id !in edits) return null
     return { EditedChip(showingOriginal = item.id == originalShownFor) { toggle(item) } }
 }
 
@@ -213,7 +213,7 @@ private fun ViewerPage(
     val label = "${item.displayName}, ${stringResource(R.string.viewer_position, position, count)}"
     Box(Modifier.fillMaxSize().semantics { contentDescription = label }) {
         if (item.isVideo) {
-            VideoPage(item, isCurrent, chromeVisible, controlsPadding, onTap, onZoomedChange)
+            VideoPage(item, isCurrent, chromeVisible, controlsPadding, onTap, onZoomedChange, recipe = recipe)
         } else {
             ImagePage(item, isCurrent, onTap, onZoomedChange, recipe = recipe)
         }

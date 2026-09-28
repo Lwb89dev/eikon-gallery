@@ -433,6 +433,11 @@
     <string name="edit_copy_saved">En kopia sparades bredvid originalet, som inte ändrades.</string>
     <string name="edit_copy_saved_no_details">En kopia sparades bredvid originalet, som inte ändrades. Kamerauppgifterna kunde inte kopieras.</string>
     <string name="edit_failed">Redigeringen kunde inte slutföras. Bilden ändrades inte.</string>
+    <string name="edit_revert_message_video">Det här rensar alla justeringar, filtret, beskärningen och trimningen från den här redigeringen. Originalvideon har aldrig ändrats. Tryck på Klart för att behålla den återställda videon.</string>
+    <string name="edit_discard_message_video">Ändringarna du gjort i den här redigeraren går förlorade. Videon förblir som den var.</string>
+    <string name="edit_copy_saved_video">En kopia sparades bredvid originalet, som inte ändrades.</string>
+    <string name="edit_failed_video">Redigeringen kunde inte slutföras. Videon ändrades inte.</string>
+    <string name="edit_trim">Trimning</string>
     <string name="edited_badge">Redigerad</string>
     <string name="viewer_show_original">Visa originalet</string>
     <string name="viewer_show_edited">Visa den redigerade bilden</string>

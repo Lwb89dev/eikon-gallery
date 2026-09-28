@@ -433,6 +433,11 @@
     <string name="edit_copy_saved">Er is een kopie naast het origineel opgeslagen; het origineel is niet gewijzigd.</string>
     <string name="edit_copy_saved_no_details">Er is een kopie naast het origineel opgeslagen; het origineel is niet gewijzigd. De cameragegevens konden niet worden gekopieerd.</string>
     <string name="edit_failed">De bewerking kon niet worden voltooid. De foto is niet gewijzigd.</string>
+    <string name="edit_revert_message_video">Hiermee worden alle aanpassingen, het filter, de uitsnede en de inkorting van deze bewerking gewist. De originele video is nooit gewijzigd. Tik op Klaar om de teruggezette video te bewaren.</string>
+    <string name="edit_discard_message_video">De wijzigingen die je in deze editor hebt gemaakt gaan verloren. De video blijft zoals hij was.</string>
+    <string name="edit_copy_saved_video">Er is een kopie naast het origineel opgeslagen; het origineel is niet gewijzigd.</string>
+    <string name="edit_failed_video">De bewerking kon niet worden voltooid. De video is niet gewijzigd.</string>
+    <string name="edit_trim">Inkorting</string>
     <string name="edited_badge">Bewerkt</string>
     <string name="viewer_show_original">Het origineel tonen</string>
     <string name="viewer_show_edited">De bewerkte foto tonen</string>

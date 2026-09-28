@@ -85,7 +85,7 @@ class EditViewModel @Inject constructor(
     private val exporter: EditExporter,
     private val clipboard: EditClipboard,
     private val sync: LibrarySyncCoordinator,
-) : ViewModel() {
+) : ViewModel(), EditToolsActions {
     private val mediaId: Long = savedState.get<Long>(ARG) ?: -1L
     private val ui = MutableStateFlow(EditUiState())
     val state: StateFlow<EditUiState> = ui.asStateFlow()
@@ -142,16 +142,19 @@ class EditViewModel @Inject constructor(
         s.copy(recipe = next, changed = next != stored)
     }
 
-    fun adjust(change: (Adjustments) -> Adjustments) = edit { it.copy(adjustments = change(it.adjustments)) }
+    override fun adjust(change: (Adjustments) -> Adjustments) = edit { it.copy(adjustments = change(it.adjustments)) }
 
-    fun setFilter(filter: EditFilter) = edit { it.copy(filter = filter, filterAmount = if (filter == it.filter) it.filterAmount else 1f) }
+    override fun setFilter(filter: EditFilter) = edit { it.copy(filter = filter, filterAmount = if (filter == it.filter) it.filterAmount else 1f) }
 
-    fun setFilterAmount(amount: Float) = edit { it.copy(filterAmount = amount) }
+    override fun setFilterAmount(amount: Float) = edit { it.copy(filterAmount = amount) }
 
-    fun geometry(change: (Geometry) -> Geometry) = edit { it.copy(geometry = change(it.geometry)) }
+    override fun geometry(change: (Geometry) -> Geometry) = edit { it.copy(geometry = change(it.geometry)) }
+
+    /** A photo's own frame can be looked at for a suggestion; a video has no equivalent yet, which is why [EditToolsActions.autoEnhance] is nullable. */
+    override val autoEnhance: () -> Unit = ::suggestAdjustments
 
     /** Locks the crop to [shape], fitting the largest crop of that shape into the picture. */
-    fun setCropShape(shape: CropShape) {
+    override fun setCropShape(shape: CropShape) {
         val picture = ui.value.preview
         ui.update { it.copy(cropShape = shape) }
         val aspect = picture?.let { it.width.toFloat() / it.height } ?: return
@@ -159,12 +162,12 @@ class EditViewModel @Inject constructor(
         geometry { it.copy(crop = CropTool.fit(it.crop, ratio, aspect)) }
     }
 
-    fun rotate() = geometry { it.copy(quarterTurns = it.quarterTurns + 1, crop = Crop.FULL) }
+    override fun rotate() = geometry { it.copy(quarterTurns = it.quarterTurns + 1, crop = Crop.FULL) }
 
-    fun flip() = geometry { it.copy(flipHorizontal = !it.flipHorizontal) }
+    override fun flip() = geometry { it.copy(flipHorizontal = !it.flipHorizontal) }
 
     /** Sets the adjustments to what "Auto enhance" proposes for this photo; they are ordinary sliders afterwards. */
-    fun autoEnhance() {
+    private fun suggestAdjustments() {
         val current = source ?: return
         viewModelScope.launch {
             val proposal = withContext(Dispatchers.Default) { AutoEnhance.suggest(current) }

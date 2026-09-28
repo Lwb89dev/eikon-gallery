@@ -414,6 +414,11 @@
     <string name="edit_copy_saved">オリジナルの隣にコピーを保存しました。オリジナルは変更されていません。</string>
     <string name="edit_copy_saved_no_details">オリジナルの隣にコピーを保存しました。オリジナルは変更されていません。カメラの情報はコピーできませんでした。</string>
     <string name="edit_failed">編集を完了できませんでした。写真は変更されていません。</string>
+    <string name="edit_revert_message_video">この編集のすべての調整、フィルタ、切り抜き、トリムが消去されます。元の動画は一度も変更されていません。元に戻した動画を保存するには「完了」を押してください。</string>
+    <string name="edit_discard_message_video">このエディタで行った変更は失われます。動画は元のままです。</string>
+    <string name="edit_copy_saved_video">オリジナルの隣にコピーを保存しました。オリジナルは変更されていません。</string>
+    <string name="edit_failed_video">編集を完了できませんでした。動画は変更されていません。</string>
+    <string name="edit_trim">トリム</string>
     <string name="edited_badge">編集済み</string>
     <string name="viewer_show_original">オリジナルを表示</string>
     <string name="viewer_show_edited">編集済みの写真を表示</string>

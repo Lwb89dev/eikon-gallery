@@ -435,6 +435,11 @@
     <string name="edit_copy_saved">A copy was saved next to the original, which was not changed.</string>
     <string name="edit_copy_saved_no_details">A copy was saved next to the original, which was not changed. Its camera details could not be copied.</string>
     <string name="edit_failed">The edit could not be completed. The photo was not changed.</string>
+    <string name="edit_revert_message_video">This clears every adjustment, the filter, the crop and the trim from this edit. The original video was never changed. Press Done to keep the reverted video.</string>
+    <string name="edit_discard_message_video">The changes you made in this editor will be lost. The video stays as it was.</string>
+    <string name="edit_copy_saved_video">A copy was saved next to the original, which was not changed.</string>
+    <string name="edit_failed_video">The edit could not be completed. The video was not changed.</string>
+    <string name="edit_trim">Trim</string>
     <string name="edited_badge">Edited</string>
     <string name="viewer_show_original">Show the original</string>
     <string name="viewer_show_edited">Show the edited photo</string>

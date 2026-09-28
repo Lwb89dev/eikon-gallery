@@ -490,6 +490,11 @@
     <string name="edit_copy_saved">Sábháladh cóip in aice leis an mbunleagan, nár athraíodh.</string>
     <string name="edit_copy_saved_no_details">Sábháladh cóip in aice leis an mbunleagan, nár athraíodh. Níorbh fhéidir sonraí an cheamara a chóipeáil.</string>
     <string name="edit_failed">Níorbh fhéidir an eagarthóireacht a chur i gcrích. Níor athraíodh an grianghraf.</string>
+    <string name="edit_revert_message_video">Glanann sé seo gach coigeartú, an scagaire, an gearradh agus an giorrú ón eagarthóireacht seo. Níor athraíodh an bunfhíseán riamh. Brúigh Críochnaithe chun an físeán fillte a choinneáil.</string>
+    <string name="edit_discard_message_video">Caillfear na hathruithe a rinne tú san eagarthóir seo. Fanfaidh an físeán mar a bhí sé.</string>
+    <string name="edit_copy_saved_video">Sábháladh cóip in aice leis an mbunleagan, nár athraíodh.</string>
+    <string name="edit_failed_video">Níorbh fhéidir an eagarthóireacht a chur i gcrích. Níor athraíodh an físeán.</string>
+    <string name="edit_trim">Giorrú</string>
     <string name="edited_badge">Curtha in eagar</string>
     <string name="viewer_show_original">Taispeáin an bunleagan</string>
     <string name="viewer_show_edited">Taispeáin an grianghraf curtha in eagar</string>

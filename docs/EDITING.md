@@ -87,7 +87,7 @@ Drawing in **bands** (`PixelSource`) means only the rows of the original that a 
 - **Viewer**: the photo is drawn edited (screen-sized, and again at up to 4,096 px while zoomed; a crop decodes larger so what remains still fills the screen). An **Edited** chip at
   the top shows the photo as it was taken when tapped, and back. Going to another photo restores the edits.
 - **Info** keeps showing the *file's* real metadata: it describes the original.
-- Videos are not editable and have no edit action.
+- **Video**: the same viewer, and the grid's edited-photo badge and thumbnail rendering, now apply to a video's own recipe too (see "Video editing" below).
 
 ## Save a copy
 
@@ -114,21 +114,48 @@ it never falls back to sending the unedited file.
 - Today "the same look" means **the same numbers**. The seam for doing better is `EditAdaptation`: pasting passes the recipe through it, with room for statistics of the source and
   target photos, so a later version can, for instance, scale exposure to how bright the target is. Only `EditAdaptation.Same` exists.
 
+## Video editing
+
+A video's edit is the **same recipe** (`EditRecipe`), with one field that means nothing for a photo: `trim` (start and end, in milliseconds; a `null` end means "to the end", so the recipe
+never needs to know the video's real length). `EditTools` (the sliders, the filter strip, rotate/flip/crop) is the same UI both editors share; only sharpening, the vignette and perspective are
+hidden while editing a video, because nothing draws them for one (below).
+
+The two renderers are not the same, on purpose. A photo's `EditRenderer` is the pure-Kotlin CPU renderer above; running that per frame in real time is not realistic, so a video's color and
+geometry are drawn by **Media3's own GPU effects** (`VideoEditEffects`, `data/edit`), built to read as the same recipe a photo would:
+
+- **Color** (every adjustment, the filter and its strength) is baked into a **3D lookup table** (`VideoColorLut`, 17 steps per channel) by literally running the photo's own `ColorPipeline`
+  once per grid point, then handed to Media3 as a `SingleColorLut`. Since it is the same code, a video and a photo edited with the same numbers read the same colors; only the resolution of
+  the table (not the values it holds) can show as very faint banding a photo's per-pixel pipeline never has.
+- **Geometry**: flip, quarter turns and straighten are one Media3 `ScaleAndRotateTransformation` (its own scale compensates for the same "no empty corner" enlargement `GeometryMap.fillZoom`
+  computes for photos); the crop is Media3's own `Crop` effect. **Perspective correction has no Media3 effect to use**, and hand-writing a GPU shader for one is exactly the kind of code this
+  project will not ship without a device to check it on, so it is not offered for video; sharpening and the vignette need more than one pixel's own color (a blur, the pixel's position), which
+  a lookup table cannot express either, so they are not offered for video yet.
+- **Trim** is a `MediaItem.ClippingConfiguration`: the player (and, for a saved copy, `Transformer`) never decodes anything outside it.
+- The **filter strip's thumbnails** are the CPU renderer again, on one representative frame (`VideoFrameLoader`, `MediaMetadataRetriever`) — a still picture, so nothing here needs the GPU
+  pipeline for it. The **grid thumbnail** of an edited video is drawn the exact same way a photo's is (`MediaThumbnail`/`EditImages.withRecipe`): the trim has nothing to show on one frame, so
+  a recipe that only trims a video leaves its thumbnail untouched.
+- **Save a copy** uses Media3's `Transformer` (`VideoEditExporter`) with the same effects and the trim as a clipping range, writing a new MP4 next to the original (`Movies/eikon/` if the
+  original is not already somewhere apps may write videos to); unlike a photo's copy, no attempt is made to carry over the file's own metadata.
+
+**Not run on a device, and not tried against a real video file.** The rotation direction (Media3's own sign convention against `Geometry`'s "positive turns clockwise") and the exact meaning
+of `Crop`'s four numbers are this project's own best reading of Media3's public API, not something confirmed on a phone; whether repeatedly rebuilding the preview's player while dragging a
+slider (debounced 200 ms) is smooth enough, and how long `Transformer` takes to render a copy, are equally unmeasured.
+
 ## Limits
 
-- **Photos only**; videos cannot be edited. RAW files, animated images and photos with Ultra HDR gain maps are not specially handled (they are decoded as ordinary pictures; the exported
+- RAW files, animated images and photos with Ultra HDR gain maps are not specially handled (they are decoded as ordinary pictures; the exported
   copy is an ordinary sRGB JPEG, so HDR information is dropped). Not tried on any.
 - **sRGB only**: wide-gamut photos are converted on decoding, so an edit means the same thing everywhere.
 - **No history**: one recipe per photo. Revert and "discard changes" are all there is; there is no undo stack inside a session.
-- **Perspective** is two sliders (vertical and horizontal), not four draggable corners.
+- **Perspective** is two sliders (vertical and horizontal), not four draggable corners, and (see "Video editing") only a photo has it.
 - **Not offered**: local adjustments and masks, curves, per-colour adjustments, noise reduction, red-eye or retouching, text and drawing.
 - **The file can change under a recipe.** The file's modification time is stored with the recipe, but nothing uses it yet: if another app edits the file afterwards, eikon still draws its
   recipe over the result.
 - **Deleted photos**: the recipe of a photo deleted for good stays in the database as a few bytes of text. Media ids are never reused, so it can never apply to another photo.
 - **Memory**: a 24-megapixel copy needs about 100 MB for the decoded photo and as much for the result at once. On a phone short of memory, "Save a copy" can fail; it says so and
   leaves nothing behind.
-- **Not run on a device yet.** The renderer, the recipe format, the copy/paste rules, the database and its migration are covered by JVM tests (85 of them plus the migration's, on synthetic pictures
-  whose expected values are computed by hand or checked as properties). The screens, the gestures of the crop overlay, the look of every tool on real photos, the speed on a phone and the
+- **Not run on a device yet.** The renderer, the recipe format, the copy/paste rules, the database and its migration are covered by JVM tests, on synthetic pictures
+  whose expected values are computed by hand or checked as properties. The screens, the gestures of the crop overlay, the look of every tool on real photos, the speed on a phone and the
   saved copy's metadata have **not** been checked; `EditOnDeviceTest` covers the Android bitmap glue and is written but not run.
 
 ## The one place eikon writes to a photo: its date and its location

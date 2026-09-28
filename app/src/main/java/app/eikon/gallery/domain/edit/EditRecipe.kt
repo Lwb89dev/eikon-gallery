@@ -1,5 +1,7 @@
 package app.eikon.gallery.domain.edit
 
+import kotlin.math.max
+
 /**
  * The tone and color adjustments of an edit. Every value is a plain number with a neutral default of 0, so a recipe says
  * what was changed and by how much, never a picture: the original file is never touched. Ranges are noted per field;
@@ -99,8 +101,29 @@ data class Geometry(
 enum class EditFilter { NONE, VIVID, WARM, COOL, MONO, NOIR, FADE, CHROME, SEPIA }
 
 /**
- * Everything done to one photo, without changing the photo. It is a value: two recipes that say the same thing are equal,
- * it is stored as a short piece of text ([EditRecipeCodec]), and it can be copied to other photos.
+ * What of a video's own length is kept, by milliseconds from its start. [endMs] is null for "to the end", so a recipe never has to know
+ * the video's real duration (which is not knowable from the recipe alone); whatever renders or exports the video clamps [endMs] against
+ * the duration it has. Meaningless for a photo, where it stays [NONE].
+ */
+data class VideoTrim(val startMs: Long = 0L, val endMs: Long? = null) {
+    val isNeutral: Boolean get() = this == NONE
+
+    fun clamped(): VideoTrim {
+        val start = startMs.coerceAtLeast(0L)
+        return VideoTrim(start, endMs?.let { max(it, start + MIN_DURATION_MS) })
+    }
+
+    companion object {
+        val NONE = VideoTrim()
+
+        /** A trim shorter than this would leave nothing worth playing. */
+        const val MIN_DURATION_MS = 500L
+    }
+}
+
+/**
+ * Everything done to one photo or video, without changing the file. It is a value: two recipes that say the same thing are equal,
+ * it is stored as a short piece of text ([EditRecipeCodec]), and it can be copied to other photos. [trim] only ever applies to a video.
  */
 data class EditRecipe(
     val adjustments: Adjustments = Adjustments.NONE,
@@ -108,17 +131,18 @@ data class EditRecipe(
     val filter: EditFilter = EditFilter.NONE,
     /** 0 to 1. */
     val filterAmount: Float = 1f,
+    val trim: VideoTrim = VideoTrim.NONE,
 ) {
     /** True when drawing the recipe would change nothing. */
-    val isIdentity: Boolean get() = adjustments.isNeutral && geometry.isNeutral && (filter == EditFilter.NONE || filterAmount <= 0f)
+    val isIdentity: Boolean get() = adjustments.isNeutral && geometry.isNeutral && trim.isNeutral && (filter == EditFilter.NONE || filterAmount <= 0f)
 
-    fun clamped() = EditRecipe(adjustments.clamped(), geometry.clamped(), filter, filterAmount.coerceIn(0f, 1f))
+    fun clamped() = EditRecipe(adjustments.clamped(), geometry.clamped(), filter, filterAmount.coerceIn(0f, 1f), trim.clamped())
 
     /**
-     * What "Paste edits" applies: the look (adjustments and filter) but not the crop, turns or straightening, which belong to
-     * one particular picture and would cut or tilt another one.
+     * What "Paste edits" applies: the look (adjustments and filter) but not the crop, turns, straightening or trim, which belong to
+     * one particular picture (or video) and would cut or tilt another one.
      */
-    fun pasteable(): EditRecipe = copy(geometry = Geometry.NONE)
+    fun pasteable(): EditRecipe = copy(geometry = Geometry.NONE, trim = VideoTrim.NONE)
 
     companion object {
         val NONE = EditRecipe()
@@ -154,6 +178,8 @@ object EditRecipeCodec {
             lines += "filter=${r.filter.name.lowercase()}"
             if (r.filterAmount != 1f) lines += "filterAmount=${r.filterAmount}"
         }
+        if (r.trim.startMs != 0L) lines += "trimStart=${r.trim.startMs}"
+        r.trim.endMs?.let { lines += "trimEnd=$it" }
         return lines.joinToString("\n")
     }
 
@@ -173,7 +199,8 @@ object EditRecipeCodec {
             number("perspectiveV"), number("perspectiveH"), values["crop"]?.let(::cropOf) ?: Crop.FULL,
         )
         val filter = EditFilter.entries.firstOrNull { it.name.equals(values["filter"], ignoreCase = true) } ?: EditFilter.NONE
-        return EditRecipe(adjustments, geometry, filter, values["filterAmount"]?.toFloatOrNull() ?: 1f).clamped()
+        val trim = VideoTrim(values["trimStart"]?.toLongOrNull() ?: 0L, values["trimEnd"]?.toLongOrNull())
+        return EditRecipe(adjustments, geometry, filter, values["filterAmount"]?.toFloatOrNull() ?: 1f, trim).clamped()
     }
 
     private fun cropOf(text: String): Crop? {

@@ -452,6 +452,11 @@
     <string name="edit_copy_saved">Une copie a été enregistrée à côté de l’original, qui n’a pas été modifié.</string>
     <string name="edit_copy_saved_no_details">Une copie a été enregistrée à côté de l’original, qui n’a pas été modifié. Les détails de l’appareil photo n’ont pas pu être copiés.</string>
     <string name="edit_failed">La modification n’a pas pu être menée à bien. La photo n’a pas été modifiée.</string>
+    <string name="edit_revert_message_video">Cela efface tous les réglages, le filtre, le recadrage et le rognage de cette modification. La vidéo originale n\'a jamais été modifiée. Touchez OK pour conserver la vidéo rétablie.</string>
+    <string name="edit_discard_message_video">Les modifications faites dans cet éditeur seront perdues. La vidéo reste telle qu\'elle était.</string>
+    <string name="edit_copy_saved_video">Une copie a été enregistrée à côté de l\'original, qui n\'a pas été modifié.</string>
+    <string name="edit_failed_video">La modification n\'a pas pu être menée à bien. La vidéo n\'a pas été modifiée.</string>
+    <string name="edit_trim">Rognage</string>
     <string name="edited_badge">Modifiée</string>
     <string name="viewer_show_original">Afficher l’original</string>
     <string name="viewer_show_edited">Afficher la photo modifiée</string>

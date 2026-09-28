@@ -433,6 +433,11 @@
     <string name="edit_copy_saved">Koopia salvestati originaali kõrvale, originaali ei muudetud.</string>
     <string name="edit_copy_saved_no_details">Koopia salvestati originaali kõrvale, originaali ei muudetud. Kaamera andmeid ei õnnestunud kopeerida.</string>
     <string name="edit_failed">Muutmist ei õnnestunud lõpetada. Fotot ei muudetud.</string>
+    <string name="edit_revert_message_video">See eemaldab sellest muudatusest kõik kohandused, filtri, kärpimise ja ajalise kärpimise. Algset videot pole kunagi muudetud. Taastatud video säilitamiseks vajuta Valmis.</string>
+    <string name="edit_discard_message_video">Selles redaktoris tehtud muudatused lähevad kaotsi. Video jääb selliseks, nagu see oli.</string>
+    <string name="edit_copy_saved_video">Koopia salvestati originaali kõrvale, originaali ei muudetud.</string>
+    <string name="edit_failed_video">Muutmist ei õnnestunud lõpetada. Videot ei muudetud.</string>
+    <string name="edit_trim">Kärbe</string>
     <string name="edited_badge">Muudetud</string>
     <string name="viewer_show_original">Näita originaali</string>
     <string name="viewer_show_edited">Näita muudetud fotot</string>
