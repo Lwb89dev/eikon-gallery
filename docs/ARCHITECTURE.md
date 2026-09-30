@@ -232,6 +232,11 @@ with a `ContentObserver` only while the UI is visible: nothing runs in the backg
 - Opening and closing a photo flies its thumbnail between the cell and the viewer (`feature/library/HeroFlight.kt`; see [PERFORMANCE.md](PERFORMANCE.md)); the cell's place comes from the grid's layout only when a photo is tapped.
 - Grid gestures: pinch (Initial pass, consumed only for two fingers), long-press-drag range selection
   (scrolling is disabled while dragging, with edge auto-scroll).
+- Viewer gestures: pinch/pan and double tap on the picture, swipe between photos (the pager), tap for the chrome, and a vertical
+  drag over all of it that closes downwards and opens the details upwards. That last one is off while a photo is zoomed, but it stays
+  in the modifier chain and checks the flag inside: a `pointerInput` removed from the chain is detached, and Compose drops a detached
+  pointer-input node from the hit path along with every node below it (the pager, the picture's own gestures), cancelling them
+  mid-gesture until the next finger down. See [PERFORMANCE.md](PERFORMANCE.md).
 
 ## Permissions and scoped storage
 

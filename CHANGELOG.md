@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.2.2 — 2026-09-30
+
+- **Pinch to zoom a photo now keeps working through the whole gesture.** Until now the first pinch on a photo moved it about a hundredth and then went dead, however far the fingers kept moving; lifting them and pinching again worked. The cause was not the slow decode 1.2.1 chased but the viewer cancelling its own gesture: crossing the zoom threshold disabled drag-to-close, which took that `pointerInput` out of the modifier chain, and Compose drops a detached pointer-input node from the hit path *together with every node below it* — the pager and the photo's own pinch handler — which are cancelled and then hear nothing more until a finger goes down again. Drag-to-close now keeps its place in the chain and turns itself off from the inside. **Not tried on a device yet.**
+
 ## 1.2.1 — 2026-09-28
 
 - **Video editing**: trim, and the same adjustments, filters, crop, rotate, flip and straighten a photo has, drawn live by Media3's GPU effects rather than the photo's CPU renderer (perspective, sharpening and the vignette are not offered for video yet, because nothing here draws them for one — see docs/EDITING.md). "Save a copy" renders a new MP4 with Media3's `Transformer`. **Not run on a device, and not tried against a real video file**; the rotation direction and the crop effect's exact numbers are this project's own best reading of Media3's public API.

@@ -340,6 +340,12 @@ private fun rememberPullState(): PullState {
 /**
  * Down past the threshold closes (the content stays where it was let go while the viewer fades out),
  * up past it opens the details; anything shorter springs back.
+ *
+ * Enabled or not, the gesture keeps its place in the modifier chain and is turned off from the inside, because taking a `pointerInput`
+ * out of the chain detaches it, and a detached node is dropped from the hit path together with everything below it: here the pager and
+ * the photo's own pinch and tap handlers, which are cancelled mid-gesture and, since the hit path is only rebuilt when a finger goes
+ * down, hear nothing more until the fingers are lifted. That is what used to stall the first pinch on a photo the moment it crossed the
+ * zoom threshold: crossing it disabled this gesture, and disabling it killed the pinch that had just crossed it.
  */
 @Composable
 private fun Modifier.pullGestures(
@@ -349,8 +355,8 @@ private fun Modifier.pullGestures(
     onPullUp: () -> Unit,
 ): Modifier {
     val scope = rememberCoroutineScope()
-    if (!enabled) return this
-    return pointerInput(pull) {
+    return pointerInput(pull, enabled) {
+        if (!enabled) return@pointerInput
         detectVerticalDragGestures(
             onVerticalDrag = { change, delta ->
                 change.consume()

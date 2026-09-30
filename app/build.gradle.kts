@@ -146,8 +146,8 @@ android {
         minSdk = 30
         targetSdk = 36
         // 1.2.1 is 10201 (major * 10000 + minor * 100 + patch), so later releases always sort higher.
-        versionCode = 10201
-        versionName = "1.2.1"
+        versionCode = 10202
+        versionName = "1.2.2"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
