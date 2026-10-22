@@ -10,9 +10,9 @@ import androidx.room.RoomDatabase
  * - `media`: rebuildable cache of MediaStore metadata (see [MediaEntity]).
  * - `album`, `album_item`, `hidden_media`: user-authored data. They are never derived from MediaStore
  *   and never touched when the media cache is cleared or re-synced.
- * - `index_state`, `media_geo`, `media_search`, `media_embedding`: what the background analysis has
- *   learned about each photo (places, text, what it looks like). Derived data: it is rebuilt if lost,
- *   and cleared with the media cache.
+ * - `index_state`, `media_geo`, `media_search`, `media_embedding`, `media_ocr_word`: what the background analysis has
+ *   learned about each photo (places, text and where it sits, what it looks like). Derived data: it is rebuilt if
+ *   lost, and cleared with the media cache.
  * - `search_hit`: scratch table holding the photos that matched the current semantic search.
  * - `content_hash`, `perceptual_hash`: fingerprints of files and pictures, to find duplicates. Derived data.
  * - `duplicate_dismissed`, `memory_preference`: what the user said about duplicate groups and memories. User data: kept
@@ -50,8 +50,9 @@ import androidx.room.RoomDatabase
         BackupItemEntity::class,
         MediaCaptionEntity::class,
         MetadataOriginalEntity::class,
+        OcrWordEntity::class,
     ],
-    version = 10,
+    version = 11,
     exportSchema = true,
     autoMigrations = [AutoMigration(from = 1, to = 2)],
 )

@@ -237,6 +237,11 @@ with a `ContentObserver` only while the UI is visible: nothing runs in the backg
   in the modifier chain and checks the flag inside: a `pointerInput` removed from the chain is detached, and Compose drops a detached
   pointer-input node from the hit path along with every node below it (the pager, the picture's own gestures), cancelling them
   mid-gesture until the next finger down. See [PERFORMANCE.md](PERFORMANCE.md).
+- Zoomed in on a photo with recognized text, an `OcrTextLayer` of invisible `Text` composables, one per OCR line, sits over the
+  picture inside a `SelectionContainer`, so a word can be long-pressed and dragged over like real text and copied through the system's
+  own toolbar (`feature/viewer/OcrTextLayer.kt`; the words themselves come from `IndexStage.OCR`, see [INDEXING.md](INDEXING.md) and
+  [ML.md](ML.md)). It is a deeper node than the picture's own pinch/pan detector, so a drag a selection handle already claimed is not
+  also read as a pan: `ZoomableImage.applyGesture` backs off a single-finger drag once something under it has consumed the event.
 
 ## Permissions and scoped storage
 

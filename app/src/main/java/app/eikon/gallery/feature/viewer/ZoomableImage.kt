@@ -26,6 +26,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.geometry.lerp
 import androidx.compose.ui.graphics.graphicsLayer
@@ -45,6 +46,7 @@ import androidx.compose.ui.util.lerp
 import app.eikon.gallery.R
 import app.eikon.gallery.core.image.EditTransformation
 import app.eikon.gallery.core.image.MediaThumbnail
+import app.eikon.gallery.data.ocr.OcrWord
 import app.eikon.gallery.domain.edit.EditRecipe
 import app.eikon.gallery.domain.edit.GeometryMap
 import app.eikon.gallery.domain.MediaItem
@@ -158,6 +160,18 @@ class ZoomState {
         return if (imageAspect > width / height) Size(width, width / imageAspect) else Size(height * imageAspect, height)
     }
 
+    /**
+     * The image's own rectangle once fitted into the container at scale 1, centered: where [content] below actually
+     * draws the picture, before the pinch/pan transform around it. Anything that must line up with the picture's own
+     * pixels (the OCR text overlay) is placed within this rectangle rather than redoing the zoom math itself.
+     */
+    internal fun fittedRect(): Rect {
+        val fitted = fittedSize()
+        val left = (containerSize.width - fitted.width) / 2f
+        val top = (containerSize.height - fitted.height) / 2f
+        return Rect(left, top, left + fitted.width, top + fitted.height)
+    }
+
     private fun clamp(candidate: Offset, forScale: Float): Offset {
         val fitted = fittedSize()
         val maxX = ((fitted.width * forScale - containerSize.width) / 2f).coerceAtLeast(0f)
@@ -232,6 +246,9 @@ private fun applyGesture(event: PointerEvent, state: ZoomState, center: Offset) 
     val multiTouch = event.changes.count { it.pressed } > 1
     if (multiTouch) state.beginPinch()
     if (!multiTouch && !state.isZoomed) return
+    // A single finger already claimed by something drawn over the picture (a text selection handle, while zoomed in on
+    // OCR'd text) is not also a pan: without this, panning and dragging a selection handle would fight over the same drag.
+    if (!multiTouch && event.changes.any { it.isConsumed }) return
     val zoom = event.calculateZoom()
     val pan = event.calculatePan()
     if (zoom == 1f && pan == Offset.Zero) return
@@ -254,6 +271,7 @@ fun ImagePage(
     onZoomedChange: (Boolean) -> Unit,
     modifier: Modifier = Modifier,
     recipe: EditRecipe? = null,
+    ocrWordsOf: suspend (Long) -> List<OcrWord> = { emptyList() },
 ) {
     val state = remember(item.id) { ZoomState() }
     LaunchedEffect(isCurrent) { if (!isCurrent) state.reset() }
@@ -271,11 +289,11 @@ fun ImagePage(
         restedOn = true
     }
     val prepareLarge = restedOn || (isCurrent && state.isPinching)
-    ZoomableBox(state, onTap, modifier) { LayeredImage(item, state, recipe, prepareLarge = prepareLarge) }
+    ZoomableBox(state, onTap, modifier) { LayeredImage(item, state, recipe, prepareLarge = prepareLarge, ocrWordsOf = ocrWordsOf) }
 }
 
 @Composable
-private fun LayeredImage(item: MediaItem, state: ZoomState, recipe: EditRecipe?, prepareLarge: Boolean) {
+private fun LayeredImage(item: MediaItem, state: ZoomState, recipe: EditRecipe?, prepareLarge: Boolean, ocrWordsOf: suspend (Long) -> List<OcrWord>) {
     val context = LocalPlatformContext.current
     var previewLoaded by remember(item.id, recipe) { mutableStateOf(false) }
     var failed by remember(item.id, recipe) { mutableStateOf(false) }
@@ -299,6 +317,10 @@ private fun LayeredImage(item: MediaItem, state: ZoomState, recipe: EditRecipe?,
     if (failed) Box(Modifier.fillMaxSize(), contentAlignment = Alignment.BottomCenter) { CannotDisplay(Modifier.padding(bottom = 96.dp)) }
     val hasMoreToShow = max(item.width, item.height) > max(container.width, container.height)
     if (state.isZoomed || (prepareLarge && hasMoreToShow)) HighResLayer(item, recipe, state)
+    // The words OCR found, boxed where they are written: like the motion clip below, only over the photo as it was taken, because the
+    // boxes were read from that file and would no longer line up with a crop, straighten or rotate. Below the clip on purpose: its
+    // selection area covers the whole picture, and on top it would swallow the touches meant for the clip's replay button.
+    if (recipe == null) OcrTextLayer(item.id, state, ocrWordsOf)
     // The clip is the photo as it was taken: shown edited, only the still (with the edit drawn on it) is shown, never the raw motion.
     val motionOffset = item.motionVideoOffset
     if (recipe == null && motionOffset != null) MotionPhotoLayer(item, motionOffset)

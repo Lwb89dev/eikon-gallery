@@ -277,6 +277,55 @@ class MigrationSqlTest {
         v9.close()
     }
 
+    // --- 10 to 11 ----------------------------------------------------------------------------------
+
+    @Test
+    fun migration10To11StatementsAreExactlyWhatRoomExportedForVersion11() {
+        val exportedNew = statementsOf(11).filter { sql -> "`media_ocr_word`" in sql }
+        assertEquals(exportedNew.toSet(), DatabaseMigrations.STATEMENTS_10_11.toSet())
+    }
+
+    @Test
+    fun migration10To11KeepsEveryRowAndProducesTheSameObjectsAsAFreshVersion11() {
+        val v10 = DriverManager.getConnection("jdbc:sqlite::memory:")
+        statementsOf(10).forEach { v10.createStatement().use { s -> s.execute(it) } }
+        v10.createStatement().use { it.execute("INSERT INTO media VALUES (1, 'a.jpg', 'image/jpeg', 0, 5, 5, 5, 10, 10, 0, 7, 'DCIM/Camera/', 'Camera', 1, 0, 0, 0, 0, NULL)") }
+
+        DatabaseMigrations.STATEMENTS_10_11.forEach { v10.createStatement().use { s -> s.execute(it) } }
+
+        val fresh = DriverManager.getConnection("jdbc:sqlite::memory:")
+        statementsOf(11).forEach { fresh.createStatement().use { s -> s.execute(it) } }
+        assertEquals(userObjects(fresh), userObjects(v10))
+        assertTrue("table:media_ocr_word" in userObjects(v10))
+        assertEquals(1, v10.createStatement().use { st -> st.executeQuery("SELECT COUNT(*) FROM media").use { rs -> rs.next(); rs.getInt(1) } })
+        v10.createStatement().use { it.execute("INSERT INTO media_ocr_word (mediaId, line, text, left, top, right, bottom) VALUES (1, 0, 'Ciao', 0.1, 0.2, 0.3, 0.4)") }
+        val text = v10.createStatement().use { st -> st.executeQuery("SELECT text FROM media_ocr_word WHERE mediaId = 1").use { rs -> rs.next(); rs.getString(1) } }
+        assertEquals("Ciao", text)
+        fresh.close()
+        v10.close()
+    }
+
+    @Test
+    fun migration10To11PutsBackInTheQueueOnlyThePhotosWhoseTextWasFound() {
+        val v10 = DriverManager.getConnection("jdbc:sqlite::memory:")
+        statementsOf(10).forEach { v10.createStatement().use { s -> s.execute(it) } }
+        // Text found on 1 (needs its boxes now), none on 2, failing on 3; 1's place is done and has nothing to do with text.
+        listOf("(1, 'OCR', 1, 0, 0)", "(2, 'OCR', 3, 0, 0)", "(3, 'OCR', 2, 2, 0)", "(1, 'GEO', 1, 0, 0)").forEach { row ->
+            v10.createStatement().use { it.execute("INSERT INTO index_state (mediaId, stage, status, attempts, updatedAt) VALUES $row") }
+        }
+
+        DatabaseMigrations.STATEMENTS_10_11.forEach { v10.createStatement().use { s -> s.execute(it) } }
+        v10.createStatement().use { it.execute(DatabaseMigrations.REREAD_TEXT_10_11) }
+
+        val left = v10.createStatement().use { st ->
+            st.executeQuery("SELECT mediaId || ':' || stage || ':' || status FROM index_state ORDER BY mediaId, stage").use { rs ->
+                generateSequence { if (rs.next()) rs.getString(1) else null }.toList()
+            }
+        }
+        assertEquals(listOf("1:GEO:1", "2:OCR:3", "3:OCR:2"), left)
+        v10.close()
+    }
+
     // --- helpers -------------------------------------------------------------------------------
 
     /** Column name, declared type and position, as `PRAGMA table_info` reports them — what Room itself checks a table against at open time. */

@@ -14,6 +14,7 @@ now does and what was fixed after reading it, not a test result. Whoever tries i
   - Hold the photo in the editor to see the original: a chip "Original" does the same with a tap.
   - Drag down to close the viewer: the back button and the system back do the same.
   - Swipe between photos: the pager's own scroll actions.
+  - Select and copy the text OCR found, long-pressed and dragged where it sits on the photo itself: the same text, already selectable as one ordinary block, in the Info sheet's "Text found" section (no gesture-only path is new here; the in-photo layer has no screen-reader equivalent of its own, see Known gaps).
 - **Roles and state.** The editor's tools are tabs with a selected state, filters are radio buttons, the "Edited"/"Original" chip in the viewer is a button that says what it will do ("Show the original").
 - **Text size.** The editor's tool row scrolls sideways when it does not fit; the tool options scroll vertically; text is in `sp`. The viewer's top bar has a fixed height (56 dp) and one line of text.
 - **Motion.** Animations follow the system "Remove animations" setting: the photo flight, zoom and the memory slideshow finish at once.
@@ -28,6 +29,7 @@ now does and what was fixed after reading it, not a test result. Whoever tries i
 - The **map** in Places is drawn on a canvas with one description for the whole map: its markers are not reachable one by one. The places *list* has the same content.
 - **Memories** play as a slideshow whose photos have no description of their own.
 - The **zoomed photo** cannot be panned with a screen reader (only zoomed in and out).
+- The **OCR text-selection layer** over a zoomed photo is an ordinary text selection to Compose, but TalkBack has no gesture for "long-press a point on an image, then drag," so it is effectively unreachable with a screen reader: use the Info sheet's "Text found" section instead, which is the same text as one ordinary, already-accessible block.
 - Touch targets: the small badges on cells are not buttons. The name above each slider (tap to reset) is smaller than 48 dp, but the same reset is on the slider itself as an action.
 - No support for a hardware keyboard beyond what Compose gives (Tab and Enter on buttons); the editor has no shortcuts.
 - Languages: English and Italian only.

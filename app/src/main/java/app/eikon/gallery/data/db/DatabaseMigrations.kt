@@ -129,5 +129,27 @@ object DatabaseMigrations {
         }
     }
 
-    val ALL: Array<Migration> = arrayOf(MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5, MIGRATION_5_6, MIGRATION_6_7, MIGRATION_7_8, MIGRATION_8_9, MIGRATION_9_10)
+    /** Adds the words OCR found in a photo, boxed, so the viewer can show them where they are actually written. */
+    val STATEMENTS_10_11: List<String> = listOf(
+        "CREATE TABLE IF NOT EXISTS `media_ocr_word` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `mediaId` INTEGER NOT NULL, " +
+            "`line` INTEGER NOT NULL, `text` TEXT NOT NULL, `left` REAL NOT NULL, `top` REAL NOT NULL, `right` REAL NOT NULL, `bottom` REAL NOT NULL)",
+        "CREATE INDEX IF NOT EXISTS `index_media_ocr_word_mediaId` ON `media_ocr_word` (`mediaId`)",
+    )
+
+    /**
+     * The photos whose text was already read before version 11 have that text but no boxes, and the text step, being done, would never
+     * look at them again: so the photos where text was found go back in its queue (the ones where none was, skipped, stay as they are).
+     * Not schema, so not part of [STATEMENTS_10_11], which must equal Room's export.
+     */
+    const val REREAD_TEXT_10_11: String = "DELETE FROM `index_state` WHERE `stage` = 'OCR' AND `status` = ${IndexStatus.DONE}"
+
+    val MIGRATION_10_11: Migration = object : Migration(10, 11) {
+        override fun migrate(db: SupportSQLiteDatabase) {
+            STATEMENTS_10_11.forEach(db::execSQL)
+            db.execSQL(REREAD_TEXT_10_11)
+        }
+    }
+
+    val ALL: Array<Migration> =
+        arrayOf(MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5, MIGRATION_5_6, MIGRATION_6_7, MIGRATION_7_8, MIGRATION_8_9, MIGRATION_9_10, MIGRATION_10_11)
 }

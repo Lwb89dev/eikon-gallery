@@ -54,10 +54,12 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.material3.MaterialTheme
 import androidx.activity.compose.BackHandler
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import app.eikon.gallery.R
 import app.eikon.gallery.core.image.LocalEditRecipeTexts
 import app.eikon.gallery.core.ui.ImmersiveMode
 import app.eikon.gallery.core.ui.SystemBarIcons
+import app.eikon.gallery.data.ocr.OcrWord
 import app.eikon.gallery.domain.MediaItem
 import app.eikon.gallery.domain.edit.EditRecipeCodec
 import kotlin.math.abs
@@ -91,6 +93,7 @@ fun MediaViewer(
     shown: Boolean = true,
     /** How much of the black backdrop to draw, 0..1, read while drawing. */
     backdrop: () -> Float = { 1f },
+    viewModel: ViewerViewModel = hiltViewModel(),
 ) {
     val count = items.count
     LaunchedEffect(count == 0) { if (count == 0) onClose(false) }
@@ -107,6 +110,7 @@ fun MediaViewer(
     val editOf = { item: MediaItem -> if (item.id == originalShownFor) null else edits[item.id] }
     val toggleOriginal = { item: MediaItem -> originalShownFor = if (item.id == originalShownFor) null else item.id }
     val editedChip = editedChipOf(currentItem, edits, originalShownFor, toggleOriginal)
+    val ocrWordsOf: suspend (Long) -> List<OcrWord> = viewModel::ocrWords
 
     LaunchedEffect(pagerState) { snapshotFlow { pagerState.currentPage }.collect(onPageChanged) }
     LaunchedEffect(pagerState.currentPage) {
@@ -130,6 +134,7 @@ fun MediaViewer(
                 pull = pull,
                 chromeVisible = chromeVisible,
                 editOf = editOf,
+                ocrWordsOf = ocrWordsOf,
                 onToggleChrome = { chromeVisible = !chromeVisible },
                 onZoomedChange = { zoomed = it },
             )
@@ -162,6 +167,7 @@ private fun ViewerPager(
     pull: PullState,
     chromeVisible: Boolean,
     editOf: (MediaItem) -> String?,
+    ocrWordsOf: suspend (Long) -> List<OcrWord>,
     onToggleChrome: () -> Unit,
     onZoomedChange: (Boolean) -> Unit,
 ) {
@@ -190,6 +196,7 @@ private fun ViewerPager(
                 chromeVisible = chromeVisible,
                 controlsPadding = controlsPadding,
                 editText = editOf(item),
+                ocrWordsOf = ocrWordsOf,
                 onTap = onToggleChrome,
                 onZoomedChange = onZoomedChange,
             )
@@ -206,6 +213,7 @@ private fun ViewerPage(
     chromeVisible: Boolean,
     controlsPadding: Dp,
     editText: String?,
+    ocrWordsOf: suspend (Long) -> List<OcrWord>,
     onTap: () -> Unit,
     onZoomedChange: (Boolean) -> Unit,
 ) {
@@ -215,7 +223,7 @@ private fun ViewerPage(
         if (item.isVideo) {
             VideoPage(item, isCurrent, chromeVisible, controlsPadding, onTap, onZoomedChange, recipe = recipe)
         } else {
-            ImagePage(item, isCurrent, onTap, onZoomedChange, recipe = recipe)
+            ImagePage(item, isCurrent, onTap, onZoomedChange, recipe = recipe, ocrWordsOf = ocrWordsOf)
         }
     }
 }

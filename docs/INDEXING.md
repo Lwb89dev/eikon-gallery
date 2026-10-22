@@ -21,7 +21,7 @@ them. Implemented steps, in the order they run:
 | `FILEHASH` | a SHA-256 of the file's bytes, **only for files that share their size with another file of the same kind** | reads the whole file, but only for candidates | nothing |
 | `EMBED` | what the photo shows, as a 512-byte vector (CLIP image model), so a phrase can be matched to it; also the source of the dogs and cats collections | moderate (decode to 224 px, one model run; measured on a desktop only, see [ML.md](ML.md)) | nothing |
 | `FACES` | the faces in the photo (box, 128-number description) and the person each was grouped with | moderate (decode to 1,280 px, three detector passes, one model run per face) | nothing |
-| `OCR` | text found inside the photo, into the full-text index | slow (seconds per photo, CPU) | nothing |
+| `OCR` | text found inside the photo, into the full-text index, each word also boxed for the viewer | slow (seconds per photo, CPU) | nothing |
 
 Location clustering (the map's markers) is not a stage: it is computed when the map is opened, from the stored positions.
 
@@ -63,6 +63,7 @@ All of it in the private app database, excluded from backups, and **deleted when
 
 - `media_geo`: latitude, longitude and the resolved city/region/country of each geotagged photo.
 - `media_search`: the words of each file name and the text read from each photo.
+- `media_ocr_word`: the same text, boxed word by word, so the viewer can show it selectable where it is actually written on the photo (replaced wholesale whenever the photo is analysed again). Added in database version 11; the migration to it puts the photos whose text had already been found back in the text step's queue, since their text had no boxes.
 - `index_state`: which stage has been done for which photo.
 - `media_embedding`: the 512-byte description of what each photo shows.
 - `perceptual_hash` and `content_hash`: fingerprints of pictures and files, each with the file's modification time so an edited photo is fingerprinted again.

@@ -8,6 +8,7 @@ import app.eikon.gallery.data.db.IndexStateEntity
 import app.eikon.gallery.data.db.IndexStatus
 import app.eikon.gallery.data.db.MediaEntity
 import app.eikon.gallery.data.db.MediaGeoEntity
+import app.eikon.gallery.data.db.OcrWordEntity
 import javax.inject.Inject
 import javax.inject.Singleton
 import kotlinx.coroutines.flow.Flow
@@ -80,6 +81,15 @@ class IndexingRepository @Inject constructor(
     suspend fun saveText(mediaId: Long, text: String) = dao.setOcr(mediaId, text)
 
     suspend fun text(mediaId: Long): String? = dao.ocr(mediaId)?.takeIf { it.isNotBlank() }
+
+    /** Replaces the boxed words of a photo with [words]: there is no identity to keep from one analysis run to the next. */
+    suspend fun saveOcrWords(mediaId: Long, words: List<OcrWordEntity>) {
+        dao.deleteOcrWordsOf(mediaId)
+        if (words.isNotEmpty()) dao.insertOcrWords(words)
+    }
+
+    /** The words OCR found in a photo and where they sit, for the viewer's text-selection overlay; empty for a photo with none (or not yet analysed). */
+    suspend fun ocrWords(mediaId: Long): List<OcrWordEntity> = dao.ocrWords(mediaId)
 
     private suspend fun record(mediaId: Long, stage: IndexStage, status: Int, attempts: Int) {
         dao.setState(IndexStateEntity(mediaId, stage.name, status, attempts, clock.nowMillis()))

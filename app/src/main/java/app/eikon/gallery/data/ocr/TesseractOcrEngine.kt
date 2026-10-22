@@ -30,11 +30,45 @@ class TesseractOcrEngine @Inject constructor(
             val engine = api ?: create().also { api = it }
             try {
                 engine.setImage(bitmap)
-                OcrResult(engine.getUTF8Text().orEmpty(), engine.meanConfidence())
+                val text = engine.getUTF8Text().orEmpty()
+                OcrResult(text, engine.meanConfidence(), words(engine, bitmap.width, bitmap.height))
             } finally {
                 // Also after a failure: what the engine kept of this picture must not be read as part of the next one.
                 engine.clear()
             }
+        }
+    }
+
+    /**
+     * The words [getUTF8Text] just read, each boxed, by walking the same result word by word. Must run after
+     * [TessBaseAPI.getUTF8Text] (or another call that recognizes the page), which is what [recognize] above does;
+     * an iterator asked for before that would simply find nothing.
+     */
+    private fun words(engine: TessBaseAPI, width: Int, height: Int): List<OcrWord> {
+        if (width <= 0 || height <= 0) return emptyList()
+        val iterator = engine.resultIterator ?: return emptyList()
+        return try {
+            val words = mutableListOf<OcrWord>()
+            iterator.begin()
+            var line = -1
+            do {
+                if (iterator.isAtBeginningOf(TessBaseAPI.PageIteratorLevel.RIL_TEXTLINE)) line++
+                val text = iterator.getUTF8Text(TessBaseAPI.PageIteratorLevel.RIL_WORD)?.trim().orEmpty()
+                val box = iterator.getBoundingRect(TessBaseAPI.PageIteratorLevel.RIL_WORD)
+                if (text.isNotEmpty()) {
+                    words += OcrWord(
+                        text = text,
+                        line = line,
+                        left = (box.left.toFloat() / width).coerceIn(0f, 1f),
+                        top = (box.top.toFloat() / height).coerceIn(0f, 1f),
+                        right = (box.right.toFloat() / width).coerceIn(0f, 1f),
+                        bottom = (box.bottom.toFloat() / height).coerceIn(0f, 1f),
+                    )
+                }
+            } while (iterator.next(TessBaseAPI.PageIteratorLevel.RIL_WORD))
+            words
+        } finally {
+            iterator.delete()
         }
     }
 

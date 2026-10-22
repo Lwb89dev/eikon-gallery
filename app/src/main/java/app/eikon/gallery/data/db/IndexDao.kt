@@ -81,6 +81,17 @@ interface IndexDao {
     @Query("SELECT ocr FROM media_search WHERE rowid = :id")
     suspend fun ocr(id: Long): String?
 
+    // --- OCR word boxes, for selecting text where it is written on the photo itself ------------
+
+    @Insert
+    suspend fun insertOcrWords(words: List<OcrWordEntity>)
+
+    @Query("DELETE FROM media_ocr_word WHERE mediaId = :mediaId")
+    suspend fun deleteOcrWordsOf(mediaId: Long)
+
+    @Query("SELECT * FROM media_ocr_word WHERE mediaId = :mediaId ORDER BY line, id")
+    suspend fun ocrWords(mediaId: Long): List<OcrWordEntity>
+
     // --- image embeddings and semantic search hits ---------------------------------------------
 
     @Upsert
@@ -128,6 +139,9 @@ interface IndexDao {
     @Query("DELETE FROM media_embedding WHERE mediaId IN (:ids)")
     suspend fun deleteEmbeddings(ids: List<Long>)
 
+    @Query("DELETE FROM media_ocr_word WHERE mediaId IN (:ids)")
+    suspend fun deleteOcrWords(ids: List<Long>)
+
     @Query("DELETE FROM index_state")
     suspend fun clearStates()
 
@@ -139,4 +153,7 @@ interface IndexDao {
 
     @Query("DELETE FROM media_embedding")
     suspend fun clearEmbeddings()
+
+    @Query("DELETE FROM media_ocr_word")
+    suspend fun clearOcrWords()
 }

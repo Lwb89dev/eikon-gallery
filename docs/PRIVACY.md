@@ -65,7 +65,8 @@ MediaStore after a restore.
 ## Location and text found in photos
 
 If you turn the analysis steps on (they are **off by default**), eikon stores, on the phone only, where each geotagged photo was taken
-(coordinates plus the nearest city) and the text it could read inside each photo. That is a real record of
+(coordinates plus the nearest city) and the text it could read inside each photo, word by word with where each word sits (so it can
+be selected where it is actually written, over the photo itself, not only read as one block). That is a real record of
 places you have been and things you have photographed (receipts, documents, screenshots), which is why:
 
 - both steps are off until you switch them on in Settings, each has its own switch, and analysis can be paused entirely;

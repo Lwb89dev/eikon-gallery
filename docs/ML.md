@@ -38,6 +38,11 @@ The release APK is about 25 MB with OCR, models and place data.
 Results are filtered (`OcrTextFilter`): below a confidence threshold, with fewer than two real words, or
 mostly symbols, the text is discarded instead of stored.
 
+The same recognition pass also walks Tesseract's `ResultIterator` word by word (`TessBaseAPI.PageIteratorLevel.RIL_WORD`,
+with `RIL_TEXTLINE` to tell lines apart) for each word's box, as a fraction of the image so it survives resizing, the
+same convention a face's box uses. Boxing costs nothing extra worth measuring on top of recognition itself (walking an
+already-recognized page), and is what the viewer's text-selection layer places over the photo (see PERFORMANCE.md).
+
 Open items: measure seconds per photo and battery per 1,000 photos on a real phone; the JNI keep rules for
 release builds are in `proguard-rules.pro` and have not been exercised on a device.
 

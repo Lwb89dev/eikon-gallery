@@ -2,8 +2,16 @@ package app.eikon.gallery.data.ocr
 
 import android.graphics.Bitmap
 
-/** Text recognized in an image and how sure the engine is about it (0 to 100). */
-data class OcrResult(val text: String, val confidence: Int)
+/**
+ * One recognized word and where it sits, as fractions of the image's own width and height (0 to 1, the same
+ * convention a face's box uses) so it does not depend on how large the image was decoded for reading. [line]
+ * groups words that sit on the same text line, in reading order, for showing or selecting them where they are
+ * actually written on the photo.
+ */
+data class OcrWord(val text: String, val line: Int, val left: Float, val top: Float, val right: Float, val bottom: Float)
+
+/** Text recognized in an image, how sure the engine is about it (0 to 100), and the words it was made of. */
+data class OcrResult(val text: String, val confidence: Int, val words: List<OcrWord> = emptyList())
 
 /**
  * A local text recognizer. eikon's implementation is Tesseract (open source, no Google services, no

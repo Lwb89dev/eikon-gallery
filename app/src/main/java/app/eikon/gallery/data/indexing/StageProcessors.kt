@@ -2,6 +2,7 @@ package app.eikon.gallery.data.indexing
 
 import app.eikon.gallery.data.db.MediaEntity
 import app.eikon.gallery.data.db.MediaGeoEntity
+import app.eikon.gallery.data.db.OcrWordEntity
 import app.eikon.gallery.data.embedding.ClipImageLoader
 import app.eikon.gallery.data.embedding.EmbeddingRepository
 import app.eikon.gallery.data.embedding.Embeddings
@@ -70,6 +71,8 @@ class OcrStageProcessor @Inject constructor(
             val result = engine.recognize(bitmap)
             val text = OcrTextFilter.clean(result.text, result.confidence) ?: return StageOutcome.SKIPPED
             repository.saveText(item.id, text)
+            val words = result.words.map { OcrWordEntity(mediaId = item.id, line = it.line, text = it.text, left = it.left, top = it.top, right = it.right, bottom = it.bottom) }
+            repository.saveOcrWords(item.id, words)
             return StageOutcome.DONE
         } finally {
             bitmap.recycle()

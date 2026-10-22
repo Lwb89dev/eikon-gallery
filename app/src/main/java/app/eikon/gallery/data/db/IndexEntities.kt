@@ -68,6 +68,25 @@ data class MediaSearchEntity(
 )
 
 /**
+ * One word OCR found in a photo and where it sits, as fractions of the upright picture (so it survives resizing,
+ * the same convention as [FaceEntity]'s box), in reading order ([line], then left to right within it). Kept
+ * alongside [MediaSearchEntity.ocr] so the text can be selected where it is actually written, over the photo
+ * itself, and not only read as one block in the info panel. Replaced wholesale when a photo is analysed again:
+ * there is no identity to preserve from one run's words to the next.
+ */
+@Entity(tableName = "media_ocr_word", indices = [Index("mediaId")])
+data class OcrWordEntity(
+    @PrimaryKey(autoGenerate = true) val id: Long = 0,
+    val mediaId: Long,
+    val line: Int,
+    val text: String,
+    val left: Float,
+    val top: Float,
+    val right: Float,
+    val bottom: Float,
+)
+
+/**
  * What a photo looks like to the image model: a 512-value vector, one signed byte per value (see
  * `Embeddings`). [model] says which model made it, because vectors of different models are not comparable.
  */

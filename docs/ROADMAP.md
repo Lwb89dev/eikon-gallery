@@ -54,14 +54,19 @@ day" is not implemented (drag-select covers ranges).
 - [x] Background analysis with WorkManager: per-photo state, retries, time slices, thermal handling,
       pause / charging-only / per-step switches, visible progress; both steps are **off by default**
 - [x] OCR with Tesseract (English and Italian), results filtered, text shown and copyable in Info
+- [x] Text selected and copied where it is actually written on the photo itself (long-press and drag,
+      zoomed in, over an invisible line-by-line layer boxed by OCR; the system's own copy menu), not only
+      as one block in Info
 - [x] Database version 3 with a tested migration; derived data cleared when access is revoked
 - [~] **Not run on a device yet**: the search screen, the WorkManager schedule, the OCR engine's native code
-      and models on real photos, the location-permission flow, the info panel additions. The logic around
-      them is covered by 100+ new JVM tests; new instrumented tests are written but have not been run.
+      and models on real photos, the location-permission flow, the info panel additions, and the text-selection
+      layer (it sizes each line's invisible text to the box OCR found by stretching it, which depends on real
+      font rendering, and its drag has to lose gracefully to pinch/pan when both want the same single finger).
+      The logic around them is covered by 100+ new JVM tests; new instrumented tests are written but have not been run.
 
-Known gaps: videos are not analyzed; on-screen photos are analysed first since Phase 9; no "select and copy text" overlay
-on the photo itself (text is shown in Info); no URL, phone or email detection in recognized text; only
-English and Italian text; region names are English except a small Italian alias list.
+Known gaps: videos are not analyzed; on-screen photos are analysed first since Phase 9; the text-selection layer only
+covers the photo as taken, not a cropped, straightened or rotated edit of it; no URL, phone or email detection in
+recognized text; only English and Italian text; region names are English except a small Italian alias list.
 
 ## Phase 4 — Intelligent indexing
 

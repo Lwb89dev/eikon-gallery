@@ -48,6 +48,7 @@ class RoomMediaIndex @Inject constructor(
             index.deleteGeo(it)
             index.deleteSearch(it)
             index.deleteEmbeddings(it)
+            index.deleteOcrWords(it)
             people.deleteFaces(it)
         }
         people.deleteEmptyUnnamedPeople()
@@ -67,7 +68,7 @@ class RoomMediaIndex @Inject constructor(
     }
 
     /**
-     * Empties the media cache and everything derived from it (places, recognized text, image embeddings, faces and people, file fingerprints, what was sent to a backup server), so revoking photo
+     * Empties the media cache and everything derived from it (places, recognized text and where it sits, image embeddings, faces and people, file fingerprints, what was sent to a backup server), so revoking photo
      * access also removes what eikon learned about the photos. Albums and the hidden list are user data
      * and are kept.
      */
@@ -78,6 +79,7 @@ class RoomMediaIndex @Inject constructor(
             index.clearGeo()
             index.clearSearch()
             index.clearEmbeddings()
+            index.clearOcrWords()
             index.clearHits()
             people.clearFaces()
             people.clearPeople()

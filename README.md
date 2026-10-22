@@ -35,6 +35,7 @@ Features that are not built yet are not shown in the app.
 - Full-screen viewer: swipe between items, pinch and double-tap zoom (photos **and videos**), immersive mode, drag down to
   close, drag up for details. Video playback with mute and a seek bar that shows the picture as you drag it.
 - **Motion Photos** (Pixel, Samsung): recognised in the grid with a small badge, the clip plays once, muted, when you open one, with a button to play it again.
+- If text was found in a photo, it can be selected and copied where it is actually written, zoomed in on the photo itself, with the system's own copy menu — not only read as one block in the info panel.
 - Info panel with the real metadata of the file: resolution, size, dates, camera, lens, exposure,
   color profile, location (on request, with a small offline map), and for videos duration, frame rate, codecs and bitrate. If the photo has been analysed it also says, in a few words, what it shows (and any pet in it).
 - **Captions** you write for a photo (searchable, kept only in eikon's database) and **changing the date or the location** written in a JPEG, PNG or WebP file, with the system's own confirmation, a safety copy, a byte-for-byte check
